@@ -35,4 +35,14 @@ instance {C} [FoldUntil C τ] : Fold C τ where
     | Cont a => a
     | Done a => a
 
-  
+
+instance : FoldUntil {r : Std.Range // 0 < r.step} Nat where
+  foldUntil := λ {α φ} f acc ⟨⟨start,stop,step⟩,h_step⟩ =>
+    let rec loop (acc : α) (i : Nat) : ContOrDone φ α :=
+      if h:i ≥ stop then pure acc else do
+        let acc ← f acc i
+        have : stop - (i + step) < stop - i := by
+          sorry
+        loop acc (i + step)
+    loop acc start
+    termination_by loop _ i => stop - i

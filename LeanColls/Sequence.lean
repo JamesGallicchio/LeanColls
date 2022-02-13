@@ -1,22 +1,20 @@
-import LeanColls.Iterable
+import LeanColls.Fold
 
-class Sequence (C : Type) :=
-  (τ : Type)
+class Indexed (C : Type u) (τ : outParam (Type v)) :=
   (size : C → Nat)
   (nth : (c : C) → Fin (size c) → τ)
 
 
-namespace Sequence
+namespace Indexed
 
-instance {C} [S : Sequence C] : Iterable C :=
-  {τ := S.τ, fold_until := sorry}
+instance {C} [S : Indexed C τ] : FoldUntil C τ where
+  foldUntil := sorry
 
-end Sequence
+end Indexed
 
 
 namespace Array
 
-instance {τ} : Sequence (Array τ) :=
-  {τ, size := Array.size, nth := Array.get}
+instance : Indexed (Array τ) τ := ⟨Array.size, Array.get⟩
 
 end Array

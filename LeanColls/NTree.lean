@@ -1,24 +1,32 @@
+import LeanColls.Fold
 import LeanColls.Sequence
 
-inductive NTree (r : Nat) (τ : Type) : Type
-| Empty : NTree r τ
-| Leaf : τ → NTree r τ
-| Node : (a : Array τ) → (h : Array.size a = r) → NTree r τ
+
+inductive NTree (τ : Type)
+| Leaf : Array τ → NTree τ
+| Node : Array (NTree τ) → NTree τ
+
 
 namespace NTree
 
-open Sequence
+noncomputable def height : NTree τ → Nat :=
+  @NTree.rec τ (λ _ => Nat) (λ _ => Nat) (λ _ => Nat)
+    (λ _ => 1)
+    (λ _ ih => ih+1)
+    (λ _ ih => ih)
+    (0)
+    (λ _ _ h t => max h t)
 
-def fold_until {r} {τ final α}
-  (f : α → τ → ContOrDone final α)
-  (init : α)
-  : NTree r τ → ContOrDone final α
-| Empty => ContOrDone.Cont init
-| Leaf x => f init x
-| Node children _ =>
-  Array.foldl
+def foldUntil (f : α → τ → ContOrDone φ α) (init : α) (t : NTree τ)
+  : ContOrDone φ α
+  :=match h:t with
+    | Leaf x => FoldUntil.foldUntil f init x
+    | Node children =>
+      have h_children : Array {c : NTree τ // c.height < t.height}
+        := Array.map (λ c => ⟨c, by sorry⟩) children
+      FoldUntil.foldUntil (λ acc ⟨c,h⟩ => foldUntil f acc c) init h_children
+  termination_by _ => height
 
-instance {τ} : Iterable (BinTree τ) :=
-  {τ, fold_until}
+instance : FoldUntil (NTree r τ) τ := ⟨foldUntil⟩
 
-end BinTree
+end NTree

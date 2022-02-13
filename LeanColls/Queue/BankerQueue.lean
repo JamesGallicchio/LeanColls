@@ -1,11 +1,19 @@
 import LeanColls.Queue
 
--- Slightly different from Okasaki: `⟨[],[x]⟩` is allowed
+/-
+Amortized O(1) queues, with front list and back list
+where the back list is flipped to the front as needed.
+
+Slightly different from Okasaki: `⟨[],[x]⟩` is allowed
+and represents the same queue as `⟨[x],[]⟩`
+-/
 structure BQueue (τ) :=
   F : List τ
   B : List τ
 
 namespace BQueue
+
+def empty : BQueue τ := ⟨[],[]⟩ 
 
 def enq (Q : BQueue τ) (x : τ) : BQueue τ :=
   match Q with
@@ -21,8 +29,11 @@ def deq (Q : BQueue τ) : Option (τ × BQueue τ) :=
   | f::F =>  some (f, ⟨F,[]⟩)
   | [] => none
 
-instance : IsQueue (BQueue τ) τ where
+instance : Queue (BQueue τ) τ where
   model := λ ⟨F,B⟩ => F ++ (B.reverse)
+  empty := empty
+  h_empty := by
+    simp [HAppend.hAppend, Append.append, List.append, List.reverse, empty, List.reverseAux]
   enq   := enq
   h_enq := by
     intros c x

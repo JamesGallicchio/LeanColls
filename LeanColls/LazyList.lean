@@ -4,18 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 
+import LeanColls.Fold
+
 inductive LazyList (α : Type u)
 | nil : LazyList α
 | cons (hd : α) (tl : LazyList α) : LazyList α
 | delayed (t : Thunk (LazyList α)) : LazyList α
-
-private unsafe def List.toLazyUnsafe {α : Type u} (xs : List α) : LazyList α :=
-  unsafeCast xs
-
-@[implementedBy List.toLazyUnsafe]
-def List.toLazy {α : Type u} : List α → LazyList α
-| []     => LazyList.nil
-| (h::t) => LazyList.cons h (toLazy t)
 
 namespace LazyList
 variable {α : Type u} {β : Type v} {δ : Type w}
@@ -26,6 +20,7 @@ instance : Inhabited (LazyList α) :=
 @[inline] protected def pure : α → LazyList α
 | a => cons a nil
 
+-- Height measures number of nodes (including delayeds)
 noncomputable def height (ll : LazyList α) : Nat :=
   @LazyList.rec (motive_1 := fun _ => Nat) (motive_2 := fun _ => Nat)
     α 0 (fun _ _ ih => ih + 1) (fun _ ih => ih + 1) (fun _ ih => ih ()) ll
@@ -38,33 +33,41 @@ noncomputable def height (ll : LazyList α) : Nat :=
     cases as with | _ fn => apply congrArg; funext (); rfl
   rw [this]; rfl
 
-def get : LazyList α → LazyList α
-| (delayed as) => get as.get
-| other        => other
+def get : LazyList α → Option (α × LazyList α)
+| delayed as => get as.get
+| nil        => none
+| cons a as  => some (a, as)
 termination_by _ as => as.height
 
 def isEmpty : LazyList α → Bool
-| nil          => true
-| (cons _ _)   => false
-| (delayed as) => isEmpty as.get
+| nil        => true
+| cons _ _   => false
+| delayed as => isEmpty as.get
 termination_by _ as => as.height
+
+/-
+Length of a list is number of actual elements
+in the list, ignoring delays
+-/
+def length : LazyList α → Nat
+| nil        => 0
+| cons _ as  => length as + 1
+| delayed as => length as.get
+termination_by _ as => as.height
+
+@[simp] theorem length_nil : (@nil α).length = 0 := by simp [length]
+@[simp] theorem length_cons : (@cons α a as).length = as.length + 1 := by simp [length]
+@[simp] theorem length_delayed (as)
+  : (@delayed α as).length = as.get.length
+  := by
+  have : as = ⟨fun x => as.get⟩ := by
+    cases as with | _ fn => apply congrArg; funext (); rfl
+  rw [this]; rfl
 
 def toList : LazyList α → List α
-| nil          => []
-| (cons a as)  => a :: toList as
-| (delayed as) => toList as.get
-termination_by _ as => as.height
-
-def head [Inhabited α] : LazyList α → α
-| nil          => Inhabited.default
-| (cons a as)  => a
-| (delayed as) => head as.get
-termination_by _ as => as.height
-
-def tail : LazyList α → LazyList α
-| nil          => nil
-| (cons a as)  => as
-| (delayed as) => tail as.get
+| nil        => []
+| cons a as  => a :: toList as
+| delayed as => toList as.get
 termination_by _ as => as.height
 
 def append : LazyList α → LazyList α → LazyList α
@@ -75,6 +78,69 @@ termination_by _ as _ => as.height
 
 instance : Append (LazyList α) :=
 ⟨LazyList.append⟩
+
+@[simp] theorem length_append (l₁ l₂ : LazyList α)
+  : (l₁ ++ l₂).length = l₁.length + l₂.length
+  := @rec α
+    (λ l => (l ++ l₂).length = l.length + l₂.length)
+    (λ t => (t.get ++ l₂).length = t.get.length + l₂.length)
+    (by simp [HAppend.hAppend, Append.append, append])
+    (by
+      intros hd tl tl_ih
+      simp [HAppend.hAppend, Append.append, append, Thunk.get] at tl_ih |-
+      simp [tl_ih, Nat.add_comm, Nat.add_assoc]
+      )
+    (by
+      intros t t_ih
+      simp [HAppend.hAppend, Append.append, append] at t_ih |-
+      assumption
+      )
+    (by
+      intros fn fn_ih
+      have := fn_ih ()
+      simp [HAppend.hAppend, Append.append, append, Thunk.get] at this |-
+      assumption
+      )
+    l₁
+
+@[simp] def revAppend : LazyList α → LazyList α → LazyList α
+| nil,        bs => bs
+| cons a as,  bs => revAppend as (cons a bs)
+| delayed as, bs => revAppend as.get bs
+termination_by _ as _ => as.height
+
+@[simp] theorem length_revAppend (l₁ l₂ : LazyList α)
+  : (revAppend l₁ l₂).length = l₁.length + l₂.length
+  := @rec α
+    (λ l => ∀ l2, (revAppend l l2).length = l.length + l2.length)
+    (λ t => ∀ l2, (revAppend t.get l2).length = t.get.length + l2.length)
+    (by simp)
+    (by
+      intros hd tl tl_ih l2
+      simp [Thunk.get] at tl_ih |-
+      have := tl_ih (cons hd l2)
+      rw [this]
+      simp [Nat.add_assoc]
+      simp [Nat.add_comm]
+      )
+    (by
+      intros t t_ih
+      simp [HAppend.hAppend, Append.append, append] at t_ih |-
+      assumption
+      )
+    (by
+      intros fn fn_ih
+      have := fn_ih ()
+      simp [HAppend.hAppend, Append.append, append, Thunk.get] at this |-
+      assumption
+      )
+    l₁ l₂
+
+
+@[simp] def reverse (l : LazyList α) := revAppend l nil
+
+@[simp] theorem length_reverse (l : LazyList α) : l.reverse.length = l.length
+  := by simp
 
 def interleave : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs
@@ -134,14 +200,26 @@ termination_by _ as => as.height
 | (delayed as) => filter p as.get
 termination_by _ as => as.height
 
-instance : Monad LazyList :=
-{ pure := @LazyList.pure, bind := @LazyList.bind, map := @LazyList.map }
+instance : Monad LazyList where
+  pure := @LazyList.pure
+  bind := @LazyList.bind
+  map := @LazyList.map
 
-instance : Alternative LazyList :=
-{ failure := nil
-  orElse  := fun as bs => LazyList.append as (delayed (Thunk.mk bs)) }
+instance : Alternative LazyList where
+  failure := nil
+  orElse  := fun as bs => LazyList.append as (delayed (Thunk.mk bs))
 
-instance : FoldUntil LazyList
+def foldUntil (f : α → τ → ContOrDone φ α) (acc : α)
+: LazyList τ → ContOrDone φ α
+| nil        => ContOrDone.Cont acc
+| cons a as  => do
+  let acc ← f acc a
+  foldUntil f acc as
+| delayed as => foldUntil f acc (as.get)
+termination_by _ as => as.height
+
+instance : FoldUntil (LazyList τ) τ := ⟨foldUntil⟩
+
 
 @[specialize] partial def iterate (f : α → α) : α → LazyList α
 | x => cons x (delayed (iterate f (f x)))
@@ -180,6 +258,14 @@ instance [ToString α] : ToString (LazyList α) :=
 
 end LazyList
 
+
+private unsafe def List.toLazyUnsafe {α : Type u} (xs : List α) : LazyList α :=
+  unsafeCast xs
+
+@[implementedBy List.toLazyUnsafe]
+def List.toLazy {α : Type u} : List α → LazyList α
+| []     => LazyList.nil
+| (h::t) => LazyList.cons h (toLazy t)
 
 
 def fib : LazyList Nat :=

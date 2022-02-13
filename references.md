@@ -7,6 +7,9 @@ https://www.cs.cmu.edu/~rwh/students/okasaki.pdf
 Some structures implemented in Isabelle
 https://functional-algorithms-verified.org/
 
+Isabelle Collections Framework
+https://www21.in.tum.de/~lammich/pub/itp10.pdf
+
 
 Performance
 ---
