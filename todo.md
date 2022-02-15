@@ -1,3 +1,4 @@
+# TODO
 
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
@@ -7,13 +8,17 @@
 - Look into Agda collections? Maybe not cuz Agda lazy by default?
 - Peter Lammich paper?
 
-15 Feb 2022
+
+## Done
+
+### 15 Feb 2022
 - Wrote some stuff about finite streams
 - Implemented LBQueue
-  - Found minor bugs in LazyList while proving correctness
-  - LBQueue correctness unproven
+  - Found minor bugs in my LazyList impl while proving correctness
+  - Need to prove correctness of deq
 - Wrote tests for queues
+- Already hit 2 bugs and counting :D
 
-8 Feb 2022
+### 8 Feb 2022
 - Implemented BQueue
 - Fleshed out Fold

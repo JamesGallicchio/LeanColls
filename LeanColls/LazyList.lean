@@ -33,18 +33,6 @@ noncomputable def height (ll : LazyList α) : Nat :=
     cases as with | _ fn => apply congrArg; funext (); rfl
   rw [this]; rfl
 
-def get : LazyList α → Option (α × LazyList α)
-| delayed as => get as.get
-| nil        => none
-| cons a as  => some (a, as)
-termination_by _ as => as.height
-
-def isEmpty : LazyList α → Bool
-| nil        => true
-| cons _ _   => false
-| delayed as => isEmpty as.get
-termination_by _ as => as.height
-
 /-
 Length of a list is number of actual elements
 in the list, ignoring delays
@@ -64,11 +52,68 @@ termination_by _ as => as.height
     cases as with | _ fn => apply congrArg; funext (); rfl
   rw [this]; rfl
 
-def toList : LazyList α → List α
+@[simp] def toList : LazyList α → List α
 | nil        => []
 | cons a as  => a :: toList as
 | delayed as => toList as.get
 termination_by _ as => as.height
+
+@[simp] theorem length_toList (l : LazyList α) : l.toList.length = l.length
+  := @rec α
+    (λ l => l.toList.length = l.length)
+    (λ t => t.get.toList.length = t.get.length)
+    (by simp [toList])
+    (by
+      intros hd tl tl_ih
+      simp [tl_ih, toList, Thunk.get]
+      )
+    (by
+      intros t t_ih
+      assumption
+      )
+    (by
+      intros fn fn_ih
+      have := fn_ih ()
+      simp [Thunk.get] at this |-
+      assumption
+      )
+    l
+
+
+def force : LazyList α → Option (α × LazyList α)
+| delayed as => force as.get
+| nil        => none
+| cons a as  => some (a,as)
+termination_by _ as => as.height
+
+theorem toList_force_none (l : LazyList α)
+  : force l = none ↔ l.toList = List.nil
+  := @rec α
+  (λ l => (force l = none ↔ l.toList = List.nil))
+  (λ t => (force t.get = none ↔ t.get.toList = List.nil))
+  (by simp [force])
+  (by intros hd tl ih; simp [force])
+  (by intros t ih; simp [force,ih])
+  (by intros fn ih; simp [force,ih,Thunk.get])
+  l
+
+theorem toList_force_some (l : LazyList α)
+  : force l = some (x,xs) → l.toList = List.cons x xs.toList
+  := @rec α
+  (λ l => force l = some (x,xs) → l.toList = List.cons x xs.toList)
+  (λ t => force t.get = some (x,xs) → t.get.toList = List.cons x xs.toList)
+  (by simp [force])
+  (by intros hd tl ih; simp [force]; intro h; simp [h])
+  (by intros t ih; simp [force]; exact ih)
+  (by intros fn ih; simp [Thunk.get]; exact ih ())
+  l
+
+def head? (l : LazyList α) : Option α := l.force.map (Prod.fst)
+
+def tail? (l : LazyList α) : Option (LazyList α) := l.force.map (Prod.snd)
+
+
+def isEmpty (l : LazyList α) : Bool := l.length = 0
 
 def append : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs
@@ -79,16 +124,17 @@ termination_by _ as _ => as.height
 instance : Append (LazyList α) :=
 ⟨LazyList.append⟩
 
-@[simp] theorem length_append (l₁ l₂ : LazyList α)
-  : (l₁ ++ l₂).length = l₁.length + l₂.length
+@[simp] theorem toList_append (l₁ l₂ : LazyList α)
+  : (l₁ ++ l₂).toList = l₁.toList ++ l₂.toList
   := @rec α
-    (λ l => (l ++ l₂).length = l.length + l₂.length)
-    (λ t => (t.get ++ l₂).length = t.get.length + l₂.length)
-    (by simp [HAppend.hAppend, Append.append, append])
+    (λ l => (l ++ l₂).toList = l.toList ++ l₂.toList)
+    (λ t => (t.get ++ l₂).toList = t.get.toList ++ l₂.toList)
+    (by simp [HAppend.hAppend, Append.append, append, List.append, toList])
     (by
       intros hd tl tl_ih
-      simp [HAppend.hAppend, Append.append, append, Thunk.get] at tl_ih |-
-      simp [tl_ih, Nat.add_comm, Nat.add_assoc]
+      simp [HAppend.hAppend, Append.append, append] at tl_ih |-
+      simp [tl_ih, toList, Thunk.get]
+      simp [List.append]
       )
     (by
       intros t t_ih
@@ -103,25 +149,32 @@ instance : Append (LazyList α) :=
       )
     l₁
 
+@[simp] theorem length_append (l₁ l₂ : LazyList α)
+  : (l₁ ++ l₂).length = l₁.length + l₂.length
+  := by
+  rw [←length_toList, ←length_toList, ←length_toList]
+  rw [toList_append]
+  exact List.length_append (toList l₁) (toList l₂)
+
 @[simp] def revAppend : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs
 | cons a as,  bs => revAppend as (cons a bs)
 | delayed as, bs => revAppend as.get bs
 termination_by _ as _ => as.height
 
-@[simp] theorem length_revAppend (l₁ l₂ : LazyList α)
-  : (revAppend l₁ l₂).length = l₁.length + l₂.length
+@[simp] theorem toList_revAppend (l₁ l₂ : LazyList α)
+  : (revAppend l₁ l₂).toList = l₁.toList.reverse ++ l₂.toList
   := @rec α
-    (λ l => ∀ l2, (revAppend l l2).length = l.length + l2.length)
-    (λ t => ∀ l2, (revAppend t.get l2).length = t.get.length + l2.length)
+    (λ l => ∀ l2, (revAppend l l2).toList = l.toList.reverse ++ l2.toList)
+    (λ t => ∀ l2, (revAppend t.get l2).toList = t.get.toList.reverse ++ l2.toList)
     (by simp)
     (by
       intros hd tl tl_ih l2
       simp [Thunk.get] at tl_ih |-
       have := tl_ih (cons hd l2)
       rw [this]
-      simp [Nat.add_assoc]
-      simp [Nat.add_comm]
+      rw [List.append_assoc]
+      simp [HAppend.hAppend, Append.append, List.append]
       )
     (by
       intros t t_ih
@@ -136,11 +189,19 @@ termination_by _ as _ => as.height
       )
     l₁ l₂
 
+@[simp] theorem length_revAppend (l₁ l₂ : LazyList α)
+  : (revAppend l₁ l₂).length = l₁.length + l₂.length
+  := by
+  rw [←length_toList, ←length_toList, ←length_toList]
+  rw [toList_revAppend, List.length_append, List.length_reverse]
 
-@[simp] def reverse (l : LazyList α) := revAppend l nil
+def reverse (l : LazyList α) := revAppend l nil
+
+@[simp] theorem toList_reverse (l : LazyList α) : l.reverse.toList = l.toList.reverse
+  := by simp [reverse]
 
 @[simp] theorem length_reverse (l : LazyList α) : l.reverse.length = l.length
-  := by simp
+  := by simp [reverse]
 
 def interleave : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs

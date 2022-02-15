@@ -13,9 +13,11 @@ structure LBQueue (τ) :=
   F_len : Nat
   R : LazyList τ
   R_len : Nat
-  h_lens : F.length = F_len ∧ R.length = R_len ∧ F_len ≥ R_len
+  h_lens : F.length = F_len ∧ R.length = R_len ∧ R_len ≤ F_len
 
 namespace LBQueue
+
+private def model_fn : LBQueue τ → Model τ := λ ⟨F,_,R,_,_⟩ => (F ++ (R.reverse)).toList
 
 def empty : LBQueue τ :=
   ⟨ LazyList.nil, 0,
@@ -24,7 +26,7 @@ def empty : LBQueue τ :=
 
 private def balance (F : LazyList τ) (F_len) (R : LazyList τ) (R_len)
   (h_lens : F.length = F_len ∧ R.length = R_len) :=
-  if h : F_len ≥ R_len then
+  if h : R_len ≤ F_len then
     (⟨F, F_len, R, R_len,
       by
       cases h_lens
@@ -39,8 +41,16 @@ private def balance (F : LazyList τ) (F_len) (R : LazyList τ) (R_len)
       simp
       apply And.intro
       simp [l, r]
-      sorry
+      exact Nat.zero_le _
     ⟩
+
+private theorem balance_inv {F : LazyList α} {F_len} {R} {R_len} {h_lens}
+  : model_fn (balance F F_len R R_len h_lens) = (F ++ (R.reverse)).toList
+  := by
+  simp [balance]
+  cases (Nat.decLe R_len F_len)
+  simp [dite, model_fn]
+  simp [dite, model_fn]
 
 def enq (Q : LBQueue τ) (x : τ) : LBQueue τ :=
   let ⟨F, F_len, R, R_len, h_lens⟩ := Q
@@ -52,21 +62,33 @@ def enq (Q : LBQueue τ) (x : τ) : LBQueue τ :=
 
 def deq (Q : LBQueue τ) : Option (τ × LBQueue τ) :=
   let ⟨F, F_len, R, R_len, h_lens⟩ := Q
-  match h:F.get with
-  | some (x, F) => some (x, balance F (F_len-1) R R_len (by sorry))
+  match h:F.force with
+  | some (x, F') => some (x, balance F' (F_len-1) R R_len (by
+      cases h_lens; case intro f_len h_lens =>
+      cases h_lens; case intro r_len h_lens =>
+      rw [r_len, ←f_len]
+      simp
+      rw [←LazyList.length_toList,←LazyList.length_toList]
+      rw [LazyList.toList_force_some F h]
+      simp
+      rw [Nat.succ_sub_succ]
+      rw [Nat.sub_zero]
+    ))
   | none => none
 
 instance : Queue (LBQueue τ) τ where
-  model := λ ⟨F,_,B,_,_⟩ => (F.toList ++ (B.toList.reverse))
+  model := model_fn
   empty := empty
-  h_empty := by sorry
+  h_empty := by simp [empty, model_fn]
   enq   := enq
   h_enq := by
     intros c x
     cases c
     case mk F F_len R R_len h_lens =>
-    simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, Model.enq]
-    sorry
+    simp [enq, balance_inv]
+    simp [Model.enq, model_fn]
+    rw [←List.append_assoc]
+    simp [HAppend.hAppend, Append.append]
   deq   := deq
   h_deq := by
     intro c
