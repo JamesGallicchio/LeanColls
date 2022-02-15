@@ -8,7 +8,11 @@ class Indexed (C : Type u) (τ : outParam (Type v)) :=
 namespace Indexed
 
 instance {C} [S : Indexed C τ] : FoldUntil C τ where
-  foldUntil := sorry
+  foldUntil f acc c := FoldUntil.foldUntil
+    (λ acc i => f acc (S.nth c i))
+    acc
+    (⟨[:S.size c],by simp⟩ : {r : Std.Range // 0 < r.step})
+
 
 end Indexed
 

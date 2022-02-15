@@ -83,8 +83,7 @@ instance : Queue (LBQueue τ) τ where
   enq   := enq
   h_enq := by
     intros c x
-    cases c
-    case mk F F_len R R_len h_lens =>
+    cases c; case mk F F_len R R_len h_lens =>
     simp [enq, balance_inv]
     simp [Model.enq, model_fn]
     rw [←List.append_assoc]
@@ -92,7 +91,10 @@ instance : Queue (LBQueue τ) τ where
   deq   := deq
   h_deq := by
     intro c
-    cases c
-    case mk F F_len R R_len h_lens =>
+    cases c; case mk F F_len R R_len h_lens =>
+    cases h':F.force
+    case none =>
+      simp [deq]
+      sorry
     sorry
 end LBQueue

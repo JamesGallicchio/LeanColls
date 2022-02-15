@@ -6,7 +6,6 @@
 - Copy an implementation from Isabelle book
 - Look into F# collections
 - Look into Agda collections? Maybe not cuz Agda lazy by default?
-- Peter Lammich paper?
 
 
 ## Done
@@ -18,6 +17,7 @@
   - Need to prove correctness of deq
 - Wrote tests for queues
 - Already hit 2 bugs and counting :D
+- Skimmed Isabelle Collections Framework paper
 
 ### 8 Feb 2022
 - Implemented BQueue

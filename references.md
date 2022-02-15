@@ -42,3 +42,6 @@ https://www.edayers.com/thesis/background#inductive-gadgets
 
 Scala 2.13 Collections Library
 https://docs.scala-lang.org/overviews/collections-2.13/introduction.html
+
+The Isabelle Collections Framework
+https://www.researchgate.net/publication/221234916_The_Isabelle_Collections_Framework
