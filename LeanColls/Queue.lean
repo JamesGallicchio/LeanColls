@@ -23,4 +23,3 @@ class Queue (C : Type u) (τ : outParam (Type v)) :=
   h_enq : ∀ c t, (model c).enq t = model (enq c t)
   deq : C → Option (τ × C)
   h_deq : ∀ c, (model c).deq = Option.map  (λ (x,c') => (x, model c')) (deq c)
-

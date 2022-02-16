@@ -33,10 +33,27 @@ def time (f : IO α) : IO (Nat × α) := do
   let post ← IO.monoMsNow
   pure (post-pre, ret)
 
-def test3 (iters : Nat) (α) [Q : Queue α Nat] : IO Nat := do
-  let q := Fold.fold (⟨[:iters],by simp⟩ : {r : Std.Range // r.step > 0}) (λ x i => Q.enq x i) Q.empty
-  let (t,_) ← time (do pure (Q.deq q))
-  pure t
+def test3 (iters len : Nat) (α) [Q : Queue α Nat] : IO Int := do  
+  let (t_deq,()) ← time (
+    for _ in [:iters] do
+      let mut q := Q.empty
+      for i in [:len] do
+        q := Q.enq q i
+      match Q.deq q with
+      | none => IO.println "early empty??"
+      | some (x,_) =>
+        if x ≠ 0 then
+          IO.println "wrong entry??"
+  )
+
+  let (t_nodeq,()) ← time (
+    for _ in [:iters] do
+      let mut q := Q.empty
+      for i in [:len] do
+        q := Q.enq q i
+  )
+  
+  pure ((Int.ofNat t_deq) - t_nodeq)
 
 def testAll : IO Unit := do
   IO.println "Ephemeral Test"
@@ -54,9 +71,9 @@ def testAll : IO Unit := do
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"
   IO.println "\nReal-Time Test"
-  let bq  ← test3 1000000 (BQueue Nat)
-  let lbq ← test3 1000000 (LBQueue Nat)
-  let rtq ← test3 1000000 (RTQueue Nat)
+  let bq  ← test3 100 1000000 (BQueue Nat)
+  let lbq ← test3 100 1000000 (LBQueue Nat)
+  let rtq ← test3 100 1000000 (RTQueue Nat)
   IO.println s!"BQ:  {bq}ms"
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"
