@@ -86,7 +86,7 @@ def force : LazyList α → Option (α × LazyList α)
 | cons a as  => some (a,as)
 termination_by _ as => as.height
 
-theorem toList_force_none (l : LazyList α)
+theorem toList_force_none {l : LazyList α}
   : force l = none ↔ l.toList = List.nil
   := @rec α
   (λ l => (force l = none ↔ l.toList = List.nil))
@@ -97,7 +97,7 @@ theorem toList_force_none (l : LazyList α)
   (by intros fn ih; simp [force,ih,Thunk.get])
   l
 
-theorem toList_force_some (l : LazyList α)
+theorem toList_force_some {l : LazyList α}
   : force l = some (x,xs) → l.toList = List.cons x xs.toList
   := @rec α
   (λ l => force l = some (x,xs) → l.toList = List.cons x xs.toList)

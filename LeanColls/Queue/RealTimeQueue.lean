@@ -1,48 +1,113 @@
 import LeanColls.Queue
+import LeanColls.LazyList
 
-structure RealTimeQueue (τ) :=
-  F : List τ
-  B : List τ
+/-
+Amortized, lazy queue implementation.
 
-namespace BQueue
+Essentially the same as `BQueue`, but amortized costs
+are shared across all persistent copies of the queue
+by lazily flipping the back of the queue periodically.
+-/
+structure RTQueue (τ) :=
+  F : LazyList τ
+  R : List τ
+  S : LazyList τ
+  h_lens : F.length = R.length + S.length
 
-def enq (Q : BQueue τ) (x : τ) : BQueue τ :=
-  match Q with
-  | ⟨F,B⟩ => {F := F, B := x::B}
+namespace RTQueue
 
-def deq (Q : BQueue τ) : Option (τ × BQueue τ) :=
-  match Q with
-  | ⟨F,B⟩ =>
-  match F with
-  | f::F => some (f, ⟨F,B⟩)
-  | [] =>
-  match B.reverse with
-  | f::F =>  some (f, ⟨F,[]⟩)
-  | [] => none
+private def model_fn : RTQueue τ → Model τ := λ ⟨F,R,_,_⟩ => F.toList ++ (R.reverse)
 
-instance : IsQueue (BQueue τ) τ where
-  model := λ ⟨F,B⟩ => F ++ (B.reverse)
+def empty : RTQueue τ :=
+  ⟨ LazyList.nil,
+    List.nil,
+    LazyList.nil,
+    by simp
+  ⟩
+
+private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
+  (h : f.length + 1 = r.length) : LazyList τ :=
+  LazyList.delayed (
+    match h_r:r with
+    | List.nil => False.elim (by rw [h_r] at h; simp [List.length] at h; cases h)
+    | y::r' =>
+    match h_f:f.force with
+    | none =>  LazyList.cons y a
+    | some (x, f') => LazyList.cons x (rotate f' r' (LazyList.cons y a) (by
+      rw [←LazyList.length_toList] at h
+      rw [LazyList.toList_force_some h_f] at h
+      rw [h_r] at h
+      simp at h
+      exact h
+      ))
+  )
+
+private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
+  (h_lens : F.length + 1 = R.length + S.length) : RTQueue τ :=
+  match h:S.force with
+  | some (_, S') =>
+    ⟨F, R, S', by
+      rw [←@LazyList.length_toList τ S] at h_lens
+      rw [LazyList.toList_force_some h] at h_lens
+      simp [Nat.add_succ] at h_lens
+      assumption
+    ⟩
+  | none =>
+    let F' := rotate F R LazyList.nil (by
+      rw [←@LazyList.length_toList τ S] at h_lens
+      rw [LazyList.toList_force_none] at h
+      rw [h] at h_lens
+      simp at h_lens
+      assumption
+    )
+    ⟨F', List.nil, F', by simp⟩
+
+/-private theorem balance_inv {F : LazyList α} {F_len} {R} {R_len} {h_lens}
+  : model_fn (balance F F_len R R_len h_lens) = (F ++ (R.reverse)).toList
+  := by
+  simp [balance]
+  cases (Nat.decLe R_len F_len)
+  simp [dite, model_fn]
+  simp [dite, model_fn]-/
+
+def enq (Q : RTQueue τ) (x : τ) : RTQueue τ :=
+  let ⟨F, R, S, h_lens⟩ := Q
+  balance F (List.cons x R) S (by
+    simp [h_lens, Nat.add_one, Nat.succ_add])
+
+def deq (Q : RTQueue τ) : Option (τ × RTQueue τ) :=
+  let ⟨F, R, S, h_lens⟩ := Q
+  match h:F.force with
+  | some (x, F') => some (x, balance F' R S (by
+      rw [←h_lens]
+      simp
+      rw [←LazyList.length_toList,←LazyList.length_toList]
+      rw [LazyList.toList_force_some h]
+      simp
+    ))
+  | none => none
+
+instance : Queue (RTQueue τ) τ where
+  model := model_fn
+  empty := empty
+  h_empty := by simp [empty, model_fn]
   enq   := enq
   h_enq := by
     intros c x
-    cases c
-    case mk F B =>
-    simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, Model.enq]
+    sorry
+    /-cases c; case mk F F_len R R_len h_lens =>
+    simp [enq, balance_inv]
+    simp [Model.enq, model_fn]
     rw [←List.append_assoc]
-    simp [HAppend.hAppend, Append.append]
+    simp [HAppend.hAppend, Append.append]-/
   deq   := deq
   h_deq := by
     intro c
-    cases c
-    case mk F B =>
-    cases F
-    case cons f F =>
-      simp [Model.deq, deq, Option.map, Option.bind]
-    case nil =>
-    cases h : List.reverse B
-    case cons f F =>
-      simp [Model.deq, deq, Option.map, Option.bind, h]
-    case nil =>
-      simp [Model.deq, deq, Option.map, Option.bind, h]
-
-end BQueue
+    sorry
+    /-cases c; case mk F F_len R R_len h_lens =>
+    cases h':F.force
+    case none =>
+      simp [deq]
+      sorry
+    sorry-/
+end RTQueue

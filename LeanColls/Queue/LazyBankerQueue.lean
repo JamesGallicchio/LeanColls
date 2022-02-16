@@ -69,7 +69,7 @@ def deq (Q : LBQueue τ) : Option (τ × LBQueue τ) :=
       rw [r_len, ←f_len]
       simp
       rw [←LazyList.length_toList,←LazyList.length_toList]
-      rw [LazyList.toList_force_some F h]
+      rw [LazyList.toList_force_some h]
       simp
       rw [Nat.succ_sub_succ]
       rw [Nat.sub_zero]

@@ -1,5 +1,6 @@
 # TODO
 
+- Read typeclass paper!!!
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
 - Implement queues from Okasaki?
