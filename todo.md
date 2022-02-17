@@ -1,15 +1,19 @@
 # TODO
 
+- Finish correctness proofs for LBQueue, RTQueue
+---
 - Read typeclass paper!!!
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
-- Implement queues from Okasaki?
-- Copy an implementation from Isabelle book
-- Look into F# collections
-- Look into Agda collections? Maybe not cuz Agda lazy by default?
+- Copy an implementation from Functional Algorithms Verified book
+- Read about Isabelle Containers
 
 
 ## Done
+
+### 22 Feb 2022
+- Looked into F# collections, Agda collections, Coq collections, Isabelle collections
+- Implemented real-time queues, which completes the first set of collections I wanted to try implementing.
 
 ### 15 Feb 2022
 - Wrote some stuff about finite streams
