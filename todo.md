@@ -7,6 +7,7 @@
 - Skim Lorenzen's thesis
 - Copy an implementation from Functional Algorithms Verified book
 - Read about Isabelle Containers
+- Read about Haskell Collections API
 
 
 ## Done
