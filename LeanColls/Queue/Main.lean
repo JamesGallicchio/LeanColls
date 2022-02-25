@@ -33,27 +33,28 @@ def time (f : IO α) : IO (Nat × α) := do
   let post ← IO.monoMsNow
   pure (post-pre, ret)
 
-def test3 (iters len : Nat) (α) [Q : Queue α Nat] : IO Int := do  
-  let (t_deq,()) ← time (
-    for _ in [:iters] do
-      let mut q := Q.empty
-      for i in [:len] do
-        q := Q.enq q i
-      match Q.deq q with
-      | none => IO.println "early empty??"
-      | some (x,_) =>
-        if x ≠ 0 then
-          IO.println "wrong entry??"
-  )
-
-  let (t_nodeq,()) ← time (
-    for _ in [:iters] do
-      let mut q := Q.empty
-      for i in [:len] do
-        q := Q.enq q i
-  )
+def test3 (reps iters len : Nat) (α) [Q : Queue α Nat] : IO Unit := do
+  for _ in [:reps] do
+    let (t_nodeq,()) ← time (
+      for _ in [:iters] do
+        let mut q := Q.empty
+        for i in [:len] do
+          q := Q.enq q i
+    )
+    let (t_deq,()) ← time (
+      for _ in [:iters] do
+        let mut q := Q.empty
+        for i in [:len] do
+          q := Q.enq q i
+        match Q.deq q with
+        | none => IO.println "early empty??"
+        | some (x,_) =>
+          if x ≠ 0 then
+            IO.println "wrong entry??"
+    )
+    IO.println s!"{t_nodeq},{t_deq}"
   
-  pure ((Int.ofNat t_deq) - t_nodeq)
+  pure ()
 
 def testAll : IO Unit := do
   IO.println "Ephemeral Test"
@@ -71,9 +72,9 @@ def testAll : IO Unit := do
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"
   IO.println "\nReal-Time Test"
-  let bq  ← test3 100 1000000 (BQueue Nat)
-  let lbq ← test3 100 1000000 (LBQueue Nat)
-  let rtq ← test3 100 1000000 (RTQueue Nat)
+  let bq  ← test3 100 10 1000000 (BQueue Nat)
+  let lbq ← test3 100 10 1000000 (LBQueue Nat)
+  let rtq ← test3 100 10 1000000 (RTQueue Nat)
   IO.println s!"BQ:  {bq}ms"
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"

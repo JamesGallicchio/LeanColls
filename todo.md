@@ -1,16 +1,20 @@
 # TODO
 
 - Finish correctness proofs for LBQueue, RTQueue
+- Read about Haskell Collections API
 ---
 - Read typeclass paper!!!
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
 - Copy an implementation from Functional Algorithms Verified book
 - Read about Isabelle Containers
-- Read about Haskell Collections API
+- Implement finger trees
 
 
 ## Done
+
+### 1 Mar 2022
+- 
 
 ### 22 Feb 2022
 - Looked into F# collections, Agda collections, Coq collections, Isabelle collections

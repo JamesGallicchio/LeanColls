@@ -36,13 +36,24 @@ instance {C} [FoldUntil C τ] : Fold C τ where
     | Done a => a
 
 
+namespace Nat
+  theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
+    induction z
+    simp
+    case succ z z_ih =>
+    simp [Nat.sub_succ, Nat.add_succ, z_ih]
+end Nat
+
 instance : FoldUntil {r : Std.Range // 0 < r.step } Nat where
   foldUntil := λ {α φ} f acc ⟨⟨start,stop,step⟩,h_step⟩ =>
     let rec loop (acc : α) (i : Nat) : ContOrDone φ α :=
-      if h:i ≥ stop then pure acc else do
+      if h:i < stop then do
         let acc ← f acc i
         have : stop - (i + step) < stop - i := by
-          sorry
+          rw [Nat.sub_dist]
+          simp at h_step
+          exact Nat.sub_lt (Nat.zero_lt_sub_of_lt h) (h_step)
         loop acc (i + step)
+      else pure acc
     loop acc start
     termination_by loop _ i => stop - i

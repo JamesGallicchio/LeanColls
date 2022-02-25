@@ -92,8 +92,23 @@ instance : Queue (LBQueue τ) τ where
   h_deq := by
     intro c
     cases c; case mk F F_len R R_len h_lens =>
+    cases h_lens; case intro h_flen h_lens =>
+    cases h_lens; case intro h_rlen h_lens =>
     cases h':F.force
     case none =>
+      have h_flist := LazyList.toList_force_none.mp h'
+      simp [←LazyList.length_toList F, h_flist] at h_flen
+      rw [←h_rlen, ←h_flen] at h_lens
+      have h_lens := Nat.eq_zero_of_le_zero h_lens
+      rw [←LazyList.length_toList R] at h_lens
+      have h_rlist : LazyList.toList R = [] := by
+        cases h_afsoc:LazyList.toList R
+        simp
+        simp [h_afsoc] at h_lens
+      simp [Model.deq, model_fn, h_flist, h_rlist]
+      suffices deq ⟨F, F_len, R, R_len, _⟩ = none by
+        rw [this]
+        simp [Option.map, Option.bind]
       simp [deq]
       sorry
     sorry

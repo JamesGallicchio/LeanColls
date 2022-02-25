@@ -25,7 +25,7 @@ def empty : RTQueue τ :=
     by simp
   ⟩
 
-private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
+@[inline] private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
   (h : f.length + 1 = r.length) : LazyList τ :=
   LazyList.delayed (
     match h_r:r with
@@ -42,7 +42,7 @@ private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
       ))
   )
 
-private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
+@[inline] private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
   (h_lens : F.length + 1 = R.length + S.length) : RTQueue τ :=
   match h:S.force with
   | some (_, S') =>
