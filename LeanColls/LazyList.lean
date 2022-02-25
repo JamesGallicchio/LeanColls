@@ -58,7 +58,7 @@ termination_by _ as => as.height
 | delayed as => toList as.get
 termination_by _ as => as.height
 
-@[simp] theorem length_toList (l : LazyList α) : l.toList.length = l.length
+@[simp] theorem length_toList : (l : LazyList α) → l.toList.length = l.length
   := @rec α
     (λ l => l.toList.length = l.length)
     (λ t => t.get.toList.length = t.get.length)
@@ -77,7 +77,6 @@ termination_by _ as => as.height
       simp [Thunk.get] at this |-
       assumption
       )
-    l
 
 
 def force : LazyList α → Option (α × LazyList α)

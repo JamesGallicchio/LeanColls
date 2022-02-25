@@ -29,14 +29,13 @@ def empty : RTQueue τ :=
   (h : f.length + 1 = r.length) : LazyList τ :=
   LazyList.delayed (
     match h_r:r with
-    | List.nil => False.elim (by rw [h_r] at h; simp [List.length] at h; cases h)
+    | List.nil => False.elim (by simp [List.length] at h; cases h)
     | y::r' =>
     match h_f:f.force with
     | none =>  LazyList.cons y a
     | some (x, f') => LazyList.cons x (rotate f' r' (LazyList.cons y a) (by
       rw [←LazyList.length_toList] at h
       rw [LazyList.toList_force_some h_f] at h
-      rw [h_r] at h
       simp at h
       exact h
       ))
