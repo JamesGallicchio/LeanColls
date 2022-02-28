@@ -1,5 +1,11 @@
+/-
+Copyright (c) 2021 James Gallicchio
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Fold
-import LeanColls.Sequence
+import LeanColls.Indexed
 
 
 inductive NTree (τ : Type)

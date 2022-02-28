@@ -1,6 +1,12 @@
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Fold
-import LeanColls.Queue.BankerQueue
-import LeanColls.Queue.LazyBankerQueue
+import LeanColls.Queue.BatchQueue
+import LeanColls.Queue.LazyBatchQueue
 import LeanColls.Queue.RealTimeQueue
 
 def test1 (iters : Nat) (α) [Q : Queue α Nat] : IO Unit := do
@@ -58,22 +64,22 @@ def test3 (reps iters len : Nat) (α) [Q : Queue α Nat] : IO Unit := do
 
 def testAll : IO Unit := do
   IO.println "Ephemeral Test"
-  let (bq, _) ← time (test1 1000000 (BQueue Nat))
-  let (lbq,_) ← time (test1 1000000 (LBQueue Nat))
+  let (bq, _) ← time (test1 1000000 (BatchQueue Nat))
+  let (lbq,_) ← time (test1 1000000 (LazyBatchQueue Nat))
   let (rtq,_) ← time (test1 1000000 (RTQueue Nat))
   IO.println s!"BQ:  {bq}ms"
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"
   IO.println "\nPersistent Test"
-  let (bq ,_) ← time (test2 10000 (BQueue Nat))
-  let (lbq,_) ← time (test2 10000 (LBQueue Nat))
+  let (bq ,_) ← time (test2 10000 (BatchQueue Nat))
+  let (lbq,_) ← time (test2 10000 (LazyBatchQueue Nat))
   let (rtq,_) ← time (test2 10000 (RTQueue Nat))
   IO.println s!"BQ:  {bq}ms"
   IO.println s!"LBQ: {lbq}ms"
   IO.println s!"RTQ: {rtq}ms"
   IO.println "\nReal-Time Test"
-  let bq  ← test3 100 10 1000000 (BQueue Nat)
-  let lbq ← test3 100 10 1000000 (LBQueue Nat)
+  let bq  ← test3 100 10 1000000 (BatchQueue Nat)
+  let lbq ← test3 100 10 1000000 (LazyBatchQueue Nat)
   let rtq ← test3 100 10 1000000 (RTQueue Nat)
   IO.println s!"BQ:  {bq}ms"
   IO.println s!"LBQ: {lbq}ms"

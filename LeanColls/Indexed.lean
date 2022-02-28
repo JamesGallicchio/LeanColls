@@ -1,3 +1,9 @@
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Fold
 
 class Indexed (C : Type u) (τ : outParam (Type v)) :=
@@ -7,12 +13,10 @@ class Indexed (C : Type u) (τ : outParam (Type v)) :=
 
 namespace Indexed
 
-instance {C} [S : Indexed C τ] : FoldUntil C τ where
-  foldUntil f acc c := FoldUntil.foldUntil
-    (λ acc i => f acc (S.nth c i))
-    acc
-    (⟨[:S.size c],by simp⟩ : {r : Std.Range // 0 < r.step})
 
+
+instance [S : Indexed C τ] [Monad m] : FoldUntil C τ where
+  foldUntil f acc c := sorry
 
 end Indexed
 

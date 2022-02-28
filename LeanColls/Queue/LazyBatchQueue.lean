@@ -1,25 +1,38 @@
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Queue
 import LeanColls.LazyList
 
-/-
+/-!
+# Lazy Batched Queues
+
 Amortized, lazy queue implementation.
 
-Essentially the same as `BQueue`, but amortized costs
+Essentially the same as `BatchQueue`, but amortized costs
 are shared across all persistent copies of the queue
 by lazily flipping the back of the queue periodically.
+
+## References
+
+See [Okasaki1996], Section 3.4.2
+
 -/
-structure LBQueue (τ) :=
+structure LazyBatchQueue (τ) :=
   F : LazyList τ
   F_len : Nat
   R : LazyList τ
   R_len : Nat
   h_lens : F.length = F_len ∧ R.length = R_len ∧ R_len ≤ F_len
 
-namespace LBQueue
+namespace LazyBatchQueue
 
-private def model_fn : LBQueue τ → Model τ := λ ⟨F,_,R,_,_⟩ => (F ++ (R.reverse)).toList
+private def model_fn : LazyBatchQueue τ → Model τ := λ ⟨F,_,R,_,_⟩ => (F ++ (R.reverse)).toList
 
-def empty : LBQueue τ :=
+def empty : LazyBatchQueue τ :=
   ⟨ LazyList.nil, 0,
     LazyList.nil, 0,
     by simp⟩
@@ -32,7 +45,7 @@ private def balance (F : LazyList τ) (F_len) (R : LazyList τ) (R_len)
       cases h_lens
       apply And.intro; assumption;
       apply And.intro; assumption; assumption
-    ⟩ : LBQueue τ)
+    ⟩ : LazyBatchQueue τ)
   else
     ⟨ F ++ R.reverse, F_len + R_len,
       LazyList.nil, 0,
@@ -52,7 +65,7 @@ private theorem balance_inv {F : LazyList α} {F_len} {R} {R_len} {h_lens}
   simp [dite, model_fn]
   simp [dite, model_fn]
 
-def enq (Q : LBQueue τ) (x : τ) : LBQueue τ :=
+def enq (Q : LazyBatchQueue τ) (x : τ) : LazyBatchQueue τ :=
   let ⟨F, F_len, R, R_len, h_lens⟩ := Q
   balance F F_len (LazyList.cons x R) (1+R_len) (by
     simp
@@ -60,7 +73,7 @@ def enq (Q : LBQueue τ) (x : τ) : LBQueue τ :=
     simp [l,r, Nat.add_comm]
     )
 
-def deq (Q : LBQueue τ) : Option (τ × LBQueue τ) :=
+def deq (Q : LazyBatchQueue τ) : Option (τ × LazyBatchQueue τ) :=
   let ⟨F, F_len, R, R_len, h_lens⟩ := Q
   match h:F.force with
   | some (x, F') => some (x, balance F' (F_len-1) R R_len (by
@@ -76,7 +89,7 @@ def deq (Q : LBQueue τ) : Option (τ × LBQueue τ) :=
     ))
   | none => none
 
-instance : Queue (LBQueue τ) τ where
+instance : Queue (LazyBatchQueue τ) τ where
   model := model_fn
   empty := empty
   h_empty := by simp [empty, model_fn]
@@ -112,4 +125,5 @@ instance : Queue (LBQueue τ) τ where
       simp [deq]
       sorry
     sorry
-end LBQueue
+
+end LazyBatchQueue

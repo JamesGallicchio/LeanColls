@@ -1,4 +1,8 @@
-import LeanColls.Fold
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
 
 def Model := List
 

@@ -1,7 +1,18 @@
 /-
+Copyright (c) 2021 James Gallicchio.
+
+---
+This file was modified from source code released by
+Microsoft Corporation under the Apache 2.0 license available at
+<https://www.apache.org/licenses/>.
+
+Original copyright notice:
+
 Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Author: Leonardo de Moura
+---
+
+Authors: Leonardo de Moura, James Gallicchio
 -/
 
 import LeanColls.Fold

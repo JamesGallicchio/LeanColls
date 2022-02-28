@@ -1,3 +1,10 @@
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
+import LeanColls.AuxLemmas
 
 inductive ContOrDone (final acc : Type u)
 | Cont : acc -> ContOrDone final acc
@@ -29,20 +36,11 @@ class FoldUntil (C : Type u) (τ : outParam (Type v)) where
 class Fold (C : Type u) (τ : outParam (Type v)) where
   fold : C → (α → τ → α) → α → α
 
-instance {C} [FoldUntil C τ] : Fold C τ where
+instance [FoldUntil C τ] : Fold C τ where
   fold c f init :=
     match FoldUntil.foldUntil (λ acc elem => Cont (f acc elem)) init c with
     | Cont a => a
     | Done a => a
-
-
-namespace Nat
-  theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
-    induction z
-    simp
-    case succ z z_ih =>
-    simp [Nat.sub_succ, Nat.add_succ, z_ih]
-end Nat
 
 instance : FoldUntil {r : Std.Range // 0 < r.step } Nat where
   foldUntil := λ {α φ} f acc ⟨⟨start,stop,step⟩,h_step⟩ =>

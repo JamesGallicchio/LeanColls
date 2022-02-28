@@ -2,6 +2,7 @@
 
 - Finish correctness proofs for LBQueue, RTQueue
 - Read about Haskell Collections API
+- Shift from Fold to ForIn
 ---
 - Read typeclass paper!!!
 - Read about thread safety in immutable beans paper

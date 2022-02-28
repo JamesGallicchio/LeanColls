@@ -1,12 +1,24 @@
+/-
+Copyright (c) 2021 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Queue
 import LeanColls.LazyList
 
-/-
-Amortized, lazy queue implementation.
+/-!
+# Real Time Queues
 
-Essentially the same as `BQueue`, but amortized costs
-are shared across all persistent copies of the queue
-by lazily flipping the back of the queue periodically.
+On any sequence of operations, this implementation
+provides O(1) `enq` and `deq` (not amortized). However,
+the constant is much larger than for `BatchQueue` and
+`LazyBatchQueue`.
+
+## References
+
+See [Okasaki1996], Section 4.2
+
 -/
 structure RTQueue (τ) :=
   F : LazyList τ
