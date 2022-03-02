@@ -33,12 +33,6 @@ def test2 (iters : Nat) (α) [Q : Queue α Nat] : IO Unit := do
       if x ≠ 0 then
         IO.println "wrong entry??"
 
-def time (f : IO α) : IO (Nat × α) := do
-  let pre ← IO.monoMsNow
-  let ret ← f
-  let post ← IO.monoMsNow
-  pure (post-pre, ret)
-
 def test3 (reps iters len : Nat) (α) [Q : Queue α Nat] : IO Unit := do
   for _ in [:reps] do
     let (t_nodeq,()) ← time (

@@ -24,7 +24,6 @@ instance {final} : Monad (ContOrDone final) :=
 
 end ContOrDone
 
-
 open ContOrDone
 
 class FoldUntil (C : Type u) (τ : outParam (Type v)) where

@@ -98,7 +98,7 @@ instance hasNextWF : WellFoundedRelation {s : ρ // isFinite s} where
       exact Acc.intro (⟨s',h'⟩ : {s : ρ // isFinite s}) this
   ⟩⟩
 
-/-def foldUntil (f : α → τ → ContOrDone φ α) (acc : α)
+def foldUntil (f : α → τ → ContOrDone φ α) (acc : α)
   : {l : ρ // isFinite l} → ContOrDone φ α
   | ⟨l,h⟩ =>
     match h:next? l with
@@ -110,17 +110,9 @@ instance hasNextWF : WellFoundedRelation {s : ρ // isFinite s} where
       foldUntil f acc ⟨xs, by sorry⟩
   termination_by _ l => l
   decreasing_by
-    trace_state
-
-def mwe [Stream ρ τ] (acc : α) : {l : ρ // isFinite l} → α
-  | ⟨l,h⟩ =>
-    match next? l with
-    | none => acc
-    | some (x,xs) =>
-      have h_next : hasNext l xs := sorry
-      mwe acc ⟨xs, by sorry⟩
-  termination_by _ l => l
+    simp [hasNextWF, InvImage, WellFoundedRelation.rel]
+    assumption
 
 instance [S : Stream ρ τ] : FoldUntil {s : ρ // isFinite s} τ := ⟨foldUntil⟩
--/
+
 end Stream

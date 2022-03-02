@@ -54,41 +54,19 @@ def length : LazyList α → Nat
 | delayed as => length as.get
 termination_by _ as => as.height
 
-@[simp] theorem length_nil : (@nil α).length = 0 := by simp [length]
-@[simp] theorem length_cons : (@cons α a as).length = as.length + 1 := by simp [length]
-@[simp] theorem length_delayed (as)
-  : (@delayed α as).length = as.get.length
-  := by
-  have : as = ⟨fun x => as.get⟩ := by
-    cases as with | _ fn => apply congrArg; funext (); rfl
-  rw [this]; rfl
-
-@[simp] def toList : LazyList α → List α
+def toList : LazyList α → List α
 | nil        => []
 | cons a as  => a :: toList as
 | delayed as => toList as.get
 termination_by _ as => as.height
 
-@[simp] theorem length_toList : (l : LazyList α) → l.toList.length = l.length
-  := @rec α
-    (λ l => l.toList.length = l.length)
-    (λ t => t.get.toList.length = t.get.length)
-    (by simp [toList])
-    (by
-      intros hd tl tl_ih
-      simp [tl_ih, toList, Thunk.get]
-      )
-    (by
-      intros t t_ih
-      assumption
-      )
-    (by
-      intros fn fn_ih
-      have := fn_ih ()
-      simp [Thunk.get] at this |-
-      assumption
-      )
+attribute [simp] length toList
 
+@[simp] theorem length_toList : (l : LazyList α) → l.toList.length = l.length
+| nil => rfl
+| cons a as => by simp [length_toList as]
+| delayed as => by simp [length_toList as.get]
+termination_by _ as => as.height
 
 def force : LazyList α → Option (α × LazyList α)
 | delayed as => force as.get
@@ -144,7 +122,6 @@ instance : Append (LazyList α) :=
       intros hd tl tl_ih
       simp [HAppend.hAppend, Append.append, append] at tl_ih |-
       simp [tl_ih, toList, Thunk.get]
-      simp [List.append]
       )
     (by
       intros t t_ih
@@ -301,9 +278,6 @@ instance : FoldUntil (LazyList τ) τ := ⟨foldUntil⟩
 
 partial def cycle : LazyList α → LazyList α
 | xs => xs ++ delayed (cycle xs)
-
-partial def repeat : α → LazyList α
-| a => cons a (delayed (repeat a))
 
 def inits : LazyList α → LazyList (LazyList α)
 | nil        => cons nil nil

@@ -53,7 +53,6 @@ instance : Queue (BatchQueue τ) τ where
     case mk F B =>
     simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, Model.enq]
     rw [←List.append_assoc]
-    simp [HAppend.hAppend, Append.append]
   deq   := deq
   h_deq := by
     intro c

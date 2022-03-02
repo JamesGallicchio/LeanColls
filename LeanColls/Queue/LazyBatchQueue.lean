@@ -100,7 +100,6 @@ instance : Queue (LazyBatchQueue τ) τ where
     simp [enq, balance_inv]
     simp [Model.enq, model_fn]
     rw [←List.append_assoc]
-    simp [HAppend.hAppend, Append.append]
   deq   := deq
   h_deq := by
     intro c
