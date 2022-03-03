@@ -31,18 +31,6 @@ instance : Inhabited (LazyList α) :=
 @[inline] protected def pure : α → LazyList α
 | a => cons a nil
 
--- Height measures number of nodes (including delayeds)
-noncomputable def height (ll : LazyList α) : Nat :=
-  @LazyList.rec (motive_1 := fun _ => Nat) (motive_2 := fun _ => Nat)
-    α 0 (fun _ _ ih => ih + 1) (fun _ ih => ih + 1) (fun _ ih => ih ()) ll
-
-@[simp] theorem height_nil : (@LazyList.nil α).height = 0 := rfl
-@[simp] theorem height_cons : (@LazyList.cons α a l).height = l.height + 1 := rfl
-@[simp] theorem height_delayed (as) :
-  (@LazyList.delayed α as).height = as.get.height + 1 := by
-  have : as = ⟨fun x => as.get⟩ := by
-    cases as with | _ fn => apply congrArg; funext (); rfl
-  rw [this]; rfl
 
 /-
 Length of a list is number of actual elements
@@ -52,13 +40,11 @@ def length : LazyList α → Nat
 | nil        => 0
 | cons _ as  => length as + 1
 | delayed as => length as.get
-termination_by _ as => as.height
 
 def toList : LazyList α → List α
 | nil        => []
 | cons a as  => a :: toList as
 | delayed as => toList as.get
-termination_by _ as => as.height
 
 attribute [simp] length toList
 
@@ -66,13 +52,11 @@ attribute [simp] length toList
 | nil => rfl
 | cons a as => by simp [length_toList as]
 | delayed as => by simp [length_toList as.get]
-termination_by _ as => as.height
 
 def force : LazyList α → Option (α × LazyList α)
 | delayed as => force as.get
 | nil        => none
 | cons a as  => some (a,as)
-termination_by _ as => as.height
 
 theorem toList_force_none {l : LazyList α}
   : force l = none ↔ l.toList = List.nil
@@ -107,7 +91,6 @@ def append : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs
 | cons a as,  bs => cons a (delayed (append as bs))
 | delayed as, bs => append as.get bs
-termination_by _ as _ => as.height
 
 instance : Append (LazyList α) :=
 ⟨LazyList.append⟩
@@ -147,7 +130,6 @@ instance : Append (LazyList α) :=
 | nil,        bs => bs
 | cons a as,  bs => revAppend as (cons a bs)
 | delayed as, bs => revAppend as.get bs
-termination_by _ as _ => as.height
 
 @[simp] theorem toList_revAppend (l₁ l₂ : LazyList α)
   : (revAppend l₁ l₂).toList = l₁.toList.reverse ++ l₂.toList
@@ -193,35 +175,25 @@ def reverse (l : LazyList α) := revAppend l nil
 def interleave : LazyList α → LazyList α → LazyList α
 | nil,        bs => bs
 | cons a as,  bs =>
-  have : bs.height + as.height < as.height + 1 + bs.height := by
-    rw [Nat.add_comm, Nat.add_right_comm]; decreasing_tactic
   cons a (delayed (interleave bs as))
 | delayed as, bs =>
-  have : as.get.height + bs.height < as.get.height + 1 + bs.height := by
-    rw [Nat.add_right_comm]; decreasing_tactic
   interleave as.get bs
-termination_by _ as bs => as.height + bs.height
+termination_by _ as bs => sizeOf (as,bs)
 
 @[specialize] def map (f : α → β) : LazyList α → LazyList β
 | nil        => nil
 | cons a as  => cons (f a) (delayed (map f as))
 | delayed as => map f as.get
-termination_by _ as => as.height
 
 @[specialize] def map₂ (f : α → β → δ) : LazyList α → LazyList β → LazyList δ
 | nil, _ => nil
 | _, nil => nil
 | cons a as, cons b bs =>
-  have : as.height + bs.height < as.height + 1 + bs.height + 1 := by
-    rw [Nat.add_right_comm as.height]
-    exact Nat.lt_trans (Nat.lt_succ_self _) (Nat.lt_succ_self _)
- cons (f a b) (delayed (map₂ f as bs))
+  cons (f a b) (delayed (map₂ f as bs))
 | delayed as, bs =>
-  have : as.get.height + bs.height < as.get.height + 1 + bs.height := by
-    rw [Nat.add_right_comm]; decreasing_tactic
   map₂ f as.get bs
 | as, delayed bs => map₂ f as bs.get
-termination_by _ as bs => as.height + bs.height
+termination_by _ as bs => sizeOf (as,bs)
 
 @[inline] def zip : LazyList α → LazyList β → LazyList (α × β) :=
 map₂ Prod.mk
@@ -230,7 +202,6 @@ def join : LazyList (LazyList α) → LazyList α
 | nil        => nil
 | cons a as  => a ++ delayed (join as)
 | delayed as => join as.get
-termination_by _ as => as.height
 
 @[inline] protected def bind (x : LazyList α) (f : α → LazyList β) : LazyList β :=
 join (x.map f)
@@ -240,13 +211,11 @@ def take : Nat → LazyList α → List α
 | _, nil => []
 | i+1, cons a as => a :: take i as
 | i+1, delayed as => take (i+1) as.get
-termination_by _ as => as.height
 
 @[specialize] def filter (p : α → Bool) : LazyList α → LazyList α
 | nil          => nil
 | (cons a as)  => if p a then cons a (delayed (filter p as)) else filter p as
 | (delayed as) => filter p as.get
-termination_by _ as => as.height
 
 instance : Monad LazyList where
   pure := @LazyList.pure
@@ -264,7 +233,6 @@ def foldUntil (f : α → τ → ContOrDone φ α) (acc : α)
   let acc ← f acc a
   foldUntil f acc as
 | delayed as => foldUntil f acc (as.get)
-termination_by _ as => as.height
 
 instance : FoldUntil (LazyList τ) τ := ⟨foldUntil⟩
 
@@ -283,7 +251,6 @@ def inits : LazyList α → LazyList (LazyList α)
 | nil        => cons nil nil
 | cons a as  => cons nil (delayed (map (fun as => cons a as) (inits as)))
 | delayed as => inits as.get
-termination_by _ as => as.height
 
 private def addOpenBracket (s : String) : String :=
 if s.isEmpty then "[" else s
@@ -293,7 +260,6 @@ def approxToStringAux [ToString α] : Nat → LazyList α → String → String
 | 0,   _,          r => (if r.isEmpty then "[" else r) ++ ", ..]"
 | n+1, cons a as,  r => approxToStringAux n as ((if r.isEmpty then "[" else r ++ ", ") ++ toString a)
 | n,   delayed as, r => approxToStringAux n as.get r
-termination_by _ n as _ => as.height
 
 def approxToString [ToString α] (as : LazyList α) (n : Nat := 10) : String :=
 as.approxToStringAux n ""
