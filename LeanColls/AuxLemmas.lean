@@ -37,6 +37,51 @@ namespace List
     case cons t' ts' ih =>
     simp [back?, ih]
 
+  theorem concat_nonempty (L : List τ)
+    : L.concat x ≠ []
+    := by
+    induction L
+    simp [concat]
+    simp [concat]
+
+  theorem back_some_iff_concat (L : List τ)
+    : L.back? = some (ts,t) ↔ L = ts.concat t
+    := by
+    apply Iff.intro
+    case mpr =>
+      intro h; rw [h, back_concat]
+    case mp =>
+    induction ts generalizing L
+    case nil =>
+      simp [concat]
+      intro h
+      match L with
+      | [] => contradiction
+      | [t] => simp [back?] at h; simp [h]
+      | _::_::_ => simp [back?] at h
+    case cons head tail ih =>
+      simp [concat]
+      intro h
+      match L with
+      | [] => contradiction
+      | [x] => simp [back?] at h
+      | x::y::z =>
+        have : back? (y::z) = some (tail, t) := by
+          simp [back?] at h
+          cases h; case intro l r =>
+          simp [back?]
+          match h:back? z with
+          | none =>
+            simp [h] at l r
+            simp [l,r]
+          | some (ts',t') =>
+            simp [h] at l r ⊢
+            simp [l,r]
+        have := ih _ this
+        rw [this] at h
+        simp [back?] at h
+        rw [this,h]
+
   @[simp]
   theorem concat_append (L₁ L₂ : List τ)
     : (L₁ ++ L₂).concat x = L₁ ++ L₂.concat x
