@@ -33,7 +33,8 @@ For general languages:
 2. [**F# Core**](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-collection-types).
 Limited options, but seem to be well-organized and has clear documentation of performance differences.
 
-3. [**Haskell Collections API**](https://hackage.haskell.org/package/collections-api-1.0.0.0/docs/Data-Collections.html). Implementation of a quite reasonable set of interfaces and implementations via typeclasses. Some interesting ideas, like using typeclasses to hint about performance to users.
+3. [**Haskell Collections API**](https://hackage.haskell.org/package/collections-api-1.0.0.0/docs/Data-Collections.html). Implementation of a quite reasonable set of interfaces and implementations via typeclasses. Some interesting ideas, like using typeclasses to hint about performance to users (?). Overall seems to just be modelling a similar hierarchy to
+Scala but with typeclasses.
 
 
 Cost tracking

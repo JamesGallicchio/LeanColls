@@ -1,21 +1,23 @@
 # TODO
 
 - Finish correctness proofs for LBQueue, RTQueue
-- Read about Haskell Collections API
-- Shift from Fold to ForIn
 ---
 - Read typeclass paper!!!
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
 - Copy an implementation from Functional Algorithms Verified book
 - Read about Isabelle Containers
-- Implement finger trees
 
 
 ## Done
 
+### 15 Mar 2022
+- Finished (non-augmented) finger tree implementation with proofs
+
 ### 1 Mar 2022
-- 
+- Read about Haskell collections
+- Implemented finger trees (mostly)
+- Fold is specialized ForIn, maybe worth keeping separate?
 
 ### 22 Feb 2022
 - Looked into F# collections, Agda collections, Coq collections, Isabelle collections
