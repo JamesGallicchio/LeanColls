@@ -7,6 +7,9 @@ Authors: James Gallicchio
 import LeanColls.Queue
 import LeanColls.LazyList
 
+set_option pp.match false
+--set_option pp.all true
+
 /-!
 # Lazy Batched Queues
 
@@ -77,17 +80,13 @@ def deq (Q : LazyBatchQueue τ) : Option (τ × LazyBatchQueue τ) :=
   let ⟨F, F_len, R, R_len, h_lens⟩ := Q
   match h:F.force with
   | some (x, F') => some (x, balance F' (F_len-1) R R_len (by
-      cases h_lens; case intro f_len h_lens =>
-      cases h_lens; case intro r_len h_lens =>
-      rw [r_len, ←f_len]
-      simp
-      rw [←LazyList.length_toList,←LazyList.length_toList]
-      rw [LazyList.toList_force_some h]
-      simp
-      rw [Nat.succ_sub_succ]
-      rw [Nat.sub_zero]
+      rw [←LazyList.length_toList, LazyList.toList_force_some h] at h_lens
+      simp at h_lens
+      rw [←h_lens.1, h_lens.2.1]
+      simp [Nat.succ_sub_succ, Nat.sub_zero]
     ))
   | none => none
+
 
 instance : Queue (LazyBatchQueue τ) τ where
   model := model_fn
@@ -104,25 +103,50 @@ instance : Queue (LazyBatchQueue τ) τ where
   h_deq := by
     intro c
     cases c; case mk F F_len R R_len h_lens =>
-    cases h_lens; case intro h_flen h_lens =>
-    cases h_lens; case intro h_rlen h_lens =>
-    cases h':F.force
-    case none =>
-      have h_flist := LazyList.toList_force_none.mp h'
-      simp [←LazyList.length_toList F, h_flist] at h_flen
-      rw [←h_rlen, ←h_flen] at h_lens
-      have h_lens := Nat.eq_zero_of_le_zero h_lens
-      rw [←LazyList.length_toList R] at h_lens
-      have h_rlist : LazyList.toList R = [] := by
-        cases h_afsoc:LazyList.toList R
+    simp [deq]
+    suffices ∀ o h, Model.deq (LazyBatchQueue.model_fn { F := F, F_len := F_len, R := R, R_len := R_len, h_lens := h_lens }) =
+      Option.map (fun x => (x.fst, LazyBatchQueue.model_fn x.snd))
+      (deq.match_1 F (fun x h => Option (τ × LazyBatchQueue τ)) o ((@LazyBatchQueue.deq.proof_1 τ F).trans h)
+      (fun x F' h =>
+          some
+            (x,
+              LazyBatchQueue.balance F' (F_len - 1) R R_len
+                (deq.proof_2 F _ _ _ h_lens x _ h)))
+      fun h => none) from
+      this F.force rfl
+    match h_lens with
+    | ⟨hf, hr, h_lens'⟩ =>
+    intro o h
+    match o with
+    | none =>
+      simp [Option.map, Option.bind, model_fn]
+      have hF : F.toList = []
+        := LazyList.toList_force_none.mp h
+      have hFL : F_len = 0
+        := by
+        rw [←LazyList.length_toList] at hf
+        simp [hF] at hf
+        exact hf.symm
+      have hRL : R_len = 0
+        := by
+        rw [hFL] at h_lens'
+        exact Nat.eq_zero_of_le_zero h_lens'
+      have hR : R.toList = []
+        := by
+        rw [hRL] at hr
+        rw [←LazyList.length_toList] at hr
+        unfold List.length at hr
+        split at hr
         simp
-        simp [h_afsoc] at h_lens
-      simp [Model.deq, model_fn, h_flist, h_rlist]
-      suffices deq ⟨F, F_len, R, R_len, _⟩ = none by
-        rw [this]
-        simp [Option.map, Option.bind]
-      simp [deq]
-      sorry
-    sorry
+        contradiction      
+      simp [hF, hR, Model.deq]
+    | some ⟨x,F'⟩ =>
+      simp [Option.map, Option.bind, model_fn]
+      have hF : F.toList = x :: F'.toList
+        := LazyList.toList_force_some h
+      simp [hF, Model.deq]
+      have := @balance_inv _ F' (F_len-1) R R_len (deq.proof_2 F _ _ _ h_lens x _ h)
+      simp [model_fn] at this
+      exact this.symm
 
 end LazyBatchQueue
