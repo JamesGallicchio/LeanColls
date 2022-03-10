@@ -60,8 +60,8 @@ Gives a default implementation of `ToStream C` by first
 building a `List τ` and then using this as the stream.
 -/
 class Foldable (C : Type u) (τ : outParam (Type v)) where
-  fold : C → β → (τ → β → β) → β
-  toIterable : Iterable C τ := ⟨List τ, List.front?, λ c => fold c [] (· :: ·)⟩
+  fold : (τ → β → β) → β → C → β
+  toIterable : Iterable C τ := ⟨List τ, List.front?, fold (· :: ·) []⟩
 
 attribute [instance] Foldable.toIterable
 
@@ -89,8 +89,8 @@ class Enumerable (C : Type u) (τ : Type v)
   ρ : Type v
   fromEnumerable : ρ → C
   insert : Option (τ × ρ) → ρ
-  unfold F := fromEnumerable $
-    Foldable.fold F (insert none) (λ t r => insert (some (t,r)))
+  unfold := fromEnumerable ∘
+    Foldable.fold (λ t r => insert (some (t,r))) (insert none)
 
 /-!
 ## CollLike
@@ -118,7 +118,7 @@ with an explicit set of keys
 -/
 class MapLike (C : Type u) (α β : outParam (Type u))
   extends ToStream C (α × β) where
-  get : C → α → Option β
+  get : α → C → Option β
 
 /-!
 ### SetLike

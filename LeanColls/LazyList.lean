@@ -15,7 +15,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, James Gallicchio
 -/
 
-import LeanColls.Fold
+import LeanColls.Classes
 
 inductive LazyList (α : Type u)
 | nil : LazyList α
@@ -226,16 +226,16 @@ instance : Alternative LazyList where
   failure := nil
   orElse  := fun as bs => LazyList.append as (delayed (Thunk.mk bs))
 
-def foldUntil (f : α → τ → ContOrDone φ α) (acc : α)
-: LazyList τ → ContOrDone φ α
-| nil        => ContOrDone.Cont acc
-| cons a as  => do
-  let acc ← f acc a
-  foldUntil f acc as
-| delayed as => foldUntil f acc (as.get)
+def fold (f : τ → α → α) (acc : α)
+: LazyList τ → α
+| nil        => acc
+| cons a as  =>
+  fold f (f a acc) as
+| delayed as => fold f acc (as.get)
 
-instance : FoldUntil (LazyList τ) τ := ⟨foldUntil⟩
-
+instance : LeanColls.Foldable (LazyList τ) τ where
+  fold := fold
+  toIterable := ⟨LazyList τ, LazyList.force, id⟩
 
 @[specialize] partial def iterate (f : α → α) : α → LazyList α
 | x => cons x (delayed (iterate f (f x)))
