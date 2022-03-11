@@ -1,0 +1,1537 @@
+<html lang="en">
+<head>
+<title>Init.NotationExtra</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.NotationExtra</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.NotationExtra</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</li>
+<li>
+<a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init.html">Init</a>
+</li>
+<li>
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</li>
+<li>
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</li>
+<li>
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.«termMacro.trace[__]_»">Lean.«termMacro.trace[__]_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.binderIdent">Lean.binderIdent</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.unbracketedExplicitBinders">Lean.unbracketedExplicitBinders</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.bracketedExplicitBinders">Lean.bracketedExplicitBinders</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.explicitBinders">Lean.explicitBinders</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandExplicitBindersAux">Lean.expandExplicitBindersAux</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandExplicitBindersAux.loop">Lean.expandExplicitBindersAux.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandBrackedBindersAux">Lean.expandBrackedBindersAux</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandBrackedBindersAux.loop">Lean.expandBrackedBindersAux.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandExplicitBinders">Lean.expandExplicitBinders</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.expandBrackedBinders">Lean.expandBrackedBinders</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.unifConstraint">Lean.unifConstraint</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.unifConstraintElem">Lean.unifConstraintElem</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.«command_Unif_hint___Where_|-⊢_»">Lean.«command_Unif_hint___Where_|-⊢_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term∃_,_»">«term∃_,_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«termExists_,_»">«termExists_,_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«termΣ_,_»">«termΣ_,_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«termΣ'_,_»">«termΣ'_,_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term_×__1»">«term_×__1»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term_×'_»">«term_×'_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#calcStep">calcStep</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#calc">calc</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#tacticCalc_">tacticCalc_</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandUnit">unexpandUnit</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandListNil">unexpandListNil</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandListCons">unexpandListCons</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandListToArray">unexpandListToArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandProdMk">unexpandProdMk</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandIte">unexpandIte</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandSorryAx">unexpandSorryAx</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandEqNDRec">unexpandEqNDRec</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandEqRec">unexpandEqRec</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandExists">unexpandExists</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandSigma">unexpandSigma</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandPSigma">unexpandPSigma</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#unexpandSubtype">unexpandSubtype</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#tacticFunext__">tacticFunext__</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«command_ClassAbbrev__:_:=__,»">«command_ClassAbbrev__:_:=__,»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«tactic·.__;_»">«tactic·.__;_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#solve">solve</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Loop">Lean.Loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Loop.forIn">Lean.Loop.forIn</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Loop.forIn.loop">Lean.Loop.forIn.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.instForInLoopUnit">Lean.instForInLoopUnit</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.doElemRepeat_">Lean.doElemRepeat_</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.doElemWhile_Do_">Lean.doElemWhile_Do_</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.doElemRepeat_Until_">Lean.doElemRepeat_Until_</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Lean.«termMacro.trace[__]_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L14-L14">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.«termMacro.trace[__]_»">Lean.«termMacro.trace[__]_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.binderIdent">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L19-L19">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.binderIdent">Lean.binderIdent</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.unbracketedExplicitBinders">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L20-L20">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.unbracketedExplicitBinders">Lean.unbracketedExplicitBinders</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.bracketedExplicitBinders">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L21-L21">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.bracketedExplicitBinders">Lean.bracketedExplicitBinders</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.explicitBinders">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L22-L22">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.explicitBinders">Lean.explicitBinders</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.expandExplicitBindersAux">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L24-L36">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandExplicitBindersAux">Lean.expandExplicitBindersAux</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinator : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(idents : <span class="fn"><a href="/docs/Init/Prelude.html#Array">Array</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(type? : <span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(body : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.expandExplicitBindersAux">Lean.expandExplicitBindersAux</a> <span class="fn">combinator</span> <span class="fn">idents</span> <span class="fn">type?</span> <span class="fn">body</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.expandExplicitBindersAux.loop">Lean.expandExplicitBindersAux.loop</a> <span class="fn">combinator</span> <span class="fn">idents</span> <span class="fn">type?</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Array.size">Array.size</a> <span class="fn">idents</span></span>) <span class="fn">body</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.expandExplicitBindersAux.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L25-L35">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandExplicitBindersAux.loop">Lean.expandExplicitBindersAux.loop</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinator : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(idents : <span class="fn"><a href="/docs/Init/Prelude.html#Array">Array</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(type? : <span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.expandBrackedBindersAux">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L38-L46">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandBrackedBindersAux">Lean.expandBrackedBindersAux</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinator : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(binders : <span class="fn"><a href="/docs/Init/Prelude.html#Array">Array</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(body : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.expandBrackedBindersAux">Lean.expandBrackedBindersAux</a> <span class="fn">combinator</span> <span class="fn">binders</span> <span class="fn">body</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.expandBrackedBindersAux.loop">Lean.expandBrackedBindersAux.loop</a> <span class="fn">combinator</span> <span class="fn">binders</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Array.size">Array.size</a> <span class="fn">binders</span></span>) <span class="fn">body</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.expandBrackedBindersAux.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L39-L45">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandBrackedBindersAux.loop">Lean.expandBrackedBindersAux.loop</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinator : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(binders : <span class="fn"><a href="/docs/Init/Prelude.html#Array">Array</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.expandBrackedBindersAux.loop">Lean.expandBrackedBindersAux.loop</a> <span class="fn">combinator</span> <span class="fn">binders</span> <span class="fn">0</span> <span class="fn">acc</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">acc</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.expandExplicitBinders">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L48-L58">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandExplicitBinders">Lean.expandExplicitBinders</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinatorDeclName : <a href="/docs/Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(explicitBinders : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(body : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.expandBrackedBinders">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L60-L62">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.expandBrackedBinders">Lean.expandBrackedBinders</a>
+</span>
+<span class="decl_args">
+<span class="fn">(combinatorDeclName : <a href="/docs/Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(bracketedExplicitBinders : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(body : <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href="/docs/Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.unifConstraint">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L64-L64">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.unifConstraint">Lean.unifConstraint</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.unifConstraintElem">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L65-L65">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.unifConstraintElem">Lean.unifConstraintElem</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.«command_Unif_hint___Where_|-⊢_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L67-L67">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.«command_Unif_hint___Where_|-⊢_»">Lean.«command_Unif_hint___Where_|-⊢_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term∃_,_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L86-L86">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«term∃_,_»">«term∃_,_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«termExists_,_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L87-L87">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«termExists_,_»">«termExists_,_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«termΣ_,_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L88-L88">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«termΣ_,_»">«termΣ_,_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«termΣ'_,_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L89-L89">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«termΣ'_,_»">«termΣ'_,_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term_×__1»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L90-L90">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«term_×__1»">«term_×__1»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term_×'_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L91-L91">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«term_×'_»">«term_×'_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="calcStep">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L94-L94">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#calcStep">calcStep</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="calc">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L95-L95">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#calc">calc</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="tacticCalc_">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L97-L97">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#tacticCalc_">tacticCalc_</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandUnit">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L99-L101">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandUnit">unexpandUnit</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandListNil">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L103-L105">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandListNil">unexpandListNil</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandListCons">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L107-L110">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandListCons">unexpandListCons</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandListToArray">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L112-L114">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandListToArray">unexpandListToArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandProdMk">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L116-L119">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandProdMk">unexpandProdMk</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandIte">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L121-L123">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandIte">unexpandIte</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandSorryAx">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L125-L128">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandSorryAx">unexpandSorryAx</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandEqNDRec">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L130-L132">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandEqNDRec">unexpandEqNDRec</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandEqRec">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L134-L136">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandEqRec">unexpandEqRec</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandExists">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L138-L142">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandExists">unexpandExists</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandSigma">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L144-L146">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandSigma">unexpandSigma</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandPSigma">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L148-L150">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandPSigma">unexpandPSigma</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="unexpandSubtype">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L152-L155">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#unexpandSubtype">unexpandSubtype</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.PrettyPrinter.Unexpander">Lean.PrettyPrinter.Unexpander</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="tacticFunext__">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L157-L157">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#tacticFunext__">tacticFunext__</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«command_ClassAbbrev__:_:=__,»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L189-L190">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«command_ClassAbbrev__:_:=__,»">«command_ClassAbbrev__:_:=__,»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«tactic·.__;_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L199-L200">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#«tactic·.__;_»">«tactic·.__;_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<p><code>· tac</code> focuses on the main goal and tries to solve it using <code>tac</code>, or else fails.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="solve">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L207-L207">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#solve">solve</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Loop">
+<div class="inductive">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L215-L216">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">inductive</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.Loop">Lean.Loop</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="constructors">
+<li class="constructor" id="Lean.Loop.mk">
+mk: <a href="/docs/Init/NotationExtra.html#Lean.Loop">Lean.Loop</a></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="Lean.Loop.forIn">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L219-L224">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.Loop.forIn">Lean.Loop.forIn</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(loop : <a href="/docs/Init/NotationExtra.html#Lean.Loop">Lean.Loop</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.Loop.forIn">Lean.Loop.forIn</a> <span class="fn">loop</span> <span class="fn">init</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.Loop.forIn.loop">Lean.Loop.forIn.loop</a> <span class="fn">f</span> <span class="fn">init</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Loop.forIn.loop">
+<div class="constant">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L220-L223">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">partial def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.Loop.forIn.loop">Lean.Loop.forIn.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.instForInLoopUnit">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L226-L227">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.instForInLoopUnit">Lean.instForInLoopUnit</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#ForIn">ForIn</a> <span class="fn">m</span> <a href="/docs/Init/NotationExtra.html#Lean.Loop">Lean.Loop</a> <a href="/docs/Init/Prelude.html#Unit">Unit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Lean.instForInLoopUnit</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ forIn := <span class="fn">fun {β} [<span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] =&gt <span class="fn">Lean.Loop.forIn</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.doElemRepeat_">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L229-L229">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.doElemRepeat_">Lean.doElemRepeat_</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/NotationExtra.html#Lean.doElemRepeat_">Lean.doElemRepeat_</a> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.doElemRepeat_</span> <span class="fn">1022</span>
+    (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.binary">Lean.ParserDescr.binary</a> <span class="fn">`andthen</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quotrepeat &quot</span></span>) (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.const">Lean.ParserDescr.const</a> <span class="fn">`doSeq</span></span>)</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.doElemWhile_Do_">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L234-L234">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.doElemWhile_Do_">Lean.doElemWhile_Do_</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.doElemRepeat_Until_">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/NotationExtra.lean#L239-L239">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/NotationExtra.html#Lean.doElemRepeat_Until_">Lean.doElemRepeat_Until_</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,966 @@
+<html lang="en">
+<head>
+<title>Init.Classical</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Classical</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Classical</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Core.html">Init.Core</a>
+</li>
+<li>
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.indefiniteDescription">Classical.indefiniteDescription</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.choose">Classical.choose</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.choose_spec">Classical.choose_spec</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.em">Classical.em</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.exists_true_of_nonempty">Classical.exists_true_of_nonempty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.inhabited_of_nonempty">Classical.inhabited_of_nonempty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.inhabited_of_exists">Classical.inhabited_of_exists</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.propDecidable">Classical.propDecidable</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.decidableInhabited">Classical.decidableInhabited</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.typeDecidableEq">Classical.typeDecidableEq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.typeDecidable">Classical.typeDecidable</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.strongIndefiniteDescription">Classical.strongIndefiniteDescription</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.epsilon">Classical.epsilon</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.epsilon_spec_aux">Classical.epsilon_spec_aux</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.epsilon_spec">Classical.epsilon_spec</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.epsilon_singleton">Classical.epsilon_singleton</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.axiomOfChoice">Classical.axiomOfChoice</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.skolem">Classical.skolem</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.propComplete">Classical.propComplete</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.byCases">Classical.byCases</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.byContradiction">Classical.byContradiction</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Classical.«tacticBy_cases__:_»">Classical.«tacticBy_cases__:_»</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Classical.indefiniteDescription">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L16-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.indefiniteDescription">Classical.indefiniteDescription</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ x, <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">{ x // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.indefiniteDescription">Classical.indefiniteDescription</a> <span class="fn">p</span> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Classical.choice">Classical.choice</a> (_ : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">{ x // <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span> }</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.choose">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L19-L20">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.choose">Classical.choose</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ x, <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><a href="/docs/Init/Classical.html#Classical.indefiniteDescription">Classical.indefiniteDescription</a> <span class="fn">p</span> <span class="fn">h</span></span>).val</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.choose_spec">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L22-L23">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.choose_spec">Classical.choose_spec</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ x, <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> (<span class="fn"><a href="/docs/Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">h</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.em">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L26-L57">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.em">Classical.em</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.exists_true_of_nonempty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L59-L60">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.exists_true_of_nonempty">Classical.exists_true_of_nonempty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span> → <span class="fn">∃ x, <a href="/docs/Init/Prelude.html#True">True</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.inhabited_of_nonempty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L62-L63">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.inhabited_of_nonempty">Classical.inhabited_of_nonempty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.inhabited_of_nonempty">Classical.inhabited_of_nonempty</a> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/docs/Init/Prelude.html#Classical.choice">Classical.choice</a> <span class="fn">h</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.inhabited_of_exists">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L65-L66">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.inhabited_of_exists">Classical.inhabited_of_exists</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ x, <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.inhabited_of_exists">Classical.inhabited_of_exists</a> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Classical.html#Classical.inhabited_of_nonempty">Classical.inhabited_of_nonempty</a> (_ : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.propDecidable">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L69-L72">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.propDecidable">Classical.propDecidable</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">a</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.propDecidable">Classical.propDecidable</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Classical.choice">Classical.choice</a> (_ : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">a</span></span>)</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.decidableInhabited">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L74-L75">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.decidableInhabited">Classical.decidableInhabited</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">a</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.decidableInhabited">Classical.decidableInhabited</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn">inferInstance</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.typeDecidableEq">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L77-L78">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.typeDecidableEq">Classical.typeDecidableEq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.typeDecidableEq">Classical.typeDecidableEq</a> <span class="fn">α</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">inferInstance</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.typeDecidable">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L80-L83">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.typeDecidable">Classical.typeDecidable</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">α</span> <a href="/docs/Init/Core.html#PSum">⊕'</a> (<span class="fn"><span class="fn">α</span> → <a href="/docs/Init/Prelude.html#False">False</a></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.typeDecidable">Classical.typeDecidable</a> <span class="fn">α</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn"><a href="/docs/Init/Classical.html#Classical.propDecidable">Classical.propDecidable</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>)</span> with
+  | <span class="fn"><a href="/docs/Init/Prelude.html#Decidable.isFalse">isTrue</a> <span class="fn">hp</span></span> =&gt <span class="fn"><a href="/docs/Init/Core.html#PSum.inl">PSum.inl</a> <span class="fn">default</span></span>
+  | <span class="fn"><a href="/docs/Init/Prelude.html#Decidable.isFalse">isFalse</a> <span class="fn">hn</span></span> =&gt <span class="fn"><a href="/docs/Init/Core.html#PSum.inr">PSum.inr</a> (_ : <span class="fn"><span class="fn">α</span> → <a href="/docs/Init/Prelude.html#False">False</a></span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.strongIndefiniteDescription">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L85-L91">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.strongIndefiniteDescription">Classical.strongIndefiniteDescription</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">{ x // <span class="fn">(<span class="fn">∃ y, <span class="fn"><span class="fn">p</span> <span class="fn">y</span></span></span>) → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span> }</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.epsilon">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L95-L96">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">noncomputable def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.epsilon">Classical.epsilon</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Classical.html#Classical.epsilon">Classical.epsilon</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><a href="/docs/Init/Classical.html#Classical.strongIndefiniteDescription">Classical.strongIndefiniteDescription</a> <span class="fn">p</span> <span class="fn">h</span></span>).val</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Classical.epsilon_spec_aux">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L98-L99">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.epsilon_spec_aux">Classical.epsilon_spec_aux</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/docs/Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">∃ y, <span class="fn"><span class="fn">p</span> <span class="fn">y</span></span></span>) → <span class="fn"><span class="fn">p</span> (<span class="fn"><a href="/docs/Init/Classical.html#Classical.epsilon">Classical.epsilon</a> <span class="fn">p</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.epsilon_spec">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L101-L102">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.epsilon_spec">Classical.epsilon_spec</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(hex : <span class="fn">∃ y, <span class="fn"><span class="fn">p</span> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> (<span class="fn"><a href="/docs/Init/Classical.html#Classical.epsilon">Classical.epsilon</a> <span class="fn">p</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.epsilon_singleton">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L104-L105">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.epsilon_singleton">Classical.epsilon_singleton</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Classical.html#Classical.epsilon">Classical.epsilon</a> <span class="fn">fun <span class="fn">y</span> =&gt <span class="fn"><span class="fn">y</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.axiomOfChoice">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L109-L110">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.axiomOfChoice">Classical.axiomOfChoice</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Sort v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{r : <span class="fn">(x : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">β</span> <span class="fn">x</span></span> → <span class="fn">Prop</span></span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (x : <span class="fn">α</span>), <span class="fn">∃ y, <span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">y</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">∃ f, <span class="fn">(x : <span class="fn">α</span>) → <span class="fn"><span class="fn">r</span> <span class="fn">x</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.skolem">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L112-L113">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.skolem">Classical.skolem</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">α</span> → <span class="fn">Sort v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">(x : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">b</span> <span class="fn">x</span></span> → <span class="fn">Prop</span></span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">∀ (x : <span class="fn">α</span>), <span class="fn">∃ y, <span class="fn"><span class="fn">p</span> <span class="fn">x</span> <span class="fn">y</span></span></span></span>) <a href="/docs/Init/Core.html#Iff">↔</a> <span class="fn">∃ f, <span class="fn">(x : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> <span class="fn">x</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.propComplete">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L115-L118">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.propComplete">Classical.propComplete</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.byCases">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L121-L122">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.byCases">Classical.byCases</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(hpq : <span class="fn"><span class="fn">p</span> → <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnpq : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span> → <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">q</span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.byContradiction">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L125-L126">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.byContradiction">Classical.byContradiction</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span> → <a href="/docs/Init/Prelude.html#False">False</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">p</span></div></div>
+</div>
+</div>
+<div class="decl" id="Classical.«tacticBy_cases__:_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Classical.lean#L128-L128">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Classical.html#Classical.«tacticBy_cases__:_»">Classical.«tacticBy_cases__:_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link visible">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

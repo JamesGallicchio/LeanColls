@@ -1,0 +1,3059 @@
+<html lang="en">
+<head>
+<title>Init.Control.Lawful</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Control.Lawful</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Control.Lawful</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</li>
+<li>
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control.html">Init.Control</a>
+</li>
+<li>
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</li>
+<li>
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#monadLift_self">monadLift_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LawfulFunctor">LawfulFunctor</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#id_map'">id_map'</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LawfulApplicative">LawfulApplicative</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#pure_id_seq">pure_id_seq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LawfulMonad">LawfulMonad</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#bind_pure">bind_pure</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#map_eq_pure_bind">map_eq_pure_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#seq_eq_bind_map">seq_eq_bind_map</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#bind_congr">bind_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#bind_pure_unit">bind_pure_unit</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#map_congr">map_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#seq_eq_bind">seq_eq_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#seqRight_eq_bind">seqRight_eq_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#seqLeft_eq_bind">seqLeft_eq_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Id.map_eq">Id.map_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Id.bind_eq">Id.bind_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Id.pure_eq">Id.pure_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Id.instLawfulMonadIdInstMonadId">Id.instLawfulMonadIdInstMonadId</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.ext">ExceptT.ext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_pure">ExceptT.run_pure</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_lift">ExceptT.run_lift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_throw">ExceptT.run_throw</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_bind_lift">ExceptT.run_bind_lift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.bind_throw">ExceptT.bind_throw</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_bind">ExceptT.run_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.lift_pure">ExceptT.lift_pure</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.run_map">ExceptT.run_map</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.seq_eq">ExceptT.seq_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.bind_pure_comp">ExceptT.bind_pure_comp</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.seqLeft_eq">ExceptT.seqLeft_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.seqRight_eq">ExceptT.seqRight_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ExceptT.instLawfulMonadExceptTInstMonadExceptT">ExceptT.instLawfulMonadExceptTInstMonadExceptT</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.ext">ReaderT.ext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_pure">ReaderT.run_pure</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_bind">ReaderT.run_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_map">ReaderT.run_map</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_monadLift">ReaderT.run_monadLift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_monadMap">ReaderT.run_monadMap</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_read">ReaderT.run_read</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_seq">ReaderT.run_seq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_seqRight">ReaderT.run_seqRight</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.run_seqLeft">ReaderT.run_seqLeft</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReaderT.instLawfulMonadReaderTInstMonadReaderT">ReaderT.instLawfulMonadReaderTInstMonadReaderT</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instLawfulMonadStateRefT'InstMonadStateRefT'">instLawfulMonadStateRefT'InstMonadStateRefT'</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.ext">StateT.ext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run'_eq">StateT.run'_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_pure">StateT.run_pure</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_bind">StateT.run_bind</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_map">StateT.run_map</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_get">StateT.run_get</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_set">StateT.run_set</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_modify">StateT.run_modify</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_modifyGet">StateT.run_modifyGet</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_lift">StateT.run_lift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_bind_lift">StateT.run_bind_lift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_monadLift">StateT.run_monadLift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_monadMap">StateT.run_monadMap</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_seq">StateT.run_seq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_seqRight">StateT.run_seqRight</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.run_seqLeft">StateT.run_seqLeft</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.seqRight_eq">StateT.seqRight_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.seqLeft_eq">StateT.seqLeft_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#StateT.instLawfulMonadStateTInstMonadStateT">StateT.instLawfulMonadStateTInstMonadStateT</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="monadLift_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L13-L14">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#monadLift_self">monadLift_self</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="LawfulFunctor">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L16-L19">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#LawfulFunctor">LawfulFunctor</a>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Functor">Functor</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Prop</span></div></div>
+<ul class="structure_fields" id="LawfulFunctor.mk">
+<li class="structure_field" id="LawfulFunctor.map_const">
+map_const : <span class="fn">∀ {α β : <span class="fn">Type u</span>}, <span class="fn"><span class="fn">Functor.mapConst</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Functor.map</span> <a href="/docs/Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">β</span></span></span></span></span></li>
+<li class="structure_field" id="LawfulFunctor.id_map">
+id_map : <span class="fn">∀ {α : <span class="fn">Type u</span>} (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><span class="fn">id</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></li>
+<li class="structure_field" id="LawfulFunctor.comp_map">
+comp_map : <span class="fn">∀ {α β γ : <span class="fn">Type u</span>} (g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) (h : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>) (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>), <span class="fn"><span class="fn">(<span class="fn"><span class="fn">h</span> <a href="/docs/Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">h</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><span class="fn">g</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Lawful.html#LawfulApplicative.toLawfulFunctor">LawfulApplicative.toLawfulFunctor</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="id_map'">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L25-L26">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#id_map'">id_map'</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Functor">Functor</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulFunctor">LawfulFunctor</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">fun <span class="fn">a</span> =&gt <span class="fn">a</span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="LawfulApplicative">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L28-L37">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#LawfulApplicative">LawfulApplicative</a>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Applicative">Applicative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_extends">extends</span>
+<span class="decl_parent">
+<span class="fn"><a class="break_within" href="/docs/Init/Control/Lawful.html#LawfulFunctor">LawfulFunctor</a>
+</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Prop</span></div></div>
+<ul class="structure_fields" id="LawfulApplicative.mk">
+<li class="structure_field" id="LawfulApplicative.seqLeft_eq">
+seqLeft_eq : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>) (y : <span class="fn"><span class="fn">f</span> <span class="fn">β</span></span>), <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">β</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></span></li>
+<li class="structure_field" id="LawfulApplicative.seqRight_eq">
+seqRight_eq : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>) (y : <span class="fn"><span class="fn">f</span> <span class="fn">β</span></span>), <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">α</span> <span class="fn">id</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></span></li>
+<li class="structure_field" id="LawfulApplicative.pure_seq">
+pure_seq : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>), <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">g</span></span>) <span class="fn">fun <span class="fn">x_1</span> =&gt <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></li>
+<li class="structure_field" id="LawfulApplicative.map_pure">
+map_pure : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) (x : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">g</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span></span></span></li>
+<li class="structure_field" id="LawfulApplicative.seq_pure">
+seq_pure : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (g : <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>) (x : <span class="fn">α</span>), <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">g</span> <span class="fn">fun <span class="fn">x_1</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">fun <span class="fn">h</span> =&gt <span class="fn"><span class="fn">h</span> <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">g</span></span></span></span></li>
+<li class="structure_field" id="LawfulApplicative.seq_assoc">
+seq_assoc : <span class="fn">∀ {α β γ : <span class="fn">Type u</span>} (x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>) (g : <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>) (h : <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>)</span>),
+  <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">h</span> <span class="fn">fun <span class="fn">x_1</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">g</span> <span class="fn">fun <span class="fn">x_2</span> =&gt <span class="fn">x</span></span></span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn">Function.comp</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">h</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">g</span></span></span>) <span class="fn">fun <span class="fn">x_1</span> =&gt <span class="fn">x</span></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Lawful.html#LawfulMonad.toLawfulApplicative">LawfulMonad.toLawfulApplicative</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="pure_id_seq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L43-L44">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#pure_id_seq">pure_id_seq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Applicative">Applicative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulApplicative">LawfulApplicative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">id</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="LawfulMonad">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L46-L59">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_extends">extends</span>
+<span class="decl_parent">
+<span class="fn"><a class="break_within" href="/docs/Init/Control/Lawful.html#LawfulApplicative">LawfulApplicative</a>
+</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Prop</span></div></div>
+<ul class="structure_fields" id="LawfulMonad.mk">
+<li class="structure_field" id="LawfulMonad.bind_pure_comp">
+bind_pure_comp : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) (x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>),
+  <span class="fn">(<span class="fn">do
+      let a ← <span class="fn">x</span>
+      <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>     <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></li>
+<li class="structure_field" id="LawfulMonad.bind_map">
+bind_map : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (f : <span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>) (x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>),
+  <span class="fn">(<span class="fn">do
+      let a ← <span class="fn">f</span>
+      <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>     <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">f</span> <span class="fn">fun <span class="fn">x_1</span> =&gt <span class="fn">x</span></span></span></span></span></li>
+<li class="structure_field" id="LawfulMonad.pure_bind">
+pure_bind : <span class="fn">∀ {α β : <span class="fn">Type u</span>} (x : <span class="fn">α</span>) (f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>), <span class="fn"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></li>
+<li class="structure_field" id="LawfulMonad.bind_assoc">
+bind_assoc : <span class="fn">∀ {α β γ : <span class="fn">Type u</span>} (x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>) (f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>) (g : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> <span class="fn">γ</span></span></span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">g</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">g</span></span></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/ExceptCps.html#ExceptCpsT.instLawfulMonadExceptCpsTInstMonadExceptCpsT">ExceptCpsT.instLawfulMonadExceptCpsTInstMonadExceptCpsT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT">ExceptT.instLawfulMonadExceptTInstMonadExceptT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html#Id.instLawfulMonadIdInstMonadId">Id.instLawfulMonadIdInstMonadId</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'">instLawfulMonadStateRefT'InstMonadStateRefT'</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT">StateT.instLawfulMonadStateTInstMonadStateT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/StateCps.html#StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT">StateCpsT.instLawfulMonadStateCpsTInstMonadStateCpsT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT">ReaderT.instLawfulMonadReaderTInstMonadReaderT</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="bind_pure">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L64-L66">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#bind_pure">bind_pure</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">pure</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="map_eq_pure_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L68-L69">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#map_eq_pure_bind">map_eq_pure_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="seq_eq_bind_map">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L71-L72">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#seq_eq_bind_map">seq_eq_bind_map</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">f</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">f</span>
+  <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="bind_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L74-L75">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#bind_congr">bind_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Bind">Bind</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (a : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">g</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="bind_pure_unit">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L77-L78">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#bind_pure_unit">bind_pure_unit</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">do
+    <span class="fn">x</span>
+    <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="map_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L80-L81">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#map_congr">map_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Functor">Functor</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (a : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="seq_eq_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L83-L84">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#seq_eq_bind">seq_eq_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(mf : <span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">mf</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let f ← <span class="fn">mf</span>
+  <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="seqRight_eq_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L86-L88">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#seqRight_eq_bind">seqRight_eq_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let _ ← <span class="fn">x</span>
+  <span class="fn">y</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="seqLeft_eq_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L90-L91">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#seqLeft_eq_bind">seqLeft_eq_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  let _ ← <span class="fn">y</span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Id.map_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L97-L97">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#Id.map_eq">Id.map_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Id.html#Id">Id</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Id.bind_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L98-L98">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#Id.bind_eq">Id.bind_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Id.html#Id">Id</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Prelude.html#id">id</a> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Id.pure_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L99-L99">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#Id.pure_eq">Id.pure_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Id.instLawfulMonadIdInstMonadId">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L101-L102">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#Id.instLawfulMonadIdInstMonadId">Id.instLawfulMonadIdInstMonadId</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <a href="/docs/Init/Control/Id.html#Id">Id</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Lawful.html#Id.instLawfulMonadIdInstMonadId">Id.instLawfulMonadIdInstMonadId</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Control/Lawful.html#Id.instLawfulMonadIdInstMonadId.proof_1">Id.instLawfulMonadIdInstMonadId.proof_1</a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ExceptT.ext">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L110-L112">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.ext">ExceptT.ext</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_pure">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L114-L114">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_pure">ExceptT.run_pure</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Except.ok">Except.ok</a> <span class="fn">x</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_lift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L116-L116">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_lift">ExceptT.run_lift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.lift">ExceptT.lift</a> <span class="fn">x</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Except.ok</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_throw">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L118-L118">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_throw">ExceptT.run_throw</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{e : <span class="fn">ε</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadExcept.throw">throw</a> <span class="fn">e</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Except.error">Except.error</a> <span class="fn">e</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_bind_lift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L120-L121">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_bind_lift">ExceptT.run_bind_lift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.lift">ExceptT.lift</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.bind_throw">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L123-L124">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.bind_throw">ExceptT.bind_throw</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{e : <span class="fn">ε</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#MonadExcept.throw">throw</a> <span class="fn">e</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#MonadExcept.throw">throw</a> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L126-L132">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_bind">ExceptT.run_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">β</span></span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let x ← <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> <span class="fn">x</span></span>
+  <span class="fn">match <span class="fn">x</span> with
+    | <span class="fn"><a href="/docs/Init/Prelude.html#Except.error">Except.ok</a> <span class="fn">x</span></span> =&gt <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span>
+    | <span class="fn"><a href="/docs/Init/Prelude.html#Except.error">Except.error</a> <span class="fn">e</span></span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Except.error">Except.error</a> <span class="fn">e</span></span>)</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.lift_pure">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L134-L135">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.lift_pure">ExceptT.lift_pure</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.lift">ExceptT.lift</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.run_map">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L137-L141">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.run_map">ExceptT.run_map</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> (<span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/docs/Init/Control/Except.html#Except.map">Except.map</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT.run">ExceptT.run</a> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.seq_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L143-L144">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.seq_eq">ExceptT.seq_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(mf : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">mf</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let f ← <span class="fn">mf</span>
+  <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.bind_pure_comp">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L146-L147">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.bind_pure_comp">ExceptT.bind_pure_comp</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn"><span class="fn">pure</span> <a href="/docs/Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.seqLeft_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L149-L159">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.seqLeft_eq">ExceptT.seqLeft_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">β</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.seqRight_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L161-L167">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.seqRight_eq">ExceptT.seqRight_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">α</span> <span class="fn">id</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ExceptT.instLawfulMonadExceptTInstMonadExceptT">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L169-L178">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT">ExceptT.instLawfulMonadExceptTInstMonadExceptT</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ε : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> (<span class="fn"><a href="/docs/Init/Control/Except.html#ExceptT">ExceptT</a> <span class="fn">ε</span> <span class="fn">m</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT">@<a href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT">ExceptT.instLawfulMonadExceptTInstMonadExceptT</a></a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT.proof_1">@<a href="/docs/Init/Control/Lawful.html#ExceptT.instLawfulMonadExceptTInstMonadExceptT.proof_1">ExceptT.instLawfulMonadExceptTInstMonadExceptT.proof_1</a></a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ReaderT.ext">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L186-L188">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.ext">ReaderT.ext</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (ctx : <span class="fn">ρ</span>), <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">y</span> <span class="fn">ctx</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_pure">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L190-L190">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_pure">ReaderT.run_pure</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L192-L193">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_bind">ReaderT.run_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">ctx</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_map">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L195-L196">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_map">ReaderT.run_map</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_monadLift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L198-L199">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_monadLift">ReaderT.run_monadLift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_3</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT">MonadLiftT</a> <span class="fn">n</span> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_monadMap">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L201-L202">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_monadMap">ReaderT.run_monadMap</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctor">MonadFunctor</a> <span class="fn">n</span> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">n</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctorT.monadMap">monadMap</a> <span class="fn">f</span> <span class="fn">x</span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctorT.monadMap">monadMap</a> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_read">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L204-L204">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_read">ReaderT.run_read</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">ReaderT.read</span> <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">ctx</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_seq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L206-L207">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_seq">ReaderT.run_seq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">f</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">f</span> <span class="fn">ctx</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_seqRight">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L209-L210">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_seqRight">ReaderT.run_seqRight</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> (<span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">y</span> <span class="fn">ctx</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.run_seqLeft">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L212-L213">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.run_seqLeft">ReaderT.run_seqLeft</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">ρ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <span class="fn">ctx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> (<span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">x</span> <span class="fn">ctx</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#ReaderT.run">ReaderT.run</a> <span class="fn">y</span> <span class="fn">ctx</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ReaderT.instLawfulMonadReaderTInstMonadReaderT">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L215-L224">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT">ReaderT.instLawfulMonadReaderTInstMonadReaderT</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> (<span class="fn"><a href="/docs/Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT">@<a href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT">ReaderT.instLawfulMonadReaderTInstMonadReaderT</a></a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT.proof_1">@<a href="/docs/Init/Control/Lawful.html#ReaderT.instLawfulMonadReaderTInstMonadReaderT.proof_1">ReaderT.instLawfulMonadReaderTInstMonadReaderT.proof_1</a></a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instLawfulMonadStateRefT'InstMonadStateRefT'">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L230-L231">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'">instLawfulMonadStateRefT'InstMonadStateRefT'</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ω : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> (<span class="fn"><a href="/docs/Init/Control/StateRef.html#StateRefT'">StateRefT'</a> <span class="fn">ω</span> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'">@<a href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'">instLawfulMonadStateRefT'InstMonadStateRefT'</a></a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'.proof_1">@<a href="/docs/Init/Control/Lawful.html#instLawfulMonadStateRefT'InstMonadStateRefT'.proof_1">instLawfulMonadStateRefT'InstMonadStateRefT'.proof_1</a></a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="StateT.ext">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L237-L238">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.ext">StateT.ext</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (s : <span class="fn">σ</span>), <span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">y</span> <span class="fn">s</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run'_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L240-L241">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run'_eq">StateT.run'_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run'">StateT.run'</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">fun <span class="fn">a</span> =&gt <span class="fn"><span class="fn">a</span>.fst</span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_pure">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L243-L243">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_pure">StateT.run_pure</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">a</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_bind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L245-L247">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_bind">StateT.run_bind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let p ← <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span>
+  <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.fst</span></span>) <span class="fn"><span class="fn">p</span>.snd</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_map">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L249-L250">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_map">StateT.run_map</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.fst</span></span>, <span class="fn"><span class="fn">p</span>.snd</span>)</span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_get">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L252-L252">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_get">StateT.run_get</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">get</span> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">s</span>, <span class="fn">s</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_set">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L254-L254">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_set">StateT.run_set</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadStateOf.set">set</a> <span class="fn">s'</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a>, <span class="fn">s'</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_modify">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L256-L256">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_modify">StateT.run_modify</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">σ</span> → <span class="fn">σ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#modify">modify</a> <span class="fn">f</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a>, <span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_modifyGet">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L258-L259">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_modifyGet">StateT.run_modifyGet</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">σ</span> → <span class="fn"><span class="fn">α</span> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn">σ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadState.modifyGet">modifyGet</a> <span class="fn">f</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>).fst</span>, <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">s</span></span>).snd</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_lift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L261-L261">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_lift">StateT.run_lift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Control/State.html#StateT.lift">StateT.lift</a> <span class="fn">x</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_bind_lift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L263-L264">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_bind_lift">StateT.run_bind_lift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.lift">StateT.lift</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">f</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn">x</span>
+  <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">s</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_monadLift">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L266-L266">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_monadLift">StateT.run_monadLift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT">MonadLiftT</a> <span class="fn">n</span> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><a href="/docs/Init/Prelude.html#MonadLiftT.monadLift">monadLift</a> <span class="fn">x</span></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn">a</span>, <span class="fn">s</span>)</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_monadMap">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L268-L269">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_monadMap">StateT.run_monadMap</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctor">MonadFunctor</a> <span class="fn">n</span> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">n</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctorT.monadMap">monadMap</a> <span class="fn">f</span> <span class="fn">x</span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#MonadFunctorT.monadMap">monadMap</a> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_seq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L271-L273">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_seq">StateT.run_seq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> <span class="fn">f</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let fs ← <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">f</span> <span class="fn">s</span></span>
+  <span class="fn">(<span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Prod.fst">Prod.fst</a> (<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) <span class="fn">σ</span> <span class="fn">fs</span> <span class="fn"><span class="fn">p</span>.fst</span></span>, <span class="fn"><span class="fn">p</span>.snd</span>)</span></span>) <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn"><span class="fn">fs</span>.snd</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_seqRight">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L275-L277">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_seqRight">StateT.run_seqRight</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let p ← <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span>
+  <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">y</span> <span class="fn"><span class="fn">p</span>.snd</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.run_seqLeft">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L279-L281">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.run_seqLeft">StateT.run_seqLeft</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u_1</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> (<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let p ← <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">x</span> <span class="fn">s</span></span>
+  let p' ← <span class="fn"><a href="/docs/Init/Control/State.html#StateT.run">StateT.run</a> <span class="fn">y</span> <span class="fn"><span class="fn">p</span>.snd</span></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn"><span class="fn">p</span>.fst</span>, <span class="fn"><span class="fn">p'</span>.snd</span>)</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.seqRight_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L283-L287">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.seqRight_eq">StateT.seqRight_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">α</span> <span class="fn">id</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.seqLeft_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L289-L291">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.seqLeft_eq">StateT.seqLeft_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#SeqLeft.seqLeft">SeqLeft.seqLeft</a> <span class="fn">x</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Function.const">Function.const</a> <span class="fn">β</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">y</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="StateT.instLawfulMonadStateTInstMonadStateT">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Lawful.lean#L293-L302">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT">StateT.instLawfulMonadStateTInstMonadStateT</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{σ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Lawful.html#LawfulMonad">LawfulMonad</a> (<span class="fn"><a href="/docs/Init/Control/State.html#StateT">StateT</a> <span class="fn">σ</span> <span class="fn">m</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT">@<a href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT">StateT.instLawfulMonadStateTInstMonadStateT</a></a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT.proof_1">@<a href="/docs/Init/Control/Lawful.html#StateT.instLawfulMonadStateTInstMonadStateT.proof_1">StateT.instLawfulMonadStateTInstMonadStateT.proof_1</a></a></span></li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html" open="">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

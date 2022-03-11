@@ -1,0 +1,1547 @@
+<html lang="en">
+<head>
+<title>Init.Data.ByteArray.Basic</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Data.ByteArray.Basic</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Data.ByteArray.Basic</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray">ByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.mkEmpty">ByteArray.mkEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.empty">ByteArray.empty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.instInhabitedByteArray">ByteArray.instInhabitedByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.instEmptyCollectionByteArray">ByteArray.instEmptyCollectionByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.push">ByteArray.push</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.size">ByteArray.size</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.uget">ByteArray.uget</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.get!">ByteArray.get!</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.get">ByteArray.get</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.getOp">ByteArray.getOp</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.set!">ByteArray.set!</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.set">ByteArray.set</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.uset">ByteArray.uset</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.isEmpty">ByteArray.isEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.copySlice">ByteArray.copySlice</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.extract">ByteArray.extract</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.append">ByteArray.append</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.instAppendByteArray">ByteArray.instAppendByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.toList">ByteArray.toList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.toList.loop">ByteArray.toList.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.findIdx?">ByteArray.findIdx?</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.findIdx?.loop">ByteArray.findIdx?.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.forInUnsafe">ByteArray.forInUnsafe</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.forInUnsafe.loop">ByteArray.forInUnsafe.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.forIn">ByteArray.forIn</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.forIn.loop">ByteArray.forIn.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.instForInByteArrayUInt8">ByteArray.instForInByteArrayUInt8</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.foldlMUnsafe">ByteArray.foldlMUnsafe</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.foldlMUnsafe.fold">ByteArray.foldlMUnsafe.fold</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.foldlM">ByteArray.foldlM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.foldlM.loop">ByteArray.foldlM.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.foldl">ByteArray.foldl</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.toByteArray">List.toByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.toByteArray.loop">List.toByteArray.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instToStringByteArray">instToStringByteArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.toUInt64LE!">ByteArray.toUInt64LE!</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ByteArray.toUInt64BE!">ByteArray.toUInt64BE!</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="ByteArray">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L13-L14">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="structure_fields" id="ByteArray.mk">
+<li class="structure_field" id="ByteArray.data">
+data : <span class="fn"><a href="/docs/Init/Prelude.html#Array">Array</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="ByteArray.mkEmpty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L21-L22">source</a>
+</div>
+<div class="attributes">@[extern  lean_mk_empty_byte_array]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.mkEmpty">ByteArray.mkEmpty</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.mkEmpty">ByteArray.mkEmpty</a> <span class="fn">c</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ data := <span class="fn">#[]</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.empty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L24-L24">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.mkEmpty">ByteArray.mkEmpty</a> <span class="fn">0</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.instInhabitedByteArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L26-L27">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instInhabitedByteArray">ByteArray.instInhabitedByteArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instInhabitedByteArray">ByteArray.instInhabitedByteArray</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.instEmptyCollectionByteArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L29-L30">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instEmptyCollectionByteArray">ByteArray.instEmptyCollectionByteArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#EmptyCollection">EmptyCollection</a> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instEmptyCollectionByteArray">ByteArray.instEmptyCollectionByteArray</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ emptyCollection := <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.push">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L33-L34">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_push]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.push">ByteArray.push</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.push">ByteArray.push</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">b</span> =&gt <span class="fn">{ data := <span class="fn"><a href="/docs/Init/Prelude.html#Array.push">Array.push</a> <span class="fn">bs</span> <span class="fn">b</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.size">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L37-L38">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_size]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> → <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Array.size">Array.size</a> <span class="fn">bs</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.uget">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L41-L42">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_uget]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.uget">ByteArray.uget</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="/docs/Init/Data/UInt.html#USize.toNat">USize.toNat</a> <span class="fn">i</span></span> <a href="/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">a</span></span></span> → <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.uget">ByteArray.uget</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span>, <span class="fn">h</span> =&gt <span class="fn"><a href="/docs/Init/Data/Array/Basic.html#Array.uget">Array.uget</a> <span class="fn">bs</span> <span class="fn">i</span> <span class="fn">h</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.get!">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L45-L46">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_get]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.get!">ByteArray.get!</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> → <span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.get!">ByteArray.get!</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Array.get!">Array.get!</a> <span class="fn">bs</span> <span class="fn">i</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.get">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L49-L50">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_fget]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.get">ByteArray.get</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Fin">Fin</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">a</span></span>)</span> → <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.get">ByteArray.get</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Array.get">Array.get</a> <span class="fn">bs</span> <span class="fn">i</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.getOp">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L52-L53">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.getOp">ByteArray.getOp</a>
+</span>
+<span class="decl_args">
+<span class="fn">(self : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(idx : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.getOp">ByteArray.getOp</a> <span class="fn">self</span> <span class="fn">idx</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.get!">ByteArray.get!</a> <span class="fn">self</span> <span class="fn">idx</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.set!">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L56-L57">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_set]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.set!">ByteArray.set!</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> → <span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.set!">ByteArray.set!</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span>, <span class="fn">b</span> =&gt <span class="fn">{ data := <span class="fn"><a href="/docs/Init/Prelude.html#Array.set!">Array.set!</a> <span class="fn">bs</span> <span class="fn">i</span> <span class="fn">b</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.set">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L60-L61">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_fset]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.set">ByteArray.set</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Fin">Fin</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">a</span></span>)</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.set">ByteArray.set</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span>, <span class="fn">b</span> =&gt <span class="fn">{ data := <span class="fn"><a href="/docs/Init/Prelude.html#Array.set">Array.set</a> <span class="fn">bs</span> <span class="fn">i</span> <span class="fn">b</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.uset">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L64-L65">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_uset]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.uset">ByteArray.uset</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(a : <a href="/docs/Init/Prelude.html#UInt8">UInt8</a>) → <span class="fn"><span class="fn"><span class="fn"><a href="/docs/Init/Data/UInt.html#USize.toNat">USize.toNat</a> <span class="fn">i</span></span> <a href="/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">a</span></span></span> → <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.uset">ByteArray.uset</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
+  | <span class="fn">{ data := <span class="fn">bs</span> }</span>, <span class="fn">i</span>, <span class="fn">v</span>, <span class="fn">h</span> =&gt <span class="fn">{ data := <span class="fn"><a href="/docs/Init/Data/Array/Basic.html#Array.uset">Array.uset</a> <span class="fn">bs</span> <span class="fn">i</span> <span class="fn">v</span> <span class="fn">h</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.isEmpty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L67-L68">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.isEmpty">ByteArray.isEmpty</a>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.isEmpty">ByteArray.isEmpty</a> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>)</span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.copySlice">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L74-L75">source</a>
+</div>
+<div class="attributes">@[extern  lean_byte_array_copy_slice]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.copySlice">ByteArray.copySlice</a>
+</span>
+<span class="decl_args">
+<span class="fn">(src : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(srcOff : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(dest : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(destOff : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(len : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(exact : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Bool">Bool</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<p>Copy the slice at <code>[srcOff, srcOff + len)</code> in <code>src</code> to <code>[destOff, destOff + len)</code> in <code>dest</code>, growing <code>dest</code> if necessary.
+If <code>exact</code> is <code>false</code>, the capacity will be doubled when grown.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.extract">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L77-L78">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.extract">ByteArray.extract</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.extract">ByteArray.extract</a> <span class="fn">a</span> <span class="fn">b</span> <span class="fn">e</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.copySlice">ByteArray.copySlice</a> <span class="fn">a</span> <span class="fn">b</span> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a> <span class="fn">0</span> (<span class="fn"><span class="fn">e</span> <a href="/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.append">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L80-L82">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.append">ByteArray.append</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.append">ByteArray.append</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.copySlice">ByteArray.copySlice</a> <span class="fn">b</span> <span class="fn">0</span> <span class="fn">a</span> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">a</span></span>) (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.instAppendByteArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L84-L84">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instAppendByteArray">ByteArray.instAppendByteArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Append">Append</a> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instAppendByteArray">ByteArray.instAppendByteArray</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ append := <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.append">ByteArray.append</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.toList">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L86-L92">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toList">ByteArray.toList</a>
+</span>
+<span class="decl_args">
+<span class="fn">(bs : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toList">ByteArray.toList</a> <span class="fn">bs</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toList.loop">ByteArray.toList.loop</a> <span class="fn">bs</span> <span class="fn">0</span> <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.toList.loop">
+<div class="constant">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L87-L91">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">partial def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toList.loop">ByteArray.toList.loop</a>
+</span>
+<span class="decl_args">
+<span class="fn">(bs : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="ByteArray.findIdx?">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L94-L100">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.findIdx?">ByteArray.findIdx?</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <a href="/docs/Init/Prelude.html#Bool">Bool</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(start : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.findIdx?">ByteArray.findIdx?</a> <span class="fn">a</span> <span class="fn">p</span> <span class="fn">start</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.findIdx?.loop">ByteArray.findIdx?.loop</a> <span class="fn">a</span> <span class="fn">p</span> <span class="fn">start</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.findIdx?.loop">
+<div class="constant">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L95-L99">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">partial def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.findIdx?.loop">ByteArray.findIdx?.loop</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <a href="/docs/Init/Prelude.html#Bool">Bool</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="ByteArray.forInUnsafe">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L108-L118">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forInUnsafe">ByteArray.forInUnsafe</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forInUnsafe">ByteArray.forInUnsafe</a> <span class="fn">as</span> <span class="fn">b</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let sz := <span class="fn"><a href="/docs/Init/Data/UInt.html#USize.ofNat">USize.ofNat</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span>)</span>;
+  <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forInUnsafe.loop">ByteArray.forInUnsafe.loop</a> <span class="fn">as</span> <span class="fn">f</span> <span class="fn">sz</span> <span class="fn">0</span> <span class="fn">b</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.forInUnsafe.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L110-L117">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forInUnsafe.loop">ByteArray.forInUnsafe.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sz : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.forIn">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L122-L133">source</a>
+</div>
+<div class="attributes">@[implementedBy ByteArray.forInUnsafe]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forIn">ByteArray.forIn</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forIn">ByteArray.forIn</a> <span class="fn">as</span> <span class="fn">b</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forIn.loop">ByteArray.forIn.loop</a> <span class="fn">as</span> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span>) (_ : <span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span> <a href="/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span></span>) <span class="fn">b</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.forIn.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L123-L132">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forIn.loop">ByteArray.forIn.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">i</span> <a href="/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.forIn.loop">ByteArray.forIn.loop</a> <span class="fn">as</span> <span class="fn">f</span> <span class="fn">0</span> <span class="fn">x</span> <span class="fn">b</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.instForInByteArrayUInt8">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L135-L136">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.instForInByteArrayUInt8">ByteArray.instForInByteArrayUInt8</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#ForIn">ForIn</a> <span class="fn">m</span> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">ByteArray.instForInByteArrayUInt8</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ forIn := <span class="fn">fun {β} [<span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] =&gt <span class="fn">ByteArray.forIn</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.foldlMUnsafe">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L143-L155">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldlMUnsafe">ByteArray.foldlMUnsafe</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(start : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(stop : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.foldlMUnsafe.fold">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L144-L148">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldlMUnsafe.fold">ByteArray.foldlMUnsafe.fold</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(stop : <a href="/docs/Init/Prelude.html#USize">USize</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.foldlM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L159-L173">source</a>
+</div>
+<div class="attributes">@[implementedBy ByteArray.foldlMUnsafe]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldlM">ByteArray.foldlM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(start : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(stop : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.foldlM.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L161-L168">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldlM.loop">ByteArray.foldlM.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(stop : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">stop</span> <a href="/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.foldl">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L176-L177">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldl">ByteArray.foldl</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn"><a href="/docs/Init/Prelude.html#UInt8">UInt8</a> → <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(start : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(stop : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.size">ByteArray.size</a> <span class="fn">as</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">β</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldl">ByteArray.foldl</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">as</span> <span class="fn">start</span> <span class="fn">stop</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Control/Id.html#Id.run">Id.run</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.foldlM">ByteArray.foldlM</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">as</span> <span class="fn">start</span> <span class="fn">stop</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.toByteArray">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L181-L185">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray">List.toByteArray</a>
+</span>
+<span class="decl_args">
+<span class="fn">(bs : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray">List.toByteArray</a> <span class="fn">bs</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray.loop">List.toByteArray.loop</a> <span class="fn">bs</span> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.empty">ByteArray.empty</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.toByteArray.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L182-L184">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray.loop">List.toByteArray.loop</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span> → <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a> → <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray.loop">List.toByteArray.loop</a> <span class="fn">[]</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray.loop">List.toByteArray.loop</a> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">bs</span></span>) <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#List.toByteArray.loop">List.toByteArray.loop</a> <span class="fn">bs</span> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.push">ByteArray.push</a> <span class="fn">x</span> <span class="fn">b</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instToStringByteArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L187-L187">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#instToStringByteArray">instToStringByteArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ToString/Basic.html#ToString">ToString</a> <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#instToStringByteArray">instToStringByteArray</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ toString := <span class="fn">fun <span class="fn">bs</span> =&gt <span class="fn"><a href="/docs/Init/Data/ToString/Basic.html#List.toString">List.toString</a> (<span class="fn"><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toList">ByteArray.toList</a> <span class="fn">bs</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.toUInt64LE!">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L190-L199">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toUInt64LE!">ByteArray.toUInt64LE!</a>
+</span>
+<span class="decl_args">
+<span class="fn">(bs : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#UInt64">UInt64</a></div></div>
+<p>Interpret a <code><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></code> of size 8 as a little-endian <code><a href="/docs/Init/Prelude.html#UInt64">UInt64</a></code>.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ByteArray.toUInt64BE!">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/ByteArray/Basic.lean#L202-L211">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/ByteArray/Basic.html#ByteArray.toUInt64BE!">ByteArray.toUInt64BE!</a>
+</span>
+<span class="decl_args">
+<span class="fn">(bs : <a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#UInt64">UInt64</a></div></div>
+<p>Interpret a <code><a href="/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></code> of size 8 as a big-endian <code><a href="/docs/Init/Prelude.html#UInt64">UInt64</a></code>.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html" open="">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html" open="">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link visible">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,1212 @@
+<html lang="en">
+<head>
+<title>Init.Control.Basic</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Control.Basic</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Control.Basic</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Core.html">Init.Core</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control.html">Init.Control</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</li>
+<li>
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</li>
+<li>
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Functor.mapRev">Functor.mapRev</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term_<&>_»">«term_<&>_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Functor.discard">Functor.discard</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Alternative">Alternative</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instOrElse">instOrElse</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#guard">guard</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#optional">optional</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ToBool">ToBool</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instToBoolBool">instToBoolBool</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#bool">bool</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#orM">orM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term_<||>_»">«term_<||>_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#andM">andM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#«term_<&&>_»">«term_<&&>_»</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#notM">notM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#MonadControl">MonadControl</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#MonadControlT">MonadControlT</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instMonadControlT">instMonadControlT</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instMonadControlT_1">instMonadControlT_1</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#controlAt">controlAt</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#control">control</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ForM">ForM</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Functor.mapRev">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L11-L12">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#Functor.mapRev">Functor.mapRev</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Functor">Functor</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">α</span></span> → <span class="fn">(<span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>) → <span class="fn"><span class="fn">f</span> <span class="fn">β</span></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Control/Basic.html#Functor.mapRev">&lt&amp&gt</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">a</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term_<&>_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L14-L14">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#«term_<&>_»">«term_<&>_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Functor.discard">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L16-L17">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#Functor.discard">Functor.discard</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Functor">Functor</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#Functor.discard">discard</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Functor.mapConst">Functor.mapConst</a> <a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a> <span class="fn">x</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Alternative">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L21-L23">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#Alternative">Alternative</a>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_extends">extends</span>
+<span class="decl_parent">
+<span class="fn"><a class="break_within" href="/docs/Init/Prelude.html#Applicative">Applicative</a>
+</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max (u + 1) v)</span></div></div>
+<ul class="structure_fields" id="Alternative.mk">
+<li class="structure_field" id="Alternative.failure">
+failure : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span></span></li>
+<li class="structure_field" id="Alternative.orElse">
+orElse : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">α</span></span> → <span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span></span>) → <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/StateRef.html#StateRefT'.instAlternativeStateRefT'">StateRefT'.instAlternativeStateRefT'</a>
+</li>
+<li>
+<a href="/docs/Init/Control/State.html#StateT.instAlternativeStateT">StateT.instAlternativeStateT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Reader.html#ReaderT.instAlternativeReaderT">ReaderT.instAlternativeReaderT</a>
+</li>
+<li>
+<a href="/docs/LeanColls/LazyList.html#LazyList.instAlternativeLazyList">LazyList.instAlternativeLazyList</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Option.html#OptionT.instAlternativeOptionT">OptionT.instAlternativeOptionT</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instOrElse">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L25-L25">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#instOrElse">instOrElse</a>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#OrElse">OrElse</a> (<span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#instOrElse">instOrElse</a> <span class="fn">f</span> <span class="fn">α</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ orElse := <span class="fn">Alternative.orElse</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="guard">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L31-L32">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#guard">guard</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Unit">Unit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#guard">guard</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn">p</span> then <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span> else <span class="fn">failure</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="optional">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L34-L35">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#optional">optional</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">f</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">f</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#optional">optional</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#HOrElse.hOrElse">HOrElse.hOrElse</a> (<span class="fn"><span class="fn">some</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">none</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ToBool">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L37-L38">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#ToBool">ToBool</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="ToBool.mk">
+<li class="structure_field" id="ToBool.toBool">
+toBool : <span class="fn"><span class="fn">α</span> → <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Option.html#instToBoolOption">instToBoolOption</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Basic.html#instToBoolBool">instToBoolBool</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instToBoolBool">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L42-L43">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#instToBoolBool">instToBoolBool</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool">ToBool</a> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Basic.html#instToBoolBool">instToBoolBool</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ toBool := <span class="fn">fun <span class="fn">b</span> =&gt <span class="fn">b</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="bool">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L45-L48">source</a>
+</div>
+<div class="attributes">@[macroInline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#bool">bool</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool">ToBool</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#bool">bool</a> <span class="fn">f</span> <span class="fn">t</span> <span class="fn">b</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool.toBool">toBool</a> <span class="fn">b</span></span> with
+  | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn">t</span>
+  | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false">f</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="orM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L50-L54">source</a>
+</div>
+<div class="attributes">@[macroInline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#orM">orM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool">ToBool</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn">(<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Control/Basic.html#orM">&lt||&gt</a> <span class="fn">y</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let b ← <span class="fn">x</span>
+  <span class="fn">match <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool.toBool">toBool</a> <span class="fn">b</span></span> with
+    | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span>
+    | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false">y</a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term_<||>_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L56-L56">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#«term_<||>_»">«term_<||>_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Control/Basic.html#«term_<||>_»">«term_&lt||&gt_»</a> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.trailingNode">Lean.ParserDescr.trailingNode</a> <span class="fn">`«term_&lt||&gt_»</span> <span class="fn">30</span> <span class="fn">31</span>
+    (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.binary">Lean.ParserDescr.binary</a> <span class="fn">`andthen</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot &lt||&gt &quot</span></span>) (<span class="fn"><a href="/docs/Init/Prelude.html#Lean.ParserDescr.cat">Lean.ParserDescr.cat</a> <span class="fn">`term</span> <span class="fn">30</span></span>)</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="andM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L58-L62">source</a>
+</div>
+<div class="attributes">@[macroInline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#andM">andM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool">ToBool</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn">(<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Control/Basic.html#andM">&lt&amp&amp&gt</a> <span class="fn">y</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let b ← <span class="fn">x</span>
+  <span class="fn">match <span class="fn"><a href="/docs/Init/Control/Basic.html#ToBool.toBool">toBool</a> <span class="fn">b</span></span> with
+    | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn">y</span>
+    | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="«term_<&&>_»">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L64-L64">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#«term_<&&>_»">«term_<&&>_»</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="notM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L66-L67">source</a>
+</div>
+<div class="attributes">@[macroInline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#notM">notM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Applicative">Applicative</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#notM">notM</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#not">not</a> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn">x</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="MonadControl">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L69-L72">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#MonadControl">MonadControl</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type w</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max (max (u + 1) v) w)</span></div></div>
+<ul class="structure_fields" id="MonadControl.mk">
+<li class="structure_field" id="MonadControl.stM">
+stM : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u</span></span></li>
+<li class="structure_field" id="MonadControl.liftWith">
+liftWith : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn">(<span class="fn">(<span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">stM</span> <span class="fn">β</span></span>)</span></span></span>) → <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span></span>) → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span></span></li>
+<li class="structure_field" id="MonadControl.restoreM">
+restoreM : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">stM</span> <span class="fn">α</span></span>)</span> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Except.html#instMonadControlExceptT">instMonadControlExceptT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/StateRef.html#instMonadControlStateRefT'">instMonadControlStateRefT'</a>
+</li>
+<li>
+<a href="/docs/Init/Control/State.html#StateT.monadControl">StateT.monadControl</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Reader.html#instMonadControlReaderT">instMonadControlReaderT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Option.html#instMonadControlOptionT">instMonadControlOptionT</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="MonadControlT">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L74-L77">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type w</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max (max (u + 1) v) w)</span></div></div>
+<ul class="structure_fields" id="MonadControlT.mk">
+<li class="structure_field" id="MonadControlT.stM">
+stM : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type u</span></span></li>
+<li class="structure_field" id="MonadControlT.liftWith">
+liftWith : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn">(<span class="fn">(<span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><span class="fn">stM</span> <span class="fn">β</span></span>)</span></span></span>) → <span class="fn"><span class="fn">m</span> <span class="fn">α</span></span></span>) → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span></span></li>
+<li class="structure_field" id="MonadControlT.restoreM">
+restoreM : <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">stM</span> <span class="fn">α</span></span> → <span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Basic.html#instMonadControlT">instMonadControlT</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Basic.html#instMonadControlT_1">instMonadControlT_1</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instMonadControlT">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L81-L84">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#instMonadControlT">instMonadControlT</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_3</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(o : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_4</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">n</span> <span class="fn">o</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a> <span class="fn">m</span> <span class="fn">n</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a> <span class="fn">m</span> <span class="fn">o</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instMonadControlT_1">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L86-L89">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#instMonadControlT_1">instMonadControlT_1</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Pure">Pure</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a> <span class="fn">m</span> <span class="fn">m</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#instMonadControlT_1">instMonadControlT_1</a> <span class="fn">m</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ stM := <span class="fn">fun <span class="fn">α</span> =&gt <span class="fn">α</span></span>, liftWith := <span class="fn">fun {α} <span class="fn">f</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">fun {β} <span class="fn">x</span> =&gt <span class="fn">x</span></span></span></span>, restoreM := <span class="fn">fun {α} <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="controlAt">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L92-L94">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#controlAt">controlAt</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[s1 : <span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a> <span class="fn">m</span> <span class="fn">n</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[s2 : <span class="fn"><a href="/docs/Init/Prelude.html#Bind">Bind</a> <span class="fn">n</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT.stM">stM</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">β</span></span>)</span></span></span>) → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT.stM">stM</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#controlAt">controlAt</a> <span class="fn">m</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT.liftWith">liftWith</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Bind.bind">&gt&gt=</a> <span class="fn">restoreM</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="control">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L97-L99">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#control">control</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT">MonadControlT</a> <span class="fn">m</span> <span class="fn">n</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Bind">Bind</a> <span class="fn">n</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">{β : <span class="fn">Type u</span>} → <span class="fn"><span class="fn"><span class="fn">n</span> <span class="fn">β</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT.stM">stM</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">β</span></span>)</span></span></span>) → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Control/Basic.html#MonadControlT.stM">stM</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">n</span> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#control">control</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Control/Basic.html#controlAt">controlAt</a> <span class="fn">m</span> <span class="fn">f</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ForM">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Control/Basic.lean#L108-L109">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Control/Basic.html#ForM">ForM</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(γ : <span class="fn">Type w₁</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><a href="/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type w₂</span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max (max (max (u + 1) v) w₁) w₂)</span></div></div>
+<ul class="structure_fields" id="ForM.mk">
+<li class="structure_field" id="ForM.forM">
+forM : <span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] → <span class="fn"><span class="fn">γ</span> → <span class="fn">(<span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span>) → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/Range.html#Std.Range.instForMRangeNat">Std.Range.instForMRangeNat</a>
+</li>
+<li>
+<a href="/docs/Init/Data/List/Control.html#List.instForMList">List.instForMList</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html" open="">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link visible">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

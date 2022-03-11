@@ -1,0 +1,809 @@
+<html lang="en">
+<head>
+<title>Init.Util</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Util</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Util</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init.html">Init</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</li>
+<li>
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dbgTrace">dbgTrace</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dbgTraceVal">dbgTraceVal</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dbgTraceIfShared">dbgTraceIfShared</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dbgSleep">dbgSleep</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#panicWithPos">panicWithPos</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#panicWithPosWithDecl">panicWithPosWithDecl</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ptrAddrUnsafe">ptrAddrUnsafe</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#withPtrAddrUnsafe">withPtrAddrUnsafe</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#withPtrEqUnsafe">withPtrEqUnsafe</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#withPtrEq">withPtrEq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#withPtrEqDecEq">withPtrEqDecEq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#withPtrAddr">withPtrAddr</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="dbgTrace">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L13-L13">source</a>
+</div>
+<div class="attributes">@[neverExtract, extern  lean_dbg_trace]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#dbgTrace">dbgTrace</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#dbgTrace">dbgTrace</a> <span class="fn">s</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="dbgTraceVal">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L15-L16">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#dbgTraceVal">dbgTraceVal</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/ToString/Basic.html#ToString">ToString</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#dbgTraceVal">dbgTraceVal</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Util.html#dbgTrace">dbgTrace</a> (<span class="fn"><a href="/docs/Init/Data/ToString/Basic.html#ToString.toString">toString</a> <span class="fn">a</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">a</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="dbgTraceIfShared">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L20-L20">source</a>
+</div>
+<div class="attributes">@[neverExtract, extern  lean_dbg_trace_if_shared]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#dbgTraceIfShared">dbgTraceIfShared</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#dbgTraceIfShared">dbgTraceIfShared</a> <span class="fn">s</span> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="dbgSleep">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L23-L23">source</a>
+</div>
+<div class="attributes">@[extern  lean_dbg_sleep]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#dbgSleep">dbgSleep</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ms : <a href="/docs/Init/Prelude.html#UInt32">UInt32</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#dbgSleep">dbgSleep</a> <span class="fn">ms</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="panicWithPos">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L28-L29">source</a>
+</div>
+<div class="attributes">@[neverExtract, inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#panicWithPos">panicWithPos</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(modName : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(line : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(col : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(msg : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#panicWithPos">panicWithPos</a> <span class="fn">modName</span> <span class="fn">line</span> <span class="fn">col</span> <span class="fn">msg</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#panic">panic</a> (<span class="fn"><a href="/docs/Init/Util.html#_private.Init.Util.0.mkPanicMessage">mkPanicMessage</a> <span class="fn">modName</span> <span class="fn">line</span> <span class="fn">col</span> <span class="fn">msg</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="panicWithPosWithDecl">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L34-L35">source</a>
+</div>
+<div class="attributes">@[neverExtract, inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#panicWithPosWithDecl">panicWithPosWithDecl</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(modName : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(declName : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(line : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(col : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(msg : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#panicWithPosWithDecl">panicWithPosWithDecl</a> <span class="fn">modName</span> <span class="fn">declName</span> <span class="fn">line</span> <span class="fn">col</span> <span class="fn">msg</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#panic">panic</a> (<span class="fn"><a href="/docs/Init/Util.html#_private.Init.Util.0.mkPanicMessageWithDecl">mkPanicMessageWithDecl</a> <span class="fn">modName</span> <span class="fn">declName</span> <span class="fn">line</span> <span class="fn">col</span> <span class="fn">msg</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ptrAddrUnsafe">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L38-L38">source</a>
+</div>
+<div class="attributes">@[extern  lean_ptr_addr]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#ptrAddrUnsafe">ptrAddrUnsafe</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#USize">USize</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#ptrAddrUnsafe">ptrAddrUnsafe</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="withPtrAddrUnsafe">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L40-L41">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#withPtrAddrUnsafe">withPtrAddrUnsafe</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="/docs/Init/Prelude.html#USize">USize</a> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (u₁ u₂ : <a href="/docs/Init/Prelude.html#USize">USize</a>), <span class="fn"><span class="fn"><span class="fn">k</span> <span class="fn">u₁</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <span class="fn">u₂</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">β</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#withPtrAddrUnsafe">withPtrAddrUnsafe</a> <span class="fn">a</span> <span class="fn">k</span> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> (<span class="fn"><a href="/docs/Init/Util.html#ptrAddrUnsafe">ptrAddrUnsafe</a> <span class="fn">a</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="withPtrEqUnsafe">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L43-L44">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">unsafe def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#withPtrEqUnsafe">withPtrEqUnsafe</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <a href="/docs/Init/Prelude.html#Bool">Bool</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">k</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#withPtrEqUnsafe">withPtrEqUnsafe</a> <span class="fn">a</span> <span class="fn">b</span> <span class="fn">k</span> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#ptrAddrUnsafe">ptrAddrUnsafe</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn"><a href="/docs/Init/Util.html#ptrAddrUnsafe">ptrAddrUnsafe</a> <span class="fn">b</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <a href="/docs/Init/Prelude.html#Bool.true">true</a> else <span class="fn"><span class="fn">k</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="withPtrEq">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L47-L47">source</a>
+</div>
+<div class="attributes">@[implementedBy withPtrEqUnsafe]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#withPtrEq">withPtrEq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="/docs/Init/Prelude.html#Unit">Unit</a> → <a href="/docs/Init/Prelude.html#Bool">Bool</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">k</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#withPtrEq">withPtrEq</a> <span class="fn">a</span> <span class="fn">b</span> <span class="fn">k</span> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <a href="/docs/Init/Prelude.html#Unit.unit">()</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="withPtrEqDecEq">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L50-L54">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#withPtrEqDecEq">withPtrEqDecEq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn">(a : <a href="/docs/Init/Prelude.html#Unit">Unit</a>) → <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></div></div>
+<p><code><a href="/docs/Init/Util.html#withPtrEq">withPtrEq</a></code> for <code><a href="/docs/Init/Prelude.html#DecidableEq">DecidableEq</a></code></p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="withPtrAddr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Util.lean#L57-L57">source</a>
+</div>
+<div class="attributes">@[implementedBy withPtrAddrUnsafe]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Util.html#withPtrAddr">withPtrAddr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn"><a href="/docs/Init/Prelude.html#USize">USize</a> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (u₁ u₂ : <a href="/docs/Init/Prelude.html#USize">USize</a>), <span class="fn"><span class="fn"><span class="fn">k</span> <span class="fn">u₁</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <span class="fn">u₂</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">β</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Util.html#withPtrAddr">withPtrAddr</a> <span class="fn">a</span> <span class="fn">k</span> <span class="fn">h</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">k</span> <span class="fn">0</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

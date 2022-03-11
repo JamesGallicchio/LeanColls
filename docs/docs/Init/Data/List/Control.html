@@ -1,0 +1,1535 @@
+<html lang="en">
+<head>
+<title>Init.Data.List.Control</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Data.List.Control</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Data.List.Control</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.mapM">List.mapM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.mapA">List.mapA</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forM">List.forM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forA">List.forA</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.filterAuxM">List.filterAuxM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.filterM">List.filterM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.filterRevM">List.filterRevM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.filterMapM">List.filterMapM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.filterMapM.loop">List.filterMapM.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.foldlM">List.foldlM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.foldrM">List.foldrM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.firstM">List.firstM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.anyM">List.anyM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.allM">List.allM</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.findM?">List.findM?</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.findSomeM?">List.findSomeM?</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn">List.forIn</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn.loop">List.forIn.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.instForInList">List.instForInList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn_nil">List.forIn_nil</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn_cons">List.forIn_cons</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn'">List.forIn'</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forIn'.loop">List.forIn'.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList">List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.instForMList">List.instForMList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forM_nil">List.forM_nil</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.forM_cons">List.forM_cons</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="List.mapM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L44-L46">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.mapM">List.mapM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">β</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapM">List.mapM</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">[]</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapM">List.mapM</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  let a_1 ← <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapM">List.mapM</a> <span class="fn">f</span> <span class="fn">as</span></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">a_1</span></span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.mapA">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L49-L51">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.mapA">List.mapA</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Applicative">Applicative</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">β</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapA">List.mapA</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">[]</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapA">List.mapA</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Seq.seq">Seq.seq</a> (<span class="fn"><span class="fn">List.cons</span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.mapA">List.mapA</a> <span class="fn">f</span> <span class="fn">as</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L54-L57">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forM">List.forM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forM">List.forM</a> <span class="fn">[]</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forM">List.forM</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as_1</span></span>) <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forM">List.forM</a> <span class="fn">as_1</span> <span class="fn">f</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forA">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L60-L63">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forA">List.forA</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Applicative">Applicative</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forA">List.forA</a> <span class="fn">[]</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forA">List.forA</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as_1</span></span>) <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#SeqRight.seqRight">SeqRight.seqRight</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forA">List.forA</a> <span class="fn">as_1</span> <span class="fn">f</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.filterAuxM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L66-L70">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a> <span class="fn">f</span> <span class="fn">[]</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a> <span class="fn">f</span> (<span class="fn"><span class="fn">h</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">t</span></span>) <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let b ← <span class="fn"><span class="fn">f</span> <span class="fn">h</span></span>
+  <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a> <span class="fn">f</span> <span class="fn">t</span> (<span class="fn">bif <span class="fn">b</span> then <span class="fn"><span class="fn">h</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">x</span></span> else <span class="fn">x</span></span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.filterM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L73-L75">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.filterM">List.filterM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterM">List.filterM</a> <span class="fn">f</span> <span class="fn">as</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let as ← <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">[]</span></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.reverse">List.reverse</a> <span class="fn">as</span></span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.filterRevM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L78-L79">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.filterRevM">List.filterRevM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterRevM">List.filterRevM</a> <span class="fn">f</span> <span class="fn">as</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterAuxM">List.filterAuxM</a> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.reverse">List.reverse</a> <span class="fn">as</span></span>) <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.filterMapM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L82-L89">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.filterMapM">List.filterMapM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">β</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM">List.filterMapM</a> <span class="fn">f</span> <span class="fn">as</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.reverse">List.reverse</a> <span class="fn">as</span></span>) <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.filterMapM.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L83-L88">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">β</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">β</span></span>)</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a> <span class="fn">f</span> <span class="fn">[]</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <span class="fn">none</span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">x</span></span>
+    | <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.filterMapM.loop">List.filterMapM.loop</a> <span class="fn">f</span> <span class="fn">as</span> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">x</span></span>)</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.foldlM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L92-L96">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.foldlM">List.foldlM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">s</span> → <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">s</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">s</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <span class="fn">s</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldlM">List.foldlM</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldlM">List.foldlM</a> <span class="fn">x</span> <span class="fn">x</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let s' ← <span class="fn"><span class="fn">x</span> <span class="fn">x</span> <span class="fn">a</span></span>
+  <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldlM">List.foldlM</a> <span class="fn">x</span> <span class="fn">s'</span> <span class="fn">as</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.foldrM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L99-L103">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.foldrM">List.foldrM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">s</span> → <span class="fn"><span class="fn">m</span> <span class="fn">s</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">s</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <span class="fn">s</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldrM">List.foldrM</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldrM">List.foldrM</a> <span class="fn">x</span> <span class="fn">x</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let s' ← <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.foldrM">List.foldrM</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">as</span></span>
+  <span class="fn"><span class="fn">x</span> <span class="fn">a</span> <span class="fn">s'</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.firstM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L106-L108">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.firstM">List.firstM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.firstM">List.firstM</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">failure</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.firstM">List.firstM</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#HOrElse.hOrElse">HOrElse.hOrElse</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.firstM">List.firstM</a> <span class="fn">f</span> <span class="fn">as</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.anyM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L111-L116">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.anyM">List.anyM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.anyM">List.anyM</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.anyM">List.anyM</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>
+    | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false"><a href="/docs/Init/Data/List/Control.html#List.anyM">List.anyM</a> <span class="fn">f</span> <span class="fn">as</span></a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.allM">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L119-L124">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.allM">List.allM</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.allM">List.allM</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.allM">List.allM</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.allM">List.allM</a> <span class="fn">f</span> <span class="fn">as</span></span>
+    | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.findM?">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L127-L132">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.findM?">List.findM?</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type</span> → <span class="fn">Type u</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">α</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.findM?">List.findM?</a> <span class="fn">p</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">none</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.findM?">List.findM?</a> <span class="fn">p</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <a href="/docs/Init/Prelude.html#Bool.false">true</a> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">a</span></span>)</span>
+    | <a href="/docs/Init/Prelude.html#Bool.false">false</a> =&gt <a href="/docs/Init/Prelude.html#Bool.false"><a href="/docs/Init/Data/List/Control.html#List.findM?">List.findM?</a> <span class="fn">p</span> <span class="fn">as</span></a></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.findSomeM?">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L135-L140">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.findSomeM?">List.findSomeM?</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type w</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.findSomeM?">List.findSomeM?</a> <span class="fn">f</span> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">none</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.findSomeM?">List.findSomeM?</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">b</span></span>)</span>
+    | <span class="fn">none</span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.findSomeM?">List.findSomeM?</a> <span class="fn">f</span> <span class="fn">as</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forIn">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L142-L149">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn">List.forIn</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn">List.forIn</a> <span class="fn">as</span> <span class="fn">init</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn.loop">List.forIn.loop</a> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">init</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forIn.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L143-L148">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn.loop">List.forIn.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn.loop">List.forIn.loop</a> <span class="fn">f</span> <span class="fn">[]</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn.loop">List.forIn.loop</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let a ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span> <span class="fn">x</span></span>
+  <span class="fn">match <span class="fn">a</span> with
+    | <span class="fn"><a href="/docs/Init/Core.html#ForInStep.yield">ForInStep.done</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span>
+    | <span class="fn"><a href="/docs/Init/Core.html#ForInStep.yield">ForInStep.yield</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn.loop">List.forIn.loop</a> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">b</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.instForInList">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L151-L152">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.instForInList">List.instForInList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#ForIn">ForIn</a> <span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">List.instForInList</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ forIn := <span class="fn">fun {β} [<span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] =&gt <span class="fn">List.forIn</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forIn_nil">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L154-L155">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn_nil">List.forIn_nil</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Core.html#ForIn.forIn">forIn</a> <span class="fn">[]</span> <span class="fn">b</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.forIn_cons">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L157-L159">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn_cons">List.forIn_cons</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Core.html#ForIn.forIn">forIn</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>) <span class="fn">b</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let x ← <span class="fn"><span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span>
+  <span class="fn">match <span class="fn">x</span> with
+    | <span class="fn"><a href="/docs/Init/Core.html#ForInStep.yield">ForInStep.done</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">b</span></span>
+    | <span class="fn"><a href="/docs/Init/Core.html#ForInStep.yield">ForInStep.yield</a> <span class="fn">b</span></span> =&gt <span class="fn"><a href="/docs/Init/Core.html#ForIn.forIn">forIn</a> <span class="fn">as</span> <span class="fn">b</span> <span class="fn">f</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.forIn'">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L161-L174">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn'">List.forIn'</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(init : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Membership.mem">∈</a> <span class="fn">as</span></span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn'">List.forIn'</a> <span class="fn">as</span> <span class="fn">init</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn'.loop">List.forIn'.loop</a> <span class="fn">as</span> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">init</span> (_ : <span class="fn">∃ bs, <span class="fn"><span class="fn"><span class="fn">bs</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">as</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">as</span></span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forIn'.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L162-L173">source</a>
+</div>
+<div class="attributes">@[specialize]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forIn'.loop">List.forIn'.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type v</span> → <span class="fn">Type w</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Membership.mem">∈</a> <span class="fn">as</span></span> → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">β</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(x : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) → <span class="fn"><span class="fn">β</span> → <span class="fn">(<span class="fn">∃ bs, <span class="fn"><span class="fn"><span class="fn">bs</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">as</span></span></span>) → <span class="fn"><span class="fn">m</span> <span class="fn">β</span></span></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Control.html#List.forIn'.loop">List.forIn'.loop</a> <span class="fn">as</span> <span class="fn">f</span> <span class="fn">[]</span> <span class="fn">x</span> <span class="fn">x_3</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">x</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L176-L177">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList">List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#ForIn'">ForIn'</a> <span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) <span class="fn">α</span> <span class="fn">inferInstance</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">List.instForIn'ListInferInstanceOutParamMembershipInstMembershipList</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ forIn' := <span class="fn">fun {β} [<span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] =&gt <span class="fn">List.forIn'</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.instForMList">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L179-L180">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.instForMList">List.instForMList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Control/Basic.html#ForM">ForM</a> <span class="fn">m</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">List.instForMList</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ forM := <span class="fn">fun [<span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>] =&gt <span class="fn">List.forM</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.forM_nil">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L182-L183">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forM_nil">List.forM_nil</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#ForM.forM">forM</a> <span class="fn">[]</span> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <a href="/docs/Init/Prelude.html#PUnit.unit">PUnit.unit</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.forM_cons">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/List/Control.lean#L184-L185">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/List/Control.html#List.forM_cons">List.forM_cons</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_3</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">m</span> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Control/Basic.html#ForM.forM">forM</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>) <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>
+  <span class="fn"><a href="/docs/Init/Control/Basic.html#ForM.forM">forM</a> <span class="fn">as</span> <span class="fn">f</span></span></span></span></div></div>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html" open="">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html" open="">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

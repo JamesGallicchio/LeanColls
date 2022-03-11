@@ -1,0 +1,1120 @@
+<html lang="en">
+<head>
+<title>Init.System.FilePath</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.System.FilePath</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.System.FilePath</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</li>
+<li>
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</li>
+<li>
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath">System.FilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instInhabitedFilePath">System.instInhabitedFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instDecidableEqFilePath">System.instDecidableEqFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instHashableFilePath">System.instHashableFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instReprFilePath">System.instReprFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instToStringFilePath">System.instToStringFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.pathSeparators">System.FilePath.pathSeparators</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.extSeparator">System.FilePath.extSeparator</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.exeExtension">System.FilePath.exeExtension</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.isCaseInsensitive">System.FilePath.isCaseInsensitive</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.normalize">System.FilePath.normalize</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.isAbsolute">System.FilePath.isAbsolute</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.isRelative">System.FilePath.isRelative</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.join">System.FilePath.join</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.instDivFilePath">System.FilePath.instDivFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.instHDivFilePathString">System.FilePath.instHDivFilePathString</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.parent">System.FilePath.parent</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.fileName">System.FilePath.fileName</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.fileStem">System.FilePath.fileStem</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.extension">System.FilePath.extension</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.withFileName">System.FilePath.withFileName</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.withExtension">System.FilePath.withExtension</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.FilePath.components">System.FilePath.components</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.mkFilePath">System.mkFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.instCoeStringFilePath">System.instCoeStringFilePath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.SearchPath">System.SearchPath</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.SearchPath.separator">System.SearchPath.separator</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.SearchPath.parse">System.SearchPath.parse</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#System.SearchPath.toString">System.SearchPath.toString</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="System.FilePath">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L15-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="structure_fields" id="System.FilePath.mk">
+<li class="structure_field" id="System.FilePath.toString">
+toString : <a href="/docs/Init/Prelude.html#String">String</a></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="System.instInhabitedFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L17-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instInhabitedFilePath">System.instInhabitedFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instInhabitedFilePath">System.instInhabitedFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn">{ toString := <span class="fn">default</span> }</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.instDecidableEqFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L17-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instDecidableEqFilePath">System.instDecidableEqFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#DecidableEq">DecidableEq</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instDecidableEqFilePath">System.instDecidableEqFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/System/FilePath.html#_private.Init.System.FilePath.0.System.decEqFilePath._@.Init.System.FilePath._hyg.24">[anonymous]</a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.instHashableFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L17-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instHashableFilePath">System.instHashableFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Hashable">Hashable</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instHashableFilePath">System.instHashableFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ hash := <a href="/docs/Init/System/FilePath.html#_private.Init.System.FilePath.0.System.hashFilePath._@.Init.System.FilePath._hyg.100">[anonymous]</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.instReprFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L19-L20">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instReprFilePath">System.instReprFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instReprFilePath">System.instReprFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.addAppParen">Repr.addAppParen</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quotFilePath.mk &quot</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> <span class="fn"><span class="fn">p</span>.toString</span></span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.instToStringFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L22-L23">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instToStringFilePath">System.instToStringFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/ToString/Basic.html#ToString">ToString</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instToStringFilePath">System.instToStringFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ toString := <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn"><span class="fn">p</span>.toString</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.pathSeparator">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L28-L29">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Char">Char</a></div></div>
+<p>The character that separates directories. In the case where more than one character is possible, <code><a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">pathSeparator</a></code> is the 'ideal' one.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><a href="/docs/Init/System/Platform.html#System.Platform.isWindows">System.Platform.isWindows</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">92</span></span> else <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">47</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.pathSeparators">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L32-L33">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparators">System.FilePath.pathSeparators</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></div></div>
+<p>The list of all possible separators.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparators">System.FilePath.pathSeparators</a> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><a href="/docs/Init/System/Platform.html#System.Platform.isWindows">System.Platform.isWindows</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">[<span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">92</span></span>, <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">47</span></span>]</span> else <span class="fn">[<span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">47</span></span>]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.extSeparator">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L36-L36">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.extSeparator">System.FilePath.extSeparator</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Char">Char</a></div></div>
+<p>File extension character</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.extSeparator">System.FilePath.extSeparator</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">46</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.exeExtension">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L38-L39">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.exeExtension">System.FilePath.exeExtension</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.exeExtension">System.FilePath.exeExtension</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><a href="/docs/Init/System/Platform.html#System.Platform.isWindows">System.Platform.isWindows</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quotexe&quot</span> else <span class="fn">&quot&quot</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.isCaseInsensitive">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L42-L42">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.isCaseInsensitive">System.FilePath.isCaseInsensitive</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<p>Case-insensitive file system</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.isCaseInsensitive">System.FilePath.isCaseInsensitive</a> <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><a href="/docs/Init/System/Platform.html#System.Platform.isWindows">System.Platform.isWindows</a> <a href="/docs/Init/Prelude.html#or">||</a> <a href="/docs/Init/System/Platform.html#System.Platform.isOSX">System.Platform.isOSX</a></span>)</span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.normalize">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L45-L50">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.normalize">System.FilePath.normalize</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(normalizeCase : <span class="fn"><a href="/docs/Init/Prelude.html#optParam">optParam</a> <a href="/docs/Init/Prelude.html#Bool">Bool</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.isCaseInsensitive">System.FilePath.isCaseInsensitive</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.isAbsolute">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L54-L55">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.isAbsolute">System.FilePath.isAbsolute</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.isRelative">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L57-L58">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.isRelative">System.FilePath.isRelative</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Bool">Bool</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.isRelative">System.FilePath.isRelative</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.isAbsolute">System.FilePath.isAbsolute</a> <span class="fn">p</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.join">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L60-L64">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.join">System.FilePath.join</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.join">System.FilePath.join</a> <span class="fn">p</span> <span class="fn">sub</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.isAbsolute">System.FilePath.isAbsolute</a> <span class="fn">sub</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">sub</span>
+  else <span class="fn">{ toString := <span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.toString</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/String/Basic.html#Char.toString">Char.toString</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a></span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><span class="fn">sub</span>.toString</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.instDivFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L66-L67">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.instDivFilePath">System.FilePath.instDivFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Div">Div</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.instDivFilePath">System.FilePath.instDivFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ div := <a href="/docs/Init/System/FilePath.html#System.FilePath.join">System.FilePath.join</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.instHDivFilePathString">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L69-L70">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.instHDivFilePathString">System.FilePath.instHDivFilePathString</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#HDiv">HDiv</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a> <a href="/docs/Init/Prelude.html#String">String</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.instHDivFilePathString">System.FilePath.instHDivFilePathString</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ hDiv := <span class="fn">fun <span class="fn">p</span> <span class="fn">sub</span> =&gt <span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.join">System.FilePath.join</a> <span class="fn">p</span> <span class="fn">{ toString := <span class="fn">sub</span> }</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.parent">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L75-L76">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.parent">System.FilePath.parent</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.parent">System.FilePath.parent</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.mk">System.FilePath.mk</a> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.extract">String.extract</a> <span class="fn"><span class="fn">p</span>.toString</span> <span class="fn">0</span></span> <a href="/docs/Init/Prelude.html#Functor.map">&lt$&gt</a> <span class="fn"><a href="/docs/Init/System/FilePath.html#_private.Init.System.FilePath.0.System.FilePath.posOfLastSep">System.FilePath.posOfLastSep</a> <span class="fn">p</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.fileName">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L78-L82">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.fileName">System.FilePath.fileName</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.fileStem">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L85-L90">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.fileStem">System.FilePath.fileStem</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<p>Extracts the stem (non-extension) part of <code>p.<a href="/docs/Init/System/FilePath.html#System.FilePath.fileName">fileName</a></code>.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.extension">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L92-L97">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.extension">System.FilePath.extension</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.withFileName">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L99-L102">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.withFileName">System.FilePath.withFileName</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(fname : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.withFileName">System.FilePath.withFileName</a> <span class="fn">p</span> <span class="fn">fname</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.parent">System.FilePath.parent</a> <span class="fn">p</span></span> with
+  | <span class="fn">none</span> =&gt <span class="fn">{ toString := <span class="fn">fname</span> }</span>
+  | <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">p</span></span> =&gt <span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">fname</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.withExtension">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L104-L107">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.withExtension">System.FilePath.withExtension</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ext : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.FilePath.components">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L109-L110">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.FilePath.components">System.FilePath.components</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.components">System.FilePath.components</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.splitOn">String.splitOn</a> <span class="fn">(<span class="fn"><a href="/docs/Init/System/FilePath.html#System.FilePath.normalize">System.FilePath.normalize</a> <span class="fn">p</span> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>).toString</span> (<span class="fn"><a href="/docs/Init/Data/String/Basic.html#Char.toString">Char.toString</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.mkFilePath">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L114-L115">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.mkFilePath">System.mkFilePath</a>
+</span>
+<span class="decl_args">
+<span class="fn">(parts : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#String">String</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.mkFilePath">System.mkFilePath</a> <span class="fn">parts</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ toString := <span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.intercalate">String.intercalate</a> (<span class="fn"><a href="/docs/Init/Data/String/Basic.html#Char.toString">Char.toString</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.pathSeparator">System.FilePath.pathSeparator</a></span>) <span class="fn">parts</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.instCoeStringFilePath">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L117-L118">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.instCoeStringFilePath">System.instCoeStringFilePath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Coe.html#Coe">Coe</a> <a href="/docs/Init/Prelude.html#String">String</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.instCoeStringFilePath">System.instCoeStringFilePath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ coe := <a href="/docs/Init/System/FilePath.html#System.FilePath.mk">System.FilePath.mk</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.SearchPath">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L120-L120">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.SearchPath">System.SearchPath</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.SearchPath">System.SearchPath</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/System/FilePath.html#System.FilePath">System.FilePath</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.SearchPath.separator">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L125-L126">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.SearchPath.separator">System.SearchPath.separator</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Char">Char</a></div></div>
+<p>The character that is used to separate the entries in the $PATH (or %PATH%) environment variable.</p><details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/System/FilePath.html#System.SearchPath.separator">System.SearchPath.separator</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><a href="/docs/Init/System/Platform.html#System.Platform.isWindows">System.Platform.isWindows</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">59</span></span> else <span class="fn"><a href="/docs/Init/Prelude.html#Char.ofNat">Char.ofNat</a> <span class="fn">58</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.SearchPath.parse">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L128-L129">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.SearchPath.parse">System.SearchPath.parse</a>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/System/FilePath.html#System.SearchPath">System.SearchPath</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.SearchPath.parse">System.SearchPath.parse</a> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.map">List.map</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.mk">System.FilePath.mk</a> (<span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.split">String.split</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">c</span> =&gt <span class="fn"><a href="/docs/Init/System/FilePath.html#System.SearchPath.separator">System.SearchPath.separator</a> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">c</span></span></span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="System.SearchPath.toString">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/System/FilePath.lean#L131-L132">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/System/FilePath.html#System.SearchPath.toString">System.SearchPath.toString</a>
+</span>
+<span class="decl_args">
+<span class="fn">(path : <a href="/docs/Init/System/FilePath.html#System.SearchPath">System.SearchPath</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/System/FilePath.html#System.SearchPath.toString">System.SearchPath.toString</a> <span class="fn">path</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.intercalate">String.intercalate</a> (<span class="fn"><a href="/docs/Init/Data/String/Basic.html#Char.toString">Char.toString</a> <a href="/docs/Init/System/FilePath.html#System.SearchPath.separator">System.SearchPath.separator</a></span>) (<span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.map">List.map</a> <a href="/docs/Init/System/FilePath.html#System.FilePath.toString">System.FilePath.toString</a> <span class="fn">path</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html" open="">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link visible">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

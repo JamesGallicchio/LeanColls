@@ -1,0 +1,2158 @@
+<html lang="en">
+<head>
+<title>Init.SimpLemmas</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.SimpLemmas</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.SimpLemmas</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Core.html">Init.Core</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init.html">Init</a>
+</li>
+<li>
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</li>
+<li>
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_self">eq_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#of_eq_true">of_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_true">eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_false">eq_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_false'">eq_false'</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_true_of_decide">eq_true_of_decide</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#eq_false_of_decide">eq_false_of_decide</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#implies_congr">implies_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#implies_congr_ctx">implies_congr_ctx</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#implies_dep_congr_ctx">implies_dep_congr_ctx</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#forall_congr">forall_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#let_congr">let_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#let_val_congr">let_val_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#let_body_congr">let_body_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ite_congr">ite_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Eq.mpr_prop">Eq.mpr_prop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Eq.mpr_not">Eq.mpr_not</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dite_congr">dite_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ne_eq">ne_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ite_true">ite_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ite_false">ite_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dite_true">dite_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#dite_false">dite_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ite_self">ite_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#and_self">and_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#and_true">and_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#true_and">true_and</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#and_false">and_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#false_and">false_and</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#or_self">or_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#or_true">or_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#true_or">true_or</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#or_false">or_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#false_or">false_or</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#iff_self">iff_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#iff_true">iff_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#true_iff">true_iff</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#iff_false">iff_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#false_iff">false_iff</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#false_implies">false_implies</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#implies_true">implies_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#true_implies">true_implies</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.or_false">Bool.or_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.or_true">Bool.or_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.false_or">Bool.false_or</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.true_or">Bool.true_or</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.or_self">Bool.or_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.or_eq_true">Bool.or_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.and_false">Bool.and_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.and_true">Bool.and_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.false_and">Bool.false_and</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.true_and">Bool.true_and</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.and_self">Bool.and_self</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.and_eq_true">Bool.and_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_not">Bool.not_not</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_true">Bool.not_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_false">Bool.not_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_beq_true">Bool.not_beq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_beq_false">Bool.not_beq_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.beq_to_eq">Bool.beq_to_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_beq_to_not_eq">Bool.not_beq_to_not_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_eq_true">Bool.not_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Bool.not_eq_false">Bool.not_eq_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#decide_eq_true_eq">decide_eq_true_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#decide_not">decide_not</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#not_decide_eq_true">not_decide_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#heq_eq_eq">heq_eq_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#cond_true">cond_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#cond_false">cond_false</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#beq_self_eq_true">beq_self_eq_true</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#beq_self_eq_true'">beq_self_eq_true'</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="eq_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L11-L12">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_self">eq_self</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="of_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L14-L15">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#of_eq_true">of_eq_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">p</span></div></div>
+</div>
+</div>
+<div class="decl" id="eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L17-L18">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_true">eq_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">p</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="eq_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L20-L21">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_false">eq_false</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="eq_false'">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L23-L24">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_false'">eq_false'</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> → <a href="/docs/Init/Prelude.html#False">False</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="eq_true_of_decide">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L26-L27">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_true_of_decide">eq_true_of_decide</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="eq_false_of_decide">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L29-L30">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#eq_false_of_decide">eq_false_of_decide</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="implies_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L32-L33">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#implies_congr">implies_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₁ : <span class="fn">Sort v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₂ : <span class="fn">Sort v</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">q₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">q₂</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p₁</span> → <span class="fn">q₁</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">p₂</span> → <span class="fn">q₂</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="implies_congr_ctx">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L35-L44">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#implies_congr_ctx">implies_congr_ctx</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₁ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₂ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">p₂</span> → <span class="fn"><span class="fn">q₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">q₂</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p₁</span> → <span class="fn">q₁</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">p₂</span> → <span class="fn">q₂</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="implies_dep_congr_ctx">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L46-L49">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#implies_dep_congr_ctx">implies_dep_congr_ctx</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₁ : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q₂ : <span class="fn"><span class="fn">p₂</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn">∀ (h : <span class="fn">p₂</span>), <span class="fn"><span class="fn">q₁</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q₂</span> <span class="fn">h</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p₁</span> → <span class="fn">q₁</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn">(h : <span class="fn">p₂</span>) → <span class="fn"><span class="fn">q₂</span> <span class="fn">h</span></span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="forall_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L51-L53">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#forall_congr">forall_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (a : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <span class="fn">a</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn">p</span> <span class="fn">a</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn">q</span> <span class="fn">a</span></span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="let_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L55-L60">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#let_congr">let_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b' : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn">∀ (x : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b'</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">let x := <span class="fn">a</span>;
+  <span class="fn"><span class="fn">b</span> <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let x := <span class="fn">a'</span>;
+  <span class="fn"><span class="fn">b'</span> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="let_val_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L62-L65">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#let_val_congr">let_val_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Sort v</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">let x := <span class="fn">a</span>;
+  <span class="fn"><span class="fn">b</span> <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let x := <span class="fn">a'</span>;
+  <span class="fn"><span class="fn">b</span> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="let_body_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L67-L71">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#let_body_congr">let_body_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Sort v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">a</span></span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b' : <span class="fn">(a : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">a</span></span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (x : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b'</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">let x := <span class="fn">a</span>;
+  <span class="fn"><span class="fn">b</span> <span class="fn">x</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let x := <span class="fn">a</span>;
+  <span class="fn"><span class="fn">b'</span> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ite_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L74-L77">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#ite_congr">ite_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{c : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{v : <span class="fn">α</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">b</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">c</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">c</span> → <span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">u</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">c</span></span> → <span class="fn"><span class="fn">y</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">if <span class="fn">b</span> then <span class="fn">x</span> else <span class="fn">y</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn">c</span> then <span class="fn">u</span> else <span class="fn">v</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Eq.mpr_prop">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L79-L80">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Eq.mpr_prop">Eq.mpr_prop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn">q</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">p</span></div></div>
+</div>
+</div>
+<div class="decl" id="Eq.mpr_not">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L82-L83">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Eq.mpr_not">Eq.mpr_not</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">q</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="dite_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L86-L94">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#dite_congr">dite_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{c : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">b</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">c</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">b</span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">c</span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">b</span></span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{v : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">c</span></span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn">∀ (h : <span class="fn">c</span>), <span class="fn"><span class="fn"><span class="fn">x</span> (<span class="fn"><a href="/docs/Init/SimpLemmas.html#Eq.mpr_prop">Eq.mpr_prop</a> <span class="fn">h₁</span> <span class="fn">h</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">u</span> <span class="fn">h</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn">∀ (h : <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">c</span></span>), <span class="fn"><span class="fn"><span class="fn">y</span> (_ : <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">b</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">v</span> <span class="fn">h</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#dite">dite</a> <span class="fn">b</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#dite">dite</a> <span class="fn">c</span> <span class="fn">u</span> <span class="fn">v</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ne_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L96-L96">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#ne_eq">ne_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Core.html#Ne">≠</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ite_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L97-L97">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#ite_true">ite_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">if <a href="/docs/Init/Prelude.html#True">True</a> then <span class="fn">a</span> else <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ite_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L98-L98">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#ite_false">ite_false</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">if <a href="/docs/Init/Prelude.html#False">False</a> then <span class="fn">a</span> else <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="dite_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L99-L99">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#dite_true">dite_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="/docs/Init/Prelude.html#True">True</a> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><a href="/docs/Init/Prelude.html#True">True</a></span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#dite">dite</a> <a href="/docs/Init/Prelude.html#True">True</a> <span class="fn">t</span> <span class="fn">e</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t</span> <a href="/docs/Init/Prelude.html#True.intro">True.intro</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="dite_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L100-L100">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#dite_false">dite_false</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="/docs/Init/Prelude.html#False">False</a> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><a href="/docs/Init/Prelude.html#False">False</a></span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#dite">dite</a> <a href="/docs/Init/Prelude.html#False">False</a> <span class="fn">t</span> <span class="fn">e</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">e</span> <a href="/docs/Init/Core.html#not_false">not_false</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="ite_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L101-L101">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#ite_self">ite_self</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{c : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{d : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">c</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">if <span class="fn">c</span> then <span class="fn">a</span> else <span class="fn">a</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="and_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L102-L102">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#and_self">and_self</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#And">∧</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="and_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L103-L103">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#and_true">and_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#And">∧</a> <a href="/docs/Init/Prelude.html#True">True</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="true_and">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L104-L104">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#true_and">true_and</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#True">True</a> <a href="/docs/Init/Prelude.html#And">∧</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="and_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L105-L105">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#and_false">and_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#And">∧</a> <a href="/docs/Init/Prelude.html#False">False</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="false_and">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L106-L106">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#false_and">false_and</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#False">False</a> <a href="/docs/Init/Prelude.html#And">∧</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#False">False</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="or_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L107-L107">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#or_self">or_self</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="or_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L108-L108">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#or_true">or_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Or">∨</a> <a href="/docs/Init/Prelude.html#True">True</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="true_or">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L109-L109">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#true_or">true_or</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#True">True</a> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="or_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L110-L110">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#or_false">or_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Prelude.html#Or">∨</a> <a href="/docs/Init/Prelude.html#False">False</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="false_or">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L111-L111">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#false_or">false_or</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#False">False</a> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="iff_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L112-L112">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#iff_self">iff_self</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Core.html#Iff">↔</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="iff_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L113-L113">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#iff_true">iff_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Core.html#Iff">↔</a> <a href="/docs/Init/Prelude.html#True">True</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="true_iff">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L114-L114">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#true_iff">true_iff</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#True">True</a> <a href="/docs/Init/Core.html#Iff">↔</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="iff_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L115-L115">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#iff_false">iff_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/docs/Init/Core.html#Iff">↔</a> <a href="/docs/Init/Prelude.html#False">False</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="false_iff">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L116-L116">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#false_iff">false_iff</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#False">False</a> <a href="/docs/Init/Core.html#Iff">↔</a> <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="false_implies">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L117-L117">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#false_implies">false_implies</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#False">False</a> → <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="implies_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L118-L118">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#implies_true">implies_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">α</span> → <a href="/docs/Init/Prelude.html#True">True</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#True">True</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="true_implies">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L119-L119">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#true_implies">true_implies</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">Prop</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#True">True</a> → <span class="fn">p</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.or_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L121-L121">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.or_false">Bool.or_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#or">||</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.or_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L122-L122">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.or_true">Bool.or_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#or">||</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.false_or">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L123-L123">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.false_or">Bool.false_or</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Bool.false">false</a> <a href="/docs/Init/Prelude.html#or">||</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.true_or">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L124-L124">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.true_or">Bool.true_or</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Bool.true">true</a> <a href="/docs/Init/Prelude.html#or">||</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.or_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L125-L125">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.or_self">Bool.or_self</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#or">||</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.or_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L126-L126">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.or_eq_true">Bool.or_eq_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#or">||</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> <a href="/docs/Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.and_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L128-L128">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.and_false">Bool.and_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.and_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L129-L129">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.and_true">Bool.and_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.false_and">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L130-L130">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.false_and">Bool.false_and</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Bool.false">false</a> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.true_and">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L131-L131">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.true_and">Bool.true_and</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Bool.true">true</a> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.and_self">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L132-L132">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.and_self">Bool.and_self</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.and_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L133-L133">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.and_eq_true">Bool.and_eq_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#and">&amp&amp</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> <a href="/docs/Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_not">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L135-L135">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_not">Bool.not_not</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn">b</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L136-L136">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_true">Bool.not_true</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L137-L137">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_false">Bool.not_false</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><a href="/docs/Init/Prelude.html#Bool.false">false</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_beq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L138-L138">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_beq_true">Bool.not_beq_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_beq_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L139-L139">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_beq_false">Bool.not_beq_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.beq_to_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L141-L141">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.beq_to_eq">Bool.beq_to_eq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_beq_to_not_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L142-L142">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_beq_to_not_eq">Bool.not_beq_to_not_eq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">b</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L144-L144">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_eq_true">Bool.not_eq_true</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="Bool.not_eq_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L145-L145">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#Bool.not_eq_false">Bool.not_eq_false</a>
+</span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/docs/Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.false">false</a></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="decide_eq_true_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L147-L147">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#decide_eq_true_eq">decide_eq_true_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">p</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="decide_not">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L148-L148">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#decide_not">decide_not</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">p</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="not_decide_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L149-L149">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#not_decide_eq_true">not_decide_eq_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">(<span class="fn"><a href="/docs/Init/Prelude.html#not">!</a><span class="fn"><a href="/docs/Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">p</span></span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Not">¬</a><span class="fn">p</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="heq_eq_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L151-L151">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#heq_eq_eq">heq_eq_eq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#HEq">HEq</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="cond_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L153-L153">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#cond_true">cond_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">bif <a href="/docs/Init/Prelude.html#Bool.true">true</a> then <span class="fn">a</span> else <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="cond_false">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L154-L154">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#cond_false">cond_false</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn">bif <a href="/docs/Init/Prelude.html#Bool.false">false</a> then <span class="fn">a</span> else <span class="fn">b</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="beq_self_eq_true">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L156-L156">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#beq_self_eq_true">beq_self_eq_true</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Core.html#LawfulBEq">LawfulBEq</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></div></div>
+</div>
+</div>
+<div class="decl" id="beq_self_eq_true'">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/SimpLemmas.lean#L157-L157">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/SimpLemmas.html#beq_self_eq_true'">beq_self_eq_true'</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span></span>) <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span></div></div>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

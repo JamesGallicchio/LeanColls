@@ -1,0 +1,1062 @@
+<html lang="en">
+<head>
+<title>LeanColls.AuxLemmas</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">LeanColls.AuxLemmas</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">LeanColls.AuxLemmas</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init.html">Init</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/LeanColls.html">LeanColls</a>
+</li>
+<li>
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.sub_dist">Nat.sub_dist</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.front?">List.front?</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.front_cons">List.front_cons</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.back?">List.back?</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.back_concat">List.back_concat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.concat_nonempty">List.concat_nonempty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.back_some_iff_concat">List.back_some_iff_concat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.concat_append">List.concat_append</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.map_concat">List.map_concat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#List.join_concat">List.join_concat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Monoid">Monoid</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Monoid.instAppend">Monoid.instAppend</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Monoid.mApp_assoc">Monoid.mApp_assoc</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Monoid.instMonoidNat">Monoid.instMonoidNat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached">Cached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.instDecidableEqCached">Cached.instDecidableEqCached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.instReprCached">Cached.instReprCached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.instSubsingletonCached">Cached.instSubsingletonCached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.instCoeHeadCached">Cached.instCoeHeadCached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.cached">Cached.cached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.instInhabitedCached">Cached.instInhabitedCached</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Cached.cached_val">Cached.cached_val</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#time">time</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Nat.sub_dist">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L8-L12">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Nat.sub_dist">Nat.sub_dist</a>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(z : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HSub.hSub">-</a> (<span class="fn"><span class="fn">y</span> <a href="/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">z</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span> <a href="/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">z</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.front?">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L16-L18">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.front?">List.front?</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span> → <span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.front?">List.front?</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+  | <span class="fn">[]</span> =&gt <span class="fn">none</span>
+  | <span class="fn"><span class="fn">t</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ts</span></span> =&gt <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">t</span>, <span class="fn">ts</span>)</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.front_cons">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L21-L25">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.front_cons">List.front_cons</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{t : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ts : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.front?">List.front?</a> (<span class="fn"><span class="fn">t</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ts</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">t</span>, <span class="fn">ts</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.back?">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L27-L29">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span> → <span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn">τ</span></span>)</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a> <span class="fn">[]</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">none</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a> (<span class="fn"><span class="fn">t</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ts</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a>
+    (<span class="fn">match <span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a> <span class="fn">ts</span></span> with
+    | <span class="fn">none</span> =&gt <span class="fn">(<span class="fn">[]</span>, <span class="fn">t</span>)</span>
+    | <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">ts'</span>, <span class="fn">t'</span>)</span></span> =&gt <span class="fn">(<span class="fn"><span class="fn">t</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ts'</span></span>, <span class="fn">t'</span>)</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="List.back_concat">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L32-L38">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.back_concat">List.back_concat</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{t : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ts : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a> (<span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">ts</span> <span class="fn">t</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">ts</span>, <span class="fn">t</span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.concat_nonempty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L40-L45">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.concat_nonempty">List.concat_nonempty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">L</span> <span class="fn">x</span></span> <a href="/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.back_some_iff_concat">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L47-L83">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.back_some_iff_concat">List.back_some_iff_concat</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ts : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{t : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#List.back?">List.back?</a> <span class="fn">L</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">ts</span>, <span class="fn">t</span>)</span></span></span> <a href="/docs/Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">L</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">ts</span> <span class="fn">t</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.concat_append">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L86-L93">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.concat_append">List.concat_append</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(L₁ : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L₂ : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> (<span class="fn"><span class="fn">L₁</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">L₂</span></span>) <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">L₁</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">L₂</span> <span class="fn">x</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.map_concat">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L96-L103">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.map_concat">List.map_concat</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn">τ</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">τ</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.map">List.map</a> <span class="fn">f</span> (<span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">L</span> <span class="fn">x</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> (<span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.map">List.map</a> <span class="fn">f</span> <span class="fn">L</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="List.join_concat">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L106-L112">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#List.join_concat">List.join_concat</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.join">List.join</a> (<span class="fn"><a href="/docs/Init/Prelude.html#List.concat">List.concat</a> <span class="fn">L</span> <span class="fn">x</span></span>)</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/docs/Init/Data/List/Basic.html#List.join">List.join</a> <span class="fn">L</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">x</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Monoid">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L115-L120">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Monoid">Monoid</a>
+</span>
+<span class="decl_args">
+<span class="fn">(M : <span class="fn">Sort u_1</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Sort (max 1 u_1)</span></div></div>
+<ul class="structure_fields" id="Monoid.mk">
+<li class="structure_field" id="Monoid.mId">
+mId : <span class="fn">M</span></li>
+<li class="structure_field" id="Monoid.mApp">
+mApp : <span class="fn"><span class="fn">M</span> → <span class="fn">M</span> → <span class="fn">M</span></span></li>
+<li class="structure_field" id="Monoid.h_idl">
+h_idl : <span class="fn">∀ (v : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">mApp</span> <span class="fn">mId</span> <span class="fn">v</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></span></li>
+<li class="structure_field" id="Monoid.h_idr">
+h_idr : <span class="fn">∀ (v : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">mApp</span> <span class="fn">v</span> <span class="fn">mId</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></span></li>
+<li class="structure_field" id="Monoid.h_assoc">
+h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">mApp</span> (<span class="fn"><span class="fn">mApp</span> <span class="fn">v1</span> <span class="fn">v2</span></span>) <span class="fn">v3</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">mApp</span> <span class="fn">v1</span> (<span class="fn"><span class="fn">mApp</span> <span class="fn">v2</span> <span class="fn">v3</span></span>)</span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/LeanColls/AuxLemmas.html#Monoid.instMonoidNat">Monoid.instMonoidNat</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Monoid.instAppend">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L124-L125">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Monoid.instAppend">Monoid.instAppend</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{M : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Append">Append</a> <span class="fn">M</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Monoid.instAppend</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ append := <span class="fn">Monoid.mApp</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Monoid.mApp_assoc">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L128-L128">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Monoid.mApp_assoc">Monoid.mApp_assoc</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{M : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(v1 : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v2 : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v3 : <span class="fn">M</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">v1</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">v2</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">v3</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">v1</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> (<span class="fn"><span class="fn">v2</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">v3</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Monoid.instMonoidNat">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L130-L135">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Monoid.instMonoidNat">Monoid.instMonoidNat</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Monoid">Monoid</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Monoid.instMonoidNat">Monoid.instMonoidNat</a> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ mId := <span class="fn">0</span>, mApp := <a href="/docs/Init/Prelude.html#Nat.add">Nat.add</a>, h_idl := <a href="/docs/LeanColls/AuxLemmas.html#Monoid.instMonoidNat.proof_1">Monoid.instMonoidNat.proof_1</a>, h_idr := <a href="/docs/LeanColls/AuxLemmas.html#Monoid.instMonoidNat.proof_2">Monoid.instMonoidNat.proof_2</a>,
+    h_assoc := <a href="/docs/Init/Data/Nat/Basic.html#Nat.add_assoc">Nat.add_assoc</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L140-L140">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u_1</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ b // <span class="fn"><span class="fn">b</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.instDecidableEqCached">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L144-L145">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.instDecidableEqCached">Cached.instDecidableEqCached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#DecidableEq">DecidableEq</a> (<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.instReprCached">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L147-L148">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.instReprCached">Cached.instReprCached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Cached.instReprCached</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.addAppParen">Repr.addAppParen</a> (<span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quotcached _&quot</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.instSubsingletonCached">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L150-L151">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.instSubsingletonCached">Cached.instSubsingletonCached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Core.html#Subsingleton">Subsingleton</a> (<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached.instSubsingletonCached">@<a href="/docs/LeanColls/AuxLemmas.html#Cached.instSubsingletonCached">Cached.instSubsingletonCached</a></a> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/LeanColls/AuxLemmas.html#Cached.instSubsingletonCached.proof_1">@<a href="/docs/LeanColls/AuxLemmas.html#Cached.instSubsingletonCached.proof_1">Cached.instSubsingletonCached.proof_1</a></a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.instCoeHeadCached">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L153-L154">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.instCoeHeadCached">Cached.instCoeHeadCached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Coe.html#CoeHead">CoeHead</a> (<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>) <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Cached.instCoeHeadCached</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ coe := <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn">x</span>.val</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.cached">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L156-L157">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.cached">Cached.cached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached.cached">cached</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ val := <span class="fn">a</span>, property := (_ : <span class="fn"><span class="fn">a</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>) }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.instInhabitedCached">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L159-L160">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.instInhabitedCached">Cached.instInhabitedCached</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Cached.instInhabitedCached</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached.cached">cached</a> <span class="fn">a</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Cached.cached_val">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L162-L162">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#Cached.cached_val">Cached.cached_val</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#Cached">Cached</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span>.val</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="time">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/32b3acee188d7114222f56d908670f81cc71f8e5/LeanColls/AuxLemmas.lean#L168-L172">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/LeanColls/AuxLemmas.html#time">time</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="/docs/Init/System/IO.html#IO">IO</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/System/IO.html#IO">IO</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/LeanColls/AuxLemmas.html#time">time</a> <span class="fn">f</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let pre ← <span class="fn"><a href="/docs/Init/Prelude.html#liftM">liftM</a> <a href="/docs/Init/System/IO.html#IO.monoMsNow">IO.monoMsNow</a></span>
+  let ret ← <span class="fn">f</span>
+  let post ← <span class="fn"><a href="/docs/Init/Prelude.html#liftM">liftM</a> <a href="/docs/Init/System/IO.html#IO.monoMsNow">IO.monoMsNow</a></span>
+  <span class="fn"><a href="/docs/Init/Prelude.html#Pure.pure">pure</a> <span class="fn">(<span class="fn"><span class="fn">post</span> <a href="/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">pre</span></span>, <span class="fn">ret</span>)</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html" open="">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link visible">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

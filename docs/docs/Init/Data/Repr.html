@@ -1,0 +1,2225 @@
+<html lang="en">
+<head>
+<title>Init.Data.Repr</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/docs/style.css"></link><link rel="stylesheet" href="/docs/pygments.css"></link><link rel="shortcut icon" href="/docs/favicon.ico"></link><link rel="prefetch" href="/docs/declaration-data.bmp"></link><script defer="true" src="/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/docs/nav.js">
+</script>
+<script type="module" src="/docs/search.js">
+</script>
+<script type="module" src="/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Data.Repr</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Data.Repr</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</li>
+<li>
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</li>
+<li>
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Repr">Repr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#repr">repr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#reprStr">reprStr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#reprArg">reprArg</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReprAtom">ReprAtom</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprIdType">instReprIdType</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprId">instReprId</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprBool">instReprBool</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Repr.addAppParen">Repr.addAppParen</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprDecidable">instReprDecidable</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprPUnit">instReprPUnit</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprULift">instReprULift</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUnit">instReprUnit</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprOption">instReprOption</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprSum">instReprSum</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#ReprTuple">ReprTuple</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprTuple">instReprTuple</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprTupleProd">instReprTupleProd</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprProd">instReprProd</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprSigma">instReprSigma</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprSubtype">instReprSubtype</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.digitChar">Nat.digitChar</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.toDigitsCore">Nat.toDigitsCore</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.toDigits">Nat.toDigits</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.repr">Nat.repr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.superDigitChar">Nat.superDigitChar</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.toSuperDigitsAux">Nat.toSuperDigitsAux</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.toSuperDigits">Nat.toSuperDigits</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.toSuperscriptString">Nat.toSuperscriptString</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprNat">instReprNat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Int.repr">Int.repr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprInt">instReprInt</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#hexDigitRepr">hexDigitRepr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#charToHex">charToHex</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Char.quoteCore">Char.quoteCore</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Char.quote">Char.quote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprChar">instReprChar</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Char.repr">Char.repr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.quote">String.quote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprString">instReprString</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprSubstring">instReprSubstring</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprIterator">instReprIterator</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprFin">instReprFin</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUInt8">instReprUInt8</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUInt16">instReprUInt16</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUInt32">instReprUInt32</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUInt64">instReprUInt64</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprUSize">instReprUSize</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprList">instReprList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprList_1">instReprList_1</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomBool">instReprAtomBool</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomNat">instReprAtomNat</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomInt">instReprAtomInt</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomChar">instReprAtomChar</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomString">instReprAtomString</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomUInt8">instReprAtomUInt8</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomUInt16">instReprAtomUInt16</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomUInt32">instReprAtomUInt32</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomUInt64">instReprAtomUInt64</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprAtomUSize">instReprAtomUSize</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instReprSourceInfo">instReprSourceInfo</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Repr">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L16-L17">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Repr">Repr</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="Repr.mk">
+<li class="structure_field" id="Repr.reprPrec">
+reprPrec : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/System/IO.html#IO.FS.instReprMetadata">IO.FS.instReprMetadata</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUInt32">instReprUInt32</a>
+</li>
+<li>
+<a href="/docs/Init/Meta.html#Lean.Meta.Simp.instReprConfig">Lean.Meta.Simp.instReprConfig</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUInt8">instReprUInt8</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprSubstring">instReprSubstring</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Random.html#instReprStdGen">instReprStdGen</a>
+</li>
+<li>
+<a href="/docs/LeanColls/AuxLemmas.html#Cached.instReprCached">Cached.instReprCached</a>
+</li>
+<li>
+<a href="/docs/Init/System/IO.html#IO.FS.instReprFileType">IO.FS.instReprFileType</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprSigma">instReprSigma</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprSourceInfo">instReprSourceInfo</a>
+</li>
+<li>
+<a href="/docs/Init/Control/EState.html#EStateM.instReprResult">EStateM.instReprResult</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprId">instReprId</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprDecidable">instReprDecidable</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprSubtype">instReprSubtype</a>
+</li>
+<li>
+<a href="/docs/Init/System/IO.html#IO.FS.instReprSystemTime">IO.FS.instReprSystemTime</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprPUnit">instReprPUnit</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUnit">instReprUnit</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprOption">instReprOption</a>
+</li>
+<li>
+<a href="/docs/Init/Meta.html#Lean.Name.instReprSyntax">Lean.Name.instReprSyntax</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUInt64">instReprUInt64</a>
+</li>
+<li>
+<a href="/docs/Init/System/IO.html#IO.FS.instReprDirEntry">IO.FS.instReprDirEntry</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUInt16">instReprUInt16</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprIterator">instReprIterator</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprList">instReprList</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprList_1">instReprList_1</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Subarray.html#instReprSubarray">instReprSubarray</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprSum">instReprSum</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Float.html#instReprFloat">instReprFloat</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprNat">instReprNat</a>
+</li>
+<li>
+<a href="/docs/Init/Meta.html#Lean.Meta.instReprTransparencyMode">Lean.Meta.instReprTransparencyMode</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Array/Basic.html#Array.instReprArray">Array.instReprArray</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprProd">instReprProd</a>
+</li>
+<li>
+<a href="/docs/Init/System/FilePath.html#System.instReprFilePath">System.instReprFilePath</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprULift">instReprULift</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprBool">instReprBool</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprIdType">instReprIdType</a>
+</li>
+<li>
+<a href="/docs/Init/Data/ToString/Basic.html#instReprExcept">instReprExcept</a>
+</li>
+<li>
+<a href="/docs/Init/Meta.html#Lean.Name.instReprName">Lean.Name.instReprName</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprString">instReprString</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprUSize">instReprUSize</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprChar">instReprChar</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprFin">instReprFin</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprInt">instReprInt</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="repr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L21-L22">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#repr">repr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.reprPrec">reprPrec</a> <span class="fn">a</span> <span class="fn">0</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="reprStr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L24-L25">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#reprStr">reprStr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#reprStr">reprStr</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.pretty">Std.Format.pretty</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.reprPrec">reprPrec</a> <span class="fn">a</span> <span class="fn">0</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="reprArg">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L27-L28">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#reprArg">reprArg</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#reprArg">reprArg</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.reprPrec">reprPrec</a> <span class="fn">a</span> <span class="fn">1024</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ReprAtom">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L32-L32">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="structure_fields" id="ReprAtom.mk">
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomUInt32">instReprAtomUInt32</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomUInt8">instReprAtomUInt8</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomUInt64">instReprAtomUInt64</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomUInt16">instReprAtomUInt16</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Float.html#instReprAtomFloat">instReprAtomFloat</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomNat">instReprAtomNat</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomBool">instReprAtomBool</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomString">instReprAtomString</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomUSize">instReprAtomUSize</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomChar">instReprAtomChar</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprAtomInt">instReprAtomInt</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprIdType">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L35-L36">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprIdType">instReprIdType</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#id">id</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprIdType</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprId">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L38-L39">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprId">instReprId</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Control/Id.html#Id">Id</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprId</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprBool">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L41-L44">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprBool">instReprBool</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprBool">instReprBool</a> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt
+      <span class="fn">match <span class="fn">x</span>, <span class="fn">x_1</span> with
+      | <a href="/docs/Init/Prelude.html#Bool.false">true</a>, <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quottrue&quot</span></span>
+      | <a href="/docs/Init/Prelude.html#Bool.false">false</a>, <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quotfalse&quot</span></span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Repr.addAppParen">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L46-L50">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Repr.addAppParen">Repr.addAppParen</a>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(prec : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.addAppParen">Repr.addAppParen</a> <span class="fn">f</span> <span class="fn">prec</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">prec</span> <a href="/docs/Init/Prelude.html#GE.ge">≥</a> <span class="fn">1024</span></span> then <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.paren">Std.Format.paren</a> <span class="fn">f</span></span> else <span class="fn">f</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprDecidable">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L52-L55">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprDecidable">instReprDecidable</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn">Prop</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Decidable">Decidable</a> <span class="fn">p</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprPUnit">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L57-L58">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprPUnit">instReprPUnit</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#PUnit">PUnit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprPUnit">instReprPUnit</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">x</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quotPUnit.unit&quot</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprULift">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L60-L62">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprULift">instReprULift</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#ULift">ULift</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprULift</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">v</span> <span class="fn">prec</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.addAppParen">Repr.addAppParen</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quotULift.up &quot</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#reprArg">reprArg</a> <span class="fn"><span class="fn">v</span>.down</span></span></span>) <span class="fn">prec</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUnit">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L64-L65">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUnit">instReprUnit</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Unit">Unit</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUnit">instReprUnit</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">v</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> <span class="fn">&quot()&quot</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprOption">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L67-L70">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprOption">instReprOption</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Option">Option</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprSum">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L72-L75">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprSum">instReprSum</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><span class="fn">α</span> <a href="/docs/Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="ReprTuple">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L77-L78">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#ReprTuple">ReprTuple</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="ReprTuple.mk">
+<li class="structure_field" id="ReprTuple.reprTuple">
+reprTuple : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></span> → <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Data/Format/Basic.html#Std.Format">Std.Format</a></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprTuple">instReprTuple</a>
+</li>
+<li>
+<a href="/docs/Init/Data/Repr.html#instReprTupleProd">instReprTupleProd</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprTuple">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L82-L83">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprTuple">instReprTuple</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprTuple">ReprTuple</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprTuple</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprTuple := <span class="fn">fun <span class="fn">a</span> <span class="fn">xs</span> =&gt <span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprTupleProd">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L85-L86">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprTupleProd">instReprTupleProd</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#ReprTuple">ReprTuple</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprTuple">ReprTuple</a> (<span class="fn"><span class="fn">α</span> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprTupleProd</span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ reprTuple := <span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt
+      <span class="fn">match <span class="fn">x</span>, <span class="fn">x_1</span> with
+      | <span class="fn">(<span class="fn">a</span>, <span class="fn">b</span>)</span>, <span class="fn">xs</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#ReprTuple.reprTuple">reprTuple</a> <span class="fn">b</span> (<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> <span class="fn">a</span></span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprProd">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L88-L89">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprProd">instReprProd</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#ReprTuple">ReprTuple</a> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><span class="fn">α</span> <a href="/docs/Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprSigma">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L91-L92">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprSigma">instReprSigma</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <span class="fn">Type v</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[s : <span class="fn">(x : <span class="fn">α</span>) → <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><span class="fn">β</span> <span class="fn">x</span></span>)</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Core.html#Sigma">Sigma</a> <span class="fn">β</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprSubtype">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L94-L95">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprSubtype">instReprSubtype</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <span class="fn">Prop</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Subtype">Subtype</a> <span class="fn">p</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instReprSubtype</span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">s</span> <span class="fn">prec</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr.reprPrec">reprPrec</a> <span class="fn"><span class="fn">s</span>.val</span> <span class="fn">prec</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.digitChar">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L99-L116">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.digitChar">Nat.digitChar</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Char">Char</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.toDigitsCore">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L118-L124">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.toDigitsCore">Nat.toDigitsCore</a>
+</span>
+<span class="decl_args">
+<span class="fn">(base : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span> → <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigitsCore">Nat.toDigitsCore</a> <span class="fn">base</span> <span class="fn">0</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigitsCore">Nat.toDigitsCore</a> <span class="fn">base</span> (<span class="fn"><a href="/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">fuel</span></span>) <span class="fn">x</span> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">base</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.digitChar">Nat.digitChar</a> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HMod.hMod">%</a> <span class="fn">base</span></span>)</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">x</span></span>
+  else <span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigitsCore">Nat.toDigitsCore</a> <span class="fn">base</span> <span class="fn">fuel</span> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">base</span></span>) (<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.digitChar">Nat.digitChar</a> (<span class="fn"><span class="fn">x</span> <a href="/docs/Init/Prelude.html#HMod.hMod">%</a> <span class="fn">base</span></span>)</span> <a href="/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">x</span></span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.toDigits">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L126-L127">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.toDigits">Nat.toDigits</a>
+</span>
+<span class="decl_args">
+<span class="fn">(base : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigits">Nat.toDigits</a> <span class="fn">base</span> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigitsCore">Nat.toDigitsCore</a> <span class="fn">base</span> (<span class="fn"><span class="fn">n</span> <a href="/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>) <span class="fn">n</span> <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.repr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L129-L130">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.repr">Nat.repr</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.repr">Nat.repr</a> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/String/Basic.html#List.asString">List.asString</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toDigits">Nat.toDigits</a> <span class="fn">10</span> <span class="fn">n</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.superDigitChar">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L132-L143">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.superDigitChar">Nat.superDigitChar</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#Char">Char</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.toSuperDigitsAux">
+<div class="constant">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L145-L150">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">partial def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.toSuperDigitsAux">Nat.toSuperDigitsAux</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span> → <span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.toSuperDigits">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L152-L153">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.toSuperDigits">Nat.toSuperDigits</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toSuperDigits">Nat.toSuperDigits</a> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toSuperDigitsAux">Nat.toSuperDigitsAux</a> <span class="fn">n</span> <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.toSuperscriptString">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L155-L156">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Nat.toSuperscriptString">Nat.toSuperscriptString</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toSuperscriptString">Nat.toSuperscriptString</a> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/String/Basic.html#List.asString">List.asString</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.toSuperDigits">Nat.toSuperDigits</a> <span class="fn">n</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprNat">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L160-L161">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprNat">instReprNat</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprNat">instReprNat</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.repr">Nat.repr</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Int.repr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L163-L165">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Int.repr">Int.repr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Int/Basic.html#Int">Int</a> → <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Int.repr">Int.repr</a> <span class="fn">x</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+  | <span class="fn"><a href="/docs/Init/Data/Int/Basic.html#Int.negSucc">Int.ofNat</a> <span class="fn">m</span></span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.repr">Nat.repr</a> <span class="fn">m</span></span>
+  | <span class="fn"><a href="/docs/Init/Data/Int/Basic.html#Int.negSucc">Int.negSucc</a> <span class="fn">m</span></span> =&gt <span class="fn"><span class="fn">&quot-&quot</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.repr">Nat.repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">m</span></span>)</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprInt">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L167-L168">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprInt">instReprInt</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Data/Int/Basic.html#Int">Int</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprInt">instReprInt</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">i</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Int.repr">Int.repr</a> <span class="fn">i</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="hexDigitRepr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L170-L171">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#hexDigitRepr">hexDigitRepr</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#hexDigitRepr">hexDigitRepr</a> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.singleton">String.singleton</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Nat.digitChar">Nat.digitChar</a> <span class="fn">n</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="charToHex">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L173-L177">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#charToHex">charToHex</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#charToHex">charToHex</a> <span class="fn">c</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let n := <span class="fn"><a href="/docs/Init/Data/Char/Basic.html#Char.toNat">Char.toNat</a> <span class="fn">c</span></span>;
+  <span class="fn">let d2 := <span class="fn"><span class="fn">n</span> <a href="/docs/Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">16</span></span>;
+  <span class="fn">let d1 := <span class="fn"><span class="fn">n</span> <a href="/docs/Init/Prelude.html#HMod.hMod">%</a> <span class="fn">16</span></span>;
+  <span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#hexDigitRepr">hexDigitRepr</a> <span class="fn">d2</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#hexDigitRepr">hexDigitRepr</a> <span class="fn">d1</span></span></span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Char.quoteCore">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L179-L185">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Char.quoteCore">Char.quoteCore</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Char.quote">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L187-L188">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Char.quote">Char.quote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Char.quote">Char.quote</a> <span class="fn">c</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">&quot'&quot</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Char.quoteCore">Char.quoteCore</a> <span class="fn">c</span></span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot'&quot</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprChar">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L190-L191">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprChar">instReprChar</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprChar">instReprChar</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">c</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#Char.quote">Char.quote</a> <span class="fn">c</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Char.repr">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L193-L194">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#Char.repr">Char.repr</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#Char.repr">Char.repr</a> <span class="fn">c</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Char.quote">Char.quote</a> <span class="fn">c</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.quote">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L196-L198">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#String.quote">String.quote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/docs/Init/Prelude.html#String">String</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#String.quote">String.quote</a> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <a href="/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot\&quot\&quot&quot</span> else <span class="fn"><span class="fn"><a href="/docs/Init/Data/String/Basic.html#String.foldl">String.foldl</a> (<span class="fn">fun <span class="fn">s</span> <span class="fn">c</span> =&gt <span class="fn"><span class="fn">s</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/docs/Init/Data/Repr.html#Char.quoteCore">Char.quoteCore</a> <span class="fn">c</span></span></span></span>) <span class="fn">&quot\&quot&quot</span> <span class="fn">s</span></span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot\&quot&quot</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprString">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L200-L201">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprString">instReprString</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprString">instReprString</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">s</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><a href="/docs/Init/Data/Repr.html#String.quote">String.quote</a> <span class="fn">s</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprSubstring">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L203-L204">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprSubstring">instReprSubstring</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Substring">Substring</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprSubstring">instReprSubstring</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">s</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Format/Basic.html#Std.Format.text">Std.Format.text</a> (<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#String.quote">String.quote</a> (<span class="fn"><a href="/docs/Init/Data/String/Basic.html#Substring.toString">Substring.toString</a> <span class="fn">s</span></span>)</span> <a href="/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot.toSubstring&quot</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprIterator">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L206-L207">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprIterator">instReprIterator</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprFin">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L209-L210">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprFin">instReprFin</a>
+</span>
+<span class="decl_args">
+<span class="fn">(n : <a href="/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/docs/Init/Data/Repr.html#instReprFin">instReprFin</a> <span class="fn">n</span></span> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">f</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> <span class="fn"><span class="fn">f</span>.val</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUInt8">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L212-L213">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUInt8">instReprUInt8</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUInt8">instReprUInt8</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> (<span class="fn"><a href="/docs/Init/Data/UInt.html#UInt8.toNat">UInt8.toNat</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUInt16">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L215-L216">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUInt16">instReprUInt16</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#UInt16">UInt16</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUInt16">instReprUInt16</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> (<span class="fn"><a href="/docs/Init/Data/UInt.html#UInt16.toNat">UInt16.toNat</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUInt32">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L218-L219">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUInt32">instReprUInt32</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#UInt32">UInt32</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUInt32">instReprUInt32</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#UInt32.toNat">UInt32.toNat</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUInt64">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L221-L222">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUInt64">instReprUInt64</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#UInt64">UInt64</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUInt64">instReprUInt64</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> (<span class="fn"><a href="/docs/Init/Data/UInt.html#UInt64.toNat">UInt64.toNat</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprUSize">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L224-L225">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprUSize">instReprUSize</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#USize">USize</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprUSize">instReprUSize</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">n</span> <span class="fn">x</span> =&gt <span class="fn"><a href="/docs/Init/Data/Repr.html#repr">repr</a> (<span class="fn"><a href="/docs/Init/Data/UInt.html#USize.toNat">USize.toNat</a> <span class="fn">n</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprList">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L227-L232">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprList">instReprList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprList_1">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L234-L239">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprList_1">instReprList_1</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="/docs/Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomBool">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L241-L241">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomBool">instReprAtomBool</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#Bool">Bool</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomBool">instReprAtomBool</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomNat">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L242-L242">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomNat">instReprAtomNat</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomNat">instReprAtomNat</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomInt">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L243-L243">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomInt">instReprAtomInt</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Data/Int/Basic.html#Int">Int</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomInt">instReprAtomInt</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomChar">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L244-L244">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomChar">instReprAtomChar</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#Char">Char</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomChar">instReprAtomChar</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomString">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L245-L245">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomString">instReprAtomString</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#String">String</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomString">instReprAtomString</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomUInt8">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L246-L246">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomUInt8">instReprAtomUInt8</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#UInt8">UInt8</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomUInt8">instReprAtomUInt8</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomUInt16">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L247-L247">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomUInt16">instReprAtomUInt16</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#UInt16">UInt16</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomUInt16">instReprAtomUInt16</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomUInt32">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L248-L248">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomUInt32">instReprAtomUInt32</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#UInt32">UInt32</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomUInt32">instReprAtomUInt32</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomUInt64">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L249-L249">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomUInt64">instReprAtomUInt64</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#UInt64">UInt64</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomUInt64">instReprAtomUInt64</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprAtomUSize">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L250-L250">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprAtomUSize">instReprAtomUSize</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#ReprAtom">ReprAtom</a> <a href="/docs/Init/Prelude.html#USize">USize</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprAtomUSize">instReprAtomUSize</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{  }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instReprSourceInfo">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/Repr.lean#L252-L252">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/docs/Init/Data/Repr.html#instReprSourceInfo">instReprSourceInfo</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/docs/Init/Prelude.html#Lean.SourceInfo">Lean.SourceInfo</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/docs/Init/Data/Repr.html#instReprSourceInfo">instReprSourceInfo</a> <a href="/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <a href="/docs/Init/Data/Repr.html#_private.Init.Data.Repr.0.reprSourceInfo._@.Init.Data.Repr._hyg.1750">[anonymous]</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/docs/Init.html" open="">
+<summary><a href="/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Control.html">
+<summary><a href="/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data.html" open="">
+<summary><a href="/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/docs/Init/Data/Array.html">
+<summary><a href="/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ByteArray.html">
+<summary><a href="/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Char.html">
+<summary><a href="/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Fin.html">
+<summary><a href="/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/FloatArray.html">
+<summary><a href="/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Format.html">
+<summary><a href="/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Int.html">
+<summary><a href="/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/List.html">
+<summary><a href="/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Nat.html">
+<summary><a href="/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/Option.html">
+<summary><a href="/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/String.html">
+<summary><a href="/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/Data/ToString.html">
+<summary><a href="/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link visible">
+<a href="/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/Init/System.html">
+<summary><a href="/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/docs/LeanColls.html">
+<summary><a href="/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>
