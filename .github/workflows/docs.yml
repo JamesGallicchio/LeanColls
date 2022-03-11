@@ -19,9 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
       - name: Install elan
         run: |
           set -o pipefail
@@ -35,10 +32,19 @@ jobs:
           git clone https://github.com/leanprover/doc-gen4
           cd doc-gen4
           lake build
-      
+
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
       - name: Merge main into gh-pages
         run: |
-          git checkout gh-pages
           git merge main
 
       - name: Generate docs
