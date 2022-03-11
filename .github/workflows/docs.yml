@@ -26,8 +26,10 @@ jobs:
 
       - name: Merge main into gh-pages
         run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git checkout gh-pages
-          git merge main
+          git merge main -m "Auto-merge main into gh-pages"
 
       - name: Install elan
         run: |
