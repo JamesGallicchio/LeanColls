@@ -19,10 +19,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          ref: main
+          fetch-depth: 0
+
+      - name: Merge main into gh-pages
+        run: |
+          git checkout gh-pages
+          git merge main
 
       - name: Install elan
         run: |
@@ -38,20 +43,11 @@ jobs:
           cd doc-gen4
           lake build
 
-      - name: Checkout gh-pages
-        uses: actions/checkout@v3
-        with:
-          ref: gh-pages
-
-      - name: Merge main into gh-pages
-        run: |
-          git merge origin/main
-
       - name: Generate docs
         run: |
           rm -r docs/docs
           ../doc-gen4/build/bin/doc-gen4 '/LeanColls/docs/' LeanColls
-      
+
       - name: Deploy docs and push to gh-pages
         run: |
           mv build/doc docs/docs
