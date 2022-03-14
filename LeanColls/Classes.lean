@@ -92,23 +92,20 @@ class Enumerable (C : Type u) (τ : Type v)
   unfold := fromEnumerable ∘
     Foldable.fold (λ t r => insert (some (t,r))) (insert none)
 
-/-!
-## CollLike
-
-A utility class for types that are foldable and unfoldable.
--/
-class CollLike (C : Type u) (τ : outParam (Type v))
-  extends Foldable C τ, Unfoldable C τ
 
 /-!
-### SeqLike
-
-Class of collections that are isomorphic to `Fin n → τ`
+## Miscellaneous
 -/
-class SeqLike (C : Type u) (τ : outParam (Type u))
-  extends CollLike C τ where
+
+/-!
+### Indexed
+
+Class of collections with efficient size and indexed
+access operations
+-/
+class Indexed (C : Type u) (τ : outParam (Type u)) where
   size : C → Nat
-  nth c : Fin (size c) → β
+  nth c : Fin (size c) → τ
 
 /-!
 ### MapLike
@@ -117,7 +114,7 @@ Class of collections that are isomorphic to `α → Option β`
 with an explicit set of keys
 -/
 class MapLike (C : Type u) (α β : outParam (Type u))
-  extends ToStream C (α × β) where
+  extends Iterable C (α × β) where
   get : α → C → Option β
 
 /-!
@@ -128,3 +125,43 @@ for a decidable proposition `P : α → Bool`.
 -/
 class SetLike (C : Type u) (τ : outParam (Type u))
   extends MapLike C τ PUnit
+
+
+/-!
+## External Hooks
+
+We plug LeanColls into built-ins from Lean.
+Each `Foldable` type gives rise to a `ForIn`, allowing
+a collection `C` to be used in `for x in C do ...` syntax.
+-/
+
+instance [Monad M] [Foldable F τ] : ForIn M F τ where
+  forIn c acc f := do
+    Foldable.fold
+      (λ x ma =>
+        bind ma (λ a =>
+        bind (f x a) (λ res =>
+        match res with
+        | ForInStep.yield y => pure y
+        | ForInStep.done y => return y
+        ))
+      )
+      (pure acc)
+      c
+
+/-!
+## Utility functions
+
+We declare a number of utility functions for interacting with
+collections. Operation classes are prefixed by the smallest
+collection class which is sufficient to provide a default
+implementation; for example, `FoldableOps` provides operations
+on `Foldable` classes.
+
+Default implementations are NOT registered as instances here.
+Instead, each collection should manually register an instance
+of the relevant operations classes, overriding operations for
+which more efficient versions exist.
+-/
+
+end LeanColls

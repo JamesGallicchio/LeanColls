@@ -4,12 +4,22 @@ Copyright (c) 2021 James Gallicchio.
 Authors: James Gallicchio
 -/
 
+#check Nat.lt
+
 namespace Nat
   theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
     induction z
     simp
     case succ z z_ih =>
     simp [Nat.sub_succ, Nat.add_succ, z_ih]
+
+  theorem lt_of_lt_le {x y z : Nat} : x < y → y ≤ z → x < z := by
+    intro h h'
+    induction h'
+    assumption
+    apply Nat.le_step
+    assumption
+
 end Nat
 
 namespace List
