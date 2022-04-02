@@ -24,11 +24,6 @@ inductive Digit (τ : Type u)
 
 namespace Digit
 
-@[simp]
-def full : Digit τ → Bool
-| _3 _ _ _ => true
-| _ => false
-
 @[inline]
 def tryAddLeft (d : Digit τ) (a : τ) (sc : Digit τ → α) (fc : τ → τ → τ → α) : α :=
   match d with
@@ -110,11 +105,6 @@ def toList : FingerTree τ n → List (NodeTree τ n)
   pr.toList ++
   (tr.toList.bind Node.toList : List (NodeTree τ n)) ++
   sf.toList
-
-def digitSum : FingerTree τ n → Nat
-| Empty => 0
-| Single _ => 0
-| Deep pr tr sf => pr.toList.length + tr.digitSum + sf.toList.length
 
 @[inline]
 def cons (f : FingerTree τ n) (a : NodeTree τ n) : FingerTree τ n :=
@@ -306,7 +296,7 @@ def append (f1 f2 : FingerTree τ n) : FingerTree τ n :=
     | Digit._3 a b c, Digit._3 d e f => (tr1.snoc (Node._3 a b c)).append (tr2.cons (Node._3 d e f))
 
     Deep pr1 tr' sf2
-  termination_by _ f1 f2 => f1.digitSum + f2.digitSum
-  decreasing_by simp [digitSum, snoc]; sorry
+  termination_by _ f1 f2 => sizeOf (f1,f2)
+  decreasing_by sorry
 
 end FingerTree
