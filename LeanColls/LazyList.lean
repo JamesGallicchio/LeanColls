@@ -25,6 +25,23 @@ inductive LazyList (α : Type u)
 namespace LazyList
 variable {α : Type u} {β : Type v} {δ : Type w}
 
+/-!
+Standard technique for LazyList. Necessary because LazyList is a
+nested inductive, but we never actually want to have different motives
+for the nested types.
+
+Remark: Lean used well-founded recursion behind the scenes to define LazyList.ind
+-/
+theorem ind {α : Type u} {motive : LazyList α → Sort v}
+        (nil : motive LazyList.nil)
+        (cons : (hd : α) → (tl : LazyList α) → motive tl → motive (LazyList.cons hd tl))
+        (delayed : (t : Thunk (LazyList α)) → motive t.get → motive (LazyList.delayed t))
+        (t : LazyList α) : motive t :=
+  match t with
+  | LazyList.nil => nil
+  | LazyList.cons h t => cons h t (ind nil cons delayed t)
+  | LazyList.delayed t => delayed t (ind nil cons delayed t.get)
+
 instance : Inhabited (LazyList α) :=
 ⟨nil⟩
 
@@ -60,25 +77,25 @@ def force : LazyList α → Option (α × LazyList α)
 
 theorem toList_force_none {l : LazyList α}
   : force l = none ↔ l.toList = List.nil
-  := @rec α
-  (λ l => (force l = none ↔ l.toList = List.nil))
-  (λ t => (force t.get = none ↔ t.get.toList = List.nil))
-  (by simp [force])
-  (by intros hd tl ih; simp [force])
-  (by intros t ih; simp [force,ih])
-  (by intros fn ih; simp [force,ih,Thunk.get])
-  l
+  := by
+    induction l using ind
+    simp [force]
+    simp [force]
+    simp [force]; assumption
 
 theorem toList_force_some {l : LazyList α}
   : force l = some (x,xs) → l.toList = List.cons x xs.toList
-  := @rec α
-  (λ l => force l = some (x,xs) → l.toList = List.cons x xs.toList)
-  (λ t => force t.get = some (x,xs) → t.get.toList = List.cons x xs.toList)
-  (by simp [force])
-  (by intros hd tl ih; simp [force]; intro h; simp [h])
-  (by intros t ih; simp [force]; exact ih)
-  (by intros fn ih; simp [Thunk.get]; exact ih ())
-  l
+  := by
+    induction l using ind generalizing x xs
+    simp [force]
+    case cons hd tl ih =>
+      simp [force]
+      intro h
+      simp [h]
+    case delayed th ih =>
+      simp [force]
+      intro h
+      exact ih h
 
 def head? (l : LazyList α) : Option α := l.force.map (Prod.fst)
 
@@ -97,27 +114,15 @@ instance : Append (LazyList α) :=
 
 @[simp] theorem toList_append (l₁ l₂ : LazyList α)
   : (l₁ ++ l₂).toList = l₁.toList ++ l₂.toList
-  := @rec α
-    (λ l => (l ++ l₂).toList = l.toList ++ l₂.toList)
-    (λ t => (t.get ++ l₂).toList = t.get.toList ++ l₂.toList)
-    (by simp [HAppend.hAppend, Append.append, append, List.append, toList])
-    (by
-      intros hd tl tl_ih
+  := by
+    induction l₁ using ind
+      simp [HAppend.hAppend, Append.append, append, List.append, toList]
+    case cons hd tl tl_ih =>
       simp [HAppend.hAppend, Append.append, append] at tl_ih |-
       simp [tl_ih, toList, Thunk.get]
-      )
-    (by
-      intros t t_ih
+    case delayed t t_ih =>
       simp [HAppend.hAppend, Append.append, append] at t_ih |-
       assumption
-      )
-    (by
-      intros fn fn_ih
-      have := fn_ih ()
-      simp [HAppend.hAppend, Append.append, append, Thunk.get] at this |-
-      assumption
-      )
-    l₁
 
 @[simp] theorem length_append (l₁ l₂ : LazyList α)
   : (l₁ ++ l₂).length = l₁.length + l₂.length
@@ -133,30 +138,18 @@ instance : Append (LazyList α) :=
 
 @[simp] theorem toList_revAppend (l₁ l₂ : LazyList α)
   : (revAppend l₁ l₂).toList = l₁.toList.reverse ++ l₂.toList
-  := @rec α
-    (λ l => ∀ l2, (revAppend l l2).toList = l.toList.reverse ++ l2.toList)
-    (λ t => ∀ l2, (revAppend t.get l2).toList = t.get.toList.reverse ++ l2.toList)
-    (by simp)
-    (by
-      intros hd tl tl_ih l2
+  := by
+    induction l₁ using ind generalizing l₂
+    simp
+    case cons hd tl tl_ih =>
       simp [Thunk.get] at tl_ih |-
-      have := tl_ih (cons hd l2)
+      have := tl_ih (cons hd l₂)
       rw [this]
       rw [List.append_assoc]
       simp [HAppend.hAppend, Append.append, List.append]
-      )
-    (by
-      intros t t_ih
+    case delayed t t_ih =>
       simp [HAppend.hAppend, Append.append, append] at t_ih |-
-      assumption
-      )
-    (by
-      intros fn fn_ih
-      have := fn_ih ()
-      simp [HAppend.hAppend, Append.append, append, Thunk.get] at this |-
-      assumption
-      )
-    l₁ l₂
+      exact t_ih l₂
 
 @[simp] theorem length_revAppend (l₁ l₂ : LazyList α)
   : (revAppend l₁ l₂).length = l₁.length + l₂.length
@@ -196,7 +189,7 @@ termination_by _ as bs => sizeOf (as,bs)
 termination_by _ as bs => sizeOf (as,bs)
 
 @[inline] def zip : LazyList α → LazyList β → LazyList (α × β) :=
-map₂ Prod.mk
+  map₂ Prod.mk
 
 def join : LazyList (LazyList α) → LazyList α
 | nil        => nil

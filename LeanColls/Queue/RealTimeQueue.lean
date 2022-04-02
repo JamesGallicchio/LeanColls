@@ -7,6 +7,8 @@ Authors: James Gallicchio
 import LeanColls.Queue
 import LeanColls.LazyList
 
+namespace LeanColls
+
 /-!
 # Real Time Queues
 
@@ -28,7 +30,8 @@ structure RTQueue (τ) :=
 
 namespace RTQueue
 
-private def model_fn : RTQueue τ → Model τ := λ ⟨F,R,_,_⟩ => F.toList ++ (R.reverse)
+private def model_fn : RTQueue τ → List τ :=
+  λ ⟨F,R,_,_⟩ => F.toList ++ (R.reverse)
 
 def empty : RTQueue τ :=
   ⟨ LazyList.nil,
@@ -39,7 +42,7 @@ def empty : RTQueue τ :=
 
 @[inline] private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
   (h : f.length + 1 = r.length) : LazyList τ :=
-  LazyList.delayed (
+  LazyList.delayed (Thunk.mk (λ () =>
     match h_r:r with
     | List.nil => False.elim (by simp [List.length] at h; cases h)
     | y::r' =>
@@ -51,7 +54,40 @@ def empty : RTQueue τ :=
       simp at h
       exact h
       ))
-  )
+  ))
+
+private theorem rotate_inv {F : LazyList α} {R} {S}
+  : (h : _) → (rotate F R S h).toList = F.toList ++ R.reverse
+  := by
+  induction F using LazyList.ind
+  case nil =>
+    intro h
+    simp at h
+    match R with
+    | [] => contradiction
+    | [x] =>
+      unfold rotate
+      simp [Thunk.get]
+      unfold LazyList.force.match_1
+      unfold LazyList.force.proof_1
+      unfold LazyList.force.proof_2
+      simp [LazyList.force]
+      sorry
+    | _::_::_ =>
+      simp at h
+      contradiction
+  case cons hd tl ih =>
+    intro h
+    simp
+    sorry
+  case delayed F ih =>
+    intro h
+    simp
+    sorry
+  case mk fn ih =>
+    intro h
+    exact ih ()
+  
 
 @[inline] private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
   (h_lens : F.length + 1 = R.length + S.length) : RTQueue τ :=
@@ -73,13 +109,15 @@ def empty : RTQueue τ :=
     )
     ⟨F', List.nil, F', by simp⟩
 
-/-private theorem balance_inv {F : LazyList α} {F_len} {R} {R_len} {h_lens}
-  : model_fn (balance F F_len R R_len h_lens) = (F ++ (R.reverse)).toList
+private theorem balance_inv {F : LazyList α} {R} {S} (h_lens)
+  : model_fn (balance F R S h_lens) = F.toList ++ R.reverse
   := by
   simp [balance]
-  cases (Nat.decLe R_len F_len)
-  simp [dite, model_fn]
-  simp [dite, model_fn]-/
+  match S.force with
+  | none =>
+    simp [dite, model_fn]
+  | some _ =>
+    simp [dite, model_fn]
 
 def enq (Q : RTQueue τ) (x : τ) : RTQueue τ :=
   let ⟨F, R, S, h_lens⟩ := Q
@@ -105,12 +143,11 @@ instance : Queue (RTQueue τ) τ where
   enq   := enq
   h_enq := by
     intros c x
-    sorry
-    /-cases c; case mk F F_len R R_len h_lens =>
+    cases c; case mk F R S h_lens =>
     simp [enq, balance_inv]
     simp [Model.enq, model_fn]
     rw [←List.append_assoc]
-    simp [HAppend.hAppend, Append.append]-/
+    simp [HAppend.hAppend, Append.append]
   deq   := deq
   h_deq := by
     intro c

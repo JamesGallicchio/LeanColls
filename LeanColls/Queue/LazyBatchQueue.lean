@@ -7,8 +7,7 @@ Authors: James Gallicchio
 import LeanColls.Queue
 import LeanColls.LazyList
 
-set_option pp.match false
---set_option pp.all true
+namespace LeanColls
 
 /-!
 # Lazy Batched Queues
@@ -33,7 +32,7 @@ structure LazyBatchQueue (τ) :=
 
 namespace LazyBatchQueue
 
-private def model_fn : LazyBatchQueue τ → Model τ := λ ⟨F,_,R,_,_⟩ => (F ++ (R.reverse)).toList
+private def model_fn : LazyBatchQueue τ → List τ := λ ⟨F,_,R,_,_⟩ => (F ++ (R.reverse)).toList
 
 def empty : LazyBatchQueue τ :=
   ⟨ LazyList.nil, 0,
@@ -55,9 +54,7 @@ private def balance (F : LazyList τ) (F_len) (R : LazyList τ) (R_len)
       by
       cases h_lens; case intro l r =>
       simp
-      apply And.intro
       simp [l, r]
-      exact Nat.zero_le _
     ⟩
 
 private theorem balance_inv {F : LazyList α} {F_len} {R} {R_len} {h_lens}
@@ -97,14 +94,14 @@ instance : Queue (LazyBatchQueue τ) τ where
     intros c x
     cases c; case mk F F_len R R_len h_lens =>
     simp [enq, balance_inv]
-    simp [Model.enq, model_fn]
+    simp [model_fn]
     rw [←List.append_assoc]
   deq   := deq
   h_deq := by
     intro c
     cases c; case mk F F_len R R_len h_lens =>
     simp [deq]
-    suffices ∀ o h, Model.deq (LazyBatchQueue.model_fn { F := F, F_len := F_len, R := R, R_len := R_len, h_lens := h_lens }) =
+    suffices ∀ o h, List.front? (LazyBatchQueue.model_fn { F := F, F_len := F_len, R := R, R_len := R_len, h_lens := h_lens }) =
       Option.map (fun x => (x.fst, LazyBatchQueue.model_fn x.snd))
       (deq.match_1 F (fun x h => Option (τ × LazyBatchQueue τ)) o ((@LazyBatchQueue.deq.proof_1 τ F).trans h)
       (fun x F' h =>
@@ -139,12 +136,12 @@ instance : Queue (LazyBatchQueue τ) τ where
         split at hr
         simp
         contradiction      
-      simp [hF, hR, Model.deq]
+      simp [hF, hR, List.front?]
     | some ⟨x,F'⟩ =>
       simp [Option.map, Option.bind, model_fn]
       have hF : F.toList = x :: F'.toList
         := LazyList.toList_force_some h
-      simp [hF, Model.deq]
+      simp [hF, List.front?]
       have := @balance_inv _ F' (F_len-1) R R_len (deq.proof_2 F _ _ _ h_lens x _ h)
       simp [model_fn] at this
       exact this.symm

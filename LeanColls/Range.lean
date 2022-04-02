@@ -21,6 +21,9 @@ def fold : (Fin n → β → β) → β → Range n → β :=
 instance : Foldable (Range n) (Fin n) where
   fold := fold
 
+instance : Membership Nat (Range n) where
+  mem i _ := i < n
+
 end Range
 
 end LeanColls

@@ -87,15 +87,27 @@ a collection one item at a time.
 class Enumerable (C : Type u) (τ : Type v)
   extends Unfoldable C τ where
   ρ : Type v
-  fromEnumerable : ρ → C
+  fromEnumerator : ρ → C
   insert : Option (τ × ρ) → ρ
-  unfold := fromEnumerable ∘
+  unfold := fromEnumerator ∘
     Foldable.fold (λ t r => insert (some (t,r))) (insert none)
 
 
 /-!
 ## Miscellaneous
 -/
+
+/-!
+### MapLike
+
+Class of collections that have an explicit key set and are
+isomorphic to `{a : α // a ∈ keySet c} → β`
+-/
+class MapLike (C : Type u) (α : outParam (Type v)) (β : outParam (Type w)) where
+  κ : C → Type x
+  κ_hasMem c : Membership α (κ c)
+  keySet c : κ c
+  get c : {a : α // a ∈ keySet c} → β
 
 /-!
 ### Indexed
@@ -108,23 +120,13 @@ class Indexed (C : Type u) (τ : outParam (Type u)) where
   nth c : Fin (size c) → τ
 
 /-!
-### MapLike
-
-Class of collections that are isomorphic to `α → Option β`
-with an explicit set of keys
--/
-class MapLike (C : Type u) (α β : outParam (Type u))
-  extends Iterable C (α × β) where
-  get : α → C → Option β
-
-/-!
 ### SetLike
 
-Class of collections that are isomorphic to `{ a : α // P a }`
-for a decidable proposition `P : α → Bool`.
+Class of collections that have a decidable membership function
+and are isomorphic to `{ a : α // decide (mem c a) }`
 -/
-class SetLike (C : Type u) (τ : outParam (Type u))
-  extends MapLike C τ PUnit
+class SetLike (C : Type u) (τ : outParam (Type u)) where
+  mem : C → τ → Bool
 
 
 /-!

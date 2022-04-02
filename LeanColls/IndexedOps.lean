@@ -32,4 +32,10 @@ instance [Indexed C τ] : Inhabited (IndexedOps C τ) where
     slice := λ off len c h => ⟨c,off,len,h⟩
   }
 
+instance [Indexed C τ] : MapLike C Nat τ where
+  κ c := Range (Indexed.size c)
+  κ_hasMem c := Range.instMembershipNatRange
+  keySet c := Range.mk (Indexed.size c)
+  get c i := Indexed.nth c ⟨i.val, i.property⟩
+
 end LeanColls

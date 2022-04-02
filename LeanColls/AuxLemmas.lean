@@ -4,8 +4,6 @@ Copyright (c) 2021 James Gallicchio.
 Authors: James Gallicchio
 -/
 
-#check Nat.lt
-
 namespace Nat
   theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
     induction z
@@ -120,6 +118,49 @@ namespace List
     simp [concat,join]
     case cons h t ih =>
     simp [ih,concat,join,List.append_assoc]
+  
+  @[simp]
+  theorem get_of_set_eq (L : List τ) (i : Fin L.length) (x : τ)
+    : (L.set i x).get ⟨i, by rw [length_set]; exact i.isLt⟩ = x
+    := by
+      induction L
+      simp at i; exact Fin.elim0 i
+      case cons hd tl ih =>
+      cases i; case mk i h_i =>
+      cases i
+      simp [set,get]
+      case succ i =>
+      simp at h_i
+      have h_i := Nat.lt_of_succ_lt_succ h_i
+      have := ih ⟨i,h_i⟩
+      simp at this
+      simp [set,get]
+      exact this
+  
+  @[simp]
+  theorem get_of_set_ne (L : List τ) (i : Nat) (x : τ) (j : Fin L.length)
+    : i ≠ j → (L.set i x).get ⟨j, by rw [length_set]; exact j.isLt⟩ = L.get j
+    := by
+      intro h
+      induction L generalizing i
+      simp at j; exact Fin.elim0 j
+      case cons hd tl ih =>
+      cases j; case mk j h_j =>
+      cases j
+      simp at h
+      cases i; contradiction
+      simp [set,get]
+      case succ j =>
+      simp at h_j
+      simp
+      cases i
+      simp [set,get]
+      case succ i =>
+      simp [set,get]
+      simp at h
+      have h_j := Nat.lt_of_succ_lt_succ h_j
+      have := ih i ⟨j,h_j⟩ h
+      exact this
 end List
 
 class Monoid (M) where

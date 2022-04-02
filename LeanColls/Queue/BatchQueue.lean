@@ -6,6 +6,8 @@ Authors: James Gallicchio
 
 import LeanColls.Queue
 
+namespace LeanColls
+
 /-!
 # Batched Queues
 
@@ -51,7 +53,7 @@ instance : Queue (BatchQueue τ) τ where
     intros c x
     cases c
     case mk F B =>
-    simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, Model.enq]
+    simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, List.cons]
     rw [←List.append_assoc]
   deq   := deq
   h_deq := by
@@ -60,12 +62,12 @@ instance : Queue (BatchQueue τ) τ where
     case mk F B =>
     cases F
     case cons f F =>
-      simp [Model.deq, deq, Option.map, Option.bind]
+      simp [List.front?, deq, Option.map, Option.bind]
     case nil =>
     cases h : List.reverse B
     case cons f F =>
-      simp [Model.deq, deq, Option.map, Option.bind, h]
+      simp [List.front?, deq, Option.map, Option.bind, h]
     case nil =>
-      simp [Model.deq, deq, Option.map, Option.bind, h]
+      simp [List.front?, deq, Option.map, Option.bind, h]
 
-end BatchQueue
+end LeanColls.BatchQueue
