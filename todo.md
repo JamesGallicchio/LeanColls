@@ -1,11 +1,14 @@
 # TODO
 
-- Finish correctness proofs for LBQueue, RTQueue
+- Finish correctness proofs for RTQueue
+- Figure out how to do tactic hints for implicit arguments
+- Implement
+  - OrdMap
+  - RBTree
+  - HashMap
 ---
-- Read typeclass paper!!!
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
-- Copy an implementation from Functional Algorithms Verified book
 - Read about Isabelle Containers
 
 
@@ -13,6 +16,10 @@
 
 ### 15 Mar 2022
 - Finished (non-augmented) finger tree implementation with proofs
+- Proved correctness for LazyBatchQueue
+- Added collection classes
+- Implemented Range
+- Worked on static-size arrays
 
 ### 1 Mar 2022
 - Read about Haskell collections
