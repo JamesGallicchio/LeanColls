@@ -4,8 +4,6 @@ Copyright (c) 2021 James Gallicchio.
 Authors: James Gallicchio
 -/
 
-#check Nat.lt
-
 namespace Nat
   theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
     induction z
@@ -19,15 +17,6 @@ namespace Nat
     assumption
     apply Nat.le_step
     assumption
-  
-  theorem ne_of_lt {x y : Nat} : x < y → x ≠ y := by
-    intro h h'
-    cases h'
-    induction x
-    exact Nat.not_lt_zero _ h
-    case succ x ih =>
-    apply ih
-    exact Nat.lt_of_succ_lt_succ h
 
 end Nat
 
