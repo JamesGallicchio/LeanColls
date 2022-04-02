@@ -30,7 +30,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Queue</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Queue.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Queue.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -38,6 +38,9 @@ Documentation</h1>
 <ul>
 <li>
 <a href="/LeanColls/docs/Init.html">Init</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
 </li>
 </ul>
 </details>
@@ -51,107 +54,19 @@ Documentation</h1>
 </details>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#Model">Model</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Model.enq">Model.enq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Model.deq">Model.deq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Queue">Queue</a>
+<a class="break_within" href="#LeanColls.Queue">LeanColls.Queue</a>
 </div>
 </nav>
 <main>
-<div class="decl" id="Model">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Queue.lean#L7-L7">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a>
-</span>
-<span class="decl_args">
-<span class="fn">(α : <span class="fn">Type u_1</span>)</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type u_1</span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#List">List</a></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Model.enq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Queue.lean#L11-L12">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Queue.html#Model.enq">Model.enq</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="decl_args">
-<span class="fn">(Q : <span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <span class="fn">τ</span></span>)</span></span>
-<span class="decl_args">
-<span class="fn">(x : <span class="fn">τ</span>)</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <span class="fn">τ</span></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model.enq">Model.enq</a> <span class="fn">Q</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/List/Basic.html#List.append">List.append</a> <span class="fn">Q</span> <span class="fn">[<span class="fn">x</span>]</span></span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Model.deq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Queue.lean#L14-L16">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Queue.html#Model.deq">Model.deq</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <span class="fn">τ</span></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/LeanColls/docs/Init/Prelude.html#Prod">×</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <span class="fn">τ</span></span></span>)</span></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model.deq">Model.deq</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">[]</span> =&gt <span class="fn">none</span>
-  | <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">x</span>, <span class="fn">xs</span>)</span></span></span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Queue">
+<div class="decl" id="LeanColls.Queue">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Queue.lean#L22-L29">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Queue.lean#L13-L20">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Queue.html#Queue">Queue</a>
+<a class="break_within" href="/LeanColls/docs/LeanColls/Queue.html#LeanColls.Queue">LeanColls.Queue</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
@@ -159,22 +74,22 @@ Documentation</h1>
 <span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max u v)</span></div></div>
-<ul class="structure_fields" id="Queue.mk">
-<li class="structure_field" id="Queue.model">
-model : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model">Model</a> <span class="fn">τ</span></span></span></li>
-<li class="structure_field" id="Queue.empty">
+<ul class="structure_fields" id="LeanColls.Queue.mk">
+<li class="structure_field" id="LeanColls.Queue.model">
+model : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span></li>
+<li class="structure_field" id="LeanColls.Queue.empty">
 empty : <span class="fn">C</span></li>
-<li class="structure_field" id="Queue.h_empty">
+<li class="structure_field" id="LeanColls.Queue.h_empty">
 h_empty : <span class="fn"><span class="fn">[]</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> <span class="fn">empty</span></span></span></li>
-<li class="structure_field" id="Queue.enq">
+<li class="structure_field" id="LeanColls.Queue.enq">
 enq : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <span class="fn">C</span></span></span></li>
-<li class="structure_field" id="Queue.h_enq">
-h_enq : <span class="fn">∀ (c : <span class="fn">C</span>) (t : <span class="fn">τ</span>), <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model.enq">Model.enq</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>) <span class="fn">t</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> (<span class="fn"><span class="fn">enq</span> <span class="fn">c</span> <span class="fn">t</span></span>)</span></span></span></li>
-<li class="structure_field" id="Queue.deq">
+<li class="structure_field" id="LeanColls.Queue.h_enq">
+h_enq : <span class="fn">∀ (c : <span class="fn">C</span>) (t : <span class="fn">τ</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">model</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">[<span class="fn">t</span>]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> (<span class="fn"><span class="fn">enq</span> <span class="fn">c</span> <span class="fn">t</span></span>)</span></span></span></li>
+<li class="structure_field" id="LeanColls.Queue.deq">
 deq : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/LeanColls/docs/Init/Prelude.html#Prod">×</a> <span class="fn">C</span></span>)</span></span></li>
-<li class="structure_field" id="Queue.h_deq">
+<li class="structure_field" id="LeanColls.Queue.h_deq">
 h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
-  <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Queue.html#Model.deq">Model.deq</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>     <span class="fn"><a href="/LeanColls/docs/Init/Data/Option/Basic.html#Option.map">Option.map</a>
+  <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/AuxLemmas.html#List.front?">List.front?</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>     <span class="fn"><a href="/LeanColls/docs/Init/Data/Option/Basic.html#Option.map">Option.map</a>
       (<span class="fn">fun <span class="fn">x</span> =&gt
         <span class="fn">match <span class="fn">x</span> with
         | <span class="fn">(<span class="fn">x</span>, <span class="fn">c'</span>)</span> =&gt <span class="fn">(<span class="fn">x</span>, <span class="fn"><span class="fn">model</span> <span class="fn">c'</span></span>)</span></span></span>)
@@ -370,6 +285,9 @@ h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
 <a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
 <div class="nav_link">
 <a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
 </div>

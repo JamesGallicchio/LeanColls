@@ -1,0 +1,1561 @@
+<html lang="en">
+<head>
+<title>Init.Data.AC</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/LeanColls/docs/style.css"></link><link rel="stylesheet" href="/LeanColls/docs/pygments.css"></link><link rel="shortcut icon" href="/LeanColls/docs/favicon.ico"></link><link rel="prefetch" href="/LeanColls/docs/declaration-data.bmp"></link><script defer="true" src="/LeanColls/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/LeanColls/docs/nav.js">
+</script>
+<script type="module" src="/LeanColls/docs/search.js">
+</script>
+<script type="module" src="/LeanColls/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Data.AC</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Data.AC</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/Init/Classical.html">Init.Classical</a>
+</li>
+<li>
+<a href="/LeanColls/docs/Init/Data/List.html">Init.Data.List</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/Init/Data.html">Init.Data</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.instInhabitedExpr">Lean.Data.AC.instInhabitedExpr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.instReprExpr">Lean.Data.AC.instReprExpr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.instBEqExpr">Lean.Data.AC.instBEqExpr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Variable">Lean.Data.AC.Variable</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context">Lean.Data.AC.Context</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.EvalInformation">Lean.Data.AC.EvalInformation</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.var">Lean.Data.AC.Context.var</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.instContextInformationContext">Lean.Data.AC.instContextInformationContext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.instEvalInformationContext">Lean.Data.AC.instEvalInformationContext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.eval">Lean.Data.AC.eval</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.insert">Lean.Data.AC.insert</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.sort">Lean.Data.AC.sort</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.removeNeutrals">Lean.Data.AC.removeNeutrals</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.removeNeutrals.loop">Lean.Data.AC.removeNeutrals.loop</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.norm">Lean.Data.AC.norm</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.List.two_step_induction">Lean.Data.AC.List.two_step_induction</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.mergeIdem_nonEmpty">Lean.Data.AC.Context.mergeIdem_nonEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.mergeIdem_head">Lean.Data.AC.Context.mergeIdem_head</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.mergeIdem_head2">Lean.Data.AC.Context.mergeIdem_head2</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_mergeIdem">Lean.Data.AC.Context.evalList_mergeIdem</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.insert_nonEmpty">Lean.Data.AC.insert_nonEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.sort_loop_nonEmpty">Lean.Data.AC.Context.sort_loop_nonEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_insert">Lean.Data.AC.Context.evalList_insert</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_sort_congr">Lean.Data.AC.Context.evalList_sort_congr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_sort_loop_swap">Lean.Data.AC.Context.evalList_sort_loop_swap</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_sort_cons">Lean.Data.AC.Context.evalList_sort_cons</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_sort">Lean.Data.AC.Context.evalList_sort</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.toList_nonEmpty">Lean.Data.AC.Context.toList_nonEmpty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.unwrap_isNeutral">Lean.Data.AC.Context.unwrap_isNeutral</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_removeNeutrals">Lean.Data.AC.Context.evalList_removeNeutrals</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.evalList_append">Lean.Data.AC.Context.evalList_append</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.eval_toList">Lean.Data.AC.Context.eval_toList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.eval_norm">Lean.Data.AC.Context.eval_norm</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Lean.Data.AC.Context.eq_of_norm">Lean.Data.AC.Context.eq_of_norm</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Lean.Data.AC.Expr">
+<div class="inductive">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L12-L15">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">inductive</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="constructors">
+<li class="constructor" id="Lean.Data.AC.Expr.var">
+var: <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a></span></li>
+<li class="constructor" id="Lean.Data.AC.Expr.op">
+op: <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a> → <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a> → <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a></span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.instInhabitedExpr">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L15-L15">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instInhabitedExpr">Lean.Data.AC.instInhabitedExpr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instInhabitedExpr">Lean.Data.AC.instInhabitedExpr</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.var">Lean.Data.AC.Expr.var</a> <span class="fn">default</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.instReprExpr">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L15-L15">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instReprExpr">Lean.Data.AC.instReprExpr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/Repr.html#Repr">Repr</a> <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instReprExpr">Lean.Data.AC.instReprExpr</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <a href="/LeanColls/docs/Init/Data/AC.html#_private.Init.Data.AC.0.Lean.Data.AC.reprExpr._@.Init.Data.AC._hyg.39">[anonymous]</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.instBEqExpr">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L15-L15">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instBEqExpr">Lean.Data.AC.instBEqExpr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#BEq">BEq</a> <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instBEqExpr">Lean.Data.AC.instBEqExpr</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ beq := <a href="/LeanColls/docs/Init/Data/AC.html#_private.Init.Data.AC.0.Lean.Data.AC.beqExpr._@.Init.Data.AC._hyg.156">[anonymous]</a> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Variable">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L17-L19">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Variable">Lean.Data.AC.Variable</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(op : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="Lean.Data.AC.Variable.mk">
+<li class="structure_field" id="Lean.Data.AC.Variable.value">
+value : <span class="fn">α</span></li>
+<li class="structure_field" id="Lean.Data.AC.Variable.neutral">
+neutral : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsNeutral">Lean.IsNeutral</a> <span class="fn">op</span> <span class="fn">value</span></span>)</span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L21-L27">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="Lean.Data.AC.Context.mk">
+<li class="structure_field" id="Lean.Data.AC.Context.op">
+op : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <span class="fn">α</span></span></li>
+<li class="structure_field" id="Lean.Data.AC.Context.assoc">
+assoc : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsAssociative">Lean.IsAssociative</a> <span class="fn">op</span></span></li>
+<li class="structure_field" id="Lean.Data.AC.Context.comm">
+comm : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsCommutative">Lean.IsCommutative</a> <span class="fn">op</span></span>)</span></li>
+<li class="structure_field" id="Lean.Data.AC.Context.idem">
+idem : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsIdempotent">Lean.IsIdempotent</a> <span class="fn">op</span></span>)</span></li>
+<li class="structure_field" id="Lean.Data.AC.Context.vars">
+vars : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Variable">Lean.Data.AC.Variable</a> <span class="fn">op</span></span>)</span></li>
+<li class="structure_field" id="Lean.Data.AC.Context.arbitrary">
+arbitrary : <span class="fn">α</span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.ContextInformation">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L29-L32">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Sort (max 1 u)</span></div></div>
+<ul class="structure_fields" id="Lean.Data.AC.ContextInformation.mk">
+<li class="structure_field" id="Lean.Data.AC.ContextInformation.isNeutral">
+isNeutral : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></span></li>
+<li class="structure_field" id="Lean.Data.AC.ContextInformation.isComm">
+isComm : <span class="fn"><span class="fn">α</span> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></li>
+<li class="structure_field" id="Lean.Data.AC.ContextInformation.isIdem">
+isIdem : <span class="fn"><span class="fn">α</span> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instContextInformationContext">Lean.Data.AC.instContextInformationContext</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.EvalInformation">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L34-L37">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation">Lean.Data.AC.EvalInformation</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Sort u</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Sort v</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Sort (max (max 1 u) v)</span></div></div>
+<ul class="structure_fields" id="Lean.Data.AC.EvalInformation.mk">
+<li class="structure_field" id="Lean.Data.AC.EvalInformation.arbitrary">
+arbitrary : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span></li>
+<li class="structure_field" id="Lean.Data.AC.EvalInformation.evalOp">
+evalOp : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <span class="fn">β</span></span></span></li>
+<li class="structure_field" id="Lean.Data.AC.EvalInformation.evalVar">
+evalVar : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn">β</span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instEvalInformationContext">Lean.Data.AC.instEvalInformationContext</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.var">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L39-L40">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.var">Lean.Data.AC.Context.var</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(idx : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Variable">Lean.Data.AC.Variable</a> <span class="fn"><span class="fn">ctx</span>.op</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.var">Lean.Data.AC.Context.var</a> <span class="fn">ctx</span> <span class="fn">idx</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/List/BasicAux.html#List.getD">List.getD</a> <span class="fn"><span class="fn">ctx</span>.vars</span> <span class="fn">idx</span> <span class="fn">{ value := <span class="fn"><span class="fn">ctx</span>.arbitrary</span>, neutral := <span class="fn">none</span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.instContextInformationContext">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L42-L45">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instContextInformationContext">Lean.Data.AC.instContextInformationContext</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.instEvalInformationContext">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L47-L50">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.instEvalInformationContext">Lean.Data.AC.instEvalInformationContext</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation">Lean.Data.AC.EvalInformation</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>) <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">Lean.Data.AC.instEvalInformationContext</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ arbitrary := <span class="fn">fun <span class="fn">ctx</span> =&gt <span class="fn"><span class="fn">ctx</span>.arbitrary</span></span>, evalOp := <span class="fn">fun <span class="fn">ctx</span> =&gt <span class="fn"><span class="fn">ctx</span>.op</span></span>,
+    evalVar := <span class="fn">fun <span class="fn">ctx</span> <span class="fn">idx</span> =&gt <span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.var">Lean.Data.AC.Context.var</a> <span class="fn">ctx</span> <span class="fn">idx</span></span>).value</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.eval">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L52-L54">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Sort u</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation">Lean.Data.AC.EvalInformation</a> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ex : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">β</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">β</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.var">Lean.Data.AC.Expr.var</a> <span class="fn">a</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalVar">Lean.Data.AC.EvalInformation.evalVar</a> <span class="fn">ctx</span> <span class="fn">a</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">β</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.op">Lean.Data.AC.Expr.op</a> <span class="fn">a</span> <span class="fn">a_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalOp">Lean.Data.AC.EvalInformation.evalOp</a> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">β</span> <span class="fn">ctx</span> <span class="fn">a</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">β</span> <span class="fn">ctx</span> <span class="fn">a_1</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Expr.toList">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L56-L58">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.var">Lean.Data.AC.Expr.var</a> <span class="fn">a</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">a</span>]</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.op">Lean.Data.AC.Expr.op</a> <span class="fn">a</span> <span class="fn">a_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/Init/Data/List/Basic.html#List.append">List.append</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> <span class="fn">a</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> <span class="fn">a_1</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.evalList">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L60-L63">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">Sort u</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation">Lean.Data.AC.EvalInformation</a> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">β</span> <span class="fn">ctx</span> <span class="fn">[]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.arbitrary">Lean.Data.AC.EvalInformation.arbitrary</a> <span class="fn">ctx</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">β</span> <span class="fn">ctx</span> <span class="fn">[<span class="fn">x</span>]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalVar">Lean.Data.AC.EvalInformation.evalVar</a> <span class="fn">ctx</span> <span class="fn">x</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">β</span> <span class="fn">ctx</span> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalOp">Lean.Data.AC.EvalInformation.evalOp</a> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalVar">Lean.Data.AC.EvalInformation.evalVar</a> <span class="fn">ctx</span> <span class="fn">x</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">β</span> <span class="fn">ctx</span> <span class="fn">xs</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.insert">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L65-L67">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> <span class="fn">[]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">x</span>]</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> (<span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span> then <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span></span> else <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> <span class="fn">as</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.sort">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L69-L73">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort">Lean.Data.AC.sort</a>
+</span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort">Lean.Data.AC.sort</a> <span class="fn">xs</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">[]</span> <span class="fn">xs</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.sort.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L70-L72">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">_fun_discr</span> <span class="fn">[]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">_fun_discr</span> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> <span class="fn">_fun_discr</span></span>) <span class="fn">xs</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.mergeIdem">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L75-L86">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a>
+</span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> <span class="fn">xs</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">xs</span> with
+  | <span class="fn">[]</span> =&gt <span class="fn">[]</span>
+  | <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a> <span class="fn">x</span> <span class="fn">xs</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.mergeIdem.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L76-L82">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a> <span class="fn">_fun_discr</span> (<span class="fn"><span class="fn">next</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">rest</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn">_fun_discr</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">next</span></span> then <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a> <span class="fn">_fun_discr</span> <span class="fn">rest</span></span>
+  else <span class="fn"><span class="fn">_fun_discr</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a> <span class="fn">next</span> <span class="fn">rest</span></span></span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem.loop">Lean.Data.AC.mergeIdem.loop</a> <span class="fn">_fun_discr</span> <span class="fn">[]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">_fun_discr</span>]</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.removeNeutrals">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L88-L99">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals">Lean.Data.AC.removeNeutrals</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[info : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals">Lean.Data.AC.removeNeutrals</a> <span class="fn">ctx</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span> =&gt
+    <span class="fn">match <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals.loop">Lean.Data.AC.removeNeutrals.loop</a> <span class="fn">ctx</span> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span> with
+    | <span class="fn">[]</span> =&gt <span class="fn">[<span class="fn">x</span>]</span>
+    | <span class="fn">ys</span> =&gt <span class="fn">ys</span></span>
+  | <span class="fn">[]</span> =&gt <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.removeNeutrals.loop">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L94-L99">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals.loop">Lean.Data.AC.removeNeutrals.loop</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[info : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals.loop">Lean.Data.AC.removeNeutrals.loop</a> <span class="fn">ctx</span> <span class="fn">[]</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.norm">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L101-L105">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.norm">Lean.Data.AC.norm</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[info : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation">Lean.Data.AC.ContextInformation</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.List.two_step_induction">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L107-L116">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.List.two_step_induction">Lean.Data.AC.List.two_step_induction</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{motive : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span> → <span class="fn">Sort u</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(empty : <span class="fn"><span class="fn">motive</span> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(single : <span class="fn">(a : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>) → <span class="fn"><span class="fn">motive</span> <span class="fn">[<span class="fn">a</span>]</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(step : <span class="fn">(a b : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>) → <span class="fn">(l : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>) → <span class="fn"><span class="fn"><span class="fn">motive</span> (<span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">l</span></span>)</span> → <span class="fn"><span class="fn">motive</span> (<span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">l</span></span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">motive</span> <span class="fn">l</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.mergeIdem_nonEmpty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L118-L122">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.mergeIdem_nonEmpty">Lean.Data.AC.Context.mergeIdem_nonEmpty</a>
+</span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">e</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> <span class="fn">e</span></span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.mergeIdem_head">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L124-L125">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.mergeIdem_head">Lean.Data.AC.Context.mergeIdem_head</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.mergeIdem_head2">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L127-L128">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.mergeIdem_head2">Lean.Data.AC.Context.mergeIdem_head2</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ys : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">y</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ys</span></span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> (<span class="fn"><span class="fn">y</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ys</span></span>)</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_mergeIdem">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L130-L158">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_mergeIdem">Lean.Data.AC.Context.evalList_mergeIdem</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation.isIdem">Lean.Data.AC.ContextInformation.isIdem</a> <span class="fn">ctx</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.mergeIdem">Lean.Data.AC.mergeIdem</a> <span class="fn">e</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.insert_nonEmpty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L160-L163">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert_nonEmpty">Lean.Data.AC.insert_nonEmpty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> <span class="fn">xs</span></span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.sort_loop_nonEmpty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L165-L168">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.sort_loop_nonEmpty">Lean.Data.AC.Context.sort_loop_nonEmpty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ys : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">xs</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">xs</span> <span class="fn">ys</span></span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_insert">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L170-L189">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_insert">Lean.Data.AC.Context.evalList_insert</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsCommutative">Lean.IsCommutative</a> <span class="fn"><span class="fn">ctx</span>.op</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.insert">Lean.Data.AC.insert</a> <span class="fn">x</span> <span class="fn">xs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_sort_congr">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L191-L208">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_sort_congr">Lean.Data.AC.Context.evalList_sort_congr</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{a : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{b : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsCommutative">Lean.IsCommutative</a> <span class="fn"><span class="fn">ctx</span>.op</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">a</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">b</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₄ : <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">a</span> <span class="fn">c</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">b</span> <span class="fn">c</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_sort_loop_swap">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L210-L223">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_sort_loop_swap">Lean.Data.AC.Context.evalList_sort_loop_swap</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsCommutative">Lean.IsCommutative</a> <span class="fn"><span class="fn">ctx</span>.op</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ys : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> <span class="fn">xs</span> (<span class="fn"><span class="fn">y</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">ys</span></span>)</span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort.loop">Lean.Data.AC.sort.loop</a> (<span class="fn"><span class="fn">y</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>) <span class="fn">ys</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_sort_cons">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L225-L247">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_sort_cons">Lean.Data.AC.Context.evalList_sort_cons</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsCommutative">Lean.IsCommutative</a> <span class="fn"><span class="fn">ctx</span>.op</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort">Lean.Data.AC.sort</a> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span>)</span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort">Lean.Data.AC.sort</a> <span class="fn">xs</span></span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_sort">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L249-L258">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_sort">Lean.Data.AC.Context.evalList_sort</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation.isComm">Lean.Data.AC.ContextInformation.isComm</a> <span class="fn">ctx</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.sort">Lean.Data.AC.sort</a> <span class="fn">e</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.toList_nonEmpty">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L260-L267">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.toList_nonEmpty">Lean.Data.AC.Context.toList_nonEmpty</a>
+</span>
+<span class="decl_args">
+<span class="fn">(e : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> <span class="fn">e</span></span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.unwrap_isNeutral">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L269-L276">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.unwrap_isNeutral">Lean.Data.AC.Context.unwrap_isNeutral</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.ContextInformation.isNeutral">Lean.Data.AC.ContextInformation.isNeutral</a> <span class="fn">ctx</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> →
+  <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Lean.IsNeutral">Lean.IsNeutral</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalOp">Lean.Data.AC.EvalInformation.evalOp</a> <span class="fn">ctx</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.EvalInformation.evalVar">Lean.Data.AC.EvalInformation.evalVar</a> <span class="fn">ctx</span> <span class="fn">x</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_removeNeutrals">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L278-L289">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_removeNeutrals">Lean.Data.AC.Context.evalList_removeNeutrals</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.removeNeutrals">Lean.Data.AC.removeNeutrals</a> <span class="fn">ctx</span> <span class="fn">e</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.evalList_append">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L291-L303">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.evalList_append">Lean.Data.AC.Context.evalList_append</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">l</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">r</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/List/Basic.html#List.append">List.append</a> <span class="fn">l</span> <span class="fn">r</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.op">Lean.Data.AC.Context.op</a> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">l</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">r</span></span>)</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.eval_toList">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L305-L310">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.eval_toList">Lean.Data.AC.Context.eval_toList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr.toList">Lean.Data.AC.Expr.toList</a> <span class="fn">e</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.eval_norm">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L312-L315">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.eval_norm">Lean.Data.AC.Context.eval_norm</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.evalList">Lean.Data.AC.evalList</a> <span class="fn">α</span> <span class="fn">ctx</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.norm">Lean.Data.AC.norm</a> <span class="fn">ctx</span> <span class="fn">e</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Lean.Data.AC.Context.eq_of_norm">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/AC.lean#L317-L320">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context.eq_of_norm">Lean.Data.AC.Context.eq_of_norm</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Sort u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Context">Lean.Data.AC.Context</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.Expr">Lean.Data.AC.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.norm">Lean.Data.AC.norm</a> <span class="fn">ctx</span> <span class="fn">a</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.norm">Lean.Data.AC.norm</a> <span class="fn">ctx</span> <span class="fn">b</span></span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">a</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/AC.html#Lean.Data.AC.eval">Lean.Data.AC.eval</a> <span class="fn">α</span> <span class="fn">ctx</span> <span class="fn">b</span></span></span></div></div>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/LeanColls/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/LeanColls/docs/Init.html" open="">
+<summary><a href="/LeanColls/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Control.html">
+<summary><a href="/LeanColls/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data.html" open="">
+<summary><a href="/LeanColls/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Array.html">
+<summary><a href="/LeanColls/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ByteArray.html">
+<summary><a href="/LeanColls/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Char.html">
+<summary><a href="/LeanColls/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Fin.html">
+<summary><a href="/LeanColls/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/FloatArray.html">
+<summary><a href="/LeanColls/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Format.html">
+<summary><a href="/LeanColls/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Int.html">
+<summary><a href="/LeanColls/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/List.html">
+<summary><a href="/LeanColls/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Nat.html">
+<summary><a href="/LeanColls/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Option.html">
+<summary><a href="/LeanColls/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/String.html">
+<summary><a href="/LeanColls/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ToString.html">
+<summary><a href="/LeanColls/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link visible">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/System.html">
+<summary><a href="/LeanColls/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/LeanColls.html">
+<summary><a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

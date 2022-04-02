@@ -30,7 +30,7 @@ Documentation</h1>
 <a class="break_within" href="#top">Init.Data.String.Basic</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -76,6 +76,9 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#List.asString">List.asString</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.instOfNatPos">String.instOfNatPos</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#String.instLTString">String.instLTString</a>
@@ -147,6 +150,9 @@ Documentation</h1>
 <a class="break_within" href="#String.revFind">String.revFind</a>
 </div>
 <div class="nav_link">
+<a class="break_within" href="#String.Pos.min">String.Pos.min</a>
+</div>
+<div class="nav_link">
 <a class="break_within" href="#String.firstDiffPos">String.firstDiffPos</a>
 </div>
 <div class="nav_link">
@@ -154,6 +160,12 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#String.extract">String.extract</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.extract.go₁">String.extract.go₁</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.extract.go₂">String.extract.go₂</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#String.splitAux">String.splitAux</a>
@@ -204,6 +216,15 @@ Documentation</h1>
 <a class="break_within" href="#String.mkIterator">String.mkIterator</a>
 </div>
 <div class="nav_link">
+<a class="break_within" href="#String.iter">String.iter</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.instSizeOfIterator">String.instSizeOfIterator</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.Iterator.sizeOf_eq">String.Iterator.sizeOf_eq</a>
+</div>
+<div class="nav_link">
 <a class="break_within" href="#String.Iterator.toString">String.Iterator.toString</a>
 </div>
 <div class="nav_link">
@@ -220,6 +241,9 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#String.Iterator.prev">String.Iterator.prev</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.Iterator.atEnd">String.Iterator.atEnd</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#String.Iterator.hasNext">String.Iterator.hasNext</a>
@@ -481,7 +505,7 @@ Documentation</h1>
 <div class="decl" id="List.asString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L12-L13">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L12-L13">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -501,10 +525,31 @@ Documentation</h1>
 </details>
 </div>
 </div>
+<div class="decl" id="String.instOfNatPos">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L17-L18">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.instOfNatPos">String.instOfNatPos</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#OfNat">OfNat</a> <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> <span class="fn">0</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.instOfNatPos">String.instOfNatPos</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ ofNat := <span class="fn">{ byteIdx := <span class="fn">0</span> }</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="String.instLTString">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L16-L17">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L20-L21">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -525,7 +570,7 @@ Documentation</h1>
 <div class="decl" id="String.decLt">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L20-L21">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L24-L25">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_dec_lt]</div>
 <div class="decl_header">
@@ -551,7 +596,7 @@ Documentation</h1>
 <div class="decl" id="String.length">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L24-L25">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L28-L29">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_length]</div>
 <div class="decl_header">
@@ -565,7 +610,7 @@ Documentation</h1>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.length">String.length</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.length">String.length</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">s</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List.length">List.length</a> <span class="fn">s</span></span></span></span></li>
 </ul>
 </details>
@@ -574,7 +619,7 @@ Documentation</h1>
 <div class="decl" id="String.push">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L30-L31">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L34-L35">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_push]</div>
 <div class="decl_header">
@@ -589,7 +634,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.push">String.push</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.push">String.push</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">s</span> }</span>, <span class="fn">c</span> =&gt <span class="fn">{ data := <span class="fn"><span class="fn">s</span> <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">[<span class="fn">c</span>]</span></span> }</span></span></span></li>
 </ul>
 </details>
@@ -598,7 +643,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.append">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L36-L37">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L40-L41">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_append]</div>
 <div class="decl_header">
@@ -613,7 +658,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.append">String.append</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.append">String.append</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">a</span> }</span>, <span class="fn">{ data := <span class="fn">b</span> }</span> =&gt <span class="fn">{ data := <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">b</span></span> }</span></span></span></li>
 </ul>
 </details>
@@ -622,7 +667,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.toList">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L40-L41">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L44-L45">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -645,7 +690,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.get">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L48-L49">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L52-L53">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_get]</div>
 <div class="decl_header">
@@ -659,7 +704,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">s</span> }</span>, <span class="fn">p</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.utf8GetAux">String.utf8GetAux</a> <span class="fn">s</span> <span class="fn">0</span> <span class="fn">p</span></span></span></span></li>
 </ul>
 </details>
@@ -668,7 +713,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.getOp">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L51-L52">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L55-L56">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -693,7 +738,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.set">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L60-L61">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L64-L65">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_set]</div>
 <div class="decl_header">
@@ -707,7 +752,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.set">String.set</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.set">String.set</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">s</span> }</span>, <span class="fn">i</span>, <span class="fn">c</span> =&gt <span class="fn">{ data := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.utf8SetAux">String.utf8SetAux</a> <span class="fn">c</span> <span class="fn">s</span> <span class="fn">0</span> <span class="fn">i</span></span> }</span></span></span></li>
 </ul>
 </details>
@@ -716,7 +761,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.modify">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L63-L64">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L67-L68">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -743,7 +788,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.next">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L67-L69">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L71-L73">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_next]</div>
 <div class="decl_header">
@@ -762,7 +807,7 @@ if the String is not shared.</p><details>
 <ul class="equations">
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.next">String.next</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let c := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">s</span> <span class="fn">p</span></span>;
-  <span class="fn"><span class="fn">p</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.csize">String.csize</a> <span class="fn">c</span></span></span></span></span></li>
+  <span class="fn"><span class="fn">p</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span></span></span></li>
 </ul>
 </details>
 </div>
@@ -770,7 +815,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.prev">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L79-L80">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L82-L83">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_prev]</div>
 <div class="decl_header">
@@ -784,7 +829,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ data := <span class="fn">s</span> }</span>, <span class="fn">p</span> =&gt <span class="fn">if <span class="fn"><span class="fn">p</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn">0</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.utf8PrevAux">String.utf8PrevAux</a> <span class="fn">s</span> <span class="fn">0</span> <span class="fn">p</span></span></span></span></span></li>
 </ul>
 </details>
@@ -793,7 +838,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.front">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L82-L83">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L85-L86">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -816,7 +861,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.back">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L85-L86">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L88-L89">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -831,7 +876,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.back">String.back</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>)</span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.back">String.back</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>)</span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -839,7 +884,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.atEnd">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L89-L90">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L92-L93">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_at_end]</div>
 <div class="decl_header">
@@ -853,8 +898,8 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.atEnd">String.atEnd</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">s</span>, <span class="fn">p</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn">p</span> <a href="/LeanColls/docs/Init/Prelude.html#GE.ge">≥</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.utf8ByteSize">String.utf8ByteSize</a> <span class="fn">s</span></span></span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.atEnd">String.atEnd</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
+  | <span class="fn">s</span>, <span class="fn">p</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn"><span class="fn">p</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#GE.ge">≥</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.utf8ByteSize">String.utf8ByteSize</a> <span class="fn">s</span></span></span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -862,7 +907,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.posOfAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L95-L98">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L98-L101">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -884,7 +929,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.posOf">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L100-L101">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L103-L104">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -902,7 +947,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOf">String.posOf</a> <span class="fn">s</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOfAux">String.posOfAux</a> <span class="fn">s</span> <span class="fn">c</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOf">String.posOf</a> <span class="fn">s</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOfAux">String.posOfAux</a> <span class="fn">s</span> <span class="fn">c</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -910,7 +955,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.revPosOfAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L103-L106">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L106-L109">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -930,7 +975,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.revPosOf">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L108-L110">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L111-L113">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -947,7 +992,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revPosOf">String.revPosOf</a> <span class="fn">s</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">none</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revPosOfAux">String.revPosOfAux</a> <span class="fn">s</span> <span class="fn">c</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>)</span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revPosOf">String.revPosOf</a> <span class="fn">s</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">none</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revPosOfAux">String.revPosOfAux</a> <span class="fn">s</span> <span class="fn">c</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>)</span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -955,7 +1000,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.findAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L112-L115">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L115-L118">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -977,7 +1022,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.find">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L117-L118">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L120-L121">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -995,7 +1040,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.find">String.find</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.findAux">String.findAux</a> <span class="fn">s</span> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.find">String.find</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.findAux">String.findAux</a> <span class="fn">s</span> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1003,7 +1048,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.revFindAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L120-L123">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L123-L126">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1023,7 +1068,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.revFind">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L125-L127">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L128-L130">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1040,7 +1085,33 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revFind">String.revFind</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">none</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revFindAux">String.revFindAux</a> <span class="fn">s</span> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>)</span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revFind">String.revFind</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">none</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.revFindAux">String.revFindAux</a> <span class="fn">s</span> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>)</span>)</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.Pos.min">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L132-L133">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.Pos.min">String.Pos.min</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Pos.min">String.Pos.min</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ byteIdx := <span class="fn"><a href="/LeanColls/docs/Init/Data/Nat/Basic.html#Nat.min">Nat.min</a> <span class="fn"><span class="fn">p₁</span>.byteIdx</span> <span class="fn"><span class="fn">p₂</span>.byteIdx</span></span> }</span></span></li>
 </ul>
 </details>
 </div>
@@ -1048,7 +1119,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.firstDiffPos">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L130-L135">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L136-L141">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1065,7 +1136,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.firstDiffPos">String.firstDiffPos</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let stopPos := <span class="fn"><a href="/LeanColls/docs/Init/Data/Nat/Basic.html#Nat.min">Nat.min</a> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">a</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">b</span></span>)</span>;
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.firstDiffPos">String.firstDiffPos</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let stopPos := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Pos.min">String.Pos.min</a> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">a</span></span>) (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">b</span></span>)</span>;
   <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.firstDiffPos.loop">String.firstDiffPos.loop</a> <span class="fn">a</span> <span class="fn">b</span> <span class="fn">stopPos</span> <span class="fn">0</span></span></span></span></li>
 </ul>
 </details>
@@ -1074,7 +1145,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.firstDiffPos.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L132-L134">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L138-L140">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1086,7 +1157,7 @@ if the String is not shared.</p><details>
 <span class="decl_args">
 <span class="fn">(b : <a href="/LeanColls/docs/Init/Prelude.html#String">String</a>)</span></span>
 <span class="decl_args">
-<span class="fn">(stopPos : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="fn">(stopPos : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
 <span class="decl_args">
 <span class="fn">(i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
 <span class="decl_args">:</span>
@@ -1096,7 +1167,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.extract">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L146-L147">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L144-L153">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_utf8_extract]</div>
 <div class="decl_header">
@@ -1109,9 +1180,52 @@ if the String is not shared.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.extract.go₁">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L147-L149">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₁">String.extract.go₁</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract">String.extract</a> <span class="fn">x</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ data := <span class="fn">s</span> }</span>, <span class="fn">b</span>, <span class="fn">e</span> =&gt <span class="fn">if <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#GE.ge">≥</a> <span class="fn">e</span></span> then <span class="fn">{ data := <span class="fn">[]</span> }</span> else <span class="fn">{ data := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.utf8ExtractAux₁">String.utf8ExtractAux₁</a> <span class="fn">s</span> <span class="fn">0</span> <span class="fn">b</span> <span class="fn">e</span></span> }</span></span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₁">String.extract.go₁</a> <span class="fn">[]</span> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.extract.go₂">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L151-L153">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₂">String.extract.go₂</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a></span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₂">String.extract.go₂</a> <span class="fn">[]</span> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₂">String.extract.go₂</a> (<span class="fn"><span class="fn">c</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">cs</span></span>) <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn">_fun_discr</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span> then <span class="fn">[]</span> else <span class="fn"><span class="fn">c</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract.go₂">String.extract.go₂</a> <span class="fn">cs</span> (<span class="fn"><span class="fn">_fun_discr</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span>) <span class="fn">_fun_discr</span></span></span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1119,7 +1233,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.splitAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L149-L157">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L156-L164">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1144,7 +1258,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.split">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L159-L160">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L166-L167">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1170,7 +1284,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.splitOnAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L162-L174">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L169-L181">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1196,7 +1310,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.splitOn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L176-L177">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L183-L184">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1221,7 +1335,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.instInhabitedString">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L179-L179">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L186-L186">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1242,7 +1356,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.instAppendString">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L181-L181">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L188-L188">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1263,7 +1377,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.str">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L183-L183">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L190-L190">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1284,7 +1398,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.pushn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L185-L186">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L192-L193">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1311,7 +1425,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.isEmpty">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L188-L189">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L195-L196">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1326,7 +1440,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>)</span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span>)</span></li>
 </ul>
 </details>
 </div>
@@ -1334,7 +1448,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.join">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L191-L192">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L198-L199">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1357,7 +1471,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.singleton">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L194-L195">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L201-L202">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1380,7 +1494,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.intercalate">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L197-L202">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L204-L209">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1395,7 +1509,7 @@ if the String is not shared.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.intercalate">String.intercalate</a> <span class="fn">s</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.intercalate">String.intercalate</a> <span class="fn">s</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">[]</span> =&gt <span class="fn">&quot&quot</span>
   | <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#List.cons">String.intercalate.go</a> <span class="fn">a</span> <span class="fn">s</span> <span class="fn">as</span></span></span></span></li>
 </ul>
@@ -1405,7 +1519,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.intercalate.go">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L200-L202">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L207-L209">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1432,7 +1546,7 @@ if the String is not shared.</p><details>
 <div class="decl" id="String.Iterator">
 <div class="structure">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L204-L207">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L211-L214">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">structure</span>
@@ -1452,7 +1566,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.instDecidableEqIterator">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L207-L207">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L214-L214">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1465,7 +1579,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.instDecidableEqIterator">String.instDecidableEqIterator</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.decEqIterator._@.Init.Data.String.Basic._hyg.1555">[anonymous]</a></span></li>
+<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.instDecidableEqIterator">String.instDecidableEqIterator</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.String.decEqIterator._@.Init.Data.String.Basic._hyg.1577">[anonymous]</a></span></li>
 </ul>
 </details>
 </div>
@@ -1473,7 +1587,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.mkIterator">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L209-L210">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L216-L217">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1493,10 +1607,71 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 </details>
 </div>
 </div>
+<div class="decl" id="String.iter">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L219-L219">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.iter">String.iter</a>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/LeanColls/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.iter">String.iter</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Data/String/Basic.html#String.mkIterator">String.mkIterator</a></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.instSizeOfIterator">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L221-L222">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.instSizeOfIterator">String.instSizeOfIterator</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf">SizeOf</a> <a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.instSizeOfIterator">String.instSizeOfIterator</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ sizeOf := <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.utf8ByteSize">String.utf8ByteSize</a> <span class="fn"><span class="fn">i</span>.s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">i</span>.i</span>.byteIdx</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.Iterator.sizeOf_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L224-L225">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.sizeOf_eq">String.Iterator.sizeOf_eq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf.sizeOf">sizeOf</a> <span class="fn">i</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.utf8ByteSize">String.utf8ByteSize</a> <span class="fn"><span class="fn">i</span>.s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">i</span>.i</span>.byteIdx</span></span></span></div></div>
+</div>
+</div>
 <div class="decl" id="String.Iterator.toString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L213-L214">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L228-L229">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1509,7 +1684,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.toString">String.Iterator.toString</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.toString">String.Iterator.toString</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">x</span> }</span> =&gt <span class="fn">s</span></span></span></li>
 </ul>
 </details>
@@ -1518,7 +1693,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.remainingBytes">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L216-L217">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L231-L232">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1531,8 +1706,8 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.remainingBytes">String.Iterator.remainingBytes</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">i</span></span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.remainingBytes">String.Iterator.remainingBytes</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>).byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">i</span>.byteIdx</span></span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1540,7 +1715,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.pos">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L219-L220">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L234-L235">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1553,7 +1728,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.pos">String.Iterator.pos</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.pos">String.Iterator.pos</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn">i</span></span></span></li>
 </ul>
 </details>
@@ -1562,7 +1737,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.curr">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L222-L223">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L237-L238">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1575,7 +1750,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.curr">String.Iterator.curr</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.curr">String.Iterator.curr</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">String.get</a> <span class="fn">s</span> <span class="fn">i</span></span></span></span></li>
 </ul>
 </details>
@@ -1584,7 +1759,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.next">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L225-L226">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L240-L241">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1597,7 +1772,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.next">String.next</a> <span class="fn">s</span> <span class="fn">i</span></span> }</span></span></span></li>
 </ul>
 </details>
@@ -1606,7 +1781,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.prev">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L228-L229">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L243-L244">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1619,8 +1794,30 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prev">String.Iterator.prev</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prev">String.Iterator.prev</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> <span class="fn">i</span></span> }</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="String.Iterator.atEnd">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L246-L247">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.atEnd">String.Iterator.atEnd</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.atEnd">String.Iterator.atEnd</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">decide</a> (<span class="fn"><span class="fn"><span class="fn">i</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#GE.ge">≥</a> <span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>).byteIdx</span></span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1628,7 +1825,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.hasNext">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L231-L232">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L249-L250">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1641,8 +1838,8 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.hasNext">String.Iterator.hasNext</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">decide</a> (<span class="fn"><span class="fn">i</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.utf8ByteSize">String.utf8ByteSize</a> <span class="fn">s</span></span></span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.hasNext">String.Iterator.hasNext</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">decide</a> (<span class="fn"><span class="fn"><span class="fn">i</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>).byteIdx</span></span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1650,7 +1847,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.hasPrev">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L234-L235">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L252-L253">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1663,8 +1860,8 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.hasPrev">String.Iterator.hasPrev</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">decide</a> (<span class="fn"><span class="fn">i</span> <a href="/LeanColls/docs/Init/Prelude.html#GT.gt">&gt</a> <span class="fn">0</span></span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.hasPrev">String.Iterator.hasPrev</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.mk">decide</a> (<span class="fn"><span class="fn"><span class="fn">i</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#GT.gt">&gt</a> <span class="fn">0</span></span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1672,7 +1869,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.setCurr">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L237-L238">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L255-L256">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1685,7 +1882,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.setCurr">String.Iterator.setCurr</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.setCurr">String.Iterator.setCurr</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span>, <span class="fn">c</span> =&gt <span class="fn">{ s := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.set">String.set</a> <span class="fn">s</span> <span class="fn">i</span> <span class="fn">c</span></span>, i := <span class="fn">i</span> }</span></span></span></li>
 </ul>
 </details>
@@ -1694,7 +1891,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.toEnd">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L240-L241">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L258-L259">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1707,8 +1904,8 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.toEnd">String.Iterator.toEnd</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">x</span> }</span> =&gt <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span> }</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.toEnd">String.Iterator.toEnd</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">x</span> }</span> =&gt <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span> }</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1716,7 +1913,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.extract">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L243-L246">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L261-L264">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1728,10 +1925,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.extract">String.Iterator.extract</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s₁</span>, i := <span class="fn">b</span> }</span>, <span class="fn">{ s := <span class="fn">s₂</span>, i := <span class="fn">e</span> }</span> =&gt
-    <span class="fn">if <span class="fn">(<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn">s₁</span> <a href="/LeanColls/docs/Init/Core.html#Ne">≠</a> <span class="fn">s₂</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#or">||</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#GT.gt">&gt</a> <span class="fn">e</span></span>)</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot&quot</span> else <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract">String.extract</a> <span class="fn">s₁</span> <span class="fn">b</span> <span class="fn">e</span></span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -1739,7 +1933,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.forward">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L248-L250">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L266-L268">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1752,9 +1946,9 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> <span class="fn">x</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> <span class="fn">_fun_discr</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">x</span></span>) <span class="fn">n</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.forward">String.Iterator.forward</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">_fun_discr</span></span>) <span class="fn">n</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1762,7 +1956,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.remainingToString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L252-L253">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L270-L271">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1775,8 +1969,8 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.remainingToString">String.Iterator.remainingToString</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
-  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract">String.extract</a> <span class="fn">s</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>)</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.remainingToString">String.Iterator.remainingToString</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
+  | <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">i</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.extract">String.extract</a> <span class="fn">s</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>)</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1784,7 +1978,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.nextn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L255-L257">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L273-L275">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1797,9 +1991,9 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> <span class="fn">x</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> <span class="fn">_fun_discr</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">x</span></span>) <span class="fn">n</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.nextn">String.Iterator.nextn</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">_fun_discr</span></span>) <span class="fn">n</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1807,7 +2001,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.Iterator.prevn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L259-L261">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L277-L279">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1820,9 +2014,9 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> <span class="fn">x</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> <span class="fn">_fun_discr</span> <span class="fn">0</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prev">String.Iterator.prev</a> <span class="fn">x</span></span>) <span class="fn">n</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prevn">String.Iterator.prevn</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.prev">String.Iterator.prev</a> <span class="fn">_fun_discr</span></span>) <span class="fn">n</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1830,7 +2024,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.offsetOfPosAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L264-L268">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L282-L286">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1852,7 +2046,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.offsetOfPos">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L270-L271">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L288-L289">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1877,7 +2071,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldlAux">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L273-L277">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L291-L295">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1913,7 +2107,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldlAux.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L274-L276">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L292-L294">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1941,7 +2135,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldl">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L279-L280">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L297-L298">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -1965,7 +2159,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldl">String.foldl</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldlAux">String.foldlAux</a> <span class="fn">f</span> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">0</span> <span class="fn">init</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldl">String.foldl</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldlAux">String.foldlAux</a> <span class="fn">f</span> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">0</span> <span class="fn">init</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1973,7 +2167,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldrAux">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L282-L286">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L300-L304">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -2009,7 +2203,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldrAux.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L283-L285">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L301-L303">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -2037,7 +2231,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.foldr">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L288-L289">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L306-L307">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2061,7 +2255,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldr">String.foldr</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldrAux">String.foldrAux</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldr">String.foldr</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.foldrAux">String.foldrAux</a> <span class="fn">f</span> <span class="fn">init</span> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">0</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -2069,7 +2263,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.anyAux">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L291-L296">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L309-L314">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -2099,7 +2293,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.anyAux.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L292-L295">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L310-L313">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -2121,7 +2315,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.any">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L298-L299">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L316-L317">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2139,7 +2333,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.any">String.any</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.anyAux">String.anyAux</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">p</span> <span class="fn">0</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.any">String.any</a> <span class="fn">s</span> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.anyAux">String.anyAux</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">p</span> <span class="fn">0</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -2147,7 +2341,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.all">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L301-L302">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L319-L320">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2173,7 +2367,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.contains">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L304-L305">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L322-L323">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2198,7 +2392,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.mapAux">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L307-L312">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L325-L330">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -2219,7 +2413,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.map">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L314-L315">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L332-L333">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2245,7 +2439,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.isNat">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L317-L318">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L335-L336">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2268,7 +2462,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.toNat?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L320-L324">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L338-L342">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2293,7 +2487,7 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <div class="decl" id="String.substrEq">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L329-L337">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L347-L356">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2312,12 +2506,11 @@ i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></li>
 <span class="fn">(sz : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></div></div>
-<p>Return <code>true</code> iff the substring of length <code>sz</code> starting at position <code>off1</code> in <code>s1</code> is equal to that starting at <code>off2</code> in <code>s2.</code>.
-False if either substring of that length does not exist.</p><details>
+<p>Return <code>true</code> iff the substring of byte size <code>sz</code> starting at position <code>off1</code> in <code>s1</code> is equal to that starting at <code>off2</code> in <code>s2.</code>.
+False if either substring of that byte size does not exist.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.substrEq">String.substrEq</a> <span class="fn">s1</span> <span class="fn">off1</span> <span class="fn">s2</span> <span class="fn">off2</span> <span class="fn">sz</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   (<span class="fn"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn"><span class="fn">off1</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">sz</span></span> <a href="/LeanColls/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s1</span></span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#and">&amp&amp</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn"><span class="fn">off2</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">sz</span></span> <a href="/LeanColls/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s2</span></span></span>)</span></span> <a href="/LeanColls/docs/Init/Prelude.html#and">&amp&amp</a>     <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.substrEq.loop">String.substrEq.loop</a> <span class="fn">s1</span> <span class="fn">s2</span> <span class="fn">off1</span> <span class="fn">off2</span> (<span class="fn"><span class="fn">off1</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">sz</span></span>)</span></span>)</span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2325,7 +2518,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="String.substrEq.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L332-L337">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L350-L356">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -2349,7 +2542,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="String.isPrefixOf">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L340-L341">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L359-L360">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2366,7 +2559,7 @@ False if either substring of that length does not exist.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isPrefixOf">String.isPrefixOf</a> <span class="fn">p</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.substrEq">String.substrEq</a> <span class="fn">p</span> <span class="fn">0</span> <span class="fn">s</span> <span class="fn">0</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">p</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isPrefixOf">String.isPrefixOf</a> <span class="fn">p</span> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.substrEq">String.substrEq</a> <span class="fn">p</span> <span class="fn">0</span> <span class="fn">s</span> <span class="fn">0</span> <span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">p</span></span>).byteIdx</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -2374,7 +2567,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="String.replace">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L344-L353">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L363-L372">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2401,7 +2594,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="String.replace.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L347-L353">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L366-L372">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -2427,7 +2620,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="Substring.isEmpty">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L359-L360">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L378-L379">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2451,7 +2644,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="Substring.toString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L362-L363">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L381-L382">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2465,7 +2658,7 @@ False if either substring of that length does not exist.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.toString">Substring.toString</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.toString">Substring.toString</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Substring.mk">String.extract</a> <span class="fn">s</span> <span class="fn">b</span> <span class="fn">e</span></span></span></span></li>
 </ul>
 </details>
@@ -2474,7 +2667,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="Substring.toIterator">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L365-L366">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L384-L385">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2488,7 +2681,7 @@ False if either substring of that length does not exist.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.toIterator">Substring.toIterator</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.toIterator">Substring.toIterator</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span> with
   | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">x</span> }</span> =&gt <span class="fn">{ s := <span class="fn">s</span>, i := <span class="fn">b</span> }</span></span></span></li>
 </ul>
 </details>
@@ -2497,7 +2690,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="Substring.get">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L369-L370">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L388-L389">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2511,7 +2704,7 @@ False if either substring of that length does not exist.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.get">Substring.get</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.get">Substring.get</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">x</span> }</span>, <span class="fn">p</span> =&gt <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.get">String.get</a> <span class="fn">s</span> (<span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">p</span></span>)</span></span></span></li>
 </ul>
 </details>
@@ -2520,7 +2713,7 @@ False if either substring of that length does not exist.</p><details>
 <div class="decl" id="Substring.next">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L374-L377">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L393-L396">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2534,11 +2727,7 @@ False if either substring of that length does not exist.</p><details>
 return the offset there of the next codepoint.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.next">Substring.next</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let absP := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">p</span></span>;
-    <span class="fn">if <span class="fn"><span class="fn">absP</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">e</span></span> then <span class="fn">p</span> else <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.next">String.next</a> <span class="fn">s</span> <span class="fn">absP</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2546,7 +2735,7 @@ return the offset there of the next codepoint.</p><details>
 <div class="decl" id="Substring.prev">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L381-L384">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L400-L403">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2560,11 +2749,7 @@ return the offset there of the next codepoint.</p><details>
 return the offset there of the previous codepoint.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prev">Substring.prev</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">x</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let absP := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">p</span></span>;
-    <span class="fn">if <span class="fn"><span class="fn">absP</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> then <span class="fn">p</span> else <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.prev">String.prev</a> <span class="fn">s</span> <span class="fn">absP</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2572,7 +2757,7 @@ return the offset there of the previous codepoint.</p><details>
 <div class="decl" id="Substring.nextn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L386-L388">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L405-L407">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2585,9 +2770,9 @@ return the offset there of the previous codepoint.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">x</span> <span class="fn">0</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">_fun_discr</span> <span class="fn">0</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">i</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">x</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.next">Substring.next</a> <span class="fn">x</span> <span class="fn">x</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">i</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">_fun_discr</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.next">Substring.next</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -2595,7 +2780,7 @@ return the offset there of the previous codepoint.</p><details>
 <div class="decl" id="Substring.prevn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L390-L392">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L409-L411">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2603,14 +2788,14 @@ return the offset there of the previous codepoint.</p><details>
 <a class="break_within" href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a>
 </span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Substring">Substring</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></span></span></span></div></div>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Substring">Substring</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a> → <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a></span></span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">x</span> <span class="fn">0</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">_fun_discr</span> <span class="fn">0</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">i</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">x</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prev">Substring.prev</a> <span class="fn">x</span> <span class="fn">x</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">i</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">_fun_discr</span> <span class="fn">i</span> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prev">Substring.prev</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -2618,7 +2803,7 @@ return the offset there of the previous codepoint.</p><details>
 <div class="decl" id="Substring.front">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L394-L395">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L413-L414">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2642,7 +2827,7 @@ return the offset there of the previous codepoint.</p><details>
 <div class="decl" id="Substring.posOf">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L399-L401">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L418-L420">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2662,7 +2847,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <ul class="equations">
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.posOf">Substring.posOf</a> <span class="fn">s</span> <span class="fn">c</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">s</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span> =&gt <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOfAux">String.posOfAux</a> <span class="fn">s</span> <span class="fn">c</span> <span class="fn">e</span> <span class="fn">b</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span></span></li>
+  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span> =&gt <span class="fn">{ byteIdx := <span class="fn"><span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.posOfAux">String.posOfAux</a> <span class="fn">s</span> <span class="fn">c</span> <span class="fn">e</span> <span class="fn">b</span></span>).byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span>.byteIdx</span></span> }</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -2670,7 +2855,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.drop">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L403-L404">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L422-L423">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2683,10 +2868,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.drop">Substring.drop</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn"><span class="fn">ss</span>@h:<span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span>, <span class="fn">n</span> =&gt
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">ss</span> <span class="fn">n</span> <span class="fn">0</span></span></span>, stopPos := <span class="fn">e</span> }</span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2694,7 +2876,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.dropRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L406-L407">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L425-L426">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2707,10 +2889,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.dropRight">Substring.dropRight</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn"><span class="fn">ss</span>@h:<span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span>, <span class="fn">n</span> =&gt
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">ss</span> <span class="fn">n</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Substring.bsize">Substring.bsize</a> <span class="fn">ss</span></span>)</span></span> }</span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2718,7 +2897,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.take">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L409-L410">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L428-L429">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2731,10 +2910,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.take">Substring.take</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn"><span class="fn">ss</span>@h:<span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span>, <span class="fn">n</span> =&gt
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.nextn">Substring.nextn</a> <span class="fn">ss</span> <span class="fn">n</span> <span class="fn">0</span></span></span> }</span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2742,7 +2918,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.takeRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L412-L413">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L431-L432">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2755,10 +2931,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.takeRight">Substring.takeRight</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn"><span class="fn">ss</span>@h:<span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span>, <span class="fn">n</span> =&gt
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.prevn">Substring.prevn</a> <span class="fn">ss</span> <span class="fn">n</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Substring.bsize">Substring.bsize</a> <span class="fn">ss</span></span>)</span></span>, stopPos := <span class="fn">e</span> }</span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -2766,7 +2939,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.atEnd">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L415-L416">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L434-L435">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2780,7 +2953,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.atEnd">Substring.atEnd</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.atEnd">Substring.atEnd</a> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">_fun_discr</span>, <span class="fn">_fun_discr</span> with
   | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt <span class="fn"><span class="fn"><span class="fn">b</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">p</span></span> <a href="/LeanColls/docs/Init/Prelude.html#BEq.beq">==</a> <span class="fn">e</span></span></span></span></li>
 </ul>
 </details>
@@ -2789,7 +2962,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.extract">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L418-L419">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L437-L438">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2810,7 +2983,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.splitOn">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L421-L441">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L440-L460">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2835,7 +3008,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.splitOn.loop">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L425-L440">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L444-L459">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -2861,7 +3034,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.foldl">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L443-L445">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L462-L464">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2894,7 +3067,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.foldr">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L447-L449">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L466-L468">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2927,7 +3100,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.any">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L451-L453">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L470-L472">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2954,7 +3127,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.all">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L455-L456">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L474-L475">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -2980,7 +3153,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.contains">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L458-L459">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L477-L478">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3005,7 +3178,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.takeWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L466-L469">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L485-L488">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3018,11 +3191,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.takeWhile">Substring.takeWhile</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let e := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeWhileAux">Substring.takeWhileAux</a> <span class="fn">s</span> <span class="fn">e</span> <span class="fn">p</span> <span class="fn">b</span></span>;
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -3030,7 +3199,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.dropWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L471-L474">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L490-L493">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3043,11 +3212,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.dropWhile">Substring.dropWhile</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let b := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeWhileAux">Substring.takeWhileAux</a> <span class="fn">s</span> <span class="fn">e</span> <span class="fn">p</span> <span class="fn">b</span></span>;
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -3055,7 +3220,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.takeRightWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L484-L487">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L503-L506">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3068,11 +3233,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.takeRightWhile">Substring.takeRightWhile</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let b := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeRightWhileAux">Substring.takeRightWhileAux</a> <span class="fn">s</span> <span class="fn">b</span> <span class="fn">p</span> <span class="fn">e</span></span>;
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -3080,7 +3241,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.dropRightWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L489-L492">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L508-L511">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3093,11 +3254,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#Substring.dropRightWhile">Substring.dropRightWhile</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn">x</span>, <span class="fn">x</span> with
-  | <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span>, <span class="fn">p</span> =&gt
-    <span class="fn">let e := <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeRightWhileAux">Substring.takeRightWhileAux</a> <span class="fn">s</span> <span class="fn">b</span> <span class="fn">p</span> <span class="fn">e</span></span>;
-    <span class="fn">{ str := <span class="fn">s</span>, startPos := <span class="fn">b</span>, stopPos := <span class="fn">e</span> }</span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -3105,7 +3262,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.trimLeft">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L494-L495">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L513-L514">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3129,7 +3286,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.trimRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L497-L498">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L516-L517">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3153,7 +3310,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.trim">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L500-L504">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L519-L523">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3174,7 +3331,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.isNat">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L506-L507">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L525-L526">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3197,7 +3354,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.toNat?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L509-L513">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L528-L532">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3222,7 +3379,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.beq">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L515-L516">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L534-L535">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3247,7 +3404,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Substring.hasBeq">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L518-L518">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L537-L537">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -3268,7 +3425,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.drop">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L524-L525">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L543-L544">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3293,7 +3450,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.dropRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L527-L528">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L546-L547">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3318,7 +3475,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.take">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L530-L531">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L549-L550">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3343,7 +3500,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.takeRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L533-L534">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L552-L553">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3368,7 +3525,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.takeWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L536-L537">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L555-L556">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3393,7 +3550,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.dropWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L539-L540">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L558-L559">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3418,7 +3575,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.takeRightWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L542-L543">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L561-L562">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3443,7 +3600,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.dropRightWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L545-L546">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L564-L565">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3468,7 +3625,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.startsWith">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L548-L549">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L567-L568">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3493,7 +3650,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.endsWith">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L551-L552">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L570-L571">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3518,7 +3675,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.trimRight">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L554-L555">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L573-L574">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3541,7 +3698,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.trimLeft">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L557-L558">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L576-L577">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3564,7 +3721,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.trim">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L560-L561">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L579-L580">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3587,7 +3744,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.nextWhile">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L563-L564">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L582-L583">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3607,7 +3764,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.nextWhile">String.nextWhile</a> <span class="fn">s</span> <span class="fn">p</span> <span class="fn">i</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeWhileAux">Substring.takeWhileAux</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.bsize">String.bsize</a> <span class="fn">s</span></span>) <span class="fn">p</span> <span class="fn">i</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.nextWhile">String.nextWhile</a> <span class="fn">s</span> <span class="fn">p</span> <span class="fn">i</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#_private.Init.Data.String.Basic.0.Substring.takeWhileAux">Substring.takeWhileAux</a> <span class="fn">s</span> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span>) <span class="fn">p</span> <span class="fn">i</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -3615,7 +3772,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.nextUntil">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L566-L567">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L585-L586">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -3643,7 +3800,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.toUpper">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L569-L570">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L588-L589">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3666,7 +3823,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.toLower">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L572-L573">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L591-L592">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3689,7 +3846,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.capitalize">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L575-L576">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L594-L595">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3712,7 +3869,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="String.decapitalize">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L578-L579">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L597-L598">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3735,7 +3892,7 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <div class="decl" id="Char.toString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Basic.lean#L583-L584">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Basic.lean#L602-L603">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -3938,6 +4095,9 @@ or <code>s.bsize</code> if <code>c</code> doesn't occur.</p><details>
 <a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
 <div class="nav_link">
 <a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
 </div>

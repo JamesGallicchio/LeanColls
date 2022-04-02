@@ -30,7 +30,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Classes</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -53,6 +53,9 @@ Documentation</h1>
 <li>
 <a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
 </li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</li>
 </ul>
 </details>
 </div>
@@ -72,10 +75,10 @@ Documentation</h1>
 <a class="break_within" href="#LeanColls.Enumerable">LeanColls.Enumerable</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#LeanColls.Indexed">LeanColls.Indexed</a>
+<a class="break_within" href="#LeanColls.MapLike">LeanColls.MapLike</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#LeanColls.MapLike">LeanColls.MapLike</a>
+<a class="break_within" href="#LeanColls.Indexed">LeanColls.Indexed</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.SetLike">LeanColls.SetLike</a>
@@ -106,7 +109,7 @@ the collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Iterable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L45-L48">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L45-L48">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -136,9 +139,6 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 <li>
 <a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable.toIterable">LeanColls.Foldable.toIterable</a>
 </li>
-<li>
-<a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike.toIterable">LeanColls.MapLike.toIterable</a>
-</li>
 </ul>
 </details>
 </div>
@@ -146,7 +146,7 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 <div class="decl" id="LeanColls.instIterable">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L50-L53">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L50-L53">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -159,11 +159,11 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{ρ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u_1</span>)</span>}</span></span>
+<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u_1</span>)</span>}</span></span>
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
@@ -191,7 +191,7 @@ building a <code><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> τ</c
 <div class="decl" id="LeanColls.Foldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L62-L64">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L62-L64">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -227,7 +227,7 @@ new collection with the folded elements.</p></div>
 <div class="decl" id="LeanColls.Unfoldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L78-L79">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L78-L79">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -260,7 +260,7 @@ a collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Enumerable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L87-L93">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L87-L93">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -280,8 +280,8 @@ a collection one item at a time.</p></div>
 <ul class="structure_fields" id="LeanColls.Enumerable.mk">
 <li class="structure_field" id="LeanColls.Enumerable.ρ">
 ρ : <span class="fn">Type v</span></li>
-<li class="structure_field" id="LeanColls.Enumerable.fromEnumerable">
-fromEnumerable : <span class="fn"><span class="fn">ρ</span> → <span class="fn">C</span></span></li>
+<li class="structure_field" id="LeanColls.Enumerable.fromEnumerator">
+fromEnumerator : <span class="fn"><span class="fn">ρ</span> → <span class="fn">C</span></span></li>
 <li class="structure_field" id="LeanColls.Enumerable.insert">
 insert : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/LeanColls/docs/Init/Prelude.html#Prod">×</a> <span class="fn">ρ</span></span>)</span> → <span class="fn">ρ</span></span></li>
 </ul>
@@ -294,12 +294,50 @@ insert : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude
 </div>
 <div class="mod_doc"><h2 class="markdown-heading" id="Miscellaneous">Miscellaneous <a class="hover-link" href="#Miscellaneous">#</a></h2></div>
 <div class="mod_doc">
+<h3 class="markdown-heading" id="MapLike">MapLike <a class="hover-link" href="#MapLike">#</a></h3><p>Class of collections that have an explicit key set and are
+isomorphic to <code>{a : α // a ∈ keySet c} → β</code></p></div>
+<div class="decl" id="LeanColls.MapLike">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L106-L110">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a>
+</span>
+<span class="decl_args">
+<span class="fn">(C : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type w</span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max (max (max u v) w) (x + 1))</span></div></div>
+<ul class="structure_fields" id="LeanColls.MapLike.mk">
+<li class="structure_field" id="LeanColls.MapLike.κ">
+κ : <span class="fn"><span class="fn">C</span> → <span class="fn">Type x</span></span></li>
+<li class="structure_field" id="LeanColls.MapLike.κ_hasMem">
+κ_hasMem : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Membership">Membership</a> <span class="fn">α</span> (<span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span>)</span></span></li>
+<li class="structure_field" id="LeanColls.MapLike.keySet">
+keySet : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span></span></li>
+<li class="structure_field" id="LeanColls.MapLike.get">
+get : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">{ a // <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">keySet</span> <span class="fn">c</span></span></span> }</span> → <span class="fn">β</span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+</ul>
+</details>
+</div>
+</div>
+<div class="mod_doc">
 <h3 class="markdown-heading" id="Indexed">Indexed <a class="hover-link" href="#Indexed">#</a></h3><p>Class of collections with efficient size and indexed
 access operations</p></div>
 <div class="decl" id="LeanColls.Indexed">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L106-L108">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L118-L120">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -326,51 +364,12 @@ nth : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><spa
 </div>
 </div>
 <div class="mod_doc">
-<h3 class="markdown-heading" id="MapLike">MapLike <a class="hover-link" href="#MapLike">#</a></h3><p>Class of collections that are isomorphic to <code>α → <a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> β</code>
-with an explicit set of keys</p></div>
-<div class="decl" id="LeanColls.MapLike">
-<div class="class">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L116-L118">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">class</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a>
-</span>
-<span class="decl_args">
-<span class="fn">(C : <span class="fn">Type u</span>)</span></span>
-<span class="decl_args">
-<span class="fn">(α : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
-<span class="decl_args">
-<span class="fn">(β : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
-<span class="decl_extends">extends</span>
-<span class="decl_parent">
-<span class="fn"><a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a>
-</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type (u + 1)</span></div></div>
-<ul class="structure_fields" id="LeanColls.MapLike.mk">
-<li class="structure_field" id="LeanColls.MapLike.get">
-get : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">C</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> <span class="fn">β</span></span></span></span></li>
-</ul>
-<details class="instances">
-<summary>Instances</summary>
-<ul>
-<li>
-<a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.SetLike.toMapLike">LeanColls.SetLike.toMapLike</a>
-</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="mod_doc">
-<h3 class="markdown-heading" id="SetLike">SetLike <a class="hover-link" href="#SetLike">#</a></h3><p>Class of collections that are isomorphic to <code>{ a : α // P a }</code>
-for a decidable proposition <code>P : α → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></code>.</p></div>
+<h3 class="markdown-heading" id="SetLike">SetLike <a class="hover-link" href="#SetLike">#</a></h3><p>Class of collections that have a decidable membership function
+and are isomorphic to <code>{ a : α // decide (mem c a) }</code></p></div>
 <div class="decl" id="LeanColls.SetLike">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L126-L127">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L128-L129">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -381,13 +380,11 @@ for a decidable proposition <code>P : α → <a href="/LeanColls/docs/Init/Prelu
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
 <span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
-<span class="decl_extends">extends</span>
-<span class="decl_parent">
-<span class="fn"><a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a>
-</span></span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type (u + 1)</span></div></div>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
 <ul class="structure_fields" id="LeanColls.SetLike.mk">
+<li class="structure_field" id="LeanColls.SetLike.mem">
+mem : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></span></li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
@@ -403,7 +400,7 @@ a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.
 <div class="decl" id="LeanColls.instForIn">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/Classes.lean#L138-L150">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/Classes.lean#L140-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -420,7 +417,7 @@ a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u_2</span>)</span>}</span></span>
+<span class="fn">{τ : <span class="fn">Type u_2</span>}</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
@@ -632,6 +629,9 @@ which more efficient versions exist.</p></div>
 <a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
 <div class="nav_link">
 <a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
 </div>

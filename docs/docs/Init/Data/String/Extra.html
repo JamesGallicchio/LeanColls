@@ -30,20 +30,29 @@ Documentation</h1>
 <a class="break_within" href="#top">Init.Data.String.Extra</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Extra.lean">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean">source</a>
 </p>
 <div class="imports">
 <details>
 <summary>Imports</summary>
 <ul>
 <li>
+<a href="/LeanColls/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</li>
+<li>
 <a href="/LeanColls/docs/Init/Util.html">Init.Util</a>
+</li>
+<li>
+<a href="/LeanColls/docs/Init/WFTactics.html">Init.WFTactics</a>
 </li>
 <li>
 <a href="/LeanColls/docs/Init/Control/Except.html">Init.Control.Except</a>
 </li>
 <li>
 <a href="/LeanColls/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</li>
+<li>
+<a href="/LeanColls/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
 </li>
 </ul>
 </details>
@@ -68,12 +77,33 @@ Documentation</h1>
 <div class="nav_link">
 <a class="break_within" href="#String.toUTF8">String.toUTF8</a>
 </div>
+<div class="nav_link">
+<a class="break_within" href="#String.one_le_csize">String.one_le_csize</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.pos_lt_eq">String.pos_lt_eq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.pos_add_char">String.pos_add_char</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.eq_empty_of_bsize_eq_zero">String.eq_empty_of_bsize_eq_zero</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.lt_next">String.lt_next</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.Iterator.sizeOf_next_lt_of_hasNext">String.Iterator.sizeOf_next_lt_of_hasNext</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#String.Iterator.sizeOf_next_lt_of_atEnd">String.Iterator.sizeOf_next_lt_of_atEnd</a>
+</div>
 </nav>
 <main>
 <div class="decl" id="String.toNat!">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Extra.lean#L13-L17">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L16-L20">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -95,7 +125,7 @@ Documentation</h1>
 <div class="decl" id="String.fromUTF8Unchecked">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Extra.lean#L23-L23">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L26-L26">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_from_utf8_unchecked]</div>
 <div class="decl_header">
@@ -113,7 +143,7 @@ The result is unspecified if <code>a</code> is not properly UTF-8 encoded.</p></
 <div class="decl" id="String.toUTF8">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/dca5da6b18d95ba75a16d5bcfb81fcb26705709a/src/Init/Data/String/Extra.lean#L26-L26">source</a>
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L29-L29">source</a>
 </div>
 <div class="attributes">@[extern  lean_string_to_utf8]</div>
 <div class="decl_header">
@@ -125,6 +155,134 @@ The result is unspecified if <code>a</code> is not properly UTF-8 encoded.</p></
 <span class="fn">(a : <a href="/LeanColls/docs/Init/Prelude.html#String">String</a>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><a href="/LeanColls/docs/Init/Data/ByteArray/Basic.html#ByteArray">ByteArray</a></div></div>
+</div>
+</div>
+<div class="decl" id="String.one_le_csize">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L31-L33">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.one_le_csize">String.one_le_csize</a>
+</span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="/LeanColls/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.csize">String.csize</a> <span class="fn">c</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="String.pos_lt_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L35-L35">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.pos_lt_eq">String.pos_lt_eq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">p₁</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn">p₂</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">p₁</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">p₂</span>.byteIdx</span></span>)</span></div></div>
+</div>
+</div>
+<div class="decl" id="String.pos_add_char">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L37-L37">source</a>
+</div>
+<div class="attributes">@[simp]</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.pos_add_char">String.pos_add_char</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <a href="/LeanColls/docs/Init/Prelude.html#Char">Char</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span>).byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">p</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.csize">String.csize</a> <span class="fn">c</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="String.eq_empty_of_bsize_eq_zero">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L39-L46">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.eq_empty_of_bsize_eq_zero">String.eq_empty_of_bsize_eq_zero</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{s : <a href="/LeanColls/docs/Init/Prelude.html#String">String</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#String.endPos">String.endPos</a> <span class="fn">s</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ byteIdx := <span class="fn">0</span> }</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">s</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">&quot&quot</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="String.lt_next">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L48-L49">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.lt_next">String.lt_next</a>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <a href="/LeanColls/docs/Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/LeanColls/docs/Init/Prelude.html#String.Pos">String.Pos</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">i</span>.byteIdx</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.next">String.next</a> <span class="fn">s</span> <span class="fn">i</span></span>).byteIdx</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="String.Iterator.sizeOf_next_lt_of_hasNext">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L51-L59">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.Iterator.sizeOf_next_lt_of_hasNext">String.Iterator.sizeOf_next_lt_of_hasNext</a>
+</span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.hasNext">String.Iterator.hasNext</a> <span class="fn">i</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf.sizeOf">sizeOf</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">i</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf.sizeOf">sizeOf</a> <span class="fn">i</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="String.Iterator.sizeOf_next_lt_of_atEnd">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Data/String/Extra.lean#L63-L65">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Data/String/Extra.html#String.Iterator.sizeOf_next_lt_of_atEnd">String.Iterator.sizeOf_next_lt_of_atEnd</a>
+</span>
+<span class="decl_args">
+<span class="fn">(i : <a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator">String.Iterator</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.atEnd">String.Iterator.atEnd</a> <span class="fn">i</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf.sizeOf">sizeOf</a> (<span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.Iterator.next">String.Iterator.next</a> <span class="fn">i</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="/LeanColls/docs/Init/SizeOf.html#SizeOf.sizeOf">sizeOf</a> <span class="fn">i</span></span></span></div></div>
 </div>
 </div>
 </main>
@@ -310,6 +468,9 @@ The result is unspecified if <code>a</code> is not properly UTF-8 encoded.</p></
 <a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
 <div class="nav_link">
 <a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
 </div>

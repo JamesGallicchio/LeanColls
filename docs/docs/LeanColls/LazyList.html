@@ -30,7 +30,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.LazyList</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -55,6 +55,9 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LazyList">LazyList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LazyList.ind">LazyList.ind</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LazyList.instInhabitedLazyList">LazyList.instInhabitedLazyList</a>
@@ -199,7 +202,7 @@ Documentation</h1>
 <div class="decl" id="LazyList">
 <div class="inductive">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L20-L23">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L20-L23">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">inductive</span>
@@ -220,10 +223,44 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 </ul>
 </div>
 </div>
+<div class="mod_doc">
+<p>Standard technique for LazyList. Necessary because LazyList is a
+nested inductive, but we never actually want to have different motives
+for the nested types.</p><p>Remark: Lean used well-founded recursion behind the scenes to define LazyList.ind</p></div>
+<div class="decl" id="LazyList.ind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L35-L43">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.ind">LazyList.ind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{motive : <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList">LazyList</a> <span class="fn">α</span></span> → <span class="fn">Sort v</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(nil : <span class="fn"><span class="fn">motive</span> <span class="fn">LazyList.nil</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(cons : <span class="fn">(hd : <span class="fn">α</span>) → <span class="fn">(tl : <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList">LazyList</a> <span class="fn">α</span></span>) → <span class="fn"><span class="fn"><span class="fn">motive</span> <span class="fn">tl</span></span> → <span class="fn"><span class="fn">motive</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">hd</span> <span class="fn">tl</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(delayed : <span class="fn">(t : <span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk">Thunk</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList">LazyList</a> <span class="fn">α</span></span>)</span>) → <span class="fn"><span class="fn"><span class="fn">motive</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t</span></span>)</span> → <span class="fn"><span class="fn">motive</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList">LazyList</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">motive</span> <span class="fn">t</span></span></div></div>
+</div>
+</div>
 <div class="decl" id="LazyList.instInhabitedLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L28-L29">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L45-L46">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -248,7 +285,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.pure">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L31-L32">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L48-L49">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -266,7 +303,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.pure">LazyList.pure</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let a := <span class="fn">x</span>;
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.pure">LazyList.pure</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">let a := <span class="fn">_fun_discr</span>;
   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">LazyList.nil</span></span></span></span></li>
 </ul>
 </details>
@@ -275,7 +312,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.length">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L39-L42">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L56-L59">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -294,9 +331,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> <span class="fn">as</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> <span class="fn">t_1</span></span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.length">LazyList.length</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -304,7 +341,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L44-L47">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L61-L64">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -323,9 +360,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x_1</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> <span class="fn">as</span></span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">h</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> <span class="fn">t_1</span></span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.toList">LazyList.toList</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -333,7 +370,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.length_toList">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L51-L54">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L68-L71">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -354,7 +391,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.force">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L56-L59">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L73-L76">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -383,7 +420,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList_force_none">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L61-L70">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L78-L84">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -405,7 +442,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList_force_some">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L72-L81">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L86-L98">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -435,7 +472,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.head?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L83-L83">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L100-L100">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -462,7 +499,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.tail?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L85-L85">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L102-L102">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -489,7 +526,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.isEmpty">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L88-L88">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L105-L105">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -516,7 +553,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.append">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L90-L93">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L107-L110">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -533,11 +570,11 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> <span class="fn">LazyList.nil</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> <span class="fn">LazyList.nil</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> <span class="fn">as</span> <span class="fn">x</span></span></span> }</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> <span class="fn">as</span> <span class="fn">_fun_discr</span></span></span> }</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">x</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.append">LazyList.append</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -545,7 +582,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.instAppendLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L95-L96">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L112-L113">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -570,7 +607,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList_append">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L98-L120">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L115-L125">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -593,7 +630,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.length_append">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L122-L127">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L127-L132">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -616,7 +653,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.revAppend">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L129-L132">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L134-L137">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -633,11 +670,11 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> <span class="fn">LazyList.nil</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> <span class="fn">LazyList.nil</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> <span class="fn">as</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">x</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> <span class="fn">as</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">_fun_discr</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">x</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.revAppend">LazyList.revAppend</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -645,7 +682,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList_revAppend">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L134-L159">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L139-L152">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -668,7 +705,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.length_revAppend">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L161-L165">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L154-L158">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -691,7 +728,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.reverse">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L167-L167">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L160-L160">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -718,7 +755,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.toList_reverse">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L169-L170">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L162-L163">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -739,7 +776,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.length_reverse">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L172-L173">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L165-L166">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -760,7 +797,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.interleave">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L175-L181">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L168-L174">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -777,11 +814,11 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> <span class="fn">LazyList.nil</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> <span class="fn">LazyList.nil</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">_fun_discr</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> <span class="fn">x</span> <span class="fn">as</span></span></span> }</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> <span class="fn">_fun_discr</span> <span class="fn">as</span></span></span> }</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">x</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.interleave">LazyList.interleave</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -789,7 +826,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.map">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L183-L186">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L176-L179">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -815,9 +852,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> (<span class="fn"><span class="fn">f</span> <span class="fn">x_1</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> <span class="fn">as</span></span></span> }</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> (<span class="fn"><span class="fn">f</span> <span class="fn">h</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> <span class="fn">t_1</span></span></span> }</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -825,7 +862,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.map₂">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L188-L196">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L181-L189">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -853,15 +890,15 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">LazyList.nil</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">LazyList.nil</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">x</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">_fun_discr</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">b</span> <span class="fn">bs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">as</span> <span class="fn">bs</span></span></span> }</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">x</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">bs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">bs</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">bs</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map₂">LazyList.map₂</a> <span class="fn">f</span> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">bs</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -869,7 +906,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.zip">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L198-L199">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L191-L192">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -899,7 +936,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.join">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L201-L204">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L194-L197">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -928,7 +965,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.bind">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L206-L207">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L199-L200">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -962,7 +999,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.take">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L209-L213">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L202-L206">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -979,9 +1016,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> <span class="fn">0</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> <span class="fn">0</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> <span class="fn">x</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> <span class="fn">_fun_discr</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></li>
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">i</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.take">LazyList.take</a> <span class="fn">i</span> <span class="fn">as</span></span></span></span></li>
 <li class="equation">
@@ -993,7 +1030,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.filter">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L215-L218">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L208-L211">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1015,10 +1052,10 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">LazyList.nil</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">x_1</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> <span class="fn">as</span></span></span> }</span></span>)</span>
-  else <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> <span class="fn">as</span></span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">h</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> <span class="fn">t_1</span></span></span> }</span></span>)</span>
+  else <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> <span class="fn">t_1</span></span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.filter">LazyList.filter</a> <span class="fn">p</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -1026,7 +1063,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.instMonadLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L220-L223">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L213-L216">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1047,7 +1084,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.instAlternativeLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L225-L227">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L218-L220">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1068,7 +1105,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.fold">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L229-L234">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L222-L227">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1095,9 +1132,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">acc</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x_1</span> <span class="fn">acc</span></span>) <span class="fn">as</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> (<span class="fn"><span class="fn">f</span> <span class="fn">h</span> <span class="fn">acc</span></span>) <span class="fn">t_1</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.fold">LazyList.fold</a> <span class="fn">f</span> <span class="fn">acc</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -1105,7 +1142,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.instFoldableLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L236-L238">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L229-L231">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1130,7 +1167,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.iterate">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L240-L241">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L233-L234">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1151,7 +1188,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.iterate₂">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L243-L244">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L236-L237">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -1172,7 +1209,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.cycle">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L247-L248">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L240-L241">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1190,7 +1227,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.inits">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L250-L253">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L243-L246">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1209,10 +1246,10 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <li class="equation">
 <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> <span class="fn">LazyList.nil</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">LazyList.nil</span> <span class="fn">LazyList.nil</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">LazyList.nil</span>
-    (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> (<span class="fn">fun <span class="fn">as</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">x_1</span> <span class="fn">as</span></span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> <span class="fn">as</span></span>)</span></span> }</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">LazyList.nil</span>
+    (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">{ fn := <span class="fn">fun <span class="fn">_</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.map">LazyList.map</a> (<span class="fn">fun <span class="fn">as</span> =&gt <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">h</span> <span class="fn">as</span></span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> <span class="fn">t_1</span></span>)</span></span> }</span></span>)</span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>)</span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">t_1</span></span>)</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.inits">LazyList.inits</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">t_1</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
@@ -1220,7 +1257,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.approxToStringAux">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L258-L262">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L251-L255">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1240,14 +1277,13 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <details>
 <summary>Equations</summary>
 <ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">x</span> <span class="fn">LazyList.nil</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">if <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot[&quot</span> else <span class="fn">x</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot]&quot</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">_fun_discr</span> <span class="fn">LazyList.nil</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">(<span class="fn">if <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot[&quot</span> else <span class="fn">_fun_discr</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot]&quot</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">0</span> <span class="fn">x</span> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">if <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot[&quot</span> else <span class="fn">x</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot, ..]&quot</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">0</span> <span class="fn">_fun_discr</span> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">(<span class="fn">if <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot[&quot</span> else <span class="fn">_fun_discr</span></span>) <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot, ..]&quot</span></span></span></li>
 <li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> (<span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>) (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.cons">LazyList.cons</a> <span class="fn">a</span> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">n</span> <span class="fn">as</span> (<span class="fn">(<span class="fn">if <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Data/String/Basic.html#String.isEmpty">String.isEmpty</a> <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <a href="/LeanColls/docs/Init/Prelude.html#Bool.true">true</a></span> then <span class="fn">&quot[&quot</span> else <span class="fn"><span class="fn">x</span> <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot, &quot</span></span></span>) <a href="/LeanColls/docs/Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn"><a href="/LeanColls/docs/Init/Data/ToString/Basic.html#ToString.toString">toString</a> <span class="fn">a</span></span></span>)</span></span></li>
-<li class="equation">
-<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">x</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">x</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">x</span></span></span></li>
+<span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.delayed">LazyList.delayed</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.approxToStringAux">LazyList.approxToStringAux</a> <span class="fn">_fun_discr</span> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#Thunk.get">Thunk.get</a> <span class="fn">as</span></span>) <span class="fn">_fun_discr</span></span></span></li>
 </ul>
 </details>
 </div>
@@ -1255,7 +1291,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.approxToString">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L264-L265">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L257-L258">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1288,7 +1324,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="LazyList.instToStringLazyList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L267-L268">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L260-L261">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1317,7 +1353,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="List.toLazy">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L277-L279">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L270-L272">source</a>
 </div>
 <div class="attributes">@[implementedBy _private.LeanColls.LazyList.0.List.toLazyUnsafe]</div>
 <div class="decl_header">
@@ -1345,7 +1381,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="fib">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L282-L283">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L275-L276">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1366,7 +1402,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="tst">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L285-L290">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L278-L283">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1391,7 +1427,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="iota">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L294-L295">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L287-L288">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1414,7 +1450,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="sieve">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L297-L300">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L290-L293">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">partial def</span>
@@ -1428,7 +1464,7 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <div class="decl" id="primes">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/ee0413e43b1e2323153ad20c557b86152a075af1/LeanColls/LazyList.lean#L302-L303">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/19144e13d970ef0e9ffda2269c12f399833432c8/LeanColls/LazyList.lean#L295-L296">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1629,6 +1665,9 @@ delayed: <span class="fn">{α : <span class="fn">Type u</span>} → <span class=
 <a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
 <div class="nav_link">
 <a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
 </div>
