@@ -3,10 +3,15 @@ Copyright (c) 2021 James Gallicchio.
 -/
 
 import LeanColls.AuxLemmas
+import LeanColls.Array
+import LeanColls.Buffer
 import LeanColls.Classes
-import LeanColls.Stream
+import LeanColls.FoldableOps
+import LeanColls.IndexedOps
 import LeanColls.LazyList
 import LeanColls.Queue
+import LeanColls.Range
+import LeanColls.Stream
 
 /-!
 # Lean Collections Library
