@@ -459,16 +459,16 @@ Documentation</h1>
 <a class="break_within" href="#instInhabitedProp">instInhabitedProp</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#instInhabitedForInStep">instInhabitedForInStep</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#instInhabitedTrue">instInhabitedTrue</a>
-</div>
-<div class="nav_link">
 <a class="break_within" href="#instInhabitedNonScalar">instInhabitedNonScalar</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#instInhabitedPNonScalar">instInhabitedPNonScalar</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instInhabitedForInStep">instInhabitedForInStep</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#instInhabitedTrue">instInhabitedTrue</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#nonempty_of_exists">nonempty_of_exists</a>
@@ -4312,48 +4312,6 @@ rfl : <span class="fn">∀ (a : <span class="fn">α</span>), <span class="fn">(<
 </details>
 </div>
 </div>
-<div class="decl" id="instInhabitedForInStep">
-<div class="instance">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Core.lean#L511-L511">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">instance</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/Init/Core.html#instInhabitedForInStep">instInhabitedForInStep</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">{a : <span class="fn">Type u_1</span>} → <span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">a</span></span>] → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">a</span></span>)</span></span></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn">instInhabitedForInStep</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/LeanColls/docs/Init/Core.html#ForInStep.done">ForInStep.done</a> <span class="fn">default</span></span> }</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="instInhabitedTrue">
-<div class="instance">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Core.lean#L511-L511">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">instance</span>
-<span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/Init/Core.html#instInhabitedTrue">instInhabitedTrue</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> <a href="/LeanColls/docs/Init/Prelude.html#True">True</a></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href="/LeanColls/docs/Init/Core.html#instInhabitedTrue">instInhabitedTrue</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <a href="/LeanColls/docs/Init/Prelude.html#True.intro">True.intro</a> }</span></span></li>
-</ul>
-</details>
-</div>
-</div>
 <div class="decl" id="instInhabitedNonScalar">
 <div class="instance">
 <div class="gh_link">
@@ -4392,6 +4350,48 @@ rfl : <span class="fn">∀ (a : <span class="fn">α</span>), <span class="fn">(<
 <ul class="equations">
 <li class="equation">
 <span class="fn"><a href="/LeanColls/docs/Init/Core.html#instInhabitedPNonScalar">instInhabitedPNonScalar</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/LeanColls/docs/Init/Core.html#PNonScalar.mk">PNonScalar.mk</a> <span class="fn">default</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instInhabitedForInStep">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Core.lean#L511-L511">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Core.html#instInhabitedForInStep">instInhabitedForInStep</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">{a : <span class="fn">Type u_1</span>} → <span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">a</span></span>] → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="/LeanColls/docs/Init/Core.html#ForInStep">ForInStep</a> <span class="fn">a</span></span>)</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">instInhabitedForInStep</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="/LeanColls/docs/Init/Core.html#ForInStep.done">ForInStep.done</a> <span class="fn">default</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="instInhabitedTrue">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/4c9c62752eaa867883365cd5e6a1f61f359ae5b1/src/Init/Core.lean#L511-L511">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/Init/Core.html#instInhabitedTrue">instInhabitedTrue</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> <a href="/LeanColls/docs/Init/Prelude.html#True">True</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="/LeanColls/docs/Init/Core.html#instInhabitedTrue">instInhabitedTrue</a> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <a href="/LeanColls/docs/Init/Prelude.html#True.intro">True.intro</a> }</span></span></li>
 </ul>
 </details>
 </div>
@@ -7833,16 +7833,31 @@ right_neutral : <span class="fn">∀ (a : <span class="fn">α</span>), <span cla
 <details class="nav_sect" data-path="/LeanColls/docs/LeanColls.html">
 <summary><a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
 </summary><div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+</div>
+<div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
 </div>
 <div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Buffer.html">LeanColls.Buffer</a>
+</div>
+<div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/Stream.html">LeanColls.Stream</a>

@@ -1,0 +1,618 @@
+<html lang="en">
+<head>
+<title>LeanColls.IndexedOps</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/LeanColls/docs/style.css"></link><link rel="stylesheet" href="/LeanColls/docs/pygments.css"></link><link rel="shortcut icon" href="/LeanColls/docs/favicon.ico"></link><link rel="prefetch" href="/LeanColls/docs/declaration-data.bmp"></link><script defer="true" src="/LeanColls/docs/mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script type="module" src="/LeanColls/docs/nav.js">
+</script>
+<script type="module" src="/LeanColls/docs/search.js">
+</script>
+<script type="module" src="/LeanColls/docs/how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">LeanColls.IndexedOps</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">LeanColls.IndexedOps</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/Init.html">Init</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Slice">LeanColls.Slice</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.instIndexedSlice">LeanColls.instIndexedSlice</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.IndexedEq">LeanColls.IndexedEq</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.IndexedOps">LeanColls.IndexedOps</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.instInhabitedIndexedOps">LeanColls.instInhabitedIndexedOps</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.instMapLikeNat">LeanColls.instMapLikeNat</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="LeanColls.Slice">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L12-L16">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.Slice">LeanColls.Slice</a>
+</span>
+<span class="decl_args">
+<span class="fn">(C : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="LeanColls.Slice.mk">
+<li class="structure_field" id="LeanColls.Slice.c">
+c : <span class="fn">C</span></li>
+<li class="structure_field" id="LeanColls.Slice.off">
+off : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></li>
+<li class="structure_field" id="LeanColls.Slice.len">
+len : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></li>
+<li class="structure_field" id="LeanColls.Slice.h_range">
+h_range : <span class="fn"><span class="fn"><span class="fn">off</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">len</span></span> <a href="/LeanColls/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed.size">LeanColls.Indexed.size</a> <span class="fn">c</span></span></span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="LeanColls.instIndexedSlice">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L18-L20">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instIndexedSlice">LeanColls.instIndexedSlice</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.Slice">LeanColls.Slice</a> <span class="fn">C</span> <span class="fn">τ</span></span>) <span class="fn">τ</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.IndexedEq">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L22-L24">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.IndexedEq">LeanColls.IndexedEq</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C₁ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C₂ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C₁</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C₂</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(c₁ : <span class="fn">C₁</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c₂ : <span class="fn">C₂</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{h : <span class="fn"><span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed.size">LeanColls.Indexed.size</a> <span class="fn">c₁</span></span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed.size">LeanColls.Indexed.size</a> <span class="fn">c₂</span></span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Prop</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.IndexedOps">
+<div class="class">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L26-L28">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">class</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.IndexedOps">LeanColls.IndexedOps</a>
+</span>
+<span class="decl_args">
+<span class="fn">(C : <span class="fn">Type u</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u</span></div></div>
+<ul class="structure_fields" id="LeanColls.IndexedOps.mk">
+<li class="structure_field" id="LeanColls.IndexedOps.slice">
+slice : <span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>] →
+  <span class="fn">(off len : <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a>) → <span class="fn">(c : <span class="fn">C</span>) → <span class="fn">{h : <span class="fn"><span class="fn"><span class="fn">off</span> <a href="/LeanColls/docs/Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">len</span></span> <a href="/LeanColls/docs/Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed.size">LeanColls.Indexed.size</a> <span class="fn">c</span></span></span>} → <span class="fn"><a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.Slice">LeanColls.Slice</a> <span class="fn">C</span> <span class="fn">τ</span></span></span></span></span></span></li>
+</ul>
+<details class="instances">
+<summary>Instances</summary>
+<ul>
+<li>
+<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.Array.instIndexedOpsArray">LeanColls.Array.instIndexedOpsArray</a>
+</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.instInhabitedIndexedOps">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L30-L33">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instInhabitedIndexedOps">LeanColls.instInhabitedIndexedOps</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.IndexedOps">LeanColls.IndexedOps</a> <span class="fn">C</span> <span class="fn">τ</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.instInhabitedIndexedOps</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a>   <span class="fn">{ default :=
+      <span class="fn">{ slice := <span class="fn">fun [<span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>] <span class="fn">off</span> <span class="fn">len</span> <span class="fn">c</span> <span class="fn">h</span> =&gt <span class="fn">{ c := <span class="fn">c</span>, off := <span class="fn">off</span>, len := <span class="fn">len</span>, h_range := <span class="fn">h</span> }</span></span> }</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.instMapLikeNat">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/IndexedOps.lean#L35-L39">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instMapLikeNat">LeanColls.instMapLikeNat</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a> <span class="fn">C</span> <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a> <span class="fn">τ</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="/LeanColls/docs/">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="/LeanColls/docs/Init.html">
+<summary><a href="/LeanColls/docs/Init.html">Init</a>
+</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Control.html">
+<summary><a href="/LeanColls/docs/Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data.html">
+<summary><a href="/LeanColls/docs/Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Array.html">
+<summary><a href="/LeanColls/docs/Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ByteArray.html">
+<summary><a href="/LeanColls/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Char.html">
+<summary><a href="/LeanColls/docs/Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Fin.html">
+<summary><a href="/LeanColls/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/FloatArray.html">
+<summary><a href="/LeanColls/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Format.html">
+<summary><a href="/LeanColls/docs/Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Int.html">
+<summary><a href="/LeanColls/docs/Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/List.html">
+<summary><a href="/LeanColls/docs/Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Nat.html">
+<summary><a href="/LeanColls/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Option.html">
+<summary><a href="/LeanColls/docs/Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/String.html">
+<summary><a href="/LeanColls/docs/Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ToString.html">
+<summary><a href="/LeanColls/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/Init/System.html">
+<summary><a href="/LeanColls/docs/Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="/LeanColls/docs/LeanColls.html" open="">
+<summary><a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Buffer.html">LeanColls.Buffer</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+</div>
+<div class="nav_link visible">
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

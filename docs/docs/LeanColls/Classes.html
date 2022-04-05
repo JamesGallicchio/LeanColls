@@ -30,7 +30,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Classes</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -51,10 +51,22 @@ Documentation</h1>
 <a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
 </li>
 <li>
+<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
+</li>
+<li>
 <a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
 </li>
 <li>
 <a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
 </li>
 </ul>
 </details>
@@ -109,7 +121,7 @@ the collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Iterable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L45-L48">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L45-L48">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -146,7 +158,7 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 <div class="decl" id="LeanColls.instIterable">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L50-L53">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L50-L53">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -191,7 +203,7 @@ building a <code><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> τ</c
 <div class="decl" id="LeanColls.Foldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L62-L64">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L62-L64">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -214,6 +226,9 @@ toIterable : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#Le
 <summary>Instances</summary>
 <ul>
 <li>
+<a href="/LeanColls/docs/LeanColls/Range.html#LeanColls.Range.instFoldableRangeFin">LeanColls.Range.instFoldableRangeFin</a>
+</li>
+<li>
 <a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.instFoldableLazyList">LazyList.instFoldableLazyList</a>
 </li>
 </ul>
@@ -227,7 +242,7 @@ new collection with the folded elements.</p></div>
 <div class="decl" id="LeanColls.Unfoldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L78-L79">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L78-L79">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -260,7 +275,7 @@ a collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Enumerable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L87-L93">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L87-L93">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -288,6 +303,9 @@ insert : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude
 <details class="instances">
 <summary>Instances</summary>
 <ul>
+<li>
+<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.instEnumerableSigmaNatArray">LeanColls.instEnumerableSigmaNatArray</a>
+</li>
 </ul>
 </details>
 </div>
@@ -299,7 +317,7 @@ isomorphic to <code>{a : α // a ∈ keySet c} → β</code></p></div>
 <div class="decl" id="LeanColls.MapLike">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L106-L110">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L106-L110">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -327,6 +345,9 @@ get : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><spa
 <details class="instances">
 <summary>Instances</summary>
 <ul>
+<li>
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instMapLikeNat">LeanColls.instMapLikeNat</a>
+</li>
 </ul>
 </details>
 </div>
@@ -337,7 +358,7 @@ access operations</p></div>
 <div class="decl" id="LeanColls.Indexed">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L118-L120">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L118-L120">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -359,6 +380,15 @@ nth : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><spa
 <details class="instances">
 <summary>Instances</summary>
 <ul>
+<li>
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instIndexedSlice">LeanColls.instIndexedSlice</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.Array.instIndexedArray">LeanColls.Array.instIndexedArray</a>
+</li>
+<li>
+<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.instIndexedArray">LeanColls.instIndexedArray</a>
+</li>
 </ul>
 </details>
 </div>
@@ -369,7 +399,7 @@ and are isomorphic to <code>{ a : α // decide (mem c a) }</code></p></div>
 <div class="decl" id="LeanColls.SetLike">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L128-L129">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L128-L129">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -400,7 +430,7 @@ a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.
 <div class="decl" id="LeanColls.instForIn">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65f6cdfe52858a79e389b765cf530123d615d24/LeanColls/Classes.lean#L140-L152">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L140-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -736,16 +766,31 @@ which more efficient versions exist.</p></div>
 <details class="nav_sect" data-path="/LeanColls/docs/LeanColls.html" open="">
 <summary><a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
 </summary><div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+</div>
+<div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Buffer.html">LeanColls.Buffer</a>
 </div>
 <div class="nav_link visible">
 <a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
 </div>
 <div class="nav_link">
 <a href="/LeanColls/docs/LeanColls/Stream.html">LeanColls.Stream</a>
