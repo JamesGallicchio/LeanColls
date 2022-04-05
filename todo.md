@@ -1,7 +1,6 @@
 # TODO
 
 - Finish correctness proofs for RTQueue
-- Figure out how to do tactic hints for implicit arguments
 - Implement
   - OrdMap
   - RBTree
@@ -13,6 +12,11 @@
 
 
 ## Done
+
+### 5 Apr 2022
+- Bashed head against RealTimeQueue proof issues
+  - (Should be improved in a few months)[https://leanprover.zulipchat.com/#narrow/stream/270676-lean4/topic/Cannot.20rewrite.20term.20being.20cased.20on]
+- Figured out FFI for fixed length arrays!!!!
 
 ### 15 Mar 2022
 - Finished (non-augmented) finger tree implementation with proofs
