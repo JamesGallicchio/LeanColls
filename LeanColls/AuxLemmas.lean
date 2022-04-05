@@ -18,6 +18,40 @@ namespace Nat
     apply Nat.le_step
     assumption
 
+  theorem min_le_left {x y : Nat} : min x y ≤ x := by
+    simp [min]
+    split
+    simp
+    case inr h =>
+    rw [Nat.not_le_eq] at h
+    exact Nat.le_of_succ_le h
+
+  theorem min_le_right {x y : Nat} : min x y ≤ y := by
+    simp [min]
+    split
+    assumption
+    simp
+
+  theorem min_succ_succ {x y : Nat} : min x.succ y.succ = (min x y).succ := by
+    simp [min]
+    split <;> split
+    rfl
+    case inl.inr h h' =>
+      exact False.elim (h' (Nat.le_of_succ_le_succ h))
+    case inr.inl h h' =>
+      exact False.elim (h (Nat.succ_le_succ h'))
+    rfl
+
+  @[simp]
+  theorem min_zero_left {x} : min 0 x = 0 := by
+    rw [←Nat.le_zero_eq]
+    exact min_le_left
+
+  @[simp]
+  theorem min_zero_right {x} : min x 0 = 0 := by
+    rw [←Nat.le_zero_eq]
+    exact min_le_right
+
 end Nat
 
 namespace List
@@ -161,7 +195,100 @@ namespace List
       have h_j := Nat.lt_of_succ_lt_succ h_j
       have := ih i ⟨j,h_j⟩ h
       exact this
+  
+  def length_take (L : List τ) (n : Nat)
+    : (L.take n).length = min L.length n
+    := by
+      induction L generalizing n
+      cases n <;> simp [length, take, min]
+      case cons h t ih =>
+      cases n
+      simp [take, min]
+      case succ n =>
+      simp [take, ih n]
+      exact Nat.min_succ_succ.symm
+  
+  def subtypeByMem (L : List α) : List {a // a ∈ L} :=
+    let rec aux (rest : List α) (h : ∀ a, a ∈ rest → a ∈ L)
+      : List {a // a ∈ L} :=
+      match rest with
+      | [] => []
+      | (x::xs) =>
+        ⟨x, h _ (List.Mem.head _ _)⟩ ::
+        aux xs (by intros; apply h; apply List.Mem.tail; assumption)
+    aux L (by intros; assumption)
+
+  theorem length_subtypeByMemAux (L rest : List α) (h)
+    : (List.subtypeByMem.aux L rest h).length = rest.length
+    := by
+      induction rest
+      simp [subtypeByMem.aux]
+      case cons hd tl ih =>
+      simp [subtypeByMem.aux]
+      apply ih
+
+  @[simp]
+  theorem length_subtypeByMem (L : List α)
+    : L.subtypeByMem.length = L.length
+    := by apply length_subtypeByMemAux
+
+  def index_of_mem (L : List α) (x) (h : x ∈ L) : ∃ i, L.get i = x := by
+    induction L
+    cases h <;> contradiction
+    case cons hd tl ih =>
+    cases h
+    apply Exists.intro ⟨0,by apply Nat.succ_le_succ; exact Nat.zero_le _⟩
+    simp [get]
+    cases ih (by assumption)
+    case intro w h =>
+    apply Exists.intro w.succ
+    simp [get]
+    exact h
+
+  theorem get_of_take (L : List α) (n i) (h : n ≤ L.length)
+    : (L.take n).get i = L.get ⟨i.val, by
+        apply Nat.le_trans i.isLt
+        simp [length_take]
+        exact Nat.min_le_left
+      ⟩
+    := by
+    induction L generalizing n
+    case nil =>
+      cases n <;> (
+        simp [length, take] at i
+        exact Fin.elim0 i
+      )
+    case cons hd tl ih =>
+    cases n
+    case zero =>
+      simp [length, take] at i
+      exact Fin.elim0 i
+    case succ n =>
+      cases i; case mk i h_i =>
+      cases i
+      case zero =>
+        simp [get, take]
+      case succ i =>
+        simp [get, take]
+        apply ih
+        simp [length] at h
+        exact Nat.le_of_succ_le_succ h
+
 end List
+
+def Nat.toUSize! (n : Nat) : USize :=
+  if n < USize.size then
+    n.toUSize
+  else
+    panic! s!"Integer {n} is to larget for usize"
+
+namespace Option
+
+def get : (o : Option α) → o.isSome → α
+| none, h => by contradiction
+| some a, _ => a
+
+end Option
 
 class Monoid (M) where
   mId : M
