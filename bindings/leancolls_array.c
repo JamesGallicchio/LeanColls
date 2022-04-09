@@ -32,74 +32,99 @@ lean_object** leancolls_array_unbox(lean_obj_arg o) {
     return (lean_object**)(lean_get_external_data(o));
 }
 
-static inline lean_obj_res leancolls_array_ensure_exclusive(size_t len, lean_obj_arg a) {
+static inline void leancolls_array_ensure_exclusive(lean_obj_arg a) {
     if (lean_is_exclusive(a))
-        return a;
+        return;
     
     if (lean_is_persistent(a)) {
-        // Make a copy I guess?
-        lean_object** backing = malloc(sizeof(lean_object*) * len);
-        memcpy(backing, leancolls_array_unbox(a), sizeof(lean_object*) * len);
-
-        return lean_alloc_external(leancolls_array_external_class, backing);
+        lean_panic_fn(NULL, lean_mk_string(
+            "LeanColls.Array: Mutation on persistent array! (Try `set_option compiler.extract_closed false`)"
+        ));
+    } else {
+        lean_panic_fn(NULL, lean_mk_string(
+            "LeanColls.Array: Mutation on shared array!"
+        ));
     }
-    
-    lean_panic_fn(NULL, lean_mk_string("LeanColls.Array being mutated, but not exclusive or persistent!"));
 }
 
+static inline size_t leancolls_unbox_array_size(b_lean_obj_arg n) {
+    // On both 64bit and 32bit systems, if n is not scalar this would OOM
+    if (!lean_is_scalar(n)) {
+        lean_internal_panic_out_of_memory();
+    }
+
+    size_t len = (size_t)(n>>1);
+    if (len != sizeof(lean_object*) * len / sizeof(lean_object*)) {
+        lean_internal_panic_out_of_memory();
+    }
+
+    return len;
+}
 
 
 // Implement basic external functions
 
-lean_obj_res leancolls_array_new(lean_obj_arg a, size_t len) {
+lean_obj_res leancolls_array_new(b_lean_obj_arg n) {
 
-    // TODO: Check that len is not too big (panic if it is)
+    size_t len = leancolls_unbox_array_size(n);
+
     lean_object** backing = malloc(sizeof(lean_object*) * len);
-    
-    for (size_t i = 0; i < len; i++) {
-        lean_inc(a);
-        backing[i] = a;
+    // Check if malloc failed
+    if (backing == NULL) {
+        lean_panic_fn(NULL, lean_mk_string(
+            "LeanColls.Array: New allocation failed! (Out of memory?)"
+        ));
     }
+
     return leancolls_array_box(backing);
 }
 
-lean_obj_res leancolls_array_get(b_lean_obj_arg n, lean_obj_arg arr, size_t i) {
-    lean_object* a = (leancolls_array_unbox(arr))[i];
+lean_obj_res leancolls_array_get(b_lean_obj_arg len, b_lean_obj_arg arr, b_lean_obj_arg i) {
+    // `len` is scalar; non-scalar `len` will OOM (see `leancolls_unbox_array_size`)
+    assert(lean_is_scalar(len));
+    // `(i : Fin len)` so `i` should be a scalar less than `len`
+    assert(lean_is_scalar(i));
+    assert(lean_unbox(i) < lean_unbox(len)); // (Could compare boxed values directly but...)
+
+    lean_object* a = (leancolls_array_unbox(arr))[lean_unbox(i)];
     lean_inc(a);
     return a;
 }
 
-lean_obj_res leancolls_array_set(size_t len, lean_obj_arg arr, size_t i, lean_obj_arg a) {
-    arr = leancolls_array_ensure_exclusive(len, arr);
+lean_obj_res leancolls_array_set(b_lean_obj_arg len, lean_obj_arg arr, b_lean_obj_arg i, lean_obj_arg a) {
+    // `len` is scalar; non-scalar `len` will OOM (see `new`)
+    assert(lean_is_scalar(len));
+    // `(i : Fin len)` so `i` should be a scalar less than `len`
+    assert(lean_is_scalar(i));
+    assert(lean_unbox(i) < lean_unbox(len)); // (Could compare boxed values directly but...)
+
+    leancolls_array_ensure_exclusive(arr);
 
     lean_object** backing = leancolls_array_unbox(arr);
-    lean_object* old = backing[i];
+
+    size_t i_ = lean_unbox(i);
+
+    // Remove old value
+    lean_object* old = backing[i_];
     lean_dec(old);
 
-    lean_inc(a);
-    backing[i] = a;
+    // Insert new value
+    backing[i_] = a;
 
     return arr;
 }
 
-lean_object* leancolls_array_extend(lean_object* idk, lean_object* what, lean_object* this) {
-    return 0;
-}
+lean_object* leancolls_array_resize(b_lean_obj_arg len, lean_obj_arg arr, b_lean_obj_arg m) {
+    size_t new_len = leancolls_unbox_array_size(m);
 
-lean_object* leancolls_array_shrink(lean_object* idk, lean_object* what, lean_object* this) {
-    return 0;
-}
+    lean_object** old_backing = leancolls_unbox_array(arr);
+    lean_object** new_backing = realloc(old_backing, sizeof(lean_object*) * new_len);
+    // Check if realloc failed
+    if (new_backing == NULL) {
+        lean_panic_fn(NULL, lean_mk_string(
+            "LeanColls.Array: Reallocation failed! (Out of memory?)"
+        ));
+    }
 
-lean_object* leancolls_array_unwrap_somes(lean_object* idk, lean_object* what) {
-    return 0;
-}
-
-// Implement functions to/from Lean internal representation
-
-lean_object* leancolls_array_to_list(lean_object* idk, lean_object* what) {
-    return 0;
-}
-
-lean_object* leancolls_array_of_list(lean_object* idk, lean_object* what) {
-    return 0;
+    return leancolls_array_box(backing);
 }
