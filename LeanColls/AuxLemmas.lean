@@ -52,6 +52,12 @@ namespace Nat
     rw [←Nat.le_zero_eq]
     exact min_le_right
 
+  def toUSize! (n : Nat) : USize :=
+    if n < USize.size then
+      n.toUSize
+    else
+      panic! s!"Integer {n} is to larget for usize"
+
 end Nat
 
 namespace List
@@ -276,19 +282,45 @@ namespace List
 
 end List
 
-def Nat.toUSize! (n : Nat) : USize :=
-  if n < USize.size then
-    n.toUSize
-  else
-    panic! s!"Integer {n} is to larget for usize"
+inductive Vector (α : Type u) : Nat → Type u where
+  | nil  : Vector α 0
+  | cons : α → Vector α n → Vector α (n+1)
+
+namespace Vector
+  def ofList : (L : List τ) → Vector τ L.length
+  | [] => nil
+  | x::xs => cons x (ofList xs)
+
+  def toList : (V : Vector τ n) → List τ
+  | nil => []
+  | cons x xs => x :: toList xs
+
+  theorem length_toList (V : Vector τ n)
+  : V.toList.length = n
+  := by induction V <;> simp [toList]; assumption
+end Vector
 
 namespace Option
 
-def get : (o : Option α) → o.isSome → α
-| none, h => by contradiction
-| some a, _ => a
+  def get : (o : Option α) → o.isSome → α
+  | none, h => by contradiction
+  | some a, _ => a
 
 end Option
+
+namespace Function
+  @[simp]
+  def update (f : α → β) (i : α) (x : β) [DecidableEq α]
+    : α → β
+    := λ a => if a = i then x else f a
+  
+  def update' {α α' : Sort u} {β : α → Sort u} (f : (a : α) → β a) (i : α) (x : α') [D : DecidableEq α]
+    : (a : α) → update β i α' a
+    := λ a =>
+    if h:a = i
+    then cast (by simp [h]) x
+    else cast (by simp [h]) (f a)
+end Function
 
 class Monoid (M) where
   mId : M

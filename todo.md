@@ -13,10 +13,14 @@
 
 ## Done
 
+### 14 Apr 2022
+- Implemented improved Array/ArrayBuffer (no more Option boxes!)
+
 ### 5 Apr 2022
 - Bashed head against RealTimeQueue proof issues
   - (Should be improved in a few months)[https://leanprover.zulipchat.com/#narrow/stream/270676-lean4/topic/Cannot.20rewrite.20term.20being.20cased.20on]
-- Figured out FFI for fixed length arrays!!!!
+- Figured out FFI for fixed length arrays
+
 
 ### 15 Mar 2022
 - Finished (non-augmented) finger tree implementation with proofs
