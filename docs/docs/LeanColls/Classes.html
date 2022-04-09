@@ -1,17 +1,18 @@
 <html lang="en">
 <head>
 <title>LeanColls.Classes</title>
-<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="/LeanColls/docs/style.css"></link><link rel="stylesheet" href="/LeanColls/docs/pygments.css"></link><link rel="shortcut icon" href="/LeanColls/docs/favicon.ico"></link><link rel="prefetch" href="/LeanColls/docs/declaration-data.bmp"></link><script defer="true" src="/LeanColls/docs/mathjax-config.js">
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="stylesheet" href=".././pygments.css"></link><link rel="shortcut icon" href=".././favicon.ico"></link><link rel="prefetch" href=".././declaration-data.bmp"></link><script defer="true" src=".././mathjax-config.js">
 </script>
 <script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
 </script>
 <script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
-<script type="module" src="/LeanColls/docs/nav.js">
+<script>const SITE_ROOT=".././";</script>
+<script type="module" src=".././nav.js">
 </script>
-<script type="module" src="/LeanColls/docs/search.js">
+<script type="module" src=".././search.js">
 </script>
-<script type="module" src="/LeanColls/docs/how-about.js">
+<script type="module" src=".././how-about.js">
 </script>
 </head>
 <body>
@@ -30,17 +31,17 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Classes</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean">source</a>
 </p>
 <div class="imports">
 <details>
 <summary>Imports</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/Init.html">Init</a>
+<a href=".././Init.html">Init</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+<a href=".././LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
 </li>
 </ul>
 </details>
@@ -48,25 +49,25 @@ Documentation</h1>
 <summary>Imported by</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
+<a href=".././LeanColls.html">LeanColls</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+<a href=".././LeanColls/Array.html">LeanColls.Array</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+<a href=".././LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
+<a href=".././LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+<a href=".././LeanColls/LazyList.html">LeanColls.LazyList</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+<a href=".././LeanColls/Queue.html">LeanColls.Queue</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
+<a href=".././LeanColls/Range.html">LeanColls.Range</a>
 </li>
 </ul>
 </details>
@@ -102,18 +103,18 @@ Documentation</h1>
 <main>
 <div class="mod_doc">
 <h1 class="markdown-heading" id="Generic-Collection-Classes">Generic Collection Classes <a class="hover-link" href="#Generic-Collection-Classes">#</a></h1><p>These classes form the top-level organization of the collections
-hierarchy. At the top of the hierarchy is <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">Iterable</a></code>. This
-exposes a means of "external iteration" on a collection.</p><p>This is extended by <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code>, which provides "internal
+hierarchy. At the top of the hierarchy is <code><a href=".././LeanColls/Classes.html#LeanColls.Iterable">Iterable</a></code>. This
+exposes a means of "external iteration" on a collection.</p><p>This is extended by <code><a href=".././LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code>, which provides "internal
 iteration" by folding the entire object into a single value.</p><p>We also have a dual notion of consuming elements rather than
-producing them. The <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Enumerable">Enumerable</a></code> class provides a natural
+producing them. The <code><a href=".././LeanColls/Classes.html#LeanColls.Enumerable">Enumerable</a></code> class provides a natural
 insertion operation, allowing a collection to be built
 from individual elements (potentially within some external
-iteration scheme). The <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Unfoldable">Unfoldable</a></code> class provides a bulk
+iteration scheme). The <code><a href=".././LeanColls/Classes.html#LeanColls.Unfoldable">Unfoldable</a></code> class provides a bulk
 insertion operation, folding one collection to produce a new
-one with all its elements.</p><p>Types which are <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> and <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Unfoldable">Unfoldable</a></code> are <code>CollLike</code>, in the
+one with all its elements.</p><p>Types which are <code><a href=".././LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> and <code><a href=".././LeanColls/Classes.html#LeanColls.Unfoldable">Unfoldable</a></code> are <code>CollLike</code>, in the
 sense that items can be inserted and removed from them. <code>CollLike</code>
 types are divided into <code>SeqLike</code> (finite-length vectors),
-<code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">MapLike</a></code> (finite key-set maps), and <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.SetLike">SetLike</a></code> (finite sets).</p></div>
+<code><a href=".././LeanColls/Classes.html#LeanColls.MapLike">MapLike</a></code> (finite key-set maps), and <code><a href=".././LeanColls/Classes.html#LeanColls.SetLike">SetLike</a></code> (finite sets).</p></div>
 <div class="mod_doc"><h2 class="markdown-heading" id="Destruction">Destruction <a class="hover-link" href="#Destruction">#</a></h2></div>
 <div class="mod_doc">
 <h3 class="markdown-heading" id="Iterable">Iterable <a class="hover-link" href="#Iterable">#</a></h3><p>Exposes <code>toIterator</code>, which gives an object that can traverse
@@ -121,12 +122,12 @@ the collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Iterable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L45-L48">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L45-L48">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
@@ -135,21 +136,27 @@ the collection one item at a time.</p></div>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max u (v + 1))</span></div></div>
 <ul class="structure_fields" id="LeanColls.Iterable.mk">
-<li class="structure_field" id="LeanColls.Iterable.ρ">
-ρ : <span class="fn">Type v</span></li>
-<li class="structure_field" id="LeanColls.Iterable.step">
-step : <span class="fn"><span class="fn">ρ</span> → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/LeanColls/docs/Init/Prelude.html#Prod">×</a> <span class="fn">ρ</span></span>)</span></span></li>
-<li class="structure_field" id="LeanColls.Iterable.toIterator">
-toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ</span></span></li>
+<li id="LeanColls.Iterable.ρ" class="structure_field">
+<div class="structure_field_info">
+ρ : <span class="fn">Type v</span></div>
+</li>
+<li id="LeanColls.Iterable.step" class="structure_field">
+<div class="structure_field_info">
+step : <span class="fn"><span class="fn">ρ</span> → <span class="fn"><a href=".././Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href=".././Init/Prelude.html#Prod">×</a> <span class="fn">ρ</span></span>)</span></span></div>
+</li>
+<li id="LeanColls.Iterable.toIterator" class="structure_field">
+<div class="structure_field_info">
+toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ</span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.instIterable">LeanColls.instIterable</a>
+<a href=".././LeanColls/Classes.html#LeanColls.instIterable">LeanColls.instIterable</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable.toIterable">LeanColls.Foldable.toIterable</a>
+<a href=".././LeanColls/Classes.html#LeanColls.Foldable.toIterable">LeanColls.Foldable.toIterable</a>
 </li>
 </ul>
 </details>
@@ -158,12 +165,12 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 <div class="decl" id="LeanColls.instIterable">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L50-L53">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L50-L53">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.instIterable">LeanColls.instIterable</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.instIterable">LeanColls.instIterable</a>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
@@ -179,57 +186,61 @@ toIterator : <span class="fn"><span class="fn">C</span> → <span class="fn">ρ<
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Data/Stream.html#ToStream">ToStream</a> <span class="fn">C</span> <span class="fn">ρ</span></span>]</span></span>
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Data/Stream.html#ToStream">ToStream</a> <span class="fn">C</span> <span class="fn">ρ</span></span>]</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Data/Stream.html#Stream">Stream</a> <span class="fn">ρ</span> <span class="fn">τ</span></span>]</span></span>
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Data/Stream.html#Stream">Stream</a> <span class="fn">ρ</span> <span class="fn">τ</span></span>]</span></span>
 </span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a> <span class="fn">C</span> <span class="fn">τ</span></span></div></div>
+<div class="decl_type"><span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a> <span class="fn">C</span> <span class="fn">τ</span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn">LeanColls.instIterable</span> <a href="/LeanColls/docs/Init/Prelude.html#Eq">=</a> <span class="fn">{ ρ := <span class="fn">ρ</span>, step := <span class="fn">Stream.next?</span>, toIterator := <span class="fn">toStream</span> }</span></span></li>
+<span class="fn"><span class="fn">LeanColls.instIterable</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">{ ρ := <span class="fn">ρ</span>, step := <span class="fn">Stream.next?</span>, toIterator := <span class="fn">toStream</span> }</span></span></li>
 </ul>
 </details>
 </div>
 </div>
 <div class="mod_doc">
 <h3 class="markdown-heading" id="Foldable">Foldable <a class="hover-link" href="#Foldable">#</a></h3><p>Exposes <code>fold</code>, which reduces a collection by
-Gives a default implementation of <code><a href="/LeanColls/docs/Init/Data/Stream.html#ToStream">ToStream</a> C</code> by first
-building a <code><a href="/LeanColls/docs/Init/Prelude.html#List">List</a> τ</code> and then using this as the stream.</p></div>
+Gives a default implementation of <code><a href=".././Init/Data/Stream.html#ToStream">ToStream</a> C</code> by first
+building a <code><a href=".././Init/Prelude.html#List">List</a> τ</code> and then using this as the stream.</p></div>
 <div class="decl" id="LeanColls.Foldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L62-L64">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L62-L64">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
+<span class="fn">(τ : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max u (v + 1))</span></div></div>
 <ul class="structure_fields" id="LeanColls.Foldable.mk">
-<li class="structure_field" id="LeanColls.Foldable.fold">
-fold : <span class="fn">{β : <span class="fn">Type v</span>} → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">β</span></span></span>) → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">C</span> → <span class="fn">β</span></span></span></span></span></li>
-<li class="structure_field" id="LeanColls.Foldable.toIterable">
-toIterable : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a> <span class="fn">C</span> <span class="fn">τ</span></span></li>
+<li id="LeanColls.Foldable.fold" class="structure_field">
+<div class="structure_field_info">
+fold : <span class="fn">{β : <span class="fn">Type v</span>} → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">β</span></span></span>) → <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">C</span> → <span class="fn">β</span></span></span></span></span></div>
+</li>
+<li id="LeanColls.Foldable.toIterable" class="structure_field">
+<div class="structure_field_info">
+toIterable : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Iterable">LeanColls.Iterable</a> <span class="fn">C</span> <span class="fn">τ</span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/Range.html#LeanColls.Range.instFoldableRangeFin">LeanColls.Range.instFoldableRangeFin</a>
+<a href=".././LeanColls/Range.html#LeanColls.Range.instFoldableRangeFin">LeanColls.Range.instFoldableRangeFin</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/LazyList.html#LazyList.instFoldableLazyList">LazyList.instFoldableLazyList</a>
+<a href=".././LeanColls/LazyList.html#LazyList.instFoldableLazyList">LazyList.instFoldableLazyList</a>
 </li>
 </ul>
 </details>
@@ -242,45 +253,47 @@ new collection with the folded elements.</p></div>
 <div class="decl" id="LeanColls.Unfoldable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L78-L79">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L78-L79">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Unfoldable">LeanColls.Unfoldable</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Unfoldable">LeanColls.Unfoldable</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
+<span class="fn">(τ : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max (max u (u_1 + 1)) (v + 1))</span></div></div>
 <ul class="structure_fields" id="LeanColls.Unfoldable.mk">
-<li class="structure_field" id="LeanColls.Unfoldable.unfold">
-unfold : <span class="fn">{F : <span class="fn">Type u_1</span>} → <span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>] → <span class="fn"><span class="fn">F</span> → <span class="fn">C</span></span></span></span></li>
+<li id="LeanColls.Unfoldable.unfold" class="structure_field">
+<div class="structure_field_info">
+unfold : <span class="fn">{F : <span class="fn">Type u_1</span>} → <span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>] → <span class="fn"><span class="fn">F</span> → <span class="fn">C</span></span></span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Enumerable.toUnfoldable">LeanColls.Enumerable.toUnfoldable</a>
+<a href=".././LeanColls/Classes.html#LeanColls.Enumerable.toUnfoldable">LeanColls.Enumerable.toUnfoldable</a>
 </li>
 </ul>
 </details>
 </div>
 </div>
 <div class="mod_doc">
-<h3 class="markdown-heading" id="Enumerable">Enumerable <a class="hover-link" href="#Enumerable">#</a></h3><p>Dual class to <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Iterable">Iterable</a></code>. Provides a builder which constructs
+<h3 class="markdown-heading" id="Enumerable">Enumerable <a class="hover-link" href="#Enumerable">#</a></h3><p>Dual class to <code><a href=".././LeanColls/Classes.html#LeanColls.Iterable">Iterable</a></code>. Provides a builder which constructs
 a collection one item at a time.</p></div>
 <div class="decl" id="LeanColls.Enumerable">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L87-L93">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L87-L93">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Enumerable">LeanColls.Enumerable</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Enumerable">LeanColls.Enumerable</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
@@ -288,23 +301,29 @@ a collection one item at a time.</p></div>
 <span class="fn">(τ : <span class="fn">Type v</span>)</span></span>
 <span class="decl_extends">extends</span>
 <span class="decl_parent">
-<span class="fn"><a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Unfoldable">LeanColls.Unfoldable</a>
+<span class="fn"><a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Unfoldable">LeanColls.Unfoldable</a>
 </span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max (max u (u_1 + 1)) (v + 1))</span></div></div>
 <ul class="structure_fields" id="LeanColls.Enumerable.mk">
-<li class="structure_field" id="LeanColls.Enumerable.ρ">
-ρ : <span class="fn">Type v</span></li>
-<li class="structure_field" id="LeanColls.Enumerable.fromEnumerator">
-fromEnumerator : <span class="fn"><span class="fn">ρ</span> → <span class="fn">C</span></span></li>
-<li class="structure_field" id="LeanColls.Enumerable.insert">
-insert : <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href="/LeanColls/docs/Init/Prelude.html#Prod">×</a> <span class="fn">ρ</span></span>)</span> → <span class="fn">ρ</span></span></li>
+<li id="LeanColls.Enumerable.ρ" class="structure_field">
+<div class="structure_field_info">
+ρ : <span class="fn">Type v</span></div>
+</li>
+<li id="LeanColls.Enumerable.fromEnumerator" class="structure_field">
+<div class="structure_field_info">
+fromEnumerator : <span class="fn"><span class="fn">ρ</span> → <span class="fn">C</span></span></div>
+</li>
+<li id="LeanColls.Enumerable.insert" class="structure_field">
+<div class="structure_field_info">
+insert : <span class="fn"><span class="fn"><a href=".././Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href=".././Init/Prelude.html#Prod">×</a> <span class="fn">ρ</span></span>)</span> → <span class="fn">ρ</span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.instEnumerableSigmaNatArray">LeanColls.instEnumerableSigmaNatArray</a>
+<a href=".././LeanColls/Array.html#LeanColls.instEnumerableSigmaNatArray'">LeanColls.instEnumerableSigmaNatArray'</a>
 </li>
 </ul>
 </details>
@@ -317,36 +336,44 @@ isomorphic to <code>{a : α // a ∈ keySet c} → β</code></p></div>
 <div class="decl" id="LeanColls.MapLike">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L106-L110">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L106-L110">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.MapLike">LeanColls.MapLike</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(α : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
+<span class="fn">(α : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(β : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type w</span>)</span>)</span></span>
+<span class="fn">(β : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type w</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max (max (max u v) w) (x + 1))</span></div></div>
 <ul class="structure_fields" id="LeanColls.MapLike.mk">
-<li class="structure_field" id="LeanColls.MapLike.κ">
-κ : <span class="fn"><span class="fn">C</span> → <span class="fn">Type x</span></span></li>
-<li class="structure_field" id="LeanColls.MapLike.κ_hasMem">
-κ_hasMem : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Membership">Membership</a> <span class="fn">α</span> (<span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span>)</span></span></li>
-<li class="structure_field" id="LeanColls.MapLike.keySet">
-keySet : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span></span></li>
-<li class="structure_field" id="LeanColls.MapLike.get">
-get : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">{ a // <span class="fn"><span class="fn">a</span> <a href="/LeanColls/docs/Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">keySet</span> <span class="fn">c</span></span></span> }</span> → <span class="fn">β</span></span></span></li>
+<li id="LeanColls.MapLike.κ" class="structure_field">
+<div class="structure_field_info">
+κ : <span class="fn"><span class="fn">C</span> → <span class="fn">Type x</span></span></div>
+</li>
+<li id="LeanColls.MapLike.κ_hasMem" class="structure_field">
+<div class="structure_field_info">
+κ_hasMem : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><a href=".././Init/Prelude.html#Membership">Membership</a> <span class="fn">α</span> (<span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span>)</span></span></div>
+</li>
+<li id="LeanColls.MapLike.keySet" class="structure_field">
+<div class="structure_field_info">
+keySet : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">κ</span> <span class="fn">c</span></span></span></div>
+</li>
+<li id="LeanColls.MapLike.get" class="structure_field">
+<div class="structure_field_info">
+get : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn">{ a // <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">keySet</span> <span class="fn">c</span></span></span> }</span> → <span class="fn">β</span></span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instMapLikeNat">LeanColls.instMapLikeNat</a>
+<a href=".././LeanColls/IndexedOps.html#LeanColls.instMapLikeNat">LeanColls.instMapLikeNat</a>
 </li>
 </ul>
 </details>
@@ -358,36 +385,40 @@ access operations</p></div>
 <div class="decl" id="LeanColls.Indexed">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L118-L120">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L118-L120">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.Indexed">LeanColls.Indexed</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
+<span class="fn">(τ : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type u</span></div></div>
 <ul class="structure_fields" id="LeanColls.Indexed.mk">
-<li class="structure_field" id="LeanColls.Indexed.size">
-size : <span class="fn"><span class="fn">C</span> → <a href="/LeanColls/docs/Init/Prelude.html#Nat">Nat</a></span></li>
-<li class="structure_field" id="LeanColls.Indexed.nth">
-nth : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Fin">Fin</a> (<span class="fn"><span class="fn">size</span> <span class="fn">c</span></span>)</span> → <span class="fn">τ</span></span></span></li>
+<li id="LeanColls.Indexed.size" class="structure_field">
+<div class="structure_field_info">
+size : <span class="fn"><span class="fn">C</span> → <a href=".././Init/Prelude.html#Nat">Nat</a></span></div>
+</li>
+<li id="LeanColls.Indexed.nth" class="structure_field">
+<div class="structure_field_info">
+nth : <span class="fn">(c : <span class="fn">C</span>) → <span class="fn"><span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> (<span class="fn"><span class="fn">size</span> <span class="fn">c</span></span>)</span> → <span class="fn">τ</span></span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
 <li>
-<a href="/LeanColls/docs/LeanColls/IndexedOps.html#LeanColls.instIndexedSlice">LeanColls.instIndexedSlice</a>
+<a href=".././LeanColls/IndexedOps.html#LeanColls.instIndexedSlice">LeanColls.instIndexedSlice</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.Array.instIndexedArray">LeanColls.Array.instIndexedArray</a>
+<a href=".././LeanColls/Array.html#LeanColls.Array'.instIndexedArray'">LeanColls.Array'.instIndexedArray'</a>
 </li>
 <li>
-<a href="/LeanColls/docs/LeanColls/Array.html#LeanColls.instIndexedArray">LeanColls.instIndexedArray</a>
+<a href=".././LeanColls/Array.html#LeanColls.instIndexedArray'">LeanColls.instIndexedArray'</a>
 </li>
 </ul>
 </details>
@@ -399,22 +430,24 @@ and are isomorphic to <code>{ a : α // decide (mem c a) }</code></p></div>
 <div class="decl" id="LeanColls.SetLike">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L128-L129">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L128-L129">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.SetLike">LeanColls.SetLike</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.SetLike">LeanColls.SetLike</a>
 </span>
 <span class="decl_args">
 <span class="fn">(C : <span class="fn">Type u</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(τ : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
+<span class="fn">(τ : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type u</span>)</span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type u</span></div></div>
 <ul class="structure_fields" id="LeanColls.SetLike.mk">
-<li class="structure_field" id="LeanColls.SetLike.mem">
-mem : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <a href="/LeanColls/docs/Init/Prelude.html#Bool">Bool</a></span></span></li>
+<li id="LeanColls.SetLike.mem" class="structure_field">
+<div class="structure_field_info">
+mem : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <a href=".././Init/Prelude.html#Bool">Bool</a></span></span></div>
+</li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
@@ -425,17 +458,17 @@ mem : <span class="fn"><span class="fn">C</span> → <span class="fn"><span clas
 </div>
 <div class="mod_doc">
 <h2 class="markdown-heading" id="External-Hooks">External Hooks <a class="hover-link" href="#External-Hooks">#</a></h2><p>We plug LeanColls into built-ins from Lean.
-Each <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> type gives rise to a <code><a href="/LeanColls/docs/Init/Core.html#ForIn">ForIn</a></code>, allowing
+Each <code><a href=".././LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> type gives rise to a <code><a href=".././Init/Core.html#ForIn">ForIn</a></code>, allowing
 a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.</p></div>
 <div class="decl" id="LeanColls.instForIn">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/1d4433680402f6d6614552c110bc1f41b7c5cb3a/LeanColls/Classes.lean#L140-L152">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/Classes.lean#L140-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
 <span class="decl_name">
-<a class="break_within" href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.instForIn">LeanColls.instForIn</a>
+<a class="break_within" href=".././LeanColls/Classes.html#LeanColls.instForIn">LeanColls.instForIn</a>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
@@ -451,14 +484,14 @@ a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/Init/Prelude.html#Monad">Monad</a> <span class="fn">M</span></span>]</span></span>
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#Monad">Monad</a> <span class="fn">M</span></span>]</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>]</span></span>
+<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>]</span></span>
 </span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="/LeanColls/docs/Init/Core.html#ForIn">ForIn</a> <span class="fn">M</span> <span class="fn">F</span> <span class="fn">τ</span></span></div></div>
+<div class="decl_type"><span class="fn"><a href=".././Init/Core.html#ForIn">ForIn</a> <span class="fn">M</span> <span class="fn">F</span> <span class="fn">τ</span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
@@ -472,7 +505,7 @@ a collection <code>C</code> to be used in <code>for x in C do ...</code> syntax.
 collections. Operation classes are prefixed by the smallest
 collection class which is sufficient to provide a default
 implementation; for example, <code>FoldableOps</code> provides operations
-on <code><a href="/LeanColls/docs/LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> classes.</p><p>Default implementations are NOT registered as instances here.
+on <code><a href=".././LeanColls/Classes.html#LeanColls.Foldable">Foldable</a></code> classes.</p><p>Default implementations are NOT registered as instances here.
 Instead, each collection should manually register an instance
 of the relevant operations classes, overriding operations for
 which more efficient versions exist.</p></div>
@@ -480,320 +513,320 @@ which more efficient versions exist.</p></div>
 <nav class="nav">
 <h3>General documentation</h3>
 <div class="nav_link">
-<a href="/LeanColls/docs/">index</a>
+<a href=".././">index</a>
 </div>
 <h3>Library</h3>
 <div class="module_list">
-<details class="nav_sect" data-path="/LeanColls/docs/Init.html">
-<summary><a href="/LeanColls/docs/Init.html">Init</a>
-</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Control.html">
-<summary><a href="/LeanColls/docs/Init/Control.html">Init.Control</a>
+<details class="nav_sect" data-path=".././Init.html">
+<summary><a href=".././Init.html">Init</a>
+</summary><details class="nav_sect" data-path=".././Init/Control.html">
+<summary><a href=".././Init/Control.html">Init.Control</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Basic.html">Init.Control.Basic</a>
+<a href=".././Init/Control/Basic.html">Init.Control.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/EState.html">Init.Control.EState</a>
+<a href=".././Init/Control/EState.html">Init.Control.EState</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Except.html">Init.Control.Except</a>
+<a href=".././Init/Control/Except.html">Init.Control.Except</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+<a href=".././Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Id.html">Init.Control.Id</a>
+<a href=".././Init/Control/Id.html">Init.Control.Id</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Lawful.html">Init.Control.Lawful</a>
+<a href=".././Init/Control/Lawful.html">Init.Control.Lawful</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Option.html">Init.Control.Option</a>
+<a href=".././Init/Control/Option.html">Init.Control.Option</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/Reader.html">Init.Control.Reader</a>
+<a href=".././Init/Control/Reader.html">Init.Control.Reader</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/State.html">Init.Control.State</a>
+<a href=".././Init/Control/State.html">Init.Control.State</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/StateCps.html">Init.Control.StateCps</a>
+<a href=".././Init/Control/StateCps.html">Init.Control.StateCps</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Control/StateRef.html">Init.Control.StateRef</a>
+<a href=".././Init/Control/StateRef.html">Init.Control.StateRef</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data.html">
-<summary><a href="/LeanColls/docs/Init/Data.html">Init.Data</a>
-</summary><details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Array.html">
-<summary><a href="/LeanColls/docs/Init/Data/Array.html">Init.Data.Array</a>
+<details class="nav_sect" data-path=".././Init/Data.html">
+<summary><a href=".././Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path=".././Init/Data/Array.html">
+<summary><a href=".././Init/Data/Array.html">Init.Data.Array</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+<a href=".././Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+<a href=".././Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+<a href=".././Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+<a href=".././Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+<a href=".././Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+<a href=".././Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+<a href=".././Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ByteArray.html">
-<summary><a href="/LeanColls/docs/Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+<details class="nav_sect" data-path=".././Init/Data/ByteArray.html">
+<summary><a href=".././Init/Data/ByteArray.html">Init.Data.ByteArray</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+<a href=".././Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Char.html">
-<summary><a href="/LeanColls/docs/Init/Data/Char.html">Init.Data.Char</a>
+<details class="nav_sect" data-path=".././Init/Data/Char.html">
+<summary><a href=".././Init/Data/Char.html">Init.Data.Char</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+<a href=".././Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Fin.html">
-<summary><a href="/LeanColls/docs/Init/Data/Fin.html">Init.Data.Fin</a>
+<details class="nav_sect" data-path=".././Init/Data/Fin.html">
+<summary><a href=".././Init/Data/Fin.html">Init.Data.Fin</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+<a href=".././Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/FloatArray.html">
-<summary><a href="/LeanColls/docs/Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+<details class="nav_sect" data-path=".././Init/Data/FloatArray.html">
+<summary><a href=".././Init/Data/FloatArray.html">Init.Data.FloatArray</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+<a href=".././Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Format.html">
-<summary><a href="/LeanColls/docs/Init/Data/Format.html">Init.Data.Format</a>
+<details class="nav_sect" data-path=".././Init/Data/Format.html">
+<summary><a href=".././Init/Data/Format.html">Init.Data.Format</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+<a href=".././Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+<a href=".././Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+<a href=".././Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+<a href=".././Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Int.html">
-<summary><a href="/LeanColls/docs/Init/Data/Int.html">Init.Data.Int</a>
+<details class="nav_sect" data-path=".././Init/Data/Int.html">
+<summary><a href=".././Init/Data/Int.html">Init.Data.Int</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+<a href=".././Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/List.html">
-<summary><a href="/LeanColls/docs/Init/Data/List.html">Init.Data.List</a>
+<details class="nav_sect" data-path=".././Init/Data/List.html">
+<summary><a href=".././Init/Data/List.html">Init.Data.List</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+<a href=".././Init/Data/List/Basic.html">Init.Data.List.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+<a href=".././Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/List/Control.html">Init.Data.List.Control</a>
+<a href=".././Init/Data/List/Control.html">Init.Data.List.Control</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Nat.html">
-<summary><a href="/LeanColls/docs/Init/Data/Nat.html">Init.Data.Nat</a>
+<details class="nav_sect" data-path=".././Init/Data/Nat.html">
+<summary><a href=".././Init/Data/Nat.html">Init.Data.Nat</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+<a href=".././Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+<a href=".././Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+<a href=".././Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+<a href=".././Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+<a href=".././Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+<a href=".././Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+<a href=".././Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/Option.html">
-<summary><a href="/LeanColls/docs/Init/Data/Option.html">Init.Data.Option</a>
+<details class="nav_sect" data-path=".././Init/Data/Option.html">
+<summary><a href=".././Init/Data/Option.html">Init.Data.Option</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+<a href=".././Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+<a href=".././Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+<a href=".././Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/String.html">
-<summary><a href="/LeanColls/docs/Init/Data/String.html">Init.Data.String</a>
+<details class="nav_sect" data-path=".././Init/Data/String.html">
+<summary><a href=".././Init/Data/String.html">Init.Data.String</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+<a href=".././Init/Data/String/Basic.html">Init.Data.String.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+<a href=".././Init/Data/String/Extra.html">Init.Data.String.Extra</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/Data/ToString.html">
-<summary><a href="/LeanColls/docs/Init/Data/ToString.html">Init.Data.ToString</a>
+<details class="nav_sect" data-path=".././Init/Data/ToString.html">
+<summary><a href=".././Init/Data/ToString.html">Init.Data.ToString</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+<a href=".././Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+<a href=".././Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
 </div>
 </details>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/AC.html">Init.Data.AC</a>
+<a href=".././Init/Data/AC.html">Init.Data.AC</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Basic.html">Init.Data.Basic</a>
+<a href=".././Init/Data/Basic.html">Init.Data.Basic</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Float.html">Init.Data.Float</a>
+<a href=".././Init/Data/Float.html">Init.Data.Float</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Hashable.html">Init.Data.Hashable</a>
+<a href=".././Init/Data/Hashable.html">Init.Data.Hashable</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+<a href=".././Init/Data/OfScientific.html">Init.Data.OfScientific</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Ord.html">Init.Data.Ord</a>
+<a href=".././Init/Data/Ord.html">Init.Data.Ord</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Prod.html">Init.Data.Prod</a>
+<a href=".././Init/Data/Prod.html">Init.Data.Prod</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Random.html">Init.Data.Random</a>
+<a href=".././Init/Data/Random.html">Init.Data.Random</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Range.html">Init.Data.Range</a>
+<a href=".././Init/Data/Range.html">Init.Data.Range</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Repr.html">Init.Data.Repr</a>
+<a href=".././Init/Data/Repr.html">Init.Data.Repr</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/Stream.html">Init.Data.Stream</a>
+<a href=".././Init/Data/Stream.html">Init.Data.Stream</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Data/UInt.html">Init.Data.UInt</a>
+<a href=".././Init/Data/UInt.html">Init.Data.UInt</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/Init/System.html">
-<summary><a href="/LeanColls/docs/Init/System.html">Init.System</a>
+<details class="nav_sect" data-path=".././Init/System.html">
+<summary><a href=".././Init/System.html">Init.System</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/Init/System/FilePath.html">Init.System.FilePath</a>
+<a href=".././Init/System/FilePath.html">Init.System.FilePath</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/System/IO.html">Init.System.IO</a>
+<a href=".././Init/System/IO.html">Init.System.IO</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/System/IOError.html">Init.System.IOError</a>
+<a href=".././Init/System/IOError.html">Init.System.IOError</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/System/Platform.html">Init.System.Platform</a>
+<a href=".././Init/System/Platform.html">Init.System.Platform</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/System/ST.html">Init.System.ST</a>
+<a href=".././Init/System/ST.html">Init.System.ST</a>
 </div>
 </details>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Classical.html">Init.Classical</a>
+<a href=".././Init/Classical.html">Init.Classical</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Coe.html">Init.Coe</a>
+<a href=".././Init/Coe.html">Init.Coe</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Conv.html">Init.Conv</a>
+<a href=".././Init/Conv.html">Init.Conv</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Core.html">Init.Core</a>
+<a href=".././Init/Core.html">Init.Core</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Fix.html">Init.Fix</a>
+<a href=".././Init/Fix.html">Init.Fix</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Hints.html">Init.Hints</a>
+<a href=".././Init/Hints.html">Init.Hints</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Meta.html">Init.Meta</a>
+<a href=".././Init/Meta.html">Init.Meta</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Notation.html">Init.Notation</a>
+<a href=".././Init/Notation.html">Init.Notation</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/NotationExtra.html">Init.NotationExtra</a>
+<a href=".././Init/NotationExtra.html">Init.NotationExtra</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Prelude.html">Init.Prelude</a>
+<a href=".././Init/Prelude.html">Init.Prelude</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/SimpLemmas.html">Init.SimpLemmas</a>
+<a href=".././Init/SimpLemmas.html">Init.SimpLemmas</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/SizeOf.html">Init.SizeOf</a>
+<a href=".././Init/SizeOf.html">Init.SizeOf</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+<a href=".././Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/Util.html">Init.Util</a>
+<a href=".././Init/Util.html">Init.Util</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/WF.html">Init.WF</a>
+<a href=".././Init/WF.html">Init.WF</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/Init/WFTactics.html">Init.WFTactics</a>
+<a href=".././Init/WFTactics.html">Init.WFTactics</a>
 </div>
 </details>
-<details class="nav_sect" data-path="/LeanColls/docs/LeanColls.html" open="">
-<summary><a href="/LeanColls/docs/LeanColls.html">LeanColls</a>
+<details class="nav_sect" data-path=".././LeanColls.html" open="">
+<summary><a href=".././LeanColls.html">LeanColls</a>
 </summary><div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/Array.html">LeanColls.Array</a>
+<a href=".././LeanColls/Array.html">LeanColls.Array</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+<a href=".././LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/Buffer.html">LeanColls.Buffer</a>
+<a href=".././LeanColls/Buffer.html">LeanColls.Buffer</a>
 </div>
 <div class="nav_link visible">
-<a href="/LeanColls/docs/LeanColls/Classes.html">LeanColls.Classes</a>
+<a href=".././LeanColls/Classes.html">LeanColls.Classes</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+<a href=".././LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
+<a href=".././LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/LazyList.html">LeanColls.LazyList</a>
+<a href=".././LeanColls/LazyList.html">LeanColls.LazyList</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/Queue.html">LeanColls.Queue</a>
+<a href=".././LeanColls/Queue.html">LeanColls.Queue</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/Range.html">LeanColls.Range</a>
+<a href=".././LeanColls/Range.html">LeanColls.Range</a>
 </div>
 <div class="nav_link">
-<a href="/LeanColls/docs/LeanColls/Stream.html">LeanColls.Stream</a>
+<a href=".././LeanColls/Stream.html">LeanColls.Stream</a>
 </div>
 </details>
 </div>
