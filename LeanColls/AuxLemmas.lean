@@ -60,6 +60,34 @@ namespace Nat
 
 end Nat
 
+namespace Fin
+
+@[simp]
+def embed_add_right : Fin n → Fin (n+m)
+| ⟨i, h⟩ => ⟨i, Nat.lt_of_lt_le h (Nat.le_add_right _ _)⟩
+
+@[simp]
+def embed_add_left : Fin n → Fin (m+n)
+| ⟨i, h⟩ => ⟨i, Nat.lt_of_lt_le h (Nat.le_add_left _ _)⟩
+
+@[simp]
+def embed_succ : Fin n → Fin n.succ
+| ⟨i, h⟩ => ⟨i, Nat.lt_of_lt_le h (Nat.le_step $ Nat.le_refl _)⟩
+
+@[simp]
+def last (n : Nat) : Fin n.succ := ⟨n, Nat.lt_succ_self _⟩
+
+end Fin
+
+namespace Option
+
+  def get : (o : Option α) → o.isSome → α
+  | none, h => by contradiction
+  | some a, _ => a
+
+  theorem some_inj {a b : α} : some a = some b ↔ a = b := by simp
+end Option
+
 namespace List
   def front? : List τ → Option (τ × List τ)
   | [] => none
@@ -220,7 +248,7 @@ namespace List
       match rest with
       | [] => []
       | (x::xs) =>
-        ⟨x, h _ (List.Mem.head _ _)⟩ ::
+        ⟨x, h _ (List.Mem.head _)⟩ ::
         aux xs (by intros; apply h; apply List.Mem.tail; assumption)
     aux L (by intros; assumption)
 
@@ -250,6 +278,20 @@ namespace List
     apply Exists.intro w.succ
     simp [get]
     exact h
+  
+  def mem_of_append (as bs : List α) (h : x ∈ as ++ bs) : x ∈ as ∨ x ∈ bs := by
+    induction as with
+    | nil =>
+      simp at h
+      exact Or.inr h
+    | cons hd tl ih =>
+      simp at h
+      match h with
+      | .head _ => exact Or.inl (List.Mem.head _)
+      | .tail _ h =>
+      match ih h with
+      | .inl h => exact .inl (List.Mem.tail _ h)
+      | .inr h => exact .inr h
 
   theorem get_of_take (L : List α) (n i) (h : n ≤ L.length)
     : (L.take n).get i = L.get ⟨i.val, by
@@ -280,6 +322,80 @@ namespace List
         simp [length] at h
         exact Nat.le_of_succ_le_succ h
 
+  @[simp]
+  theorem length_rangeAux : (rangeAux n L).length = L.length + n := by
+    induction n generalizing L <;> simp [length, rangeAux, *]
+    case succ n ih =>
+    rw [←Nat.add_one, Nat.add_comm n 1, Nat.add_assoc]
+
+  @[simp]
+  theorem length_range : (range n).length = n := by
+    simp [range]
+
+  theorem get?_eq_get (L : List α) (h)
+    : L.get? i = some (L.get ⟨i,h⟩)
+    := by
+    induction i generalizing L with
+    | zero => match L with
+      | nil => contradiction
+      | x::L => trivial
+    | succ i ih => match L with
+      | nil => contradiction
+      | x::L =>
+        simp [get?, get]
+        exact ih L (by
+          rw [length, Nat.add_one] at h
+          exact Nat.lt_of_succ_lt_succ h)
+
+  theorem rangeAux_eq_append
+    : rangeAux n (x :: L) = rangeAux n [] ++ (x :: L)
+    := by
+    suffices ∀ L, rangeAux n L = rangeAux n [] ++ L from
+      this (cons x L)
+    intro L
+    induction n generalizing L
+    simp [rangeAux]
+    case succ n ih =>
+    simp [get, rangeAux]
+    rw [@ih (n :: L), @ih [n]]
+    simp [List.append_assoc]
+  
+  theorem get?_range (n) (i : Nat) (h : i < n) : (range n).get? i = some i := by
+    induction n with
+    | zero => cases h
+    | succ n ih =>
+      unfold range
+      simp [rangeAux]
+      rw [rangeAux_eq_append]
+      have : i < length (rangeAux n [] ++ [n]) := by
+        simp; assumption
+      rw [get?_eq_get _ this, Option.some_inj]
+      match h_i:Nat.beq i n with
+      | true =>
+        simp at h_i
+        rw [List.get_append_right]
+        simp [get, h_i]
+        simp [h_i]
+        simp [h_i]
+      | false =>
+        have h := Nat.le_of_succ_le_succ h
+        have h_i := Nat.ne_of_beq_eq_false h_i
+        have : i < n := Nat.lt_of_le_and_ne h h_i
+        rw [List.get_append_left]
+        case h => simp [this]
+        rw [←Option.some_inj]
+        rw [←get?_eq_get]
+        exact ih this
+
+  theorem get_range' (n) (i : Nat) (h) : (range n).get ⟨i, h⟩ = i := by
+    rw [←Option.some_inj, ← get?_eq_get]
+    exact get?_range _ _ (by simp at h; exact h)
+
+  @[simp]
+  theorem get_range (i : Fin n) : (range n).get (cast (by simp) i) = i := by
+    have : ∀ m (h : m = n) h', (cast (h ▸ rfl) i : Fin m) = ⟨i, h'⟩ := by
+      intros m h h'; cases h; rfl
+    rw [this]; apply get_range'; simp; simp [i.2]    
 end List
 
 inductive Vector (α : Type u) : Nat → Type u where
@@ -299,14 +415,6 @@ namespace Vector
   : V.toList.length = n
   := by induction V <;> simp [toList]; assumption
 end Vector
-
-namespace Option
-
-  def get : (o : Option α) → o.isSome → α
-  | none, h => by contradiction
-  | some a, _ => a
-
-end Option
 
 namespace Function
   @[simp]

@@ -1,5 +1,6 @@
 #include <lean/lean.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Declare array class
 
@@ -7,6 +8,7 @@ static lean_external_class* leancolls_array_external_class = NULL;
 
 static inline void leancolls_array_finalizer(void *ptr)
 {
+    // TODO: Need to rc dec all elements of array (needs linear typing)
     free(ptr);
 }
 
@@ -33,7 +35,7 @@ lean_object** leancolls_array_unbox(lean_obj_arg o) {
 }
 
 static inline void leancolls_array_ensure_exclusive(lean_obj_arg a) {
-    if (lean_is_exclusive(a))
+    if (LEAN_LIKELY(lean_is_exclusive(a)))
         return;
     
     if (lean_is_persistent(a)) {
@@ -53,7 +55,7 @@ static inline size_t leancolls_unbox_array_size(b_lean_obj_arg n) {
         lean_internal_panic_out_of_memory();
     }
 
-    size_t len = (size_t)(n>>1);
+    size_t len = (size_t)(lean_unbox(n));
     if (len != sizeof(lean_object*) * len / sizeof(lean_object*)) {
         lean_internal_panic_out_of_memory();
     }
@@ -64,7 +66,7 @@ static inline size_t leancolls_unbox_array_size(b_lean_obj_arg n) {
 
 // Implement basic external functions
 
-lean_obj_res leancolls_array_new(b_lean_obj_arg n) {
+lean_obj_res leancolls_array_new(b_lean_obj_arg x, b_lean_obj_arg n) {
 
     size_t len = leancolls_unbox_array_size(n);
 
@@ -74,6 +76,18 @@ lean_obj_res leancolls_array_new(b_lean_obj_arg n) {
         lean_panic_fn(NULL, lean_mk_string(
             "LeanColls.Array: New allocation failed! (Out of memory?)"
         ));
+    }
+
+    // Initialize
+    if (lean_is_scalar(x)) {
+        for (size_t i = 0; i < len; i++) {
+            backing[i] = x;
+        }
+    } else {
+        for (size_t i = 0; i < len; i++) {
+            lean_inc(x);
+            backing[i] = x;
+        }
     }
 
     return leancolls_array_box(backing);
@@ -114,10 +128,16 @@ lean_obj_res leancolls_array_set(b_lean_obj_arg len, lean_obj_arg arr, b_lean_ob
     return arr;
 }
 
-lean_object* leancolls_array_resize(b_lean_obj_arg len, lean_obj_arg arr, b_lean_obj_arg m) {
+lean_object* leancolls_array_resize(b_lean_obj_arg n, lean_obj_arg arr,
+                                    b_lean_obj_arg x, b_lean_obj_arg m) {
+    size_t old_len = leancolls_unbox_array_size(n);
     size_t new_len = leancolls_unbox_array_size(m);
 
-    lean_object** old_backing = leancolls_unbox_array(arr);
+    leancolls_array_ensure_exclusive(arr);
+
+    lean_object** old_backing = leancolls_array_unbox(arr);
+    lean_free_small_object(arr);
+
     lean_object** new_backing = realloc(old_backing, sizeof(lean_object*) * new_len);
     // Check if realloc failed
     if (new_backing == NULL) {
@@ -126,5 +146,17 @@ lean_object* leancolls_array_resize(b_lean_obj_arg len, lean_obj_arg arr, b_lean
         ));
     }
 
-    return leancolls_array_box(backing);
+    // Initialize
+    if (lean_is_scalar(x)) {
+        for (size_t i = old_len; i < new_len; i++) {
+            new_backing[i] = x;
+        }
+    } else {
+        for (size_t i = old_len; i < new_len; i++) {
+            lean_inc(x);
+            new_backing[i] = x;
+        }
+    }
+
+    return leancolls_array_box(new_backing);
 }

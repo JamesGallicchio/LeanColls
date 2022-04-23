@@ -22,6 +22,8 @@ unsafe def initUnsafe (a : α) : Uninit α := unsafeCast a
 @[implementedBy initUnsafe]
 constant init (a : α) : Uninit α
 
+instance : Inhabited (Uninit α) := ⟨uninit⟩
+
 noncomputable constant getValue? : Uninit α → Option α
 
 def ofOption : Option α → Uninit α
