@@ -1,0 +1,1197 @@
+<html lang="en">
+<head>
+<title>Init.Data.Nat.SOM</title>
+<meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././declaration-data.bmp"></link><script defer="true" src="../../.././mathjax-config.js">
+</script>
+<script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script>const SITE_ROOT="../../.././";</script>
+<script type="module" src="../../.././nav.js">
+</script>
+<script type="module" src="../../.././search.js">
+</script>
+<script type="module" src="../../.././how-about.js">
+</script>
+</head>
+<body>
+<input id="nav_toggle" type="checkbox"></input><header>
+<h1>
+<label for="nav_toggle">
+</label>
+Documentation</h1>
+<p class="header_filename break_within">Init.Data.Nat.SOM</p>
+<form action="https://google.com/search" method="get" id="search_form">
+<input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
+</form>
+</header>
+<nav class="internal_nav">
+<h3>
+<a class="break_within" href="#top">Init.Data.Nat.SOM</a>
+</h3>
+<p class="gh_nav_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean">source</a>
+</p>
+<div class="imports">
+<details>
+<summary>Imports</summary>
+<ul>
+<li>
+<a href="../../.././Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</li>
+<li>
+<a href="../../.././Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</li>
+</ul>
+</details>
+<details>
+<summary>Imported by</summary>
+<ul>
+<li>
+<a href="../../.././Init/Data/Nat.html">Init.Data.Nat</a>
+</li>
+</ul>
+</details>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Expr">Nat.SOM.Expr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.instInhabitedExpr">Nat.SOM.instInhabitedExpr</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon">Nat.SOM.Mon</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.mul">Nat.SOM.Mon.mul</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.mul.go">Nat.SOM.Mon.mul.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly">Nat.SOM.Poly</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.add.go">Nat.SOM.Poly.add.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mulMon">Nat.SOM.Poly.mulMon</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mul">Nat.SOM.Poly.mul</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.append_denote">Nat.SOM.Mon.append_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.mul_denote">Nat.SOM.Mon.mul_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Mon.mul_denote.go">Nat.SOM.Mon.mul_denote.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.append_denote">Nat.SOM.Poly.append_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.add_denote">Nat.SOM.Poly.add_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.add_denote.go">Nat.SOM.Poly.add_denote.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.denote_insertSorted">Nat.SOM.Poly.denote_insertSorted</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mulMon_denote">Nat.SOM.Poly.mulMon_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mulMon_denote.go">Nat.SOM.Poly.mulMon_denote.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mul_denote">Nat.SOM.Poly.mul_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Poly.mul_denote.go">Nat.SOM.Poly.mul_denote.go</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Expr.toPoly_denote">Nat.SOM.Expr.toPoly_denote</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.SOM.Expr.eq_of_toPoly_eq">Nat.SOM.Expr.eq_of_toPoly_eq</a>
+</div>
+</nav>
+<main>
+<div class="decl" id="Nat.SOM.Expr">
+<div class="inductive">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L14-L19">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">inductive</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<ul class="constructors">
+<li class="constructor" id="Nat.SOM.Expr.num">
+num: <span class="fn"><a href="../../.././Init/Prelude.html#Nat">Nat</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a></span></li>
+<li class="constructor" id="Nat.SOM.Expr.var">
+var: <span class="fn"><a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Var">Nat.Linear.Var</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a></span></li>
+<li class="constructor" id="Nat.SOM.Expr.add">
+add: <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a></span></li>
+<li class="constructor" id="Nat.SOM.Expr.mul">
+mul: <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a></span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.instInhabitedExpr">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L19-L19">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.instInhabitedExpr">Nat.SOM.instInhabitedExpr</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.instInhabitedExpr">Nat.SOM.instInhabitedExpr</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ default := <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.num">Nat.SOM.Expr.num</a> <span class="fn">default</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Expr.denote">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L21-L25">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.num">Nat.SOM.Expr.num</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.var">Nat.SOM.Expr.var</a> <span class="fn">v</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Var.denote">Nat.Linear.Var.denote</a> <span class="fn">ctx</span> <span class="fn">v</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.add">Nat.SOM.Expr.add</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Nat.add">Nat.add</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">a</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">b</span></span>)</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.mul">Nat.SOM.Expr.mul</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Nat.mul">Nat.mul</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">a</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">b</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L27-L27">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Var">Nat.Linear.Var</a></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.denote">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L29-L31">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a> → <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">[]</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> (<span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">vs</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Nat.mul">Nat.mul</a> (<span class="fn"><a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Var.denote">Nat.Linear.Var.denote</a> <span class="fn">ctx</span> <span class="fn">v</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">vs</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.mul">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L33-L49">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul">Nat.SOM.Mon.mul</a>
+</span>
+<span class="decl_args">
+<span class="fn">(m₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul">Nat.SOM.Mon.mul</a> <span class="fn">m₁</span> <span class="fn">m₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul.go">Nat.SOM.Mon.mul.go</a> <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.hugeFuel">Nat.Linear.hugeFuel</a> <span class="fn">m₁</span> <span class="fn">m₂</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.mul.go">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L36-L49">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul.go">Nat.SOM.Mon.mul.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(fuel : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul.go">Nat.SOM.Mon.mul.go</a> <span class="fn">0</span> <span class="fn">m₁</span> <span class="fn">m₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">m₁</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">m₂</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L51-L51">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">abbrev</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Nat">Nat</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.denote">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L53-L55">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a> → <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">[]</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><span class="fn">(<span class="fn">k</span>, <span class="fn">m</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">p</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Nat.add">Nat.add</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Nat.mul">Nat.mul</a> <span class="fn">k</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m</span></span>)</span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.add">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L57-L75">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add.go">Nat.SOM.Poly.add.go</a> <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.hugeFuel">Nat.Linear.hugeFuel</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.add.go">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L60-L75">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add.go">Nat.SOM.Poly.add.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(fuel : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add.go">Nat.SOM.Poly.add.go</a> <span class="fn">0</span> <span class="fn">p₁</span> <span class="fn">p₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">p₁</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">p₂</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.insertSorted">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L77-L80">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a>
+</span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">[]</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">(<span class="fn">k</span>, <span class="fn">m</span>)</span>]</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a> <span class="fn">k</span> <span class="fn">m</span> (<span class="fn"><span class="fn">(<span class="fn">k_1</span>, <span class="fn">m_1</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">p_1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">bif <span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">m_1</span></span>)</span> then <span class="fn"><span class="fn">(<span class="fn">k</span>, <span class="fn">m</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">(<span class="fn">k_1</span>, <span class="fn">m_1</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">p_1</span></span></span> else <span class="fn"><span class="fn">(<span class="fn">k_1</span>, <span class="fn">m_1</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">p_1</span></span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mulMon">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L82-L88">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon">Nat.SOM.Poly.mulMon</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon">Nat.SOM.Poly.mulMon</a> <span class="fn">p</span> <span class="fn">k</span> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">p</span> <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mulMon.go">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L85-L88">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">[]</span> <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">acc</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a> <span class="fn">k</span> <span class="fn">m</span> (<span class="fn"><span class="fn">(<span class="fn">k_1</span>, <span class="fn">m_1</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">p_1</span></span>) <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">p_1</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a> (<span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">k_1</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul">Nat.SOM.Mon.mul</a> <span class="fn">m</span> <span class="fn">m_1</span></span>) <span class="fn">acc</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mul">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L90-L96">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul">Nat.SOM.Poly.mul</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul">Nat.SOM.Poly.mul</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a> <span class="fn">p₂</span> <span class="fn">p₁</span> <span class="fn">[]</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mul.go">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L93-L96">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a> <span class="fn">p₂</span> <span class="fn">[]</span> <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">acc</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a> <span class="fn">p₂</span> (<span class="fn"><span class="fn">(<span class="fn">k</span>, <span class="fn">m</span>)</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">p</span></span>) <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a> <span class="fn">p₂</span> <span class="fn">p</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a> <span class="fn">acc</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon">Nat.SOM.Poly.mulMon</a> <span class="fn">p₂</span> <span class="fn">k</span> <span class="fn">m</span></span>)</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Expr.toPoly">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L98-L102">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a> → <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.num">Nat.SOM.Expr.num</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">bif <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span></span> then <span class="fn">[]</span> else <span class="fn">[<span class="fn">(<span class="fn">n</span>, <span class="fn">[]</span>)</span>]</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.var">Nat.SOM.Expr.var</a> <span class="fn">v</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">(<span class="fn">1</span>, <span class="fn">[<span class="fn">v</span>]</span>)</span>]</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.add">Nat.SOM.Expr.add</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">a</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">b</span></span>)</span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.mul">Nat.SOM.Expr.mul</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul">Nat.SOM.Poly.mul</a> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">a</span></span>) (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">b</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.append_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L104-L107">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.append_denote">Nat.SOM.Mon.append_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> (<span class="fn"><span class="fn">m₁</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">m₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₁</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.mul_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L109-L120">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul_denote">Nat.SOM.Mon.mul_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul">Nat.SOM.Mon.mul</a> <span class="fn">m₁</span> <span class="fn">m₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₁</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Mon.mul_denote.go">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L112-L120">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul_denote.go">Nat.SOM.Mon.mul_denote.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(fuel : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.mul.go">Nat.SOM.Mon.mul.go</a> <span class="fn">fuel</span> <span class="fn">m₁</span> <span class="fn">m₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₁</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.append_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L122-L125">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.append_denote">Nat.SOM.Poly.append_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><span class="fn">p₁</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">p₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.add_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L127-L143">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add_denote">Nat.SOM.Poly.add_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add">Nat.SOM.Poly.add</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.add_denote.go">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L130-L143">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add_denote.go">Nat.SOM.Poly.add_denote.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(fuel : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.add.go">Nat.SOM.Poly.add.go</a> <span class="fn">fuel</span> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.denote_insertSorted">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L145-L149">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote_insertSorted">Nat.SOM.Poly.denote_insertSorted</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.insertSorted">Nat.SOM.Poly.insertSorted</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">p</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mulMon_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L151-L158">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon_denote">Nat.SOM.Poly.mulMon_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon">Nat.SOM.Poly.mulMon</a> <span class="fn">p</span> <span class="fn">k</span> <span class="fn">m</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mulMon_denote.go">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L154-L158">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon_denote.go">Nat.SOM.Poly.mulMon_denote.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon">Nat.SOM.Mon</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mulMon.go">Nat.SOM.Poly.mulMon.go</a> <span class="fn">k</span> <span class="fn">m</span> <span class="fn">p</span> <span class="fn">acc</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Mon.denote">Nat.SOM.Mon.denote</a> <span class="fn">ctx</span> <span class="fn">m</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mul_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L160-L169">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul_denote">Nat.SOM.Poly.mul_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul">Nat.SOM.Poly.mul</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₂</span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Poly.mul_denote.go">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L163-L169">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul_denote.go">Nat.SOM.Poly.mul_denote.go</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(acc : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly">Nat.SOM.Poly</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.mul.go">Nat.SOM.Poly.mul.go</a> <span class="fn">p₂</span> <span class="fn">p₁</span> <span class="fn">acc</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">acc</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> <span class="fn">p₂</span></span></span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Expr.toPoly_denote">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L171-L178">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly_denote">Nat.SOM.Expr.toPoly_denote</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Poly.denote">Nat.SOM.Poly.denote</a> <span class="fn">ctx</span> (<span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">e</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">e</span></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.SOM.Expr.eq_of_toPoly_eq">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Nat/SOM.lean#L180-L183">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.eq_of_toPoly_eq">Nat.SOM.Expr.eq_of_toPoly_eq</a>
+</span>
+<span class="decl_args">
+<span class="fn">(ctx : <a href="../../.././Init/Data/Nat/Linear.html#Nat.Linear.Context">Nat.Linear.Context</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr">Nat.SOM.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.toPoly">Nat.SOM.Expr.toPoly</a> <span class="fn">b</span></span></span>) <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Nat/SOM.html#Nat.SOM.Expr.denote">Nat.SOM.Expr.denote</a> <span class="fn">ctx</span> <span class="fn">b</span></span></span></div></div>
+</div>
+</div>
+</main>
+<nav class="nav">
+<h3>General documentation</h3>
+<div class="nav_link">
+<a href="../../.././">index</a>
+</div>
+<h3>Library</h3>
+<div class="module_list">
+<details class="nav_sect" data-path="../../.././Init.html" open="">
+<summary><a href="../../.././Init.html">Init</a>
+</summary><details class="nav_sect" data-path="../../.././Init/Control.html">
+<summary><a href="../../.././Init/Control.html">Init.Control</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Control/Basic.html">Init.Control.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/EState.html">Init.Control.EState</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/Except.html">Init.Control.Except</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/ExceptCps.html">Init.Control.ExceptCps</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/Id.html">Init.Control.Id</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/Lawful.html">Init.Control.Lawful</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/Option.html">Init.Control.Option</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/Reader.html">Init.Control.Reader</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/State.html">Init.Control.State</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/StateCps.html">Init.Control.StateCps</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Control/StateRef.html">Init.Control.StateRef</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data.html" open="">
+<summary><a href="../../.././Init/Data.html">Init.Data</a>
+</summary><details class="nav_sect" data-path="../../.././Init/Data/Array.html">
+<summary><a href="../../.././Init/Data/Array.html">Init.Data.Array</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Array/Basic.html">Init.Data.Array.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/BinSearch.html">Init.Data.Array.BinSearch</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/DecidableEq.html">Init.Data.Array.DecidableEq</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/InsertionSort.html">Init.Data.Array.InsertionSort</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/Mem.html">Init.Data.Array.Mem</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/QSort.html">Init.Data.Array.QSort</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Array/Subarray.html">Init.Data.Array.Subarray</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/ByteArray.html">
+<summary><a href="../../.././Init/Data/ByteArray.html">Init.Data.ByteArray</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/ByteArray/Basic.html">Init.Data.ByteArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Char.html">
+<summary><a href="../../.././Init/Data/Char.html">Init.Data.Char</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Char/Basic.html">Init.Data.Char.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Fin.html">
+<summary><a href="../../.././Init/Data/Fin.html">Init.Data.Fin</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Fin/Basic.html">Init.Data.Fin.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/FloatArray.html">
+<summary><a href="../../.././Init/Data/FloatArray.html">Init.Data.FloatArray</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/FloatArray/Basic.html">Init.Data.FloatArray.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Format.html">
+<summary><a href="../../.././Init/Data/Format.html">Init.Data.Format</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Format/Basic.html">Init.Data.Format.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Format/Instances.html">Init.Data.Format.Instances</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Format/Macro.html">Init.Data.Format.Macro</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Format/Syntax.html">Init.Data.Format.Syntax</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Int.html">
+<summary><a href="../../.././Init/Data/Int.html">Init.Data.Int</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Int/Basic.html">Init.Data.Int.Basic</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/List.html">
+<summary><a href="../../.././Init/Data/List.html">Init.Data.List</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/List/Basic.html">Init.Data.List.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/List/BasicAux.html">Init.Data.List.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/List/Control.html">Init.Data.List.Control</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Nat.html" open="">
+<summary><a href="../../.././Init/Data/Nat.html">Init.Data.Nat</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Nat/Basic.html">Init.Data.Nat.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Bitwise.html">Init.Data.Nat.Bitwise</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Control.html">Init.Data.Nat.Control</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Div.html">Init.Data.Nat.Div</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Gcd.html">Init.Data.Nat.Gcd</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Linear.html">Init.Data.Nat.Linear</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+<div class="nav_link visible">
+<a href="../../.././Init/Data/Nat/SOM.html">Init.Data.Nat.SOM</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/Option.html">
+<summary><a href="../../.././Init/Data/Option.html">Init.Data.Option</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/Option/Basic.html">Init.Data.Option.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Option/BasicAux.html">Init.Data.Option.BasicAux</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Option/Instances.html">Init.Data.Option.Instances</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/String.html">
+<summary><a href="../../.././Init/Data/String.html">Init.Data.String</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/String/Basic.html">Init.Data.String.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/String/Extra.html">Init.Data.String.Extra</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/Data/ToString.html">
+<summary><a href="../../.././Init/Data/ToString.html">Init.Data.ToString</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/Data/ToString/Basic.html">Init.Data.ToString.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/ToString/Macro.html">Init.Data.ToString.Macro</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="../../.././Init/Data/AC.html">Init.Data.AC</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Basic.html">Init.Data.Basic</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Float.html">Init.Data.Float</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Hashable.html">Init.Data.Hashable</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/OfScientific.html">Init.Data.OfScientific</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Ord.html">Init.Data.Ord</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Prod.html">Init.Data.Prod</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Random.html">Init.Data.Random</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Range.html">Init.Data.Range</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Repr.html">Init.Data.Repr</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/Stream.html">Init.Data.Stream</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Data/UInt.html">Init.Data.UInt</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././Init/System.html">
+<summary><a href="../../.././Init/System.html">Init.System</a>
+</summary><div class="nav_link">
+<a href="../../.././Init/System/FilePath.html">Init.System.FilePath</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/System/IO.html">Init.System.IO</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/System/IOError.html">Init.System.IOError</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/System/Platform.html">Init.System.Platform</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/System/ST.html">Init.System.ST</a>
+</div>
+</details>
+<div class="nav_link">
+<a href="../../.././Init/Classical.html">Init.Classical</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Coe.html">Init.Coe</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Conv.html">Init.Conv</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Core.html">Init.Core</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Fix.html">Init.Fix</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Hints.html">Init.Hints</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Meta.html">Init.Meta</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Notation.html">Init.Notation</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/NotationExtra.html">Init.NotationExtra</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Prelude.html">Init.Prelude</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/SimpLemmas.html">Init.SimpLemmas</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/SizeOf.html">Init.SizeOf</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/Util.html">Init.Util</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/WF.html">Init.WF</a>
+</div>
+<div class="nav_link">
+<a href="../../.././Init/WFTactics.html">Init.WFTactics</a>
+</div>
+</details>
+<details class="nav_sect" data-path="../../.././LeanColls.html">
+<summary><a href="../../.././LeanColls.html">LeanColls</a>
+</summary><div class="nav_link">
+<a href="../../.././LeanColls/Array.html">LeanColls.Array</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Buffer.html">LeanColls.Buffer</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Classes.html">LeanColls.Classes</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/FoldableOps.html">LeanColls.FoldableOps</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/IndexedOps.html">LeanColls.IndexedOps</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/LazyList.html">LeanColls.LazyList</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/List.html">LeanColls.List</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Queue.html">LeanColls.Queue</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Range.html">LeanColls.Range</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+<div class="nav_link">
+<a href="../../.././LeanColls/Uninit.html">LeanColls.Uninit</a>
+</div>
+</details>
+</div>
+</nav>
+</body>
+</html>

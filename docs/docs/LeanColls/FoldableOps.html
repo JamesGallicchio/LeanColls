@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.FoldableOps</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/FoldableOps.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/08fd9a8b6f6ecf8ae5c22e37af1fa82d92b4d73a/LeanColls/FoldableOps.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -51,6 +51,9 @@ Documentation</h1>
 <li>
 <a href=".././LeanColls.html">LeanColls</a>
 </li>
+<li>
+<a href=".././LeanColls/List.html">LeanColls.List</a>
+</li>
 </ul>
 </details>
 </div>
@@ -60,12 +63,15 @@ Documentation</h1>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.instInhabitedFoldableOps">LeanColls.instInhabitedFoldableOps</a>
 </div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.FoldableOps.toList_ind">LeanColls.FoldableOps.toList_ind</a>
+</div>
 </nav>
 <main>
 <div class="decl" id="LeanColls.FoldableOps">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/FoldableOps.lean#L11-L12">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/08fd9a8b6f6ecf8ae5c22e37af1fa82d92b4d73a/LeanColls/FoldableOps.lean#L11-L17">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -73,20 +79,54 @@ Documentation</h1>
 <a class="break_within" href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps">LeanColls.FoldableOps</a>
 </span>
 <span class="decl_args">
-<span class="fn">(F : <span class="fn">Sort u_1</span>)</span></span>
+<span class="fn">(C : <span class="fn">Type u_1</span>)</span></span>
 <span class="decl_args">
-<span class="fn">(τ : <span class="fn">Sort u_2</span>)</span></span>
+<span class="fn">(τ : <span class="fn">Type u_2</span>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#BEq">BEq</a> <span class="fn">τ</span></span>]</span></span>
+</span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Sort (max (max 1 u_1) u_2)</span></div></div>
+<div class="decl_type"><span class="fn">Type (max u_1 u_2)</span></div></div>
 <ul class="structure_fields" id="LeanColls.FoldableOps.mk">
-<li id="LeanColls.FoldableOps.mem" class="structure_field">
+<li id="LeanColls.FoldableOps.toList" class="structure_field">
 <div class="structure_field_info">
-mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">τ</span></span>] → <span class="fn"><span class="fn">F</span> → <span class="fn"><span class="fn">τ</span> → <a href=".././Init/Prelude.html#Bool">Bool</a></span></span></span></div>
+toList : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span></div>
+</li>
+<li id="LeanColls.FoldableOps.h_toList" class="structure_field">
+<div class="structure_field_info">
+h_toList : <span class="fn"><span class="fn">toList</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable.fold">LeanColls.Foldable.fold</a> (<span class="fn">fun <span class="fn">a</span> <span class="fn">a_1</span> =&gt <span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">a_1</span></span></span>) <span class="fn">[]</span></span></span></div>
+</li>
+<li id="LeanColls.FoldableOps.all" class="structure_field">
+<div class="structure_field_info">
+all : <span class="fn"><span class="fn">C</span> → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <a href=".././Init/Prelude.html#Bool">Bool</a></span>) → <a href=".././Init/Prelude.html#Bool">Bool</a></span></span></div>
+</li>
+<li id="LeanColls.FoldableOps.h_all" class="structure_field">
+<div class="structure_field_info">
+h_all : <span class="fn"><span class="fn">all</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">List.all</span> <a href=".././Init/Prelude.html#Function.comp">∘</a> <span class="fn">toList</span></span></span></div>
+</li>
+<li id="LeanColls.FoldableOps.contains" class="structure_field">
+<div class="structure_field_info">
+contains : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <a href=".././Init/Prelude.html#Bool">Bool</a></span></span></div>
+</li>
+<li id="LeanColls.FoldableOps.h_contains" class="structure_field">
+<div class="structure_field_info">
+h_contains : <span class="fn"><span class="fn">contains</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">List.contains</span> <a href=".././Init/Prelude.html#Function.comp">∘</a> <span class="fn">toList</span></span></span></div>
 </li>
 </ul>
 <details class="instances">
 <summary>Instances</summary>
 <ul>
+<li>
+<a href=".././LeanColls/Range.html#LeanColls.Range.instFoldableOpsRangeFinInstFoldableRangeFinInstBEqInstDecidableEqFin">LeanColls.Range.instFoldableOpsRangeFinInstFoldableRangeFinInstBEqInstDecidableEqFin</a>
+</li>
+<li>
+<a href=".././LeanColls/List.html#List.instFoldableOpsListInstFoldableList">List.instFoldableOpsListInstFoldableList</a>
+</li>
 </ul>
 </details>
 </div>
@@ -94,7 +134,7 @@ mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#
 <div class="decl" id="LeanColls.instInhabitedFoldableOps">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/219ef5413cc1c82107b2b605b1915f310dc05b82/LeanColls/FoldableOps.lean#L14-L17">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/08fd9a8b6f6ecf8ae5c22e37af1fa82d92b4d73a/LeanColls/FoldableOps.lean#L19-L27">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -103,27 +143,76 @@ mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{F : <span class="fn">Type u_1</span>}</span></span>
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{τ : <span class="fn">Type</span>}</span></span>
+<span class="fn">{τ : <span class="fn">Type u_2</span>}</span></span>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>]</span></span>
+<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#BEq">BEq</a> <span class="fn">τ</span></span>]</span></span>
 </span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps">LeanColls.FoldableOps</a> <span class="fn">F</span> <span class="fn">τ</span></span>)</span></div></div>
+<div class="decl_type"><span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps">LeanColls.FoldableOps</a> <span class="fn">C</span> <span class="fn">τ</span></span>)</span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn">LeanColls.instInhabitedFoldableOps</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">{ default :=
-      <span class="fn">{ mem := <span class="fn">fun [<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">τ</span></span>] <span class="fn">C</span> <span class="fn">x</span> =&gt
-          <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable.fold">LeanColls.Foldable.fold</a> (<span class="fn">fun <span class="fn">y</span> <span class="fn">found</span> =&gt <span class="fn"><a href=".././Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span> <a href=".././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">found</span> <a href=".././Init/Prelude.html#Eq">=</a> <a href=".././Init/Prelude.html#Bool.true">true</a></span></span>)</span></span>) <a href=".././Init/Prelude.html#Bool.false">false</a> <span class="fn">C</span></span></span> }</span> }</span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
+</div>
+</div>
+<div class="decl" id="LeanColls.FoldableOps.toList_ind">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/08fd9a8b6f6ecf8ae5c22e37af1fa82d92b4d73a/LeanColls/FoldableOps.lean#L31-L38">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps.toList_ind">LeanColls.FoldableOps.toList_ind</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#BEq">BEq</a> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps">LeanColls.FoldableOps</a> <span class="fn">C</span> <span class="fn">τ</span></span>]</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{motive : <span class="fn"><span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span> → <span class="fn">Sort v</span></span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(nil : <span class="fn"><span class="fn">motive</span> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(cons : <span class="fn">(hd : <span class="fn">τ</span>) → <span class="fn">(tl : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>) → <span class="fn"><span class="fn"><span class="fn">motive</span> <span class="fn">tl</span></span> → <span class="fn"><span class="fn">motive</span> (<span class="fn"><span class="fn">hd</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">tl</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">C</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">motive</span> (<span class="fn"><a href=".././LeanColls/FoldableOps.html#LeanColls.FoldableOps.toList">LeanColls.FoldableOps.toList</a> <span class="fn">t</span></span>)</span></div></div>
 </div>
 </div>
 </main>
@@ -277,6 +366,9 @@ mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#
 </div>
 <div class="nav_link">
 <a href=".././Init/Data/Nat/Log2.html">Init.Data.Nat.Log2</a>
+</div>
+<div class="nav_link">
+<a href=".././Init/Data/Nat/SOM.html">Init.Data.Nat.SOM</a>
 </div>
 </details>
 <details class="nav_sect" data-path=".././Init/Data/Option.html">
@@ -437,6 +529,9 @@ mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#
 <a href=".././LeanColls/LazyList.html">LeanColls.LazyList</a>
 </div>
 <div class="nav_link">
+<a href=".././LeanColls/List.html">LeanColls.List</a>
+</div>
+<div class="nav_link">
 <a href=".././LeanColls/Queue.html">LeanColls.Queue</a>
 </div>
 <div class="nav_link">
@@ -444,6 +539,9 @@ mem : <span class="fn">[inst : <span class="fn"><a href=".././Init/Prelude.html#
 </div>
 <div class="nav_link">
 <a href=".././LeanColls/Stream.html">LeanColls.Stream</a>
+</div>
+<div class="nav_link">
+<a href=".././LeanColls/Uninit.html">LeanColls.Uninit</a>
 </div>
 </details>
 </div>
