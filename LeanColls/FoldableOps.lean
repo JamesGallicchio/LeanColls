@@ -8,12 +8,35 @@ import LeanColls.Classes
 
 namespace LeanColls
 
-class FoldableOps (F τ) where
-  mem : [DecidableEq τ] → F → τ → Bool
+class FoldableOps (C τ) [Foldable C τ] [BEq τ] where
+  toList : C → List τ
+  h_toList : toList = Foldable.fold (· :: ·) []
+  all : C → (τ → Bool) → Bool
+  h_all : all = List.all ∘ toList
+  contains : C → τ → Bool
+  h_contains : contains = List.contains ∘ toList
 
-instance [Foldable F τ] : Inhabited (FoldableOps F τ) where
+instance [Foldable C τ] [BEq τ] : Inhabited (FoldableOps C τ) where
   default := {
-    mem := λ C x => Foldable.fold (λ y found => x = y ∨ found) false C
+    toList := _
+    h_toList := rfl
+    all := _
+    h_all := rfl
+    contains := _
+    h_contains := rfl
   }
+
+namespace FoldableOps
+
+theorem toList_ind [Foldable C τ] [BEq τ] [FoldableOps C τ] {α : Type u} {motive : List τ → Sort v}
+        (nil : motive List.nil)
+        (cons : (hd : τ) → (tl : List τ) → motive tl → motive (List.cons hd tl))
+        (t : C) : motive (FoldableOps.toList t)
+  := by
+  induction toList t
+  assumption
+  exact cons _ _ (by assumption)
+
+end FoldableOps
 
 end LeanColls
