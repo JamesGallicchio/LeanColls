@@ -9,6 +9,9 @@ import LeanColls.Range
 
 namespace LeanColls
 
+instance [Indexed C τ] : Foldable C τ where
+  fold f init c := Range.fold (λ i acc => f (Indexed.nth c i) acc) init ⟨⟩
+
 structure Slice (C) (τ : outParam (Type u)) [Indexed C τ] where
   c : C
   off : Nat
@@ -34,8 +37,8 @@ instance [Indexed C τ] : Inhabited (IndexedOps C τ) where
 
 instance [Indexed C τ] : MapLike C Nat τ where
   κ c := Range (Indexed.size c)
-  κ_hasMem c := Range.instMembershipNatRange
-  keySet c := Range.mk (Indexed.size c)
+  κ_hasMem c := ⟨λ i _ => i < Indexed.size c⟩
+  keySet c := @Range.mk (Indexed.size c)
   get c i := Indexed.nth c ⟨i.val, i.property⟩
 
 end LeanColls
