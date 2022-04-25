@@ -30,19 +30,23 @@ def get {α} {n : @& Nat}
         (A : @& Array α n) (i : @& Fin n) : α
   := A.data i
 
-@[inline, extern "leancolls_array_set"]
+@[extern "leancolls_array_set"]
 def set {α} {n : @& Nat}
         (A : Array α n) (i : @& Fin n) (x : α)
   : Array α n
   := ⟨λ a => if a = i then x  else A.data a⟩
 
-@[inline, extern "leancolls_array_resize"]
+@[extern "leancolls_array_resize"]
 def resize {α} {n : @& Nat} (A : Array α n)
           (x : @&α) (m : @& Nat)
   : Array α m
   := ⟨λ i => if h:i < n
     then A.data ⟨i,h⟩
     else x⟩
+
+@[extern "leancolls_array_copy"]
+def copy {α} {n : @& Nat} (A : @& Array α n) : Array α n
+  := ⟨λ i => A.data i⟩
 
 unsafe def allInitUnsafe (A : Array (Uninit α) n)
   (h : ∀ i, (A.get i).isInit) : Array α n
@@ -125,8 +129,6 @@ theorem grow_notfull (A : ArrayBuffer α)
     apply Nat.lt_of_le_of_lt (Nat.le_of_succ_le_succ A.size.isLt)
     assumption
 
-set_option pp.coercions true
-
 @[inline] def push_notfull (A : ArrayBuffer α) (h : ¬A.full) (a : α) : ArrayBuffer α
   :=
     match A with
@@ -178,4 +180,15 @@ instance : Indexed (Array α n) α where
   size _ := n
   nth a i := a.get i
 
-end LeanColls
+structure COWArray (α n) where
+  backing : Array α n
+
+namespace COWArray
+variable (A : COWArray α n)
+
+def new (x : α) (n : Nat) := Array.new x n |> COWArray.mk
+def get : Fin n → α := A.backing.get
+def set (i : Fin n) (x : α) : COWArray α n :=
+  A.backing.copy |>.set i x |> COWArray.mk
+
+end COWArray

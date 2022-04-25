@@ -12,7 +12,7 @@ set_option compiler.extract_closed false
 
 def main : IO Unit := do
   /- Some linear usage (all gucci!) -/
-  let mut arr := Array.new 73 100
+  let mut arr := COWArray.new 73 100
   for i in @Range.mk 100 do
     arr := arr.set i i.val
   let mut sum := 0

@@ -1,10 +1,13 @@
 # TODO
 
 - Finish correctness proofs for RTQueue
+- Finish correctness of basic Range functions
 - Implement
+  - RBFingerTree
   - OrdMap
-  - RBTree
+  - RedBlackTree
   - HashMap
+- Test how much we can get view folds inlined
 ---
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
@@ -13,8 +16,14 @@
 
 ## Done
 
+### 28 Apr 2022
+- Finished third iteration of Array (that actually works this time)
+- Add copy on write arrays
+
 ### 14 Apr 2022
 - Implemented improved Array/ArrayBuffer (no more Option boxes!)
+- Fleshed out View
+- More proof bashing (I should really stop doing this)
 
 ### 5 Apr 2022
 - Bashed head against RealTimeQueue proof issues
