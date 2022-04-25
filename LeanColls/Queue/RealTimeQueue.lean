@@ -40,53 +40,48 @@ def empty : RTQueue τ :=
     by simp
   ⟩
 
-@[inline] private def rotate (f : LazyList τ) (r : List τ) (a : LazyList τ)
-  (h : f.length + 1 = r.length) : LazyList τ :=
+@[inline] private def rotate (f : LazyList τ) (r : τ) (rs : List τ) (a : LazyList τ)
+  (h : f.length = rs.length) : LazyList τ :=
   LazyList.delayed (Thunk.mk (λ () =>
-    match h_r:r with
-    | List.nil => False.elim (by simp [List.length] at h; cases h)
-    | y::r' =>
     match h_f:f.force with
-    | none =>  LazyList.cons y a
-    | some (x, f') => LazyList.cons x (rotate f' r' (LazyList.cons y a) (by
+    | none =>  LazyList.cons r a
+    | some (x, f') =>
+    match h_r:rs with
+    | [] => by
       rw [←LazyList.length_toList] at h
-      rw [LazyList.toList_force_some h_f] at h
-      simp at h
-      exact h
-      ))
-  ))
+      simp[LazyList.toList_force_some h_f] at h
+    | r'::rs' =>
+      LazyList.cons x (rotate f' r' rs' (LazyList.cons r a) (by
+        rw [←LazyList.length_toList] at h
+        rw [LazyList.toList_force_some h_f] at h
+        simp at h
+        exact h
+        ))
+      )
+  )
 
-private theorem rotate_inv {F : LazyList α} {R} {S}
-  : (h : _) → (rotate F R S h).toList = F.toList ++ R.reverse
+private theorem rotate_inv {F : LazyList α} {r R S}
+  : (h : _) → (rotate F r R S h).toList = F.toList ++ r :: R.reverse
   := by
+  intro h
+  unfold rotate
+  simp [Thunk.get]
+  unfold rotate.match_1
+  unfold rotate.match_2
+  unfold rotate.proof_1
+  unfold rotate.proof_2
+  unfold rotate.proof_3
+  unfold rotate.proof_4
   induction F using LazyList.ind
   case nil =>
-    intro h
-    simp at h
-    match R with
-    | [] => contradiction
-    | [x] =>
-      unfold rotate
-      simp [Thunk.get]
-      unfold LazyList.force.match_1
-      unfold LazyList.force.proof_1
-      unfold LazyList.force.proof_2
-      simp [LazyList.force]
-      sorry
-    | _::_::_ =>
-      simp at h
-      contradiction
+    simp [LazyList.force]
+    sorry
   case cons hd tl ih =>
-    intro h
     simp
     sorry
   case delayed F ih =>
-    intro h
     simp
     sorry
-  case mk fn ih =>
-    intro h
-    exact ih ()
   
 
 @[inline] private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
@@ -100,7 +95,12 @@ private theorem rotate_inv {F : LazyList α} {R} {S}
       assumption
     ⟩
   | none =>
-    let F' := rotate F R LazyList.nil (by
+  match R with
+  | [] => by
+    rw [←LazyList.length_toList S, LazyList.toList_force_none.mp h] at h_lens
+    contradiction
+  | r::rs =>
+    let F' := rotate F r rs LazyList.nil (by
       rw [←@LazyList.length_toList τ S] at h_lens
       rw [LazyList.toList_force_none] at h
       rw [h] at h_lens
@@ -113,11 +113,7 @@ private theorem balance_inv {F : LazyList α} {R} {S} (h_lens)
   : model_fn (balance F R S h_lens) = F.toList ++ R.reverse
   := by
   simp [balance]
-  match S.force with
-  | none =>
-    simp [dite, model_fn]
-  | some _ =>
-    simp [dite, model_fn]
+  sorry
 
 def enq (Q : RTQueue τ) (x : τ) : RTQueue τ :=
   let ⟨F, R, S, h_lens⟩ := Q
@@ -145,9 +141,8 @@ instance : Queue (RTQueue τ) τ where
     intros c x
     cases c; case mk F R S h_lens =>
     simp [enq, balance_inv]
-    simp [Model.enq, model_fn]
+    simp [List.cons, model_fn]
     rw [←List.append_assoc]
-    simp [HAppend.hAppend, Append.append]
   deq   := deq
   h_deq := by
     intro c
