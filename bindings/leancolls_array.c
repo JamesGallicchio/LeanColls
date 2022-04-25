@@ -161,7 +161,10 @@ lean_object* leancolls_array_resize(b_lean_obj_arg n, lean_obj_arg arr,
     return leancolls_array_box(new_backing);
 }
 
-lean_object* leancolls_array_copy(b_lean_obj_arg n, b_lean_obj_arg arr) {
+lean_object* leancolls_array_copy(b_lean_obj_arg n, lean_obj_arg arr) {
+    if (lean_is_exclusive(arr))
+        return arr;
+    
     size_t len = leancolls_unbox_array_size(n);
     
     lean_object** old_backing = leancolls_array_unbox(arr);

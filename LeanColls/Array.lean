@@ -45,7 +45,7 @@ def resize {α} {n : @& Nat} (A : Array α n)
     else x⟩
 
 @[extern "leancolls_array_copy"]
-def copy {α} {n : @& Nat} (A : @& Array α n) : Array α n
+def copy {α} {n : @& Nat} (A : Array α n) : Array α n
   := ⟨λ i => A.data i⟩
 
 unsafe def allInitUnsafe (A : Array (Uninit α) n)
