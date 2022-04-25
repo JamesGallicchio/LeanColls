@@ -248,7 +248,7 @@ namespace List
       match rest with
       | [] => []
       | (x::xs) =>
-        ⟨x, h _ (List.Mem.head _)⟩ ::
+        ⟨x, h _ (List.Mem.head _ _)⟩ ::
         aux xs (by intros; apply h; apply List.Mem.tail; assumption)
     aux L (by intros; assumption)
 
@@ -287,7 +287,7 @@ namespace List
     | cons hd tl ih =>
       simp at h
       match h with
-      | .head _ => exact Or.inl (List.Mem.head _)
+      | .head _ _ => exact Or.inl (List.Mem.head _ _)
       | .tail _ h =>
       match ih h with
       | .inl h => exact .inl (List.Mem.tail _ h)
