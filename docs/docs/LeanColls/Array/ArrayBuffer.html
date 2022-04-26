@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-<title>Init.Control.Reader</title>
+<title>LeanColls.Array.ArrayBuffer</title>
 <meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././declaration-data.bmp"></link><script defer="true" src="../.././mathjax-config.js">
 </script>
 <script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
@@ -21,30 +21,27 @@
 <label for="nav_toggle">
 </label>
 Documentation</h1>
-<p class="header_filename break_within">Init.Control.Reader</p>
+<p class="header_filename break_within">LeanColls.Array.ArrayBuffer</p>
 <form action="https://google.com/search" method="get" id="search_form">
 <input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
 </form>
 </header>
 <nav class="internal_nav">
 <h3>
-<a class="break_within" href="#top">Init.Control.Reader</a>
+<a class="break_within" href="#top">LeanColls.Array.ArrayBuffer</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean">source</a>
 </p>
 <div class="imports">
 <details>
 <summary>Imports</summary>
 <ul>
 <li>
-<a href="../.././Init/Control/Basic.html">Init.Control.Basic</a>
+<a href="../.././Init.html">Init</a>
 </li>
 <li>
-<a href="../.././Init/Control/Except.html">Init.Control.Except</a>
-</li>
-<li>
-<a href="../.././Init/Control/Id.html">Init.Control.Id</a>
+<a href="../.././LeanColls/Array/Basic.html">LeanColls.Array.Basic</a>
 </li>
 </ul>
 </details>
@@ -52,241 +49,280 @@ Documentation</h1>
 <summary>Imported by</summary>
 <ul>
 <li>
-<a href="../.././Init/Control.html">Init.Control</a>
-</li>
-<li>
-<a href="../.././Init/System/IO.html">Init.System.IO</a>
-</li>
-<li>
-<a href="../.././Init/System/ST.html">Init.System.ST</a>
+<a href="../.././LeanColls/Array.html">LeanColls.Array</a>
 </li>
 </ul>
 </details>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ReaderT.orElse">ReaderT.orElse</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ReaderT.failure">ReaderT.failure</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer.empty">LeanColls.ArrayBuffer.empty</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ReaderT.instAlternativeReaderT">ReaderT.instAlternativeReaderT</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer.full">LeanColls.ArrayBuffer.full</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#instMonadControlReaderT">instMonadControlReaderT</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer.grow">LeanColls.ArrayBuffer.grow</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ReaderT.tryFinally">ReaderT.tryFinally</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer.grow_notfull">LeanColls.ArrayBuffer.grow_notfull</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#Reader">Reader</a>
+<a class="break_within" href="#LeanColls.ArrayBuffer.push_notfull">LeanColls.ArrayBuffer.push_notfull</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.ArrayBuffer.push">LeanColls.ArrayBuffer.push</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.ArrayBuffer.toArray">LeanColls.ArrayBuffer.toArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.instEnumerableSigmaNatArray">LeanColls.instEnumerableSigmaNatArray</a>
 </div>
 </nav>
 <main>
-<div class="decl" id="ReaderT.orElse">
+<div class="decl" id="LeanColls.ArrayBuffer">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L5-L12">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a>
+</span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Type u_1</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type u_1</span></div></div>
+<ul class="structure_fields" id="LeanColls.ArrayBuffer.mk">
+<li id="LeanColls.ArrayBuffer.cap" class="structure_field">
+<div class="structure_field_info">
+cap : <a href="../.././Init/Prelude.html#Nat">Nat</a></div>
+</li>
+<li id="LeanColls.ArrayBuffer.h_cap" class="structure_field">
+<div class="structure_field_info">
+h_cap : <span class="fn"><span class="fn">1</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">cap</span></span></div>
+</li>
+<li id="LeanColls.ArrayBuffer.size" class="structure_field">
+<div class="structure_field_info">
+size : <span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> (<span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">cap</span></span>)</span></div>
+</li>
+<li id="LeanColls.ArrayBuffer.backing" class="structure_field">
+<div class="structure_field_info">
+backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> (<span class="fn"><a href="../.././LeanColls/Uninit.html#LeanColls.Uninit">LeanColls.Uninit</a> <span class="fn">α</span></span>) <span class="fn">cap</span></span></div>
+</li>
+<li id="LeanColls.ArrayBuffer.h_filled" class="structure_field">
+<div class="structure_field_info">
+h_filled : <span class="fn">∀ (i : <a href="../.././Init/Prelude.html#Nat">Nat</a>),
+  <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">size</span>.val</span></span> → <span class="fn"><span class="fn"><a href="../.././LeanColls/Uninit.html#LeanColls.Uninit.isInit">LeanColls.Uninit.isInit</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> <span class="fn">backing</span> <span class="fn">{ val := <span class="fn">i</span>, isLt := (_ : <span class="fn"><span class="fn">i</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">cap</span></span>) }</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Init/Prelude.html#Bool.true">true</a></span></span></span></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="decl" id="LeanColls.ArrayBuffer.empty">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L15-L16">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L16-L22">source</a>
 </div>
-<div class="attributes">@[inline]</div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
 <span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#ReaderT.orElse">ReaderT.orElse</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.empty">LeanColls.ArrayBuffer.empty</a>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
 <span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
 </span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">m</span></span>]</span></span>
-</span>
-<span class="decl_args">
-<span class="fn">(x₁ : <span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span>)</span></span>
-<span class="decl_args">
-<span class="fn">(x₂ : <span class="fn"><a href="../.././Init/Prelude.html#Unit">Unit</a> → <span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span></span>)</span></span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span></div></div>
+<div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Unit">Unit</a> → <span class="fn">(initCap : <span class="fn"><a href="../.././Init/Prelude.html#optParam">optParam</a> <a href="../.././Init/Prelude.html#Nat">Nat</a> <span class="fn">16</span></span>) → <span class="fn"><span class="fn"><a href="../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><span class="fn">1</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">initCap</span></span>) <a href="../.././LeanColls/Array/ArrayBuffer.html#_auto._@.LeanColls.Array.ArrayBuffer._hyg.122">_auto✝</a></span> → <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span></span></span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="../.././Init/Control/Reader.html#ReaderT.orElse">ReaderT.orElse</a> <span class="fn">x₁</span> <span class="fn">x₂</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#HOrElse.hOrElse">HOrElse.hOrElse</a> (<span class="fn"><span class="fn">x₁</span> <span class="fn">s</span></span>) <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn">x₂</span> <a href="../.././Init/Prelude.html#Unit.unit">()</a> <span class="fn">s</span></span></span></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
 </div>
-<div class="decl" id="ReaderT.failure">
+<div class="decl" id="LeanColls.ArrayBuffer.full">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L18-L19">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L24-L24">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
 <span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#ReaderT.failure">ReaderT.failure</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.full">LeanColls.ArrayBuffer.full</a>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
 <span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
 </span>
-<span class="impl_arg">
 <span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">m</span></span>]</span></span>
-</span>
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span>)</span></span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span> <span class="fn">α</span></span></div></div>
+<div class="decl_type"><a href="../.././Init/Prelude.html#Bool">Bool</a></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn"><a href="../.././Init/Control/Reader.html#ReaderT.failure">ReaderT.failure</a> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">failure</span></span></li>
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.full">LeanColls.ArrayBuffer.full</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Decidable.decide">decide</a> (<span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span>.size</span>.val</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span>.cap</span></span>)</span></span></li>
 </ul>
 </details>
 </div>
 </div>
-<div class="decl" id="ReaderT.instAlternativeReaderT">
-<div class="instance">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L21-L23">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">instance</span>
-<span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#ReaderT.instAlternativeReaderT">ReaderT.instAlternativeReaderT</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> <span class="fn">m</span></span>]</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././Init/Control/Basic.html#Alternative">Alternative</a> (<span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span></span>)</span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn">ReaderT.instAlternativeReaderT</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Control/Basic.html#Alternative.mk">Alternative.mk</a> (<span class="fn">fun {α} =&gt <span class="fn">ReaderT.failure</span></span>) <span class="fn">fun {α} =&gt <span class="fn">ReaderT.orElse</span></span></span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="instMonadControlReaderT">
-<div class="instance">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L27-L30">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">instance</span>
-<span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#instMonadControlReaderT">instMonadControlReaderT</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././Init/Control/Basic.html#MonadControl">MonadControl</a> <span class="fn">m</span> (<span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span></span>)</span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn">instMonadControlReaderT</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ stM := <span class="fn">id</span>, liftWith := <span class="fn">fun {α} <span class="fn">f</span> <span class="fn">ctx</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">fun {β} <span class="fn">x</span> =&gt <span class="fn"><span class="fn">x</span> <span class="fn">ctx</span></span></span></span></span>, restoreM := <span class="fn">fun {α} <span class="fn">x</span> <span class="fn">ctx</span> =&gt <span class="fn">x</span></span> }</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="ReaderT.tryFinally">
-<div class="instance">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L32-L33">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">instance</span>
-<span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#ReaderT.tryFinally">ReaderT.tryFinally</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{m : <span class="fn"><span class="fn">Type u_1</span> → <span class="fn">Type u_2</span></span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> <span class="fn">m</span></span>]</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally">MonadFinally</a> (<span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <span class="fn">m</span></span>)</span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn">ReaderT.tryFinally</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ tryFinally' := <span class="fn">fun {α β} <span class="fn">x</span> <span class="fn">h</span> <span class="fn">ctx</span> =&gt <span class="fn"><a href="../.././Init/Control/Except.html#MonadFinally.tryFinally'">tryFinally'</a> (<span class="fn"><span class="fn">x</span> <span class="fn">ctx</span></span>) <span class="fn">fun <span class="fn">a?</span> =&gt <span class="fn"><span class="fn">h</span> <span class="fn">a?</span> <span class="fn">ctx</span></span></span></span></span> }</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Reader">
+<div class="decl" id="LeanColls.ArrayBuffer.grow">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Control/Reader.lean#L35-L35">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L26-L43">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
 <span class="decl_name">
-<a class="break_within" href="../.././Init/Control/Reader.html#Reader">Reader</a>
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.grow">LeanColls.ArrayBuffer.grow</a>
 </span>
+<span class="impl_arg">
 <span class="decl_args">
-<span class="fn">(ρ : <span class="fn">Type u</span>)</span></span>
-<span class="decl_args">
-<span class="fn">(α : <span class="fn">Type u</span>)</span></span>
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type u</span></div></div>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span> → <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="../.././Init/Control/Reader.html#Reader">Reader</a> <span class="fn">ρ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#ReaderT">ReaderT</a> <span class="fn">ρ</span> <a href="../.././Init/Control/Id.html#Id">Id</a></span></span></li>
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.ArrayBuffer.grow_notfull">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L45-L54">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.grow_notfull">LeanColls.ArrayBuffer.grow_notfull</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.full">LeanColls.ArrayBuffer.full</a> (<span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.grow">LeanColls.ArrayBuffer.grow</a> <span class="fn">A</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div>
+</div>
+</div>
+<div class="decl" id="LeanColls.ArrayBuffer.push_notfull">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L56-L76">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.push_notfull">LeanColls.ArrayBuffer.push_notfull</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.full">LeanColls.ArrayBuffer.full</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Init/Prelude.html#Bool.true">true</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.ArrayBuffer.push">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L78-L82">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.push">LeanColls.ArrayBuffer.push</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.ArrayBuffer.toArray">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L85-L91">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer.toArray">LeanColls.ArrayBuffer.toArray</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.ArrayBuffer">LeanColls.ArrayBuffer</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn"><span class="fn"><span class="fn">A</span>.size</span>.val</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.instEnumerableSigmaNatArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/5cb415b58493c5631a303067e1853c5e019ae533/LeanColls/Array/ArrayBuffer.lean#L95-L101">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/ArrayBuffer.html#LeanColls.instEnumerableSigmaNatArray">LeanColls.instEnumerableSigmaNatArray</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Classes.html#LeanColls.Enumerable">LeanColls.Enumerable</a> (<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">Nat</a>) × <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span></span>) <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
 </ul>
 </details>
 </div>
@@ -299,9 +335,9 @@ Documentation</h1>
 </div>
 <h3>Library</h3>
 <div class="module_list">
-<details class="nav_sect" data-path="../.././Init.html" open="">
+<details class="nav_sect" data-path="../.././Init.html">
 <summary><a href="../.././Init.html">Init</a>
-</summary><details class="nav_sect" data-path="../.././Init/Control.html" open="">
+</summary><details class="nav_sect" data-path="../.././Init/Control.html">
 <summary><a href="../.././Init/Control.html">Init.Control</a>
 </summary><div class="nav_link">
 <a href="../.././Init/Control/Basic.html">Init.Control.Basic</a>
@@ -324,7 +360,7 @@ Documentation</h1>
 <div class="nav_link">
 <a href="../.././Init/Control/Option.html">Init.Control.Option</a>
 </div>
-<div class="nav_link visible">
+<div class="nav_link">
 <a href="../.././Init/Control/Reader.html">Init.Control.Reader</a>
 </div>
 <div class="nav_link">
@@ -581,11 +617,11 @@ Documentation</h1>
 <a href="../.././Init/WFTactics.html">Init.WFTactics</a>
 </div>
 </details>
-<details class="nav_sect" data-path="../.././LeanColls.html">
+<details class="nav_sect" data-path="../.././LeanColls.html" open="">
 <summary><a href="../.././LeanColls.html">LeanColls</a>
-</summary><details class="nav_sect" data-path="../.././LeanColls/Array.html">
+</summary><details class="nav_sect" data-path="../.././LeanColls/Array.html" open="">
 <summary><a href="../.././LeanColls/Array.html">LeanColls.Array</a>
-</summary><div class="nav_link">
+</summary><div class="nav_link visible">
 <a href="../.././LeanColls/Array/ArrayBuffer.html">LeanColls.Array.ArrayBuffer</a>
 </div>
 <div class="nav_link">
