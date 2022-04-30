@@ -7,22 +7,6 @@ structure Range (n : Nat)
 
 namespace Range
 
-def fold_ind {motive : (i : Nat) → i ≤ n → Sort u}
-  (zero : motive 0 (Nat.zero_le _))
-  (succ : (i : Nat) → (h : i < n) → motive i (Nat.le_of_lt h) → motive i.succ h)
-  (r : Range n)
-  : motive n (Nat.le_refl _) :=
-  let rec @[inline] loop {m} {α : (i : Nat) → i ≤ m → Sort u}
-    (f : (i : Nat) → (h : i < m) → α i (Nat.le_of_lt h) → α i.succ h)
-    i (h_i : i ≤ m) (acc : α i h_i) : α m (Nat.le_refl _) :=
-    if h:i < m then
-      loop f i.succ h (f i h acc)
-    else
-      have : i = m := (Nat.eq_or_lt_of_le h_i).elim (id) (False.elim ∘ h)
-      cast (by simp [this]) acc
-  loop succ 0 (Nat.zero_le _) zero
-  termination_by loop _ _ _i => m - i
-
 def fold : (Fin n → β → β) → β → Range n → β :=
   let rec @[inline] loop {m α} (f : Fin m → α → α) acc i : α :=
     if h:i < m then
@@ -32,16 +16,40 @@ def fold : (Fin n → β → β) → β → Range n → β :=
   λ f acc ⟨⟩ => loop f acc 0
   termination_by loop _ _ i => m - i
 
+theorem fold_ind {f : Fin n → β → β} {acc : β} {motive : Nat → β → Prop}
+  (init : motive 0 acc)
+  (step : ∀ i acc, (h : i < n) → motive i acc → motive i.succ (f ⟨i,h⟩ acc))
+  : motive n (fold f acc ⟨⟩)
+  :=
+  let rec loop i (acc : β) (h_i : i ≤ n) (h_acc : motive i acc)
+    : motive n (fold.loop f acc i) :=
+    if h:i < n then by
+      unfold fold.loop
+      simp [h]
+      exact loop i.succ (f ⟨i,h⟩ acc) h (step i acc h h_acc)
+    else by
+      have : i = n := (Nat.eq_or_lt_of_le h_i).elim (id) (False.elim ∘ h)
+      unfold fold.loop
+      simp [h]
+      rw [this] at h_acc
+      exact h_acc
+  loop 0 acc (Nat.zero_le _) init
+  termination_by loop _ _ _i => n - i
+
+
 instance : Foldable (Range n) (Fin n) where
   fold := fold
-  toIterable := ⟨Nat, λ i =>
-    if h:i < n then some ⟨⟨i,h⟩,i.succ⟩ else none, λ _ => 0⟩
 
-def toList : (Range n) → List (Fin n) := Unfoldable.unfold
+instance : Iterable (Range n) (Fin n) where
+  ρ := Nat
+  step := λ i => if h:i < n then some ⟨⟨i,h⟩,i.succ⟩ else none
+  toIterator := λ _ => 0
+
+def toList (r : Range n) : List (Fin n) := Unfoldable.unfold r
 
 instance : FoldableOps (Range n) (Fin n) where
   toList := toList
-  h_toList := by rfl
+  h_toList := by sorry
   all := _
   h_all := by rfl
   contains _ i := i < n
