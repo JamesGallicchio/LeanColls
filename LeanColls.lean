@@ -9,9 +9,11 @@ import LeanColls.Classes
 import LeanColls.FoldableOps
 import LeanColls.IndexedOps
 import LeanColls.LazyList
+import LeanColls.List
 import LeanColls.Queue
 import LeanColls.Range
 import LeanColls.Stream
+import LeanColls.View
 
 /-!
 # Lean Collections Library

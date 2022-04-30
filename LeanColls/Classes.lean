@@ -137,7 +137,7 @@ Each `Foldable` type gives rise to a `ForIn`, allowing
 a collection `C` to be used in `for x in C do ...` syntax.
 -/
 
-instance [Monad M] [Foldable F τ] : ForIn M F τ where
+instance instForInOfFoldable [Monad M] [Foldable F τ] : ForIn M F τ where
   forIn c acc f := do
     Foldable.fold
       (λ x ma =>

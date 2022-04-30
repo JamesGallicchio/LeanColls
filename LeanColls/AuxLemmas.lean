@@ -11,6 +11,20 @@ namespace Nat
     case succ z z_ih =>
     simp [Nat.sub_succ, Nat.add_succ, z_ih]
 
+  theorem add_mul_div (x y z : Nat) (h_x : 0 < x)
+    : (x * y + z) / x = y + z / x
+    := by
+    induction y generalizing z with
+    | zero => simp
+    | succ y ih =>
+      simp [mul_succ, Nat.add_assoc]
+      rw [ih (x + z)]
+      simp [HDiv.hDiv, Div.div]
+      rw [Nat.div]
+      simp [h_x, Nat.le_add_right]
+      rw [Nat.add_comm x z, Nat.add_sub_cancel,
+        Nat.add_comm _ 1, ←Nat.add_assoc, Nat.add_one]
+
   theorem lt_of_lt_le {x y z : Nat} : x < y → y ≤ z → x < z := by
     intro h h'
     induction h'
