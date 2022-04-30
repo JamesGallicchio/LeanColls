@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-<title>LeanColls.Buffer</title>
+<title>LeanColls.View</title>
 <meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="stylesheet" href=".././pygments.css"></link><link rel="shortcut icon" href=".././favicon.ico"></link><link rel="prefetch" href=".././declaration-data.bmp"></link><script defer="true" src=".././mathjax-config.js">
 </script>
 <script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6">
@@ -21,17 +21,17 @@
 <label for="nav_toggle">
 </label>
 Documentation</h1>
-<p class="header_filename break_within">LeanColls.Buffer</p>
+<p class="header_filename break_within">LeanColls.View</p>
 <form action="https://google.com/search" method="get" id="search_form">
 <input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs"></input><input type="text" name="q" autocomplete="off"></input><button>Google site search</button>
 </form>
 </header>
 <nav class="internal_nav">
 <h3>
-<a class="break_within" href="#top">LeanColls.Buffer</a>
+<a class="break_within" href="#top">LeanColls.View</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/Buffer.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/View.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -39,6 +39,9 @@ Documentation</h1>
 <ul>
 <li>
 <a href=".././Init.html">Init</a>
+</li>
+<li>
+<a href=".././LeanColls/Classes.html">LeanColls.Classes</a>
 </li>
 </ul>
 </details>
@@ -52,103 +55,101 @@ Documentation</h1>
 </details>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ExpectedSize">ExpectedSize</a>
+<a class="break_within" href="#LeanColls.View">LeanColls.View</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#ToArray">ToArray</a>
+<a class="break_within" href="#LeanColls.View.fold">LeanColls.View.fold</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#instToArray">instToArray</a>
+<a class="break_within" href="#LeanColls.View.instFoldableView">LeanColls.View.instFoldableView</a>
 </div>
 </nav>
 <main>
-<div class="decl" id="ExpectedSize">
-<div class="class">
+<div class="decl" id="LeanColls.View">
+<div class="inductive">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/Buffer.lean#L7-L8">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/View.lean#L11-L15">source</a>
 </div>
 <div class="decl_header">
-<span class="decl_kind">class</span>
+<span class="decl_kind">inductive</span>
 <span class="decl_name">
-<a class="break_within" href=".././LeanColls/Buffer.html#ExpectedSize">ExpectedSize</a>
+<a class="break_within" href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">Type u</span> → <span class="fn">Type (u + 1)</span></span></div></div>
+<ul class="constructors">
+<li class="constructor" id="LeanColls.View.of">
+of: <span class="fn">{τ F : <span class="fn">Type u</span>} → <span class="fn"><span class="fn">F</span> → <span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> <span class="fn">F</span> <span class="fn">τ</span></span>] → <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span></span></span></span></li>
+<li class="constructor" id="LeanColls.View.map">
+map: <span class="fn">{τ' τ : <span class="fn">Type u</span>} → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <span class="fn">τ'</span></span>) → <span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span> → <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ'</span></span></span></span></span></li>
+<li class="constructor" id="LeanColls.View.filter">
+filter: <span class="fn">{τ : <span class="fn">Type u</span>} → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <a href=".././Init/Prelude.html#Bool">Bool</a></span>) → <span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span> → <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span></span></span></span></li>
+<li class="constructor" id="LeanColls.View.filterMap">
+filterMap: <span class="fn">{τ' τ : <span class="fn">Type u</span>} → <span class="fn">(<span class="fn"><span class="fn">τ</span> → <span class="fn"><a href=".././Init/Prelude.html#Option">Option</a> <span class="fn">τ'</span></span></span>) → <span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span> → <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ'</span></span></span></span></span></li>
+</ul>
+</div>
+</div>
+<div class="decl" id="LeanColls.View.fold">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/View.lean#L20-L32">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{β : <span class="fn">Type u_1</span>}</span></span>
 </span>
 <span class="decl_args">
-<span class="fn">(ρ : <span class="fn">Type u</span>)</span></span>
+<span class="fn">(foldF : <span class="fn"><span class="fn">τ</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(foldAcc : <span class="fn">β</span>)</span></span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type u</span></div></div>
-<ul class="structure_fields" id="ExpectedSize.mk">
-<li id="ExpectedSize.expectedSize" class="structure_field">
-<div class="structure_field_info">
-expectedSize : <span class="fn"><span class="fn">ρ</span> → <a href=".././Init/Prelude.html#Nat">Nat</a></span></div>
-</li>
-</ul>
-<details class="instances">
-<summary>Instances</summary>
-<ul>
+<div class="decl_type"><span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span> → <span class="fn">β</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> <span class="fn">foldF</span> <span class="fn">foldAcc</span> (<span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.of">LeanColls.View.of</a> <span class="fn">c</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable.fold">LeanColls.Foldable.fold</a> <span class="fn">foldF</span> <span class="fn">foldAcc</span> <span class="fn">c</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> <span class="fn">foldF</span> <span class="fn">foldAcc</span> (<span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.map">LeanColls.View.map</a> <span class="fn">f</span> <span class="fn">v</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> (<span class="fn"><span class="fn">foldF</span> <a href=".././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>) <span class="fn">foldAcc</span> <span class="fn">v</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> <span class="fn">foldF</span> <span class="fn">foldAcc</span> (<span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.filter">LeanColls.View.filter</a> <span class="fn">f</span> <span class="fn">v</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">a</span> =&gt <span class="fn">if <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <a href=".././Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><span class="fn">foldF</span> <span class="fn">x</span> <span class="fn">a</span></span> else <span class="fn">a</span></span></span>) <span class="fn">foldAcc</span> <span class="fn">v</span></span></span></li>
+<li class="equation">
+<span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> <span class="fn">foldF</span> <span class="fn">foldAcc</span> (<span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.filterMap">LeanColls.View.filterMap</a> <span class="fn">f</span> <span class="fn">v</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a>
+    (<span class="fn">fun <span class="fn">x</span> <span class="fn">a</span> =&gt
+      <span class="fn">match <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> with
+      | <span class="fn">none</span> =&gt <span class="fn">a</span>
+      | <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn">x'</span></span> =&gt <span class="fn"><a href=".././Init/Prelude.html#Option.some">foldF</a> <span class="fn">x'</span> <span class="fn">a</span></span></span></span>)
+    <span class="fn">foldAcc</span> <span class="fn">v</span></span></span></li>
 </ul>
 </details>
 </div>
 </div>
-<div class="decl" id="ToArray">
-<div class="class">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/Buffer.lean#L10-L11">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">class</span>
-<span class="decl_name">
-<a class="break_within" href=".././LeanColls/Buffer.html#ToArray">ToArray</a>
-</span>
-<span class="decl_args">
-<span class="fn">(ρ : <span class="fn">Type u</span>)</span></span>
-<span class="decl_args">
-<span class="fn">(α : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> (<span class="fn">Type v</span>)</span>)</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn">Type (max u v)</span></div></div>
-<ul class="structure_fields" id="ToArray.mk">
-<li id="ToArray.toArray" class="structure_field">
-<div class="structure_field_info">
-toArray : <span class="fn"><span class="fn">ρ</span> → <span class="fn"><a href=".././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span></span></div>
-</li>
-</ul>
-<details class="instances">
-<summary>Instances</summary>
-<ul>
-<li>
-<a href=".././LeanColls/Buffer.html#instToArray">instToArray</a>
-</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="instToArray">
+<div class="decl" id="LeanColls.View.instFoldableView">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/Buffer.lean#L13-L18">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/View.lean#L34-L35">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
 <span class="decl_name">
-<a class="break_within" href=".././LeanColls/Buffer.html#instToArray">instToArray</a>
+<a class="break_within" href=".././LeanColls/View.html#LeanColls.View.instFoldableView">LeanColls.View.instFoldableView</a>
 </span>
 <span class="impl_arg">
 <span class="decl_args">
-<span class="fn">{ρ : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{α : <span class="fn">Type u_2</span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href=".././Init/Core.html#ForIn">ForIn</a> <a href=".././Init/Control/Id.html#Id">Id</a> <span class="fn">ρ</span> <span class="fn">α</span></span>]</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">[inst : <span class="fn"><a href=".././LeanColls/Buffer.html#ExpectedSize">ExpectedSize</a> <span class="fn">ρ</span></span>]</span></span>
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
 </span>
 <span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href=".././LeanColls/Buffer.html#ToArray">ToArray</a> <span class="fn">ρ</span> <span class="fn">α</span></span></div></div>
+<div class="decl_type"><span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Foldable">LeanColls.Foldable</a> (<span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span>) <span class="fn">τ</span></span></div></div>
 <details>
 <summary>Equations</summary>
 <ul class="equations">
@@ -461,7 +462,7 @@ toArray : <span class="fn"><span class="fn">ρ</span> → <span class="fn"><a hr
 <div class="nav_link">
 <a href=".././LeanColls/AuxLemmas.html">LeanColls.AuxLemmas</a>
 </div>
-<div class="nav_link visible">
+<div class="nav_link">
 <a href=".././LeanColls/Buffer.html">LeanColls.Buffer</a>
 </div>
 <div class="nav_link">
@@ -491,7 +492,7 @@ toArray : <span class="fn"><span class="fn">ρ</span> → <span class="fn"><a hr
 <div class="nav_link">
 <a href=".././LeanColls/Uninit.html">LeanColls.Uninit</a>
 </div>
-<div class="nav_link">
+<div class="nav_link visible">
 <a href=".././LeanColls/View.html">LeanColls.View</a>
 </div>
 </details>
