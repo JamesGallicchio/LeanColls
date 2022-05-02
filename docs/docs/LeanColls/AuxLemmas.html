@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.AuxLemmas</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -65,6 +65,15 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#Nat.add_mul_div">Nat.add_mul_div</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.div_mul_cancel">Nat.div_mul_cancel</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.le_of_mul_of_div">Nat.le_of_mul_of_div</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Nat.lt_of_mul_lt">Nat.lt_of_mul_lt</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#Nat.lt_of_lt_le">Nat.lt_of_lt_le</a>
@@ -245,7 +254,7 @@ Documentation</h1>
 <div class="decl" id="Nat.sub_dist">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L8-L12">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L8-L12">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -265,29 +274,113 @@ Documentation</h1>
 <div class="decl" id="Nat.add_mul_div">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L14-L26">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L14-L26">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
 <span class="decl_name">
 <a class="break_within" href=".././LeanColls/AuxLemmas.html#Nat.add_mul_div">Nat.add_mul_div</a>
 </span>
+<span class="impl_arg">
 <span class="decl_args">
-<span class="fn">(x : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="fn">{x : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
 <span class="decl_args">
-<span class="fn">(y : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="fn">{y : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
 <span class="decl_args">
-<span class="fn">(z : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="fn">{z : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
 <span class="decl_args">
 <span class="fn">(h_x : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">x</span></span>)</span></span>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">z</span></span>) <a href=".././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">x</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">z</span> <a href=".././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">x</span></span></span></span></div></div>
 </div>
 </div>
+<div class="decl" id="Nat.div_mul_cancel">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L28-L46">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/AuxLemmas.html#Nat.div_mul_cancel">Nat.div_mul_cancel</a>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{q : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{r : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h_r : <span class="fn"><span class="fn">r</span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">q</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r</span></span>) <a href=".././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">q</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.le_of_mul_of_div">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L48-L53">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/AuxLemmas.html#Nat.le_of_mul_of_div">Nat.le_of_mul_of_div</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h_x : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">y</span> <a href=".././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">x</span></span>)</span> <a href=".././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="Nat.lt_of_mul_lt">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L55-L70">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/AuxLemmas.html#Nat.lt_of_mul_lt">Nat.lt_of_mul_lt</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{x : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{y : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{z : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(h_z : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">y</span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span> → <span class="fn"><span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">z</span></span> <a href=".././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">y</span></span></span></div></div>
+</div>
+</div>
 <div class="decl" id="Nat.lt_of_lt_le">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L28-L33">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L72-L77">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -313,7 +406,7 @@ Documentation</h1>
 <div class="decl" id="Nat.min_le_left">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L35-L41">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L79-L85">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -335,7 +428,7 @@ Documentation</h1>
 <div class="decl" id="Nat.min_le_right">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L43-L47">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L87-L91">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -357,7 +450,7 @@ Documentation</h1>
 <div class="decl" id="Nat.min_succ_succ">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L49-L57">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L93-L101">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -379,7 +472,7 @@ Documentation</h1>
 <div class="decl" id="Nat.min_zero_left">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L60-L62">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L104-L106">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -398,7 +491,7 @@ Documentation</h1>
 <div class="decl" id="Nat.min_zero_right">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L65-L67">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L109-L111">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -417,7 +510,7 @@ Documentation</h1>
 <div class="decl" id="Nat.toUSize!">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L69-L73">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L113-L117">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -439,7 +532,7 @@ Documentation</h1>
 <div class="decl" id="Fin.embed_add_right">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L80-L81">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L124-L125">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -469,7 +562,7 @@ Documentation</h1>
 <div class="decl" id="Fin.embed_add_left">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L84-L85">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L128-L129">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -499,7 +592,7 @@ Documentation</h1>
 <div class="decl" id="Fin.embed_succ">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L88-L89">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L132-L133">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -525,7 +618,7 @@ Documentation</h1>
 <div class="decl" id="Fin.last">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L92-L92">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L136-L136">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -548,7 +641,7 @@ Documentation</h1>
 <div class="decl" id="Option.get">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L98-L100">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L142-L144">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -577,7 +670,7 @@ Documentation</h1>
 <div class="decl" id="Option.some_inj">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L102-L102">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L146-L146">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -603,7 +696,7 @@ Documentation</h1>
 <div class="decl" id="List.front?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L106-L108">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L150-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -630,7 +723,7 @@ Documentation</h1>
 <div class="decl" id="List.front_cons">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L111-L115">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L155-L159">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -655,7 +748,7 @@ Documentation</h1>
 <div class="decl" id="List.back?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L117-L119">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L161-L163">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -685,7 +778,7 @@ Documentation</h1>
 <div class="decl" id="List.back_concat">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L122-L128">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L166-L172">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -710,7 +803,7 @@ Documentation</h1>
 <div class="decl" id="List.concat_nonempty">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L130-L135">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L174-L179">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -734,7 +827,7 @@ Documentation</h1>
 <div class="decl" id="List.back_some_iff_concat">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L137-L173">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L181-L217">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -762,7 +855,7 @@ Documentation</h1>
 <div class="decl" id="List.concat_append">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L176-L183">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L220-L227">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -789,7 +882,7 @@ Documentation</h1>
 <div class="decl" id="List.map_concat">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L186-L193">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L230-L237">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -820,7 +913,7 @@ Documentation</h1>
 <div class="decl" id="List.join_concat">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L196-L202">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L240-L246">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -845,7 +938,7 @@ Documentation</h1>
 <div class="decl" id="List.get_of_set_eq">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L205-L220">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L249-L264">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -870,7 +963,7 @@ Documentation</h1>
 <div class="decl" id="List.get_of_set_ne">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L223-L245">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L267-L289">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -898,7 +991,7 @@ Documentation</h1>
 <div class="decl" id="List.length_take">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L247-L257">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L291-L301">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -927,7 +1020,7 @@ Documentation</h1>
 <div class="decl" id="List.subtypeByMem">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L259-L267">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L303-L311">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -954,7 +1047,7 @@ Documentation</h1>
 <div class="decl" id="List.subtypeByMem.aux">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L260-L266">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L304-L310">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -987,7 +1080,7 @@ Documentation</h1>
 <div class="decl" id="List.length_subtypeByMemAux">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L269-L276">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L313-L320">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1011,7 +1104,7 @@ Documentation</h1>
 <div class="decl" id="List.length_subtypeByMem">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L279-L281">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L323-L325">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1032,7 +1125,7 @@ Documentation</h1>
 <div class="decl" id="List.index_of_mem">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L283-L294">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L327-L338">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1063,7 +1156,7 @@ Documentation</h1>
 <div class="decl" id="List.mem_of_append">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L296-L308">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L340-L352">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1098,7 +1191,7 @@ Documentation</h1>
 <div class="decl" id="List.get_of_take">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L310-L337">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L354-L381">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1124,7 +1217,7 @@ Documentation</h1>
 <div class="decl" id="List.length_rangeAux">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L340-L343">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L384-L387">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1147,7 +1240,7 @@ Documentation</h1>
 <div class="decl" id="List.length_range">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L346-L347">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L390-L391">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1166,7 +1259,7 @@ Documentation</h1>
 <div class="decl" id="List.get?_eq_get">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L349-L362">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L393-L406">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1192,7 +1285,7 @@ Documentation</h1>
 <div class="decl" id="List.rangeAux_eq_append">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L364-L375">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L408-L419">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1218,7 +1311,7 @@ Documentation</h1>
 <div class="decl" id="List.get?_range">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L377-L402">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L421-L446">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1238,7 +1331,7 @@ Documentation</h1>
 <div class="decl" id="List.get_range'">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L404-L406">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L448-L450">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1258,7 +1351,7 @@ Documentation</h1>
 <div class="decl" id="List.get_range">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L409-L412">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L453-L456">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1279,7 +1372,7 @@ Documentation</h1>
 <div class="decl" id="Vector">
 <div class="inductive">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L415-L417">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L459-L461">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">inductive</span>
@@ -1301,7 +1394,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Vector.ofList">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L420-L422">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L464-L466">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1330,7 +1423,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Vector.toList">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L424-L426">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L468-L470">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1363,7 +1456,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Vector.length_toList">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L428-L430">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L472-L474">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">theorem</span>
@@ -1387,7 +1480,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Function.update">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L435-L437">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L479-L481">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1426,7 +1519,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Function.update'">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L439-L444">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L483-L488">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1471,7 +1564,7 @@ cons: <span class="fn">{α : <span class="fn">Type u</span>} → <span class="fn
 <div class="decl" id="Monoid">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L447-L452">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L491-L496">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -1517,7 +1610,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Monoid.instAppend">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L456-L457">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L500-L501">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1546,7 +1639,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Monoid.mApp_assoc">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L460-L460">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L504-L504">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1575,7 +1668,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Monoid.instMonoidNat">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L462-L467">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L506-L511">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1597,7 +1690,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L472-L472">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L516-L516">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1624,7 +1717,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.instDecidableEqCached">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L476-L477">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L520-L521">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1652,7 +1745,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.instReprCached">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L479-L480">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L523-L524">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1681,7 +1774,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.instSubsingletonCached">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L482-L483">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L526-L527">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1710,7 +1803,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.instCoeHeadCached">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L485-L486">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L529-L530">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1739,7 +1832,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.cached">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L488-L489">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L532-L533">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1766,7 +1859,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.instInhabitedCached">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L491-L492">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L535-L536">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -1795,7 +1888,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="Cached.cached_val">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L494-L494">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L538-L538">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -1818,7 +1911,7 @@ h_assoc : <span class="fn">∀ (v1 v2 v3 : <span class="fn">M</span>), <span cla
 <div class="decl" id="time">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/90e55d4077b74d40976eb0fc196755a3ae4c8e0a/LeanColls/AuxLemmas.lean#L500-L504">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2d3874af178d2ae0c76bd88384b3c6fdf60f7e07/LeanColls/AuxLemmas.lean#L544-L548">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>

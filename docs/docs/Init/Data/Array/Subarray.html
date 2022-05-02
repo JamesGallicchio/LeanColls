@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">Init.Data.Array.Subarray</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -59,6 +59,21 @@ Documentation</h1>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#Subarray">Subarray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Subarray.size">Subarray.size</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Subarray.get">Subarray.get</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Subarray.getD">Subarray.getD</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Subarray.get!">Subarray.get!</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#Subarray.getOp">Subarray.getOp</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#Subarray.popFront">Subarray.popFront</a>
@@ -143,7 +158,7 @@ Documentation</h1>
 <div class="decl" id="Subarray">
 <div class="structure">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L11-L16">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L11-L16">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">structure</span>
@@ -178,10 +193,165 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 </ul>
 </div>
 </div>
+<div class="decl" id="Subarray.size">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L20-L21">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Array/Subarray.html#Subarray.size">Subarray.size</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray">Subarray</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><a href="../../.././Init/Prelude.html#Nat">Nat</a></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.size">Subarray.size</a> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">s</span>.stop</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">s</span>.start</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Subarray.get">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L23-L30">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Array/Subarray.html#Subarray.get">Subarray.get</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray">Subarray</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> (<span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.size">Subarray.size</a> <span class="fn">s</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.get">Subarray.get</a> <span class="fn">s</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let_fun this := (_ : <span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.start</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">i</span>.val</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Init/Prelude.html#Array.size">Array.size</a> <span class="fn"><span class="fn">s</span>.as</span></span></span>);
+  <span class="fn"><a href="../../.././Init/Prelude.html#Array.get">Array.get</a> <span class="fn"><span class="fn">s</span>.as</span> <span class="fn">{ val := <span class="fn"><span class="fn"><span class="fn">s</span>.start</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">i</span>.val</span></span>, isLt := <span class="fn">this</span> }</span></span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Subarray.getD">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L32-L33">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Array/Subarray.html#Subarray.getD">Subarray.getD</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray">Subarray</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(v₀ : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.getD">Subarray.getD</a> <span class="fn">s</span> <span class="fn">i</span> <span class="fn">v₀</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.size">Subarray.size</a> <span class="fn">s</span></span></span> then <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.get">Subarray.get</a> <span class="fn">s</span> <span class="fn">{ val := <span class="fn">i</span>, isLt := <span class="fn">h</span> }</span></span> else <span class="fn">v₀</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Subarray.get!">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L35-L36">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Array/Subarray.html#Subarray.get!">Subarray.get!</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray">Subarray</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.get!">Subarray.get!</a> <span class="fn">s</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.getD">Subarray.getD</a> <span class="fn">s</span> <span class="fn">i</span> <span class="fn">default</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="Subarray.getOp">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L38-L39">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../../.././Init/Data/Array/Subarray.html#Subarray.getOp">Subarray.getOp</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(self : <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray">Subarray</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(idx : <a href="../../.././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.getOp">Subarray.getOp</a> <span class="fn">self</span> <span class="fn">idx</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Data/Array/Subarray.html#Subarray.get!">Subarray.get!</a> <span class="fn">self</span> <span class="fn">idx</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="Subarray.popFront">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L20-L24">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L41-L45">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -211,7 +381,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.forInUnsafe">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L26-L36">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L47-L57">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -256,7 +426,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.forInUnsafe.loop">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L28-L35">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L49-L56">source</a>
 </div>
 <div class="attributes">@[specialize]</div>
 <div class="decl_header">
@@ -303,7 +473,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.forIn">
 <div class="constant">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L40-L41">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L61-L62">source</a>
 </div>
 <div class="attributes">@[implementedBy Subarray.forInUnsafe]</div>
 <div class="decl_header">
@@ -340,7 +510,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.instForInSubarray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L43-L44">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L64-L65">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -369,7 +539,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.foldlM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L47-L48">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L68-L69">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -413,7 +583,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.foldrM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L51-L52">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L72-L73">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -457,7 +627,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.anyM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L55-L56">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L76-L77">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -495,7 +665,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.allM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L59-L60">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L80-L81">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -533,7 +703,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.forM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L63-L64">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L84-L85">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -571,7 +741,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.forRevM">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L67-L68">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L88-L89">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -609,7 +779,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.foldl">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L71-L72">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L92-L93">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -645,7 +815,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.foldr">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L75-L76">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L96-L97">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -681,7 +851,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.any">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L79-L80">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L100-L101">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -711,7 +881,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.all">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L83-L84">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L104-L105">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -741,7 +911,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.toSubarray">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L91-L101">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L112-L122">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -771,7 +941,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.ofSubarray">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L103-L107">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L124-L128">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -797,7 +967,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.extract">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L109-L110">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L130-L131">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -828,7 +998,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.instCoeSubarrayArray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L112-L112">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L133-L133">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -853,7 +1023,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.«term__[_:_]»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L114-L114">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L135-L135">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -873,7 +1043,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.«term__[_:]»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L115-L115">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L136-L136">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -893,7 +1063,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Array.«term__[:_]»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L116-L116">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L137-L137">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -913,7 +1083,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="Subarray.toArray">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L125-L126">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L146-L147">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -940,7 +1110,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="instAppendSubarray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L128-L131">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L149-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -967,7 +1137,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="instReprSubarray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L133-L134">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L154-L155">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -996,7 +1166,7 @@ h₂ : <span class="fn"><span class="fn">stop</span> <a href="../../.././Init/Pr
 <div class="decl" id="instToStringSubarray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/3ad8dcb7ffdc3b01ae326798bf2e3a7e11cd961b/src/Init/Data/Array/Subarray.lean#L136-L137">source</a>
+<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Data/Array/Subarray.lean#L157-L158">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
