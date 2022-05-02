@@ -11,19 +11,63 @@ namespace Nat
     case succ z z_ih =>
     simp [Nat.sub_succ, Nat.add_succ, z_ih]
 
-  theorem add_mul_div (x y z : Nat) (h_x : 0 < x)
+  theorem add_mul_div {x y z : Nat} (h_x : 0 < x)
     : (x * y + z) / x = y + z / x
     := by
     induction y generalizing z with
     | zero => simp
     | succ y ih =>
       simp [mul_succ, Nat.add_assoc]
-      rw [ih (x + z)]
+      rw [ih]
       simp [HDiv.hDiv, Div.div]
       rw [Nat.div]
       simp [h_x, Nat.le_add_right]
       rw [Nat.add_comm x z, Nat.add_sub_cancel,
         Nat.add_comm _ 1, ←Nat.add_assoc, Nat.add_one]
+
+  theorem div_mul_cancel (x : Nat) {q r : Nat} (h_r : r < q)
+    : (x * q + r) / q = x
+    := by
+    induction x with
+    | zero =>
+      rw [div_eq]
+      have : 0 < q := zero_lt_of_lt h_r
+      simp [this, Nat.not_le_of_gt h_r]
+    | succ x ih =>
+      rw [div_eq]
+      simp [zero_lt_of_lt h_r]
+      have : q ≤ (x + 1) * q + r := by
+        simp [succ_mul]
+        rw [Nat.add_comm _ q, Nat.add_assoc]
+        apply Nat.le_add_right
+      simp [this]
+      rw [succ_mul, Nat.add_assoc, Nat.add_comm q,
+          ←Nat.add_assoc, Nat.add_sub_cancel]
+      assumption
+
+  theorem le_of_mul_of_div { x y : Nat } (h_x : 0 < x)
+    : x * (y / x) ≤ y
+    := by
+    apply Nat.le_of_add_le_add_right (b := y % x)
+    rw [div_add_mod]
+    apply Nat.le_add_right
+
+  theorem lt_of_mul_lt {x y z : Nat} (h_z : 0 < z)
+    : x < y * z → x / z < y
+    := by
+    intro h
+    by_cases x / z < y
+    case inl h_res =>
+      assumption
+    case inr h_res =>
+      rw [←div_add_mod x z] at h
+      apply False.elim $ Nat.not_le_of_gt h _
+      clear h h_z
+      rw [Nat.mul_comm]
+      suffices z * y ≤ z * (x / z) from
+        Nat.le_trans this $ Nat.le_add_right _ (x % z)
+      apply Nat.mul_le_mul_left z
+      exact Nat.ge_of_not_lt h_res
 
   theorem lt_of_lt_le {x y z : Nat} : x < y → y ≤ z → x < z := by
     intro h h'
