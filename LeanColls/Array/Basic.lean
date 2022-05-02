@@ -1,5 +1,5 @@
 /-
-Copyright (c) 2021 James Gallicchio.
+Copyright (c) 2022 James Gallicchio.
 
 Authors: James Gallicchio
 -/
@@ -56,10 +56,12 @@ def allInit (A : Array (Uninit α) n)
   (h : ∀ i, (A.get i).isInit) : Array α n
   := ⟨λ i => Uninit.getValue (A.get i) (h i)⟩
 
+@[simp]
 theorem get_of_set_eq (f : Array α n) (i : Fin n) (x : α) {i' : Fin n} (h_i : i = i')
   : (f.set i x).get i' = x
   := by unfold get; unfold set; simp [h_i, Function.update, cast]
 
+@[simp]
 theorem get_of_set_ne (f : Array α n) (i : Fin n) (x : α) (j : Fin n) (h : i ≠ j)
   : (f.set i x).get j = f.get j
   := by
@@ -88,9 +90,12 @@ namespace COWArray
 variable (A : COWArray α n)
 
 def new (x : α) (n : Nat) := Array.new x n |> COWArray.mk
-def get : Fin n → α := A.backing.get
-def set (i : Fin n) (x : α) : COWArray α n :=
+@[inline] def get : Fin n → α := A.backing.get
+@[inline] def set (i : Fin n) (x : α) : COWArray α n :=
   A.backing.copy |>.set i x |> COWArray.mk
+
+@[inline] def update (i : Fin n) (f : α → α) : COWArray α n :=
+  A.set i (f <| A.get i)
 
 instance : Foldable (COWArray α n) α where
   fold f acc A := Foldable.fold f acc A.backing
