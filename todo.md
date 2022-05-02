@@ -16,6 +16,9 @@
 
 ## Done
 
+### 5 May 2022
+- Progress on RBFT implementation
+
 ### 28 Apr 2022
 - Finished third iteration of Array (that actually works this time)
 - Add copy on write arrays

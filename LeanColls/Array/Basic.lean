@@ -92,4 +92,7 @@ def get : Fin n → α := A.backing.get
 def set (i : Fin n) (x : α) : COWArray α n :=
   A.backing.copy |>.set i x |> COWArray.mk
 
+instance : Foldable (COWArray α n) α where
+  fold f acc A := Foldable.fold f acc A.backing
+
 end COWArray
