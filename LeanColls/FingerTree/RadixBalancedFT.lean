@@ -11,14 +11,20 @@ import LeanColls.IndexedOps
 /-!
 # Radix Balanced Finger Trees
 
-Represents a sequence as an N-dimensional hypercube where all sides
-are `WIDTH` wide. The highest dimension can be less wide than `WIDTH`,
-and the first and last element of the highest dimension can be
-incomplete.
+An implementation of persistent vectors which has fast random
+access, fast cons/snoc, and reasonable performance on most other
+vector operations.
 
-However, all interior layers of the hypercube are completely full.
-This allows for rapid index calculations, essentially a trie on the
-indices.
+The implementation is an N-dimensional hypercube where all sides
+are `WIDTH` wide. The first and last slice of the highest
+dimension can be just partially filled, and are implemented as
+"fingers" that provide O(1) access to the first/last elements.
+
+The interior layers of the hypercube are completely full.
+This allows for rapid index calculations, like a radix trie.
+We also store incremental sizes at each joint of the fingers
+to allow faster indexing calculations within the fingers.
+
 
 ## References
 
@@ -44,23 +50,69 @@ namespace HyperArray
 @[inline, simp]
 def size (_ : HyperArray α n) : Nat := WIDTH ^ n
 
-@[inline]
 def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
 | 0,   a, ⟨0,_⟩   => a
 | n+1, A, ⟨i,h_i⟩ =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
-  get (COWArray.get A ⟨q, by
+  have h_q : q < WIDTH := by
     apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
     rw [Nat.pow_succ, Nat.mul_comm] at h_i
-    assumption⟩)
-    ⟨r, Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by decide))⟩
+    assumption
+  have h_r : r < WIDTH^n :=
+    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by decide))
+  COWArray.get A ⟨q, h_q⟩
+  |>.get ⟨r, h_r⟩
 
-def get? (A : HyperArray α n) (i : Nat) : Option α :=
-  if h : i < WIDTH ^ n then
-    some $ A.get ⟨i,h⟩
-  else
-    none
+def set : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α → HyperArray α n
+| 0,   _, ⟨0,_⟩  , a => a
+| n+1, A, ⟨i,h_i⟩, a =>
+  let q := i / WIDTH^n
+  let r := i % WIDTH^n
+  have h_q : q < WIDTH := by
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    rw [Nat.pow_succ, Nat.mul_comm] at h_i
+    assumption
+  have h_r : r < WIDTH^n :=
+    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by decide))
+  COWArray.update A ⟨q, h_q⟩
+  <| λ A' => set A' ⟨r, h_r⟩ a
+
+theorem get_of_set (A : HyperArray α n) (i j : Fin (WIDTH ^ n)) (x : α)
+  : (A.set i x |>.get j) = if i = j then x else A.get j
+  := by
+  induction n with
+  | zero =>
+    simp [HyperArray, Nat.pow_zero] at A i j
+    cases i; case mk i h_i =>
+    cases j; case mk j h_j =>
+    have : i = 0 := Nat.eq_zero_of_le_zero <| Nat.le_of_succ_le_succ h_i
+    cases this
+    have : j = 0 := Nat.eq_zero_of_le_zero <| Nat.le_of_succ_le_succ h_j
+    cases this
+    simp [set, get]
+  | succ n ih =>
+    simp [HyperArray, Nat.pow_zero] at A i j
+    cases i; case mk i h_i =>
+    cases j; case mk j h_j =>
+    by_cases i = j
+    case inl h =>
+      simp [h, set, get, COWArray.update, COWArray.get, COWArray.set, ih]
+    case inr h =>
+      simp [h]
+      by_cases i / WIDTH ^ n = j / WIDTH ^ n
+      case inl h' =>
+        simp [h', set, get, COWArray.update, COWArray.get, COWArray.set, ih]
+        have : i % WIDTH ^ n ≠ j % WIDTH ^ n := by
+          clear A x ih
+          rw [←Nat.div_add_mod i (WIDTH ^ n), ←Nat.div_add_mod j (WIDTH ^ n)] at h
+          rw [h'] at h
+          clear h'
+          exact h ∘ (congrArg _)
+        simp [this]
+      case inr h' =>
+        simp [h', set, get, COWArray.update, COWArray.get, COWArray.set,
+          Array.copy]
 
 end HyperArray
 
@@ -96,10 +148,24 @@ def get : (A : FingerArray α n) → Fin A.size → α
 | ⟨w,h_w,A⟩, ⟨i,h_i⟩ =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
-  COWArray.get A ⟨q, by
+  have h_q := by
     apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
-    assumption⟩
-  |>.get ⟨r, Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by decide)⟩
+    assumption
+  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by decide)
+  COWArray.get A ⟨q, h_q⟩
+  |>.get ⟨r, h_r⟩
+
+def set : (A : FingerArray α n) → Fin A.size → α → FingerArray α n
+| ⟨w,h_w,A⟩, ⟨i,h_i⟩, a =>
+  let q := i / WIDTH^n
+  let r := i % WIDTH^n
+  have h_q := by
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    assumption
+  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by decide)
+  ⟨w, h_w,
+    COWArray.update A ⟨q, h_q⟩
+    <| λ A' => A'.set ⟨r, h_r⟩ a⟩
 
 end FingerArray
 
@@ -149,6 +215,64 @@ def get : (L : FingerList τ n m) → (h_L : L.validList startIdx)
   else
     get tl h_L.right i (Nat.ge_of_not_lt h) h_high
 
+def set : (L : FingerList τ n m) → (h_L : L.validList startIdx)
+          → (i : Nat) → (h_low : startIdx ≤ i) → (h_high : i < L.endIdx)
+          → τ → FingerList τ n m 
+| single A endIdx, h_L, i, h_low, h_high, a =>
+  have h_i := by
+    simp [validList] at h_L
+    cases h_L; case refl =>
+    simp [endIdx] at h_high
+    simp
+    apply Nat.le_of_add_le_add_right (b := startIdx)
+    rw [Nat.succ_add, Nat.sub_add_cancel h_low]
+    rw [Nat.add_comm] at h_high
+    assumption
+  single (A.set ⟨i - startIdx, h_i⟩ a) endIdx
+| cons hd tlIdx tl, h_L, i, h_low, h_high, a =>
+  if h : i < tlIdx then
+    have h_i := by
+      simp [validList] at h_L
+      cases h_L with
+      | intro h_tlIdx h_L =>
+      cases h_tlIdx; case refl =>
+      simp
+      apply Nat.le_of_add_le_add_right (b := startIdx)
+      rw [Nat.succ_add, Nat.sub_add_cancel h_low]
+      rw [Nat.add_comm] at h
+      assumption
+    cons (hd.set ⟨i - startIdx, h_i⟩ a) tlIdx tl
+  else
+    cons hd tlIdx (set tl h_L.right i (Nat.ge_of_not_lt h) h_high a)
+
+theorem valid_set_of_valid (L : FingerList τ n m) (h_L : L.validList startIdx)
+          (i : Nat) (h_low : startIdx ≤ i) (h_high : i < L.endIdx) (x : τ)
+  : validList startIdx (set L h_L i h_low h_high x)
+  := by
+  induction L generalizing startIdx with
+  | single a endIdx =>
+    simp [validList, FingerArray.set] at h_L ⊢
+    assumption
+  | cons hd tlIdx tl ih =>
+    simp [set]
+    split <;> (
+      simp [validList, FingerArray.set] at h_L ⊢
+      simp [h_L] at h_L ⊢
+      simp [h_L, ih]
+    )
+
+theorem endIdx_set (L : FingerList τ n m) (h_L : L.validList startIdx)
+          (i : Nat) (h_low : startIdx ≤ i) (h_high : i < L.endIdx) (x : τ)
+  : endIdx (set L h_L i h_low h_high x) = endIdx L
+  := by
+  induction L generalizing startIdx with
+  | single a ei =>
+    simp [endIdx]
+  | cons hd tlIdx tl ih =>
+    simp [set]
+    split <;>
+      simp [endIdx, ih]
+
 end FingerList
 
 end RadixBalancedFT
@@ -171,24 +295,67 @@ namespace RadixBalancedFT
 abbrev RBFT := RadixBalancedFT
 
 def get : (A : RBFT τ) → Fin A.size → τ
-| neRbft, ⟨i,h_i⟩ =>
-  if h : i < neRbft.mid_idx then
-    neRbft.pre.get neRbft.h_pre i (Nat.zero_le _) (by
-      rw [Cached.cached_val] at h; assumption)
-  else if h' : i < neRbft.suf_idx then
-    neRbft.mid.get ⟨i - neRbft.mid_idx, by
+| ⟨_, pre, h_pre, mid_idx, mid, suf_idx, suf, h_suf, _⟩, ⟨i,h_i⟩ =>
+  if h : i < mid_idx then
+    have h_low := Nat.zero_le _
+    have h_high := by
+      rw [Cached.cached_val] at h; assumption
+    pre.get h_pre i h_low h_high
+  else if h' : i < suf_idx then
+    have h_i := by
       rw [Cached.cached_val] at h h' ⊢
       simp at h h'
       apply Nat.le_of_add_le_add_right
       rw [Nat.succ_add, Nat.sub_add_cancel (Nat.ge_of_not_lt h)]
       rw [Nat.add_comm] at h'
-      assumption⟩
+      assumption
+    mid.get ⟨i - mid_idx, h_i⟩
   else
-    neRbft.suf.get neRbft.h_suf i (by
+    have h_low := by
       apply Nat.ge_of_not_lt
       rw [Cached.cached_val] at h'
-      assumption) (by
+      assumption
+    have h_high := by
       rw [Cached.cached_val] at h_i
-      assumption)
+      assumption
+    suf.get h_suf i h_low h_high
+
+def set : (A : RBFT τ) → Fin A.size → τ → RBFT τ
+| A, ⟨i,h_i⟩, a =>
+  if h : i < A.mid_idx then
+    have h_low := Nat.zero_le _
+    have h_high := by
+      rw [Cached.cached_val] at h; assumption
+    {A with
+      pre := A.pre.set A.h_pre i h_low h_high a
+      h_pre := by simp [FingerList.valid_set_of_valid]
+      mid_idx := cast (by rw [FingerList.endIdx_set]) A.mid_idx
+      suf_idx := cast (by rw [FingerList.endIdx_set]) A.suf_idx
+      h_suf := by simp [FingerList.valid_set_of_valid, FingerList.endIdx_set]; exact A.h_suf
+      }
+  else if h' : i < A.suf_idx then
+    have h_i := by
+      rw [Cached.cached_val] at h h' ⊢
+      simp at h h'
+      apply Nat.le_of_add_le_add_right
+      rw [Nat.succ_add, Nat.sub_add_cancel (Nat.ge_of_not_lt h)]
+      rw [Nat.add_comm] at h'
+      assumption
+    {A with
+      mid := A.mid.set ⟨i - A.mid_idx, h_i⟩ a
+      }
+  else
+    have h_low := by
+      apply Nat.ge_of_not_lt
+      rw [Cached.cached_val] at h'
+      assumption
+    have h_high := by
+      rw [Cached.cached_val] at h_i
+      assumption
+    {A with
+      suf := A.suf.set A.h_suf i h_low h_high a
+      h_suf := by simp [FingerList.valid_set_of_valid]
+      size := cast (by rw [FingerList.endIdx_set]) A.size
+      }
 
 end RadixBalancedFT
