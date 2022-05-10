@@ -11,6 +11,14 @@ namespace Nat
     case succ z z_ih =>
     simp [Nat.sub_succ, Nat.add_succ, z_ih]
 
+  theorem sub_lt_of_lt_add {x y z : Nat}
+    : x < y + z → x ≥ z → x - z < y
+    := by
+    intro h h_z
+    apply Nat.le_of_add_le_add_right
+    rw [succ_add, Nat.sub_add_cancel h_z]
+    assumption
+
   theorem add_mul_div {x y z : Nat} (h_x : 0 < x)
     : (x * y + z) / x = y + z / x
     := by
@@ -532,6 +540,9 @@ instance {a : α} : CoeHead (Cached a) α where
 def cached (a : α) : Cached a :=
   ⟨a, rfl⟩
 
+def cached' (a : α) (h : a = b) : Cached b :=
+  ⟨a, h⟩
+
 instance {a : α} : Inhabited (Cached a) where
   default := cached a
 
@@ -540,6 +551,7 @@ instance {a : α} : Inhabited (Cached a) where
 end Cached
 
 export Cached (cached)
+export Cached (cached')
 
 def time (f : IO α) : IO (Nat × α) := do
   let pre ← IO.monoMsNow
