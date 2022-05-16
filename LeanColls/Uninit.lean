@@ -33,6 +33,14 @@ def ofOption : Option α → Uninit α
 axiom getValue_ofOption : ∀ {α} (a : Option α), getValue? (ofOption a) = a
 axiom ofOption_getValue : ∀ {α} (a : Uninit α), ofOption (getValue? a) = a
 
+theorem getValue?_init {a : α} : (init a).getValue? = some a := by
+  rw [(by simp [ofOption] : init a = ofOption (some a)),
+        getValue_ofOption]
+
+theorem getValue?_uninit : (@uninit α).getValue? = none := by
+  rw [(by simp [ofOption] : uninit = ofOption none),
+        getValue_ofOption]
+
 noncomputable def isInit (a : Uninit α) : Bool := Option.isSome (getValue? a)
 
 @[simp]
@@ -56,10 +64,37 @@ theorem isInit_uninit : ¬(@uninit α).isInit := by
 unsafe def getValueUnsafe (a : Uninit α) (h : a.isInit) : α := unsafeCast a
 
 @[implementedBy getValueUnsafe]
-def getValue (a : Uninit α) (h : a.isInit) : α := by
-  unfold isInit at h
-  exact
-  match getValue? a, h with
+def getValue (a : Uninit α) (h : a.isInit) : α := 
+  match getValue? a, (by unfold isInit at h; exact h : Option.isSome (getValue? a)) with
   | some a, h => a
+  | none, h => by contradiction
 
-end Uninit
+@[simp]
+theorem getValue_init {a : α} (h) : (init a).getValue h = a := by
+  simp [isInit] at h
+  unfold getValue
+  generalize h' : getValue? (init a) = x, h = hx
+  split
+  case h_1 x h =>
+    rw [(by simp [ofOption] : init a = ofOption (some a)),
+        getValue_ofOption] at h'
+    simp at h'
+    simp [h']
+  case h_2 x h =>
+    rw [(by simp [ofOption] : init a = ofOption (some a)),
+        getValue_ofOption] at h'
+    contradiction
+
+@[simp]
+theorem getValue_of_getValue?_some {a : α} (h)
+  : getValue? x = some a → x.getValue h = a := by
+  intro h_some
+  simp [isInit] at h
+  unfold getValue
+  generalize h' : getValue? x = x', h = hx
+  split
+  case h_1 x' h =>
+    simp [h_some] at h'
+    simp [h']
+  case h_2 x h =>
+    contradiction

@@ -161,28 +161,3 @@ lean_object* leancolls_array_resize(b_lean_obj_arg n, lean_obj_arg arr,
     return leancolls_array_box(new_backing);
 }
 
-lean_object* leancolls_array_copy(b_lean_obj_arg n, lean_obj_arg arr) {
-    if (lean_is_exclusive(arr))
-        return arr;
-    
-    size_t len = leancolls_unbox_array_size(n);
-    
-    lean_object** old_backing = leancolls_array_unbox(arr);
-
-    lean_object** new_backing = malloc(sizeof(lean_object*) * len);
-    // Check if malloc failed
-    if (new_backing == NULL) {
-        lean_panic_fn(NULL, lean_mk_string(
-            "LeanColls.Array: Copy allocation failed! (Out of memory?)"
-        ));
-    }
-
-    // Copy from old to new
-    for (size_t i = 0; i < len; i++) {
-        lean_object* v = old_backing[i];
-        lean_inc(v);
-        new_backing[i] = v;
-    }
-
-    return leancolls_array_box(new_backing);
-}

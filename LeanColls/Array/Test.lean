@@ -24,18 +24,18 @@ def testPanicOnPersist : IO Unit :=
 def benchmarkArrayBuffer : IO Unit := do
   let iters := 100
   for i in List.range 10 do
-    let size := 10000 * (2 ^ i)
+    let size := 1000 * (2 ^ i)
     let (timeStd, _) ← time (do
       for _ in [0:iters] do
-        let mut arr : Array Nat := Array.empty
+        let mut arr : Array (Nat × Nat) := Array.empty
         for i in [0:size] do
-          arr := arr.push i
+          arr := arr.push (i,i)
     )
     let (timeLC, _) ← time (
       open LeanColls in do
       for _ in [0:iters] do
-        let mut arr : ArrayBuffer Nat := .empty ()
+        let mut arr : ArrayBuffer (Nat × Nat) := .empty ()
         for i in [0:size] do
-          arr := arr.push i
+          arr := arr.push (i,i)
     )
     IO.println s!"{size}, {timeStd}, {timeLC}"

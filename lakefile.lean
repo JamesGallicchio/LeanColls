@@ -19,4 +19,6 @@ def cLibTarget (pkgDir : FilePath) : FileTarget :=
 
 package lean_colls (pkgDir) {
   moreLibTargets := #[cLibTarget pkgDir]
+--  defaultFacet := PackageFacet.sharedLib
+--  moreServerArgs := #["--load-dynlib=build/lib/LeanColls.so"]
 }
