@@ -34,6 +34,14 @@ def fold (foldF : τ → β → β) (foldAcc : β) : View τ → β
 instance : Foldable (View τ) τ where
   fold := fold
 
+/- Defines toList on a view by accumulating continuations
+May be more inefficient than building list in reverse +
+explicitly reversing it.
+-/
+def toList (v : View τ) : List τ :=
+  v.fold (fun x k tl => k (x :: tl)) id
+  <| []
+
 end View
 
 end LeanColls
