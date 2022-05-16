@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.View</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/View.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/View.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -51,6 +51,9 @@ Documentation</h1>
 <li>
 <a href=".././LeanColls.html">LeanColls</a>
 </li>
+<li>
+<a href=".././LeanColls/Array/Basic.html">LeanColls.Array.Basic</a>
+</li>
 </ul>
 </details>
 </div>
@@ -63,12 +66,15 @@ Documentation</h1>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.View.instFoldableView">LeanColls.View.instFoldableView</a>
 </div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.View.toList">LeanColls.View.toList</a>
+</div>
 </nav>
 <main>
 <div class="decl" id="LeanColls.View">
 <div class="inductive">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/View.lean#L11-L15">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/View.lean#L11-L15">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">inductive</span>
@@ -92,7 +98,7 @@ filterMap: <span class="fn">{τ' τ : <span class="fn">Type u</span>} → <span 
 <div class="decl" id="LeanColls.View.fold">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/View.lean#L20-L32">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/View.lean#L20-L32">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -137,7 +143,7 @@ filterMap: <span class="fn">{τ' τ : <span class="fn">Type u</span>} → <span 
 <div class="decl" id="LeanColls.View.instFoldableView">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/View.lean#L34-L35">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/View.lean#L34-L35">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -154,6 +160,33 @@ filterMap: <span class="fn">{τ' τ : <span class="fn">Type u</span>} → <span 
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.View.toList">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/View.lean#L41-L43">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/View.html#LeanColls.View.toList">LeanColls.View.toList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View">LeanColls.View</a> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.toList">LeanColls.View.toList</a> <span class="fn">v</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././LeanColls/View.html#LeanColls.View.fold">LeanColls.View.fold</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">k</span> <span class="fn">tl</span> =&gt <span class="fn"><span class="fn">k</span> (<span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">tl</span></span>)</span></span>) <span class="fn">id</span> <span class="fn">v</span> <span class="fn">[]</span></span></span></li>
 </ul>
 </details>
 </div>

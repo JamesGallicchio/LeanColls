@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Array.Basic</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -54,6 +54,9 @@ Documentation</h1>
 </li>
 <li>
 <a href="../.././LeanColls/Uninit.html">LeanColls.Uninit</a>
+</li>
+<li>
+<a href="../.././LeanColls/View.html">LeanColls.View</a>
 </li>
 </ul>
 </details>
@@ -85,9 +88,6 @@ Documentation</h1>
 <a class="break_within" href="#LeanColls.Array.resize">LeanColls.Array.resize</a>
 </div>
 <div class="nav_link">
-<a class="break_within" href="#LeanColls.Array.copy">LeanColls.Array.copy</a>
-</div>
-<div class="nav_link">
 <a class="break_within" href="#LeanColls.Array.allInitUnsafe">LeanColls.Array.allInitUnsafe</a>
 </div>
 <div class="nav_link">
@@ -100,10 +100,31 @@ Documentation</h1>
 <a class="break_within" href="#LeanColls.Array.get_of_set_ne">LeanColls.Array.get_of_set_ne</a>
 </div>
 <div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.init">LeanColls.Array.init</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.dataImpl">LeanColls.Array.dataImpl</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.init_eq_mk">LeanColls.Array.init_eq_mk</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.empty">LeanColls.Array.empty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.copy">LeanColls.Array.copy</a>
+</div>
+<div class="nav_link">
 <a class="break_within" href="#LeanColls.Array.instIndexedArray">LeanColls.Array.instIndexedArray</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.Array.instIndexedOpsArray">LeanColls.Array.instIndexedOpsArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.toList">LeanColls.Array.toList</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Array.instReprArray">LeanColls.Array.instReprArray</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.instIndexedArray">LeanColls.instIndexedArray</a>
@@ -112,7 +133,16 @@ Documentation</h1>
 <a class="break_within" href="#LeanColls.COWArray">LeanColls.COWArray</a>
 </div>
 <div class="nav_link">
+<a class="break_within" href="#LeanColls.instReprCOWArray">LeanColls.instReprCOWArray</a>
+</div>
+<div class="nav_link">
 <a class="break_within" href="#LeanColls.COWArray.new">LeanColls.COWArray.new</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.empty">LeanColls.COWArray.empty</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.singleton">LeanColls.COWArray.singleton</a>
 </div>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.COWArray.get">LeanColls.COWArray.get</a>
@@ -124,14 +154,29 @@ Documentation</h1>
 <a class="break_within" href="#LeanColls.COWArray.update">LeanColls.COWArray.update</a>
 </div>
 <div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.cons">LeanColls.COWArray.cons</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.snoc">LeanColls.COWArray.snoc</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.front">LeanColls.COWArray.front</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.back">LeanColls.COWArray.back</a>
+</div>
+<div class="nav_link">
 <a class="break_within" href="#LeanColls.COWArray.instFoldableCOWArray">LeanColls.COWArray.instFoldableCOWArray</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.COWArray.instReprCOWArray">LeanColls.COWArray.instReprCOWArray</a>
 </div>
 </nav>
 <main>
 <div class="decl" id="LeanColls.Array">
 <div class="structure">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L19-L20">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L20-L21">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">structure</span>
@@ -155,7 +200,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.new">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L25-L26">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L28-L29">source</a>
 </div>
 <div class="attributes">@[extern  leancolls_array_new]</div>
 <div class="decl_header">
@@ -185,7 +230,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.get">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L29-L31">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L32-L34">source</a>
 </div>
 <div class="attributes">@[extern  leancolls_array_get]</div>
 <div class="decl_header">
@@ -219,7 +264,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.set">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L34-L37">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L37-L40">source</a>
 </div>
 <div class="attributes">@[extern  leancolls_array_set]</div>
 <div class="decl_header">
@@ -255,7 +300,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.resize">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L40-L45">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L43-L48">source</a>
 </div>
 <div class="attributes">@[extern  leancolls_array_resize]</div>
 <div class="decl_header">
@@ -288,42 +333,10 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 </details>
 </div>
 </div>
-<div class="decl" id="LeanColls.Array.copy">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L48-L49">source</a>
-</div>
-<div class="attributes">@[extern  leancolls_array_copy]</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.copy">LeanColls.Array.copy</a>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
-</span>
-<span class="impl_arg">
-<span class="decl_args">
-<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
-</span>
-<span class="decl_args">
-<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.copy">LeanColls.Array.copy</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ data := <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.data">LeanColls.Array.data</a> <span class="fn">A</span> <span class="fn">i</span></span></span> }</span></span></li>
-</ul>
-</details>
-</div>
-</div>
 <div class="decl" id="LeanColls.Array.allInitUnsafe">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L51-L53">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L50-L52">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">unsafe def</span>
@@ -356,7 +369,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.allInit">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L55-L57">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L54-L56">source</a>
 </div>
 <div class="attributes">@[implementedBy LeanColls.Array.allInitUnsafe]</div>
 <div class="decl_header">
@@ -390,7 +403,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.get_of_set_eq">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L60-L62">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L60-L62">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -425,7 +438,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.get_of_set_ne">
 <div class="theorem">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L65-L72">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L65-L72">source</a>
 </div>
 <div class="attributes">@[simp]</div>
 <div class="decl_header">
@@ -455,10 +468,162 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl_type"><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.set">LeanColls.Array.set</a> <span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span>) <span class="fn">j</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> <span class="fn">f</span> <span class="fn">j</span></span></span></div></div>
 </div>
 </div>
+<div class="mod_doc">
+<h3 class="markdown-heading" id="Array-init">Array.init <a class="hover-link" href="#Array-init">#</a></h3><p>Utility function necessary to provide a runtime implementation
+for <code><a href="../.././Init/Prelude.html#Array.mk">Array.mk</a></code>.</p></div>
+<div class="decl" id="LeanColls.Array.init">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L81-L104">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="mod_doc"><p>Implement the auto-generated <code>mk</code> and <code>data</code> functions with
+actually-correct implementations above. This seals up all
+routes to interact with the <code><a href="../.././Init/Prelude.html#Array">Array</a></code>, ensuring safety.</p></div>
+<div class="decl" id="LeanColls.Array.dataImpl">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L112-L114">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.dataImpl">LeanColls.Array.dataImpl</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">α</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.dataImpl">LeanColls.Array.dataImpl</a> <span class="fn">A</span> <span class="fn">i</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> <span class="fn">A</span> <span class="fn">i</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.Array.init_eq_mk">
+<div class="theorem">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L117-L144">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">theorem</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init_eq_mk">LeanColls.Array.init_eq_mk</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span> → <span class="fn">α</span></span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ data := <span class="fn">f</span> }</span></span></div></div>
+</div>
+</div>
+<div class="decl" id="LeanColls.Array.empty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L146-L146">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.empty">LeanColls.Array.empty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">0</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.Array.empty</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">Fin.elim0</span></span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.Array.copy">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L148-L149">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.copy">LeanColls.Array.copy</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.copy">LeanColls.Array.copy</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> <span class="fn">A</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="LeanColls.Array.instIndexedArray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L74-L76">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L151-L153">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -487,7 +652,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.Array.instIndexedOpsArray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L78-L78">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L155-L155">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -513,10 +678,74 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 </details>
 </div>
 </div>
+<div class="decl" id="LeanColls.Array.toList">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L157-L161">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.toList">LeanColls.Array.toList</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.toList">LeanColls.Array.toList</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././LeanColls/View.html#LeanColls.View.toList">LeanColls.View.toList</a> (<span class="fn"><a href="../.././LeanColls/View.html#LeanColls.View.map">LeanColls.View.map</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.get">LeanColls.Array.get</a> <span class="fn">A</span> <span class="fn">i</span></span></span>) (<span class="fn"><a href="../.././LeanColls/View.html#LeanColls.View.of">LeanColls.View.of</a> <span class="fn">{  }</span></span>)</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.Array.instReprArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L163-L164">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.Array.instReprArray">LeanColls.Array.instReprArray</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array">LeanColls.Array</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.Array.instReprArray</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">fun <span class="fn">A</span> =&gt <span class="fn"><a href="../.././Init/Data/Repr.html#Repr.reprPrec">reprPrec</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.toList">LeanColls.Array.toList</a> <span class="fn">A</span></span>)</span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="LeanColls.instIndexedArray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L82-L84">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L168-L170">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -545,7 +774,7 @@ data : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin"
 <div class="decl" id="LeanColls.COWArray">
 <div class="structure">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L86-L87">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L172-L174">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">structure</span>
@@ -566,10 +795,31 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 </ul>
 </div>
 </div>
+<div class="decl" id="LeanColls.instReprCOWArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L174-L174">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.instReprCOWArray">LeanColls.instReprCOWArray</a>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">{α : <span class="fn">Type</span>} → <span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>} → <span class="fn">[inst : <span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>] → <span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.instReprCOWArray</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ reprPrec := <span class="fn">[anonymous]</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="LeanColls.COWArray.new">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L92-L92">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L179-L179">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -595,10 +845,62 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 </details>
 </div>
 </div>
+<div class="decl" id="LeanColls.COWArray.empty">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L180-L180">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.empty">LeanColls.COWArray.empty</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">0</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.COWArray.empty</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ backing := <span class="fn">LeanColls.Array.empty</span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.COWArray.singleton">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L181-L181">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.singleton">LeanColls.COWArray.singleton</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">1</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.singleton">LeanColls.COWArray.singleton</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ backing := <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">x</span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="LeanColls.COWArray.get">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L93-L93">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L183-L183">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -630,7 +932,7 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 <div class="decl" id="LeanColls.COWArray.set">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L94-L95">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L184-L185">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -666,7 +968,7 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 <div class="decl" id="LeanColls.COWArray.update">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L97-L98">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L187-L188">source</a>
 </div>
 <div class="attributes">@[inline]</div>
 <div class="decl_header">
@@ -699,10 +1001,144 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 </details>
 </div>
 </div>
+<div class="decl" id="LeanColls.COWArray.cons">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L190-L193">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.cons">LeanColls.COWArray.cons</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> (<span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.COWArray.snoc">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L195-L199">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.snoc">LeanColls.COWArray.snoc</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> (<span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.snoc">LeanColls.COWArray.snoc</a> <span class="fn">A</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ backing :=
+      <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">if h : <span class="fn"><span class="fn"><span class="fn">i</span>.val</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">n</span></span> then <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.get">LeanColls.COWArray.get</a> <span class="fn">A</span> <span class="fn">{ val := <span class="fn"><span class="fn">i</span>.val</span>, isLt := <span class="fn">h</span> }</span></span> else <span class="fn">x</span></span></span></span> }</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.COWArray.front">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L201-L203">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.front">LeanColls.COWArray.front</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> (<span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn">α</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.front">LeanColls.COWArray.front</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">(<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.get">LeanColls.COWArray.get</a> <span class="fn">A</span> <span class="fn">{ val := <span class="fn">0</span>, isLt := (_ : <span class="fn"><span class="fn">0</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span></span>) }</span></span>,
+    <span class="fn">{ backing := <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.get">LeanColls.COWArray.get</a> <span class="fn">A</span> (<span class="fn"><a href="../.././Init/Data/Fin/Basic.html#Fin.succ">Fin.succ</a> <span class="fn">i</span></span>)</span></span></span> }</span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.COWArray.back">
+<div class="def">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L205-L207">source</a>
+</div>
+<div class="attributes">@[inline]</div>
+<div class="decl_header">
+<span class="decl_kind">def</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.back">LeanColls.COWArray.back</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> (<span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span>)</span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">α</span></span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.back">LeanColls.COWArray.back</a> <span class="fn">A</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">(<span class="fn">{ backing := <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.Array.init">LeanColls.Array.init</a> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.get">LeanColls.COWArray.get</a> <span class="fn">A</span> (<span class="fn"><a href="../.././LeanColls/AuxLemmas.html#Fin.embed_succ">Fin.embed_succ</a> <span class="fn">i</span></span>)</span></span></span> }</span>,
+    <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.get">LeanColls.COWArray.get</a> <span class="fn">A</span> <span class="fn">{ val := <span class="fn">n</span>, isLt := (_ : <span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../.././Init/Prelude.html#Nat.succ">Nat.succ</a> <span class="fn">n</span></span></span>) }</span></span>)</span></span></li>
+</ul>
+</details>
+</div>
+</div>
 <div class="decl" id="LeanColls.COWArray.instFoldableCOWArray">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/10be82f9ddb2964587f3d3af4f831e5132d89654/LeanColls/Array/Basic.lean#L100-L101">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L209-L210">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -723,6 +1159,39 @@ backing : <span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">One or more equations did not get rendered due to their size.</li>
+</ul>
+</details>
+</div>
+</div>
+<div class="decl" id="LeanColls.COWArray.instReprCOWArray">
+<div class="instance">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/2cb28179d77534947b890b68cf8ae9350882209b/LeanColls/Array/Basic.lean#L212-L212">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">instance</span>
+<span class="decl_name">
+<a class="break_within" href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray.instReprCOWArray">LeanColls.COWArray.instReprCOWArray</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{α : <span class="fn">Type</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> <span class="fn">α</span></span>]</span></span>
+</span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn"><a href="../.././Init/Data/Repr.html#Repr">Repr</a> (<span class="fn"><a href="../.././LeanColls/Array/Basic.html#LeanColls.COWArray">LeanColls.COWArray</a> <span class="fn">α</span> <span class="fn">n</span></span>)</span></div></div>
+<details>
+<summary>Equations</summary>
+<ul class="equations">
+<li class="equation">
+<span class="fn"><span class="fn">LeanColls.COWArray.instReprCOWArray</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">inferInstance</span></span></li>
 </ul>
 </details>
 </div>
