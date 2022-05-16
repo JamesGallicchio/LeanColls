@@ -34,7 +34,9 @@ introducing this collection. There are no formal references.
 
 namespace LeanColls.RadixBalancedFT
 
-@[inline] def WIDTH := 32
+@[inline] constant WIDTH_PREV : Nat := 31
+@[inline] def WIDTH : Nat := WIDTH_PREV.succ
+@[simp] theorem WIDTH_pos : 0 < WIDTH := Nat.zero_lt_succ _
 
 /- A hypercube array thing with `n` dimensions, each
   `WIDTH` wide, e.g. a total capacity of `WIDTH ^ n`
@@ -54,11 +56,11 @@ def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
   let q := i / WIDTH^n
   let r := i % WIDTH^n
   have h_q : q < WIDTH := by
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
     rw [Nat.pow_succ, Nat.mul_comm] at h_i
     assumption
   have h_r : r < WIDTH^n :=
-    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by decide))
+    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
   COWArray.get A ⟨q, h_q⟩
   |>.get ⟨r, h_r⟩
 
@@ -68,11 +70,11 @@ def set : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α → Hyp
   let q := i / WIDTH^n
   let r := i % WIDTH^n
   have h_q : q < WIDTH := by
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
     rw [Nat.pow_succ, Nat.mul_comm] at h_i
     assumption
   have h_r : r < WIDTH^n :=
-    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by decide))
+    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
   COWArray.update A ⟨q, h_q⟩
   <| λ A' => set A' ⟨r, h_r⟩ a
 
@@ -163,9 +165,9 @@ def get : (A : HyperRect α n) → Fin A.size → α
   let r := i % WIDTH^n
   have h_q := by
     simp at h_i
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
     assumption
-  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by decide)
+  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
   COWArray.get A ⟨q, h_q⟩
   |>.get ⟨r, h_r⟩
 
@@ -175,9 +177,9 @@ def set : (A : HyperRect α n) → Fin A.size → α → HyperRect α n
   let r := i % WIDTH^n
   have h_q := by
     simp at h_i
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by decide)
+    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
     assumption
-  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by decide)
+  have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
   ⟨w,
     COWArray.update A ⟨q, h_q⟩ <| λ A' => A'.set ⟨r, h_r⟩ a,
     size⟩
@@ -267,9 +269,9 @@ def isFull : FingerList τ n m → Bool
 | joint hd tl =>
   hd.w = WIDTH && isFull tl
 
-def extend : FingerList τ n m → FingerList τ n.succ m
-| base => joint (HyperRect.empty) base
-| joint hd tl => joint hd (extend tl)
+def extend (new : HyperRect τ n) : FingerList τ n m → FingerList τ n.succ m
+| base => joint new base
+| joint hd tl => joint hd (extend new tl)
 
 def unextend : {n m : Nat} → m ≤ n → FingerList τ n.succ m → HyperRect τ n × FingerList τ n m
 | _, _, h, base => False.elim (Nat.ne_of_lt h rfl)
@@ -477,7 +479,8 @@ def consL (x : HyperArray τ m) : (L : FingerList τ n m) → L.validList →
         |> cast (by simp [h_w, HyperArray, WIDTH])
       match consL newSlice tl h_tl with
       | (fl, excess) =>
-      (joint ⟨0, COWArray.empty, cached' 0 (by simp)⟩ fl, excess)
+      (joint ⟨1, COWArray.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl,
+        excess)
 
 /- Pushes `x` onto `L` from the right at the top joint (small elements).
 If `L` is full, returns the (full) bottom joint as a `HyperArray τ n`
@@ -699,17 +702,17 @@ def cons (x : τ) (A : RBFT τ) : RBFT τ :=
       size := cached' (A.size.val + 1) (by sorry)
       }
     else
-    have h : A.mid.w = 32 := by
+    have h : A.mid.w = WIDTH := by
       apply Nat.le_antisymm
       exact A.h_mid
       exact Nat.ge_of_not_lt h
     -- We need a new level!
     { depth := A.depth.succ,
-      pre := pre.extend
+      pre := pre.extend (.singleton excess)
       mid := .singleton (A.mid.fullToHyperArray h)
-      suf := A.suf.extend
+      suf := A.suf.extend .empty
       h_pre := by sorry
-      h_mid := by simp [HyperRect.singleton]
+      h_mid := by simp [HyperRect.singleton]; exact WIDTH_pos
       h_suf := by sorry
       mid_idx := cached' (A.mid_idx.val + 1) (by sorry)
       suf_idx := cached' (A.mid_idx.val + 1) (by sorry)
@@ -771,3 +774,8 @@ def front? : RBFT τ → Option (τ × RBFT τ)
     }
   )
 termination_by _ r => r.depth
+
+def test := @Range.mk 1237
+  |> View.of
+  |>.map (Fin.val)
+  |>.fold cons empty
