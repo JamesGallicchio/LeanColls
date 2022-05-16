@@ -17,7 +17,7 @@ def cLibTarget (pkgDir : FilePath) : FileTarget :=
   let libFile := pkgDir / buildDir / cDir / "leancolls_array.a"
   staticLibTarget libFile #[oTarget pkgDir]
 
-package lean_colls (pkgDir) {
+package LeanColls (pkgDir) {
   moreLibTargets := #[cLibTarget pkgDir]
 --  defaultFacet := PackageFacet.sharedLib
 --  moreServerArgs := #["--load-dynlib=build/lib/LeanColls.so"]
