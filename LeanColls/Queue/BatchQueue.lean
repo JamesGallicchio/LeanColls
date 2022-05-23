@@ -44,30 +44,32 @@ def deq (Q : BatchQueue τ) : Option (τ × BatchQueue τ) :=
   | [] => none
 
 instance : Queue (BatchQueue τ) τ where
-  model := λ ⟨F,B⟩ => F ++ (B.reverse)
   empty := empty
+  enq   := enq
+  deq   := deq
+
+instance : Queue.CorrectFIFO (instQueueBatchQueue (τ := τ)) where
+  model := λ ⟨F,B⟩ => F ++ (B.reverse)
   h_empty := by
     simp [HAppend.hAppend, Append.append, List.append, List.reverse, empty, List.reverseAux]
-  enq   := enq
   h_enq := by
     intros c x
     cases c
     case mk F B =>
     simp [List.isEmpty, List.append, enq, dite, instDecidableEqBool, List.cons]
     rw [←List.append_assoc]
-  deq   := deq
   h_deq := by
     intro c
     cases c
     case mk F B =>
     cases F
     case cons f F =>
-      simp [List.front?, deq, Option.map, Option.bind]
+      simp [List.front?, Queue.deq, deq, Option.map, Option.bind]
     case nil =>
     cases h : List.reverse B
     case cons f F =>
-      simp [List.front?, deq, Option.map, Option.bind, h]
+      simp [List.front?, Queue.deq, deq, Option.map, Option.bind, h]
     case nil =>
-      simp [List.front?, deq, Option.map, Option.bind, h]
+      simp [List.front?, Queue.deq, deq, Option.map, Option.bind, h]
 
 end LeanColls.BatchQueue

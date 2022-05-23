@@ -124,6 +124,16 @@ namespace Nat
     else
       panic! s!"Integer {n} is to larget for usize"
 
+  def eq_zero_of_add_eq_zero {x y : Nat}
+    : x + y = 0 → x = 0 ∧ y = 0
+    := by
+    intro h
+    match x with
+    | x+1 => rw [Nat.add_comm] at h; contradiction
+    | 0 =>
+    match y with
+    | y+1 => contradiction
+    | 0 => simp
 end Nat
 
 namespace Fin

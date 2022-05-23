@@ -6,6 +6,7 @@ Authors: James Gallicchio
 
 import LeanColls.Queue
 import LeanColls.LazyList
+import LeanColls.AuxLemmas
 
 namespace LeanColls
 
@@ -60,28 +61,44 @@ def empty : RTQueue τ :=
       )
   )
 
-private theorem rotate_inv {F : LazyList α} {r R S}
-  : (h : _) → (rotate F r R S h).toList = F.toList ++ r :: R.reverse
+private theorem rotate_inv {F : LazyList α} {r rs acc}
+  : (h : _) → (rotate F r rs acc h).toList = F.toList ++ rs.reverse ++ [r] ++ acc.toList
   := by
   intro h
-  unfold rotate
-  simp [Thunk.get]
-  unfold rotate.match_1
-  unfold rotate.match_2
-  unfold rotate.proof_1
-  unfold rotate.proof_2
-  unfold rotate.proof_3
-  unfold rotate.proof_4
-  induction F using LazyList.ind
+  induction rs generalizing F r acc
   case nil =>
-    simp [LazyList.force]
-    sorry
+    have : F.toList = [] := by
+      generalize hFl : F.toList = Fl
+      rw [←LazyList.length_toList, hFl] at h
+      match Fl with
+      | [] => rfl
+      | _ :: _ => simp at h
+    unfold rotate
+    simp [LazyList.force, Thunk.get]
+    split
+    case h_2 heq =>
+      contradiction
+    case h_1 =>
+      simp [this]
   case cons hd tl ih =>
-    simp
-    sorry
-  case delayed F ih =>
-    simp
-    sorry
+    have : ∃ x F', F.toList = x :: F' := by
+      rw [←LazyList.length_toList] at h
+      match hList : F.toList with
+      | [] => rw [hList] at h; contradiction
+      | x::F' => exact ⟨x,⟨F',rfl⟩⟩
+    match this with
+    | ⟨x, ⟨F', h⟩⟩ =>
+    unfold rotate
+    simp [Thunk.get]
+    split
+    case h_1 heq =>
+      rw [LazyList.toList_force_none.mp heq] at h
+      contradiction
+    case h_2 x F' heq =>
+      simp [this, ih]
+      rw [LazyList.toList_force_some heq]
+      rw [List.append_cons]
+      simp [List.append_assoc]
   
 
 @[inline] private def balance (F : LazyList τ) (R : List τ) (S : LazyList τ)
@@ -113,7 +130,16 @@ private theorem balance_inv {F : LazyList α} {R} {S} (h_lens)
   : model_fn (balance F R S h_lens) = F.toList ++ R.reverse
   := by
   simp [balance]
-  sorry
+  split
+  case h_1 _ S' heq =>
+    simp [model_fn]
+  case h_2 heq =>
+    split
+    case h_1 x y h_lens =>
+      rw [←LazyList.length_toList S, LazyList.toList_force_none.mp heq] at h_lens
+      contradiction
+    case h_2 =>
+      simp [model_fn, rotate_inv, List.append_assoc]
 
 def enq (Q : RTQueue τ) (x : τ) : RTQueue τ :=
   let ⟨F, R, S, h_lens⟩ := Q
@@ -133,24 +159,37 @@ def deq (Q : RTQueue τ) : Option (τ × RTQueue τ) :=
   | none => none
 
 instance : Queue (RTQueue τ) τ where
-  model := model_fn
   empty := empty
-  h_empty := by simp [empty, model_fn]
   enq   := enq
+  deq   := deq
+
+instance : Queue.CorrectFIFO (@instQueueRTQueue τ) where
+  model := model_fn
+  h_empty := by simp [empty, model_fn]
   h_enq := by
     intros c x
     cases c; case mk F R S h_lens =>
-    simp [enq, balance_inv]
+    simp [Queue.enq, enq, balance_inv]
     simp [List.cons, model_fn]
     rw [←List.append_assoc]
-  deq   := deq
   h_deq := by
     intro c
-    sorry
-    /-cases c; case mk F F_len R R_len h_lens =>
-    cases h':F.force
-    case none =>
-      simp [deq]
-      sorry
-    sorry-/
-end RTQueue
+    cases c; case mk F R S h_lens =>
+    simp [Queue.deq, deq]
+    split
+    case h_1 x S' hF =>
+      simp [Option.map, Option.bind, balance_inv]
+      simp [model_fn, LazyList.toList_force_some hF]
+    case h_2 hF =>
+      simp [Option.map, Option.bind, model_fn]
+      simp [LazyList.toList_force_none.mp hF]
+      suffices R = [] by
+        simp [this, List.front?]
+      suffices List.length R = 0 by
+        cases R; simp; contradiction
+      have : LazyList.length F = 0 := by
+        rw [←LazyList.length_toList, LazyList.toList_force_none.mp hF]
+        simp
+      rw [this] at h_lens
+      have := Nat.eq_zero_of_add_eq_zero h_lens.symm
+      exact this.left

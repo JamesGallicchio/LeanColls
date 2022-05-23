@@ -4,10 +4,12 @@ Copyright (c) 2022 James Gallicchio.
 Authors: James Gallicchio
 -/
 
-import LeanColls.Fold
+import LeanColls.Classes
 import LeanColls.Queue.BatchQueue
 import LeanColls.Queue.LazyBatchQueue
 import LeanColls.Queue.RealTimeQueue
+
+open LeanColls
 
 def test1 (iters : Nat) (α) [Q : Queue α Nat] : IO Unit := do
   let mut q := Q.empty
@@ -24,7 +26,11 @@ def test1 (iters : Nat) (α) [Q : Queue α Nat] : IO Unit := do
         IO.println "wrong entry!"
 
 def test2 (iters : Nat) (α) [Q : Queue α Nat] : IO Unit := do
-  let q := Fold.fold (⟨[:iters],by simp⟩ : {r : Std.Range // r.step > 0}) (λ x i => Q.enq x i) Q.empty
+  let q := Id.run do
+    let mut q := Q.empty
+    for i in [:iters] do
+      q := Q.enq q i
+    return q
 
   for i in [:iters] do
     match Q.deq q with
