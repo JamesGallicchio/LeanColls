@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">Init.Notation</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -49,7 +49,7 @@ Documentation</h1>
 <a href=".././Init.html">Init</a>
 </li>
 <li>
-<a href=".././Init/SizeOf.html">Init.SizeOf</a>
+<a href=".././Init/Tactics.html">Init.Tactics</a>
 </li>
 </ul>
 </details>
@@ -297,309 +297,12 @@ Documentation</h1>
 <div class="nav_link">
 <a class="break_within" href="#Lean.rawStx.quot">Lean.rawStx.quot</a>
 </div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.withAnnotateState">Lean.Parser.Tactic.withAnnotateState</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.intro">Lean.Parser.Tactic.intro</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.intros">Lean.Parser.Tactic.intros</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rename">Lean.Parser.Tactic.rename</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.revert">Lean.Parser.Tactic.revert</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.clear">Lean.Parser.Tactic.clear</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.subst">Lean.Parser.Tactic.subst</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.assumption">Lean.Parser.Tactic.assumption</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.contradiction">Lean.Parser.Tactic.contradiction</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.apply">Lean.Parser.Tactic.apply</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.exact">Lean.Parser.Tactic.exact</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.refine">Lean.Parser.Tactic.refine</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.refine'">Lean.Parser.Tactic.refine'</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.constructor">Lean.Parser.Tactic.constructor</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.case">Lean.Parser.Tactic.case</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.case'">Lean.Parser.Tactic.case'</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.«tacticNext___=>_»">Lean.Parser.Tactic.«tacticNext___=>_»</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.allGoals">Lean.Parser.Tactic.allGoals</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.anyGoals">Lean.Parser.Tactic.anyGoals</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.focus">Lean.Parser.Tactic.focus</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.skip">Lean.Parser.Tactic.skip</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.done">Lean.Parser.Tactic.done</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.traceState">Lean.Parser.Tactic.traceState</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.traceMessage">Lean.Parser.Tactic.traceMessage</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.failIfSuccess">Lean.Parser.Tactic.failIfSuccess</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.paren">Lean.Parser.Tactic.paren</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.withReducible">Lean.Parser.Tactic.withReducible</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.withReducibleAndInstances">Lean.Parser.Tactic.withReducibleAndInstances</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.withUnfoldingAll">Lean.Parser.Tactic.withUnfoldingAll</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.first">Lean.Parser.Tactic.first</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rotateLeft">Lean.Parser.Tactic.rotateLeft</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rotateRight">Lean.Parser.Tactic.rotateRight</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticTry_">Lean.Parser.Tactic.tacticTry_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.«tactic_<;>_»">Lean.Parser.Tactic.«tactic_<;>_»</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.refl">Lean.Parser.Tactic.refl</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticRfl">Lean.Parser.Tactic.tacticRfl</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticRfl'">Lean.Parser.Tactic.tacticRfl'</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.ac_refl">Lean.Parser.Tactic.ac_refl</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticAdmit">Lean.Parser.Tactic.tacticAdmit</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticSorry">Lean.Parser.Tactic.tacticSorry</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticInfer_instance">Lean.Parser.Tactic.tacticInfer_instance</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.config">Lean.Parser.Tactic.config</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.locationWildcard">Lean.Parser.Tactic.locationWildcard</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.locationHyp">Lean.Parser.Tactic.locationHyp</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.location">Lean.Parser.Tactic.location</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.change">Lean.Parser.Tactic.change</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.changeWith">Lean.Parser.Tactic.changeWith</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rwRule">Lean.Parser.Tactic.rwRule</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rwRuleSeq">Lean.Parser.Tactic.rwRuleSeq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rewriteSeq">Lean.Parser.Tactic.rewriteSeq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rwSeq">Lean.Parser.Tactic.rwSeq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.rwWithRfl">Lean.Parser.Tactic.rwWithRfl</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.expandRwSeq">Lean.Parser.Tactic.expandRwSeq</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.injection">Lean.Parser.Tactic.injection</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.injections">Lean.Parser.Tactic.injections</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.discharger">Lean.Parser.Tactic.discharger</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpPre">Lean.Parser.Tactic.simpPre</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpPost">Lean.Parser.Tactic.simpPost</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpLemma">Lean.Parser.Tactic.simpLemma</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpErase">Lean.Parser.Tactic.simpErase</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpStar">Lean.Parser.Tactic.simpStar</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simp">Lean.Parser.Tactic.simp</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.simpAll">Lean.Parser.Tactic.simpAll</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.dsimp">Lean.Parser.Tactic.dsimp</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.delta">Lean.Parser.Tactic.delta</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.unfold">Lean.Parser.Tactic.unfold</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticRefine_lift_">Lean.Parser.Tactic.tacticRefine_lift_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticHave_">Lean.Parser.Tactic.tacticHave_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.«tacticHave__:=_»">Lean.Parser.Tactic.«tacticHave__:=_»</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticSuffices_">Lean.Parser.Tactic.tacticSuffices_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticLet_">Lean.Parser.Tactic.tacticLet_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticShow_">Lean.Parser.Tactic.tacticShow_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.letrec">Lean.Parser.Tactic.letrec</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticRefine_lift'_">Lean.Parser.Tactic.tacticRefine_lift'_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticHave'_">Lean.Parser.Tactic.tacticHave'_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.«tacticHave'__:=_»">Lean.Parser.Tactic.«tacticHave'__:=_»</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticLet'_">Lean.Parser.Tactic.tacticLet'_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.inductionAlt">Lean.Parser.Tactic.inductionAlt</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.inductionAlts">Lean.Parser.Tactic.inductionAlts</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.induction">Lean.Parser.Tactic.induction</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.generalizeArg">Lean.Parser.Tactic.generalizeArg</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.generalize">Lean.Parser.Tactic.generalize</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.casesTarget">Lean.Parser.Tactic.casesTarget</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.cases">Lean.Parser.Tactic.cases</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.renameI">Lean.Parser.Tactic.renameI</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticRepeat_">Lean.Parser.Tactic.tacticRepeat_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticTrivial">Lean.Parser.Tactic.tacticTrivial</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.split">Lean.Parser.Tactic.split</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.dbgTrace">Lean.Parser.Tactic.dbgTrace</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticStop_">Lean.Parser.Tactic.tacticStop_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.specialize">Lean.Parser.Tactic.specialize</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.tacticUnhygienic_">Lean.Parser.Tactic.tacticUnhygienic_</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.fail">Lean.Parser.Tactic.fail</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.checkpoint">Lean.Parser.Tactic.checkpoint</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.save">Lean.Parser.Tactic.save</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.sleep">Lean.Parser.Tactic.sleep</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Tactic.«tacticExists_,,»">Lean.Parser.Tactic.«tacticExists_,,»</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#Lean.Parser.Attr.simp">Lean.Parser.Attr.simp</a>
-</div>
-<div class="nav_link">
-<a class="break_within" href="#«term‹_›»">«term‹_›»</a>
-</div>
 </nav>
 <main>
 <div class="decl" id="Lean.Parser.Syntax.addPrec">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L15-L15">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L15-L15">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -619,7 +322,7 @@ Documentation</h1>
 <div class="decl" id="Lean.Parser.Syntax.subPrec">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L16-L16">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L16-L16">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -639,7 +342,7 @@ Documentation</h1>
 <div class="decl" id="Lean.Parser.Syntax.addPrio">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L18-L18">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L18-L18">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -659,7 +362,7 @@ Documentation</h1>
 <div class="decl" id="Lean.Parser.Syntax.subPrio">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L19-L19">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L19-L19">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -679,7 +382,7 @@ Documentation</h1>
 <div class="decl" id="precMax">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L23-L23">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L23-L23">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -700,7 +403,7 @@ Documentation</h1>
 <div class="decl" id="precArg">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L24-L24">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L24-L24">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -721,7 +424,7 @@ Documentation</h1>
 <div class="decl" id="precLead">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L25-L25">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L25-L25">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -742,7 +445,7 @@ Documentation</h1>
 <div class="decl" id="«prec(_)»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L26-L26">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L26-L26">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -762,7 +465,7 @@ Documentation</h1>
 <div class="decl" id="precMin">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L27-L27">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L27-L27">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -783,7 +486,7 @@ Documentation</h1>
 <div class="decl" id="precMin1">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L28-L28">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L28-L28">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -804,7 +507,7 @@ Documentation</h1>
 <div class="decl" id="termMax_prec">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L32-L32">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L32-L32">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -825,7 +528,7 @@ Documentation</h1>
 <div class="decl" id="prioDefault">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L34-L34">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L34-L34">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -846,7 +549,7 @@ Documentation</h1>
 <div class="decl" id="prioLow">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L35-L35">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L35-L35">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -867,7 +570,7 @@ Documentation</h1>
 <div class="decl" id="prioMid">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L36-L36">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L36-L36">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -888,7 +591,7 @@ Documentation</h1>
 <div class="decl" id="prioHigh">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L37-L37">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L37-L37">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -909,7 +612,7 @@ Documentation</h1>
 <div class="decl" id="«prio(_)»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L38-L38">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L38-L38">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -929,7 +632,7 @@ Documentation</h1>
 <div class="decl" id="«stx_+»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L42-L42">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L42-L42">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -950,7 +653,7 @@ Documentation</h1>
 <div class="decl" id="«stx_*»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L43-L43">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L43-L43">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -971,7 +674,7 @@ Documentation</h1>
 <div class="decl" id="stx_?">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L44-L44">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L44-L44">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -992,7 +695,7 @@ Documentation</h1>
 <div class="decl" id="«stx_<|>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L45-L45">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L45-L45">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1014,7 +717,7 @@ Documentation</h1>
 <div class="decl" id="«stx_,*»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L54-L54">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L54-L54">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1035,7 +738,7 @@ Documentation</h1>
 <div class="decl" id="«stx_,+»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L55-L55">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L55-L55">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1056,7 +759,7 @@ Documentation</h1>
 <div class="decl" id="«stx_,*,?»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L57-L57">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L57-L57">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1077,7 +780,7 @@ Documentation</h1>
 <div class="decl" id="«stx_,+,?»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L58-L58">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L58-L58">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1098,7 +801,7 @@ Documentation</h1>
 <div class="decl" id="stx!_">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L60-L60">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L60-L60">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1120,7 +823,7 @@ Documentation</h1>
 <div class="decl" id="rawNatLit">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L62-L62">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L62-L62">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1142,7 +845,7 @@ Documentation</h1>
 <div class="decl" id="«term_∘_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L64-L64">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L64-L64">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1164,7 +867,7 @@ Documentation</h1>
 <div class="decl" id="«term_×_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L65-L65">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L65-L65">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1186,7 +889,7 @@ Documentation</h1>
 <div class="decl" id="«term_|||_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L67-L67">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L67-L67">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1208,7 +911,7 @@ Documentation</h1>
 <div class="decl" id="«term_^^^_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L68-L68">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L68-L68">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1230,7 +933,7 @@ Documentation</h1>
 <div class="decl" id="«term_&&&_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L69-L69">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L69-L69">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1250,7 +953,7 @@ Documentation</h1>
 <div class="decl" id="«term_+_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L70-L70">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L70-L70">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1272,7 +975,7 @@ Documentation</h1>
 <div class="decl" id="«term_-_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L71-L71">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L71-L71">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1294,7 +997,7 @@ Documentation</h1>
 <div class="decl" id="«term_*_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L72-L72">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L72-L72">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1316,7 +1019,7 @@ Documentation</h1>
 <div class="decl" id="«term_/_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L73-L73">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L73-L73">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1338,7 +1041,7 @@ Documentation</h1>
 <div class="decl" id="«term_%_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L74-L74">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L74-L74">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1360,7 +1063,7 @@ Documentation</h1>
 <div class="decl" id="«term_<<<_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L75-L75">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L75-L75">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1382,7 +1085,7 @@ Documentation</h1>
 <div class="decl" id="«term_>>>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L76-L76">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L76-L76">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1404,7 +1107,7 @@ Documentation</h1>
 <div class="decl" id="«term_^_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L77-L77">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L77-L77">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1426,7 +1129,7 @@ Documentation</h1>
 <div class="decl" id="«term_++_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L78-L78">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L78-L78">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1448,7 +1151,7 @@ Documentation</h1>
 <div class="decl" id="«term-_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L79-L79">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L79-L79">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1470,7 +1173,7 @@ Documentation</h1>
 <div class="decl" id="«term~~~_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L80-L80">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L80-L80">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1492,7 +1195,7 @@ Documentation</h1>
 <div class="decl" id="«term_<=_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L95-L95">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L95-L95">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1514,7 +1217,7 @@ Documentation</h1>
 <div class="decl" id="«term_≤_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L96-L96">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L96-L96">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1536,7 +1239,7 @@ Documentation</h1>
 <div class="decl" id="«term_<_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L97-L97">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L97-L97">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1558,7 +1261,7 @@ Documentation</h1>
 <div class="decl" id="«term_>=_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L98-L98">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L98-L98">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1580,7 +1283,7 @@ Documentation</h1>
 <div class="decl" id="«term_≥_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L99-L99">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L99-L99">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1602,7 +1305,7 @@ Documentation</h1>
 <div class="decl" id="«term_>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L100-L100">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L100-L100">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1624,7 +1327,7 @@ Documentation</h1>
 <div class="decl" id="«term_=_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L101-L101">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L101-L101">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1646,7 +1349,7 @@ Documentation</h1>
 <div class="decl" id="«term_==_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L102-L102">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L102-L102">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1668,7 +1371,7 @@ Documentation</h1>
 <div class="decl" id="«term_/\_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L118-L118">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L118-L118">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1690,7 +1393,7 @@ Documentation</h1>
 <div class="decl" id="«term_∧_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L119-L119">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L119-L119">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1712,7 +1415,7 @@ Documentation</h1>
 <div class="decl" id="«term_\/_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L120-L120">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L120-L120">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1734,7 +1437,7 @@ Documentation</h1>
 <div class="decl" id="«term_∨_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L121-L121">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L121-L121">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1756,7 +1459,7 @@ Documentation</h1>
 <div class="decl" id="«term¬_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L122-L122">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L122-L122">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1778,7 +1481,7 @@ Documentation</h1>
 <div class="decl" id="«term_&&_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L124-L124">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L124-L124">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1800,7 +1503,7 @@ Documentation</h1>
 <div class="decl" id="«term_||_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L125-L125">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L125-L125">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1822,7 +1525,7 @@ Documentation</h1>
 <div class="decl" id="term!_">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L126-L126">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L126-L126">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1844,7 +1547,7 @@ Documentation</h1>
 <div class="decl" id="«term_∈_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L128-L128">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L128-L128">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1866,7 +1569,7 @@ Documentation</h1>
 <div class="decl" id="«term_∉_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L129-L129">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L129-L129">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1888,7 +1591,7 @@ Documentation</h1>
 <div class="decl" id="«term_::_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L131-L131">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L131-L131">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1910,7 +1613,7 @@ Documentation</h1>
 <div class="decl" id="«term_<|>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L132-L132">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L132-L132">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1932,7 +1635,7 @@ Documentation</h1>
 <div class="decl" id="«term_>>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L133-L133">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L133-L133">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1954,7 +1657,7 @@ Documentation</h1>
 <div class="decl" id="«term_>>=_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L134-L134">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L134-L134">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1976,7 +1679,7 @@ Documentation</h1>
 <div class="decl" id="«term_<*>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L135-L135">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L135-L135">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -1998,7 +1701,7 @@ Documentation</h1>
 <div class="decl" id="«term_<*_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L136-L136">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L136-L136">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2020,7 +1723,7 @@ Documentation</h1>
 <div class="decl" id="«term_*>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L137-L137">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L137-L137">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2042,7 +1745,7 @@ Documentation</h1>
 <div class="decl" id="«term_<$>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L138-L138">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L138-L138">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2064,7 +1767,7 @@ Documentation</h1>
 <div class="decl" id="termDepIfThenElse">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L143-L145">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L143-L145">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2084,7 +1787,7 @@ Documentation</h1>
 <div class="decl" id="termIfThenElse">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L150-L152">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L150-L152">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2104,7 +1807,7 @@ Documentation</h1>
 <div class="decl" id="«termIfLet_:=_Then_Else_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L157-L157">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L157-L157">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2124,7 +1827,7 @@ Documentation</h1>
 <div class="decl" id="boolIfThenElse">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L160-L162">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L160-L162">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2144,7 +1847,7 @@ Documentation</h1>
 <div class="decl" id="«term_<|_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L167-L167">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L167-L167">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2166,7 +1869,7 @@ Documentation</h1>
 <div class="decl" id="«term_|>_»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L173-L173">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L173-L173">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2188,7 +1891,7 @@ Documentation</h1>
 <div class="decl" id="«term_$__»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L181-L181">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L181-L181">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2208,7 +1911,7 @@ Documentation</h1>
 <div class="decl" id="«term{__:_//_}»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L187-L187">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L187-L187">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2228,7 +1931,7 @@ Documentation</h1>
 <div class="decl" id="termWithout_expected_type_">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L197-L197">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L197-L197">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2248,7 +1951,7 @@ Documentation</h1>
 <div class="decl" id="«term[_]»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L199-L199">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L199-L199">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2268,7 +1971,7 @@ Documentation</h1>
 <div class="decl" id="«term%[_|_]»">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L200-L200">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L200-L200">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2288,7 +1991,7 @@ Documentation</h1>
 <div class="decl" id="Lean.termThis">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L218-L219">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L218-L219">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
@@ -2309,2132 +2012,12 @@ Documentation</h1>
 <div class="decl" id="Lean.rawStx.quot">
 <div class="def">
 <div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L224-L224">source</a>
+<a href="https://github.com/leanprover/lean4/blob/56cd6c1ff519d8be39f35875b5bf8719e6101c20/src/Init/Notation.lean#L224-L224">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">def</span>
 <span class="decl_name">
 <a class="break_within" href=".././Init/Notation.html#Lean.rawStx.quot">Lean.rawStx.quot</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.withAnnotateState">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L227-L228">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.withAnnotateState">Lean.Parser.Tactic.withAnnotateState</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>with_annotate_state stx t</code> annotates the lexical range of <code>stx : Syntax</code> with the initial and final state of running tactic <code>t</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.intro">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L230-L248">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.intro">Lean.Parser.Tactic.intro</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Introduce one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal's target type must be a <code>let</code> or function type.</p><ul>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a></code> by itself introduces one anonymous hypothesis, which can be accessed by e.g. <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.assumption">assumption</a></code>.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a> x y</code> introduces two hypotheses and names them. Individual hypotheses can be anonymized via <code>_</code>,
-or matched against a pattern:
-<pre><code class="language-lean">-- ... ⊢ α × β → ...
-<a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a> (a, b)
--- ..., a : α, b : β ⊢ ...
-</code></pre>
-</li>
-<li>Alternatively, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a></code> can be combined with pattern matching much like <code>fun</code>:
-<pre><code class="language-lean"><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a>
-| n + 1, 0 => tac
-| ...
-</code></pre>
-</li>
-</ul><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.intros">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L249-L250">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.intros">Lean.Parser.Tactic.intros</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intros">intros</a> x...</code> behaves like <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a> x...</code>, but then keeps introducing (anonymous) hypotheses until goal is not of a function type.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rename">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L251-L254">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rename">Lean.Parser.Tactic.rename</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.rename">rename</a> t => x</code> renames the most recent hypothesis whose type matches <code>t</code> (which may contain placeholders) to <code>x</code>,
-or fails if no such hypothesis could be found.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.revert">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L255-L256">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.revert">Lean.Parser.Tactic.revert</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.revert">revert</a> x...</code> is the inverse of <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.intro">intro</a> x...</code>: it moves the given hypotheses into the main goal's target type.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.clear">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L257-L258">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.clear">Lean.Parser.Tactic.clear</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.clear">clear</a> x...</code> removes the given hypotheses, or fails if there are remaining references to a hypothesis.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.subst">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L259-L262">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.subst">Lean.Parser.Tactic.subst</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.subst">subst</a> x...</code> substitutes each <code>x</code> with <code>e</code> in the goal if there is a hypothesis of type <code>x = e</code> or <code>e = x</code>.
-If <code>x</code> is itself a hypothesis of type <code>y = e</code> or <code>e = y</code>, <code>y</code> is substituted instead.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.assumption">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L263-L266">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.assumption">Lean.Parser.Tactic.assumption</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.assumption">assumption</a></code> tries to solve the main goal using a hypothesis of compatible type, or else fails.
-Note also the <code>‹t›</code> term notation, which is a shorthand for <code>show t by <a href=".././Init/Notation.html#Lean.Parser.Tactic.assumption">assumption</a></code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.assumption">Lean.Parser.Tactic.assumption</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.assumption</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotassumption&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.contradiction">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L267-L290">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">Lean.Parser.Tactic.contradiction</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a></code> closes the main goal if its hypotheses are "trivially contradictory".</p><ul>
-<li>Inductive type/family with no applicable constructors</li>
-</ul><pre><code class="language-lean">example (h : False) : p := by <a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a>
-</code></pre><ul>
-<li>Injectivity of constructors</li>
-</ul><pre><code class="language-lean">example (h : none = some true) : p := by <a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a>  --
-</code></pre><ul>
-<li>Decidable false proposition</li>
-</ul><pre><code class="language-lean">example (h : 2 + 2 = 3) : p := by <a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a>
-</code></pre><ul>
-<li>Contradictory hypotheses</li>
-</ul><pre><code class="language-lean">example (h : p) (h' : ¬ p) : q := by <a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a>
-</code></pre><ul>
-<li>Other simple contradictions such as</li>
-</ul><pre><code class="language-lean">example (x : Nat) (h : x ≠ x) : p := by <a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a>
-</code></pre><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">Lean.Parser.Tactic.contradiction</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.contradiction</span> <span class="fn">1024</span>
-    (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotcontradiction&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.apply">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L291-L299">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.apply">Lean.Parser.Tactic.apply</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.apply">apply</a> e</code> tries to match the current goal against the conclusion of <code>e</code>'s type.
-If it succeeds, then the tactic returns as many subgoals as the number of premises that
-have not been fixed by type inference or type class resolution.
-Non-dependent premises are added before dependent ones.</p><p>The <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.apply">apply</a></code> tactic uses higher-order pattern matching, type class resolution, and first-order unification with dependent types.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.exact">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L300-L303">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.exact">Lean.Parser.Tactic.exact</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> e</code> closes the main goal if its target type matches that of <code>e</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.refine">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L304-L308">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.refine">Lean.Parser.Tactic.refine</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.refine">refine</a> e</code> behaves like <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> e</code>, except that named (<code>?x</code>) or unnamed (<code>?_</code>) holes in <code>e</code> that are not solved
-by unification with the main goal's target type are converted into new goals, using the hole's name, if any, as the goal case name.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.refine'">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L309-L310">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.refine'">Lean.Parser.Tactic.refine'</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.refine'">refine'</a> e</code> behaves like <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.refine">refine</a> e</code>, except that unsolved placeholders (<code>_</code>) and implicit parameters are also converted into new goals.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.constructor">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L311-L312">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.constructor">Lean.Parser.Tactic.constructor</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>If the main goal's target type is an inductive type, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.constructor">constructor</a></code> solves it with the first matching constructor, or else fails.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.constructor">Lean.Parser.Tactic.constructor</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.constructor</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotconstructor&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.case">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L313-L316">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.case">Lean.Parser.Tactic.case</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.case">case</a> tag => tac</code> focuses on the goal with case name <code>tag</code> and solves it using <code>tac</code>, or else fails.
-<code><a href=".././Init/Notation.html#Lean.Parser.Tactic.case">case</a> tag x₁ ... xₙ => tac</code> additionally renames the <code>n</code> most recent hypotheses with inaccessible names to the given names.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.case'">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L317-L321">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.case'">Lean.Parser.Tactic.case'</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Similar to the <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.case">case</a> tag => tac</code> tactic but for writing macros. Recall that <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.case">case</a></code> closes the goal using <code>sorry</code> when it fails,
-and the tactic execution is not interrupted.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.«tacticNext___=>_»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L323-L326">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.«tacticNext___=>_»">Lean.Parser.Tactic.«tacticNext___=>_»</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>next => tac</code> focuses on the next goal solves it using <code>tac</code>, or else fails.
-<code>next x₁ ... xₙ => tac</code> additionally renames the <code>n</code> most recent hypotheses with inaccessible names to the given names.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.allGoals">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L328-L329">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.allGoals">Lean.Parser.Tactic.allGoals</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.allGoals">allGoals</a> tac</code> runs <code>tac</code> on each goal, concatenating the resulting goals, if any.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.anyGoals">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L330-L331">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.anyGoals">Lean.Parser.Tactic.anyGoals</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.anyGoals">anyGoals</a> tac</code> applies the tactic <code>tac</code> to every goal, and succeeds if at least one application succeeds.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.focus">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L332-L335">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.focus">Lean.Parser.Tactic.focus</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.focus">focus</a> tac</code> focuses on the main goal, suppressing all other goals, and runs <code>tac</code> on it.
-Usually <code>· tac</code>, which enforces that the goal is closed by <code>tac</code>, should be preferred.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.skip">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L336-L337">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.skip">Lean.Parser.Tactic.skip</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.skip">skip</a></code> does nothing.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.skip">Lean.Parser.Tactic.skip</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.skip</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotskip&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.done">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L338-L339">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.done">Lean.Parser.Tactic.done</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.done">done</a></code> succeeds iff there are no remaining goals.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.done">Lean.Parser.Tactic.done</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.done</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotdone&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.traceState">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L340-L341">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.traceState">Lean.Parser.Tactic.traceState</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>This tactic displays the current state in the info view.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.traceState">Lean.Parser.Tactic.traceState</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.traceState</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quottrace_state&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.traceMessage">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L342-L343">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.traceMessage">Lean.Parser.Tactic.traceMessage</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>trace msg</code> displays <code>msg</code> in the info view.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.failIfSuccess">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L344-L345">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.failIfSuccess">Lean.Parser.Tactic.failIfSuccess</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Fails if the given tactic succeeds.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.paren">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L346-L346">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.paren">Lean.Parser.Tactic.paren</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.withReducible">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L347-L347">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.withReducible">Lean.Parser.Tactic.withReducible</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.withReducibleAndInstances">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L348-L348">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.withReducibleAndInstances">Lean.Parser.Tactic.withReducibleAndInstances</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.withUnfoldingAll">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L349-L349">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.withUnfoldingAll">Lean.Parser.Tactic.withUnfoldingAll</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.first">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L350-L351">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.first">Lean.Parser.Tactic.first</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.first">first</a> | tac | ...</code> runs each <code>tac</code> until one succeeds, or else fails.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rotateLeft">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L352-L352">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rotateLeft">Lean.Parser.Tactic.rotateLeft</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rotateRight">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L353-L353">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rotateRight">Lean.Parser.Tactic.rotateRight</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticTry_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L354-L355">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticTry_">Lean.Parser.Tactic.tacticTry_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>try tac</code> runs <code>tac</code> and succeeds even if <code>tac</code> failed.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.«tactic_<;>_»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L356-L357">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.«tactic_<;>_»">Lean.Parser.Tactic.«tactic_<;>_»</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div>
-<p><code>tac <;> tac'</code> runs <code>tac</code> on the main goal and <code>tac'</code> on each produced goal, concatenating all goals produced by <code>tac'</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.refl">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L364-L365">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.refl">Lean.Parser.Tactic.refl</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>eq_refl</code> is equivalent to <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> <a href=".././Init/Prelude.html#rfl">rfl</a></code>, but has a few optimizatons.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.refl">Lean.Parser.Tactic.refl</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.refl</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quoteq_refl&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticRfl">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L367-L372">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRfl">Lean.Parser.Tactic.tacticRfl</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>This tactic tries to close the current goal using reflexivity.
-This is supposed to be an extensible tactic and users can add their own support
-to new reflexive relations.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRfl">Lean.Parser.Tactic.tacticRfl</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticRfl</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotrfl&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticRfl'">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L374-L377">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRfl'">Lean.Parser.Tactic.tacticRfl'</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Similar to <code><a href=".././Init/Prelude.html#rfl">rfl</a></code>, but disables smart unfolding and unfolds all kinds of definitions,
-theorems included (relevant for declarations defined by well-founded recursion).</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRfl'">Lean.Parser.Tactic.tacticRfl'</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticRfl'</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotrfl'&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.ac_refl">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L379-L379">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.ac_refl">Lean.Parser.Tactic.ac_refl</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.ac_refl">Lean.Parser.Tactic.ac_refl</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.ac_refl</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotac_refl &quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticAdmit">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L381-L382">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticAdmit">Lean.Parser.Tactic.tacticAdmit</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>admit</code> is a shorthand for <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> sorry</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticAdmit">Lean.Parser.Tactic.tacticAdmit</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticAdmit</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotadmit&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticSorry">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L383-L384">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticSorry">Lean.Parser.Tactic.tacticSorry</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The <code>sorry</code> tactic is a shorthand for <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> sorry</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticSorry">Lean.Parser.Tactic.tacticSorry</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticSorry</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotsorry&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticInfer_instance">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L385-L386">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticInfer_instance">Lean.Parser.Tactic.tacticInfer_instance</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>infer_instance</code> is an abbreviation for <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.exact">exact</a> <a href=".././Init/Prelude.html#inferInstance">inferInstance</a></code></p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticInfer_instance">Lean.Parser.Tactic.tacticInfer_instance</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticInfer_instance</span> <span class="fn">1024</span>
-    (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotinfer_instance&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.config">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L388-L389">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.config">Lean.Parser.Tactic.config</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Optional configuration option for tactics</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.locationWildcard">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L391-L391">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.locationWildcard">Lean.Parser.Tactic.locationWildcard</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.locationWildcard">Lean.Parser.Tactic.locationWildcard</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nodeWithAntiquot">Lean.ParserDescr.nodeWithAntiquot</a> <span class="fn">&quotlocationWildcard&quot</span> <span class="fn">`Lean.Parser.Tactic.locationWildcard</span>
-    (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot*&quot</span></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.locationHyp">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L392-L392">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.locationHyp">Lean.Parser.Tactic.locationHyp</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.location">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L393-L393">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.location">Lean.Parser.Tactic.location</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.change">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L395-L395">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.change">Lean.Parser.Tactic.change</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.changeWith">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L396-L396">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.changeWith">Lean.Parser.Tactic.changeWith</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rwRule">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L398-L398">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rwRule">Lean.Parser.Tactic.rwRule</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rwRuleSeq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L399-L399">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rwRuleSeq">Lean.Parser.Tactic.rwRuleSeq</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rewriteSeq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L401-L408">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rewriteSeq">Lean.Parser.Tactic.rewriteSeq</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>rewrite [e]</code> applies identity <code>e</code> as a rewrite rule to the target of the main goal.
-If <code>e</code> is preceded by left arrow (<code>←</code> or <code><-</code>), the rewrite is applied in the reverse direction.
-If <code>e</code> is a defined constant, then the equational theorems associated with <code>e</code> are used. This provides a convenient way to unfold <code>e</code>.</p><ul>
-<li><code>rewrite [e₁, ..., eₙ]</code> applies the given rules sequentially.</li>
-<li><code>rewrite [e] at l</code> rewrites <code>e</code> at location(s) <code>l</code>, where <code>l</code> is either <code>*</code> or a list of hypotheses in the local context. In the latter case, a turnstile <code>⊢</code> or <code>|-</code> can also be used, to signify the target of the goal.</li>
-</ul><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rwSeq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L410-L413">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rwSeq">Lean.Parser.Tactic.rwSeq</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>An abbreviation for <code>rewrite</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.rwWithRfl">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L415-L422">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.rwWithRfl">Lean.Parser.Tactic.rwWithRfl</a>
-</span>
-<span class="decl_args">
-<span class="fn">(kind : <a href=".././Init/Prelude.html#Lean.SyntaxNodeKind">Lean.SyntaxNodeKind</a>)</span></span>
-<span class="decl_args">
-<span class="fn">(atom : <a href=".././Init/Prelude.html#String">String</a>)</span></span>
-<span class="decl_args">
-<span class="fn">(stx : <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
-<span class="decl_args">:</span>
-<div class="decl_type"><span class="fn"><a href=".././Init/Prelude.html#Lean.MacroM">Lean.MacroM</a> <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.expandRwSeq">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L424-L425">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.expandRwSeq">Lean.Parser.Tactic.expandRwSeq</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.Macro">Lean.Macro</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.expandRwSeq">Lean.Parser.Tactic.expandRwSeq</a> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.rwWithRfl">Lean.Parser.Tactic.rwWithRfl</a> <span class="fn">`Lean.Parser.Tactic.rewriteSeq</span> <span class="fn">&quotrewrite&quot</span></span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.injection">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L427-L436">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.injection">Lean.Parser.Tactic.injection</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.injection">injection</a></code> tactic is based on the fact that constructors of inductive data types are injections.
-That means that if <code>c</code> is a constructor of an inductive datatype, and if <code>(c t₁)</code> and <code>(c t₂)</code> are two terms that are equal then  <code>t₁</code> and <code>t₂</code> are equal too.
-If <code>q</code> is a proof of a statement of conclusion <code>t₁ = t₂</code>, then injection applies injectivity to derive the equality of all arguments of <code>t₁</code> and <code>t₂</code>
-placed in the same positions. For example, from <code>(a::b) = (c::d)</code> we derive <code>a=c</code> and <code>b=d</code>. To use this tactic <code>t₁</code> and <code>t₂</code>
-should be constructor applications of the same constructor.
-Given <code>h : a::b = c::d</code>, the tactic <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.injection">injection</a> h</code> adds two new hypothesis with types <code>a = c</code> and <code>b = d</code> to the main goal.
-The tactic <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.injection">injection</a> h with h₁ h₂</code> uses the names <code>h₁</code> and <code>h₂</code> to name the new hypotheses.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.injections">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L438-L438">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.injections">Lean.Parser.Tactic.injections</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.injections">Lean.Parser.Tactic.injections</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.injections</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotinjections&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.discharger">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L440-L440">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.discharger">Lean.Parser.Tactic.discharger</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpPre">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L442-L442">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpPre">Lean.Parser.Tactic.simpPre</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.simpPre">Lean.Parser.Tactic.simpPre</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nodeWithAntiquot">Lean.ParserDescr.nodeWithAntiquot</a> <span class="fn">&quotsimpPre&quot</span> <span class="fn">`Lean.Parser.Tactic.simpPre</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot↓&quot</span></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpPost">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L443-L443">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpPost">Lean.Parser.Tactic.simpPost</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.simpPost">Lean.Parser.Tactic.simpPost</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nodeWithAntiquot">Lean.ParserDescr.nodeWithAntiquot</a> <span class="fn">&quotsimpPost&quot</span> <span class="fn">`Lean.Parser.Tactic.simpPost</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot↑&quot</span></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpLemma">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L444-L444">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpLemma">Lean.Parser.Tactic.simpLemma</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpErase">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L445-L445">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpErase">Lean.Parser.Tactic.simpErase</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpStar">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L446-L446">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpStar">Lean.Parser.Tactic.simpStar</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.simpStar">Lean.Parser.Tactic.simpStar</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nodeWithAntiquot">Lean.ParserDescr.nodeWithAntiquot</a> <span class="fn">&quotsimpStar&quot</span> <span class="fn">`Lean.Parser.Tactic.simpStar</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot*&quot</span></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simp">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L447-L458">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simp">Lean.Parser.Tactic.simp</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a></code> tactic uses lemmas and hypotheses to simplify the main goal target or non-dependent hypotheses. It has many variants.</p><ul>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a></code> simplifies the main goal target using lemmas tagged with the attribute <code>[simp]</code>.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [h₁, h₂, ..., hₙ]</code> simplifies the main goal target using the lemmas tagged with the attribute <code>[simp]</code> and the given <code>hᵢ</code>'s, where the <code>hᵢ</code>'s are expressions. If an <code>hᵢ</code> is a defined constant <code>f</code>, then the equational lemmas associated with <code>f</code> are used. This provides a convenient way to unfold <code>f</code>.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [*]</code> simplifies the main goal target using the lemmas tagged with the attribute <code>[simp]</code> and all hypotheses.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> only [h₁, h₂, ..., hₙ]</code> is like <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [h₁, h₂, ..., hₙ]</code> but does not use <code>[simp]</code> lemmas</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [-id₁, ..., -idₙ]</code> simplifies the main goal target using the lemmas tagged with the attribute <code>[simp]</code>, but removes the ones named <code>idᵢ</code>.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> at h₁ h₂ ... hₙ</code> simplifies the hypotheses <code>h₁ : T₁</code> ... <code>hₙ : Tₙ</code>. If the target or another hypothesis depends on <code>hᵢ</code>, a new simplified hypothesis <code>hᵢ</code> is introduced, but the old one remains in the local context.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> at *</code> simplifies all the hypotheses and the target.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [*] at *</code> simplifies target and all (propositional) hypotheses using the other hypotheses.</li>
-</ul><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.simpAll">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L459-L464">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.simpAll">Lean.Parser.Tactic.simpAll</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>A stronger version of <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a> [*] at *</code> where the hypotheses and target are simplified
-multiple times until no simplication is applicable.
-Only non-dependent propositional hypotheses are considered.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.dsimp">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L466-L470">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.dsimp">Lean.Parser.Tactic.dsimp</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.dsimp">dsimp</a></code> tactic is the definitional simplifier. It is similar to <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.simp">simp</a></code> but only applies theorems that hold by
-reflexivity. Thus, the result is guaranteed to be definitionally equal to the input.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.delta">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L472-L475">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.delta">Lean.Parser.Tactic.delta</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Delta expand the given definition.
-This is a low-level tactic, it will expose how recursive definitions have been compiled by Lean.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.unfold">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L476-L480">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.unfold">Lean.Parser.Tactic.unfold</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Unfold definition. For non-recursive definitions, this tactic is identical to <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.delta">delta</a></code>.
-For recursive definitions, it hides the encoding tricks used by the Lean frontend to convince the
-kernel that the definition terminates.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticRefine_lift_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L484-L484">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRefine_lift_">Lean.Parser.Tactic.tacticRefine_lift_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticHave_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L486-L492">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticHave_">Lean.Parser.Tactic.tacticHave_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>have h : t := e</code> adds the hypothesis <code>h : t</code> to the current goal if <code>e</code> a term of type <code>t</code>. If <code>t</code> is omitted, it will be inferred.
-If <code>h</code> is omitted, the name <code>this</code> is used.
-The variant <code>have pattern := e</code> is equivalent to <code>match e with | pattern => _</code>, and it is convenient for types that have only applicable constructor.
-Example: given <code>h : p ∧ q ∧ r</code>, <code>have ⟨h₁, h₂, h₃⟩ := h</code> produces the hypotheses <code>h₁ : p</code>, <code>h₂ : q</code>, and <code>h₃ : r</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.«tacticHave__:=_»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L494-L497">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.«tacticHave__:=_»">Lean.Parser.Tactic.«tacticHave__:=_»</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>have h := e</code> adds the hypothesis <code>h : t</code> if <code>e : t</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticSuffices_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L498-L505">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticSuffices_">Lean.Parser.Tactic.tacticSuffices_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Given a main goal <code>ctx |- t</code>, <code>suffices h : t' from e</code> replaces the main goal with <code>ctx |- t'</code>,
-<code>e</code> must have type <code>t</code> in the context <code>ctx, h : t'</code>.</p><p>The variant <code>suffices h : t' by tac</code> is a shorthand for <code>suffices h : t' from by tac</code>.
-If <code>h :</code> is omitted, the name <code>this</code> is used.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticLet_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L506-L512">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticLet_">Lean.Parser.Tactic.tacticLet_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>let h : t := e</code> adds the hypothesis <code>h : t := e</code> to the current goal if <code>e</code> a term of type <code>t</code>.
-If <code>t</code> is omitted, it will be inferred.
-The variant <code>let pattern := e</code> is equivalent to <code>match e with | pattern => _</code>, and it is convenient for types that have only applicable constructor.
-Example: given <code>h : p ∧ q ∧ r</code>, <code>let ⟨h₁, h₂, h₃⟩ := h</code> produces the hypotheses <code>h₁ : p</code>, <code>h₂ : q</code>, and <code>h₃ : r</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticShow_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L513-L517">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticShow_">Lean.Parser.Tactic.tacticShow_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>show t</code> finds the first goal whose target unifies with <code>t</code>. It makes that the main goal,
-performs the unification, and replaces the target with the unified version of <code>t</code>.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.letrec">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L518-L518">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.letrec">Lean.Parser.Tactic.letrec</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticRefine_lift'_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L523-L523">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRefine_lift'_">Lean.Parser.Tactic.tacticRefine_lift'_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticHave'_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L524-L524">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticHave'_">Lean.Parser.Tactic.tacticHave'_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.«tacticHave'__:=_»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L525-L525">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.«tacticHave'__:=_»">Lean.Parser.Tactic.«tacticHave'__:=_»</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticLet'_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L526-L526">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticLet'_">Lean.Parser.Tactic.tacticLet'_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.inductionAlt">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L528-L528">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.inductionAlt">Lean.Parser.Tactic.inductionAlt</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.inductionAlts">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L529-L529">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.inductionAlts">Lean.Parser.Tactic.inductionAlts</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.induction">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L530-L544">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.induction">Lean.Parser.Tactic.induction</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Assuming <code>x</code> is a variable in the local context with an inductive type, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> x</code> applies induction on <code>x</code> to the main goal,
-producing one goal for each constructor of the inductive type, in which the target is replaced by a general instance of that constructor
-and an inductive hypothesis is added for each recursive argument to the constructor.
-If the type of an element in the local context depends on <code>x</code>, that element is reverted and reintroduced afterward,
-so that the inductive hypothesis incorporates that hypothesis as well.
-For example, given <code>n : <a href=".././Init/Prelude.html#Nat">Nat</a></code> and a goal with a hypothesis <code>h : P n</code> and target <code>Q n</code>, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> n</code> produces one goal
-with hypothesis <code>h : P 0</code> and target <code>Q 0</code>, and one goal with hypotheses <code>h : P (Nat.succ a)</code> and <code>ih₁ : P a → Q a</code> and target <code>Q (Nat.succ a)</code>.
-Here the names <code>a</code> and <code>ih₁</code> are chosen automatically and are not accessible. You can use <code>with</code> to provide the variables names for each constructor.</p><ul>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> e</code>, where <code>e</code> is an expression instead of a variable, generalizes <code>e</code> in the goal, and then performs induction on the resulting variable.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> e using r</code> allows the user to specify the principle of induction that should be used. Here <code>r</code> should be a theorem whose result type must be of the form <code>C t</code>, where <code>C</code> is a bound variable and <code>t</code> is a (possibly empty) sequence of bound variables</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> e generalizing z₁ ... zₙ</code>, where <code>z₁ ... zₙ</code> are variables in the local context, generalizes over <code>z₁ ... zₙ</code> before applying the induction but then introduces them in each goal. In other words, the net effect is that each inductive hypothesis is generalized.</li>
-<li>Given <code>x : <a href=".././Init/Prelude.html#Nat">Nat</a></code>, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.induction">induction</a> x with | zero => tac₁ | succ x' ih => tac₂</code> uses tactic <code>tac₁</code> for the <code>zero</code> case, and <code>tac₂</code> for the <code>succ</code> case.</li>
-</ul><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.generalizeArg">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L546-L546">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.generalizeArg">Lean.Parser.Tactic.generalizeArg</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.generalize">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L547-L550">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.generalize">Lean.Parser.Tactic.generalize</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.generalize">generalize</a> ([h :] e = x),+</code> replaces all occurrences <code>e</code>s in the main goal with a fresh hypothesis <code>x</code>s.
-If <code>h</code> is given, <code>h : e = x</code> is introduced as well.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.casesTarget">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L552-L552">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.casesTarget">Lean.Parser.Tactic.casesTarget</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.cases">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L553-L564">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.cases">Lean.Parser.Tactic.cases</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Assuming <code>x</code> is a variable in the local context with an inductive type, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a> x</code> splits the main goal,
-producing one goal for each constructor of the inductive type, in which the target is replaced by a general instance of that constructor.
-If the type of an element in the local context depends on <code>x</code>, that element is reverted and reintroduced afterward,
-so that the case split affects that hypothesis as well. <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a></code> detects unreachable cases and closes them automatically.
-For example, given <code>n : <a href=".././Init/Prelude.html#Nat">Nat</a></code> and a goal with a hypothesis <code>h : P n</code> and target <code>Q n</code>, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a> n</code> produces one goal with hypothesis <code>h : P 0</code> and target <code>Q 0</code>,
-and one goal with hypothesis <code>h : P (Nat.succ a)</code> and target <code>Q (Nat.succ a)</code>. Here the name <code>a</code> is chosen automatically and are not accessible. You can use <code>with</code> to provide the variables names for each constructor.</p><ul>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a> e</code>, where <code>e</code> is an expression instead of a variable, generalizes <code>e</code> in the goal, and then cases on the resulting variable.</li>
-<li>Given <code>as : <a href=".././Init/Prelude.html#List">List</a> α</code>, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a> as with | nil => tac₁ | cons a as' => tac₂</code>, uses tactic <code>tac₁</code> for the <code>nil</code> case, and <code>tac₂</code> for the <code>cons</code> case, and <code>a</code> and <code>as'</code> are used as names for the new variables introduced.</li>
-<li><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.cases">cases</a> h : e</code>, where <code>e</code> is a variable or an expression, performs cases on <code>e</code> as above, but also adds a hypothesis <code>h : e = ...</code> to each hypothesis, where <code>...</code> is the constructor instance for that particular case.</li>
-</ul><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.renameI">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L566-L567">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.renameI">Lean.Parser.Tactic.renameI</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>rename_i x_1 ... x_n</code> renames the last <code>n</code> inaccessible names using the given names.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticRepeat_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L569-L573">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticRepeat_">Lean.Parser.Tactic.tacticRepeat_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>repeat tac</code> applies <code>tac</code> to main goal. If the application succeeds,
-the tactic is applied recursively to the generated subgoals until it eventually fails.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticTrivial">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L577-L584">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticTrivial">Lean.Parser.Tactic.tacticTrivial</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Tries different simple tactics (e.g., <code><a href=".././Init/Prelude.html#rfl">rfl</a></code>, <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.contradiction">contradiction</a></code>, ...) to close the current goal.
-You can use the command <code>macro_rules</code> to extend the set of tactics used. Example:</p><pre><code>macro_rules | `(tactic| trivial) => `(tactic| simp)
-</code></pre><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.tacticTrivial">Lean.Parser.Tactic.tacticTrivial</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.tacticTrivial</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quottrivial&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.split">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L586-L590">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.split">Lean.Parser.Tactic.split</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.split">split</a></code> tactic is useful for breaking nested if-then-else and match expressions in cases.
-For a <code>match</code> expression with <code>n</code> cases, the <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.split">split</a></code> tactic generates at most <code>n</code> subgoals</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.dbgTrace">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L592-L592">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.dbgTrace">Lean.Parser.Tactic.dbgTrace</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticStop_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L594-L596">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticStop_">Lean.Parser.Tactic.tacticStop_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>Helper tactic for "discarding" the rest of a proof. It is useful when working on the middle of a complex proofs,
-and less messy than commenting the remainder of the proof.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.specialize">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L598-L604">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.specialize">Lean.Parser.Tactic.specialize</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The tactic <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.specialize">specialize</a> h a₁ ... aₙ</code> works on local hypothesis <code>h</code>.
-The premises of this hypothesis, either universal quantifications or non-dependent implications,
-are instantiated by concrete terms coming either from arguments <code>a₁</code> ... <code>aₙ</code>.
-The tactic adds a new hypothesis with the same name <code>h := h a₁ ... aₙ</code> and tries to clear the previous one.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.tacticUnhygienic_">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L613-L613">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.tacticUnhygienic_">Lean.Parser.Tactic.tacticUnhygienic_</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.fail">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L615-L616">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.fail">Lean.Parser.Tactic.fail</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code><a href=".././Init/Notation.html#Lean.Parser.Tactic.fail">fail</a> msg</code> is a tactic that always fail and produces an error using the given message.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.checkpoint">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L618-L618">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.checkpoint">Lean.Parser.Tactic.checkpoint</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.save">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L620-L620">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.save">Lean.Parser.Tactic.save</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">
-<span class="fn"><a href=".././Init/Notation.html#Lean.Parser.Tactic.save">Lean.Parser.Tactic.save</a> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Lean.Parser.Tactic.save</span> <span class="fn">1024</span> (<span class="fn"><a href=".././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quotsave&quot</span> <a href=".././Init/Prelude.html#Bool.false">false</a></span>)</span></span></li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.sleep">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L622-L623">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.sleep">Lean.Parser.Tactic.sleep</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p>The tactic <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.sleep">sleep</a> ms</code> sleeps for <code>ms</code> milliseconds and does nothing. It is used for debugging purposes only.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Tactic.«tacticExists_,,»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L625-L627">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Tactic.«tacticExists_,,»">Lean.Parser.Tactic.«tacticExists_,,»</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<p><code>exists e₁, e₂, ...</code> is shorthand for <code><a href=".././Init/Notation.html#Lean.Parser.Tactic.refine">refine</a> ⟨e₁, e₂, ...⟩; try <a href=".././Init/Core.html#trivial">trivial</a></code>. It is useful for existential goals.</p><details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="Lean.Parser.Attr.simp">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L633-L633">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#Lean.Parser.Attr.simp">Lean.Parser.Attr.simp</a>
-</span>
-<span class="decl_args">:</span>
-<div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
-<details>
-<summary>Equations</summary>
-<ul class="equations">
-<li class="equation">One or more equations did not get rendered due to their size.</li>
-</ul>
-</details>
-</div>
-</div>
-<div class="decl" id="«term‹_›»">
-<div class="def">
-<div class="gh_link">
-<a href="https://github.com/leanprover/lean4/blob/fa943d3864daa8ce709378f7783f849c72318f0c/src/Init/Notation.lean#L639-L639">source</a>
-</div>
-<div class="decl_header">
-<span class="decl_kind">def</span>
-<span class="decl_name">
-<a class="break_within" href=".././Init/Notation.html#«term‹_›»">«term‹_›»</a>
 </span>
 <span class="decl_args">:</span>
 <div class="decl_type"><a href=".././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div>
@@ -4725,6 +2308,9 @@ The tactic adds a new hypothesis with the same name <code>h := h a₁ ... aₙ</
 </div>
 <div class="nav_link">
 <a href=".././Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href=".././Init/Tactics.html">Init.Tactics</a>
 </div>
 <div class="nav_link">
 <a href=".././Init/Util.html">Init.Util</a>

@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.Queue</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/fcfa9b59f98f56ea775260c308865133b3ded57e/LeanColls/Queue.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/Queue.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -57,12 +57,18 @@ Documentation</h1>
 <div class="nav_link">
 <a class="break_within" href="#LeanColls.Queue">LeanColls.Queue</a>
 </div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Queue.CorrectFIFO">LeanColls.Queue.CorrectFIFO</a>
+</div>
+<div class="nav_link">
+<a class="break_within" href="#LeanColls.Queue.CorrectLIFO">LeanColls.Queue.CorrectLIFO</a>
+</div>
 </nav>
 <main>
 <div class="decl" id="LeanColls.Queue">
 <div class="class">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/fcfa9b59f98f56ea775260c308865133b3ded57e/LeanColls/Queue.lean#L13-L20">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/Queue.lean#L13-L16">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">class</span>
@@ -76,38 +82,17 @@ Documentation</h1>
 <span class="decl_args">:</span>
 <div class="decl_type"><span class="fn">Type (max u v)</span></div></div>
 <ul class="structure_fields" id="LeanColls.Queue.mk">
-<li id="LeanColls.Queue.model" class="structure_field">
-<div class="structure_field_info">
-model : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span></div>
-</li>
 <li id="LeanColls.Queue.empty" class="structure_field">
 <div class="structure_field_info">
 empty : <span class="fn">C</span></div>
-</li>
-<li id="LeanColls.Queue.h_empty" class="structure_field">
-<div class="structure_field_info">
-h_empty : <span class="fn"><span class="fn">[]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> <span class="fn">empty</span></span></span></div>
 </li>
 <li id="LeanColls.Queue.enq" class="structure_field">
 <div class="structure_field_info">
 enq : <span class="fn"><span class="fn">C</span> → <span class="fn"><span class="fn">τ</span> → <span class="fn">C</span></span></span></div>
 </li>
-<li id="LeanColls.Queue.h_enq" class="structure_field">
-<div class="structure_field_info">
-h_enq : <span class="fn">∀ (c : <span class="fn">C</span>) (t : <span class="fn">τ</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">model</span> <span class="fn">c</span></span> <a href=".././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">[<span class="fn">t</span>]</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> (<span class="fn"><span class="fn">enq</span> <span class="fn">c</span> <span class="fn">t</span></span>)</span></span></span></div>
-</li>
 <li id="LeanColls.Queue.deq" class="structure_field">
 <div class="structure_field_info">
 deq : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href=".././Init/Prelude.html#Option">Option</a> (<span class="fn"><span class="fn">τ</span> <a href=".././Init/Prelude.html#Prod">×</a> <span class="fn">C</span></span>)</span></span></div>
-</li>
-<li id="LeanColls.Queue.h_deq" class="structure_field">
-<div class="structure_field_info">
-h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
-  <span class="fn"><span class="fn"><a href=".././LeanColls/AuxLemmas.html#List.front?">List.front?</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>     <span class="fn"><a href=".././Init/Data/Option/Basic.html#Option.map">Option.map</a>
-      (<span class="fn">fun <span class="fn">x</span> =&gt
-        <span class="fn">match <span class="fn">x</span> with
-        | <span class="fn">(<span class="fn">x</span>, <span class="fn">c'</span>)</span> =&gt <span class="fn">(<span class="fn">x</span>, <span class="fn"><span class="fn">model</span> <span class="fn">c'</span></span>)</span></span></span>)
-      (<span class="fn"><span class="fn">deq</span> <span class="fn">c</span></span>)</span></span></span></div>
 </li>
 </ul>
 <details class="instances">
@@ -115,6 +100,100 @@ h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
 <ul>
 </ul>
 </details>
+</div>
+</div>
+<div class="decl" id="LeanColls.Queue.CorrectFIFO">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/Queue.lean#L20-L24">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/Queue.html#LeanColls.Queue.CorrectFIFO">LeanColls.Queue.CorrectFIFO</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(Q : <span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue">LeanColls.Queue</a> <span class="fn">C</span> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max u_1 u_2)</span></div></div>
+<ul class="structure_fields" id="LeanColls.Queue.CorrectFIFO.mk">
+<li id="LeanColls.Queue.CorrectFIFO.model" class="structure_field">
+<div class="structure_field_info">
+model : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectFIFO.h_empty" class="structure_field">
+<div class="structure_field_info">
+h_empty : <span class="fn"><span class="fn">[]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> <span class="fn">LeanColls.Queue.empty</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectFIFO.h_enq" class="structure_field">
+<div class="structure_field_info">
+h_enq : <span class="fn">∀ (c : <span class="fn">C</span>) (t : <span class="fn">τ</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">model</span> <span class="fn">c</span></span> <a href=".././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">[<span class="fn">t</span>]</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> (<span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue.enq">LeanColls.Queue.enq</a> <span class="fn">c</span> <span class="fn">t</span></span>)</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectFIFO.h_deq" class="structure_field">
+<div class="structure_field_info">
+h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
+  <span class="fn"><span class="fn"><a href=".././LeanColls/AuxLemmas.html#List.front?">List.front?</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>     <span class="fn"><a href=".././Init/Data/Option/Basic.html#Option.map">Option.map</a>
+      (<span class="fn">fun <span class="fn">x</span> =&gt
+        <span class="fn">match <span class="fn">x</span> with
+        | <span class="fn">(<span class="fn">x</span>, <span class="fn">c'</span>)</span> =&gt <span class="fn">(<span class="fn">x</span>, <span class="fn"><span class="fn">model</span> <span class="fn">c'</span></span>)</span></span></span>)
+      (<span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue.deq">LeanColls.Queue.deq</a> <span class="fn">c</span></span>)</span></span></span></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="decl" id="LeanColls.Queue.CorrectLIFO">
+<div class="structure">
+<div class="gh_link">
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/Queue.lean#L26-L30">source</a>
+</div>
+<div class="decl_header">
+<span class="decl_kind">structure</span>
+<span class="decl_name">
+<a class="break_within" href=".././LeanColls/Queue.html#LeanColls.Queue.CorrectLIFO">LeanColls.Queue.CorrectLIFO</a>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{C : <span class="fn">Type u_1</span>}</span></span>
+</span>
+<span class="impl_arg">
+<span class="decl_args">
+<span class="fn">{τ : <span class="fn">Type u_2</span>}</span></span>
+</span>
+<span class="decl_args">
+<span class="fn">(Q : <span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue">LeanColls.Queue</a> <span class="fn">C</span> <span class="fn">τ</span></span>)</span></span>
+<span class="decl_args">:</span>
+<div class="decl_type"><span class="fn">Type (max u_1 u_2)</span></div></div>
+<ul class="structure_fields" id="LeanColls.Queue.CorrectLIFO.mk">
+<li id="LeanColls.Queue.CorrectLIFO.model" class="structure_field">
+<div class="structure_field_info">
+model : <span class="fn"><span class="fn">C</span> → <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectLIFO.h_empty" class="structure_field">
+<div class="structure_field_info">
+h_empty : <span class="fn"><span class="fn">[]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> <span class="fn">LeanColls.Queue.empty</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectLIFO.h_enq" class="structure_field">
+<div class="structure_field_info">
+h_enq : <span class="fn">∀ (c : <span class="fn">C</span>) (t : <span class="fn">τ</span>), <span class="fn"><span class="fn"><span class="fn">t</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">model</span> <span class="fn">c</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">model</span> (<span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue.enq">LeanColls.Queue.enq</a> <span class="fn">c</span> <span class="fn">t</span></span>)</span></span></span></div>
+</li>
+<li id="LeanColls.Queue.CorrectLIFO.h_deq" class="structure_field">
+<div class="structure_field_info">
+h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
+  <span class="fn"><span class="fn"><a href=".././LeanColls/AuxLemmas.html#List.front?">List.front?</a> (<span class="fn"><span class="fn">model</span> <span class="fn">c</span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>     <span class="fn"><a href=".././Init/Data/Option/Basic.html#Option.map">Option.map</a>
+      (<span class="fn">fun <span class="fn">x</span> =&gt
+        <span class="fn">match <span class="fn">x</span> with
+        | <span class="fn">(<span class="fn">x</span>, <span class="fn">c'</span>)</span> =&gt <span class="fn">(<span class="fn">x</span>, <span class="fn"><span class="fn">model</span> <span class="fn">c'</span></span>)</span></span></span>)
+      (<span class="fn"><a href=".././LeanColls/Queue.html#LeanColls.Queue.deq">LeanColls.Queue.deq</a> <span class="fn">c</span></span>)</span></span></span></div>
+</li>
+</ul>
 </div>
 </div>
 </main>
@@ -396,6 +475,9 @@ h_deq : <span class="fn">∀ (c : <span class="fn">C</span>),
 </div>
 <div class="nav_link">
 <a href=".././Init/SizeOfLemmas.html">Init.SizeOfLemmas</a>
+</div>
+<div class="nav_link">
+<a href=".././Init/Tactics.html">Init.Tactics</a>
 </div>
 <div class="nav_link">
 <a href=".././Init/Util.html">Init.Util</a>
