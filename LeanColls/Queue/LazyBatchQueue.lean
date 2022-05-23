@@ -86,36 +86,27 @@ def deq (Q : LazyBatchQueue τ) : Option (τ × LazyBatchQueue τ) :=
 
 
 instance : Queue (LazyBatchQueue τ) τ where
-  model := model_fn
   empty := empty
-  h_empty := by simp [empty, model_fn]
   enq   := enq
+  deq   := deq
+
+instance : instQueueLazyBatchQueue.CorrectFIFO (τ := τ) where
+  model := model_fn
+  h_empty := by simp [empty, model_fn]
   h_enq := by
     intros c x
     cases c; case mk F F_len R R_len h_lens =>
-    simp [enq, balance_inv]
+    simp [Queue.enq, enq, balance_inv]
     simp [model_fn]
     rw [←List.append_assoc]
-  deq   := deq
   h_deq := by
     intro c
     cases c; case mk F F_len R R_len h_lens =>
-    simp [deq]
-    suffices ∀ o h, List.front? (LazyBatchQueue.model_fn { F := F, F_len := F_len, R := R, R_len := R_len, h_lens := h_lens }) =
-      Option.map (fun x => (x.fst, LazyBatchQueue.model_fn x.snd))
-      (deq.match_1 F (fun x h => Option (τ × LazyBatchQueue τ)) o ((@LazyBatchQueue.deq.proof_1 τ F).trans h)
-      (fun x F' h =>
-          some
-            (x,
-              LazyBatchQueue.balance F' (F_len - 1) R R_len
-                (deq.proof_2 F _ _ _ h_lens x _ h)))
-      fun h => none) from
-      this F.force rfl
+    simp [Queue.deq, deq]
     match h_lens with
     | ⟨hf, hr, h_lens'⟩ =>
-    intro o h
-    match o with
-    | none =>
+    split
+    case h_2 h =>
       simp [Option.map, Option.bind, model_fn]
       have hF : F.toList = []
         := LazyList.toList_force_none.mp h
@@ -134,16 +125,17 @@ instance : Queue (LazyBatchQueue τ) τ where
         rw [←LazyList.length_toList] at hr
         unfold List.length at hr
         split at hr
-        simp
-        contradiction      
+        assumption
+        contradiction
       simp [hF, hR, List.front?]
-    | some ⟨x,F'⟩ =>
+    case h_1 x F' h =>
       simp [Option.map, Option.bind, model_fn]
       have hF : F.toList = x :: F'.toList
         := LazyList.toList_force_some h
       simp [hF, List.front?]
-      have := @balance_inv _ F' (F_len-1) R R_len (deq.proof_2 F _ _ _ h_lens x _ h)
-      simp [model_fn] at this
-      exact this.symm
+      suffices _ by
+        have := @balance_inv _ F' (F_len-1) R R_len this
+        simp [model_fn] at this
+        exact this.symm
 
 end LazyBatchQueue
