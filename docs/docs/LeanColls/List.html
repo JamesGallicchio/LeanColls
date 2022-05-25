@@ -31,7 +31,7 @@ Documentation</h1>
 <a class="break_within" href="#top">LeanColls.List</a>
 </h3>
 <p class="gh_nav_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/List.lean">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65b69f41b42ee9a8c1ae4fd3b531806eb5a04c0/LeanColls/List.lean">source</a>
 </p>
 <div class="imports">
 <details>
@@ -71,7 +71,7 @@ Documentation</h1>
 <div class="decl" id="List.instFoldableList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/List.lean#L7-L9">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65b69f41b42ee9a8c1ae4fd3b531806eb5a04c0/LeanColls/List.lean#L7-L9">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -88,7 +88,8 @@ Documentation</h1>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn">List.instFoldableList</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">{ fold := <span class="fn">fun {β} =&gt <span class="fn">List.foldr</span></span>, toIterable := <span class="fn">{ ρ := <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>, step := <span class="fn">List.front?</span>, toIterator := <span class="fn">id</span> }</span> }</span></span></li>
+<span class="fn"><span class="fn">List.instFoldableList</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">{ fold := <span class="fn">fun {β} <span class="fn">f</span> =&gt <span class="fn"><a href=".././Init/Prelude.html#List.foldl">List.foldl</a> <span class="fn">fun <span class="fn">x</span> <span class="fn">y</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">y</span> <span class="fn">x</span></span></span></span></span>,
+    toIterable := <span class="fn">{ ρ := <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>, step := <span class="fn">List.front?</span>, toIterator := <span class="fn">id</span> }</span> }</span></span></li>
 </ul>
 </details>
 </div>
@@ -96,7 +97,7 @@ Documentation</h1>
 <div class="decl" id="List.instFoldableOpsListInstFoldableList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/List.lean#L11-L11">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65b69f41b42ee9a8c1ae4fd3b531806eb5a04c0/LeanColls/List.lean#L11-L11">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -125,7 +126,7 @@ Documentation</h1>
 <div class="decl" id="List.instEnumerableList">
 <div class="instance">
 <div class="gh_link">
-<a href="https://github.com/JamesGallicchio/LeanColls/blob/de3b6ceaab7dfc7c158c9e599769c884719c5963/LeanColls/List.lean#L13-L18">source</a>
+<a href="https://github.com/JamesGallicchio/LeanColls/blob/b65b69f41b42ee9a8c1ae4fd3b531806eb5a04c0/LeanColls/List.lean#L13-L18">source</a>
 </div>
 <div class="decl_header">
 <span class="decl_kind">instance</span>
@@ -142,8 +143,8 @@ Documentation</h1>
 <summary>Equations</summary>
 <ul class="equations">
 <li class="equation">
-<span class="fn"><span class="fn">List.instEnumerableList</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Enumerable.mk">LeanColls.Enumerable.mk</a> (<span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>) <span class="fn">id</span> <span class="fn">fun <span class="fn">o</span> =&gt
-    <span class="fn">match <span class="fn">o</span> with
+<span class="fn"><span class="fn">List.instEnumerableList</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././LeanColls/Classes.html#LeanColls.Enumerable.mk">LeanColls.Enumerable.mk</a> (<span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">τ</span></span>) <span class="fn">id</span> <span class="fn">fun <span class="fn">x</span> =&gt
+    <span class="fn">match <span class="fn">x</span> with
     | <span class="fn">none</span> =&gt <span class="fn">[]</span>
     | <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn">(<span class="fn">x</span>, <span class="fn">xs</span>)</span></span> =&gt <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">xs</span></span></span></span></span></span></li>
 </ul>
