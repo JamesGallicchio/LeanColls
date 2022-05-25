@@ -5,6 +5,9 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.AuxLemmas
+import LeanColls.Classes
+
+namespace LeanColls
 
 /-!
 # Finger Trees
@@ -16,6 +19,7 @@ TODO: Describe
 See [Sozeau2007], section 4 and [Claessen2020]
 
 -/
+namespace FingerTree
 
 inductive Digit (τ : Type u)
 | _1 : τ → Digit τ
@@ -88,6 +92,9 @@ def NodeTree (τ : Type u) : Nat → Type u
 | 0 => τ
 | (n+1) => Node (NodeTree τ n)
 
+end FingerTree
+
+open FingerTree
 
 inductive FingerTree (τ : Type u) : (n : Nat) → Type u
 | Empty : FingerTree τ n
@@ -133,6 +140,7 @@ def front? (f : FingerTree τ n) : Option (NodeTree τ n × FingerTree τ n) :=
             (λ b => /- sf = Digit1 b -/
               Single b))))
 
+@[simp]
 theorem toList_cons (f : FingerTree τ n) (a : NodeTree τ n)
   : (f.cons a).toList = a :: f.toList
   := by
@@ -151,6 +159,7 @@ theorem toList_cons (f : FingerTree τ n) (a : NodeTree τ n)
   simp [toList, Digit.toList, Node.toList, List.bind, List.map, List.join]
   simp [toList, Digit.toList, Node.toList, List.bind, List.map, List.join]
 
+@[simp]
 theorem toList_front (f : FingerTree τ n)
   : f.front?.map (λ (a,f') => (a,f'.toList)) = f.toList.front?
   := by
@@ -211,6 +220,7 @@ def back? (f : FingerTree τ n) : Option (FingerTree τ n × NodeTree τ n) :=
               Single y),
         z)))
 
+@[simp]
 theorem toList_snoc (f : FingerTree τ n) (a : NodeTree τ n)
   : (f.snoc a).toList = f.toList.concat a
   := by
@@ -229,6 +239,7 @@ theorem toList_snoc (f : FingerTree τ n) (a : NodeTree τ n)
   simp [toList, Digit.toList, Node.toList, List.bind, List.map, List.join, List.concat_append, List.concat, List.map_concat, List.join_concat, List.append_assoc]
   simp [toList, Digit.toList, Node.toList, List.bind, List.map, List.join, List.concat_append, List.concat, List.map_concat, List.join_concat, List.append_assoc]
 
+@[simp]
 theorem toList_back (f : FingerTree τ n)
   : f.back?.map (λ (f',a) => (f'.toList,a)) = f.toList.back?
   := by
@@ -276,6 +287,20 @@ theorem toList_back (f : FingerTree τ n)
       split
       repeat { simp [Digit.toList, toList, List.bind, List.join, List.map] }
 
+theorem length_toList_deep {tr : FingerTree τ (n+1)}
+  : List.length (toList tr) ≤ List.length (List.bind (toList tr) Node.toList)
+  := by
+  generalize toList tr = L
+  simp [List.bind]
+  induction L with
+  | nil => simp [List.map, List.join]
+  | cons l ls ih =>
+  simp [List.map, List.join]
+  suffices 1 ≤ List.length (Node.toList l) by
+    have := Nat.add_le_add this ih
+    rw [←Nat.add_one, Nat.add_comm]
+    exact this
+  simp [Node.toList]; split <;> simp
 
 def append (f1 f2 : FingerTree τ n) : FingerTree τ n :=
   match f1, f2 with
@@ -284,6 +309,10 @@ def append (f1 f2 : FingerTree τ n) : FingerTree τ n :=
   | f1, Single z => f1.snoc z
   | Single a, f1 => f1.cons a
   | Deep pr1 tr1 sf1, Deep pr2 tr2 sf2 =>
+    have : List.length (toList tr1) ≤ List.length (List.bind (toList tr1) Node.toList)
+      := length_toList_deep
+    have : List.length (toList tr2) ≤ List.length (List.bind (toList tr2) Node.toList)
+      := length_toList_deep
     let tr' := match sf1, pr2 with
     | Digit._1 a,     Digit._1 b     => (tr1.snoc (Node._2 a b)).append tr2
     | Digit._2 a b,   Digit._1 c     => (tr1.snoc (Node._3 a b c)).append tr2
@@ -296,7 +325,20 @@ def append (f1 f2 : FingerTree τ n) : FingerTree τ n :=
     | Digit._3 a b c, Digit._3 d e f => (tr1.snoc (Node._3 a b c)).append (tr2.cons (Node._3 d e f))
 
     Deep pr1 tr' sf2
-  termination_by _ f1 f2 => sizeOf (f1,f2)
-  decreasing_by sorry
+  termination_by _ f1 f2 => f1.toList.length + f2.toList.length
+  decreasing_by
+    sorry
+
+instance {α} : Enumerable (FingerTree α 0) α where
+  ρ := FingerTree α 0
+  fromEnumerator := id
+  insert := λ
+    | none => empty
+    | some (x,ft) => ft.cons x
+
+instance {α} : Iterable (FingerTree α 0) α where
+  ρ := FingerTree α 0
+  toIterator := id
+  step := front?
 
 end FingerTree

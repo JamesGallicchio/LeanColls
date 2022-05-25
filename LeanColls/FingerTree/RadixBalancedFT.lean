@@ -143,7 +143,7 @@ def fullToHyperArray : (r : HyperRect α n) → r.w = WIDTH → HyperArray α n.
   backing |> cast (by simp at h; simp [HyperArray, h])
 
 theorem size_eq_sum_sizes (F : HyperRect α n)
-  : Foldable.fold (λ x acc => x.size + acc) 0 F.backing = F.size
+  : Foldable.fold (λ x (acc : Nat) => x.size + acc) 0 F.backing = F.size
   := by
   match F with
   | ⟨w, ⟨backing⟩, _⟩ =>
@@ -774,6 +774,18 @@ def front? : RBFT τ → Option (τ × RBFT τ)
     }
   )
 termination_by _ r => r.depth
+
+instance : Enumerable (RBFT α) α where
+  ρ := RBFT α
+  fromEnumerator := id
+  insert := λ
+    | none => empty
+    | some (x, y) => cons x y
+
+instance : Iterable (RBFT α) α where
+  ρ := RBFT α
+  toIterator := id
+  step := front?
 
 def test := @Range.mk 1237
   |> View.of
