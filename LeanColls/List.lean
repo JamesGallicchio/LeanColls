@@ -1,12 +1,15 @@
 import LeanColls.FoldableOps
+open LeanColls
 
 namespace List
 
-open LeanColls
-
 instance : Foldable (List τ) τ where
-  fold f := List.foldl (λ x y => f y x)
-  toIterable := ⟨List τ, List.front?, id⟩
+  fold := List.foldl
+
+instance : Iterable (List τ) τ where
+  ρ := List τ
+  step := List.front?
+  toIterator := id
 
 instance [BEq τ] : FoldableOps (List τ) τ := default
 
@@ -16,5 +19,15 @@ instance : Enumerable (List τ) τ where
   insert := λ
     | none => []
     | some ⟨x,xs⟩ => x::xs
-
 end List
+
+/-! ## Association Lists -/
+def AList (κ τ) := List (κ × τ)
+
+namespace AList
+
+instance [DecidableEq κ] : MapLike (AList κ τ) κ τ where
+  fold := List.foldl
+  get? L k := L.find? (fun (k',_) => k' = k) |>.map Prod.snd
+
+end AList

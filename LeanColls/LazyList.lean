@@ -219,16 +219,20 @@ instance : Alternative LazyList where
   failure := nil
   orElse  := fun as bs => LazyList.append as (delayed (Thunk.mk bs))
 
-def fold (f : τ → α → α) (acc : α)
+def fold (f : α → τ → α) (acc : α)
 : LazyList τ → α
 | nil        => acc
 | cons a as  =>
-  fold f (f a acc) as
+  fold f (f acc a) as
 | delayed as => fold f acc (as.get)
 
 instance : LeanColls.Foldable (LazyList τ) τ where
   fold := fold
-  toIterable := ⟨LazyList τ, LazyList.force, id⟩
+
+instance : LeanColls.Iterable (LazyList τ) τ where
+  ρ := LazyList τ
+  step := LazyList.force
+  toIterator := id
 
 @[specialize] partial def iterate (f : α → α) : α → LazyList α
 | x => cons x (delayed (iterate f (f x)))

@@ -43,7 +43,7 @@ Exposes `toIterator`, which gives an object that can traverse
 the collection one item at a time.
 -/
 class Iterable (C : Type u) (τ : Type v) where
-  ρ : Type v
+  ρ : Type w
   step : ρ → Option (τ × ρ)
   toIterator : C → ρ
 
@@ -60,10 +60,23 @@ Gives a default implementation of `ToStream C` by first
 building a `List τ` and then using this as the stream.
 -/
 class Foldable (C : Type u) (τ : outParam (Type v)) where
-  fold : (τ → β → β) → β → C → β
-  toIterable : Iterable C τ := ⟨List τ, List.front?, fold (· :: ·) []⟩
+  fold : {β : Type w} → (β → τ → β) → β → C → β
 
-attribute [instance] Foldable.toIterable
+class Foldable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C)) where
+  fold' : {β : Type w} → (c : C) → (β → (t : τ) → t ∈ c → β) → β → β
+
+/-!
+Foldables can be Iterable by first collecting everything
+into a list. Note that the iteration occurs in the same
+order that elements are applied in when folding.
+-/
+@[defaultInstance]
+instance [Foldable C τ] : Iterable C τ where
+  ρ := List τ
+  step := List.front?
+  toIterator c := c
+    |> Foldable.fold (fun acc x => x::acc) []
+    |> List.reverse
 
 /-!
 ## Construction
@@ -90,7 +103,7 @@ class Enumerable (C : Type u) (τ : Type v)
   fromEnumerator : ρ → C
   insert : Option (τ × ρ) → ρ
   unfold := fromEnumerator ∘
-    Foldable.fold (λ t r => insert (some (t,r))) (insert none)
+    Foldable.fold (λ r t => insert (some (t,r))) (insert none)
 
 
 /-!
@@ -98,16 +111,29 @@ class Enumerable (C : Type u) (τ : Type v)
 -/
 
 /-!
+### Size
+
+Class of collections with an efficient `size` operation
+-/
+class Size (C : Type u) where
+  size : C → Nat
+
+/-!
+### SetLike
+
+Class of collections with efficient membership checking
+-/
+class SetLike (C : Type u) (τ : outParam (Type v))
+  extends Foldable C τ, Membership τ C where
+
+/-!
 ### MapLike
 
-Class of collections that have an explicit key set and are
-isomorphic to `{a : α // a ∈ keySet c} → β`
+Class of collections that have efficient key value lookup
 -/
-class MapLike (C : Type u) (α : outParam (Type v)) (β : outParam (Type w)) where
-  κ : C → Type x
-  κ_hasMem c : Membership α (κ c)
-  keySet c : κ c
-  get c : {a : α // a ∈ keySet c} → β
+class MapLike (C : Type u) (α : outParam (Type v)) (β : outParam (Type w))
+  extends Foldable C (α × β) where
+  get? : C → α → Option β
 
 /-!
 ### Indexed
@@ -115,18 +141,9 @@ class MapLike (C : Type u) (α : outParam (Type v)) (β : outParam (Type w)) whe
 Class of collections with efficient size and indexed
 access operations
 -/
-class Indexed (C : Type u) (τ : outParam (Type u)) where
-  size : C → Nat
+class Indexed (C : Type u) (τ : outParam (Type u))
+  extends Size C where
   nth c : Fin (size c) → τ
-
-/-!
-### SetLike
-
-Class of collections that have a decidable membership function
-and are isomorphic to `{ a : α // decide (mem c a) }`
--/
-class SetLike (C : Type u) (τ : outParam (Type u)) where
-  mem : C → τ → Bool
 
 
 /-!
@@ -140,7 +157,7 @@ a collection `C` to be used in `for x in C do ...` syntax.
 instance instForInOfFoldable [Monad M] [Foldable F τ] : ForIn M F τ where
   forIn c acc f := do
     Foldable.fold
-      (λ x ma =>
+      (λ ma x =>
         bind ma (λ a =>
         bind (f x a) (λ res =>
         match res with
@@ -166,4 +183,3 @@ of the relevant operations classes, overriding operations for
 which more efficient versions exist.
 -/
 
-end LeanColls

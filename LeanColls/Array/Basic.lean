@@ -55,6 +55,12 @@ def allInit (A : Array (Uninit α) n)
   (h : ∀ i, (A.get i).isInit) : Array α n
   := ⟨λ i => Uninit.getValue (A.get i) (h i)⟩
 
+-- Axioms
+
+/- This axiom holds, because instantiating an array larger than `USize.size`
+  will cause the program to panic -/
+axiom size_lt_usize {α n} : Array α n → n ≤ USize.size
+
 -- Preliminary theorems
 @[simp]
 theorem get_of_set_eq (f : Array α n) (i : Fin n) (x : α) {i' : Fin n} (h_i : i = i')
@@ -80,12 +86,11 @@ for `Array.mk`.
 @[inline]
 def init {α : Type u} {n : Nat} (f : Fin n → α) : Array α n
   :=
-  @Range.mk n
-  |>.fold (λ i A' => A'.set i (.init $ f i)) (new Uninit.uninit n)
+  Range.fold' ⟨n⟩ (λ A' i h => A'.set ⟨i,h⟩ (.init $ f ⟨i,h⟩)) (new Uninit.uninit n)
   |>.allInit (by
     intro i
     simp [forIn, Foldable.fold, Id.run]
-    refine Range.fold_ind (motive := λ i A' =>
+    refine Range.fold'_ind (motive := λ i h A' =>
       ∀ j : Fin n, j < i → Uninit.isInit (get A' j))
       ?init ?step i i.isLt
     case init =>
@@ -113,17 +118,27 @@ def dataImpl {α : Type u} {n : Nat}
         (A : Array α n) (i : Fin n) : α
   := A.get i
 attribute [implementedBy dataImpl] Array.data
+def recImpl.{u_1,u}
+  : {α : Type u} → {n : Nat} → {motive : Array α n → Sort u_1} →
+    ((data : Fin n → α) → motive ⟨data⟩) →
+    (t : Array α n) → motive t
+  := λ f A => f (data A)
+attribute [implementedBy recImpl] Array.rec
 
 theorem init_eq_mk {f : Fin n → α}
   : init f = Array.mk f
   := by
     simp [init, forIn, Foldable.fold, Id.run, allInit]
     apply funext; intro i
-    suffices Uninit.getValue? (get (Range.fold (fun i A' => set A' i (Uninit.init (f i))) (new Uninit.uninit n) {  }) i)
+    suffices Uninit.getValue?
+      (get (Range.fold' ⟨n⟩ (fun A' i h =>
+              set A' ⟨i,h⟩ (Uninit.init (f ⟨i,h⟩))
+            ) (new Uninit.uninit n)
+        ) i)
       = some (f i) by
       apply Uninit.getValue_of_getValue?_some
       exact this
-    refine Range.fold_ind (motive := λ i A =>
+    refine Range.fold'_ind (motive := λ i h A =>
       ∀ j : Fin n, j < i → Uninit.getValue? (get A j) = some (f j))
       ?init ?step i i.isLt
     case init =>
@@ -155,19 +170,14 @@ instance : Indexed (Array α n) α where
 instance : IndexedOps (Array α n) α := default
 
 def toList (A : Array α n) : List α :=
-  (@Range.mk n)
-  |> View.of
-  |>.map (λ i => A.get i)
-  |>.toList
+  View.view' (Range.mk n)
+  |>.map' (λ i h => A.get ⟨i,h⟩)
+  |> FoldableOps.toList
 
 instance [Repr α] : Repr (Array α n) where
   reprPrec A := reprPrec (A.toList)
 
 end Array
-
-instance : Indexed (Array α n) α where
-  size _ := n
-  nth a i := a.get i
 
 structure COWArray (α n) where
   backing : Array α n
@@ -207,7 +217,7 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
   A.get ⟨n, Nat.lt_succ_self _⟩)
 
 instance : Foldable (COWArray α n) α where
-  fold f acc A := Foldable.fold f acc A.backing
+  fold f acc A := Foldable.fold (self := IndexedOps.instFoldable) f acc A.backing
 
 instance [Repr α] : Repr (COWArray α n) := inferInstance
 
