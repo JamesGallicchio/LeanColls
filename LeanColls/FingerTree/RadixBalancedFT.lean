@@ -477,10 +477,95 @@ def consL (x : HyperArray τ m) : (L : FingerList τ n m) → L.validList →
       let newSlice : HyperArray τ (m + 1) :=
         hd.backing
         |> cast (by simp [h_w, HyperArray, WIDTH])
-      match consL newSlice tl h_tl with
-      | (fl, excess) =>
+      let (fl, excess) := consL newSlice tl h_tl
       (joint ⟨1, COWArray.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl,
         excess)
+
+theorem valid_consL (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validList)
+  : let ⟨L',_⟩ := L.consL x h_L
+    L'.validList
+  := by
+  induction L with
+  | base =>
+    simp [consL, h_L]
+  | joint hd tl ih =>
+    simp [consL]
+    simp [validList] at h_L
+    split
+    case inl m' h =>
+      simp [validList]
+      simp [HyperRect.cons, h_L]
+      exact h
+    case inr m' h =>
+      split
+      case _ _ h_w h_tl _ =>
+      simp [validList]
+      constructor
+      case left  => exact WIDTH_pos
+      case right =>
+      apply ih
+
+theorem size_consL (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validList)
+  {L' excess} (h_L' : L.consL x h_L = (L', excess))
+  : L'.size + (match excess with
+      | none => 0
+      | some e => HyperArray.size e
+    ) = L.size + x.size
+  := by
+  simp [Option.getD, Option.map, Option.bind]
+  induction L generalizing excess with
+  | base =>
+    split
+    case h_1 h_L' =>
+      simp [size, consL] at h_L'
+    case h_2 h_L' =>
+      simp [size, consL] at h_L'
+      simp [h_L']
+  | joint hd tl ih =>
+    rename Nat => m'
+    clear m
+    simp [validList] at h_L
+    have : hd.w < WIDTH ∨ hd.w = WIDTH := by
+      match h : Nat.beq hd.w WIDTH with
+      | false =>
+        apply Or.inl (Nat.lt_of_le_and_ne (And.left h_L) _)
+        apply Nat.ne_of_beq_eq_false h
+      | true =>
+        apply Or.inr
+        apply Nat.eq_of_beq_eq_true h
+    match this with
+    | .inl h_w =>
+      split
+      case h_1 h_L' =>
+        simp [consL, h_w, HyperRect.cons] at h_L'
+        simp [←h_L', size]
+        rw [Nat.succ_mul, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
+      case h_2 h_L' =>
+        simp [consL, h_w, HyperRect.cons] at h_L'
+    | .inr h_w =>
+      clear this
+      cases hd; case mk m w backing hd_size h_L'' =>
+      simp at h_w
+      simp [size]
+      rw [Nat.add_comm _ (size tl), Nat.add_assoc, h_w]
+      unfold consL at h_L'
+      simp [h_w] at h_L'
+      split at h_L'
+      rename validList tl = true => h_tl
+      simp [h_w, size] at h_L'
+      subst h_w
+      simp [cast] at h_L'
+      split
+      case h_1 =>
+        simp [consL, HyperRect.cons] at h_L'
+        simp [←h_L'.1, size]
+        cases consL backing tl h_tl; case mk fst snd =>
+        have : size fst + _ = _ := ih backing h_tl ( := snd)
+        rw [Nat.add_comm, ih, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
+      case h_2 h_L' =>
+        simp [consL, h_w, HyperRect.cons] at h_L'
+      rw [Nat.add_assoc, ih, Nat.pow_succ, Nat.mul_comm]
+      simp_arith
 
 /- Pushes `x` onto `L` from the right at the top joint (small elements).
 If `L` is full, returns the (full) bottom joint as a `HyperArray τ n`
@@ -506,7 +591,69 @@ def consR (x : HyperArray τ m) : (L : FingerList τ n m) → L.validList →
         |> cast (by simp [h_w, HyperArray, WIDTH])
       match consR newSlice tl h_tl with
       | (fl, excess) =>
-      (joint ⟨0, COWArray.empty, cached' 0 (by simp)⟩ fl, excess)
+      (joint ⟨1, COWArray.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl, excess)
+
+theorem valid_consR (x : HyperArray τ m) (L : FingerList τ n m) (h_R : L.validList)
+  : let ⟨L',_⟩ := L.consR x h_R
+    L'.validList
+  := by
+  induction L with
+  | base =>
+    simp [consR, h_R]
+  | joint hd tl ih =>
+    simp [consR]
+    simp [validList] at h_R
+    split
+    case inl m' h =>
+      simp [validList]
+      simp [HyperRect.cons, h_R]
+      exact h
+    case inr m' h =>
+      split
+      case _ _ h_w h_tl _ =>
+      simp [validList]
+      constructor
+      case left  => exact WIDTH_pos
+      case right =>
+      apply ih
+
+theorem size_consR (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validList)
+  : let ⟨L', excess⟩ := L.consR x h_L
+    L'.size + (match excess with
+      | none => 0
+      | some e => HyperArray.size e
+    ) = L.size + x.size
+  := by
+  simp [Option.getD, Option.map, Option.bind]
+  induction L with
+  | base =>
+    simp [size, consR]
+  | joint hd tl ih =>
+    clear m
+    simp [validList] at h_L
+    have : hd.w < WIDTH ∨ hd.w = WIDTH := by
+      match h : Nat.beq hd.w WIDTH with
+      | false =>
+        apply Or.inl (Nat.lt_of_le_and_ne (And.left h_L) _)
+        apply Nat.ne_of_beq_eq_false h
+      | true =>
+        apply Or.inr
+        apply Nat.eq_of_beq_eq_true h
+    match this with
+    | .inl h_w =>
+      simp [size, consR, h_w, HyperRect.cons]
+      rw [Nat.succ_mul, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
+    | .inr h_w =>
+      cases hd; case mk m w backing hd_size h_L' =>
+      simp at h_w
+      unfold consR
+      simp [h_w]
+      split
+      simp [h_w, size]
+      subst h_w
+      simp [cast]
+      rw [Nat.add_assoc, ih, Nat.pow_succ, Nat.mul_comm]
+      simp_arith
 
 /- Pops a single element from the left at the top joint (small elements).
   If `L` is empty, returns none.
@@ -679,9 +826,17 @@ def cons (x : τ) (A : RBFT τ) : RBFT τ :=
   -- Try putting x in the prefix finger
   match h_preCons : A.pre.consL x A.h_pre with
   | (pre, none) =>
+    have h_pre := by
+      have := FingerList.valid_consL x A.pre A.h_pre
+      rw [h_preCons] at this
+      exact this
+    have size_pre : pre.size = A.pre.size + 1 := by
+      have := A.pre.size_consL x
+      rw [h_preCons]
+      sorry
     {A with
       pre := pre
-      h_pre := by sorry
+      h_pre := h_pre
       mid_idx := cached' (A.mid_idx.val + 1) (by sorry)
       suf_idx := cached' (A.suf_idx.val + 1) (by sorry)
       size := cached' (A.size.val + 1) (by sorry)

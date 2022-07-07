@@ -124,7 +124,7 @@ namespace Nat
     else
       panic! s!"Integer {n} is to larget for usize"
 
-  def eq_zero_of_add_eq_zero {x y : Nat}
+  theorem eq_zero_of_add_eq_zero {x y : Nat}
     : x + y = 0 → x = 0 ∧ y = 0
     := by
     intro h
@@ -134,6 +134,22 @@ namespace Nat
     match y with
     | y+1 => contradiction
     | 0 => simp
+  
+  theorem mod_lt_of_lt {x y z : Nat}
+    : x < y → z > 0 → x % z < y
+    := by
+    intro h h_z
+    match h_y : decide (y ≤ z) with
+    | true =>
+      have := of_decide_eq_true h_y
+      rw [Nat.mod_eq_of_lt (Nat.lt_of_lt_le h this)]
+      assumption
+    | false =>
+      have := of_decide_eq_false h_y
+      apply Nat.lt_trans _ (Nat.gt_of_not_le this)
+      apply Nat.mod_lt
+      assumption
+
 end Nat
 
 namespace Fin
@@ -154,6 +170,16 @@ def embed_succ : Fin n → Fin n.succ
 def last (n : Nat) : Fin n.succ := ⟨n, Nat.lt_succ_self _⟩
 
 end Fin
+
+namespace USize
+
+theorem usize_bounded : USize.size ≤ UInt64.size := by
+  cases usize_size_eq <;> (
+    rw [(by assumption : USize.size = _)]
+    decide
+  )
+
+end USize
 
 namespace Option
 
