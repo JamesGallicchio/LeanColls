@@ -18,16 +18,6 @@ structure Range where
 
 namespace Range
 
-def fold : (β → Nat → β) → β → Range → β :=
-  let rec @[inline] loop {α} (stop) (f : α → Nat → α) acc i : α :=
-    if h:i < stop then
-      loop stop f (f acc i) (i+1)
-    else
-      acc
-  λ f acc ⟨n⟩ =>
-    loop n f acc 0
-  termination_by loop i => stop - i
-
 instance : Membership Nat Range where
   mem x r := x < r.n
 
@@ -48,34 +38,8 @@ def fold' : (r : Range) → (β → (i : Nat) → i ∈ r → β) → β → β 
     loop n f acc 0
   termination_by loop _ _ i => stop - i
 
-theorem fold_eq_fold' (n) (f : β → Nat → β) (acc : β)
-  : fold f acc ⟨n⟩ = fold' ⟨n⟩ (fun acc x _ => f acc x) acc
-  := by
-    simp [fold, fold']
-    suffices ∀ i, i ≤ n → fold.loop _ _ _ (n - i) = fold'.loop _ _ _ (n - i) by
-      have := this n
-      simp at this
-      exact this
-    intro i h_i
-    induction i generalizing acc with
-    | zero =>
-      unfold fold.loop
-      unfold fold'.loop
-      simp
-    | succ i ih =>
-      unfold fold.loop
-      unfold fold'.loop
-      split
-      case inr => trivial
-      case inl h =>
-      have : (n - Nat.succ i) + 1 = n - i := by
-        rw [Nat.succ_eq_add_one, Nat.sub_dist, Nat.sub_add_cancel _]
-        apply Nat.le_sub_of_add_le
-        rw [Nat.add_comm, ← Nat.succ_eq_add_one]
-        exact h_i
-      simp
-      rw [this, ih]
-      exact Nat.le_of_lt h_i
+def fold (f : β → Nat → β) (acc) (r : Range) :=
+  fold' r (fun acc x _ => f acc x) acc
 
 theorem fold'_ind {stop : Nat}
   {f : β → (i : Nat) → i ∈ (⟨stop⟩ : Range) → β}
@@ -108,16 +72,20 @@ theorem fold_ind {stop : Nat}
       motive i (Nat.le_of_lt h) acc → motive (i+1) h (f acc i))
   : motive stop (Nat.le_refl _) (fold f acc (⟨stop⟩ : Range))
   := by
-  rw [fold_eq_fold']
+  unfold fold
   apply fold'_ind <;> assumption
 
-instance : Foldable Range Nat where
-  fold := fold 
-
-instance : FoldableOps Range Nat := default
-
-instance : Foldable' Range Nat inferInstance where
+instance : Foldable'.Correct Range Nat inferInstance where
+  fold := fold
   fold' := fold'
+  memCorrect := by sorry
+  foldCorrect := by sorry
+  fold'Correct := by sorry
+
+instance : FoldableOps Range Nat := {
+  (default : FoldableOps Range Nat) with
+  contains := λ r _ i => i < r.n
+}
 
 instance : Iterable Range Nat where
   ρ := Nat × Nat

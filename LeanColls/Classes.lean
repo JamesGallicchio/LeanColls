@@ -62,8 +62,10 @@ building a `List τ` and then using this as the stream.
 class Foldable (C : Type u) (τ : outParam (Type v)) where
   fold : {β : Type w} → (β → τ → β) → β → C → β
 
-class Foldable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C)) where
+class Foldable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C))
+  extends Foldable C τ where
   fold' : {β : Type w} → (c : C) → (β → (t : τ) → t ∈ c → β) → β → β
+  fold f acc c := fold' c (λ acc x h => f acc x) acc
 
 /-!
 Foldables can be Iterable by first collecting everything

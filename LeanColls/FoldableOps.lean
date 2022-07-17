@@ -25,21 +25,12 @@ def defaultImpl (F : Foldable C τ) : FoldableOps C τ where
 instance [F : Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl F
 
-/- TODO: figure out how to generate foldable' generically
+/- TODO: figure out if can generate foldable' generically
 def foldable' [F : Foldable C τ] [B : BEq τ] [M : Membership τ C]
   (h_mem : ∀ c x, x ∈ c ↔ (defaultImpl F B).contains c x)
   : Foldable' C τ M where
   fold' := F.fold
   -/
-
-theorem toList_ind [Foldable C τ] [BEq τ] [FoldableOps C τ] {α : Type u} {motive : List τ → Sort v}
-        (nil : motive List.nil)
-        (cons : (hd : τ) → (tl : List τ) → motive tl → motive (List.cons hd tl))
-        (t : C) : motive (FoldableOps.toList t)
-  := by
-  induction toList t
-  assumption
-  exact cons _ _ (by assumption)
 
 end FoldableOps
 

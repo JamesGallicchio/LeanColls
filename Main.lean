@@ -5,10 +5,27 @@ Authors: James Gallicchio
 -/
 
 import LeanColls
-import LeanColls.Array.Test
 
 open LeanColls
 
-set_option compiler.extract_closed false
+theorem inferred_fold_eq_list_fold
+  : Foldable'.fold' (C := List Nat) (β := β)
+    = List.fold'
+  := rfl
 
-def main : IO Unit := benchmarkArrayBuffer
+def main := ((do
+  let iters := 100
+  let len := 10000
+  let list := List.iota len
+  timeit "fold" do
+    for _ in [0:iters] do
+      let res := Foldable.fold (λ acc _ => acc+1) 0 list
+      if res ≠ len then
+        IO.print "ohno"
+  timeit "fold'" do
+    for _ in [0:iters] do
+      let res := Foldable'.fold' list (λ acc _ _ => acc+1) 0
+      if res ≠ len then
+        IO.print "ohno"
+  ) : IO Unit)
+
