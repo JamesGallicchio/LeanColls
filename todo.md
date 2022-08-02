@@ -1,13 +1,11 @@
 # TODO
 
 - Finish correctness proofs for RTQueue
-- Finish correctness of basic Range functions
 - Implement
   - RBFingerTree
   - OrdMap
   - RedBlackTree
   - HashMap
-- Test how much we can get view folds inlined
 ---
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
@@ -15,6 +13,11 @@
 
 
 ## Done
+
+### 8 Aug 2022
+- After many rewrites, Ranges seem workable & reasonable
+- Range folds proven correct; fold correctness API seems reasonable
+- Added proofs of correctness theorems for View.filter/map w.r.t. their List counterparts
 
 ### 5 May 2022
 - Progress on RBFT implementation
