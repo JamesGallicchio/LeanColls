@@ -16,7 +16,7 @@ instance [Indexed C τ] : Membership τ C where
   mem x c := ∃ i, x = Indexed.nth c i
 
 instance [Indexed C τ] : Foldable'.Correct C τ inferInstance where
-  fold f init c :=
+  fold c f init :=
     Range.fold' ⟨Size.size c⟩ (λ acc i h =>
       f acc (Indexed.nth c ⟨i,h⟩)
     ) init
@@ -65,7 +65,7 @@ instance [Indexed C τ] : Inhabited (IndexedOps C τ) where
   }
 
 instance [Indexed C τ] : MapLike C Nat τ where
-  fold f acc c :=
+  fold c f acc :=
     Range.fold' ⟨Size.size c⟩ (λ acc i h_i =>
       f acc (i, Indexed.nth c ⟨i,h_i⟩)
     ) acc

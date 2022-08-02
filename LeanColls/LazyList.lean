@@ -227,7 +227,7 @@ def fold (f : α → τ → α) (acc : α)
 | delayed as => fold f acc (as.get)
 
 instance : LeanColls.Foldable (LazyList τ) τ where
-  fold := fold
+  fold l f a := fold f a l
 
 instance : LeanColls.Iterable (LazyList τ) τ where
   ρ := LazyList τ

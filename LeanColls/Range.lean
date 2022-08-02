@@ -38,7 +38,7 @@ def fold' : (r : Range) → (β → (i : Nat) → i ∈ r → β) → β → β 
     loop n f acc 0
   termination_by loop _ _ i => stop - i
 
-def fold (f : β → Nat → β) (acc) (r : Range) :=
+def fold (r : Range) (f : β → Nat → β) (acc) :=
   fold' r (fun acc x _ => f acc x) acc
 
 theorem fold'_ind {stop : Nat}
@@ -70,7 +70,7 @@ theorem fold_ind {stop : Nat}
   (base : motive 0 (Nat.zero_le _) acc)
   (ind_step : ∀ i acc, (h : i < stop) →
       motive i (Nat.le_of_lt h) acc → motive (i+1) h (f acc i))
-  : motive stop (Nat.le_refl _) (fold f acc (⟨stop⟩ : Range))
+  : motive stop (Nat.le_refl _) (fold (⟨stop⟩ : Range) f acc)
   := by
   unfold fold
   apply fold'_ind <;> assumption
@@ -93,8 +93,8 @@ theorem toList_eq_range
     rw [List.rangeAux_eq_append, ih]
 
 theorem canonicalToList_eq_toList
-  : canonicalToList (fun {β} => fold) = toList
-  := funext λ c => by
+  : canonicalToList (fun {β} => fold c) = toList c
+  := by
   cases c; case mk n =>
   simp [canonicalToList]
   apply fold_ind (motive := λ i h a => a = toList ⟨i⟩)
@@ -104,7 +104,7 @@ theorem canonicalToList_eq_toList
     simp [toList, toList.list, h_acc]
 
 theorem memCorrect (x : Nat) (c : Range)
-  : x ∈ c ↔ x ∈ canonicalToList (fun {β} => fold) c
+  : x ∈ c ↔ x ∈ canonicalToList (fun {β} => fold c)
   := by
   cases c; case mk n =>
   simp [Foldable.fold, Membership.mem, canonicalToList_eq_toList]
@@ -141,12 +141,12 @@ theorem memCorrect (x : Nat) (c : Range)
         contradiction
 
 theorem foldCorrect {β : Type} (f : β → Nat → β) (init : β) (c : Range)
-  : fold f init c = List.fold f init (canonicalToList fold c)
+  : fold c f init = List.fold (canonicalToList (fold c)) f init
   := by
   simp [canonicalToList_eq_toList]
   cases c with
   | mk n =>
-  apply fold_ind (motive := λ i h a => a = List.fold f init (toList.list i))
+  apply fold_ind (motive := λ i h a => a = List.fold (toList.list i) f init)
   case base =>
     simp [List.fold, List.foldl]
   case ind_step =>
@@ -168,7 +168,7 @@ theorem foldCorrect {β : Type} (f : β → Nat → β) (init : β) (c : Range)
       simp [List.foldl]
 
 theorem fold'Correct {β : Type} (c : Range) (f : β → (x : Nat) → x ∈ c → β) (init : β)
-  : fold' c f init = List.fold' (canonicalToList fold c)
+  : fold' c f init = List.fold' (canonicalToList (fold c))
     (fun acc x h => f acc x ((memCorrect _ _).mpr h)) init
   := by
   stop

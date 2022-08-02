@@ -12,7 +12,7 @@ open LeanColls
 namespace List
 
 theorem canonicalToList_eq_id (l : List τ)
-  : canonicalToList fold l = l
+  : canonicalToList (fold l) = l
   := by
   simp [canonicalToList, fold]
   suffices ∀ acc, foldl (fun acc x => acc ++ [x]) acc l = acc ++ l by
@@ -39,7 +39,7 @@ instance : Foldable'.Correct (List τ) τ inferInstance where
     intro β c f acc
     simp [Foldable.fold]
     suffices ∀ l (h : c = l) (h' : ∀ {x}, x ∈ l → x ∈ c), fold' c f acc = fold' l (fun acc x h => f acc x (h' h)) acc from
-      this (canonicalToList fold c) (by rw [canonicalToList_eq_id]) (by
+      this (canonicalToList (fold c)) (by rw [canonicalToList_eq_id]) (by
         rw [canonicalToList_eq_id]
         intros; trivial
         )

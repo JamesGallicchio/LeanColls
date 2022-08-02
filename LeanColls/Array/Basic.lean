@@ -216,8 +216,9 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
   (⟨Array.init (λ i => A.get i.embed_succ)⟩,
   A.get ⟨n, Nat.lt_succ_self _⟩)
 
-instance : Foldable (COWArray α n) α where
-  fold f acc A := Foldable.fold (self := IndexedOps.instFoldable) f acc A.backing
+instance : Indexed (COWArray α n) α where
+  size _ := n
+  nth := get
 
 instance [Repr α] : Repr (COWArray α n) := inferInstance
 
