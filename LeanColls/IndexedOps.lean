@@ -12,11 +12,30 @@ namespace LeanColls
 
 namespace IndexedOps
 
-instance [Indexed C τ] : Foldable C τ where
+instance [Indexed C τ] : Membership τ C where
+  mem x c := ∃ i, x = Indexed.nth c i
+
+instance [Indexed C τ] : Foldable'.Correct C τ inferInstance where
   fold f init c :=
     Range.fold' ⟨Size.size c⟩ (λ acc i h =>
       f acc (Indexed.nth c ⟨i,h⟩)
     ) init
+  fold' c f init :=
+    Range.fold' ⟨Size.size c⟩ (λ acc i h =>
+      f acc (Indexed.nth c ⟨i,h⟩) ⟨⟨i,h⟩, rfl⟩
+    ) init
+  foldCorrect := sorry
+  fold'Correct := sorry
+  memCorrect x c := by
+    simp [Membership.mem, Foldable.fold, canonicalToList]
+    constructor
+    case mp =>
+      intro h; simp [Membership.mem] at h; cases h; case intro i h =>
+      
+      sorry
+    case mpr =>
+      intro h
+      sorry
 
 structure Slice (C) (τ : outParam (Type u)) [Indexed C τ] where
   c : C

@@ -5,9 +5,9 @@ open LeanColls
 
 namespace List
 
-def fold := @List.foldl
+def fold {β} (c : List τ) (f a) := @List.foldl β _ f a c
 
-@[specialize]
+@[specialize, inline]
 def fold' : (l : List τ) → (β → (x : τ) → x ∈ l → β) → β → β :=
   let rec @[specialize,inline] go
     (l : List τ) (f : β → (x : τ) → x ∈ l → β) (acc : β)
@@ -19,7 +19,7 @@ def fold' : (l : List τ) → (β → (x : τ) → x ∈ l → β) → β → β
   λ l f acc => go l f acc l (by intros; trivial)
 
 theorem fold_eq_fold' (c : List τ) (f : β → τ → β) (acc : β)
-  : fold f acc c = fold' c (λ acc x _ => f acc x) acc
+  : fold c f acc = fold' c (λ acc x _ => f acc x) acc
   := by
   simp [fold, fold']
   suffices ∀ l h, foldl f acc l = fold'.go c (fun acc x x_1 => f acc x) acc l h from
@@ -41,7 +41,7 @@ def AList (κ τ) := List (κ × τ)
 namespace AList
 
 instance [DecidableEq κ] : MapLike (AList κ τ) κ τ where
-  fold := List.foldl
+  fold := List.fold
   get? L k := L.find? (fun (k',_) => k' = k) |>.map Prod.snd
 
 inductive UpdateEffect

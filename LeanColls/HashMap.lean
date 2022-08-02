@@ -47,10 +47,27 @@ def set (k : κ) (t : τ) (m : HashMap κ τ) : HashMap κ τ :=
     match eff with | .replaced => m.size | .inserted => m.size + 1
   ⟨m.cap, m.h_cap, m.backing.set idx newSlot, ⟨newSize, by
     simp
-    split
-    case h_1 h =>
+    clear newSize
+    match eff with
+    | .replaced =>
+      simp
+      stop
+      simp [Foldable.fold, View.instFoldableOpsViewInstFoldableView_1, default, FoldableOps.defaultImpl]
+      simp [Size.size, Array.size_set]
+      apply Range.fold'_ind (motive := λ i h a => sorry)
+      stop
+      suffices ∀ acc i, Range.fold'.loop m.cap (fun acc i h_i => acc + List.length (Indexed.nth m.backing { val := i, isLt := h_i })) acc i =
+                Range.fold'.loop m.cap (fun acc i h_i => acc + List.length
+                  (Indexed.nth (Array.set m.backing (LeanColls.HashMap.calc_idx k m) newSlot) { val := i, isLt := h_i })) acc i
+        from this 0 0
+      intro acc i; induction i generalizing acc
+      unfold Range.fold'.loop
+      simp
+      split <;> simp
       sorry
-    case h_2 h =>
+      sorry
+    | .inserted =>
+      simp
       sorry
     ⟩⟩
 

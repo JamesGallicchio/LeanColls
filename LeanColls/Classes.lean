@@ -60,12 +60,12 @@ Gives a default implementation of `ToStream C` by first
 building a `List τ` and then using this as the stream.
 -/
 class Foldable (C : Type u) (τ : outParam (Type v)) where
-  fold : {β : Type w} → (β → τ → β) → β → C → β
+  fold : {β : Type w} → C → (β → τ → β) → β → β
 
 class Foldable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C))
   extends Foldable C τ where
   fold' : {β : Type w} → (c : C) → (β → (t : τ) → t ∈ c → β) → β → β
-  fold f acc c := fold' c (λ acc x h => f acc x) acc
+  fold c f acc := fold' c (λ acc x h => f acc x) acc
 
 /-!
 Foldables can be Iterable by first collecting everything
@@ -76,8 +76,8 @@ order that elements are applied in when folding.
 instance [Foldable C τ] : Iterable C τ where
   ρ := List τ
   step := List.front?
-  toIterator c := c
-    |> Foldable.fold (fun acc x => x::acc) []
+  toIterator c :=
+    Foldable.fold c (fun acc x => x::acc) []
     |> List.reverse
 
 /-!
@@ -104,9 +104,9 @@ class Enumerable (C : Type u) (τ : Type v)
   ρ : Type v
   fromEnumerator : ρ → C
   insert : Option (τ × ρ) → ρ
-  unfold := fromEnumerator ∘
-    Foldable.fold (λ r t => insert (some (t,r))) (insert none)
-
+  unfold c :=
+    Foldable.fold c (λ r t => insert (some (t,r))) (insert none)
+    |> fromEnumerator
 
 /-!
 ## Miscellaneous
@@ -158,17 +158,28 @@ a collection `C` to be used in `for x in C do ...` syntax.
 
 instance instForInOfFoldable [Monad M] [Foldable F τ] : ForIn M F τ where
   forIn c acc f := do
-    Foldable.fold
-      (λ ma x =>
-        bind ma (λ a =>
-        bind (f x a) (λ res =>
+    Foldable.fold c
+      (λ ma x => do
+        let a ← ma
+        let res ← f x a
         match res with
         | ForInStep.yield y => pure y
         | ForInStep.done y => return y
-        ))
       )
       (pure acc)
+
+instance instForIn'OfFoldable' [Monad M] [Me : Membership τ F] [Foldable' F τ Me] : ForIn' M F τ Me where
+  forIn' c acc f := do
+    Foldable'.fold'
       c
+      (λ ma x h => do
+        let a ← ma
+        let res ← f x h a
+        match res with
+        | ForInStep.yield y => pure y
+        | ForInStep.done y => return y
+      )
+      (pure acc)
 
 /-!
 ## Utility functions

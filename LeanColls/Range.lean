@@ -75,12 +75,133 @@ theorem fold_ind {stop : Nat}
   unfold fold
   apply fold'_ind <;> assumption
 
+def toList (c : Range) : List Nat :=
+  let rec list : Nat → List Nat
+  | 0 => []
+  | n+1 => list n ++ [n]
+  list c.n
+
+@[csimp]
+theorem toList_eq_range
+  : toList.list = List.range
+  := funext λ n => by
+  simp [List.range]
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    simp [toList.list, List.rangeAux]
+    rw [List.rangeAux_eq_append, ih]
+
+theorem canonicalToList_eq_toList
+  : canonicalToList (fun {β} => fold) = toList
+  := funext λ c => by
+  cases c; case mk n =>
+  simp [canonicalToList]
+  apply fold_ind (motive := λ i h a => a = toList ⟨i⟩)
+  case base => simp [toList]
+  case ind_step =>
+    intro i acc h_i h_acc
+    simp [toList, toList.list, h_acc]
+
+theorem memCorrect (x : Nat) (c : Range)
+  : x ∈ c ↔ x ∈ canonicalToList (fun {β} => fold) c
+  := by
+  cases c; case mk n =>
+  simp [Foldable.fold, Membership.mem, canonicalToList_eq_toList]
+  induction n with
+  | zero =>
+    constructor <;> (intro h; apply False.elim)
+    apply Nat.not_lt_zero _ h
+    cases h
+  | succ n ih =>
+    constructor <;> intro h
+    case mp =>
+      have := Nat.eq_or_lt_of_le (Nat.le_of_succ_le_succ h)
+      clear h
+      cases this
+      case inl h =>
+        cases h
+        apply List.mem_append_of_mem_right
+        apply List.Mem.head
+      case inr h =>
+        apply List.mem_append_of_mem_left
+        apply ih.mp h
+    case mpr =>
+      apply Nat.succ_le_succ
+      have := List.mem_of_append _ _ h
+      clear h
+      cases this
+      case a.inl h =>
+        apply Nat.le_of_lt
+        apply ih.mpr h
+      case a.inr h =>
+        simp [Membership.mem] at h
+        cases h
+        simp
+        contradiction
+
+theorem foldCorrect {β : Type} (f : β → Nat → β) (init : β) (c : Range)
+  : fold f init c = List.fold f init (canonicalToList fold c)
+  := by
+  simp [canonicalToList_eq_toList]
+  cases c with
+  | mk n =>
+  apply fold_ind (motive := λ i h a => a = List.fold f init (toList.list i))
+  case base =>
+    simp [List.fold, List.foldl]
+  case ind_step =>
+    intro i acc h_i h_acc
+    simp [List.fold] at h_acc ⊢
+    unfold List.foldl
+    simp [toList.list]
+    split
+    case h_1 h =>
+      have : List.length (toList.list i ++ [i]) = List.length [] := by 
+        rw [h]
+      simp at this
+      contradiction
+    case h_2 init _ smth x xs h =>
+      suffices
+        List.foldl f acc [i] = List.foldl f (f init x) xs
+        from this
+      rw [h_acc, ←List.foldl_append, h]
+      simp [List.foldl]
+
+theorem fold'Correct {β : Type} (c : Range) (f : β → (x : Nat) → x ∈ c → β) (init : β)
+  : fold' c f init = List.fold' (canonicalToList fold c)
+    (fun acc x h => f acc x ((memCorrect _ _).mpr h)) init
+  := by
+  stop
+  rw [canonicalToList_eq_toList]
+  cases c with
+  | mk n =>
+  apply fold'_ind (motive := λ i h a => a = _)
+  case base =>
+    simp [List.fold', List.fold'.go]
+  case ind_step =>
+    intro i acc h_i h_acc
+    simp [List.fold] at h_acc ⊢
+    unfold List.foldl
+    simp [toList.list]
+    split
+    case h_1 h =>
+      have : List.length (toList.list i ++ [i]) = List.length [] := by 
+        rw [h]
+      simp at this
+      contradiction
+    case h_2 init _ smth x xs h =>
+      suffices
+        List.foldl f acc [i] = List.foldl f (f init x) xs
+        from this
+      rw [h_acc, ←List.foldl_append, h]
+      simp [List.foldl]
+
 instance : Foldable'.Correct Range Nat inferInstance where
   fold := fold
   fold' := fold'
-  memCorrect := by sorry
-  foldCorrect := by sorry
-  fold'Correct := by sorry
+  memCorrect := memCorrect
+  foldCorrect := foldCorrect
+  fold'Correct := fold'Correct
 
 instance : FoldableOps Range Nat := {
   (default : FoldableOps Range Nat) with

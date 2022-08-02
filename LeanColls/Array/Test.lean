@@ -6,11 +6,11 @@ def testPanicOnPersist : IO Unit :=
   open LeanColls in do
   /- Some linear usage (all gucci!) -/
   let mut arr := Array.new 73 100
-  for i in @Range.mk 100 do
-    arr := arr.set i i.val
+  for h : i in Range.mk 100 do
+    arr := arr.set ⟨i,h⟩ i
   let mut sum := 0
-  for i in @Range.mk 100 do
-    sum := sum + arr.get i
+  for h : i in Range.mk 100 do
+    sum := sum + arr.get ⟨i,h⟩
   if sum ≠ 4950 then
     IO.eprintln (s!"Expected sum 4950, got {sum}")
   /- Now we do a not-allowed mutation: -/

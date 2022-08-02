@@ -497,7 +497,16 @@ namespace List
   theorem get_range (i : Fin n) : (range n).get (cast (by simp) i) = i := by
     have : ∀ m (h : m = n) h', (cast (h ▸ rfl) i : Fin m) = ⟨i, h'⟩ := by
       intros m h h'; cases h; rfl
-    rw [this]; apply get_range'; simp; simp [i.2]    
+    rw [this]; apply get_range'; simp; simp [i.2]
+
+  @[simp]
+  theorem foldl_append (L₁ L₂ : List τ) (f) (acc : β)
+    : (L₁ ++ L₂).foldl f acc = L₂.foldl f (L₁.foldl f acc)
+    := by
+    induction L₁ generalizing acc with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+      simp [foldl, ih]
 end List
 
 inductive Vector (α : Type u) : Nat → Type u where
