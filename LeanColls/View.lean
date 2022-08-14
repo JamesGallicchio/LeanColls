@@ -7,6 +7,7 @@ Authors: James Gallicchio
 import LeanColls.Classes
 import LeanColls.FoldableOps
 import LeanColls.FoldableCorrect
+import LeanColls.List
 
 namespace LeanColls
 
@@ -25,7 +26,7 @@ namespace View
 instance : Foldable.{max u (v+1),u,v} (View.{u,v} τ) τ where
   fold v f acc := v.fold f acc  
 
-@[inline]
+@[inline, simp]
 instance : FoldableOps (View τ) τ := FoldableOps.defaultImpl (View τ) τ  
 
 @[inline]
@@ -68,53 +69,33 @@ def map' {τ : Type u} {c : C} {M} (v : View.WithMem τ c M) {τ' : Type v} (f :
 
 end WithMem
 
-theorem canonicalToList_map [Foldable.Correct C τ] (c : C) (f : τ → τ')
-  : canonicalToList (((View.view c).map f).fold)
-    = List.map f (canonicalToList (Foldable.fold c))
+theorem view_eq_view_canonicalToList [Foldable.Correct C τ] (c : C)
+  : View.view c = View.view (canonicalToList (Foldable.fold c))
   := by
-  generalize h : canonicalToList (Foldable.fold c) = list
-  simp [canonicalToList, view, map]
-  rw [Foldable.Correct.foldCorrect, h]
-  clear h c
-  simp [List.fold]
-  suffices ∀ init,
-    List.foldl (fun acc t => acc ++ [f t]) init list = init ++ List.map f list
-    from this []
-  intro init
-  induction list generalizing init with
-  | nil =>
-    simp [List.foldl, List.map]
-  | cons x xs ih =>
-    simp [List.foldl, List.map]
-    rw [List.append_cons _ _ (List.map _ _)]
-    exact ih _
+  simp [view]
+  funext β f acc
+  simp [Foldable.fold]
+  apply Foldable.Correct.foldCorrect
 
-theorem canonicalToList_filter [Foldable.Correct C τ] (c : C) (f)
-  : canonicalToList (((View.view c).filter f).fold)
-    = List.filter f (canonicalToList (Foldable.fold c))
+@[simp]
+theorem map_eq_list_map (L : List τ) (f : τ → τ')
+  : ((View.view L).map f)
+    = View.view (List.map f L)
   := by
-  generalize h : canonicalToList (Foldable.fold c) = list
-  simp [canonicalToList, view, filter]
-  rw [Foldable.Correct.foldCorrect, h]
-  clear h c
-  simp [List.fold]
-  rw [List.filter_eq_filterTR]
-  suffices ∀ init,
-    List.foldl (fun acc t => if f t = true then acc ++ [t] else acc) init list
-      = List.filterTRAux f list init.reverse
-    from this []
-  intro init
-  induction list generalizing init with
-  | nil =>
-    simp [List.foldl, List.filter, List.filterTRAux]
-  | cons x xs ih =>
-    simp [List.foldl, List.filter, List.filterTRAux]
-    split
-    case inl h =>
-      simp [h]
-      have : x :: List.reverse init = List.reverse (init ++ [x]) := by
-        simp
-      rw [this]
-      exact ih _
-    case inr h =>
-      simp [h, ih]
+  simp [map, view, Foldable.fold, List.fold]
+
+@[simp]
+theorem filter_eq_list_filter (L : List τ) (f : τ → Bool)
+  : (View.view L).filter f
+    = View.view (List.filter f L)
+  := by
+  simp [filter, view, Foldable.fold, List.fold]
+
+@[simp]
+theorem sum_eq_list_sum [AddMonoid τ] (L : List τ)
+  : FoldableOps.sum (View.view L) = L.sum
+  := by
+  suffices _ by
+    rw [FoldableOps.default_sum_pred_fold (view L) L this]
+    apply FoldableOps.default_sum_list_eq_list_sum
+  simp [view, Foldable.fold]

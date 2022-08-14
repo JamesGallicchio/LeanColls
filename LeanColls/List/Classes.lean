@@ -6,12 +6,12 @@ Authors: James Gallicchio
 
 import LeanColls.List.Basic
 import LeanColls.FoldableCorrect
-import LeanColls.FoldableOps
 
 open LeanColls
 
 namespace List
 
+@[simp]
 theorem canonicalToList_eq_id (l : List τ)
   : canonicalToList (fold l) = l
   := by
@@ -39,7 +39,7 @@ instance : Foldable'.Correct (List τ) τ inferInstance where
   fold'Correct := by
     intro β c f acc
     simp [Foldable.fold]
-    suffices ∀ l (h : c = l) (h' : ∀ {x}, x ∈ l → x ∈ c), fold' c f acc = fold' l (fun acc x h => f acc x (h' h)) acc from
+    suffices ∀ l (_ : c = l) (h' : ∀ {x}, x ∈ l → x ∈ c), fold' c f acc = fold' l (fun acc x h => f acc x (h' h)) acc from
       this (canonicalToList (fold c)) (by rw [canonicalToList_eq_id]) (by
         rw [canonicalToList_eq_id]
         intros; trivial
@@ -49,12 +49,15 @@ instance : Foldable'.Correct (List τ) τ inferInstance where
     apply congrArg
     rfl
 
+@[simp]
+theorem canonicalToList_of_foldable (l : List τ)
+  : canonicalToList (Foldable.fold l) = l
+  := by simp [Foldable.fold]
+
 instance : Iterable (List τ) τ where
   ρ := List τ
   step := List.front?
   toIterator := id
-
-instance : FoldableOps (List τ) τ := default
 
 instance : Enumerable (List τ) τ where
   ρ := List τ

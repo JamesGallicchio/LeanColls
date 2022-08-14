@@ -452,6 +452,32 @@ namespace List
     | nil => simp [foldl]
     | cons x xs ih =>
       simp [foldl, ih]
+  
+  @[simp]
+  theorem foldl_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
+    : (L.map f).foldl foldF foldAcc =
+      L.foldl (fun acc x => foldF acc (f x)) foldAcc
+    := by
+    induction L generalizing foldAcc with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+      simp [foldl, ih]
+
+  @[simp]
+  theorem foldl_filter (L : List τ) (f : τ → Bool) (foldF) (foldAcc : β)
+    : (L.filter f).foldl foldF foldAcc =
+      L.foldl (fun acc x => if f x then foldF acc x else acc) foldAcc
+    := by
+    induction L generalizing foldAcc with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+      unfold filter
+      split
+      case cons.h_1 h =>
+        simp [h, foldl, ih]
+      case cons.h_2 h =>
+        simp [h, foldl, ih]
+
 end List
 
 inductive Vector (α : Type u) : Nat → Type u where

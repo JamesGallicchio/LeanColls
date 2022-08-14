@@ -62,7 +62,10 @@ def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
     clear this newSize
     match old with
     | none =>
-      simp [FoldableOps.sum_eq_sum_toList]
+      simp
+      conv => lhs; rw [View.view_eq_view_canonicalToList]
+      conv => rhs; rw [View.view_eq_view_canonicalToList]
+      simp
       sorry
     | some _ =>
       simp

@@ -7,6 +7,7 @@ Authors: James Gallicchio
 import LeanColls.Classes
 import LeanColls.FoldableCorrect
 import LeanColls.List.Basic
+import LeanColls.List.Classes
 
 namespace LeanColls
 
@@ -34,24 +35,27 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
 
-theorem sum_eq_sum_toList [F : Foldable.Correct C τ] [FoldableOps C τ] [AddMonoid τ] (c : C)
-  (h : FoldableOps.sum c = (defaultImpl C τ).sum c := by rfl)
-  : FoldableOps.sum c = List.sum (canonicalToList (Foldable.fold c))
+@[simp]
+theorem default_sum_list_eq_list_sum [AddMonoid τ] (L : List τ)
+  : (defaultImpl (List τ) τ).sum L = L.sum
   := by
-  simp [autoParam] at h
-  rw [h]
   simp [defaultImpl, sum]
-  rw [Foldable.Correct.foldCorrect]
-  generalize canonicalToList _ = list
-  simp [List.fold]
-  suffices ∀ (acc : τ) list, List.foldl (fun acc x => acc + x) acc list = acc + List.sum list by
-    have := this 0 list
+  simp [Foldable.fold, List.fold]
+  suffices ∀ (acc : τ), List.foldl (fun acc x => acc + x) acc L = acc + List.sum L by
+    have := this 0
     simp at this
     exact this
-  intro acc list
-  induction list generalizing acc with
+  intro acc
+  induction L generalizing acc with
   | nil =>
     simp [List.foldl, List.sum]
   | cons x xs ih =>
     simp [List.foldl, List.sum, ih]
     rw [AddMonoid.toAddSemigroup.add_assoc]
+
+theorem default_sum_pred_fold (c : C) (c' : C')
+  [Foldable C τ] [Foldable C' τ] [AddMonoid τ]
+  (h : Foldable.fold c (β := τ) = Foldable.fold c')
+  : (defaultImpl C τ).sum c = (defaultImpl C' τ).sum c'
+  := by
+  simp [sum, defaultImpl, h]
