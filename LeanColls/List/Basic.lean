@@ -1,7 +1,4 @@
-import LeanColls.FoldableOps
 import LeanColls.AuxLemmas
-
-open LeanColls
 
 namespace List
 
@@ -32,77 +29,49 @@ theorem fold_eq_fold' (c : List τ) (f : β → τ → β) (acc : β)
     simp [foldl, fold'.go]
     apply ih (f acc x)
 
-end List
+def sum [Add τ] [OfNat τ 0] : List τ → τ
+| [] => 0
+| x::xs => x + sum xs
 
-
-/-! ## Association Lists -/
-def AList (κ τ) := List (κ × τ)
-
-namespace AList
-
-instance [DecidableEq κ] : MapLike (AList κ τ) κ τ where
-  fold := List.fold
-  get? L k := L.find? (fun (k',_) => k' = k) |>.map Prod.snd
-
-inductive UpdateEffect
-| replaced
-| inserted
-
-def set [DecidableEq κ] (k : κ) (t : τ) : AList κ τ → UpdateEffect × AList κ τ
-| [] => (.inserted, [(k,t)])
-| x :: xs =>
-  if x.1 = k
-  then (.replaced, (k,t) :: xs)
-  else
-    let (eff, xs') := set k t xs
-    (eff, x :: xs')
-
-theorem length_set [DecidableEq κ] (k : κ) (t : τ) (as : AList κ τ)
-  : match set k t as with
-  | (.replaced, as') => as'.length = as.length
-  | (.inserted, as') => as'.length = as.length + 1
+theorem get_le_sum (L : List Nat) (i : Nat) (h_i : i < L.length)
+  : L.get ⟨i,h_i⟩ ≤ L.sum
   := by
-  simp
-  split
-  case h_1 as' h =>
-    rename UpdateEffect × AList κ τ => x
-    clear x
-    induction as generalizing as' with
-    | nil => simp [set] at h
-    | cons a as ih =>
-      cases a; case mk k' t' =>
-      simp [set] at h
-      split at h
-      case inl h_k =>
-        simp at *
-        cases h_k
-        simp [←h]
-      case inr h_k =>
-        simp at *
-        cases h; case intro h_l h_r =>
-        cases h_r
-        simp
-        apply ih
-        rw [←h_l]
-  case h_2 as' h =>
-    rename UpdateEffect × AList κ τ => x
-    clear x
-    induction as generalizing as' with
-    | nil =>
-      simp [set] at h
-      simp [←h]
-    | cons a as ih =>
-      cases a; case mk k' t' =>
-      simp [set] at h
-      split at h
-      case inl h_k =>
-        simp at *
-      case inr h_k =>
-        simp at *
-        cases h; case intro h_l h_r =>
-        cases h_r
-        simp
-        apply ih
-        rw [←h_l]
+  induction L generalizing i with
+  | nil =>
+    contradiction
+  | cons x xs ih =>
+    match i with
+    | 0 =>
+      simp [get, sum]
+      apply Nat.le_add_right
+    | i+1 =>
+      simp [get, sum]
+      rw [←Nat.zero_add (get _ _)]
+      apply Nat.add_le_add (Nat.zero_le x)
+      apply ih
 
-end AList
+theorem sum_set (L : List Nat) (i : Nat) (w : Nat) (h_i : i < L.length)
+  : sum (L.set i w) = sum L - (L.get ⟨i,h_i⟩) + w
+  := by
+  induction L generalizing i with
+  | nil => contradiction
+  | cons x xs ih =>
+  match xs, i with
+  | [], 0 =>
+    simp [set, sum, get]
+  | [], _+1 =>
+    contradiction
+  | y :: z, 0 =>
+    simp [set, sum, get]
+    rw [Nat.add_comm x, Nat.add_sub_cancel, Nat.add_comm w]
+  | y :: z, i+1 =>
+    simp [set, sum, get]
+    rw [ih]
+    generalize h : get _ _ = g
+    have : g ≤ y + sum z := by
+      rw [←h]
+      apply get_le_sum
+    clear h ih
+    simp [sum]
+    rw [Nat.add_sub_assoc this,
+        Nat.add_assoc x]

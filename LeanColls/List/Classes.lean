@@ -6,6 +6,7 @@ Authors: James Gallicchio
 
 import LeanColls.List.Basic
 import LeanColls.FoldableCorrect
+import LeanColls.FoldableOps
 
 open LeanColls
 
