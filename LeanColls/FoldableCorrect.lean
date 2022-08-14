@@ -5,7 +5,6 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Classes
-import LeanColls.FoldableOps
 import LeanColls.List.Basic
 
 namespace LeanColls

@@ -88,10 +88,11 @@ theorem toList_force_some {l : LazyList α}
   := by
     induction l using ind generalizing x xs
     simp [force]
-    case cons hd tl ih =>
+    case cons =>
       simp [force]
       intro h
       simp [h]
+      apply congr_arg
     case delayed th ih =>
       simp [force]
       intro h
@@ -200,7 +201,7 @@ def join : LazyList (LazyList α) → LazyList α
 join (x.map f)
 
 def take : Nat → LazyList α → List α
-| 0, as => []
+| 0, _ => []
 | _, nil => []
 | i+1, cons a as => a :: take i as
 | i+1, delayed as => take (i+1) as.get

@@ -21,7 +21,7 @@ def empty (_ : Unit) (initCap : Nat := 16) (h_cap : 1 ≤ initCap := by decide) 
   by intro i h; simp [Fin.val] at h; contradiction
   ⟩
 
-@[inline] def full (A : ArrayBuffer α) : Bool := A.size = A.cap
+@[inline] def full (A : ArrayBuffer α) : Bool := A.size.val = A.cap
 
 def grow : ArrayBuffer α → ArrayBuffer α :=
 λ ⟨cap, h_cap, size, backing, h_backing⟩ =>
@@ -46,8 +46,9 @@ theorem grow_notfull (A : ArrayBuffer α)
   : ¬A.grow.full
   := by
     simp [full,grow]
-    suffices A.size.val < 2 * A.cap by
-      simp [Nat.ne_of_lt this]
+    apply (decide_eq_false_iff_not _).mpr
+    suffices A.size.val < 2 * A.cap from
+      Nat.ne_of_lt this
     have := Nat.mul_lt_mul_of_pos_right (Nat.lt_succ_self 1) A.h_cap
     simp at this ⊢
     apply Nat.lt_of_le_of_lt (Nat.le_of_succ_le_succ A.size.isLt)
@@ -59,7 +60,7 @@ theorem grow_notfull (A : ArrayBuffer α)
     | ⟨cap, h_cap, size, backing, h_backing⟩ =>
     have h_size :=
       Nat.le_of_lt_succ $
-      Nat.lt_of_le_and_ne size.isLt (by
+      Nat.lt_of_le_of_ne size.isLt (by
       simp [full] at h; intro h'; apply h; injection h'; assumption)
     ⟨ cap, h_cap, ⟨size.val + 1, Nat.succ_le_succ h_size⟩,
       backing.set ⟨size,h_size⟩ (Uninit.init a),
@@ -72,11 +73,11 @@ theorem grow_notfull (A : ArrayBuffer α)
         exact Uninit.isInit_init
         simp [Fin.eq_of_val_eq]
         rw [backing.get_of_set_ne _ _ _ (by simp; exact h ∘ Eq.symm)]
-        have h_i : i < size := Nat.lt_of_le_and_ne (Nat.le_of_succ_le_succ h_i) h
+        have h_i : i < size := Nat.lt_of_le_of_ne (Nat.le_of_succ_le_succ h_i) h
         exact h_backing i h_i⟩
 
 def push (A : ArrayBuffer α) (a : α) : ArrayBuffer α :=
-  if h:A.size = A.cap then
+  if h:A.size.val = A.cap then
     A.grow.push_notfull (A.grow_notfull) a
   else
     A.push_notfull (by simp [full,h]) a

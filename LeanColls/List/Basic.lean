@@ -29,7 +29,7 @@ theorem fold_eq_fold' (c : List τ) (f : β → τ → β) (acc : β)
     simp [foldl, fold'.go]
     apply ih (f acc x)
 
-def sum [Add τ] [OfNat τ 0] : List τ → τ
+def sum [AddMonoid τ] : List τ → τ
 | [] => 0
 | x::xs => x + sum xs
 

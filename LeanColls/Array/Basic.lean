@@ -13,7 +13,7 @@ import LeanColls.View
 
 namespace LeanColls
 
-@[extern "leancolls_array_initialize"] private constant arrayInit : IO Unit
+@[extern "leancolls_array_initialize"] private opaque arrayInit : IO Unit
 
 builtin_initialize arrayInit
 
@@ -48,7 +48,7 @@ def resize {α} {n : @& Nat} (A : Array α n)
     else x⟩
 
 unsafe def allInitUnsafe (A : Array (Uninit α) n)
-  (h : ∀ i, (A.get i).isInit) : Array α n
+  (_ : ∀ i, (A.get i).isInit) : Array α n
   := unsafeCast A
 @[implementedBy allInitUnsafe]
 def allInit (A : Array (Uninit α) n)
@@ -57,9 +57,9 @@ def allInit (A : Array (Uninit α) n)
 
 -- Axioms
 
-/- This axiom holds, because instantiating an array larger than `USize.size`
+/- This axiom holds, because instantiating an array of at least `USize.size`
   will cause the program to panic -/
-axiom size_lt_usize {α n} : Array α n → n ≤ USize.size
+axiom size_lt_usize {α n} : Array α n → n < USize.size
 
 -- Preliminary theorems
 @[simp]
@@ -90,7 +90,7 @@ def init {α : Type u} {n : Nat} (f : Fin n → α) : Array α n
   |>.allInit (by
     intro i
     simp [forIn, Foldable.fold, Id.run]
-    refine Range.fold'_ind (motive := λ i h A' =>
+    refine Range.fold'_ind (motive := λ i _ A' =>
       ∀ j : Fin n, j < i → Uninit.isInit (get A' j))
       ?init ?step i i.isLt
     case init =>
@@ -138,7 +138,7 @@ theorem init_eq_mk {f : Fin n → α}
       = some (f i) by
       apply Uninit.getValue_of_getValue?_some
       exact this
-    refine Range.fold'_ind (motive := λ i h A =>
+    refine Range.fold'_ind (motive := λ i _ A =>
       ∀ j : Fin n, j < i → Uninit.getValue? (get A j) = some (f j))
       ?init ?step i i.isLt
     case init =>
@@ -163,19 +163,19 @@ def empty : Array α 0 := init (Fin.elim0)
 def copy {n : Nat} (A : Array α n) : Array α n
   := init A.get
 
+theorem copy_def (A : Array α n) : A.copy = A
+  := by
+  simp [copy, init_eq_mk]
+  rfl
+
 instance : Indexed (Array α n) α where
   size _ := n
   nth := Array.get
 
 instance : IndexedOps (Array α n) α := default
 
-def toList (A : Array α n) : List α :=
-  View.view' (Range.mk n)
-  |>.map' (λ i h => A.get ⟨i,h⟩)
-  |> FoldableOps.toList
-
 instance [Repr α] : Repr (Array α n) where
-  reprPrec A := reprPrec (A.toList)
+  reprPrec A := reprPrec (α := List α) (FoldableOps.toList A)
 
 end Array
 
@@ -204,7 +204,7 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
 
 @[inline] def snoc (x : α) : COWArray α n.succ :=
   ⟨Array.init (λ i =>
-    if h:i < n then
+    if h:i.val < n then
       A.get ⟨i, h⟩
     else x)⟩
 
@@ -219,6 +219,7 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
 instance : Indexed (COWArray α n) α where
   size _ := n
   nth := get
+
 
 instance [Repr α] : Repr (COWArray α n) := inferInstance
 

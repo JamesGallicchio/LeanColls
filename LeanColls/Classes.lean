@@ -65,7 +65,7 @@ class Foldable (C : Type u) (τ : outParam (Type v)) where
 class Foldable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C))
   extends Foldable C τ where
   fold' : {β : Type w} → (c : C) → (β → (t : τ) → t ∈ c → β) → β → β
-  fold c f acc := fold' c (λ acc x h => f acc x) acc
+  fold c f acc := fold' c (λ acc x _ => f acc x) acc
 
 /-!
 Foldables can be Iterable by first collecting everything
@@ -135,7 +135,7 @@ Class of collections that have efficient key value lookup
 -/
 class MapLike (C : Type u) (α : outParam (Type v)) (β : outParam (Type w))
   extends Foldable C (α × β) where
-  get? : C → α → Option β
+  get? : α → C → Option β
 
 /-!
 ### Indexed

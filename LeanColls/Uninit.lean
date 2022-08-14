@@ -6,7 +6,7 @@ Authors: James Gallicchio, Mario Carneiro
 
 namespace LeanColls
 
-constant UninitPointed.{u} (α : Type u) : NonemptyType.{u}
+opaque UninitPointed.{u} (α : Type u) : NonemptyType.{u}
 
 def Uninit.{u} (α : Type u) : Type u := (UninitPointed α).type
 
@@ -16,15 +16,15 @@ instance : Nonempty (Uninit α) := (UninitPointed α).property
 
 unsafe def uninitUnsafe {α} : Uninit α := unsafeCast ()
 @[implementedBy uninitUnsafe]
-constant uninit {α} : Uninit α
+opaque uninit {α} : Uninit α
 
 unsafe def initUnsafe (a : α) : Uninit α := unsafeCast a
 @[implementedBy initUnsafe]
-constant init (a : α) : Uninit α
+opaque init (a : α) : Uninit α
 
 instance : Inhabited (Uninit α) := ⟨uninit⟩
 
-noncomputable constant getValue? : Uninit α → Option α
+noncomputable opaque getValue? : Uninit α → Option α
 
 def ofOption : Option α → Uninit α
 | none => uninit
@@ -61,12 +61,12 @@ theorem isInit_uninit : ¬(@uninit α).isInit := by
   rw [getValue_ofOption]
   simp [Option.isSome]
 
-unsafe def getValueUnsafe (a : Uninit α) (h : a.isInit) : α := unsafeCast a
+unsafe def getValueUnsafe (a : Uninit α) (_ : a.isInit) : α := unsafeCast a
 
 @[implementedBy getValueUnsafe]
 def getValue (a : Uninit α) (h : a.isInit) : α := 
   match getValue? a, (by unfold isInit at h; exact h : Option.isSome (getValue? a)) with
-  | some a, h => a
+  | some a, _ => a
   | none, h => by contradiction
 
 @[simp]
