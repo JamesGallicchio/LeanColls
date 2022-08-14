@@ -38,16 +38,9 @@ jobs:
           ~/.elan/bin/lean --version
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
-      - name: Build doc-gen4
-        run: |
-          cd ../
-          git clone https://github.com/leanprover/doc-gen4
-          cd doc-gen4
-          lake build
-
       - name: Generate docs
         run: |
-          lake -Kenv=dev build LeanColls:docs --verbose
+          lake -Kenv=dev build LeanColls:docs
 
       - name: Deploy docs and push to gh-pages
         run: |
