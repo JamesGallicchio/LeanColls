@@ -24,12 +24,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Merge main into gh-pages
+      - name: Reset gh-pages to main
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git checkout gh-pages
-          git merge main -m "Auto-merge main into gh-pages"
+          git reset --hard main
 
       - name: Install elan
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy docs and push to gh-pages
         run: |
-          mv build/doc docs/docs
+          mv build/doc/* docs/docs/
           git add docs/*
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           git commit -m "Automatic docs update $git_hash"
