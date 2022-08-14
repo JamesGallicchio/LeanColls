@@ -97,10 +97,10 @@ theorem canonicalToList_eq_toList
   := by
   cases c; case mk n =>
   simp [canonicalToList]
-  apply fold_ind (motive := λ i h a => a = toList ⟨i⟩)
+  apply fold_ind (motive := λ i _ a => a = toList ⟨i⟩)
   case base => simp [toList]
   case ind_step =>
-    intro i acc h_i h_acc
+    intro i acc _ h_acc
     simp [toList, toList.list, h_acc]
 
 theorem memCorrect (x : Nat) (c : Range)
@@ -128,7 +128,7 @@ theorem memCorrect (x : Nat) (c : Range)
         apply ih.mp h
     case mpr =>
       apply Nat.succ_le_succ
-      have := List.mem_of_append _ _ h
+      have := List.mem_append.mp h
       clear h
       cases this
       case a.inl h =>
@@ -146,11 +146,11 @@ theorem foldCorrect {β : Type} (f : β → Nat → β) (init : β) (c : Range)
   simp [canonicalToList_eq_toList]
   cases c with
   | mk n =>
-  apply fold_ind (motive := λ i h a => a = List.fold (toList.list i) f init)
+  apply fold_ind (motive := λ i _ a => a = List.fold (toList.list i) f init)
   case base =>
     simp [List.fold, List.foldl]
   case ind_step =>
-    intro i acc h_i h_acc
+    intro i acc _ h_acc
     simp [List.fold] at h_acc ⊢
     unfold List.foldl
     simp [toList.list]
@@ -159,7 +159,6 @@ theorem foldCorrect {β : Type} (f : β → Nat → β) (init : β) (c : Range)
       have : List.length (toList.list i ++ [i]) = List.length [] := by 
         rw [h]
       simp at this
-      contradiction
     case h_2 init _ smth x xs h =>
       suffices
         List.foldl f acc [i] = List.foldl f (f init x) xs
@@ -210,7 +209,7 @@ instance : FoldableOps Range Nat := {
 
 instance : Iterable Range Nat where
   ρ := Nat × Nat
-  step := λ (i,stop) => if h:i < stop then some (i, (i.succ, stop)) else none
+  step := λ (i,stop) => if i < stop then some (i, (i.succ, stop)) else none
   toIterator := λ r => (0,r.n)
 
 end Range
@@ -234,22 +233,83 @@ structure Range.Complex where
 
 namespace Range.Complex
 
-/-
+
 def fold : (β → Int → β) → β → Range.Complex → β :=
-  let rec @[inline] loop {α} (start stop step h_step) (f : α → Int → α) acc i : α :=
+  let rec @[inline] loopUp {α} (start stop step : Int) (h_step : step > 0)
+    (f : α → Int → α) acc i : α :=
     if h:i < stop then
-      have : stop - (i + step) < stop - i := by
-        rw [Int.]
-        apply Nat.sub_lt
-        exact Nat.zero_lt_sub_of_lt h
-        exact h_step
-      loop start stop step h_step f (f acc i) (i+step)
+      have : Int.natAbs (stop + step - (i+step))
+              < Int.natAbs (stop + step - i)
+        := by
+        rw [(by rw [Int.sub_eq_add_neg, Int.sub_eq_add_neg, Int.neg_add, Int.add_comm (-i), Int.add_assoc, ←Int.add_assoc step, Int.add_right_neg]; simp
+            : stop + step - (i+step) = stop - i)]
+        have h1 : stop - i > 0 := by
+          apply Int.lt_sub_right_of_add_lt (a := 0)
+          simp [h]
+        have h2 : stop + step - i > 0 := by
+          rw [Int.add_comm, Int.add_sub_assoc, ←Int.add_zero 0]
+          apply Int.add_lt_add_of_le_of_lt (Int.le_of_lt h_step) h1
+        suffices stop - i < stop + step - i by
+          rw [←Int.ofNat_natAbs_eq_of_nonneg _ (Int.le_of_lt h1)] at this
+          rw [←Int.ofNat_natAbs_eq_of_nonneg _ (Int.le_of_lt h2)] at this
+          simp at this
+          assumption
+        rw [Int.sub_eq_add_neg,
+            Int.sub_eq_add_neg]
+        apply Int.add_lt_add_of_lt_of_le
+        apply Int.lt_add_of_pos_right _ h_step
+        apply Int.le_refl
+      loopUp start stop step h_step f (f acc i) (i+step)
     else
       acc
-  λ f acc ⟨start,stop,step, h_step⟩ =>
-    if h:step > 0 then loop start stop step h_step f acc 0 else acc
-  termination_by loop _ _ i => stop - i
+  let rec @[inline] loopDown {α} (start stop step : Int) (h_step : step < 0)
+    (f : α → Int → α) acc i : α :=
+    if h:i > stop then
+      have : Int.natAbs (stop + step - (i+step))
+              < Int.natAbs (stop + step - i)
+        := by
+        rw [(by rw [Int.sub_eq_add_neg, Int.sub_eq_add_neg, Int.neg_add, Int.add_comm (-i), Int.add_assoc, ←Int.add_assoc step, Int.add_right_neg]; simp
+            : stop + step - (i+step) = stop - i)]
+        have h1 : stop - i < 0 := by
+          apply Int.sub_left_lt_of_lt_add
+          simp [h]
+        have h2 : stop + step - i < 0 := by
+          rw [Int.add_comm, Int.add_sub_assoc, ←Int.add_zero 0]
+          apply Int.add_lt_add_of_le_of_lt (Int.le_of_lt h_step) h1
+        suffices stop - i > stop + step - i by
+          have := Int.neg_lt_neg this
+          rw [←Int.ofNat_natAbs_eq_neg_of_nonpos _ (Int.le_of_lt h1)] at this
+          rw [←Int.ofNat_natAbs_eq_neg_of_nonpos _ (Int.le_of_lt h2)] at this
+          simp at this
+          assumption
+        rw [Int.sub_eq_add_neg,
+            Int.sub_eq_add_neg]
+        apply Int.add_lt_add_of_lt_of_le
+        conv =>
+          rhs
+          rw [←Int.add_zero stop]
+        apply Int.add_lt_add_left h_step
+        apply Int.le_refl
+      loopDown start stop step h_step f (f acc i) (i+step)
+    else
+      acc
 
+  λ f acc ⟨start,stop,step,h_step⟩ =>
+    if h_step:step > 0 then
+      loopUp start stop step h_step f acc 0
+    else
+      have h_step : step < 0 := by
+        apply Int.lt_iff_le_and_ne.mpr
+        constructor
+        simp at h_step
+        assumption
+        assumption
+      loopDown start stop step h_step f acc 0
+  termination_by
+    loopUp i => Int.natAbs (stop + step - i)
+    loopDown i => Int.natAbs (stop + step - i)
+
+/-
 instance : Membership Nat Range where
   mem x r := x < r.stop ∧ ∃ k, x = r.start + k * r.step
 

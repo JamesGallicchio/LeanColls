@@ -8,78 +8,107 @@ import LeanColls.AuxLemmas
 import LeanColls.Array
 import LeanColls.View
 import LeanColls.Classes
+import LeanColls.FoldableOps
 
-namespace LeanColls
+namespace LeanColls 
 
-structure HashMap (κ τ : Type u) [Hashable κ] [DecidableEq κ] where
+structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
   cap : Nat
   h_cap : cap > 0
-  backing : Array (List (κ × τ)) cap
+  backing : COWArray (AList κ τ) cap
   size : Cached (
     View.view backing
-    |>.map (fun p => p.2.length)
-    |> FoldableOps.sum
-  )
+    |>.map List.length
+    |> FoldableOps.sum (τ := Nat))
 
 namespace HashMap
-variable {κ : Type u} {τ} [Hashable κ] [DecidableEq κ]
+variable {κ τ : Type} [Hashable κ] [DecidableEq κ]
 
 @[inline] private
-def calc_idx (k : κ) (m : HashMap κ τ) : Fin m.cap :=
-  let idx := (hash k) % m.cap
+def calc_idx' (k : κ) (cap : Nat) (h_cap : cap > 0) (h : cap < UInt64.size) : Fin cap :=
+  let idx := (hash k) % (UInt64.ofNat cap)
   ⟨idx.toNat, by
-    simp [HMod.hMod, UInt64.modn, UInt64.toNat, Fin.modn, Mod.mod]
+    simp [UInt64.mod_def, Fin.mod_def]
     apply Nat.mod_lt_of_lt
-      (Nat.mod_lt _ m.h_cap)
-      (by decide)
+    rw [UInt64.val_eq_of_lt h]
+    apply Nat.mod_lt
+    assumption
+    exact UInt64.size_positive
     ⟩
 
+@[inline]
+def calc_idx (k : κ) (m : HashMap κ τ) : Fin m.cap :=
+  match m with
+  | ⟨cap, h_cap, backing, _⟩ =>
+  calc_idx' k cap h_cap (
+    Nat.lt_of_lt_of_le
+      backing.backing.size_lt_usize
+      USize.usize_bounded)
+
 /- TODO: add Array.getU64 -/
-def get (m : HashMap κ τ) (k : κ) : Option τ :=
+def get? (k : κ) (m : HashMap κ τ) : Option τ :=
   m.backing.get (calc_idx k m)
-  |>.find? (λ ⟨k',_⟩ => k = k')
-  |>.map Prod.snd
+  |> MapLike.get?.{0,0,0,0} k
+
+def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
+  let idx := calc_idx k m
+  match h : m.backing.get idx |> AList.set' k t with
+  | (old, newSlot) =>
+  let newSize :=
+    match old with | none => m.size + 1 | some _ => m.size
+  ⟨old, m.cap, m.h_cap, m.backing.set idx newSlot, newSize, by
+    have : newSize = match old, h with | none, h => _ | some _, h => _ := rfl
+    rw [this]
+    clear this newSize
+    match old with
+    | none =>
+      simp [FoldableOps.sum_eq_sum_toList]
+      sorry
+    | some _ =>
+      simp
+      sorry
+    ⟩
 
 def set (k : κ) (t : τ) (m : HashMap κ τ) : HashMap κ τ :=
-  let idx := calc_idx k m
-  let (eff, newSlot) := m.backing.get idx |> AList.set k t
-  let newSize :=
-    match eff with | .replaced => m.size | .inserted => m.size + 1
-  ⟨m.cap, m.h_cap, m.backing.set idx newSlot, ⟨newSize, by
-    simp
-    clear newSize
-    match eff with
-    | .replaced =>
-      simp
-      stop
-      simp [Foldable.fold, View.instFoldableOpsViewInstFoldableView_1, default, FoldableOps.defaultImpl]
-      simp [Size.size, Array.size_set]
-      apply Range.fold'_ind (motive := λ i h a => sorry)
-      stop
-      suffices ∀ acc i, Range.fold'.loop m.cap (fun acc i h_i => acc + List.length (Indexed.nth m.backing { val := i, isLt := h_i })) acc i =
-                Range.fold'.loop m.cap (fun acc i h_i => acc + List.length
-                  (Indexed.nth (Array.set m.backing (LeanColls.HashMap.calc_idx k m) newSlot) { val := i, isLt := h_i })) acc i
-        from this 0 0
-      intro acc i; induction i generalizing acc
-      unfold Range.fold'.loop
-      simp
-      split <;> simp
-      sorry
-      sorry
-    | .inserted =>
-      simp
-      sorry
-    ⟩⟩
+  (m.set' k t).2
 
-def fold (f) (acc : β) (m : HashMap κ τ) :=
-  m.backing
-  |> Foldable.fold (fun acc (_,l) =>
-    Foldable.fold f acc l
+def fold (m : HashMap κ τ) (f : β → (κ × τ) → β) (acc : β) :=
+  Foldable.fold m.backing (fun acc l =>
+    Foldable.fold l f acc
   ) acc
 
 instance : Membership κ (HashMap κ τ) where
-  mem k m := get m k |>.isSome
+  mem k m := get? k m |>.isSome
 
 instance : MapLike (HashMap κ τ) κ τ where
-  get? := get
+  get? := get?
   fold := fold
+
+theorem get_set_eq [Hashable κ] (k : κ) (t : τ) (m : HashMap κ τ)
+  : (m.set k t |>.get? k) = some t
+  := by
+  simp [get?, set, set', calc_idx, calc_idx']
+  simp [COWArray.get, COWArray.set, Array.get_set_eq]
+  simp [MapLike.get?]
+  simp [AList.get?_set'_eq]
+
+theorem get_set_ne [Hashable κ]
+  (k : κ) (t : τ) (k' : κ) (m : HashMap κ τ)
+  (h_k : k ≠ k')
+  : (m.set k t |>.get? k') = m.get? k'
+  := by
+  simp [get?, set, set']
+  simp [COWArray.get, COWArray.set]
+  simp [calc_idx]
+  generalize calc_idx' k _ _ _ = k_idx
+  generalize calc_idx' k' _ _ _ = k'_idx
+  match h : decide (k_idx = k'_idx) with
+  | true =>
+    simp at h
+    simp [h]
+    simp [MapLike.get?]
+    rw [AList.get?_set'_ne _ _ _ _ h_k]
+  | false =>
+    have : k_idx ≠ k'_idx := by
+      intro h; cases h; simp at h
+    simp [this, Array.copy_def]

@@ -7,6 +7,7 @@ import LeanColls.Array
 import LeanColls.Buffer
 import LeanColls.Classes
 import LeanColls.FoldableOps
+import LeanColls.HashMap
 import LeanColls.IndexedOps
 import LeanColls.LazyList
 import LeanColls.List

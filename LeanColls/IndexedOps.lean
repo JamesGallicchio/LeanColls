@@ -64,16 +64,33 @@ instance [Indexed C τ] : Inhabited (IndexedOps C τ) where
     slice := λ off len c h => ⟨c,off,len,h⟩
   }
 
-instance [Indexed C τ] : MapLike C Nat τ where
+instance [Indexed C τ] [Foldable C τ] : FoldableOps C τ
+  := { (default : FoldableOps C τ) with
+  toList := λ c =>
+    let n := Size.size c
+    Foldable'.fold' (Range.mk n) (λ acc i h =>
+      Indexed.nth c ⟨n-i-1, by
+        simp
+        simp [Membership.mem] at h
+        rw [Nat.sub_sub]
+        apply Nat.sub_lt_of_pos_le
+        simp [Nat.add_one, Nat.zero_lt_succ]
+        exact h
+      ⟩ :: acc
+      ) []
+  }
+
+structure Map (C) [Indexed C τ] where
+  val : C
+
+namespace Map
+
+instance [Indexed C τ] : MapLike (Map C) Nat τ where
   fold c f acc :=
-    Range.fold' ⟨Size.size c⟩ (λ acc i h_i =>
-      f acc (i, Indexed.nth c ⟨i,h_i⟩)
+    Range.fold' ⟨Size.size c.val⟩ (λ acc i h_i =>
+      f acc (i, Indexed.nth c.val ⟨i,h_i⟩)
     ) acc
-  get? c i :=
-    if h : i < Size.size c then
-      some (Indexed.nth c ⟨i, h⟩)
+  get? i c :=
+    if h : i < Size.size c.val then
+      some (Indexed.nth c.val ⟨i, h⟩)
     else none
-
-end IndexedOps
-
-end LeanColls
