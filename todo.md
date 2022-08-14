@@ -1,11 +1,11 @@
 # TODO
 
+- Implement HashMap rebalancing
 - Finish correctness proofs for RTQueue
 - Implement
   - RBFingerTree
   - OrdMap
   - RedBlackTree
-  - HashMap
 ---
 - Read about thread safety in immutable beans paper
 - Skim Lorenzen's thesis
@@ -13,6 +13,11 @@
 
 
 ## Done
+
+### 14 Aug 2022
+- Implemented HashMaps!! No re-balancing yet, though.
+  - Needed more rewriting... hopefully it settles down soon
+  - Proved get/set interchange a la Array
 
 ### 8 Aug 2022
 - After many rewrites, Ranges seem workable & reasonable
