@@ -16,22 +16,9 @@ lean_exe test {
   root := `Main
 }
 
-/-
-def pkgDir := __dir__
-def cSrcDir := pkgDir / "bindings"
-def cBuildDir := pkgDir / _package.buildDir / "bindings"
-
-def ffiOTarget : FileTarget :=
-  let oFile := cBuildDir / "leancolls_array.o"
-  let srcTarget := inputFileTarget <| cSrcDir / "leancolls_array.c"
-  fileTargetWithDep oFile srcTarget fun srcFile => do
-    compileO oFile srcFile #["-I", (← getLeanIncludeDir).toString, "-fPIC"] "c++"
-
-extern_lib cLib :=
-  let libFile := cBuildDir / nameToStaticLib "leancolls_array"
-  staticLibTarget libFile #[ffiOTarget]
--/
-
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
-    @ "7da24c4024a2cb547d9d6e85943027daa77d850f"
+    @ "a4f624b2fc85f02897a51d3149469a19975867d2"
+
+meta if get_config? env = some "dev" then -- dev is so not everyone has to build it
+require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"

@@ -47,8 +47,7 @@ jobs:
 
       - name: Generate docs
         run: |
-          rm -r docs/docs
-          ../doc-gen4/build/bin/doc-gen4 LeanColls
+          lake -Kenv=dev build LeanColls:docs --verbose
 
       - name: Deploy docs and push to gh-pages
         run: |
