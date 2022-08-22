@@ -38,6 +38,10 @@ jobs:
           ~/.elan/bin/lean --version
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
+      - name: Compile library
+        run: |
+          lake build LeanColls
+
       - name: Generate docs
         run: |
           lake -Kenv=dev build LeanColls:docs || true
