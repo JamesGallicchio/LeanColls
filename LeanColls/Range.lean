@@ -103,6 +103,66 @@ theorem canonicalToList_eq_toList
     intro i acc _ h_acc
     simp [toList, toList.list, h_acc]
 
+def toListAux (r : Range) :=
+  let rec list : Nat → Nat → List Nat
+  | 0,   _ => []
+  | n+1, i => i :: list n (i+1)
+  list r.n 0
+
+theorem toList_eq_toListAux (r : Range)
+  : r.toList = r.toListAux
+  := by
+  cases r; case mk n =>
+  simp [toList, toListAux]
+  suffices ∀ i, i ≤ n → toList.list n = toList.list (n-i) ++ toListAux.list i (n-i)
+    by have := this n; simp at this; exact this
+  intro i h
+  induction i with
+  | zero =>
+    simp [toListAux.list]
+  | succ i ih =>
+    simp [toListAux.list]
+    rw [List.append_cons]
+    suffices toList.list (n - i.succ) ++ [n - i.succ]
+            = toList.list (n - i)
+      by
+      rw [this]
+      rw [Nat.sub_succ, Nat.add_one,
+        Nat.succ_pred_eq_of_pos (Nat.sub_pos_of_lt h)]
+      apply ih
+      apply Nat.le_of_lt h
+    conv => rhs; unfold toList.list
+    have : n - i ≠ 0 := Nat.sub_ne_zero_of_lt h
+    split
+    contradiction
+    simp [toList.list]
+    rename n - i = _ => h
+    rw [Nat.sub_succ, h, Nat.pred_succ]
+
+theorem reverse_toList_eq_map_toList (r : Range)
+  : r.toList.reverse = r.toList.map (fun i => r.n - i - 1)
+  := by
+  conv => lhs; rw [toList_eq_toListAux, toListAux]
+  conv => rhs; rw [toList]
+  cases r; case mk n =>
+  suffices ∀ i j, i + j = n →
+    List.reverse (toListAux.list i j)
+    = List.map (fun i => n - i - 1) (toList.list i)
+    from this n 0 (by simp)
+  intro i j h
+  induction i generalizing j with
+  | zero =>
+    simp [toListAux.list]
+  | succ i ih =>
+    simp [toListAux.list, toList.list]
+    conv =>
+      rhs; apply congr_arg; rw [←h]
+      rw [Nat.succ_add, Nat.add_comm, ←Nat.succ_add, Nat.add_sub_cancel, Nat.succ_sub_one]
+    simp
+    apply ih
+    simp [Nat.succ_add, Nat.add_succ] at h ⊢
+    assumption
+
 theorem memCorrect (x : Nat) (c : Range)
   : x ∈ c ↔ x ∈ canonicalToList (fun {β} => fold c)
   := by
@@ -205,6 +265,7 @@ instance : Foldable'.Correct Range Nat inferInstance where
 instance : FoldableOps Range Nat := {
   (default : FoldableOps Range Nat) with
   contains := λ r _ i => i < r.n
+  toList := toList
 }
 
 instance : Iterable Range Nat where

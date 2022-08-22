@@ -11,7 +11,7 @@ import LeanColls.List.Classes
 
 namespace LeanColls
 
-class FoldableOps.{uC,uT} (C : Type uC) (τ : Type uT) where
+class FoldableOps.{uC,uT} (C : Type uC) (τ : outParam (Type uT)) where
   toList : C → List τ
   all : C → (τ → Bool) → Bool
   contains : C → [BEq τ] → τ → Bool
@@ -34,6 +34,30 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
 
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
+
+@[simp]
+theorem default_toList_list (L : List τ)
+  : (defaultImpl (List τ) τ).toList L = L
+  := by
+  simp [toList, defaultImpl, Foldable.fold, List.fold, List.reverse]
+  apply List.reverseAux_reverseAux_nil
+
+theorem default_toList_pred_fold (c : C) (c' : C')
+  [Foldable C τ] [Foldable C' τ]
+  (h : Foldable.fold c (β := List τ) = Foldable.fold c')
+  : (defaultImpl C τ).toList c = (defaultImpl C' τ).toList c'
+  := by
+  simp [toList, defaultImpl, h]
+
+@[simp]
+theorem default_toList_eq_canonicalToList [Foldable.Correct C τ] (c : C)
+  : (defaultImpl C τ).toList c = canonicalToList (Foldable.fold c)
+  := by
+  rw [default_toList_pred_fold c (canonicalToList (Foldable.fold c))]
+  simp [toList]
+  simp [Foldable.fold]
+  funext f acc
+  apply Foldable.Correct.foldCorrect
 
 @[simp]
 theorem default_sum_list_eq_list_sum [AddMonoid τ] (L : List τ)

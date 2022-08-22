@@ -49,5 +49,15 @@ instance : Indexed (COWArray α n) α where
   size _ := n
   nth := get
 
+@[simp]
+theorem fold_eq_backing_fold (A : COWArray α n)
+  : ∀ {β}, Foldable.fold A (β := β) = Foldable.fold A.backing
+  := by
+  intro β
+  simp [Foldable.fold, Size.size, Indexed.nth, get]
 
-instance [Repr α] : Repr (COWArray α n) := inferInstance
+@[simp]
+theorem backing_set (A : COWArray α n) (i : Fin n) (x : α)
+  : (A.set i x).backing = A.backing.set i x
+  := by
+  simp [set, Array.copy_def]

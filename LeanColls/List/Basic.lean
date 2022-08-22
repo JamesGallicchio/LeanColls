@@ -29,6 +29,51 @@ theorem fold_eq_fold' (c : List τ) (f : β → τ → β) (acc : β)
     simp [foldl, fold'.go]
     apply ih (f acc x)
 
+def map' (L : List τ) (f : (x : τ) → x ∈ L → τ') :=
+  L.subtypeByMem.map (fun ⟨x,h⟩ => f x h)
+
+def rw_map' {L1 L2 : List τ} (h_L : L1 = L2) (f : (x : τ) → x ∈ L1 → τ')
+  : L1.map' f = L2.map' (fun x h => f x (h_L.substr h))
+  := by cases h_L; rfl
+
+def fold'_append_singleton_eq_map' (L : List τ) (f : (x : τ) → x ∈ L → τ')
+  : L.fold' (fun acc x h => acc ++ [f x h]) []
+    = L.map' (fun x h => f x h)
+  := by
+  simp [fold', subtypeByMem]
+  suffices ∀ acc rem h, fold'.go L (fun acc x h => acc ++ [f x h]) acc rem h
+    = acc ++ map _ (subtypeByMem.aux L rem h)
+    by apply this
+  intro acc rem h
+  induction rem generalizing acc with
+  | nil =>
+    simp [fold'.go]
+  | cons x xs ih =>
+    simp [fold'.go]
+    conv =>
+      rhs
+      rw [append_cons]
+    apply ih
+
+theorem fold'_cons_eq_map'_reverse (L : List τ) (f : (x : τ) → x ∈ L → τ')
+  : List.fold' L (λ acc x h => (f x h) :: acc) []
+    = (L.map' (fun x h => f x h)
+      |>.reverse)
+  := by
+  simp [fold', map', subtypeByMem]
+  rw [map_eq_mapTR]
+  simp [mapTR]
+  suffices ∀ acc rem h, fold'.go L (fun acc x h => (f x h) :: acc) acc rem h
+    = reverse (mapTRAux _ (subtypeByMem.aux L rem h) acc)
+    by apply this
+  intro acc rem h
+  induction rem generalizing acc with
+  | nil =>
+    simp [fold'.go, subtypeByMem.aux, mapTRAux]
+  | cons x xs ih =>
+    simp [fold'.go, subtypeByMem.aux, mapTRAux]
+    apply ih
+
 def sum [AddMonoid τ] : List τ → τ
 | [] => 0
 | x::xs => x + sum xs

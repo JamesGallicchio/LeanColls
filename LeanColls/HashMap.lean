@@ -19,7 +19,7 @@ structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
   size : Cached (
     View.view backing
     |>.map List.length
-    |> FoldableOps.sum (τ := Nat))
+    |> FoldableOps.sum)
 
 namespace HashMap
 variable {κ τ : Type} [Hashable κ] [DecidableEq κ]

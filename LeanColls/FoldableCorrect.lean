@@ -44,6 +44,30 @@ theorem fold_eq_fold' [M : Membership τ C] [F : Foldable'.Correct C τ M]
   rw [F.fold'Correct]
   simp [canonicalToList, List.fold_eq_fold']
 
+theorem fold'_append_singleton_eq_map [M : Membership τ C] [F : Foldable'.Correct C τ M]
+  (c : C) (f : (x : τ) → x ∈ c → τ')
+  : F.fold' c (λ acc x h => acc ++ [f x h]) []
+    = (canonicalToList (Foldable.fold c)
+      |>.map' (fun x h => f x ((Foldable'.Correct.memCorrect _ _).mpr h)))
+  := by
+  rw [Correct.fold'Correct]
+  rw [List.fold'_append_singleton_eq_map']
+
+theorem fold'_cons_eq_map_reverse [M : Membership τ C] [F : Foldable'.Correct C τ M]
+  (c : C) (f : (x : τ) → x ∈ c → τ')
+  : F.fold' c (λ acc x h => (f x h) :: acc) []
+    = (canonicalToList (Foldable.fold c)
+      |>.map'
+        (fun x h => f x ((Foldable'.Correct.memCorrect _ _).mpr h))
+      |>.reverse)
+  := by
+  rw [Correct.fold'Correct]
+  rw [List.fold'_cons_eq_map'_reverse]
+
+end Foldable'
+
+namespace Foldable
+
 theorem fold_pair [F : Foldable.Correct C τ]
   (f₁ : β₁ → τ → β₁) (acc₁ : β₁) (f₂ : β₂ → τ → β₂) (acc₂ : β₂) (c : C)
   : F.fold c (λ (acc₁,acc₂) x => (f₁ acc₁ x, f₂ acc₂ x)) (acc₁, acc₂)
@@ -65,5 +89,3 @@ theorem fold_pair [F : Foldable.Correct C τ]
   | cons x xs ih =>
     simp
     apply ih
-  
-end Foldable'

@@ -444,6 +444,17 @@ namespace List
       intros m h h'; cases h; rfl
     rw [this]; apply get_range'; simp; simp [i.2]
 
+
+  @[simp]
+  theorem foldl_cons (L : List τ) (acc)
+    : L.foldl (fun acc x => x :: acc) acc = L.reverseAux acc
+    := by
+    induction L generalizing acc with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+    unfold foldl
+    apply ih
+
   @[simp]
   theorem foldl_append (L₁ L₂ : List τ) (f) (acc : β)
     : (L₁ ++ L₂).foldl f acc = L₂.foldl f (L₁.foldl f acc)
@@ -452,7 +463,7 @@ namespace List
     | nil => simp [foldl]
     | cons x xs ih =>
       simp [foldl, ih]
-  
+
   @[simp]
   theorem foldl_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
     : (L.map f).foldl foldF foldAcc =

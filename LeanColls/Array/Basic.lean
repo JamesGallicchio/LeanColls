@@ -174,5 +174,24 @@ instance : Indexed (Array α n) α where
 
 instance : IndexedOps (Array α n) α := default
 
+def toList (A : Array α n) : List α := FoldableOps.toList A
+
 instance [Repr α] : Repr (Array α n) where
-  reprPrec A := reprPrec (α := List α) (FoldableOps.toList A)
+  reprPrec A := reprPrec (α := List α) A.toList
+
+@[simp]
+theorem canonicalToList_eq_toList (A : Array α n)
+  : canonicalToList (Foldable.fold A) = A.toList
+  := by
+  unfold toList
+  rw [IndexedOps.toList_eq_default_toList,
+    FoldableOps.default_toList_eq_canonicalToList]
+
+@[simp]
+theorem toList_set (A : Array α n) (i : Fin n) (x : α)
+  : (A.set i x).toList =
+    List.set A.toList i x
+  := by
+  simp [toList, set, FoldableOps.toList]
+  simp [set, canonicalToList]
+  sorry
