@@ -4,7 +4,10 @@ Copyright (c) 2022 James Gallicchio.
 Authors: James Gallicchio
 -/
 
-import Mathlib
+import Mathlib.Data.Nat.Basic
+import Mathlib.Init.Data.Int.Basic
+import Mathlib.Init.Data.Int.Order
+import Mathlib.Data.UInt
 
 namespace Nat
   theorem sub_dist (x y z : Nat) : x - (y + z) = x - y - z := by
