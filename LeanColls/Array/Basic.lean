@@ -213,6 +213,11 @@ theorem size_set (A : Array α n) (i : Fin n) (x : α)
   : Size.size (A.set i x) = Size.size A
   := by simp [Size.size]
 
+@[simp]
+theorem length_toList (A : Array α n)
+  : A.toList.length = n
+  := by simp [toList, Size.size]
+
 private def memRangeToList_to_fin (i : {a // a ∈ Range.toList ⟨n⟩})
   : Fin n := ⟨i.val, by
     cases i; case mk i hi =>
@@ -221,11 +226,19 @@ private def memRangeToList_to_fin (i : {a // a ∈ Range.toList ⟨n⟩})
     simp [Membership.mem] at hi
     exact hi⟩
 
+theorem toList_get (A : Array α n) (i : Fin n)
+  : A.get i = List.get A.toList ⟨i,by simp; exact i.isLt⟩
+  := by
+  simp [toList]
+  rw [IndexedOps.get_toList_eq_get]
+  simp [Indexed.nth]
+  rfl
+
 @[simp]
 theorem toList_set (A : Array α n) (i : Fin n) (x : α)
   : (A.set i x).toList =
     List.set A.toList i x
-  := set_option trace.Meta.isDefEq false in by
+  := by
   simp [toList]
   rw [IndexedOps.toList_eq_range_toList_map]
   case hL => simp [Foldable.fold, ←Range.toList_eq_canonicalToList]

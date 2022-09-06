@@ -14,6 +14,10 @@
 
 ## Done
 
+### 6 Sept 2022
+- Further Range rewrite/cleanup
+- More IndexedOps/HashMap sorries closed
+
 ### 14 Aug 2022
 - Implemented HashMaps!! No re-balancing yet, though.
   - Needed more rewriting... hopefully it settles down soon

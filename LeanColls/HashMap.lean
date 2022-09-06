@@ -24,6 +24,16 @@ structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
 namespace HashMap
 variable {κ τ : Type} [Hashable κ] [DecidableEq κ]
 
+def new (cap : Nat) (h_cap : cap > 0 := by decide) : HashMap κ τ :=
+  ⟨cap, h_cap, COWArray.new [] cap, cached' 0 (by
+    clear h_cap
+    simp [View.map, View.view, FoldableOps.sum,
+      FoldableOps.defaultImpl, Foldable.fold, Foldable'.Correct.fold']
+    simp [Size.size, COWArray.new, Indexed.nth, COWArray.get, Array.new, Array.get]
+    induction cap <;> simp
+    rw [Range.foldl'_step]
+    assumption)⟩
+
 @[inline] private
 def calc_idx' (k : κ) (cap : Nat) (h_cap : cap > 0) (h : cap < UInt64.size) : Fin cap :=
   let idx := (hash k) % (UInt64.ofNat cap)
@@ -56,20 +66,54 @@ def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
   | (old, newSlot) =>
   let newSize :=
     match old with | none => m.size + 1 | some _ => m.size
-  ⟨old, m.cap, m.h_cap, m.backing.set idx newSlot, newSize, by
+  ⟨old, m.cap, m.h_cap, m.backing.set idx newSlot, newSize,
+    set_option trace.Meta.isDefEq false in by
     have : newSize = match old, h with | none, h => _ | some _, h => _ := rfl
     rw [this]
     clear this newSize
+    have := AList.length_set' k t (COWArray.get m.backing idx)
+    rw [h] at this
     match old with
     | none =>
-      simp
+      simp at this ⊢
       conv => lhs; rw [View.view_eq_view_canonicalToList]
       conv => rhs; rw [View.view_eq_view_canonicalToList]
       simp
-      sorry
-    | some _ =>
+      simp [List.map_set]
+      rw [List.sum_set]
+      case h_i =>
+        simp [idx.isLt]
       simp
-      sorry
+      rw [this]
+      have := List.get_map_reverse List.length
+        (l := Array.toList m.backing.backing)
+        (n := ⟨calc_idx k m, by simp [idx.isLt]⟩)
+      rw [this]
+      rw [←Nat.sub_add_comm (by apply List.get_le_sum)]
+      conv =>
+        rhs arg 1 arg 2
+        rw [Nat.add_comm]
+      rw [←Nat.add_assoc]
+      simp [COWArray.get, ←Array.toList_get]
+      rw [Nat.add_sub_cancel]
+    | some _ =>
+      simp at this ⊢
+      conv => lhs; rw [View.view_eq_view_canonicalToList]
+      conv => rhs; rw [View.view_eq_view_canonicalToList]
+      simp
+      simp [List.map_set]
+      rw [List.sum_set]
+      case h_i =>
+        simp [idx.isLt]
+      simp
+      rw [this]
+      have := List.get_map_reverse List.length
+        (l := Array.toList m.backing.backing)
+        (n := ⟨calc_idx k m, by simp [idx.isLt]⟩)
+      rw [this]
+      rw [←Nat.sub_add_comm (by apply List.get_le_sum)]
+      simp [COWArray.get, ←Array.toList_get]
+      rw [Nat.add_sub_cancel]
     ⟩
 
 def set (k : κ) (t : τ) (m : HashMap κ τ) : HashMap κ τ :=
