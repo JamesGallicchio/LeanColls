@@ -303,6 +303,11 @@ instance : Iterable Range Nat where
 
 /- ## Lemmas -/
 
+@[simp]
+theorem mem_toList_iff {r : Range} {x}
+  : x ∈ toList r ↔ x < r.n
+  := by rw [toList_eq_canonicalToList, ←memCorrect]; simp [Membership.mem]
+
 theorem size_pos_of_mem {r : Range} {x}
   : x ∈ r → 0 < r.n
   := by
@@ -342,6 +347,102 @@ theorem get_toList {r : Range} {i : Fin r.toList.length}
       apply ih
       simp
       assumption
+
+theorem map_set_toList {r : Range} {f : Nat → τ}
+  : (r.toList.set i j).map f = (r.toList.map f).set i (f j)
+  := by
+  cases r; case mk n =>
+  cases Nat.decLt i n
+  case isFalse h =>
+    rw [List.set_of_ge_length (toList ⟨n⟩) _ _]
+    rw [List.set_of_ge_length (List.map f (toList ⟨n⟩))]
+    simp at h ⊢; exact h
+    simp at h ⊢; exact h
+  case isTrue hi =>
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    simp
+    cases Nat.decLt i (toList ⟨n⟩).length
+    case isFalse h =>
+      have : i = n :=
+        Nat.le_antisymm
+          (Nat.le_of_succ_le_succ hi)
+          (by simp at h; exact h)
+      cases this
+      rw [List.set_append_right]
+      rw [List.set_append_right]
+      simp [List.set]
+      simp
+      simp
+    case isTrue h =>
+      simp at h
+      rw [List.set_append_left]
+      rw [List.set_append_left]
+      simp
+      apply ih
+      assumption
+      simp; assumption
+      simp; assumption
+
+theorem set_map'_toList {r : Range} {i} {x : τ} {f}
+  : (r.toList.map' f).set i x
+    = r.toList.map' (fun j h' =>
+      if j = i
+      then x
+      else f j h'
+      )
+  := by
+  cases r; case mk n =>
+  cases Nat.decLt i n
+  case isFalse h =>
+    rw [List.set_of_ge_length ((toList ⟨n⟩).map' f)]
+    next =>
+      congr
+      funext j hj
+      simp at hj
+      simp [Nat.ne_of_lt (Nat.lt_of_lt_of_le hj (Nat.le_of_not_lt h))]
+    simp at h ⊢; exact h
+  case isTrue hi =>
+  simp [List.map']
+  suffices ∀ f, List.set (List.map f _) _ _
+    = List.map (fun ⟨j,h⟩ => if j = i then x else f ⟨j,h⟩) (List.subtypeByMem (toList ⟨n⟩))
+    from this _
+  intro f
+  induction n with
+  | zero =>
+    simp
+  | succ n ih =>
+    rw [List.subtypeByMem_rw _ (toList_succ _)]
+    simp [List.subtypeByMem_append]
+    cases Nat.decLt i n
+    case isFalse h =>
+      have : i = n :=
+        Nat.le_antisymm
+          (Nat.le_of_succ_le_succ hi)
+          (by simp at h; exact h)
+      cases this
+      rw [List.set_append_right]
+      next =>
+        simp [List.set]
+        congr
+        funext j'
+        cases j'; case mk j' hj' =>
+        rw [toList_eq_canonicalToList] at hj'
+        rw [←memCorrect] at hj'
+        simp [Membership.mem] at hj'
+        simp [Nat.ne_of_lt hj']
+      simp
+    case isTrue h' =>
+      rw [List.set_append_left]
+      simp [(Nat.ne_of_lt h').symm]
+      rw [ih]
+      simp
+      congr
+      assumption
+      exact fun x h => f ⟨x,by simp; apply Or.inl; simp at h; assumption⟩
+      simp; assumption
+
 
 end Range
 

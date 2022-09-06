@@ -55,7 +55,7 @@ instance [Indexed C τ] : Foldable'.Correct C τ inferInstance where
         (fun i h => Indexed.nth c ⟨i,h⟩)
       simp [Membership.mem] at this ⊢
       simp [this, Foldable.fold]
-      rw [List.map'_rw _ _ _ (Range.toList_eq_canonicalToList ⟨Size.size c⟩).symm]
+      rw [List.map'_rw _ (Range.toList_eq_canonicalToList ⟨Size.size c⟩).symm]
       rw [List.map']
       apply (List.mem_of_map_iff _ _ _).mpr
       simp
@@ -232,8 +232,7 @@ theorem length_toList_eq_size {C τ : Type} [Indexed C τ] (c : C)
   simp [FoldableOps.toList, FoldableOps.defaultImpl, Foldable.fold]
   rw [Foldable'.canonicalToList_fold'_eq_map']
   simp [Foldable.fold]
-  rw [List.map'_rw _ _ _ (Range.toList_eq_canonicalToList _).symm]
-  rw [List.map']
+  rw [←Range.toList_eq_canonicalToList]
   simp
 
 theorem get_toList_eq_get [Indexed C τ] (c : C) (i : Nat) (h : i < _)

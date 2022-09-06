@@ -1,3 +1,9 @@
+/-
+Copyright (c) 2022 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.AuxLemmas
 
 namespace List
@@ -77,6 +83,11 @@ theorem foldr'_eq_subtypeByMem_foldr (l : List τ)
 def map' (L : List τ) (f : (x : τ) → x ∈ L → τ') :=
   L.subtypeByMem.map (fun ⟨x,h⟩ => f x h)
 
+@[simp]
+theorem length_map' (L : List τ) (f : (x : τ) → x ∈ L → τ')
+  : (L.map' f).length = L.length
+  := by simp [map']
+
 theorem map_of_subtypeByMem_eq_map' (L : List τ) (f : {x // x ∈ L} → τ')
   : L.subtypeByMem.map f = L.map' (fun x h => f ⟨x,h⟩)
   := by
@@ -102,7 +113,13 @@ theorem foldl'_eq_map' (L : List τ) (f : (x : _) → _ → τ')
   rw [map']
   rw [List.foldl_eq_map]
 
-def map'_rw (L : List τ) (f : (x : τ) → x ∈ L → τ') (L' : List τ) (h : L = L')
+def subtypeByMem_rw {L : List τ} (L') (h : L = L')
+  : L.subtypeByMem = L'.subtypeByMem.map (fun ⟨x,h'⟩ => ⟨x,h.symm.subst h'⟩)
+  := by
+  cases h
+  conv => lhs rw [←map_id (subtypeByMem L)]  
+
+def map'_rw {L : List τ} {f : (x : τ) → x ∈ L → τ'} (L' : List τ) (h : L = L')
   : L.map' f = L'.map' (fun x h' => f x (h.symm.subst h'))
   := by
   cases h

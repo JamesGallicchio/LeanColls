@@ -319,7 +319,73 @@ namespace List
       have h_j := Nat.lt_of_succ_lt_succ h_j
       have := ih i ⟨j,h_j⟩ h
       exact this
-    
+  
+  theorem set_of_ge_length (L : List α) (i x) (h : ¬i < L.length)
+    : L.set i x = L
+    := by
+    induction L generalizing i
+    simp
+    case cons hd tl ih =>
+    cases i
+    simp at h
+    simp at h
+    simp
+    apply ih
+    apply Nat.not_lt_of_le
+    apply Nat.le_of_succ_le_succ h
+  
+  theorem set_append_left (L1 L2 : List α) (i x) (h : i < L1.length)
+    : (L1 ++ L2).set i x = L1.set i x ++ L2
+    := by
+    induction L1 generalizing i with
+    | nil => simp at h; contradiction
+    | cons hd tl ih =>
+    match i with
+    | 0 =>
+      simp at h
+      simp [set]
+    | i+1 =>
+      simp at h
+      simp [set]
+      apply ih
+      apply Nat.le_of_succ_le_succ h
+
+  theorem set_append_right (L1 L2 : List α) (i x) (h : L1.length ≤ i)
+    : (L1 ++ L2).set i x = L1 ++ L2.set (i - L1.length) x
+    := by
+    induction L1 generalizing i with
+    | nil => simp [set]
+    | cons hd tl ih =>
+    match i with
+    | 0 =>
+      simp at h
+    | i+1 =>
+      simp at h
+      simp [set]
+      rw [Nat.succ_sub_succ]
+      apply ih
+      apply Nat.le_of_succ_le_succ h
+  
+  theorem map_set {L : List τ} {i x} {f : τ → τ'}
+    : (L.set i x).map f = (L.map f).set i (f x)
+    := by
+    induction L generalizing i with
+    | nil => simp
+    | cons y ys ih =>
+      cases i
+      simp [set]
+      simp [ih]
+  
+  theorem set_map {L : List τ} (x') (h : x = f x')
+    : (L.map f).set i x = (L.set i x').map f
+    := by
+    induction L generalizing i with
+    | nil => simp
+    | cons y ys ih =>
+      cases i
+      simp [set]; assumption
+      simp [set, ih]
+
   def subtypeByMem (L : List α) : List {a // a ∈ L} :=
     let rec aux (rest : List α) (h : ∀ a, a ∈ rest → a ∈ L)
       : List {a // a ∈ L} :=

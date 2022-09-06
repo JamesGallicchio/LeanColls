@@ -69,12 +69,10 @@ def allInit (A : Array (Uninit α) n)
 axiom size_lt_usize {α n} : Array α n → n < USize.size
 
 -- Preliminary theorems
-@[simp]
 theorem get_of_set_eq (f : Array α n) (i : Fin n) (x : α) {i' : Fin n} (h_i : i = i')
   : (f.set i x).get i' = x
   := by unfold get; unfold set; simp [h_i, Function.update, cast]
 
-@[simp]
 theorem get_of_set_ne (f : Array α n) (i : Fin n) (x : α) (j : Fin n) (h : i ≠ j)
   : (f.set i x).get j = f.get j
   := by
@@ -83,6 +81,14 @@ theorem get_of_set_ne (f : Array α n) (i : Fin n) (x : α) (j : Fin n) (h : i �
     split
     exact False.elim $ h (by apply Eq.symm; assumption)
     rfl
+
+@[simp]
+theorem get_of_set (f : Array α n) (i : Fin n) (x : α) {i' : Fin n}
+  : (f.set i x).get i' = if i = i' then x else f.get i'
+  := by
+  split
+  apply get_of_set_eq; assumption
+  apply get_of_set_ne; assumption
 
 /-!
 ### Array.init
@@ -120,11 +126,9 @@ def init {α : Type u} {n : Nat} (f : Fin n → α) : Array α n
         simp
       | .inr h =>
         have : i < n' := Nat.le_of_succ_le_succ h
-        rw [get_of_set_ne]
+        simp [(Nat.ne_of_lt this).symm]
         apply ih
         exact this
-        simp
-        apply (Nat.ne_of_lt this).symm
     )
 
 /-!
@@ -171,10 +175,9 @@ theorem init_eq_mk {f : Fin n → α}
         cases hi'
         simp [Uninit.getValue?_init]
       | .inr hi' =>
-        rw [get_of_set_ne]
+        simp [(Nat.ne_of_lt hi').symm]
         apply ih
         assumption
-        simp [(Nat.ne_of_lt hi').symm]
 
 def empty : Array α 0 := init (Fin.elim0)
 
@@ -206,10 +209,46 @@ theorem canonicalToList_eq_toList (A : Array α n)
     FoldableOps.default_toList_eq_canonicalToList]
 
 @[simp]
+theorem size_set (A : Array α n) (i : Fin n) (x : α)
+  : Size.size (A.set i x) = Size.size A
+  := by simp [Size.size]
+
+private def memRangeToList_to_fin (i : {a // a ∈ Range.toList ⟨n⟩})
+  : Fin n := ⟨i.val, by
+    cases i; case mk i hi =>
+    rw [Range.toList_eq_canonicalToList] at hi
+    rw [←Range.memCorrect] at hi
+    simp [Membership.mem] at hi
+    exact hi⟩
+
+@[simp]
 theorem toList_set (A : Array α n) (i : Fin n) (x : α)
   : (A.set i x).toList =
     List.set A.toList i x
-  := by
-  simp [toList, set, FoldableOps.toList]
-  simp [set, canonicalToList]
-  sorry
+  := set_option trace.Meta.isDefEq false in by
+  simp [toList]
+  rw [IndexedOps.toList_eq_range_toList_map]
+  case hL => simp [Foldable.fold, ←Range.toList_eq_canonicalToList]
+  rw [IndexedOps.toList_eq_range_toList_map]
+  case hL => simp [Foldable.fold, ←Range.toList_eq_canonicalToList]
+  have :
+    canonicalToList (Range.mk (Size.size (A.set i x))).foldl
+    = Range.toList ⟨n⟩ := by
+    simp [Size.size, Range.toList_eq_canonicalToList]
+  rw [List.map'_rw _ this]
+  have :
+    canonicalToList (Range.mk (Size.size A)).foldl
+    = Range.toList ⟨n⟩ := by
+    simp [Size.size, Range.toList_eq_canonicalToList]
+  rw [List.map'_rw _ this]
+  simp [Indexed.nth]
+  rw [Range.set_map'_toList]
+  congr
+  funext j hj
+  simp at hj
+  cases i; case mk i hi =>
+  split
+  case inl h =>
+    simp at h; simp [h]
+  case inr h =>
+    simp at h; simp [Ne.symm h]
