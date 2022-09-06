@@ -506,6 +506,10 @@ namespace List
         simp [length] at h
         exact Nat.le_of_succ_le_succ h
 
+  theorem get_map_reverse (f : α → β) {l n}
+    : f (get l n) = get (map f l) ⟨n, by simp [n.isLt]⟩
+    := by simp
+
   @[simp]
   theorem length_rangeAux : (rangeAux n L).length = L.length + n := by
     induction n generalizing L <;> simp [length, rangeAux, *]
