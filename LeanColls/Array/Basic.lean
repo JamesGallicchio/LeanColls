@@ -22,7 +22,14 @@ structure Array (α : Type u) (n : Nat) : Type u where
 
 namespace Array
 
+instance [Inhabited α] : Inhabited (Array α n) where
+  default := ⟨fun _ => default⟩
+
 -- External functions
+
+@[extern "leancolls_array_new_uninit"]
+def newUninit (n : Nat) : Array (Uninit α) n
+  := ⟨λ _ => Uninit.uninit⟩
 
 @[extern "leancolls_array_new"]
 def new (x : @&α) (n : @& Nat) : Array α n
@@ -86,26 +93,38 @@ for `Array.mk`.
 @[inline]
 def init {α : Type u} {n : Nat} (f : Fin n → α) : Array α n
   :=
-  Range.fold' ⟨n⟩ (λ A' i h => A'.set ⟨i,h⟩ (.init $ f ⟨i,h⟩)) (new Uninit.uninit n)
+  Range.foldl' ⟨n⟩ (λ A' i h => A'.set ⟨i,h⟩ (.init $ f ⟨i,h⟩)) (newUninit n)
   |>.allInit (by
     intro i
-    simp [forIn, Foldable.fold, Id.run]
-    refine Range.fold'_ind (motive := λ i _ A' =>
-      ∀ j : Fin n, j < i → Uninit.isInit (get A' j))
-      ?init ?step i i.isLt
-    case init =>
-      intro j h; contradiction
-    case step =>
-      intro i A' h_i ih j h_j
-      match Nat.eq_or_lt_of_le h_j with
+    cases i; case mk i hi =>
+    simp [newUninit]
+    suffices ∀ n' (hn : ∀ {i}, i < n' → i < n) (_ : i < n'),
+      Uninit.isInit (
+        get
+          (Range.foldl'
+            ⟨n'⟩
+            (fun A i h => A.set ⟨i, hn h⟩ (.init $ f ⟨i, hn h⟩))
+            (⟨λ _ => Uninit.uninit⟩ : Array (Uninit α) n))
+          ⟨i, hi⟩)
+      from this n (by simp) hi
+    intro n' hn hi'
+    induction n' with
+    | zero =>
+      contradiction
+    | succ n' ih =>
+      simp at hi
+      simp [Range.foldl']
+      match Nat.eq_or_lt_of_le hi' with
       | .inl h =>
         cases h
         simp
       | .inr h =>
-        have h := Nat.lt_of_succ_lt_succ h
+        have : i < n' := Nat.le_of_succ_le_succ h
         rw [get_of_set_ne]
-        exact ih j h
-        exact (Nat.ne_of_lt h).symm ∘ Fin.val_eq_of_eq
+        apply ih
+        exact this
+        simp
+        apply (Nat.ne_of_lt this).symm
     )
 
 /-!
@@ -130,33 +149,32 @@ theorem init_eq_mk {f : Fin n → α}
   := by
     simp [init, forIn, Foldable.fold, Id.run, allInit]
     apply funext; intro i
-    suffices Uninit.getValue?
-      (get (Range.fold' ⟨n⟩ (fun A' i h =>
-              set A' ⟨i,h⟩ (Uninit.init (f ⟨i,h⟩))
-            ) (new Uninit.uninit n)
-        ) i)
-      = some (f i) by
+    cases i; case mk i hi =>
+    suffices ∀ n' (hn : ∀ {i}, i < n' → i < n) (hi' : i < n'),
+      Uninit.getValue?
+        (get (Range.foldl' ⟨n'⟩ (fun A' i h =>
+                set A' ⟨i,hn h⟩ (Uninit.init (f ⟨i,hn h⟩))
+              ) (newUninit n)
+          ) ⟨i, hn hi'⟩)
+        = some (f ⟨i, hi⟩)
+      by
       apply Uninit.getValue_of_getValue?_some
-      exact this
-    refine Range.fold'_ind (motive := λ i _ A =>
-      ∀ j : Fin n, j < i → Uninit.getValue? (get A j) = some (f j))
-      ?init ?step i i.isLt
-    case init =>
-      intro j h; contradiction
-    case step =>
-      intro i A h_i ih j h_j
-      cases j; case mk j _ =>
-      match Nat.eq_or_lt_of_le h_j with
-      | .inl h_j =>
-        simp at h_j
-        cases h_j
-        simp [get_of_set_eq, Uninit.getValue?_init]
-      | .inr h_j =>
-        simp at h_j; have h_j := Nat.lt_of_succ_lt_succ h_j
+      exact this n (by simp) hi
+    intro n' hn hi'
+    induction n' with
+    | zero =>
+      contradiction
+    | succ n' ih =>
+      simp [Range.foldl']
+      match Nat.eq_or_lt_of_le (Nat.le_of_succ_le_succ hi') with
+      | .inl hi' =>
+        cases hi'
+        simp [Uninit.getValue?_init]
+      | .inr hi' =>
         rw [get_of_set_ne]
         apply ih
-        simp [h_j]
-        simp [Fin.val_eq_of_eq, (Nat.ne_of_lt h_j).symm]
+        assumption
+        simp [(Nat.ne_of_lt hi').symm]
 
 def empty : Array α 0 := init (Fin.elim0)
 

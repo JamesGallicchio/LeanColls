@@ -18,7 +18,7 @@ def get? (k : κ) : AList κ τ → Option τ
   else get? k as
 
 instance : LeanColls.MapLike (AList κ τ) κ τ where
-  fold := List.fold
+  fold l := l.foldl
   get? := get?
 
 def set' (k : κ) (t : τ) : AList κ τ → Option τ × AList κ τ

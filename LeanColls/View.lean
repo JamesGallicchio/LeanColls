@@ -56,14 +56,15 @@ def filterMap (f : τ → Option τ') (v : View τ) : View τ' where
 structure WithMem (τ) (c : C) (M : outParam (Membership τ C)) where
   fold' : {β : Type w} → (β → (x : τ) → x ∈ c → β) → β → β
 
-@[inline,reducible]
+@[inline]
 def view' [Foldable' C τ M] (c : C) : WithMem τ c M where
   fold' := Foldable'.fold' c
 
 namespace WithMem
 
-@[inline,reducible]
-def map' {τ : Type u} {c : C} {M} (v : View.WithMem τ c M) {τ' : Type v} (f : (x : τ) → M.mem x c → τ') : View τ' where
+@[inline]
+def map' {τ : Type u} {c : C} {M} (v : View.WithMem τ c M) {τ' : Type v}
+  (f : (x : τ) → M.mem x c → τ') : View τ' where
   fold foldF foldAcc :=
     v.fold' (λ acc t h => foldF acc (f t h)) foldAcc
 
@@ -82,14 +83,14 @@ theorem map_eq_list_map (L : List τ) (f : τ → τ')
   : ((View.view L).map f)
     = View.view (List.map f L)
   := by
-  simp [map, view, Foldable.fold, List.fold]
+  simp [map, view, Foldable.fold, List.foldl_map]
 
 @[simp]
 theorem filter_eq_list_filter (L : List τ) (f : τ → Bool)
   : (View.view L).filter f
     = View.view (List.filter f L)
   := by
-  simp [filter, view, Foldable.fold, List.fold]
+  simp [filter, view, Foldable.fold, List.foldl_filter]
 
 @[simp]
 theorem sum_eq_list_sum [AddMonoid τ] (L : List τ)

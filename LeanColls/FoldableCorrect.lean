@@ -18,55 +18,11 @@ def canonicalToList (fold : {β : Type w} → (β → τ → β) → β → β) 
 
 namespace Foldable
 
-class Correct (C τ) extends Foldable C τ where
-  foldCorrect : ∀ {β} (f : β → τ → β) acc (c : C),
+class Correct (C) (τ : outParam _) extends Foldable C τ where
+  foldCorrect : ∀ {β} (c : C) (f : β → τ → β) acc,
     fold c f acc = (
       canonicalToList (fold c)
-      |>.fold f acc)
-
-end Foldable
-
-namespace Foldable'
-
-class Correct (C τ) (M : outParam (Membership τ C))
-  extends Foldable.Correct C τ, Foldable' C τ M where
-  memCorrect : ∀ x (c : C), x ∈ c ↔ x ∈ canonicalToList (fold c)
-  fold'Correct : ∀ {β} (c : C) (f : β → (x : τ) → x ∈ c → β) acc,
-    fold' c f acc = (
-      canonicalToList (fold c)
-      |>.fold' (λ acc x h => f acc x ((memCorrect x c).mpr h)) acc)
-
-theorem fold_eq_fold' [M : Membership τ C] [F : Foldable'.Correct C τ M]
-  (c : C) (f : β → τ → β) (acc : β)
-  : F.fold c f acc = F.fold' c (λ acc x _ => f acc x) acc
-  := by
-  rw [F.foldCorrect]
-  rw [F.fold'Correct]
-  simp [canonicalToList, List.fold_eq_fold']
-
-theorem fold'_append_singleton_eq_map [M : Membership τ C] [F : Foldable'.Correct C τ M]
-  (c : C) (f : (x : τ) → x ∈ c → τ')
-  : F.fold' c (λ acc x h => acc ++ [f x h]) []
-    = (canonicalToList (Foldable.fold c)
-      |>.map' (fun x h => f x ((Foldable'.Correct.memCorrect _ _).mpr h)))
-  := by
-  rw [Correct.fold'Correct]
-  rw [List.fold'_append_singleton_eq_map']
-
-theorem fold'_cons_eq_map_reverse [M : Membership τ C] [F : Foldable'.Correct C τ M]
-  (c : C) (f : (x : τ) → x ∈ c → τ')
-  : F.fold' c (λ acc x h => (f x h) :: acc) []
-    = (canonicalToList (Foldable.fold c)
-      |>.map'
-        (fun x h => f x ((Foldable'.Correct.memCorrect _ _).mpr h))
-      |>.reverse)
-  := by
-  rw [Correct.fold'Correct]
-  rw [List.fold'_cons_eq_map'_reverse]
-
-end Foldable'
-
-namespace Foldable
+      |>.foldl f acc)
 
 theorem fold_pair [F : Foldable.Correct C τ]
   (f₁ : β₁ → τ → β₁) (acc₁ : β₁) (f₂ : β₂ → τ → β₂) (acc₂ : β₂) (c : C)
@@ -76,16 +32,73 @@ theorem fold_pair [F : Foldable.Correct C τ]
   := by
   let list := canonicalToList (F.fold c)
   suffices
-    List.fold list (λ (acc₁,acc₂) x => (f₁ acc₁ x, f₂ acc₂ x)) (acc₁, acc₂)
-      = (List.fold list (λ acc₁ x => f₁ acc₁ x) acc₁,
-         List.fold list (λ acc₂ x => f₂ acc₂ x) acc₂)
+    List.foldl (λ (acc₁,acc₂) x => (f₁ acc₁ x, f₂ acc₂ x)) (acc₁, acc₂) list
+      = (List.foldl (λ acc₁ x => f₁ acc₁ x) acc₁ list,
+         List.foldl (λ acc₂ x => f₂ acc₂ x) acc₂ list)
          by
     simp at this
     simp [←F.foldCorrect] at this
     exact this
   induction list generalizing acc₁ acc₂ with
   | nil =>
-    simp [List.fold, List.foldl]
+    simp [List.foldl]
   | cons x xs ih =>
     simp
     apply ih
+
+end Foldable
+
+namespace Foldable'
+
+class Correct (C) (τ : outParam _) (M : outParam (Membership τ C))
+  extends Foldable.Correct C τ, Foldable' C τ M where
+  memCorrect : ∀ x (c : C), x ∈ c ↔ x ∈ canonicalToList (fold c)
+  fold'Correct : ∀ {β} (c : C) (f : β → (x : τ) → x ∈ c → β) acc,
+    fold' c f acc = (
+      canonicalToList (fold c)
+      |>.foldl' (λ acc x h => f acc x ((memCorrect x c).mpr h)) acc)
+
+theorem fold_eq_fold' [M : Membership τ C] [F : Foldable'.Correct C τ M]
+  (c : C) (f : β → τ → β) (acc : β)
+  : F.fold c f acc = F.fold' c (λ acc x _ => f acc x) acc
+  := by
+  rw [F.foldCorrect]
+  rw [F.fold'Correct]
+  simp [canonicalToList, List.foldl_eq_foldl']
+
+theorem fold'_append_singleton_eq_map [M : Membership τ C] [Foldable'.Correct C τ M]
+  (c : C) (f : (x : τ) → x ∈ c → τ')
+  : Foldable'.Correct.fold' c (λ acc x h => acc ++ [f x h]) []
+    = (canonicalToList (Foldable.fold c)
+      |>.map' (fun x h => f x ((Foldable'.Correct.memCorrect _ _).mpr h)))
+  := by
+  rw [Correct.fold'Correct]
+  rw [List.foldl'_eq_subtypeByMem_foldl]
+  rw [List.map', List.foldl_eq_map]
+
+theorem fold_canonicalToList_fold'_eq_fold' [Foldable'.Correct C τ M]
+  (c : C) (f' : (x : τ) → M.mem x c → τ') (f : β → τ' → β) (acc)
+  : List.foldl f acc
+    (canonicalToList (fun f init =>
+      Foldable'.Correct.fold' c (fun acc x h => f acc (f' x h)) init
+      )) = Foldable'.Correct.fold' c (fun acc x h => f acc (f' x h)) acc
+  := by
+  simp [canonicalToList]
+  rw [fold'_append_singleton_eq_map]
+  rw [List.map', List.foldl_map,
+      Foldable'.Correct.fold'Correct,
+      List.foldl'_eq_subtypeByMem_foldl]
+
+theorem canonicalToList_fold'_eq_map' [Foldable'.Correct C τ M]
+  (c : C) (f' : (x : τ) → M.mem x c → τ')
+  : canonicalToList (fun f init =>
+      Foldable'.Correct.fold' c (fun acc x h => f acc (f' x h)) init
+      ) =
+    (canonicalToList (Foldable.fold c)).map' (fun x h =>
+      f' x ((Foldable'.Correct.memCorrect _ _).mpr h))
+  := by
+  conv =>
+    lhs simp [canonicalToList]
+    rw [Correct.fold'Correct]
+    rw [List.foldl'_eq_subtypeByMem_foldl]
+    rw [List.foldl_eq_map]

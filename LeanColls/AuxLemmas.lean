@@ -344,6 +344,59 @@ namespace List
     : L.subtypeByMem.length = L.length
     := by apply length_subtypeByMemAux
 
+  @[simp]
+  theorem get_subtypeByMem (L : List α) (i : Fin L.subtypeByMem.length)
+    : L.subtypeByMem.get i = L.get ⟨i, by cases i; case mk _ h => simp at h; assumption⟩
+    := by
+    simp [subtypeByMem]
+    suffices ∀ L' hL' i (hi : i < length L'),
+      (get (subtypeByMem.aux L L' hL') ⟨i, by
+        simp [length_subtypeByMemAux] at hi ⊢
+        exact hi⟩).val =
+      get L' ⟨i, hi⟩
+      from this L (by simp) i (by cases i; case mk _ h => simp at h; assumption)
+    intro L' hL' i hi
+    induction L' generalizing i with
+    | nil =>
+      simp [subtypeByMem.aux]
+      unfold get
+      split <;> split <;> contradiction
+    | cons x xs ih =>
+      simp [subtypeByMem.aux]
+      unfold get
+      split
+      case h_1 a b c d e f g =>
+        simp at f
+        cases f; case intro f1 f2 =>
+        cases f1
+        cases f2
+        simp at g
+        split
+        case h_1 h i j k l m n o =>
+          cases n
+          rfl
+        case h_2 h i j k l m n o =>
+          cases n
+          cases o
+          contradiction
+      case h_2 a b c d e f g =>
+        simp at f
+        cases f; case intro f1 f2 =>
+        cases f1
+        cases f2
+        simp at g
+        split
+        case h_1 h i j k l m n o =>
+          cases n
+          cases o
+          contradiction
+        case h_2 h i j k l m n o =>
+          cases n
+          cases o
+          cases g
+          simp at e
+          apply ih
+
   def index_of_mem (L : List α) (x) (h : x ∈ L) : ∃ i, L.get i = x := by
     induction L
     cases h <;> contradiction
@@ -448,15 +501,49 @@ namespace List
     rw [this]; apply get_range'; simp; simp [i.2]
 
 
-  @[simp]
-  theorem foldl_cons (L : List τ) (acc)
+  theorem foldl_acc_cons (L : List τ) (f : _ → _) (x') (acc : List τ')
+    : L.foldl (fun acc x => acc ++ f x) (x' :: acc)
+      = x' :: L.foldl (fun acc x => acc ++ f x) acc
+    := by
+    induction L generalizing acc with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+      unfold foldl
+      rw [List.cons_append, ih]
+
+  theorem foldl_eq_reverseAux (L : List τ) (acc)
     : L.foldl (fun acc x => x :: acc) acc = L.reverseAux acc
     := by
     induction L generalizing acc with
     | nil => simp [foldl]
     | cons x xs ih =>
-    unfold foldl
-    apply ih
+      unfold foldl
+      apply ih
+
+  theorem foldl_eq_map (L : List τ) (f : τ → τ')
+    : L.foldl (fun acc x => acc ++ [f x]) [] = L.map f
+    := by
+    induction L with
+    | nil => simp [foldl]
+    | cons x xs ih =>
+      unfold foldl
+      simp [foldl_acc_cons]
+      apply ih
+
+  theorem foldl_eq_filter (L : List τ) (f : τ → Bool)
+    : L.foldl (fun acc x => acc ++ if f x then [x] else []) [] = L.filter f
+    := by
+    induction L with
+    | nil => simp [filter, foldl]
+    | cons x xs ih =>
+      unfold foldl
+      apply Eq.symm
+      simp [filter]
+      split <;> (
+        simp [(by assumption : f x = _)]
+        simp [foldl_acc_cons]
+        apply ih.symm
+      )
 
   @[simp]
   theorem foldl_append (L₁ L₂ : List τ) (f) (acc : β)
@@ -467,7 +554,6 @@ namespace List
     | cons x xs ih =>
       simp [foldl, ih]
 
-  @[simp]
   theorem foldl_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
     : (L.map f).foldl foldF foldAcc =
       L.foldl (fun acc x => foldF acc (f x)) foldAcc
@@ -477,7 +563,6 @@ namespace List
     | cons x xs ih =>
       simp [foldl, ih]
 
-  @[simp]
   theorem foldl_filter (L : List τ) (f : τ → Bool) (foldF) (foldAcc : β)
     : (L.filter f).foldl foldF foldAcc =
       L.foldl (fun acc x => if f x then foldF acc x else acc) foldAcc
@@ -491,6 +576,76 @@ namespace List
         simp [h, foldl, ih]
       case cons.h_2 h =>
         simp [h, foldl, ih]
+
+  @[simp]
+  theorem foldr_append (L₁ L₂ : List τ) (f) (acc : β)
+    : (L₁ ++ L₂).foldr f acc = L₁.foldr f (L₂.foldr f acc)
+    := by
+    induction L₁ with
+    | nil         => simp
+    | cons _ _ ih => simp [ih]
+
+  theorem foldl_eq_foldr_reverse (L : List τ) (f) (acc : β)
+    : L.foldl f acc = L.reverse.foldr (fun x acc => f acc x) acc
+    := by
+    induction L generalizing acc with
+    | nil         => simp [foldl]
+    | cons _ _ ih => simp [foldl, ih]
+  
+  theorem foldr_eq_map (L : List τ) (f : τ → τ')
+    : L.foldr (f · :: ·) [] = L.map f
+    := by induction L <;> simp; assumption
+  
+  theorem foldr_eq_filter (L : List τ) (f : τ → Bool)
+    : L.foldr (fun x acc => if f x then x :: acc else acc) [] = L.filter f
+    := by
+      induction L <;> simp [filter]
+      split <;> split
+      case h_1 =>
+        simp; assumption
+      case h_2 h _ h' =>
+        rw [h] at h'; contradiction
+      case h_1 =>
+        contradiction
+      case h_2 =>
+        simp; assumption
+
+  theorem foldr_cons_eq_foldl_append (L : List τ) (f : _ → β)
+    : L.foldr (f · :: ·) [] = L.foldl (· ++ [f ·]) []
+    := by rw [foldr_eq_map, foldl_eq_map]
+
+  theorem foldr_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
+    : (L.map f).foldr foldF foldAcc =
+      L.foldr (fun x acc => foldF (f x) acc) foldAcc
+    := by
+    induction L generalizing foldAcc with
+    | nil => simp
+    | cons x xs ih => simp [ih]
+
+  theorem mem_of_map_iff (L : List τ) (f : τ → τ')
+    : ∀ y, y ∈ L.map f ↔ ∃ x, x ∈ L ∧ f x = y
+    := by
+    intro y
+    induction L with
+    | nil => simp
+    | cons x xs ih =>
+      simp
+      constructor
+      case mp =>
+        intro h; cases h
+        case inl h =>
+          exact ⟨x, .inl rfl, h.symm⟩
+        case inr h =>
+          cases ih.mp h; case intro x' h =>
+          exact ⟨x', .inr h.1, h.2⟩
+      case mpr =>
+        intro h; cases h; case intro x' h =>
+        cases h.1
+        case inl h' =>
+          cases h'
+          exact .inl h.2.symm
+        case inr h' =>
+          exact Or.inr (ih.mpr ⟨x',h',h.2⟩)
 
 end List
 

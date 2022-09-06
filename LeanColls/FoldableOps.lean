@@ -39,7 +39,9 @@ instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
 theorem default_toList_list (L : List τ)
   : (defaultImpl (List τ) τ).toList L = L
   := by
-  simp [toList, defaultImpl, Foldable.fold, List.fold, List.reverse]
+  simp [toList, defaultImpl]
+  rw [Foldable.Correct.foldCorrect, List.foldl_eq_reverseAux]
+  simp [List.reverse]
   apply List.reverseAux_reverseAux_nil
 
 theorem default_toList_pred_fold (c : C) (c' : C')
@@ -64,7 +66,7 @@ theorem default_sum_list_eq_list_sum [AddMonoid τ] (L : List τ)
   : (defaultImpl (List τ) τ).sum L = L.sum
   := by
   simp [defaultImpl, sum]
-  simp [Foldable.fold, List.fold]
+  simp [Foldable.fold, List.foldl]
   suffices ∀ (acc : τ), List.foldl (fun acc x => acc + x) acc L = acc + List.sum L by
     have := this 0
     simp at this

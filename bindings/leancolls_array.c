@@ -66,6 +66,22 @@ static inline size_t leancolls_unbox_array_size(b_lean_obj_arg n) {
 
 // Implement basic external functions
 
+lean_obj_res leancolls_array_new_uninit(b_lean_obj_arg n) {
+
+    size_t len = leancolls_unbox_array_size(n);
+
+    lean_object** backing = malloc(sizeof(lean_object*) * len);
+    // Check if malloc failed
+    if (backing == NULL) {
+        lean_panic_fn(NULL, lean_mk_string(
+            "LeanColls.Array: New allocation failed! (Out of memory?)"
+        ));
+    }
+
+    return leancolls_array_box(backing);
+}
+
+
 lean_obj_res leancolls_array_new(b_lean_obj_arg x, b_lean_obj_arg n) {
 
     size_t len = leancolls_unbox_array_size(n);
