@@ -64,7 +64,8 @@ instance [Indexed C τ] : Foldable'.Correct C τ inferInstance where
           rw [Range.toList_eq_canonicalToList]
           apply (Range.memCorrect _ _).mp
           assumption
-      apply Exists.intro ⟨i, this⟩
+      apply Exists.intro i
+      apply Exists.intro this
       simp
       constructor
       case left =>

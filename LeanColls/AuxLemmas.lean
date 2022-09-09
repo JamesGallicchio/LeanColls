@@ -6,7 +6,7 @@ Authors: James Gallicchio
 
 import Mathlib.Data.Nat.Basic
 import Mathlib.Init.Data.Int.Basic
-import Mathlib.Init.Data.Int.Order
+import Mathlib.Order.Basic
 import Mathlib.Data.UInt
 
 namespace Nat
