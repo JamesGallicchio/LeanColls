@@ -4,13 +4,6 @@ Copyright (c) 2022 James Gallicchio.
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes
-import LeanColls.Range
-import LeanColls.IndexedOps
-import LeanColls.Uninit
-import LeanColls.AuxLemmas
-import LeanColls.View
-
 namespace LeanColls
 
 @[extern "leancolls_array_initialize"] private opaque arrayInit : IO Unit
