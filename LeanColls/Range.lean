@@ -28,6 +28,7 @@ We define folds over ranges in both directions. Noting that
 `List.foldl` and `List.foldr`.
 -/
 
+@[inline]
 def foldr (f : Nat → β → β) (acc : β) : Range → β
 | ⟨0⟩ => acc
 | ⟨n+1⟩ => foldr f (f n acc) ⟨n⟩
@@ -36,6 +37,7 @@ def foldl (f : β → Nat → β) (acc : β) : Range → β
 | ⟨0⟩ => acc
 | ⟨n+1⟩ => f (foldl f acc ⟨n⟩) n
 
+@[inline]
 def foldr' (r : Range) (f : (i : Nat) → i ∈ r → β → β) (acc : β) : β :=
   match r with
   | ⟨0⟩ => acc
@@ -51,6 +53,27 @@ def foldl' (r : Range) (f : β → (i : Nat) → i ∈ r → β) (acc : β) : β
     have hn : n < n+1 := Nat.lt_succ_self _
     have hi : ∀ {i}, i < n → i < n+1 := Nat.le_step
     f (foldl' ⟨n⟩ (λ acc i h => f acc i (hi h)) acc) n hn
+
+@[inline]
+def foldl'' (r : Range) (motive : (i : Nat) → Sort u)
+  (f : (i : Nat) → i ∈ r → motive i → motive i.succ)
+  (init : motive 0)
+  : motive r.n
+  :=
+  let rec @[inline] aux (n : Nat) (motive : (i : Nat) → Sort u)
+    (f : (i : Nat) → i ∈ Range.mk n → motive i → motive i.succ)
+    (i : Nat)
+    (h_i : i ≤ n)
+    (acc : motive i)
+    : motive n
+    :=
+    if h : i = n then
+      h ▸ acc
+    else
+      have : i < n := Nat.lt_of_le_of_ne h_i h
+      aux n motive f i.succ this (f i this acc)
+  aux r.n motive f 0 (Nat.zero_le _) init
+  termination_by aux n _ _ i _ _ => n - i
 
 /- ## Simp lemmas -/
 
@@ -279,6 +302,108 @@ theorem foldr'_correct {β : Type u} (r : Range) {f} {acc : β}
     simp [List.foldr']
     rw [ih]
 
+
+/- ## csimp lemmas -/
+
+theorem foldl''.aux_step {n} {f : (_ : _) → _ → _ → _} {i : Nat} (h : i ≤ n) {acc : motive i}
+  : foldl''.aux (n+1) motive f i (Nat.le_step h) acc =
+    f n (Nat.lt_succ_self _) (
+      foldl''.aux (n) motive (fun i h acc => f i (Nat.le_step h) acc) i h acc)
+  := by
+  suffices ∀ j (_ : j ≤ n) i (h_i : i = n - j) acc,
+    foldl''.aux (n+1) motive f i (h_i ▸ Nat.le_step (Nat.sub_le _ _)) acc =
+    f n (Nat.lt_succ_self _) (
+      foldl''.aux (n) motive (fun i h acc => f i (Nat.le_step h) acc) i (h_i ▸ Nat.sub_le _ _) acc)
+    from this (n-i) (Nat.sub_le _ _) i (Nat.sub_sub_self h).symm acc
+  intro j h i h_i acc
+  induction j generalizing i acc with
+  | zero =>
+    simp at h_i
+    cases h_i
+    unfold aux
+    simp
+    split
+    case inl h => cases h
+    unfold aux
+    simp
+  | succ j ih =>
+    conv => lhs unfold aux
+    conv => rhs unfold aux
+    have : i < n := by
+      cases h_i
+      apply Nat.sub_lt_of_pos_le _ _ (Nat.zero_lt_succ _) h
+    have i_nsucc : i ≠ n+1 :=
+      Nat.ne_of_lt (Nat.le_step this)
+    have i_n : i ≠ n :=
+      Nat.ne_of_lt this
+    simp [i_nsucc, i_n]
+    apply ih
+    exact Nat.le_of_lt h
+    cases h_i
+    rw [Nat.sub_succ]
+    rw [Nat.succ_pred]
+    apply Ne.symm; apply Nat.ne_of_lt
+    apply Nat.lt_sub_of_add_lt
+    simp
+    exact h
+
+@[simp]
+theorem foldl''_zero {f : (_ : _) → _ → _ → _}
+  : foldl'' ⟨0⟩ motive f init = init
+  := by
+  unfold foldl''
+  unfold foldl''.aux
+  simp
+
+@[simp]
+theorem foldl''_step {n} {f : (_ : _) → _ → _ → _}
+  : foldl'' ⟨n+1⟩ motive f init =
+    f n (Nat.lt_succ_self _) (
+      foldl'' ⟨n⟩
+        motive
+        (f := fun i h acc => f i (Nat.le_step h) acc)
+        init)
+  := by
+  simp [foldl'']
+  apply foldl''.aux_step
+
+def foldlImpl (f : β → Nat → β) (acc : β) (r : Range) : β :=
+  foldl'' r (motive := λ _ => β) (fun i _ acc => f acc i) acc
+
+@[csimp]
+theorem foldl_eq_foldlImpl
+  : @foldl = @foldlImpl
+  := by
+  funext β f acc r
+  cases r; case mk n =>
+  simp [foldlImpl]
+  induction n with
+  | zero =>
+    simp [foldl, foldl'']
+    unfold foldl''.aux
+    simp
+  | succ n ih =>
+    simp [foldl]
+    rw [ih]
+
+def foldl'Impl (r : Range) (f : β → (i : Nat) → i ∈ r → β) (init : β) : β :=
+  foldl'' r (fun _ => β) (fun i h acc => f acc i h) init
+
+@[csimp]
+theorem foldl'_eq_foldl'Impl
+  : @foldl' = @foldl'Impl
+  := by
+  funext β r f acc
+  cases r; case mk n =>
+  simp [foldl'Impl]
+  induction n with
+  | zero =>
+    simp [foldl'']
+    unfold foldl''.aux
+    simp
+  | succ n ih =>
+    simp [foldl']
+    rw [ih]
 
 /- ## Class instances -/
 

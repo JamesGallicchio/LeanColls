@@ -15,7 +15,7 @@ class FoldableOps.{uC,uT} (C : Type uC) (τ : outParam (Type uT)) where
   toList : C → List τ
   all : C → (τ → Bool) → Bool
   contains : C → [BEq τ] → τ → Bool
-  sum : C → [AddMonoid τ] → τ
+  sum : C → [Add τ] → [Zero τ] → τ
 
 namespace FoldableOps
 

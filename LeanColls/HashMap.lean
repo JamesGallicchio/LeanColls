@@ -14,7 +14,7 @@ namespace LeanColls
 
 structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
   cap : Nat
-  h_cap : cap > 0
+  h_cap : 0 < cap ∧ cap < UInt64.size
   backing : COWArray (AList κ τ) cap
   size : Cached (
     View.view backing
@@ -24,15 +24,28 @@ structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
 namespace HashMap
 variable {κ τ : Type} [Hashable κ] [DecidableEq κ]
 
-def new (cap : Nat) (h_cap : cap > 0 := by decide) : HashMap κ τ :=
+def new (cap : Nat) (h_cap : 0 < cap ∧ cap < UInt64.size := by decide) : HashMap κ τ :=
   ⟨cap, h_cap, COWArray.new [] cap, cached' 0 (by
     clear h_cap
     simp [View.map, View.view, FoldableOps.sum,
       FoldableOps.defaultImpl, Foldable.fold, Foldable'.Correct.fold']
     simp [Size.size, COWArray.new, Indexed.nth, COWArray.get, Array.new, Array.get]
-    induction cap <;> simp
-    rw [Range.foldl'_step]
-    assumption)⟩
+    generalize Range.foldl'' _ _ _ _ = res
+    match res with
+    | ⟨_,A,hA⟩ =>
+    clear res
+    simp
+    conv =>
+      rhs arg 2 intro acc i h
+      rw [hA]
+      simp
+    clear hA A
+    induction cap
+    case zero => simp
+    case succ n ih _ =>
+    simp
+    apply ih
+    simp)⟩
 
 @[inline] private
 def calc_idx' (k : κ) (cap : Nat) (h_cap : cap > 0) (h : cap < UInt64.size) : Fin cap :=
@@ -49,11 +62,8 @@ def calc_idx' (k : κ) (cap : Nat) (h_cap : cap > 0) (h : cap < UInt64.size) : F
 @[inline]
 def calc_idx (k : κ) (m : HashMap κ τ) : Fin m.cap :=
   match m with
-  | ⟨cap, h_cap, backing, _⟩ =>
-  calc_idx' k cap h_cap (
-    Nat.lt_of_lt_of_le
-      backing.backing.size_lt_usize
-      USize.usize_bounded)
+  | ⟨cap, h_cap, _, _⟩ =>
+  calc_idx' k cap h_cap.1 h_cap.2
 
 /- TODO: add Array.getU64 -/
 def get? (k : κ) (m : HashMap κ τ) : Option τ :=
@@ -67,7 +77,7 @@ def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
   let newSize :=
     match old with | none => m.size + 1 | some _ => m.size
   ⟨old, m.cap, m.h_cap, m.backing.set idx newSlot, newSize,
-    set_option trace.Meta.isDefEq false in by
+  by
     have : newSize = match old, h with | none, h => _ | some _, h => _ := rfl
     rw [this]
     clear this newSize

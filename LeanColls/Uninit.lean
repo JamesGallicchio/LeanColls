@@ -14,29 +14,27 @@ namespace Uninit
 
 instance : Nonempty (Uninit α) := (UninitPointed α).property
 
-unsafe def uninitUnsafe {α} : Uninit α := unsafeCast ()
-@[implementedBy uninitUnsafe]
-opaque uninit {α} : Uninit α
+noncomputable opaque uninit {α} : Uninit α
 
 unsafe def initUnsafe (a : α) : Uninit α := unsafeCast a
 @[implementedBy initUnsafe]
 opaque init (a : α) : Uninit α
 
-instance : Inhabited (Uninit α) := ⟨uninit⟩
-
 noncomputable opaque getValue? : Uninit α → Option α
 
-def ofOption : Option α → Uninit α
+noncomputable def ofOption : Option α → Uninit α
 | none => uninit
 | some a => init a
 
 axiom getValue_ofOption : ∀ {α} (a : Option α), getValue? (ofOption a) = a
 axiom ofOption_getValue : ∀ {α} (a : Uninit α), ofOption (getValue? a) = a
 
+@[simp]
 theorem getValue?_init {a : α} : (init a).getValue? = some a := by
   rw [(by simp [ofOption] : init a = ofOption (some a)),
         getValue_ofOption]
 
+@[simp]
 theorem getValue?_uninit : (@uninit α).getValue? = none := by
   rw [(by simp [ofOption] : uninit = ofOption none),
         getValue_ofOption]
@@ -71,21 +69,18 @@ def getValue (a : Uninit α) (h : a.isInit) : α :=
 
 @[simp]
 theorem getValue_init {a : α} (h) : (init a).getValue h = a := by
-  simp [isInit] at h
   unfold getValue
-  generalize h' : getValue? (init a) = x, h = hx
   split
-  case h_1 x h =>
-    rw [(by simp [ofOption] : init a = ofOption (some a)),
-        getValue_ofOption] at h'
-    simp at h'
-    simp [h']
-  case h_2 x h =>
-    rw [(by simp [ofOption] : init a = ofOption (some a)),
-        getValue_ofOption] at h'
-    contradiction
+  case h_1 h _ =>
+    simp at h
+    rw [h]
+  case h_2 h _ =>
+    simp at h
 
-@[simp]
+theorem getValue_of_eq_init {a : α} {u h} (h' : u = Uninit.init a)
+  : u.getValue h = a
+  := by cases h'; simp
+
 theorem getValue_of_getValue?_some {a : α} (h)
   : getValue? x = some a → x.getValue h = a := by
   intro h_some
