@@ -615,15 +615,6 @@ namespace List
         apply ih.symm
       )
 
-  @[simp]
-  theorem foldl_append (L₁ L₂ : List τ) (f) (acc : β)
-    : (L₁ ++ L₂).foldl f acc = L₂.foldl f (L₁.foldl f acc)
-    := by
-    induction L₁ generalizing acc with
-    | nil => simp [foldl]
-    | cons x xs ih =>
-      simp [foldl, ih]
-
   theorem foldl_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
     : (L.map f).foldl foldF foldAcc =
       L.foldl (fun acc x => foldF acc (f x)) foldAcc
@@ -646,21 +637,6 @@ namespace List
         simp [h, foldl, ih]
       case cons.h_2 h =>
         simp [h, foldl, ih]
-
-  @[simp]
-  theorem foldr_append (L₁ L₂ : List τ) (f) (acc : β)
-    : (L₁ ++ L₂).foldr f acc = L₁.foldr f (L₂.foldr f acc)
-    := by
-    induction L₁ with
-    | nil         => simp
-    | cons _ _ ih => simp [ih]
-
-  theorem foldl_eq_foldr_reverse (L : List τ) (f) (acc : β)
-    : L.foldl f acc = L.reverse.foldr (fun x acc => f acc x) acc
-    := by
-    induction L generalizing acc with
-    | nil         => simp [foldl]
-    | cons _ _ ih => simp [foldl, ih]
   
   theorem foldr_eq_map (L : List τ) (f : τ → τ')
     : L.foldr (f · :: ·) [] = L.map f
@@ -704,18 +680,16 @@ namespace List
       case mp =>
         intro h; cases h
         case inl h =>
-          exact ⟨x, .inl rfl, h.symm⟩
+          exact .inl h.symm
         case inr h =>
           cases ih.mp h; case intro x' h =>
-          exact ⟨x', .inr h.1, h.2⟩
+          exact .inr ⟨x', h.1, h.2⟩
       case mpr =>
-        intro h; cases h; case intro x' h =>
-        cases h.1
+        intro h; cases h
         case inl h' =>
-          cases h'
-          exact .inl h.2.symm
+          exact .inl h'.symm
         case inr h' =>
-          exact Or.inr (ih.mpr ⟨x',h',h.2⟩)
+          exact Or.inr (ih.mpr h')
 
 end List
 

@@ -113,7 +113,7 @@ theorem foldr_correct (r : Range)
   cases r; case mk n =>
   induction n generalizing acc with
   | zero => simp [foldr]
-  | succ n ih => simp [foldr, ih]
+  | succ n ih => simp [foldr, List.foldr_append, ih]
 
 theorem toList_eq_canonicalToList (r : Range)
   : toList r = canonicalToList r.foldl
@@ -136,7 +136,7 @@ theorem foldl_correct (r : Range)
   induction n with
   | zero => simp [foldl, List.foldl]
   | succ n ih =>
-    simp [foldl, List.foldl, ih]
+    simp [foldl, List.foldl_append, List.foldl, ih]
 
 theorem foldl_step (n)
   : foldl f init ⟨n+1⟩ = foldl (fun acc x => f acc x.succ) (f init 0) ⟨n⟩
@@ -209,23 +209,25 @@ theorem reverse_toList_eq_map_toList (r : Range)
     rhs
     simp [toList]
     rw [foldr_eq_foldl_mapped, foldl_correct]
-  rw [List.foldl_eq_foldr_reverse]
-  cases r; case mk n =>
+  match r with
+  | ⟨n⟩ =>
   simp
-  suffices ∀ k, k ≤ n →
-    (toList ⟨k⟩).reverse
-    = List.map _ (List.foldr _ _ (List.reverse (toList ⟨k⟩)))
+  suffices ∀ k, k ≤ n → List.reverse (toList ⟨k⟩) =
+    List.map (fun i => n - i - 1)
+      (List.foldl (fun acc x => (n - x - 1) :: acc) []
+        (toList ⟨k⟩))
     from this n (Nat.le_refl _)
-  intro k h
+  intro k h_k
   induction k with
   | zero => simp
-  | succ k ih =>
-    simp
-    constructor
-    case left =>
-      rw [←Nat.sub_dist (y := k), Nat.sub_sub_self h, Nat.succ_sub_one]
-    case right =>
-      conv => lhs rw [ih (Nat.le_of_lt h)]
+  | succ n ih =>
+  simp [List.foldl_append]
+  constructor
+  case left =>
+    rw [←Nat.sub_dist (y := n), Nat.sub_sub_self h_k, Nat.succ_sub_one]
+  case right =>
+    apply ih
+    exact Nat.le_of_lt h_k
 
 theorem memCorrect (x : Nat) (c : Range)
   : x ∈ c ↔ x ∈ canonicalToList (fun {β} => c.foldl)
@@ -253,7 +255,7 @@ theorem memCorrect (x : Nat) (c : Range)
       case inr h =>
         simp [h]
 
-theorem foldl'_correct (r : Range) {f : β → (i : Nat) → i ∈ r → β}
+theorem foldl'_correct {β : Type u} (r : Range) {f : β → (i : Nat) → i ∈ r → β} {acc : β}
     {L : List Nat} (hL : L = canonicalToList r.foldl)
   : r.foldl' f acc = L.foldl' (fun acc x h => f acc x ((memCorrect _ _).mpr (hL.subst h))) acc
   := by
@@ -273,7 +275,7 @@ theorem foldl'_correct (r : Range) {f : β → (i : Nat) → i ∈ r → β}
     cases hL
     rw [List.subtypeByMem_append]
     rw [List.foldl'_eq_subtypeByMem_foldl]
-    simp [foldl, List.foldl_map, List.foldl]
+    simp [foldl, List.foldl_map, List.foldl, List.foldl_append]
     simp [toList_eq_canonicalToList]
 
 theorem foldr'_correct {β : Type u} (r : Range) {f} {acc : β}
@@ -294,7 +296,7 @@ theorem foldr'_correct {β : Type u} (r : Range) {f} {acc : β}
     rw [List.foldr'_rw _ _ _ _ (toList_succ _)]
     rw [List.foldr'_eq_subtypeByMem_foldr]
     rw [List.subtypeByMem_append]
-    simp
+    simp [List.map_append, List.foldr_append]
     rw [List.map_of_subtypeByMem_eq_map']
     rw [List.foldr_of_map']
     simp

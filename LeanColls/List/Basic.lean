@@ -240,7 +240,7 @@ theorem subtypeByMem_map' (L : List τ) (f : (x : τ) → x ∈ L → τ')
   | cons x xs ih =>
     simp [subtypeByMem.aux, ih]
 
-theorem foldl'_append (L₁ L₂ : List τ) (f : β → (x : τ) → x ∈ L₁ ++ L₂ → β) (init)
+theorem foldl'_append {β : Type u} (L₁ L₂ : List τ) (f : β → (x : τ) → x ∈ L₁ ++ L₂ → β) (init)
   : foldl' (L₁ ++ L₂) f init =
     foldl' L₂ (fun acc x h => f acc x (List.mem_append_right _ h))
       (foldl' L₁ (fun acc x h => f acc x (List.mem_append_left _ h)) init)
@@ -248,7 +248,7 @@ theorem foldl'_append (L₁ L₂ : List τ) (f : β → (x : τ) → x ∈ L₁ 
   rw [foldl'_eq_subtypeByMem_foldl, foldl'_eq_subtypeByMem_foldl, foldl'_eq_subtypeByMem_foldl]
   simp
   rw [subtypeByMem_append]
-  simp [foldl_map]
+  simp [foldl_map, foldl_append]
 
 def sum [AddMonoid τ] : List τ → τ
 | [] => 0
