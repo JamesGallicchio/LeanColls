@@ -4,6 +4,7 @@ Copyright (c) 2022 James Gallicchio.
 
 import LeanColls.AuxLemmas
 import LeanColls.Array
+import LeanColls.BitVec
 import LeanColls.Buffer
 import LeanColls.Classes
 import LeanColls.FoldableOps
