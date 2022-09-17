@@ -16,6 +16,7 @@ class FoldableOps.{uC,uT} (C : Type uC) (τ : outParam (Type uT)) where
   all : C → (τ → Bool) → Bool
   contains : C → [BEq τ] → τ → Bool
   sum : C → [Add τ] → [Zero τ] → τ
+  max : C → [L : LT τ] → [DecidableRel L.lt] → Option τ
 
 namespace FoldableOps
 
@@ -31,6 +32,11 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
     |>.down
   sum := λ c =>
     Foldable.fold c (fun acc x => acc + x) 0
+  max := λ c =>
+    Foldable.fold c (fun
+      | none   => λ x => some x
+      | some x => λ y => some (_root_.max x y)
+    ) none
 
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
