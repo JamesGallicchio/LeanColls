@@ -206,6 +206,9 @@ def ofList (L : List α) : Array α L.length :=
         by intro j hj; contradiction⟩
   ⟨res.2.1⟩
 
+instance [Repr α] : Repr (Array α n) where
+  reprPrec A prec := "LeanColls.Array.ofList " ++ reprPrec A.toList prec
+
 @[simp]
 theorem get_ofList (L : List α) (i)
   : get (ofList L) i = L.get i
