@@ -53,6 +53,22 @@ def filterMap (f : τ → Option τ') (v : View τ) : View τ' where
       | some x' => foldF a x'
     ) foldAcc
 
+@[inline]
+def flatten (v : View C) [Foldable C τ] : View τ where
+  fold := λ foldF foldAcc =>
+    v.fold (λ a c =>
+      Foldable.fold c foldF a)
+      foldAcc
+
+@[inline]
+def append (v : View τ) (v2 : View τ) : View τ where
+  fold := λ foldF foldAcc =>
+    v2.fold foldF
+      (v.fold foldF foldAcc)
+
+instance : Append (View τ) where
+  append := append
+
 structure WithMem (τ) (c : C) (M : outParam (Membership τ C)) where
   fold' : {β : Type w} → (β → (x : τ) → x ∈ c → β) → β → β
 
