@@ -24,7 +24,7 @@ structure HashMap (κ τ : Type) [Hashable κ] [DecidableEq κ] where
 namespace HashMap
 variable {κ τ : Type} [Hashable κ] [DecidableEq κ]
 
-def new (cap : Nat) (h_cap : 0 < cap ∧ cap < UInt64.size := by decide) : HashMap κ τ :=
+def new (cap : Nat := 16) (h_cap : 0 < cap ∧ cap < UInt64.size := by decide) : HashMap κ τ :=
   ⟨cap, h_cap, COWArray.new [] cap, cached' 0 (by
     clear h_cap
     simp [View.map, View.view, FoldableOps.sum,
@@ -70,7 +70,8 @@ def get? (k : κ) (m : HashMap κ τ) : Option τ :=
   m.backing.get (calc_idx k m)
   |> MapLike.get?.{0,0,0,0} k
 
-def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
+@[inline]
+private def setNoRebalance (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
   let idx := calc_idx k m
   match h : m.backing.get idx |> AList.set' k t with
   | (old, newSlot) =>
@@ -126,8 +127,40 @@ def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
       rw [Nat.add_sub_cancel]
     ⟩
 
+def rebalance : HashMap κ τ → HashMap κ τ
+| ⟨cap, h_cap, backing, size⟩ =>
+  if size >= cap then
+    new (cap := min (2 * cap) (UInt64.size - 1)) (by
+      constructor
+      case left =>
+        simp [min]
+        split
+        case inl =>
+          rw [(by simp : 0 = 0 * 0)]
+          apply Nat.mul_lt_mul'
+          decide
+          exact h_cap.1
+          decide
+        case inr =>
+          simp
+      case right =>
+        simp [min]
+        split
+        case inl h =>
+          exact Nat.succ_le_succ h
+        case inr h =>
+          simp)
+    |> Foldable.fold backing (fun acc L =>
+      L.foldl (fun acc (k,t) => (acc.setNoRebalance k t).2) acc)
+  else
+    ⟨cap, h_cap, backing, size⟩
+
+def set' (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × HashMap κ τ :=
+  let (o, h) := m.setNoRebalance k t
+  (o, rebalance h)
+
 def set (k : κ) (t : τ) (m : HashMap κ τ) : HashMap κ τ :=
-  (m.set' k t).2
+  rebalance (m.setNoRebalance k t).2
 
 def fold (m : HashMap κ τ) (f : β → (κ × τ) → β) (acc : β) :=
   Foldable.fold m.backing (fun acc l =>
@@ -141,10 +174,19 @@ instance : MapLike (HashMap κ τ) κ τ where
   get? := get?
   fold := fold
 
+theorem get_rebalance (k : κ) (m : HashMap κ τ)
+  : m.rebalance.get? k = m.get? k
+  := by
+  simp [rebalance]
+  split <;> simp
+  simp [get?]
+  sorry
+
 theorem get_set_eq [Hashable κ] (k : κ) (t : τ) (m : HashMap κ τ)
   : (m.set k t |>.get? k) = some t
   := by
-  simp [get?, set, set', calc_idx, calc_idx']
+  simp [set, get_rebalance]
+  simp [get?, setNoRebalance, calc_idx, calc_idx']
   simp [COWArray.get, COWArray.set]
   simp [MapLike.get?]
   simp [AList.get?_set'_eq]
@@ -154,7 +196,8 @@ theorem get_set_ne [Hashable κ]
   (h_k : k ≠ k')
   : (m.set k t |>.get? k') = m.get? k'
   := by
-  simp [get?, set, set']
+  simp [set, get_rebalance]
+  simp [get?, setNoRebalance]
   simp [COWArray.get, COWArray.set]
   simp [calc_idx]
   generalize calc_idx' k _ _ _ = k_idx
