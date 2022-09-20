@@ -428,6 +428,14 @@ instance : Iterable Range Nat where
   step := λ (i,stop) => if i < stop then some (i, (i.succ, stop)) else none
   toIterator := λ r => (0,r.n)
 
+instance : Iterable' Range Nat inferInstance where
+  ρ c := Σ' (i : Nat) (stop : Nat), i ≤ stop ∧ stop = c.n
+  step := λ ⟨i,stop,_,h_stop⟩ =>
+    if h : i < stop then
+      some (⟨i, by rw [h_stop] at h; exact h⟩, ⟨i.succ, stop, h, h_stop⟩)
+    else none
+  toIterator := λ r => ⟨0,r.n,Nat.zero_le _,rfl⟩
+
 /- ## Lemmas -/
 
 @[simp]

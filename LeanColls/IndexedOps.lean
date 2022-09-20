@@ -16,6 +16,12 @@ namespace IndexedOps
 instance [Indexed C τ] : Membership τ C where
   mem x c := ∃ i, x = Indexed.nth c i
 
+instance [Indexed C τ] : Iterable C τ where
+  ρ := Σ' (c : C), Iterable'.ρ Nat (Range.mk <| Size.size c)
+  toIterator c := ⟨c, Iterable'.toIterator (Range.mk <| Size.size c)⟩
+  step := λ ⟨c,r⟩ => Iterable'.step r
+                    |>.map (fun (⟨i,h⟩,r) => (Indexed.nth c ⟨i,h⟩, ⟨c,r⟩))
+
 theorem size_pos_iff_mem [Indexed C τ] {c : C}
   : Size.size c > 0 ↔ ∃ x, x ∈ c
   := by

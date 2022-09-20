@@ -47,6 +47,11 @@ class Iterable (C : Type u) (τ : Type v) where
   step : ρ → Option (τ × ρ)
   toIterator : C → ρ
 
+class Iterable' (C : Type u) (τ : Type v) (mem : outParam (Membership τ C)) where
+  ρ : C → Type w
+  step : {c : C} → ρ c → Option ({ t : τ // mem.mem t c } × ρ c)
+  toIterator : (c : C) → ρ c
+
 instance [ToStream C ρ] [Stream ρ τ] : Iterable C τ where
   ρ := ρ
   step := Stream.next?
@@ -156,30 +161,43 @@ Each `Foldable` type gives rise to a `ForIn`, allowing
 a collection `C` to be used in `for x in C do ...` syntax.
 -/
 
-instance instForInOfFoldable [Monad M] [Foldable F τ] : ForIn M F τ where
+instance instForInOfIterable [Monad M] [Iterable F τ] : ForIn M F τ where
   forIn c acc f := do
-    Foldable.fold c
-      (λ ma x => do
-        let a ← ma
-        let res ← f x a
-        match res with
-        | ForInStep.yield y => pure y
-        | ForInStep.done y => return y
-      )
-      (pure acc)
+    let mut iter := Iterable.toIterator c
+    let mut done := false
+    let mut res := acc
+    while !done do
+      match Iterable.step iter with
+      | none =>
+        done := true
+      | some (x, iter') =>
+        match ← f x res with
+        | ForInStep.yield y =>
+          res := y
+          iter := iter'
+        | ForInStep.done y =>
+          res := y
+          done := true
+    return res
 
-instance instForIn'OfFoldable' [Monad M] [Me : Membership τ F] [Foldable' F τ Me] : ForIn' M F τ Me where
+instance instForIn'OfIterable' [Monad M] [Me : Membership τ F] [Iterable' F τ Me] : ForIn' M F τ Me where
   forIn' c acc f := do
-    Foldable'.fold'
-      c
-      (λ ma x h => do
-        let a ← ma
-        let res ← f x h a
-        match res with
-        | ForInStep.yield y => pure y
-        | ForInStep.done y => return y
-      )
-      (pure acc)
+    let mut iter := Iterable'.toIterator c
+    let mut done := false
+    let mut res := acc
+    while !done do
+      match Iterable'.step iter with
+      | none =>
+        done := true
+      | some (⟨x,h⟩, iter') =>
+        match ← f x h res with
+        | ForInStep.yield y =>
+          res := y
+          iter := iter'
+        | ForInStep.done y =>
+          res := y
+          done := true
+    return res
 
 /-!
 ## Utility functions
