@@ -15,6 +15,7 @@ import LeanColls.List
 import LeanColls.Queue
 import LeanColls.Range
 import LeanColls.Stream
+import LeanColls.Tuple
 import LeanColls.View
 
 /-!
