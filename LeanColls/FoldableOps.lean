@@ -17,6 +17,7 @@ class FoldableOps.{uC,uT} (C : Type uC) (τ : outParam (Type uT)) where
   contains : C → [BEq τ] → τ → Bool
   sum : C → [Add τ] → [Zero τ] → τ
   max : C → [L : LT τ] → [DecidableRel L.lt] → Option τ
+  toString : C → [ToString τ] → (sep : String) → String 
 
 namespace FoldableOps
 
@@ -37,6 +38,13 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
       | none   => λ x => some x
       | some x => λ y => some (_root_.max x y)
     ) none
+  toString := λ c _ sep =>
+    Foldable.fold c
+      (fun
+      | ⟨none⟩   => λ x => ⟨some (ToString.toString x)⟩
+      | ⟨some x⟩ => λ y => ⟨some (x ++ sep ++ ToString.toString y)⟩)
+      (⟨none⟩ : ULift (Option String))
+    |>.down.getD ""
 
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
