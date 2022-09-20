@@ -42,7 +42,7 @@ opaque set {n m : @& Nat} {h} (A : ArrayUninit α n m h) (i : @& Nat) (h_i : i <
 opaque resize {n m : @& Nat} {h} (A : ArrayUninit α n m h) (n' : @& Nat) (h' : m <= n') : ArrayUninit α n' m h'
 
 @[extern "leancolls_array_isexclusive"]
-opaque isExclusive {n m : @& Nat} {h} (A : @& ArrayUninit α n m h) : Bool
+opaque isExclusive (a : @& A) : Bool
 
 @[simp]
 axiom get_push {α n m h} {A : ArrayUninit α n m h} {x h' i hn hm}

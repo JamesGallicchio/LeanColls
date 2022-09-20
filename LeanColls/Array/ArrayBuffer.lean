@@ -1,4 +1,11 @@
+/-
+Copyright (c) 2022 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Array.Basic
+import LeanColls.Array.VarArray
 
 namespace LeanColls
 
@@ -64,17 +71,23 @@ def push (A : ArrayBuffer α) (a : α) : ArrayBuffer α :=
 def toArray (A : ArrayBuffer α) : Array α A.size :=
   match A with
   | ⟨_, _, size, h_size, backing⟩ =>
-  if backing.isExclusive
+  if ArrayUninit.isExclusive A
   then ⟨backing.resize size (Nat.le_refl _)⟩
   else Array.init (n := size) (fun ⟨i,h⟩ =>
     backing.get i (Nat.lt_of_lt_of_le h h_size) h)
 
-end ArrayBuffer
-
-instance : Enumerable (Σ n, Array α n) α where
+instance : Enumerable (VarArray α) α where
   ρ := ArrayBuffer α
   insert A :=
     match A with
     | some ⟨a,A⟩ => A.push a
     | none => ArrayBuffer.empty ()
-  fromEnumerator A := ⟨A.size, A.toArray⟩
+  fromEnumerator A := ⟨A.size, ⟨A.toArray⟩⟩
+
+def foldl (f : _ → _ → _) (acc : β) (A : ArrayBuffer α) :=
+  (Range.mk A.size).foldl' (fun acc i h =>
+    f acc (A.backing.get i (Nat.lt_of_lt_of_le h A.h_size) h)
+  ) acc
+
+instance : Foldable (ArrayBuffer α) α where
+  fold A f acc := A.foldl f acc

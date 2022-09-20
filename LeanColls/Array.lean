@@ -5,5 +5,6 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Array.Basic
+import LeanColls.Array.VarArray
 import LeanColls.Array.COWArray
 import LeanColls.Array.ArrayBuffer

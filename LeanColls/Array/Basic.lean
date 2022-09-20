@@ -151,6 +151,17 @@ theorem copy_def (A : Array α n) : A.copy = A
   funext i
   simp
 
+def copyIfShared (A : Array α n) : Array α n :=
+  if ArrayUninit.isExclusive A then A else copy A
+
+@[simp]
+theorem copyIfShared_def (A : Array α n) : A.copyIfShared = A
+  := by
+  simp [copyIfShared]
+
+
+/-! ## Class instances -/
+
 instance : Indexed (Array α n) α where
   size _ := n
   nth := Array.get
@@ -162,6 +173,11 @@ instance [N : Nonempty α] : Nonempty (Array α n) :=
 
 instance [Inhabited α] : Inhabited (Array α n) where
   default := new default n
+
+instance : GetElem (Array α n) Nat α (fun _ i => i < n) where
+  getElem A i h := A.get ⟨i,h⟩
+
+/-! ## Misc -/
 
 def toList (A : Array α n) : List α := FoldableOps.toList A
 

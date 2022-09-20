@@ -21,7 +21,7 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
 
 @[inline] def get : Fin n → α := A.backing.get
 @[inline] def set (i : Fin n) (x : α) : COWArray α n :=
-  A.backing.copy |>.set i x |> COWArray.mk
+  A.backing.copyIfShared |>.set i x |> COWArray.mk
 
 @[inline] def update (i : Fin n) (f : α → α) : COWArray α n :=
   A.set i (f <| A.get i)
@@ -60,4 +60,4 @@ theorem fold_eq_backing_fold (A : COWArray α n)
 theorem backing_set (A : COWArray α n) (i : Fin n) (x : α)
   : (A.set i x).backing = A.backing.set i x
   := by
-  simp [set, Array.copy_def]
+  simp [set, Array.copyIfShared_def]
