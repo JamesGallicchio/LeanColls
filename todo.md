@@ -1,6 +1,5 @@
 # TODO
 
-- Implement HashMap rebalancing
 - Finish correctness proofs for RTQueue
 - Implement
   - RBFingerTree
@@ -13,6 +12,9 @@
 
 
 ## Done
+
+### 20 Sept 2022
+- HashMap growth implemented (not shrinking yet)
 
 ### 6 Sept 2022
 - Further Range rewrite/cleanup
