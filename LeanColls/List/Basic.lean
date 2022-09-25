@@ -117,7 +117,7 @@ def subtypeByMem_rw {L : List τ} (L') (h : L = L')
   : L.subtypeByMem = L'.subtypeByMem.map (fun ⟨x,h'⟩ => ⟨x,h.symm.subst h'⟩)
   := by
   cases h
-  conv => lhs rw [←map_id (subtypeByMem L)]  
+  conv => lhs; rw [←map_id (subtypeByMem L)] 
 
 def map'_rw {L : List τ} {f : (x : τ) → x ∈ L → τ'} (L' : List τ) (h : L = L')
   : L.map' f = L'.map' (fun x h' => f x (h.symm.subst h'))
@@ -172,7 +172,7 @@ theorem subtypeByMem_append (L₁ L₂ : List τ)
     L₁.subtypeByMem.map (fun ⟨x,h⟩ => ⟨x, List.mem_append_left _ h⟩)
     ++ L₂.subtypeByMem.map (fun ⟨x,h⟩ => ⟨x, List.mem_append_right _ h⟩)
   := by
-  conv => lhs simp [subtypeByMem]
+  conv => lhs; simp [subtypeByMem]
   rw [subtypeByMemAux_append]
   simp [subtypeByMemAux_eq_map_subtypeByMem]
 

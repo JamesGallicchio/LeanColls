@@ -98,7 +98,8 @@ theorem canonicalToList_fold'_eq_map' [Foldable'.Correct C τ M]
       f' x ((Foldable'.Correct.memCorrect _ _).mpr h))
   := by
   conv =>
-    lhs simp [canonicalToList]
+    lhs
+    simp [canonicalToList]
     rw [Correct.fold'Correct]
     rw [List.foldl'_eq_subtypeByMem_foldl]
     rw [List.foldl_eq_map]

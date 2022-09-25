@@ -217,7 +217,7 @@ def ofList (L : List α) : Array α L.length :=
             simp
             split
             subst_vars
-            simp [getElem', getElem]
+            simp [getElem]
             apply h_acc
             ⟩
       )

@@ -202,6 +202,7 @@ namespace List
     induction ts
     simp [back?]
     case cons t' ts' ih =>
+    simp at ih ⊢
     simp [back?, ih]
 
   theorem concat_nonempty (L : List τ)
@@ -233,7 +234,7 @@ namespace List
       | [] => contradiction
       | [x] => simp [back?] at h
       | x::y::z =>
-        have : back? (y::z) = some (tail, t) := by
+        have ihh : back? (y::z) = some (tail, t) := by
           simp [back?] at h
           cases h; case intro l r =>
           simp [back?]
@@ -244,39 +245,31 @@ namespace List
           | some (ts',t') =>
             simp [h] at l r ⊢
             simp [l,r]
-        have := ih _ this
-        rw [this] at h
-        simp [back?] at h
-        rw [this,h]
+        have := ih _ ihh
+        rw [this]; simp; clear this
+        unfold back? at h
+        simp [ihh] at h
+        assumption
 
   @[simp]
   theorem concat_append (L₁ L₂ : List τ)
     : (L₁ ++ L₂).concat x = L₁ ++ L₂.concat x
     := by
-    induction L₁
-    simp
-    case cons h t ih =>
-    simp [concat]
-    exact ih
+    induction L₁ <;> simp
 
   @[simp]
   theorem map_concat (L : List τ) (f : τ → α)
     : (L.concat x).map f = (L.map f).concat (f x)
     := by
-    induction L
-    simp [concat,map]
-    case cons h t ih =>
-    simp [concat,map]
-    exact ih
+    induction L <;> simp [concat,map]
 
   @[simp]
   theorem join_concat (L : List (List τ))
     : (L.concat x).join = L.join ++ x
     := by
-    induction L
-    simp [concat,join]
-    case cons h t ih =>
-    simp [ih,concat,join,List.append_assoc]
+    simp [concat]
+    induction L <;> simp [concat,join]
+    assumption
   
   @[simp]
   theorem get_of_set_eq (L : List τ) (i : Fin L.length) (x : τ)

@@ -117,7 +117,7 @@ instance : Append (LazyList α) :=
   : (l₁ ++ l₂).toList = l₁.toList ++ l₂.toList
   := by
     induction l₁ using ind
-      simp [HAppend.hAppend, Append.append, append, List.append, toList]
+    simp [HAppend.hAppend, Append.append, append, List.append, toList]
     case cons hd tl tl_ih =>
       simp [HAppend.hAppend, Append.append, append] at tl_ih |-
       simp [tl_ih, toList, Thunk.get]
@@ -146,7 +146,6 @@ instance : Append (LazyList α) :=
       simp [Thunk.get] at tl_ih |-
       have := tl_ih (cons hd l₂)
       rw [this]
-      rw [List.append_assoc]
       simp [HAppend.hAppend, Append.append, List.append]
     case delayed t t_ih =>
       simp [HAppend.hAppend, Append.append, append] at t_ih |-

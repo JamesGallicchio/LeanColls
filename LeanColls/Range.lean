@@ -239,8 +239,8 @@ theorem memCorrect (x : Nat) (c : Range)
     simp [canonicalToList, foldl]
     apply Nat.not_lt_zero
   | succ n ih =>
-    conv => lhs simp [Membership.mem]
-    conv => rhs simp [canonicalToList, foldl]
+    conv => lhs; simp [Membership.mem]
+    conv => rhs; simp [canonicalToList, foldl]
     constructor <;> intro h
     case mp =>
       cases Nat.eq_or_lt_of_le <| Nat.le_of_succ_le_succ h
@@ -271,7 +271,7 @@ theorem foldl'_correct {β : Type u} (r : Range) {f : β → (i : Nat) → i ∈
     simp at hL
     simp [foldl']
     rw [ih (L := toList ⟨n⟩) _ rfl]
-    conv => rhs rw [List.foldl'_eq_subtypeByMem_foldl]
+    conv => rhs; rw [List.foldl'_eq_subtypeByMem_foldl]
     cases hL
     rw [List.subtypeByMem_append]
     rw [List.foldl'_eq_subtypeByMem_foldl]
@@ -329,8 +329,8 @@ theorem foldl''.aux_step {n} {f : (_ : _) → _ → _ → _} {i : Nat} (h : i �
     unfold aux
     simp
   | succ j ih =>
-    conv => lhs unfold aux
-    conv => rhs unfold aux
+    conv => lhs; unfold aux
+    conv => rhs; unfold aux
     have : i < n := by
       cases h_i
       apply Nat.sub_lt_of_pos_le _ _ (Nat.zero_lt_succ _) h

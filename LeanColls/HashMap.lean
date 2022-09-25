@@ -36,7 +36,9 @@ def new (cap : Nat := 16) (h_cap : 0 < cap ∧ cap < UInt64.size := by decide) :
     clear res
     simp
     conv =>
-      rhs arg 2 intro acc i h
+      rhs
+      arg 2
+      intro acc i h
       rw [hA]
       simp
     clear hA A
@@ -102,11 +104,10 @@ private def setNoRebalance (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × 
       rw [this]
       rw [←Nat.sub_add_comm (by apply List.get_le_sum)]
       conv =>
-        rhs arg 1 arg 2
+        rhs; arg 1; arg 2
         rw [Nat.add_comm]
       rw [←Nat.add_assoc]
       simp [COWArray.get, ←Array.toList_get]
-      rw [Nat.add_sub_cancel]
     | some _ =>
       simp at this ⊢
       conv => lhs; rw [View.view_eq_view_canonicalToList]
@@ -124,7 +125,6 @@ private def setNoRebalance (k : κ) (t : τ) (m : HashMap κ τ) : Option τ × 
       rw [this]
       rw [←Nat.sub_add_comm (by apply List.get_le_sum)]
       simp [COWArray.get, ←Array.toList_get]
-      rw [Nat.add_sub_cancel]
     ⟩
 
 def rebalance : HashMap κ τ → HashMap κ τ

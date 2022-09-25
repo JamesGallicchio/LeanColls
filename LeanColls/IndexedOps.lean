@@ -96,7 +96,7 @@ instance [Indexed C τ] : Foldable'.Correct C τ inferInstance where
   fold'Correct := by
     intro β c f acc
     simp
-    conv => rhs simp [Foldable'.Correct.fold', Foldable.fold]
+    conv => rhs; simp [Foldable'.Correct.fold', Foldable.fold]
     have := Foldable'.canonicalToList_fold'_eq_map'
       (⟨Size.size c⟩ : Range)
       (fun x h => Indexed.nth c ⟨x,h⟩)
