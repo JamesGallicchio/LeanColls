@@ -46,6 +46,18 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
       (⟨none⟩ : ULift (Option String))
     |>.down.getD ""
 
+def mapImpl' (F : C → Type u) (f : (c : C) → F c) [(c : C) → FoldableOps (F c) τ] : FoldableOps C τ := {
+  toList    := λ c => FoldableOps.toList (f c)
+  all       := λ c => FoldableOps.all (f c)
+  sum       := λ c => FoldableOps.sum (f c)
+  contains  := λ c => FoldableOps.contains (f c)
+  max       := λ c => FoldableOps.max (f c)
+  toString  := λ c => FoldableOps.toString (f c)
+}
+
+def mapImpl (f : C → C') [FoldableOps C' τ] : FoldableOps C τ :=
+  mapImpl' (λ _ => C') f
+
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
 

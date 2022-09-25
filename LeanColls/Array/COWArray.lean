@@ -45,9 +45,13 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
   (⟨Array.init (λ i => A.get i.embed_succ)⟩,
   A.get ⟨n, Nat.lt_succ_self _⟩)
 
+instance : FoldableOps (COWArray α n) α := FoldableOps.mapImpl (COWArray.backing)
+
 instance : Indexed (COWArray α n) α where
   size _ := n
   nth := get
+
+instance : IndexedOps (COWArray α n) α := default
 
 @[simp]
 theorem fold_eq_backing_fold (A : COWArray α n)

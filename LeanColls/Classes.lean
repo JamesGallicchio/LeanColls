@@ -152,6 +152,15 @@ class Indexed (C : Type u) (τ : outParam (Type u))
   extends Size C where
   nth c : Fin (size c) → τ
 
+/-!
+### Initable
+
+Class of collections that can be constructed efficiently
+from a `Fin n → τ` initialization function
+-/
+class Initable (C : Type u) (n : outParam Nat) (τ : outParam (Type u)) where
+  init : (Fin n → τ) → C
+
 
 /-!
 ## External Hooks

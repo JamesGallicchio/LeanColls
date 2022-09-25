@@ -168,6 +168,9 @@ instance : Indexed (Array α n) α where
 
 instance : IndexedOps (Array α n) α := default
 
+instance : Initable (Array α n) n α where
+  init := init
+
 instance [N : Nonempty α] : Nonempty (Array α n) :=
   Nonempty.elim N (fun a => ⟨new a n⟩)
 
@@ -224,6 +227,9 @@ def ofList (L : List α) : Array α L.length :=
 
 instance [Repr α] : Repr (Array α n) where
   reprPrec A prec := "LeanColls.Array.ofList " ++ reprPrec A.toList prec
+
+instance [ToString α] : ToString (Array α n) where
+  toString A := toString A.toList
 
 @[simp]
 theorem get_ofList (L : List α) (i)

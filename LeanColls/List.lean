@@ -8,3 +8,4 @@ import LeanColls.List.Basic
 import LeanColls.List.AList
 import LeanColls.List.Classes
 import LeanColls.List.Ops
+import LeanColls.List.NonemptyList

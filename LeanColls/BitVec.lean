@@ -34,6 +34,8 @@ def flip (bv : BitVec n) (i : Fin n) : BitVec n :=
 
 def empty (n : Nat) : BitVec n := ⟨0, Nat.pos_pow_of_pos _ (by decide)⟩
 
+instance : OfNat (BitVec n) 0 := ⟨empty n⟩
+
 @[simp]
 theorem shiftLeft_bitwiseOr (a b i : Nat)
   : (a ||| b) >>> i = (a >>> i) ||| (b >>> i)
@@ -77,7 +79,11 @@ theorem get_empty (n i)
 def toString (bv : BitVec n) :=
   String.leftpad n '0' (String.mk (Nat.toDigits 2 bv.val))
 
+instance : ToString (BitVec n) := ⟨toString⟩
+
 instance : DecidableEq (BitVec n) :=
   cast (by simp [BitVec]) (inferInstance : DecidableEq (Fin (2^n)))
+
+instance : Inhabited (BitVec n) := ⟨empty n⟩
 
 end BitVec
