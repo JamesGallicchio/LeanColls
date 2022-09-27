@@ -40,7 +40,7 @@ jobs:
 
       - name: Generate docs
         run: |
-          lake -Kenv=dev build LeanColls:docs
+          lake -Kdocs=on build LeanColls:docs
 
       - name: Deploy docs and push to gh-pages
         run: |
