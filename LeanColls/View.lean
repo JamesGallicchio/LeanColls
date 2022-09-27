@@ -61,6 +61,13 @@ def flatten (v : View C) [Foldable C τ] : View τ where
       foldAcc
 
 @[inline]
+def flatMap (f : τ → C) (v : View τ) [Foldable C τ'] : View τ' where
+  fold := λ foldF foldAcc =>
+    v.fold (λ a t =>
+      Foldable.fold (f t) foldF a)
+      foldAcc
+
+@[inline]
 def append (v : View τ) (v2 : View τ) : View τ where
   fold := λ foldF foldAcc =>
     v2.fold foldF
@@ -69,22 +76,10 @@ def append (v : View τ) (v2 : View τ) : View τ where
 instance : Append (View τ) where
   append := append
 
-structure WithMem (τ) (c : C) (M : outParam (Membership τ C)) where
-  fold' : {β : Type w} → (β → (x : τ) → x ∈ c → β) → β → β
-
 @[inline]
-def view' [Foldable' C τ M] (c : C) : WithMem τ c M where
-  fold' := Foldable'.fold' c
-
-namespace WithMem
-
-@[inline]
-def map' {τ : Type u} {c : C} {M} (v : View.WithMem τ c M) {τ' : Type v}
-  (f : (x : τ) → M.mem x c → τ') : View τ' where
+def view' [Foldable' C τ M] (c : C) : View {x // M.mem x c} where
   fold foldF foldAcc :=
-    v.fold' (λ acc t h => foldF acc (f t h)) foldAcc
-
-end WithMem
+    Foldable'.fold' c (fun acc x i => foldF acc ⟨x,i⟩) foldAcc
 
 theorem view_eq_view_canonicalToList [Foldable.Correct C τ] (c : C)
   : View.view c = View.view (canonicalToList (Foldable.fold c))
