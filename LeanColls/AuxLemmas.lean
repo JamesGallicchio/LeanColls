@@ -137,6 +137,115 @@ namespace Nat
       apply Nat.mod_lt
       assumption
 
+  @[inline]
+  def square (n : Nat) := n * n
+
+  def sqrt (n : Nat) : Nat :=
+    let guess := n / 2
+    if guess = 0 then n else
+    let rec iter (guess : Nat) : Nat :=
+      let next := (guess + n / guess) / 2
+      if h : guess ≤ next then
+        guess
+      else
+        have : next < guess := Nat.gt_of_not_le h
+        iter next
+    iter guess
+  termination_by iter guess => guess
+
+  theorem square_sqrt_le (n)
+    : square (sqrt n) ≤ n
+    :=
+    match n with
+    | 0 | 1 => by simp
+    | n+2 =>
+    let rec iter n (guess) (g_pos : guess > 0) (g_le_n : guess ≤ n)
+      : square (sqrt.iter n guess) ≤ n
+      :=
+      let next := (guess + n / guess) / 2
+      if h : guess ≤ next then by
+        unfold sqrt.iter
+        simp [h, square]
+        apply (le_div_iff_mul_le g_pos).mp
+        apply Nat.le_of_add_le_add_left (a := guess)
+        rw [(by simp [succ_mul] : guess + guess = 2 * guess)]
+        rw [mul_comm]
+        apply (le_div_iff_mul_le (by decide)).mp
+        exact h
+      else
+        have : next < guess := Nat.gt_of_not_le h
+        have next_pos : next > 0 := by
+          have : n / guess = succ _ := by
+            conv => lhs; simp [Div.div, HDiv.hDiv]; unfold Nat.div
+            simp [g_pos, g_le_n]
+            rfl
+          cases guess <;> simp at this
+          simp [this, succ_add, add_succ]
+          simp [succ_eq_add_one, add_assoc]
+          rw [(by decide : 1 + 1 = 2)]
+          simp [←add_assoc]
+          apply succ_le_succ (zero_le _)
+        have next_le_n : next ≤ n := by
+          simp
+          apply Nat.div_le_of_le_mul
+          simp [succ_mul]
+          apply Nat.add_le_add
+          assumption
+          apply Nat.div_le_self
+        have := iter n next next_pos next_le_n
+        by unfold sqrt.iter; simp [h, this]
+    have := iter (n+2) ((n+2)/2)
+      (by simp; apply succ_le_succ; simp)
+      (Nat.div_le_self _ _)
+    by simp [sqrt] at this ⊢; exact this
+  termination_by iter guess _ _ => guess
+
+  theorem square_succ_sqrt_gt (n)
+    : n < square ((sqrt n)+1)
+    :=
+    match n with
+    | 0 | 1 => by simp
+    | n+2 =>
+    let rec iter n (guess) (g_succ_gt_n : square (guess+1) > n)
+      : n < square (sqrt.iter n guess + 1)
+      :=
+      let next := (guess + n / guess) / 2
+      if h : guess ≤ next then by
+        unfold sqrt.iter
+        simp [h, g_succ_gt_n]
+      else
+        have : next < guess := Nat.gt_of_not_le h
+        have : square (next + 1) > n := by
+          have : square (next + 1) ≤ square guess := by sorry
+          have : n < square guess := by sorry
+          sorry
+        have := iter n next this
+        by unfold sqrt.iter; simp [h, this]
+    have := iter (n+2) ((n+2)/2) (by
+      simp [square]
+      have : n ≤ 2 * (n / 2) + 1 := by
+        apply Nat.le_trans (m := 2 * (n / 2) + n % 2)
+        rw [Nat.div_add_mod]; apply Nat.le_refl
+        apply Nat.add_le_add; apply Nat.le_refl
+        apply Nat.le_of_succ_le_succ
+        simp [(by decide : succ 1 = 2)]
+        apply Nat.mod_lt
+        decide
+      simp [succ_mul, mul_succ] at this ⊢
+      simp [succ_add, add_succ]
+      apply succ_le_succ; apply succ_le_succ; apply succ_le_succ
+      apply Nat.le_trans this
+      apply succ_le_succ
+      simp
+      apply Nat.add_le_add_right
+      apply Nat.le_add_left)
+    by simp [sqrt] at this ⊢; exact this
+  termination_by iter guess _ _ => guess
+
+
+#eval sqrt 0
+#eval (7 + 15 / 7) / 2
+
 end Nat
 
 namespace Fin
