@@ -36,7 +36,6 @@ def foldl (f : β → Nat → β) (acc : β) : Range → β
 | ⟨0⟩ => acc
 | ⟨n+1⟩ => f (foldl f acc ⟨n⟩) n
 
-@[inline]
 def foldr' (r : Range) (f : (i : Nat) → i ∈ r → β → β) (acc : β) : β :=
   match r with
   | ⟨0⟩ => acc
@@ -53,7 +52,6 @@ def foldl' (r : Range) (f : β → (i : Nat) → i ∈ r → β) (acc : β) : β
     have hi : ∀ {i}, i < n → i < n+1 := Nat.le_step
     f (foldl' ⟨n⟩ (λ acc i h => f acc i (hi h)) acc) n hn
 
-@[inline]
 def foldl'' (r : Range) (motive : (i : Nat) → Sort u)
   (f : (i : Nat) → i ∈ r → motive i → motive i.succ)
   (init : motive 0)
