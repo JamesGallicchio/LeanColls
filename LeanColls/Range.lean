@@ -28,7 +28,6 @@ We define folds over ranges in both directions. Noting that
 `List.foldl` and `List.foldr`.
 -/
 
-@[inline]
 def foldr (f : Nat → β → β) (acc : β) : Range → β
 | ⟨0⟩ => acc
 | ⟨n+1⟩ => foldr f (f n acc) ⟨n⟩
@@ -60,7 +59,7 @@ def foldl'' (r : Range) (motive : (i : Nat) → Sort u)
   (init : motive 0)
   : motive r.n
   :=
-  let rec @[inline] aux (n : Nat) (motive : (i : Nat) → Sort u)
+  let rec aux (n : Nat) (motive : (i : Nat) → Sort u)
     (f : (i : Nat) → i ∈ Range.mk n → motive i → motive i.succ)
     (i : Nat)
     (h_i : i ≤ n)
@@ -602,7 +601,7 @@ namespace Range.Complex
 
 
 def fold : (β → Int → β) → β → Range.Complex → β :=
-  let rec @[inline] loopUp {α} (start stop step : Int) (h_step : step > 0)
+  let rec loopUp {α} (start stop step : Int) (h_step : step > 0)
     (f : α → Int → α) acc i : α :=
     if h:i < stop then
       have : Int.natAbs (stop + step - (i+step))
@@ -629,7 +628,7 @@ def fold : (β → Int → β) → β → Range.Complex → β :=
       loopUp start stop step h_step f (f acc i) (i+step)
     else
       acc
-  let rec @[inline] loopDown {α} (start stop step : Int) (h_step : step < 0)
+  let rec loopDown {α} (start stop step : Int) (h_step : step < 0)
     (f : α → Int → α) acc i : α :=
     if h:i > stop then
       have : Int.natAbs (stop + step - (i+step))
