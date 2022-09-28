@@ -12,6 +12,8 @@ Representation specified by three things:
     for 0 <= i < m, backing[i] is initialized with a valid lean_object*
     for m <= i < n, backing[i] is uninitialized
 
+Note if n = 0 then backing is permitted to be NULL.
+
 TODO: Eventually we may be able to ensure that the finalizer is
 only called if all elements are uninitialized. Then we could
 generalize to avoid the m parameter entirely, and let the
@@ -235,7 +237,7 @@ lean_object* leancolls_array_resize(
 
     lean_object** new_backing = realloc(old_backing, sizeof(lean_object*) * new_len);
     // Check if realloc failed
-    if (new_backing == NULL) {
+    if (new_len > 0 && new_backing == NULL) {
         lean_panic_fn(NULL, lean_mk_string(
             "LeanColls.Array: Reallocation failed! (Out of memory?)"
         ));
