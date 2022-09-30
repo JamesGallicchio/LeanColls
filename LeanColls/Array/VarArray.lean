@@ -11,6 +11,7 @@ namespace LeanColls
 structure VarArray (α) where
   size : Nat
   backing : COWArray α size
+deriving Inhabited, Repr
 
 namespace VarArray
 

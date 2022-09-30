@@ -49,6 +49,8 @@ def new (cap : Nat := 16) (h_cap : 0 < cap ∧ cap < UInt64.size := by decide) :
     apply ih
     simp)⟩
 
+instance : Inhabited (HashMap κ τ) := ⟨HashMap.new⟩
+
 @[inline] private
 def calc_idx' (k : κ) (cap : Nat) (h_cap : cap > 0) (h : cap < UInt64.size) : Fin cap :=
   let idx := (hash k) % (UInt64.ofNat cap)
@@ -173,6 +175,8 @@ instance : Membership κ (HashMap κ τ) where
 instance : MapLike (HashMap κ τ) κ τ where
   get? := get?
   fold := fold
+
+instance : FoldableOps (HashMap κ τ) (κ × τ) := default
 
 theorem get_rebalance (k : κ) (m : HashMap κ τ)
   : m.rebalance.get? k = m.get? k

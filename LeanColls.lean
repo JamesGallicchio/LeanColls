@@ -7,6 +7,7 @@ import LeanColls.Array
 import LeanColls.BitVec
 import LeanColls.Buffer
 import LeanColls.Classes
+import LeanColls.EnumerableOps
 import LeanColls.FoldableOps
 import LeanColls.HashMap
 import LeanColls.IndexedOps

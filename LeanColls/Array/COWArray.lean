@@ -10,7 +10,7 @@ namespace LeanColls
 
 structure COWArray (α n) where
   backing : Array α n
-deriving Repr
+deriving Inhabited, Repr
 
 namespace COWArray
 variable (A : COWArray α n)

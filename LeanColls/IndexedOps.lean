@@ -121,17 +121,30 @@ def IndexedEq [DecidableEq τ] [Indexed C₁ τ] [Indexed C₂ τ] (c₁ : C₁)
 
 end IndexedOps
 
-class IndexedOps (C τ) [Indexed C τ] where
+class IndexedOps (C) (τ : Type u) [Indexed C τ] where
   slice (c : C) (off len : Nat)
     {h : off + len ≤ Size.size c} : IndexedOps.Slice C τ
-  map (c : C) (f : τ → τ') [Initable C' (Size.size c) τ'] : C'
+  map (c : C) {τ' : Type u} (f : τ → τ') [Initable C' (Size.size c) τ'] : C'
+  findi (c : C) (f : τ → Bool) : Option (Fin (Size.size c) × τ)
+  findMapi (c : C) {τ' : Type u} (f : τ → Option τ') : Option (Fin (Size.size c) × τ')
 
 namespace IndexedOps
 
 instance [Indexed C τ] : Inhabited (IndexedOps C τ) where
   default := {
     slice := λ c off len h => ⟨c,off,len,h⟩
-    map := λ c f => Initable.init (fun i => f (Indexed.nth c i))
+    map := λ c _ f => Initable.init (fun i => f (Indexed.nth c i))
+    findi := λ c f =>
+      View.view' (Range.mk (Size.size c))
+      |>.map (fun ⟨i,h⟩ => (⟨i,h⟩ : Fin (Size.size c)))
+      |> FoldableOps.find (f := fun i => f (Indexed.nth c i))
+      |> Option.map (fun i => (i, Indexed.nth c i))
+    findMapi := λ c _ f =>
+      View.view' (Range.mk (Size.size c))
+      |>.map (fun ⟨i,h⟩ => (⟨i,h⟩ : Fin (Size.size c)))
+      |> FoldableOps.findMap (f := fun i =>
+        f (Indexed.nth c i) |>.map (fun x => (i, x))
+        )
   }
 
 instance [Indexed C τ] [Foldable C τ] : FoldableOps C τ

@@ -104,9 +104,9 @@ class Unfoldable (C : Type u) (τ : outParam (Type v)) where
 Dual class to `Iterable`. Provides a builder which constructs
 a collection one item at a time.
 -/
-class Enumerable (C : Type u) (τ : Type v)
+class Enumerable (C : Type u) (τ : outParam (Type v))
   extends Unfoldable C τ where
-  ρ : Type v
+  ρ : Type w
   fromEnumerator : ρ → C
   insert : Option (τ × ρ) → ρ
   unfold c :=

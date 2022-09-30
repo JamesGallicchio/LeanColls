@@ -12,12 +12,15 @@ import LeanColls.List.Classes
 namespace LeanColls
 
 class FoldableOps.{uC,uT} (C : Type uC) (τ : outParam (Type uT)) where
-  toList : C → List τ
-  all : C → (τ → Bool) → Bool
-  contains : C → [BEq τ] → τ → Bool
-  sum : C → [Add τ] → [Zero τ] → τ
-  max : C → [L : LT τ] → [DecidableRel L.lt] → Option τ
-  toString : C → [ToString τ] → (sep : String) → String 
+  toList    (c : C) : List τ
+  all       (c : C) (f : τ → Bool) : Bool
+  any       (c : C) (f : τ → Bool) : Bool
+  contains  (c : C) [BEq τ] : τ → Bool
+  sum       (c : C) [Add τ] [Zero τ] : τ
+  max       (c : C) [L : LT τ] [DecidableRel L.lt] : Option τ
+  toString  (c : C) [ToString τ] (sep : String) : String 
+  find      (c : C) (f : τ → Bool) : Option τ
+  findMap   (c : C) (f : τ → Option τ') : Option τ'  
 
 namespace FoldableOps
 
@@ -28,8 +31,11 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
   all := λ c f =>
     Foldable.fold c (β := ULift Bool) (fun acc x => ⟨acc.down && f x⟩) ⟨true⟩
     |>.down
+  any := λ c f =>
+    Foldable.fold c (β := ULift Bool) (fun acc x => ⟨acc.down || f x⟩) ⟨false⟩
+    |>.down
   contains := λ c _ x  =>
-    Foldable.fold c (β := ULift Bool) (fun acc y => ⟨acc.down || BEq.beq x y⟩) ⟨true⟩
+    Foldable.fold c (β := ULift Bool) (fun acc y => ⟨acc.down || BEq.beq x y⟩) ⟨false⟩
     |>.down
   sum := λ c =>
     Foldable.fold c (fun acc x => acc + x) 0
@@ -41,18 +47,33 @@ def defaultImpl (C : Type u) (τ : Type v) [Foldable C τ] : FoldableOps C τ wh
   toString := λ c _ sep =>
     Foldable.fold c
       (fun
-      | ⟨none⟩   => λ x => ⟨some (ToString.toString x)⟩
-      | ⟨some x⟩ => λ y => ⟨some (x ++ sep ++ ToString.toString y)⟩)
+      | ⟨none⟩  , x => ⟨some (ToString.toString x)⟩
+      | ⟨some x⟩, y => ⟨some (x ++ sep ++ ToString.toString y)⟩)
       (⟨none⟩ : ULift (Option String))
     |>.down.getD ""
+  find := λ c f =>
+    Foldable.fold c
+      (fun
+      | none, x => if f x then some x else none
+      | some x, _ => some x)
+      none
+  findMap := λ c f =>
+    Foldable.fold c
+      (fun
+      | none, x => f x
+      | some x, _ => some x)
+      none
 
 def mapImpl' (F : C → Type u) (f : (c : C) → F c) [(c : C) → FoldableOps (F c) τ] : FoldableOps C τ := {
   toList    := λ c => FoldableOps.toList (f c)
   all       := λ c => FoldableOps.all (f c)
+  any       := λ c => FoldableOps.all (f c)
   sum       := λ c => FoldableOps.sum (f c)
   contains  := λ c => FoldableOps.contains (f c)
   max       := λ c => FoldableOps.max (f c)
   toString  := λ c => FoldableOps.toString (f c)
+  find      := λ c => FoldableOps.find (f c)
+  findMap   := λ c => FoldableOps.findMap (f c)
 }
 
 def mapImpl (f : C → C') [FoldableOps C' τ] : FoldableOps C τ :=
@@ -60,6 +81,9 @@ def mapImpl (f : C → C') [FoldableOps C' τ] : FoldableOps C τ :=
 
 instance [Foldable C τ] : Inhabited (FoldableOps C τ) where
   default := defaultImpl C τ
+
+
+/-! # Lemmas -/
 
 @[simp]
 theorem default_toList_list (L : List τ)
