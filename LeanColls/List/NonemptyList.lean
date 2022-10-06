@@ -17,3 +17,10 @@ namespace NonemptyList
 
 instance : Foldable (NonemptyList α) α where
   fold := λ ⟨hd,tl⟩ f acc => tl.foldl f (f acc hd)
+
+def toList : NonemptyList α → List α
+| ⟨hd,tl⟩ => hd::tl
+
+instance [Repr α] : Repr (NonemptyList α) := ⟨(reprPrec ·.toList)⟩
+
+instance [ToString α] : ToString (NonemptyList α) := ⟨(toString ·.toList)⟩
