@@ -1,3 +1,9 @@
+/*
+Copyright (c) 2022 James Gallicchio.
+
+Authors: James Gallicchio
+*/
+
 #include <lean/lean.h>
 #include <string.h>
 #include <stdlib.h>
