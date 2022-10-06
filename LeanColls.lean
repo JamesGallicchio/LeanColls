@@ -10,6 +10,7 @@ import LeanColls.Classes
 import LeanColls.EnumerableOps
 import LeanColls.FoldableOps
 import LeanColls.HashMap
+import LeanColls.Hole
 import LeanColls.IndexedOps
 import LeanColls.LazyList
 import LeanColls.List
