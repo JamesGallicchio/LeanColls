@@ -717,15 +717,6 @@ namespace List
         apply ih.symm
       )
 
-  theorem foldl_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
-    : (L.map f).foldl foldF foldAcc =
-      L.foldl (fun acc x => foldF acc (f x)) foldAcc
-    := by
-    induction L generalizing foldAcc with
-    | nil => simp [foldl]
-    | cons x xs ih =>
-      simp [foldl, ih]
-
   theorem foldl_filter (L : List τ) (f : τ → Bool) (foldF) (foldAcc : β)
     : (L.filter f).foldl foldF foldAcc =
       L.foldl (fun acc x => if f x then foldF acc x else acc) foldAcc
@@ -761,14 +752,6 @@ namespace List
   theorem foldr_cons_eq_foldl_append (L : List τ) (f : _ → β)
     : L.foldr (f · :: ·) [] = L.foldl (· ++ [f ·]) []
     := by rw [foldr_eq_map, foldl_eq_map]
-
-  theorem foldr_map (L : List τ) (f : τ → τ') (foldF) (foldAcc : β)
-    : (L.map f).foldr foldF foldAcc =
-      L.foldr (fun x acc => foldF (f x) acc) foldAcc
-    := by
-    induction L generalizing foldAcc with
-    | nil => simp
-    | cons x xs ih => simp [ih]
 
   theorem mem_of_map_iff (L : List τ) (f : τ → τ')
     : ∀ y, y ∈ L.map f ↔ ∃ x, x ∈ L ∧ f x = y

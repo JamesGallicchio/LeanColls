@@ -17,7 +17,7 @@ target leancolls_array.o (pkg : Package) : FilePath := do
   let oFile := pkg.buildDir / "c" / "leancolls_array.o"
   let srcJob ← inputFile <| pkg.dir / "bindings" / "leancolls_array.c"
   buildFileAfterDep oFile srcJob fun srcFile => do
-    let flags := #["-I", (← getLeanIncludeDir).toString]
+    let flags := #["-I", (← getLeanIncludeDir).toString, "-O3"]
     compileO "leancolls_array.c" oFile srcFile flags
 
 extern_lib libleancolls_array (pkg : Package) := do
@@ -29,7 +29,7 @@ target leancolls_hole.o (pkg : Package) : FilePath := do
   let oFile := pkg.buildDir / "c" / "leancolls_hole.o"
   let srcJob ← inputFile <| pkg.dir / "bindings" / "leancolls_hole.c"
   buildFileAfterDep oFile srcJob fun srcFile => do
-    let flags := #["-I", (← getLeanIncludeDir).toString]
+    let flags := #["-I", (← getLeanIncludeDir).toString, "-O3"]
     compileO "leancolls_hole.c" oFile srcFile flags
 
 extern_lib libleancolls_hole (pkg : Package) := do
