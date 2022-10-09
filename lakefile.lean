@@ -41,4 +41,4 @@ require mathlib from git
   "https://github.com/leanprover-community/mathlib4" @ "master"
 
 meta if get_config? docs = some "on" then
-require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "upgrade-lean"
+require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"

@@ -280,7 +280,6 @@ theorem toList_get (A : Array α n) (i : Fin n)
   simp [toList]
   rw [IndexedOps.get_toList_eq_get]
   simp [Indexed.nth]
-  rfl
 
 @[simp]
 theorem toList_set (A : Array α n) (i : Fin n) (x : α)
