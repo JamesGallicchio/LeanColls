@@ -21,7 +21,9 @@ def singleton (x : α) : COWArray α 1 := ⟨Array.init (λ _ => x)⟩
 
 @[inline] def get : Fin n → α := A.backing.get
 @[inline] def set (i : Fin n) (x : α) : COWArray α n :=
-  A.backing.copyIfShared |>.set i x |> COWArray.mk
+  match A with
+  | ⟨backing⟩ =>
+    backing.copyIfShared |>.set i x |> COWArray.mk
 
 @[inline] def update (i : Fin n) (f : α → α) : COWArray α n :=
   A.set i (f <| A.get i)

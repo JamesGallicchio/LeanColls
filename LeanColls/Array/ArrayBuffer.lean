@@ -5,7 +5,6 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Array.Basic
-import LeanColls.Array.VarArray
 
 namespace LeanColls
 
@@ -25,6 +24,9 @@ def empty (_ : Unit) (initCap : Nat := 16) (h_cap : 1 ≤ initCap := by decide) 
   Nat.zero_le _,
   ArrayUninit.new initCap
   ⟩
+
+instance : Inhabited (ArrayBuffer α) where
+  default := empty ()
 
 @[inline] def full (A : ArrayBuffer α) : Bool := A.size = A.cap
 
@@ -68,26 +70,40 @@ def push (A : ArrayBuffer α) (a : α) : ArrayBuffer α :=
   else
     A.push_notfull (by simp [full,h]) a
 
+def copyIfShared : ArrayBuffer α → ArrayBuffer α
+| ⟨cap, h_cap, size, h_size, backing⟩ =>
+  if backing.isExclusive
+  then ⟨cap, h_cap, size, h_size, backing⟩
+  else ⟨cap, h_cap, size, h_size,
+    ArrayUninit.init h_size (fun i => backing.get i i.isLt)⟩
+
+@[simp]
+theorem copyIfShared_eq (A : ArrayBuffer α)
+  : copyIfShared A = A
+  := by cases A; simp [copyIfShared]; split <;> simp
+        funext i h; simp
+
 def toArray (A : ArrayBuffer α) : Array α A.size :=
   match A with
-  | ⟨_, _, size, h_size, backing⟩ =>
-  if ArrayUninit.isExclusive A
+  | ⟨_, _, size, _, backing⟩ =>
+  if ArrayUninit.isExclusive backing
   then ⟨backing.resize size (Nat.le_refl _)⟩
-  else Array.init (n := size) (fun ⟨i,h⟩ =>
-    backing.get i (Nat.lt_of_lt_of_le h h_size) h)
-
-instance : Enumerable (VarArray α) α where
-  ρ := ArrayBuffer α
-  insert A :=
-    match A with
-    | some ⟨a,A⟩ => A.push a
-    | none => ArrayBuffer.empty ()
-  fromEnumerator A := ⟨A.size, ⟨A.toArray⟩⟩
+  else Array.init (fun ⟨i,h⟩ => backing.get i h)
 
 def foldl (f : _ → _ → _) (acc : β) (A : ArrayBuffer α) :=
   (Range.mk A.size).foldl' (fun acc i h =>
-    f acc (A.backing.get i (Nat.lt_of_lt_of_le h A.h_size) h)
+    f acc (A.backing.get i h)
   ) acc
 
 instance : Foldable (ArrayBuffer α) α where
   fold A f acc := A.foldl f acc
+
+instance : FoldableOps (ArrayBuffer α) α := default
+
+def get (A : ArrayBuffer α) (i : Fin A.size) : α :=
+  A.backing.get i i.isLt
+
+def set (A : ArrayBuffer α) (i : Fin A.size) (a : α) : ArrayBuffer α :=
+  match A with
+  | ⟨cap, h_cap, size, h_size, backing⟩ =>
+    ⟨cap, h_cap, size, h_size, backing.set i i.isLt a⟩

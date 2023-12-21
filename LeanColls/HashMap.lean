@@ -198,6 +198,11 @@ instance : MapLike (HashMap κ τ) κ τ where
 
 instance : FoldableOps (HashMap κ τ) (κ × τ) := default
 
+instance [ToString κ] [ToString τ] : ToString (HashMap κ τ) where
+  toString m :=
+    View.view m |>.map (fun (k,v) => s!"{k} -> {v}")
+                |> FoldableOps.toList |> toString
+
 theorem get_rebalance (k : κ) (m : HashMap κ τ)
   : m.rebalance.get? k = m.get? k
   := by

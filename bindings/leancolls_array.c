@@ -75,7 +75,8 @@ static inline size_t leancolls_array_unbox_size(b_lean_obj_arg n) {
 
 // Exclusivity checking
 
-uint8_t leancolls_array_isexclusive(b_lean_obj_arg a) {
+uint8_t leancolls_array_isexclusive(b_lean_obj_arg n, b_lean_obj_arg m, b_lean_obj_arg a) {
+    assert (!lean_is_scalar(a));
     if (lean_is_exclusive(a))
         return 1;
     else

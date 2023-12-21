@@ -5,34 +5,34 @@ package leancolls {
   precompileModules := true
 }
 
-@[defaultTarget]
+@[default_target]
 lean_lib LeanColls
 
-@[defaultTarget]
+@[default_target]
 lean_exe test {
   root := `Main
 }
 
-target leancolls_array.o (pkg : Package) : FilePath := do
+target leancolls_array.o (pkg : NPackage _) : FilePath := do
   let oFile := pkg.buildDir / "c" / "leancolls_array.o"
   let srcJob ← inputFile <| pkg.dir / "bindings" / "leancolls_array.c"
   buildFileAfterDep oFile srcJob fun srcFile => do
     let flags := #["-I", (← getLeanIncludeDir).toString, "-O3"]
     compileO "leancolls_array.c" oFile srcFile flags
 
-extern_lib libleancolls_array (pkg : Package) := do
+extern_lib libleancolls_array (pkg : NPackage _) := do
   let name := nameToStaticLib "leancolls_array"
   let ffiO ← fetch <| pkg.target ``leancolls_array.o
   buildStaticLib (pkg.buildDir / "lib" / name) #[ffiO]
 
-target leancolls_hole.o (pkg : Package) : FilePath := do
+target leancolls_hole.o (pkg : NPackage _) : FilePath := do
   let oFile := pkg.buildDir / "c" / "leancolls_hole.o"
   let srcJob ← inputFile <| pkg.dir / "bindings" / "leancolls_hole.c"
   buildFileAfterDep oFile srcJob fun srcFile => do
     let flags := #["-I", (← getLeanIncludeDir).toString, "-O3"]
     compileO "leancolls_hole.c" oFile srcFile flags
 
-extern_lib libleancolls_hole (pkg : Package) := do
+extern_lib libleancolls_hole (pkg : NPackage _) := do
   let name := nameToStaticLib "leancolls_hole"
   let ffiO ← fetch <| pkg.target ``leancolls_hole.o
   buildStaticLib (pkg.buildDir / "lib" / name) #[ffiO]

@@ -16,6 +16,9 @@ namespace IndexedOps
 instance [Indexed C τ] : Membership τ C where
   mem x c := ∃ i, x = Indexed.nth c i
 
+instance [Indexed C τ] : GetElem C Nat τ (fun c i => i < Size.size c) where
+  getElem c i h := Indexed.nth c ⟨i,h⟩
+
 instance [Indexed C τ] : Iterable C τ where
   ρ := Σ' (c : C), Iterable'.ρ Nat (Range.mk <| Size.size c)
   toIterator c := ⟨c, Iterable'.toIterator (Range.mk <| Size.size c)⟩

@@ -31,7 +31,7 @@ Build an array of length `n` where all elements are instantiated to `x`.
 def new (x : α) (n : Nat) : Array α n :=
   have res := Range.foldl'' ⟨n⟩
     (motive := fun i => Σ' h, Σ' (A : ArrayUninit α n i h),
-      ∀ j hm, A.get j (Nat.lt_of_lt_of_le hm h) hm = x)
+      ∀ j hm, A.get j hm = x)
     (fun _ h_i ⟨_, A, h⟩ =>
       ⟨h_i, A.push x h_i, by
         intro j hm
@@ -46,22 +46,7 @@ def new (x : α) (n : Nat) : Array α n :=
 Build an array of length `n` where element `i` is instantiated to `f i`.
 -/
 def init {α : Type u} {n : Nat} (f : Fin n → α) : Array α n :=
-  have res := Range.foldl'' ⟨n⟩
-    (motive := fun i => Σ' h, Σ' (A : ArrayUninit α n i h),
-      ∀ j hm, A.get j (Nat.lt_of_lt_of_le hm h) hm =
-              f ⟨j,(Nat.lt_of_lt_of_le hm h)⟩)
-    (fun i h_i ⟨_, A, h⟩ =>
-      ⟨h_i, A.push (f ⟨i,h_i⟩) h_i, by
-        intro j hj
-        simp
-        have := Nat.lt_or_eq_of_le <| Nat.le_of_succ_le_succ hj
-        cases this
-        case inr hj => simp [hj]
-        case inl hj =>
-          simp [Nat.ne_of_lt hj]
-          apply h⟩
-    ) ⟨Nat.zero_le _, ArrayUninit.new n, by intro _ hj; contradiction⟩
-  ⟨res.2.1⟩
+  ⟨ArrayUninit.init (Nat.le_refl _) f⟩
 
 /-!
 ### Array.get
@@ -71,7 +56,7 @@ by its `get` (see `Array.ext`).
 -/
 @[inline]
 def get (A : @& Array α n) (i : @& Fin n) : α
-  := A.data.get i.val i.isLt i.isLt
+  := A.data.get i.val i.isLt
 
 /-!
 ### Array.set
@@ -93,7 +78,7 @@ theorem ext {α n} {A B : Array α n} : A = B ↔ A.get = B.get
   intro h; rw [h]
   intro h; cases A; cases B
   simp [get] at h ⊢
-  funext i h_i _
+  funext i h_i
   exact congrFun h ⟨i,h_i⟩
 
 @[simp]
@@ -112,11 +97,6 @@ theorem get_init {f : Fin n → α} {i}
   : get (init f) i = f i
   := by
   simp [get, init]
-  generalize Range.foldl'' _ _ _ _ = res
-  match res with
-  | ⟨_, _, h⟩ =>
-  simp
-  apply h
 
 theorem get_of_set_eq (f : Array α n) (i : Fin n) (x : α) {i' : Fin n} (h_i : i = i')
   : (f.set i x).get i' = x
@@ -151,8 +131,9 @@ theorem copy_def (A : Array α n) : A.copy = A
   funext i
   simp
 
-def copyIfShared (A : Array α n) : Array α n :=
-  if ArrayUninit.isExclusive A then A else copy A
+def copyIfShared : Array α n → Array α n
+| ⟨backing⟩ =>
+  if ArrayUninit.isExclusive backing then ⟨backing⟩ else copy ⟨backing⟩
 
 @[simp]
 theorem copyIfShared_def (A : Array α n) : A.copyIfShared = A
@@ -190,7 +171,7 @@ def ofList (L : List α) : Array α L.length :=
       (motive := fun i =>
         Σ' h, Σ' (acc : ArrayUninit α L.length i h) (rest : List α),
         rest = L.drop i ∧ ∀ j h_j,
-        acc.get j (Nat.lt_of_lt_of_le h_j h) h_j =
+        acc.get j h_j =
           L.get ⟨j, Nat.lt_of_lt_of_le h_j h⟩)
       (fun i h ⟨_, acc, rest, h_rest, h_acc⟩ =>
         match rest with

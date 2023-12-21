@@ -42,12 +42,12 @@ namespace LeanColls
 Exposes `toIterator`, which gives an object that can traverse
 the collection one item at a time.
 -/
-class Iterable (C : Type u) (τ : Type v) where
+class Iterable (C : Type u) (τ : outParam (Type v)) where
   ρ : Type w
   step : ρ → Option (τ × ρ)
   toIterator : C → ρ
 
-class Iterable' (C : Type u) (τ : Type v) (mem : outParam (Membership τ C)) where
+class Iterable' (C : Type u) (τ : outParam (Type v)) (mem : outParam (Membership τ C)) where
   ρ : C → Type w
   step : {c : C} → ρ c → Option ({ t : τ // mem.mem t c } × ρ c)
   toIterator : (c : C) → ρ c
@@ -77,7 +77,7 @@ Foldables can be Iterable by first collecting everything
 into a list. Note that the iteration occurs in the same
 order that elements are applied in when folding.
 -/
-@[defaultInstance]
+@[default_instance]
 instance [Foldable C τ] : Iterable C τ where
   ρ := List τ
   step := List.front?

@@ -65,8 +65,6 @@ theorem shiftRight_succ (n i : Nat)
 theorem zero_shiftRight (i : Nat) : 0 >>> i = 0
   := by
   induction i <;> simp [shiftRight_zero, shiftRight_succ]
-  rw [(by assumption : _ >>> _ = 0)]
-  simp
 
 theorem get_empty (n i)
   : get (empty n) i = false
@@ -74,7 +72,6 @@ theorem get_empty (n i)
   match i with
   | ⟨i,h_i⟩ =>
   simp [empty,get]
-  simp [zero_shiftRight]
 
 def toString (bv : BitVec n) :=
   String.leftpad n '0' (String.mk (Nat.toDigits 2 bv.val))
@@ -85,5 +82,3 @@ instance : DecidableEq (BitVec n) :=
   cast (by simp [BitVec]) (inferInstance : DecidableEq (Fin (2^n)))
 
 instance : Inhabited (BitVec n) := ⟨empty n⟩
-
-end BitVec

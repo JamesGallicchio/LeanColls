@@ -119,10 +119,10 @@ instance : Append (LazyList α) :=
     induction l₁ using ind
     simp [HAppend.hAppend, Append.append, append, List.append, toList]
     case cons hd tl tl_ih =>
-      simp [HAppend.hAppend, Append.append, append] at tl_ih |-
+      simp [HAppend.hAppend, Append.append, append] at tl_ih ⊢
       simp [tl_ih, toList, Thunk.get]
     case delayed t t_ih =>
-      simp [HAppend.hAppend, Append.append, append] at t_ih |-
+      simp [HAppend.hAppend, Append.append, append] at t_ih ⊢
       assumption
 
 @[simp] theorem length_append (l₁ l₂ : LazyList α)
@@ -143,12 +143,12 @@ instance : Append (LazyList α) :=
     induction l₁ using ind generalizing l₂
     simp
     case cons hd tl tl_ih =>
-      simp [Thunk.get] at tl_ih |-
+      simp [Thunk.get] at tl_ih ⊢
       have := tl_ih (cons hd l₂)
       rw [this]
       simp [HAppend.hAppend, Append.append, List.append]
     case delayed t t_ih =>
-      simp [HAppend.hAppend, Append.append, append] at t_ih |-
+      simp [HAppend.hAppend, Append.append, append] at t_ih ⊢
       exact t_ih l₂
 
 @[simp] theorem length_revAppend (l₁ l₂ : LazyList α)
@@ -270,7 +270,7 @@ end LazyList
 private unsafe def List.toLazyUnsafe {α : Type u} (xs : List α) : LazyList α :=
   unsafeCast xs
 
-@[implementedBy List.toLazyUnsafe]
+@[implemented_by List.toLazyUnsafe]
 def List.toLazy {α : Type u} : List α → LazyList α
 | []     => LazyList.nil
 | (h::t) => LazyList.cons h (toLazy t)

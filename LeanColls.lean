@@ -20,6 +20,8 @@ import LeanColls.Stream
 import LeanColls.Tuple
 import LeanColls.View
 
+#check List.countP
+
 /-!
 # Lean Collections Library
 

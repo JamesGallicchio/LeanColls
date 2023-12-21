@@ -17,7 +17,7 @@ instance : Nonempty (Uninit α) := (UninitPointed α).property
 noncomputable opaque uninit {α} : Uninit α
 
 unsafe def initUnsafe (a : α) : Uninit α := unsafeCast a
-@[implementedBy initUnsafe]
+@[implemented_by initUnsafe]
 opaque init (a : α) : Uninit α
 
 noncomputable opaque getValue? : Uninit α → Option α
@@ -61,7 +61,7 @@ theorem isInit_uninit : ¬(@uninit α).isInit := by
 
 unsafe def getValueUnsafe (a : Uninit α) (_ : a.isInit) : α := unsafeCast a
 
-@[implementedBy getValueUnsafe]
+@[implemented_by getValueUnsafe]
 def getValue (a : Uninit α) (h : a.isInit) : α := 
   match getValue? a, (by unfold isInit at h; exact h : Option.isSome (getValue? a)) with
   | some a, _ => a

@@ -34,7 +34,6 @@ theorem drop_empty (n : Nat) :
 theorem drop_adds [Stream ρ τ] (s : ρ) (n₁ n₂ : Nat) :
   drop (drop s n₁) n₂ = drop s (n₁ + n₂)
   := by
-  simp
   induction n₁ generalizing s
   case zero =>
     simp [drop]

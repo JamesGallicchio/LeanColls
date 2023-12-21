@@ -4,6 +4,8 @@ Copyright (c) 2022 James Gallicchio.
 Authors: James Gallicchio
 -/
 
+import LeanColls.Range
+
 namespace LeanColls
 
 @[extern "leancolls_array_initialize"] private opaque arrayInit : IO Unit
@@ -24,7 +26,7 @@ axiom partiallyInit_inhabited {α n m h} (A : ArrayUninit α n (.succ m) h) : In
 opaque new (n : @& Nat) : ArrayUninit α n 0 (Nat.zero_le _)
 
 @[extern "leancolls_array_get"]
-opaque get {n m : @& Nat} {h} (A : @& ArrayUninit α n m h) (i : @& Nat) (h_in : i < n) (h_im : i < m) : α
+opaque get {n m : @& Nat} {h} (A : @& ArrayUninit α n m h) (i : @& Nat) (h_im : i < m) : α
   := match m with
   | 0 => by contradiction
   | m+1 => (partiallyInit_inhabited A).default
@@ -36,33 +38,33 @@ opaque push {n m : @& Nat} {h} (A : ArrayUninit α n m h) (x : α) (h' : m < n) 
 opaque pop {n m : @& Nat} {h} (A : ArrayUninit α n m.succ h) : ArrayUninit α n m (Nat.le_of_succ_le h)
 
 @[extern "leancolls_array_set"]
-opaque set {n m : @& Nat} {h} (A : ArrayUninit α n m h) (i : @& Nat) (h_i : i < n) (x : α) : ArrayUninit α n m h
+opaque set {n m : @& Nat} {h} (A : ArrayUninit α n m h) (i : @& Nat) (h_i : i < m) (x : α) : ArrayUninit α n m h
 
 @[extern "leancolls_array_resize"]
 opaque resize {n m : @& Nat} {h} (A : ArrayUninit α n m h) (n' : @& Nat) (h' : m <= n') : ArrayUninit α n' m h'
 
 @[extern "leancolls_array_isexclusive"]
-opaque isExclusive (a : @& A) : Bool
+opaque isExclusive (a : @& ArrayUninit α n m h) : Bool
 
 @[simp]
-axiom get_push {α n m h} {A : ArrayUninit α n m h} {x h' i hn hm}
-  : get (push A x h') i hn hm =
+axiom get_push {α n m h} {A : ArrayUninit α n m h} {x h' i hm}
+  : get (push A x h') i hm =
     if h_i : i = m then x
-    else get A i hn (Nat.lt_of_le_of_ne (Nat.le_of_succ_le_succ hm) h_i)
+    else get A i (Nat.lt_of_le_of_ne (Nat.le_of_succ_le_succ hm) h_i)
 
 @[simp]
-axiom get_pop {α n m h} {A : ArrayUninit α n (.succ m) h} {i hn hm}
-  : get (pop A) i hn hm = get A i hn (Nat.le_step hm)
+axiom get_pop {α n m h} {A : ArrayUninit α n (.succ m) h} {i hm}
+  : get (pop A) i hm = get A i (Nat.le_step hm)
 
 @[simp]
-axiom get_set {α n m h} {A : ArrayUninit α n m h} {i hi x j hn hm}
-  : get (set A i hi x) j hn hm =
+axiom get_set {α n m h} {A : ArrayUninit α n m h} {i hi x j hm}
+  : get (set A i hi x) j hm =
     if i = j then x
-    else get A j hn hm
+    else get A j hm
 
 @[simp]
-axiom get_resize {α n m h} {A : ArrayUninit α n m h} {n' h' i hn hm}
-  : get (resize A n' h') i hn hm = get A i (Nat.lt_of_lt_of_le hm h) hm
+axiom get_resize {α n m h} {A : ArrayUninit α n m h} {n' h' i hm}
+  : get (resize A n' h') i hm = get A i hm
 
 axiom ext {α n m h} {A B : ArrayUninit α n m h} : A.get = B.get → A = B
 
@@ -72,3 +74,29 @@ theorem ext_iff {α n m h} {A B : ArrayUninit α n m h}
   constructor
   intro eq; rw [eq]
   exact ext
+
+def init {α : Type u} {n m : Nat} (hn : m ≤ n) (f : Fin m → α) : ArrayUninit α n m hn :=
+  have res := Range.foldl'' ⟨m⟩
+    (motive := fun i => Σ' h, Σ' (A : ArrayUninit α n i (Nat.le_trans h hn)),
+      ∀ j hm, A.get j hm =
+              f ⟨j, (Nat.lt_of_lt_of_le hm h)⟩)
+    (fun i h_i ⟨_, A, h⟩ =>
+      ⟨h_i, A.push (f ⟨i,h_i⟩) (Nat.lt_of_lt_of_le h_i hn), by
+        intro j hj
+        simp
+        have := Nat.lt_or_eq_of_le <| Nat.le_of_succ_le_succ hj
+        cases this
+        case inr hj => simp [hj]
+        case inl hj =>
+          simp [Nat.ne_of_lt hj]
+          apply h⟩
+    ) ⟨Nat.zero_le _, ArrayUninit.new n, by intro _ hj; contradiction⟩
+  res.2.1
+
+@[simp]
+theorem get_init {α : Type u} (hm : m ≤ n) (f : Fin m → α) (i hi)
+  : get (init hm f) i hi = f ⟨i,hi⟩
+  := by
+  simp [init]
+  generalize Range.foldl'' _ _ _ _ = res
+  apply res.2.2
