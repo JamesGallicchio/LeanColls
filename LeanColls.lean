@@ -1,26 +1,13 @@
 /-
-Copyright (c) 2022 James Gallicchio.
+Copyright (c) 2023 James Gallicchio.
 -/
 
-import LeanColls.AuxLemmas
-import LeanColls.Array
-import LeanColls.BitVec
-import LeanColls.Buffer
-import LeanColls.Classes
-import LeanColls.EnumerableOps
-import LeanColls.FoldableOps
-import LeanColls.HashMap
-import LeanColls.Hole
-import LeanColls.IndexedOps
-import LeanColls.LazyList
-import LeanColls.List
-import LeanColls.Queue
-import LeanColls.Range
-import LeanColls.Stream
-import LeanColls.Tuple
-import LeanColls.View
-
-#check List.countP
+import LeanColls.Classes.Bag
+import LeanColls.Classes.Map
+import LeanColls.Classes.Seq
+import LeanColls.Data.Array
+import LeanColls.Data.RBFT
+import LeanColls.Util.Cached
 
 /-!
 # Lean Collections Library
@@ -28,7 +15,4 @@ import LeanColls.View
 Generic collections implemented in pure Lean 4.
 
 Heavy WIP.
-
-
-
 -/

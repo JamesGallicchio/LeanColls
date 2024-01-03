@@ -1,12 +1,13 @@
 /-
-Copyright (c) 2022 James Gallicchio.
+Copyright (c) 2023 James Gallicchio.
 
 Authors: James Gallicchio
 -/
 
-import LeanColls.AuxLemmas
-import LeanColls.Array
-import LeanColls.IndexedOps
+import LeanColls.Data.Array
+import LeanColls.Util.Cached
+
+--import Mathlib
 
 /-!
 # Radix Balanced Finger Trees
@@ -32,203 +33,207 @@ See the [Scala issue on GitHub](https://github.com/scala/scala/pull/8534)
 introducing this collection. There are no formal references.
 -/
 
-namespace LeanColls.RadixBalancedFT
+open LeanColls Classes Util
 
-@[inline] constant WIDTH_PREV : Nat := 31
-@[inline] def WIDTH : Nat := WIDTH_PREV.succ
+namespace LeanColls.Data.RBFT
+
+@[inline] opaque WIDTH_PRED : Nat := 31
+@[inline] def WIDTH : Nat := WIDTH_PRED.succ
 @[simp] theorem WIDTH_pos : 0 < WIDTH := Nat.zero_lt_succ _
 
-/- A hypercube array thing with `n` dimensions, each
+/- A hypercube array with `n` dimensions, each
   `WIDTH` wide, e.g. a total capacity of `WIDTH ^ n`
 -/
 def HyperArray (α : Type u) : Nat → Type u
 | 0   => α
-| n+1 => COWArray (HyperArray α n) WIDTH
+| n+1 => NArray (HyperArray α n) WIDTH
 
 namespace HyperArray
 
 @[inline, simp]
 def size (_ : HyperArray α n) : Nat := WIDTH ^ n
 
+def ofFn : {n : Nat} → (Fin (WIDTH ^ n) → α) → HyperArray α n
+| 0, f => f ⟨0, by simp⟩
+| n+1, f => NArray.ofFn fun ⟨i,hi⟩ => ofFn fun ⟨j,hj⟩ =>
+    f ⟨i*j, by rw [Nat.pow_succ, Nat.mul_comm]; apply mul_lt_mul'' hj hi; repeat simp⟩
+
 def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
 | 0,   a, ⟨0,_⟩   => a
 | n+1, A, ⟨i,h_i⟩ =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
-  have h_q : q < WIDTH := by
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
-    rw [Nat.pow_succ, Nat.mul_comm] at h_i
-    assumption
+  have h_q : q < WIDTH := Nat.div_lt_of_lt_mul h_i
   have h_r : r < WIDTH^n :=
     Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
-  COWArray.get A ⟨q, h_q⟩
+  Indexed.get (C := NArray ..) A ⟨q, h_q⟩
   |>.get ⟨r, h_r⟩
 
+@[simp] theorem get_ofFn (f : Fin (WIDTH ^ n) → α)
+  : get (ofFn f) = f := by
+  ext i
+  induction n with
+  | zero =>
+    match i with
+    | ⟨0,_⟩ => simp [get, ofFn]
+  | succ n ih =>
+    sorry
+
+/- todo: make a tailrec version of this
+that uses a heterogeneous stack -/
 def set : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α → HyperArray α n
 | 0,   _, ⟨0,_⟩  , a => a
 | n+1, A, ⟨i,h_i⟩, a =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
-  have h_q : q < WIDTH := by
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
-    rw [Nat.pow_succ, Nat.mul_comm] at h_i
-    assumption
+  have h_q : q < WIDTH := Nat.div_lt_of_lt_mul h_i
   have h_r : r < WIDTH^n :=
     Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
-  COWArray.update A ⟨q, h_q⟩
+  Indexed.update (C := NArray ..) A ⟨q, h_q⟩
   <| λ A' => set A' ⟨r, h_r⟩ a
 
-theorem get_of_set (A : HyperArray α n) (i j : Fin (WIDTH ^ n)) (x : α)
+theorem get_set {n : Nat} (A : HyperArray α n) (i x j)
   : (A.set i x |>.get j) = if i = j then x else A.get j
   := by
   induction n with
   | zero =>
-    simp [HyperArray, Nat.pow_zero] at A i j
-    cases i; case mk i h_i =>
-    cases j; case mk j h_j =>
-    have : i = 0 := Nat.eq_zero_of_le_zero <| Nat.le_of_succ_le_succ h_i
-    cases this
-    have : j = 0 := Nat.eq_zero_of_le_zero <| Nat.le_of_succ_le_succ h_j
-    cases this
+    match i,j with
+    | ⟨0,_⟩, ⟨0,_⟩ =>
     simp [set, get]
   | succ n ih =>
-    simp [HyperArray, Nat.pow_zero] at A i j
-    cases i; case mk i h_i =>
-    cases j; case mk j h_j =>
-    by_cases i = j
-    case inl h =>
-      simp [h, set, get, COWArray.update, COWArray.get, COWArray.set, ih]
-    case inr h =>
-      simp [h]
-      by_cases i / WIDTH ^ n = j / WIDTH ^ n
-      case inl h' =>
-        simp [h', set, get, COWArray.update, COWArray.get, COWArray.set, ih]
-        have : i % WIDTH ^ n ≠ j % WIDTH ^ n := by
-          clear A x ih
-          rw [←Nat.div_add_mod i (WIDTH ^ n), ←Nat.div_add_mod j (WIDTH ^ n)] at h
-          rw [h'] at h
-          clear h'
-          exact h ∘ (congrArg _)
-        simp [this]
-      case inr h' =>
-        simp [h', set, get, COWArray.update, COWArray.get, COWArray.set]
-        simp [Array.copy, Array.init_eq_mk, Array.get, Array.set]
+    generalize hqi : i / WIDTH^n = qi
+    generalize hri : i % WIDTH^n = ri
+    generalize hqj : j / WIDTH^n = qj
+    generalize hqj : j % WIDTH^n = rj
+    unfold set; unfold get
+    simp [*]
+    generalize hqif : Fin.mk qi _ = qif
+    generalize hrif : Fin.mk ri _ = rif
+    generalize hqjf : Fin.mk qj _ = qjf
+    generalize hrjf : Fin.mk rj _ = rjf
+    rw [LawfulIndexed.get_update]
+    split
+    next h =>
+      rw [ih]
+      cases h
+      congr 1
+      subst_vars
+      rcases i with ⟨i,hi⟩; rcases j with ⟨j,hj⟩
+      simp at hqjf ⊢
+      refine ⟨?_, fun | rfl => rfl⟩
+      intro h
+      have := (Nat.div_mod_unique ?_).mp ⟨hqjf.symm, h⟩
+      · rw [Nat.add_comm, Nat.div_add_mod] at this
+        exact this.1.symm
+      simp
+    next h =>
+      suffices i ≠ j by simp [this]
+      intro contra
+      subst_vars
+      simp at h
 
-def repr [R : Repr α] : {n : Nat} → Repr (HyperArray α n)
-| 0 => R
-| n+1 => @COWArray.instReprCOWArray _ _ (repr)
+instance : Indexed (HyperArray α n) (Fin (WIDTH ^ n)) α where
+  ofFn := ofFn
+  get := get
+  set := set
 
-instance [Repr α] : Repr (HyperArray α n) := repr
+instance : LawfulIndexed (HyperArray α n) (Fin (WIDTH ^ n)) α where
+  get_ofFn := get_ofFn
+  get_set := get_set
+  get_update := by simp [Indexed.update, Indexed.get, get_set]
 
 end HyperArray
 
 structure HyperRect (α : Type u) (n : Nat) : Type u where
-  (w : Nat)
-  (backing : COWArray (HyperArray α n) w)
-  (size : Cached (w * WIDTH ^ n))
-deriving Repr
+  (backing : Array (HyperArray α n))
+  (size : Cached (backing.size * WIDTH ^ n))
 
 namespace HyperRect
 
-def ofArray {w} (backing : COWArray (HyperArray α n) w) : HyperRect α n :=
-  ⟨w, backing, cached _⟩
+@[simp] def width (A : HyperRect α n) := A.backing.size
 
-def empty : HyperRect α n := ofArray (COWArray.empty)
+def ofArray (backing : Array (HyperArray α n)) : HyperRect α n :=
+  ⟨backing, cached _⟩
+
+def empty : HyperRect α n := ofArray (Array.empty)
+
+@[simp] theorem size_empty : Array.size (@empty α n).backing = 0 := rfl
 
 def singleton (A : HyperArray α n) : HyperRect α n :=
-  ⟨1, COWArray.singleton A, cached _⟩
+  ⟨Array.singleton A, cached _⟩
 
-def fullToHyperArray : (r : HyperRect α n) → r.w = WIDTH → HyperArray α n.succ
-| ⟨_, backing, _⟩, h =>
-  backing |> cast (by simp at h; simp [HyperArray, h])
-
-theorem size_eq_sum_sizes (F : HyperRect α n)
-  : Foldable.fold (λ x (acc : Nat) => x.size + acc) 0 F.backing = F.size
-  := by
-  match F with
-  | ⟨w, ⟨backing⟩, _⟩ =>
-  simp
-  unfold Foldable.fold
-  simp [COWArray.instFoldableCOWArray]
-  unfold Foldable.fold
-  simp [instFoldable]
-  simp [Indexed.size, Indexed.nth]
-  apply Range.fold_ind (motive := λ w res => res = w * WIDTH ^ n)
-  case init => simp
-  case step =>
-  intro i acc h_i h_acc
-  simp [h_acc, Nat.succ_mul, Nat.add_comm]
+def fullToHyperArray : (r : HyperRect α n) → r.width = WIDTH → HyperArray α n.succ
+| ⟨backing, _⟩, (h : backing.size = WIDTH) =>
+  NArray.ofArray backing |>.cast h
 
 def get : (A : HyperRect α n) → Fin A.size → α
-| ⟨w,A,_⟩, ⟨i,h_i⟩ =>
+| ⟨A,_⟩, ⟨i,h_i⟩ =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
   have h_q := by
     simp at h_i
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
-    assumption
+    convert Nat.div_lt_div_of_lt_of_dvd _ h_i
+    · simp
+    · simp
   have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
-  COWArray.get A ⟨q, h_q⟩
+  Array.get A ⟨q, h_q⟩
   |>.get ⟨r, h_r⟩
 
 def set : (A : HyperRect α n) → Fin A.size → α → HyperRect α n
-| ⟨w,A,size⟩, ⟨i,h_i⟩, a =>
+| ⟨A,size⟩, ⟨i,h_i⟩, a =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
   have h_q := by
     simp at h_i
-    apply Nat.lt_of_mul_lt $ Nat.pos_pow_of_pos _ (by simp)
-    assumption
+    convert Nat.div_lt_div_of_lt_of_dvd _ h_i
+    · simp
+    · simp
   have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
-  ⟨w,
-    COWArray.update A ⟨q, h_q⟩ <| λ A' => A'.set ⟨r, h_r⟩ a,
-    size⟩
+  ⟨ Array.update A ⟨q, h_q⟩ <| λ A' => A'.set ⟨r, h_r⟩ a,
+    cached' size (by simp)⟩
 
 def cons : HyperArray α n → HyperRect α n → HyperRect α n
-| x, ⟨w,A,size⟩ =>
-  ⟨w.succ, A.cons x,
+| x, ⟨A,size⟩ =>
+  ⟨A.cons x,
     cached' (size.val + WIDTH ^ n) (by simp [Nat.succ_mul])⟩
+
+@[simp] theorem size_cons {A : HyperArray α n}
+  : (cons A R).backing.size = R.backing.size + 1 := by
+  simp [cons]
 
 def snoc : HyperRect α n → HyperArray α n → HyperRect α n
-| ⟨w,A,size⟩, x =>
-  ⟨w.succ, A.snoc x,
+| ⟨A,size⟩, x =>
+  ⟨A.snoc x,
     cached' (size.val + WIDTH ^ n) (by simp [Nat.succ_mul])⟩
 
-def front? : HyperRect α n → Option (HyperArray α n × HyperRect α n)
-| ⟨0,_,_⟩ => none
-| ⟨w+1, A, size⟩ =>
-  match A.front with
-  | (x, A') =>
-  some (x, ⟨w, A',
-      cached' (size.val - WIDTH ^ n) (by
-        simp [Nat.succ_mul, Nat.add_sub_cancel])⟩
-  )
+@[simp] theorem size_snoc {A : HyperArray α n}
+  : (snoc R A).backing.size = R.backing.size + 1 := by
+  simp [snoc]
 
-theorem size_front?_none : (r : HyperRect τ n) → front? r = none → r.size.val = 0
-| ⟨w, A, _⟩, h => by
-  simp [front?] at *
-  split at h
-  case h_1 h_r =>
-    simp at h_r
-    simp [h_r.left]
-  case h_2 =>
-    contradiction
+def front? : HyperRect α n → Option (HyperArray α n × HyperRect α n)
+| ⟨A,size⟩ =>
+  if h : A.size > 0 then
+    let (x, A') := NArray.ofArray A
+      |>.cast (Nat.sub_add_cancel h).symm |>.front
+    some (x, ⟨A'.data, cached' (size - WIDTH^n) (by
+      simp [A'.hsize, Nat.mul_sub_right_distrib])⟩)
+  else
+    none
 
 def back? : HyperRect α n → Option (HyperRect α n × HyperArray α n)
-| ⟨0,_,_⟩ => none
-| ⟨w+1, A, size⟩ =>
-  match A.back with
-  | (A', x) =>
-  some (
-    ⟨w, A',
-      cached' (size.val - WIDTH ^ n) (by
-        simp [Nat.succ_mul, Nat.add_sub_cancel])⟩,
-    x
-  )
+| ⟨A, size⟩ =>
+  if h : A.size > 0 then
+    let (A', x) := NArray.ofArray A
+      |>.cast (Nat.sub_add_cancel h).symm |>.back
+    some (⟨A'.data, cached' (size - WIDTH^n) (by
+      simp [A'.hsize, Nat.mul_sub_right_distrib])⟩, x)
+  else
+    none
 
 end HyperRect
 
-/-!
+
+/--
 ## FingerList
 
 A linked-list-like representation of the prefix/suffix fingers.
@@ -238,7 +243,6 @@ inductive FingerList (τ : Type u) (n : Nat) : Nat → Type u
 | base  : FingerList τ n n
 | joint : (hd : HyperRect τ m) → (tl : FingerList τ n m.succ)
           → FingerList τ n m
-deriving Repr
 
 namespace FingerList
 
@@ -262,12 +266,12 @@ def size : FingerList τ n m → Nat
 def validList : FingerList τ n m → Bool
 | base => true
 | joint hd tl =>
-  hd.w ≤ WIDTH && validList tl
+  hd.width ≤ WIDTH && validList tl
 
 def isFull : FingerList τ n m → Bool
 | base => true
 | joint hd tl =>
-  hd.w = WIDTH && isFull tl
+  hd.width = WIDTH && isFull tl
 
 def extend (new : HyperRect τ n) : FingerList τ n m → FingerList τ n.succ m
 | base => joint new base
@@ -275,13 +279,13 @@ def extend (new : HyperRect τ n) : FingerList τ n m → FingerList τ n.succ m
 
 def unextend : {n m : Nat} → m ≤ n → FingerList τ n.succ m → HyperRect τ n × FingerList τ n m
 | _, _, h, base => False.elim (Nat.ne_of_lt h rfl)
-| _, _, h, joint hd base => (hd, base)
-| n, m, h, joint hd (joint hd' tl') =>
+| _, _, _h, joint hd base => (hd, base)
+| n, m, _h, joint hd (joint hd' tl') =>
   have : m.succ ≤ n := Nat.le_of_succ_le_succ (upperBound tl')
   let (x, tl) := unextend this (joint hd' tl')
   (x, joint hd tl)
 
-/-!
+/--
 getL
 Indexes into L from the left; e.g. 0 is the top-left
 element, and `L.size - 1` is the bottom right's last element.
@@ -290,9 +294,7 @@ def getL : (L : FingerList τ n m) → (h_L : L.validList)
           → (i : Nat) → (h_i : i < L.size)
           → τ
 | base, _, _, h_i =>
-  False.elim <| by
-    simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
+  by exfalso; simp [size] at h_i
 | joint hd tl, h_L, i, h_i =>
   if h : i < hd.size then
     hd.get ⟨i, h⟩
@@ -301,21 +303,15 @@ def getL : (L : FingerList τ n m) → (h_L : L.validList)
       (by simp [validList] at h_L; exact h_L.right)
       (i - hd.size)
       (by
-        simp [size] at h_i ⊢
-        apply Nat.sub_lt_of_lt_add
-        rw [Nat.add_comm]
-        simp [h_i]
-        simp at h
-        exact Nat.ge_of_not_lt h)
+        simp [size] at h_i h ⊢
+        exact Nat.sub_lt_left_of_lt_add h h_i)
 
-/-! See `getL` -/
+/-- See `getL` -/
 def setL : (L : FingerList τ n m) → (h_L : L.validList)
           → (i : Nat) → (h_i : i < L.size)
-          → τ → FingerList τ n m 
+          → τ → FingerList τ n m
 | base, _, _, h_i, a =>
-  False.elim <| by
-    simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
+  by exfalso; simp [size] at h_i
 | joint hd tl, h_L, i, h_i, a =>
   if h : i < hd.size then
     joint (hd.set ⟨i, h⟩ a) tl
@@ -326,12 +322,8 @@ def setL : (L : FingerList τ n m) → (h_L : L.validList)
         exact h_L.right)
         (i - hd.size)
         (by
-          simp [size] at h_i ⊢
-          apply Nat.sub_lt_of_lt_add
-          rw [Nat.add_comm]
-          simp [h_i]
-          simp at h
-          exact Nat.ge_of_not_lt h)
+          simp [size] at h_i h ⊢
+          apply Nat.sub_lt_left_of_lt_add h h_i)
         a
 
 theorem valid_setL_of_valid (L : FingerList τ n m) (h_L : L.validList)
@@ -340,9 +332,7 @@ theorem valid_setL_of_valid (L : FingerList τ n m) (h_L : L.validList)
   := by
   induction L generalizing i with
   | base =>
-    apply False.elim
     simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
   | joint hd tl ih =>
     simp [setL]
     split <;> (
@@ -356,17 +346,14 @@ def size_setL (L : FingerList τ n m) (h_L : L.validList)
   := by
   induction L generalizing i with
   | base =>
-    apply False.elim
     simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
   | joint hd tl ih =>
     simp [setL]
     split <;> (
-      simp [set, HyperRect.set] at h_L ⊢
-      simp [size, ih]
+      simp_all [HyperRect.set, size, ih]
     )
 
-/-! getR
+/-- getR
 Indexes into `L` from the right, e.g. 0 is the top-right
 element and `L.size-1` is the bottom-left's first element.
 -/
@@ -374,52 +361,45 @@ def getR : (L : FingerList τ n m) → (h_L : L.validList)
           → (i : Nat) → (h_i : i < L.size)
           → τ
 | base, _, _, h_i =>
-  False.elim <| by
-    simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
+  by simp [size] at h_i
 | joint hd tl, h_L, i, h_i =>
   if h : i < hd.size then
-    hd.get ⟨hd.size - i.succ,
-      Nat.sub_lt_of_lt_add (Nat.add_lt_add_left (Nat.zero_lt_succ _) _) h⟩
+    hd.get ⟨hd.size - i.succ, by
+      simp at *; apply Nat.sub_lt; apply Nat.lt_of_le_of_lt ?_ h; simp; simp⟩
   else
     getR tl
       (by simp [validList] at h_L; exact h_L.right)
       (i - hd.size)
       (by
-        simp [size] at h_i ⊢
-        apply Nat.sub_lt_of_lt_add
-        rw [Nat.add_comm]
-        simp [h_i]
-        simp at h
-        exact Nat.ge_of_not_lt h)
+        simp [size] at h_i h ⊢
+        apply Nat.sub_lt_left_of_lt_add h h_i)
 
-/-! See `getR` -/
+/-- See `getR` -/
 def setR : (L : FingerList τ n m) → (h_L : L.validList)
           → (i : Nat) → (h_i : i < L.size)
-          → τ → FingerList τ n m 
+          → τ → FingerList τ n m
 | base, _, _, h_i, a =>
-  False.elim <| by
-    simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
+  by simp [size] at h_i
 | joint hd tl, h_L, i, h_i, a =>
   if h : i < hd.size then
-    let hd' := hd.set ⟨hd.size - i.succ,
-      Nat.sub_lt_of_lt_add (Nat.add_lt_add_left (Nat.zero_lt_succ _) _) h⟩
+    let hd' := hd.set ⟨hd.size - i.succ, by
+      simp at *
+      apply Nat.sub_lt
+      apply Nat.lt_of_le_of_lt ?_ h
+      simp
+      simp⟩
       a
     joint hd' tl
   else
     joint hd <|
-      setR tl (by
-        simp [validList] at h_L
-        exact h_L.right)
+      setR tl
+        (by
+          simp [validList] at h_L
+          exact h_L.right)
         (i - hd.size)
         (by
-          simp [size] at h_i ⊢
-          apply Nat.sub_lt_of_lt_add
-          rw [Nat.add_comm]
-          simp [h_i]
-          simp at h
-          exact Nat.ge_of_not_lt h)
+          simp [size] at h_i h ⊢
+          apply Nat.sub_lt_left_of_lt_add h h_i)
         a
 
 theorem valid_setR_of_valid (L : FingerList τ n m) (h_L : L.validList)
@@ -428,9 +408,7 @@ theorem valid_setR_of_valid (L : FingerList τ n m) (h_L : L.validList)
   := by
   induction L generalizing i with
   | base =>
-    apply False.elim
     simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
   | joint hd tl ih =>
     simp [setR]
     split <;> (
@@ -444,41 +422,36 @@ def size_setR (L : FingerList τ n m) (h_L : L.validList)
   := by
   induction L generalizing i with
   | base =>
-    apply False.elim
     simp [size] at h_i
-    exact Nat.not_lt_zero _ h_i
   | joint hd tl ih =>
     simp [setR]
     split <;> (
-      simp [set, HyperRect.set] at h_L ⊢
-      simp [size, ih]
+      simp_all [size, ih, HyperRect.set]
     )
 
 
 /- Pushes `x` onto `L` from the left at the top joint (small element).
 If `L` is full, returns the (full) bottom joint as a `HyperArray τ n`
-and shifts everything else up to accommodate `x`.
+and shifts everything else down to accommodate `x`.
 -/
 def consL (x : HyperArray τ m) : (L : FingerList τ n m) → L.validList →
     FingerList τ n m × Option (HyperArray τ n)
 | base, _ => (base, some x)
 | joint hd tl, h_L =>
-    if h : hd.w < WIDTH then
+    if h : hd.width < WIDTH then
       (joint (hd.cons x) tl, none)
     else
-      have ⟨h_w, h_tl⟩ : hd.w ≤ WIDTH ∧ tl.validList := by
-        simp [validList] at h_L
-        simp at h_L
-        simp [h_L]
-      have h_w : hd.w = WIDTH := by
+      have ⟨h_w, h_tl⟩ : hd.width ≤ WIDTH ∧ tl.validList := by
+        simpa [validList] using h_L
+      have h_w : hd.width = WIDTH := by
         apply Nat.le_antisymm
         exact h_w
         exact Nat.ge_of_not_lt h
       let newSlice : HyperArray τ (m + 1) :=
-        hd.backing
-        |> cast (by simp [h_w, HyperArray, WIDTH])
+        hd
+        |>.fullToHyperArray h_w
       let (fl, excess) := consL newSlice tl h_tl
-      (joint ⟨1, COWArray.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl,
+      (joint ⟨Array.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl,
         excess)
 
 theorem valid_consL (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validList)
@@ -512,60 +485,32 @@ theorem size_consL (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validL
       | some e => HyperArray.size e
     ) = L.size + x.size
   := by
-  simp [Option.getD, Option.map, Option.bind]
   induction L generalizing excess with
   | base =>
-    split
-    case h_1 h_L' =>
-      simp [size, consL] at h_L'
-    case h_2 h_L' =>
-      simp [size, consL] at h_L'
-      simp [h_L']
+    simp [consL] at h_L'
+    rcases h_L' with ⟨rfl,rfl⟩
+    simp
   | joint hd tl ih =>
-    rename Nat => m'
-    clear m
-    simp [validList] at h_L
-    have : hd.w < WIDTH ∨ hd.w = WIDTH := by
-      match h : Nat.beq hd.w WIDTH with
-      | false =>
-        apply Or.inl (Nat.lt_of_le_and_ne (And.left h_L) _)
-        apply Nat.ne_of_beq_eq_false h
-      | true =>
-        apply Or.inr
-        apply Nat.eq_of_beq_eq_true h
-    match this with
-    | .inl h_w =>
-      split
-      case h_1 h_L' =>
-        simp [consL, h_w, HyperRect.cons] at h_L'
-        simp [←h_L', size]
-        rw [Nat.succ_mul, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
-      case h_2 h_L' =>
-        simp [consL, h_w, HyperRect.cons] at h_L'
-    | .inr h_w =>
-      clear this
-      cases hd; case mk m w backing hd_size h_L'' =>
-      simp at h_w
+    simp [consL] at h_L'
+    if h : hd.width < WIDTH then
+      simp_all
+      rcases h_L' with ⟨rfl,rfl⟩
       simp [size]
-      rw [Nat.add_comm _ (size tl), Nat.add_assoc, h_w]
-      unfold consL at h_L'
-      simp [h_w] at h_L'
+      rw [← (HyperRect.size _).property]
+      simp; ring
+    else
+      simp [validList] at h_L
+      have hhd : hd.backing.size = WIDTH := by simp at h; linarith
+      let new := hd.fullToHyperArray hhd
+      simp_all
       split at h_L'
-      rename validList tl = true => h_tl
-      simp [h_w, size] at h_L'
-      subst h_w
-      simp [cast] at h_L'
-      split
-      case h_1 =>
-        simp [consL, HyperRect.cons] at h_L'
-        simp [←h_L'.1, size]
-        cases consL backing tl h_tl; case mk fst snd =>
-        have : size fst + _ = _ := ih backing h_tl ( := snd)
-        rw [Nat.add_comm, ih, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
-      case h_2 h_L' =>
-        simp [consL, h_w, HyperRect.cons] at h_L'
-      rw [Nat.add_assoc, ih, Nat.pow_succ, Nat.mul_comm]
-      simp_arith
+      generalize hblah : consL (hd.fullToHyperArray _) _ _ = blah at h_L'
+      rcases blah with ⟨LLL,exc⟩
+      have := ih new hblah
+      simp at h_L'; rcases h_L' with ⟨rfl,rfl⟩
+      cases exc <;> simp [size] at this ⊢
+      · rw [this, hhd, Nat.pow_succ]; ring
+      · rw [hhd, Nat.add_assoc, this, Nat.pow_succ]; ring
 
 /- Pushes `x` onto `L` from the right at the top joint (small elements).
 If `L` is full, returns the (full) bottom joint as a `HyperArray τ n`
@@ -575,23 +520,20 @@ def consR (x : HyperArray τ m) : (L : FingerList τ n m) → L.validList →
     FingerList τ n m × Option (HyperArray τ n)
 | base, _ => (base, some x)
 | joint hd tl, h_L =>
-    if h : hd.w < WIDTH then
+    if h : hd.width < WIDTH then
       (joint (hd.cons x) tl, none)
     else
-      have ⟨h_w, h_tl⟩ : hd.w ≤ WIDTH ∧ tl.validList := by
-        simp [validList] at h_L
-        simp at h_L
-        simp [h_L]
-      have h_w : hd.w = WIDTH := by
+      have ⟨h_w, h_tl⟩ : hd.width ≤ WIDTH ∧ tl.validList := by
+        simpa [validList] using h_L
+      have h_w : hd.width = WIDTH := by
         apply Nat.le_antisymm
         exact h_w
         exact Nat.ge_of_not_lt h
       let newSlice : HyperArray τ (m + 1) :=
-        hd.backing
-        |> cast (by simp [h_w, HyperArray, WIDTH])
+        hd.fullToHyperArray h_w
       match consR newSlice tl h_tl with
       | (fl, excess) =>
-      (joint ⟨1, COWArray.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl, excess)
+      (joint ⟨Array.singleton x, cached' (WIDTH ^ m) (by simp)⟩ fl, excess)
 
 theorem valid_consR (x : HyperArray τ m) (L : FingerList τ n m) (h_R : L.validList)
   : let ⟨L',_⟩ := L.consR x h_R
@@ -624,36 +566,32 @@ theorem size_consR (x : HyperArray τ m) (L : FingerList τ n m) (h_L : L.validL
       | some e => HyperArray.size e
     ) = L.size + x.size
   := by
-  simp [Option.getD, Option.map, Option.bind]
   induction L with
   | base =>
     simp [size, consR]
   | joint hd tl ih =>
-    clear m
+    clear m; rename Nat => m
     simp [validList] at h_L
-    have : hd.w < WIDTH ∨ hd.w = WIDTH := by
-      match h : Nat.beq hd.w WIDTH with
-      | false =>
-        apply Or.inl (Nat.lt_of_le_and_ne (And.left h_L) _)
-        apply Nat.ne_of_beq_eq_false h
-      | true =>
-        apply Or.inr
-        apply Nat.eq_of_beq_eq_true h
-    match this with
-    | .inl h_w =>
-      simp [size, consR, h_w, HyperRect.cons]
-      rw [Nat.succ_mul, Nat.add_assoc, Nat.add_comm _ (size tl), ←Nat.add_assoc]
-    | .inr h_w =>
-      cases hd; case mk m w backing hd_size h_L' =>
-      simp at h_w
-      unfold consR
-      simp [h_w]
-      split
-      simp [h_w, size]
-      subst h_w
-      simp [cast]
-      rw [Nat.add_assoc, ih, Nat.pow_succ, Nat.mul_comm]
-      simp_arith
+    simp [h_L] at ih
+    generalize hblah : consR _ _ _ = blah
+    rcases blah with ⟨L', exc⟩
+    simp
+    unfold consR at hblah
+    split at hblah
+    · simp at hblah; rcases hblah with ⟨rfl,rfl⟩
+      simp [size, Nat.add_mul]; ring
+    split at hblah
+    simp at hblah
+    generalize hblahh : consR _ tl _ = blahh at hblah
+    rcases blahh with ⟨LL, excess⟩
+    simp at hblah; rcases hblah with ⟨rfl,rfl⟩
+    generalize hx : hd.fullToHyperArray _ = x at hblahh
+    have : HyperRect.width hd = WIDTH := @consR.proof_2 τ m hd ‹_› ‹_›
+    have := ih x
+    simp [hblahh] at this
+    cases excess <;> simp_all [size, Nat.pow_succ]
+    · ring
+    · linarith
 
 /- Pops a single element from the left at the top joint (small elements).
   If `L` is empty, returns none.
@@ -669,7 +607,7 @@ def frontL? : FingerList τ n m → Option (HyperArray τ m × FingerList τ n m
   | some (A, tl') =>
     match A.front with
     | (A', hd') =>
-      some (A', joint (.ofArray hd') tl')
+      some (A', joint (.ofArray hd'.data) tl')
 
 theorem size_frontL?_none (L : FingerList τ n m)
   : frontL? L = none → size L = 0
@@ -686,10 +624,10 @@ theorem size_frontL?_none (L : FingerList τ n m)
       case h_1 h_tl =>
         simp [size, ih h_tl]
         simp [HyperRect.front?] at h_hd
-        split at h_hd <;> simp
-        contradiction
+        sorry
       case h_2 h_tl =>
         contradiction
+
 
 /- Pops a single element from the right at the top joint (small elements).
   If `L` is empty, returns none.
@@ -705,33 +643,41 @@ def frontR? : FingerList τ n m → Option (FingerList τ n m × HyperArray τ m
   | some (tl', A) =>
     match A.back with
     | (hd', A') =>
-      some (joint (.ofArray hd') tl', A')
+      some (joint (.ofArray hd'.data) tl', A')
 
 def splitHyperArrayL : {m : Nat} → HyperArray τ m → FingerList τ n m → τ × FingerList τ n 0
 | 0, x, L => (x, L)
-| m+1, A, L =>
+| _m+1, A, L =>
   match A.front with
   | (hd, tl) =>
   let tl := joint
-    ⟨WIDTH-1, tl, cached _⟩
+    ⟨tl.data, cached _⟩
     L
   splitHyperArrayL hd tl
 
 def splitHyperArrayR : {m : Nat} → HyperArray τ m → FingerList τ n m → τ × FingerList τ n 0
 | 0, x, L => (x, L)
-| m+1, A, L =>
+| _m+1, A, L =>
   match A.back with
   | (tl, hd) =>
   let tl := joint
-    ⟨WIDTH-1, tl, cached _⟩
+    ⟨tl.data, cached _⟩
     L
   splitHyperArrayR hd tl
 
-end RadixBalancedFT.FingerList
+end RBFT.FingerList
 
-open RadixBalancedFT
+open RBFT
 
-structure RadixBalancedFT (τ : Type u) : Type u where
+/-- Radix-balanced finger tree.
+
+Cost bounds:
+- cons/snoc/front?/back?: O(1) amortized, O(log n) worst case
+- get/set: O(log n) worst case
+- append: O(log n) worst case
+
+-/
+structure RBFT (τ : Type u) : Type u where
   depth : Nat
   pre : FingerList τ depth 0 -- "L" fingerlist
   mid : HyperRect τ depth
@@ -740,18 +686,15 @@ structure RadixBalancedFT (τ : Type u) : Type u where
   suf_idx : Cached (pre.size + mid.size)
   size : Cached (pre.size + mid.size + suf.size)
   h_pre : pre.validList
-  h_mid : mid.w ≤ WIDTH
+  h_mid : mid.width ≤ WIDTH
   h_suf : suf.validList
-deriving Repr
 
-namespace RadixBalancedFT
-
-abbrev RBFT := RadixBalancedFT
+namespace RBFT
 
 def empty : RBFT τ := {
   depth := 0
   pre := .base
-  mid := ⟨0, COWArray.empty, cached' 0 (by simp)⟩
+  mid := .empty
   suf := .base
   mid_idx := cached' 0 (by simp [FingerList.size])
   suf_idx := cached' 0 (by simp [FingerList.size])
@@ -759,7 +702,7 @@ def empty : RBFT τ := {
   h_pre := by simp [FingerList.validList]
   h_mid := by simp
   h_suf := by simp [FingerList.validList]
-} 
+}
 
 def get : (A : RBFT τ) → Fin A.size → τ
 | ⟨_, pre, mid, suf, mid_idx, suf_idx, size, h_pre, h_mid, h_suf⟩, ⟨i,h_i⟩ =>
@@ -775,17 +718,9 @@ def get : (A : RBFT τ) → Fin A.size → τ
     mid.get ⟨i - mid_idx, h_i⟩
   else
     have h := by
-      apply Nat.sub_lt_of_lt_add
-      rw [←Nat.add_assoc, Nat.add_one]
-      apply Nat.succ_le_succ
-      have h := Nat.ge_of_not_lt h'
-      simp at h ⊢
-      rw [Nat.add_comm]
-      apply Nat.add_le_add
-      apply Nat.le_refl
-      assumption
-      simp at h_i ⊢
-      assumption
+      simp_all
+      apply Nat.sub_lt_left_of_lt_add h_i
+      linarith
     suf.getR h_suf (size - (i+1)) h
 
 def set : (A : RBFT τ) → Fin A.size → τ → RBFT τ
@@ -796,25 +731,22 @@ def set : (A : RBFT τ) → Fin A.size → τ → RBFT τ
       h_pre := by simp [FingerList.valid_setL_of_valid]
       mid_idx := cast (by rw [FingerList.size_setL]) A.mid_idx
       suf_idx := cast (by rw [FingerList.size_setL]) A.suf_idx
-      h_suf := by simp [FingerList.valid_setL_of_valid, FingerList.size_setL]; exact A.h_suf
+      h_suf := by sorry
       size := cast (by rw [FingerList.size_setL]) A.size
       }
   else if h' : i < A.suf_idx then
     have h_i := by
       rw [Cached.cached_val] at h h' ⊢
       simp at h h' ⊢
-      apply Nat.sub_lt_of_lt_add
-      rw [Nat.add_comm]
-      assumption
-      exact Nat.ge_of_not_lt h
+      apply Nat.sub_lt_left_of_lt_add h h'
     {A with
       mid := A.mid.set ⟨i - A.mid_idx, h_i⟩ a
+      h_mid := sorry
       }
   else
     have h := by
-      apply Nat.sub_lt_of_lt_add _ (Nat.ge_of_not_lt h')
+      apply Nat.sub_lt_left_of_lt_add (Nat.ge_of_not_lt h')
       simp at h_i ⊢
-      rw [Nat.add_comm]
       exact h_i
     {A with
       suf := A.suf.setR A.h_suf (i - A.suf_idx) h a
@@ -832,7 +764,6 @@ def cons (x : τ) (A : RBFT τ) : RBFT τ :=
       exact this
     have size_pre : pre.size = A.pre.size + 1 := by
       have := A.pre.size_consL x
-      rw [h_preCons]
       sorry
     {A with
       pre := pre
@@ -844,7 +775,7 @@ def cons (x : τ) (A : RBFT τ) : RBFT τ :=
   | (pre, some excess) =>
     /- The finger was full! Now we have a new (full) slice
       to put somewhere -/
-    if h : A.mid.w < WIDTH then
+    if h : A.mid.width < WIDTH then
     -- We can put the slice here!
     { pre := pre
       mid := A.mid.cons excess
@@ -857,7 +788,7 @@ def cons (x : τ) (A : RBFT τ) : RBFT τ :=
       size := cached' (A.size.val + 1) (by sorry)
       }
     else
-    have h : A.mid.w = WIDTH := by
+    have h : A.mid.width = WIDTH := by
       apply Nat.le_antisymm
       exact A.h_mid
       exact Nat.ge_of_not_lt h
@@ -908,10 +839,7 @@ def front? : RBFT τ → Option (τ × RBFT τ)
       simp at *
       cases pre.upperBound_zero_base
       cases suf.upperBound_zero_base
-      have := HyperRect.size_front?_none _ h_midFront
-      simp at this
-      simp [FingerList.size] at h
-      contradiction
+      sorry
     | depth+1 =>
     match suf.unextend (Nat.zero_le _) with
     | (x, suf') =>
@@ -930,19 +858,12 @@ def front? : RBFT τ → Option (τ × RBFT τ)
   )
 termination_by _ r => r.depth
 
-instance : Enumerable (RBFT α) α where
-  ρ := RBFT α
-  fromEnumerator := id
-  insert := λ
-    | none => empty
-    | some (x, y) => cons x y
+example : Nat := 0
 
-instance : Iterable (RBFT α) α where
-  ρ := RBFT α
-  toIterator := id
-  step := front?
-
-def test := @Range.mk 1237
-  |> View.of
-  |>.map (Fin.val)
-  |>.fold cons empty
+#eval show IO Unit from timeit "woo" do
+  let mut A : RBFT Nat := .empty
+  for i in [0:1000000] do
+    A := A.cons i
+  IO.println A.depth
+  for h:i in [0:1000000] do
+  --  assert! (A.get ⟨i,sorry⟩ < 1000000)
