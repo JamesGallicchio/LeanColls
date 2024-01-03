@@ -14,42 +14,6 @@ open LeanColls
 namespace Array
 
 def cons (x : α) (A : Array α) : Array α := #[x] ++ A
-def cons? (A : Array α) : Option (α × Array α) :=
-  if h : A.size > 0 then
-    some (A[0], A[1:])
-  else
-    none
-
-@[simp] theorem ofSubarray_def (A : Subarray α)
-  : ofSubarray A = ofFn (fun i => A.get i) := by
-  rcases A with ⟨as, start, stop, h1, h2⟩
-  simp [ofSubarray, Id.run, Subarray.get]
-  sorry
-
-@[simp] theorem cons?_cons (x : α) (A : Array α)
-  : cons? (cons x A) = some (x,A) := by
-  simp [cons, cons?]
-  split
-  · simp; constructor
-    · simp [getElem_eq_data_get, List.get_eq_iff]
-    · apply Array.ext
-      · simp []
-      · sorry
-  next h =>
-    simp [size] at h
-
-@[simp] theorem cons?_eq_none (A : Array α)
-  : A.cons? = none ↔ A = #[] := by
-  simp [cons?]; rcases A with ⟨_|_⟩ <;> simp
-  · rfl
-  · intro h; cases h
-
-@[simp] theorem cons?_eq_some (A : Array α)
-  : A.cons? = some (x,A') ↔ A = Array.cons x A' := by
-  simp [cons?, cons]
-  rcases A with ⟨_|_⟩ <;> simp
-  · intro h; cases h
-  · sorry
 
 def snoc := @Array.push
 def snoc? (A : Array α) :=
@@ -72,7 +36,6 @@ instance : Seq (Array α) α where
   get := Array.get
   set := Array.set
   cons := Array.cons
-  cons? := Array.cons?
   snoc := Array.push
   snoc? := Array.snoc?
 
@@ -131,47 +94,23 @@ instance : LawfulSeq (Array α) α where
       simp; simp [Array.getElem_eq_data_get]
   snoc?_eq_none := by
     simp [LeanColls.toList, Seq.snoc?]
-    rintro ⟨L⟩; split <;> simp
-    next h => simp [size] at h; apply List.eq_nil_of_length_eq_zero h
-    next h => simp [size] at h; cases L <;> simp at h; simp
+    rintro ⟨L⟩; simp [snoc?]; exact List.length_eq_zero
   snoc?_eq_some := by
     rintro ⟨L⟩ x ⟨L'⟩ h
-    simp [Seq.snoc?] at h; split at h <;> simp at h
-    next hs =>
-    generalize hLr : L.reverse = Lr
-    match Lr with
-    | .nil => simp at hLr; cases hLr; simp at hs
-    | .cons y L'' =>
-    rw [List.reverse_eq_iff] at hLr; simp at hLr
-    cases hLr
     simp [LeanColls.toList]
-    generalize L''.reverse = L at hs h
-    clear L''
-    rcases h with ⟨h,rfl⟩
-    simp at hs; cases hs
-    simp [getElem_eq_data_get]
-    rw [List.get_append_right]
-    · simp; replace h := congrArg Array.data h; simp at h; cases h
-      rw [← List.ofFn_def]; apply List.ext_get
-      · simp
-      intro i h1 h2
-      simp [Array.getElem_eq_data_get]
-      rw [List.get_append]
-    repeat simp
+    simp [Seq.snoc?, snoc?] at h; split at h <;> simp at h
+    rcases h with ⟨hL', rfl⟩
+    replace hL' := congrArg (Array.data) hL'
+    simp at hL'; cases hL'
+    rw [eq_comm]; convert List.dropLast_append_getLast _
+    rw [getElem_eq_data_get, List.getLast_eq_get]
+    exact List.length_pos.mp ‹_›
   snoc?_eq_some_of_toList := by
-    stop
     rintro ⟨L⟩ x L' h
     simp [LeanColls.toList] at h; cases h
     use ⟨L'⟩
-    simp [Seq.snoc?]; split
-    next h => simp at h
-    next h =>
-    simp; constructor
-    · apply Array.ext
-      · simp [size] at h; simp [h]
-      intro i hi1 hi2
-      simp; simp [Array.getElem_eq_data_get]; rw [List.get_append _ hi2]
-    · simp [Array.getElem_eq_data_get]
-      rw [List.get_append_right] <;> (simp at h; cases h)
-      · simp
-      · simp
+    simp [Seq.snoc?, snoc?]
+    constructor
+    · apply ext'; simp
+    · rw [getElem_eq_data_get, List.get_append_right]
+      repeat simp
