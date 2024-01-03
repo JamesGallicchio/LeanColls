@@ -114,3 +114,7 @@ instance : LawfulSeq (Array α) α where
     · apply ext'; simp
     · rw [getElem_eq_data_get, List.get_append_right]
       repeat simp
+
+end Array
+
+abbrev NArray (α : Type u) (n : Nat) := Seq.FixSize (Array α) n

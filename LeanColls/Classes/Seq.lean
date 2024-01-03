@@ -17,9 +17,9 @@ which is also the model used for sequence operations.
 -/
 
 /-- A collection which is ordered (i.e. isomorphic to [List]). -/
-class Seq (C : Type u) (τ : outParam (Type v))
+class Seq.{u,v} (C : Type u) (τ : outParam (Type v))
   extends
-  Fold C τ,
+  Fold.{u,v,max u v} C τ,
   Insert C τ,
   ToList C τ,
   Membership τ C,
@@ -131,18 +131,20 @@ variable [Seq C τ] [LawfulSeq C τ]
   rw [size_def, size_def, toList_snoc, toList_append]
   simp
 
+
 /-! ### Relationship with [Indexed] -/
 
-structure OfSize (C) [Size C] (n : Nat) where
+structure FixSize (C) [Size C] (n : Nat) where
   data : C
   hsize : size data = n
 
-def fixSize (c : C) : OfSize C (size c) := {
+def FixSize.cast [Size C] (h : n = n') (c : FixSize C n) : FixSize C n' :=
+  ⟨c.data, Trans.trans c.hsize h⟩
+
+def fixSize (c : C) : FixSize C (size c) := {
   data := c
   hsize := rfl
 }
 
-instance [Seq C τ] : Indexed (OfSize C n) (Fin n) τ := sorry -- TODO
-
-
-
+instance [Seq C τ] : Indexed (FixSize C n) (Fin n) τ := sorry -- TODO
+instance [Seq C τ] : LawfulIndexed (FixSize C n) (Fin n) τ := sorry -- TODO

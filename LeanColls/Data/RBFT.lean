@@ -7,7 +7,7 @@ Authors: James Gallicchio
 import LeanColls.Data.Array
 import LeanColls.Util.Cached
 
---import Mathlib
+import Mathlib.Data.Nat.Order.Lemmas
 
 /-!
 # Radix Balanced Finger Trees
@@ -33,7 +33,7 @@ See the [Scala issue on GitHub](https://github.com/scala/scala/pull/8534)
 introducing this collection. There are no formal references.
 -/
 
-open LeanColls Classes Util
+open LeanColls Util
 
 namespace LeanColls.Data.RBFT
 
@@ -50,12 +50,14 @@ def HyperArray (α : Type u) : Nat → Type u
 
 namespace HyperArray
 
+variable {α : Type u}
+
 @[inline, simp]
 def size (_ : HyperArray α n) : Nat := WIDTH ^ n
 
 def ofFn : {n : Nat} → (Fin (WIDTH ^ n) → α) → HyperArray α n
 | 0, f => f ⟨0, by simp⟩
-| n+1, f => NArray.ofFn fun ⟨i,hi⟩ => ofFn fun ⟨j,hj⟩ =>
+| n+1, f => Indexed.ofFn (C := NArray _ _) fun ⟨i,hi⟩ => ofFn fun ⟨j,hj⟩ =>
     f ⟨i*j, by rw [Nat.pow_succ, Nat.mul_comm]; apply mul_lt_mul'' hj hi; repeat simp⟩
 
 def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
@@ -66,8 +68,8 @@ def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
   have h_q : q < WIDTH := Nat.div_lt_of_lt_mul h_i
   have h_r : r < WIDTH^n :=
     Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
-  Indexed.get (C := NArray ..) A ⟨q, h_q⟩
-  |>.get ⟨r, h_r⟩
+  let next := Indexed.get.{u,0,u} (C := NArray ..) A ⟨q, h_q⟩
+  get next ⟨r, h_r⟩
 
 @[simp] theorem get_ofFn (f : Fin (WIDTH ^ n) → α)
   : get (ofFn f) = f := by
@@ -132,10 +134,15 @@ theorem get_set {n : Nat} (A : HyperArray α n) (i x j)
       subst_vars
       simp at h
 
-instance : Indexed (HyperArray α n) (Fin (WIDTH ^ n)) α where
+instance : Indexed (HyperArray α n) (Fin (WIDTH ^ n)) α := {
   ofFn := ofFn
   get := get
   set := set
+  update := fun A i f => set A i (f (get A i))
+  toMembership := sorry
+  toToMultiset := sorry
+  toFold := sorry
+}
 
 instance : LawfulIndexed (HyperArray α n) (Fin (WIDTH ^ n)) α where
   get_ofFn := get_ofFn
@@ -146,7 +153,7 @@ end HyperArray
 
 structure HyperRect (α : Type u) (n : Nat) : Type u where
   (backing : Array (HyperArray α n))
-  (size : Cached (backing.size * WIDTH ^ n))
+  (size : Cached (size backing * WIDTH ^ n))
 
 namespace HyperRect
 
@@ -164,9 +171,9 @@ def singleton (A : HyperArray α n) : HyperRect α n :=
 
 def fullToHyperArray : (r : HyperRect α n) → r.width = WIDTH → HyperArray α n.succ
 | ⟨backing, _⟩, (h : backing.size = WIDTH) =>
-  NArray.ofArray backing |>.cast h
+  Seq.fixSize backing |>.cast h
 
-def get : (A : HyperRect α n) → Fin A.size → α
+def get : (A : HyperRect α n) → Fin (size A) → α
 | ⟨A,_⟩, ⟨i,h_i⟩ =>
   let q := i / WIDTH^n
   let r := i % WIDTH^n
@@ -176,7 +183,7 @@ def get : (A : HyperRect α n) → Fin A.size → α
     · simp
     · simp
   have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
-  Array.get A ⟨q, h_q⟩
+  Seq.get A ⟨q, h_q⟩
   |>.get ⟨r, h_r⟩
 
 def set : (A : HyperRect α n) → Fin A.size → α → HyperRect α n
@@ -189,38 +196,30 @@ def set : (A : HyperRect α n) → Fin A.size → α → HyperRect α n
     · simp
     · simp
   have h_r := Nat.mod_lt _ (Nat.pos_pow_of_pos _ $ by simp)
-  ⟨ Array.update A ⟨q, h_q⟩ <| λ A' => A'.set ⟨r, h_r⟩ a,
+  ⟨ Seq.update A ⟨q, h_q⟩ <| λ A' => A'.set ⟨r, h_r⟩ a,
     cached' size (by simp)⟩
 
 def cons : HyperArray α n → HyperRect α n → HyperRect α n
 | x, ⟨A,size⟩ =>
-  ⟨A.cons x,
+  ⟨Seq.cons x A,
     cached' (size.val + WIDTH ^ n) (by simp [Nat.succ_mul])⟩
-
-@[simp] theorem size_cons {A : HyperArray α n}
-  : (cons A R).backing.size = R.backing.size + 1 := by
-  simp [cons]
 
 def snoc : HyperRect α n → HyperArray α n → HyperRect α n
 | ⟨A,size⟩, x =>
-  ⟨A.snoc x,
+  ⟨Seq.snoc A x,
     cached' (size.val + WIDTH ^ n) (by simp [Nat.succ_mul])⟩
 
-@[simp] theorem size_snoc {A : HyperArray α n}
-  : (snoc R A).backing.size = R.backing.size + 1 := by
-  simp [snoc]
-
-def front? : HyperRect α n → Option (HyperArray α n × HyperRect α n)
+def cons? : HyperRect α n → Option (HyperArray α n × HyperRect α n)
 | ⟨A,size⟩ =>
-  if h : A.size > 0 then
-    let (x, A') := NArray.ofArray A
-      |>.cast (Nat.sub_add_cancel h).symm |>.front
-    some (x, ⟨A'.data, cached' (size - WIDTH^n) (by
-      simp [A'.hsize, Nat.mul_sub_right_distrib])⟩)
-  else
-    none
+  match h : Seq.cons? A with
+  | none => none
+  | some (x, A') =>
+    some (x, ⟨A', cached' (size - WIDTH^n) (by
+      have := congrArg Size.size <| Seq.cons?_eq_some _ _ _ h
+      simp [Seq.size_toList]
+      simp [Nat.mul_sub_right_distrib])⟩)
 
-def back? : HyperRect α n → Option (HyperRect α n × HyperArray α n)
+def snoc? : HyperRect α n → Option (HyperRect α n × HyperArray α n)
 | ⟨A, size⟩ =>
   if h : A.size > 0 then
     let (A', x) := NArray.ofArray A
