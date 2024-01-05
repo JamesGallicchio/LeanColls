@@ -14,26 +14,37 @@ Bags are collections of elements of a single type.
 Other languages often call these collections "sets",
 but in Lean this word is quite overloaded.
 
-This file defines two common variants of bag:
+This file defines two common classes of bag:
 - [Bag]: no duplicates; math model is [Finset]
 - [MultiBag]: duplicates; math model is [Multiset]
+
+It also defines classes for read-only variants which
+do not include a way to insert or remove elements.
 
 -/
 
 namespace LeanColls
 
--- TODO: docstrings
-
-class Bag (C : Type u) (τ : outParam (Type v)) extends
+/-- [Bag] operations expected on read-only "set-like" collections. -/
+class Bag.ReadOnly (C : Type u) (τ : outParam (Type v)) extends
   Membership τ C,
   ToFinset C τ,
   Fold C τ,
-  Size C,
+  Size C
+
+/-- [Bag] includes operations expected on most "set-like" collections. -/
+class Bag (C : Type u) (τ : outParam (Type v)) extends
+  Bag.ReadOnly C τ,
   Insert C τ
 
-class MultiBag (C : Type u) (τ : outParam (Type v)) extends
+/-- [MultiBag] operations expected on read-only "multiset-like" collections -/
+class MultiBag.ReadOnly (C : Type u) (τ : outParam (Type v)) extends
   Membership τ C,
   ToMultiset C τ,
   Fold C τ,
-  Size C,
+  Size C
+
+/-- [MultiBag] includes operations expected on most "multiset-like" collections -/
+class MultiBag (C : Type u) (τ : outParam (Type v)) extends
+  MultiBag.ReadOnly C τ,
   Insert C τ

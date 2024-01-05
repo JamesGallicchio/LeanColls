@@ -115,6 +115,41 @@ class Fold (C : Type u) (τ : outParam (Type v)) where
     := fun c f i => fold c (fun macc x => macc >>= fun acc => f acc x) (pure i)
 export Fold (fold foldM)
 
+namespace Fold
+
+def find (f : τ → Bool) [Fold C τ] (c : C) : Option τ :=
+  match
+    Fold.foldM c (fun () x =>
+      if f x then .error x else .ok ()
+    ) ()
+  with
+  | Except.ok () => none
+  | Except.error x => some x
+
+def any (f : τ → Bool) [Fold C τ] (c : C) : Bool :=
+  match
+    Fold.foldM c (fun () x =>
+      if f x then .error () else .ok ()
+    ) ()
+  with
+  | Except.ok () => false
+  | Except.error () => true
+
+def all (f : τ → Bool) [Fold C τ] (c : C) : Bool :=
+  match
+    Fold.foldM c (fun () x =>
+      if f x then .ok () else .error ()
+    ) ()
+  with
+  | Except.ok () => true
+  | Except.error () => false
+
+instance (priority := low) [Fold C τ] [BEq τ] : Membership τ C where
+  mem x c := any (· == x) c
+
+end Fold
+
+
 /-- `C` with element type `τ` can be iterated using type `ρ`
 
 **Note:** This is essentially a combination of Lean core's
@@ -138,6 +173,11 @@ class Insert (C : Type u) (τ : outParam (Type v)) where
 export Insert (empty insert singleton)
 
 namespace Insert
+
+instance [_root_.Insert τ C] [EmptyCollection C] : Insert C τ where
+  empty := EmptyCollection.emptyCollection
+  insert c x := _root_.Insert.insert x c
+
 variable  (C : Type u) (τ : outParam (Type v)) [Insert C τ]
 
 class Mem [Membership τ C] : Prop where
