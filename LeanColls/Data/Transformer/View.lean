@@ -71,3 +71,4 @@ def foldM [Monad m] (f : β → τ → m β) (init : β) : View τ → m β
 
 instance : Fold (View τ) τ where
   fold v f init := fold f init v
+  foldM v f init := foldM f init v
