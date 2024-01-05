@@ -42,7 +42,7 @@ class LawfulIndexed (C ι τ) [DecidableEq ι] [Indexed C ι τ] where
       if i = j then a else Indexed.get c j
   get_update : ∀ (c : C) i f j,
     Indexed.get (Indexed.update c i f) j =
-      if i = j then f (Indexed.get c i) else Indexed.get c j
+      if i = j then f (Indexed.get c j) else Indexed.get c j
 
 namespace Indexed
 
@@ -64,40 +64,5 @@ variable [Indexed C ι τ] [DecidableEq ι] [LawfulIndexed C ι τ]
   : Indexed.get (Indexed.update c i a) j = Indexed.get c j := by
   rw [LawfulIndexed.get_update]; simp [h]
 
-
-/-- An indexed collection can be restricted to some "smaller" domain -/
-structure Slice (C ι τ) [Indexed C ι τ] (ι') (f : ι' ↪ ι) where
-  data : C
-
-nonrec def Slice.get [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i) :=
-  get slice.data (f i)
-
-nonrec def Slice.update [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (g : τ → τ) : Slice C ι τ ι' f :=
-  ⟨update slice.data (f i') g⟩
-
-nonrec def Slice.set [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (x : τ) : Slice C ι τ ι' f :=
-  ⟨set slice.data (f i') x⟩
-
-instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ] [Inhabited τ]
-    : Indexed (Slice C ι τ ι' f) ι' τ where
-  get := Slice.get
-  update := Slice.update
-  mem x slice :=
-    match
-      foldM (m := Except Unit) (IndexType.univ ι')
-        (fun _ i' =>
-          if Slice.get slice i' = x then
-            throw ()
-          else return ()
-        ) ()
-    with
-    | .error () => true
-    | .ok () => false
-  toMultiset slice :=
-    toList (IndexType.univ ι') |> Multiset.ofList |>.map (Slice.get slice)
-  fold slice f init :=
-    fold (IndexType.univ ι') (fun acc i => f acc (i,Slice.get slice i)) init
-  ofFn g := ⟨
-      (ofFn fun _ => default)
-      |> fold (IndexType.univ ι') (fun c i' => set c (f i') (g i'))
-    ⟩
+export LawfulIndexed (get_ofFn)
+attribute [simp] get_ofFn

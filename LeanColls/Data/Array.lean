@@ -4,10 +4,12 @@ Authors: James Gallicchio
 -/
 
 import Std.Data.Array.Lemmas
+import Std.Data.List.Lemmas
 import Mathlib.Data.Array.Lemmas
 
 import LeanColls.Classes.Seq
 import LeanColls.Data.List
+import LeanColls.Data.Transformer.FixSize
 
 open LeanColls
 
@@ -16,12 +18,20 @@ namespace Array
 def cons (x : α) (A : Array α) : Array α := #[x] ++ A
 
 def snoc := @Array.push
-def snoc? (A : Array α) :=
+def getSnoc? (A : Array α) :=
   if h : A.size > 0 then
     let x := A[A.size-1]'(tsub_lt_self h (by decide))
     some (A.pop, x)
   else
     none
+
+theorem ext_iff (A B : Array α) (h : A.size = B.size) : A = B ↔ ∀ (i : Nat) h1 h2, A[i]'h1 = B[i]'h2 := by
+  constructor
+  · rintro rfl; simp
+  · apply ext _ _ h
+
+theorem ext'_iff (A B : Array α) : A = B ↔ A.data = B.data := by
+  cases A; cases B; simp
 
 instance : ToList (Array α) α where
   toList := Array.toList
@@ -37,7 +47,7 @@ instance : Seq (Array α) α where
   set := Array.set
   cons := Array.cons
   snoc := Array.push
-  snoc? := Array.snoc?
+  getSnoc? := Array.getSnoc?
 
 instance : LawfulSeq (Array α) α where
   mem_iff_mem_toList := by simp [LeanColls.toList, mem_def]
@@ -60,61 +70,61 @@ instance : LawfulSeq (Array α) α where
   toList_set := by
     rintro c ⟨i,hi⟩ x
     simp [LeanColls.toList, Seq.set]
-  cons?_eq_none := by
+  getCons?_eq_none := by
     intro ⟨L⟩
-    simp [LeanColls.toList, Seq.cons?]
+    simp [LeanColls.toList, Seq.getCons?]
     split <;> simp <;> cases L <;> simp at *
-  cons?_eq_some := by
-    intro ⟨L⟩ x ⟨L'⟩ h
-    simp [LeanColls.toList]
-    simp [Seq.cons?] at h; split at h <;> simp at h
-    next hs =>
-    rcases h with ⟨rfl,h⟩
-    replace h := congrArg Array.data h; simp at h; cases h
-    rw [size_eq_length_data] at hs; simp at hs
-    cases L <;> simp at hs ⊢
-    simp [getElem_eq_data_get]
-    rw [← toList_eq, show (ofFn _).toList = List.ofFn _ from rfl]
-    apply List.ext_get
-    · simp [hs]
-    intro n h1 h2
-    simp
-  cons?_eq_some_of_toList := by
-    rintro ⟨L⟩ x L'
-    simp [LeanColls.toList]
-    rintro rfl; use ⟨L'⟩
-    simp [Seq.cons?]
-    split
-    next h => simp [size] at h
-    next h =>
-      simp [size] at h; simp [getElem_eq_data_get]
-      apply ext
-      · simp [h]
-      intro i hi hi'
-      simp; simp [Array.getElem_eq_data_get]
-  snoc?_eq_none := by
-    simp [LeanColls.toList, Seq.snoc?]
-    rintro ⟨L⟩; simp [snoc?]; exact List.length_eq_zero
-  snoc?_eq_some := by
-    rintro ⟨L⟩ x ⟨L'⟩ h
-    simp [LeanColls.toList]
-    simp [Seq.snoc?, snoc?] at h; split at h <;> simp at h
-    rcases h with ⟨hL', rfl⟩
-    replace hL' := congrArg (Array.data) hL'
-    simp at hL'; cases hL'
-    rw [eq_comm]; convert List.dropLast_append_getLast _
-    rw [getElem_eq_data_get, List.getLast_eq_get]
-    exact List.length_pos.mp ‹_›
-  snoc?_eq_some_of_toList := by
-    rintro ⟨L⟩ x L' h
-    simp [LeanColls.toList] at h; cases h
-    use ⟨L'⟩
-    simp [Seq.snoc?, snoc?]
+  getCons?_eq_some := by
+    intro ⟨L⟩ x ⟨L'⟩
+    cases L
+    · simp [LeanColls.toList, Seq.getCons?]
+      intro h; split at h; simp_all; rw [size_eq_length_data] at *; simp at *
+    next hd tl =>
+    simp [LeanColls.toList, Seq.getCons?, getElem_eq_data_get]
+    split <;> simp_all [size_mk]
+    rintro rfl
     constructor
-    · apply ext'; simp
-    · rw [getElem_eq_data_get, List.get_append_right]
-      repeat simp
+    · intro h
+      have := congrArg size h
+      simp at this; cases this
+      have : List.length tl = List.length L' := by
+        clear h; simp_all [size_mk]
+      rw [Array.ext_iff] at h
+      · simp at h; simp [getElem_eq_data_get] at h
+        apply List.ext_get
+        · assumption
+        intro i h1 h2
+        apply h i (this ▸ h1) h2
+      · simp
+    · rintro rfl
+      rw [Array.ext_iff]
+      · simp; simp [getElem_eq_data_get]
+      · simp; simp_all [size_mk]
+  getSnoc?_eq_none := by
+    simp [LeanColls.toList, Seq.getSnoc?]
+    rintro ⟨L⟩; simp [getSnoc?]; exact List.length_eq_zero
+  getSnoc?_eq_some := by
+    rintro ⟨L⟩ x ⟨L'⟩
+    simp [LeanColls.toList, Seq.getSnoc?, getSnoc?]
+    split <;> simp_all [List.length_eq_zero]
+    simp [pop]
+    rw [getElem_eq_data_get, ← List.getLast_eq_get L (List.ne_nil_of_length_pos ‹_›)]
+    constructor
+    · rintro ⟨rfl,rfl⟩
+      simp only [List.dropLast_append_getLast]
+    · rintro rfl
+      simp only [List.dropLast_concat, List.getLast_append, and_self]
+  toList_update := by
+    rintro ⟨c⟩ ⟨i,h⟩ f
+    simp [Seq.update, LeanColls.toList, getElem_eq_data_get]
+    congr 2; apply List.get_eq_get
+    · rw [toList_eq]
+    · simp
+  toList_cons := by
+    simp [LeanColls.toList, Seq.cons, cons]
+  toList_snoc := by
+    simp [LeanColls.toList, Seq.snoc, snoc]
 
 end Array
 
-abbrev NArray (α : Type u) (n : Nat) := Seq.FixSize (Array α) n
+abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n

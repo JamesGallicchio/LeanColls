@@ -78,15 +78,15 @@ instance [ToList C τ] : LawfulToList C τ where
 namespace Mem
 variable (C : Type u) (τ : outParam (Type v)) [Membership τ C]
 
-class ToFinset [ToFinset C τ] where
+class ToFinset [ToFinset C τ] : Prop where
   mem_iff_mem_toFinset : ∀ x (c : C),
     x ∈ c ↔ x ∈ ToFinset.toFinset c
 
-class ToMultiset [ToMultiset C τ] where
+class ToMultiset [ToMultiset C τ] : Prop where
   mem_iff_mem_toMultiset : ∀ x (c : C),
     x ∈ c ↔ x ∈ ToMultiset.toMultiset c
 
-class ToList [ToList C τ] where
+class ToList [ToList C τ] : Prop where
   mem_iff_mem_toList : ∀ x (c : C),
     x ∈ c ↔ x ∈ ToList.toList c
 
@@ -95,7 +95,7 @@ end Mem
 namespace Append
 variable (C : Type u) (τ : outParam (Type v)) [Append C]
 
-class ToList [ToList C τ] where
+class ToList [ToList C τ] : Prop where
   toList_append : ∀ (c1 c2 : C),
     toList (c1 ++ c2) = toList c1 ++ toList c2
 
@@ -140,12 +140,12 @@ export Insert (empty insert singleton)
 namespace Insert
 variable  (C : Type u) (τ : outParam (Type v)) [Insert C τ]
 
-class Mem [Membership τ C] where
+class Mem [Membership τ C] : Prop where
   mem_empty : ∀ x, ¬ x ∈ empty (C := C)
   mem_insert : ∀ x (c : C) y, x ∈ insert c y ↔ x = y ∨ x ∈ c
   mem_singleton : ∀ x y, x ∈ singleton (C := C) y ↔ x = y
 
-class ToMultiset [ToMultiset C τ] where
+class ToMultiset [ToMultiset C τ] : Prop where
   toMultiset_empty : ToMultiset.toMultiset (empty (C := C)) = {}
   toMultiset_insert : ∀ (c : C) x,
     ToMultiset.toMultiset (insert c x) = Multiset.cons x (ToMultiset.toMultiset c)
