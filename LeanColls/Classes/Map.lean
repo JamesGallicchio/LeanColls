@@ -19,9 +19,23 @@ namespace LeanColls
 
 -- TODO docstrings
 
+namespace Map
+
+structure KeySet (C : Type u) where
+  data : C
+
+end Map
+
 class Map (C : Type u) (κ : outParam (Type v)) (τ : outParam (Type w))
   extends MultiBag C (κ × τ) where
   get? : C → κ → Option τ
   update : C → κ → (Option τ → Option τ) → C
   set : C → κ → τ → C := (update · · <| Function.const _ <| some ·)
   remove : C → κ → C := (update · · (Function.const _ none))
+  toBagKeySet : Bag (Map.KeySet C) τ
+
+attribute [instance] Map.toBagKeySet
+
+namespace Map
+
+def keySet (c : C) : KeySet C := ⟨c⟩
