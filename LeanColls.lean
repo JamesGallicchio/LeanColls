@@ -22,23 +22,20 @@ import LeanColls.Util.Cached
 /-!
 # Lean Collections Library
 
-Generic collections implemented in pure Lean 4.
+General-purpose collections implemented in pure Lean 4.
 
 `LeanColls` attempts to make programming and proving
 with collections a fun and straightforward experience.
 To that end, the library contains:
- 1. Comprehensive and consistent interfaces for common collection operations.
- 2. Comprehensive and consistent lawfulness specifications for implementations.
- 3. Efficient implementations of common collections for all major use cases.
- 4. Utilities for writing clean, efficient, and provably correct code
-    that utilizes collections.
+ 1. Comprehensive interfaces for common collection operations.
+ 2. Lawfulness specifications for those interfaces.
+ 3. Performant & proven-correct implementations.
+ 4. Utilities for writing clean, efficient, and provably correct
+    code with collections.
 
 which is quite a lot!
 
-Here is a quick summary of important modules to look at:
- - [LeanColls.Classes.Ops] contains typeclasses for individual operations.
-
 More thorough documentation is WIP.
 Contributions are welcome and appreciated;
-see the [Github](https://github.com/JamesGallicchio/LeanColls).
+see the [GitHub repository](https://github.com/JamesGallicchio/LeanColls).
 -/

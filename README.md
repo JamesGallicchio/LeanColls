@@ -1,11 +1,25 @@
-Collections for Lean 4
----
+# Lean Collections Library
 
-A solid collections library is essential to every language's ecosystem. This project aims to provide such a library for Lean 4, providing:
-1. Generic interfaces for standard collections
-2. Performant, correct-by-construction implementations
-3. Utilities and thorough docs for easy development
+General-purpose collections library implemented in pure Lean 4.
 
-See [notes.md](notes.md) for design philosophy and inspiration sources. I'm also in the process of adding docstrings to what is present here.
+### Usage
 
-Very much a work in progress, always looking for help. Feel free to email me!
+Add the following to your `lakefile.lean`:
+```
+require leancolls from git
+  "https://github.com/JamesGallicchio/LeanColls" @ "v0.2"
+```
+
+[The latest documentation is available here](https://jamesgallicchio.github.io/LeanColls/docs/).
+
+### Design
+
+See [notes.md](notes.md) for design philosophy and inspiration sources.
+I'm also in the process of adding docstrings to what is present here.
+
+### Contributing
+
+Issues and PRs are welcome. You can also DM me on the
+[Lean community Zulip](https://leanprover.zulipchat.com/)
+as James Gallicchio.
+
