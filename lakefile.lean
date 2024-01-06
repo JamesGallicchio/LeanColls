@@ -2,7 +2,7 @@ import Lake
 open System Lake DSL
 
 package leancolls {
-  precompileModules := true
+  precompileModules
 }
 
 @[default_target]
