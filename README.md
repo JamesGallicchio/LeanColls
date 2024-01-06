@@ -7,7 +7,7 @@ General-purpose collections library implemented in pure Lean 4.
 Add the following to your `lakefile.lean`:
 ```
 require leancolls from git
-  "https://github.com/JamesGallicchio/LeanColls" @ "v0.2"
+  "https://github.com/JamesGallicchio/LeanColls" @ "main"
 ```
 
 [The latest documentation is available here](https://jamesgallicchio.github.io/LeanColls/docs/).
