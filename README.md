@@ -15,7 +15,6 @@ require leancolls from git
 ### Design
 
 See [notes.md](notes.md) for design philosophy and inspiration sources.
-I'm also in the process of adding docstrings to what is present here.
 
 ### Contributing
 
