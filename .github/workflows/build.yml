@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy docs and push to gh-pages
         run: |
-          mv build/doc docs/docs/
+          mv .lake/build/doc docs/docs/
           git add docs/*
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           git commit -m "Automatic docs update $git_hash"

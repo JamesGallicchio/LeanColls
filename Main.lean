@@ -5,3 +5,5 @@ Authors: James Gallicchio
 -/
 
 import LeanColls
+
+def main : IO Unit := return
