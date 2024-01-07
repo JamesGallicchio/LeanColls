@@ -20,7 +20,7 @@ namespace Range
 
 attribute [simp] step_pos start_le_stop
 
-def ofStd : Std.Range → Range
+@[simp] def ofStd : Std.Range → Range
 | {start, stop, step} =>
   { start := start
   , stop := max start stop
@@ -145,16 +145,45 @@ theorem mem_iff_exists_get (r : Range) : x ∈ r ↔ ∃ i, x = get r i := by
 
 
 def foldl (r : Range) (f : α → Nat → α) (init : α) : α :=
-  aux r.start r.start_le_stop init
+  aux r.start (fun h => by simp_all [mem_def]) init
 where
-  aux i (hi : i ≤ r.stop) (acc : α) :=
-    if h : i = r.stop then acc else
-    have : i < r.stop := Nat.lt_of_le_of_ne hi h
-    aux (i+1) this (f acc i)
+  aux i (hi : i < r.stop → i ∈ r) (acc : α) :=
+    if h : i < r.stop then
+      have := r.step_pos
+      have : r.stop - (i + r.step) < r.stop - i := by
+        rw [Nat.sub_add_eq]; apply Nat.sub_lt
+        repeat simp [*]
+      aux (i + r.step) (fun h => by
+        simp_all [mem_def]; rcases hi with ⟨left,right⟩
+        constructor
+        · apply le_add_right; assumption
+        · rw [Nat.sub_add_comm left]; simp [*]
+        ) (f acc i)
+    else
+      acc
 termination_by aux i _ _ => r.stop - i
 
 instance : Fold Range Nat where
   fold := foldl
+
+def foldl' (r : Range) (f : α → (i : Nat) → i ∈ r → α) (init : α) : α :=
+  aux r.start (fun h => by simp_all [mem_def]) init
+where
+  aux i (hi : i < r.stop → i ∈ r) (acc : α) :=
+    if h : i < r.stop then
+      have := r.step_pos
+      have : r.stop - (i + r.step) < r.stop - i := by
+        rw [Nat.sub_add_eq]; apply Nat.sub_lt
+        repeat simp [*]
+      aux (i + r.step) (fun h => by
+        simp_all [mem_def]; rcases hi with ⟨left,right⟩
+        constructor
+        · apply le_add_right; assumption
+        · rw [Nat.sub_add_comm left]; simp [*]
+        ) (f acc i (hi h))
+    else
+      acc
+termination_by aux i _ _ => r.stop - i
 
 theorem fold_def (r : Range) (f : β → Nat → β)
     : fold r f init =
@@ -162,5 +191,3 @@ theorem fold_def (r : Range) (f : β → Nat → β)
   := by
   simp [fold, foldl, Fin.foldl]
   sorry -- TODO
-
-
