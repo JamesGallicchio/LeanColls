@@ -9,6 +9,7 @@ import Mathlib.Data.Array.Lemmas
 
 import LeanColls.Classes.Seq
 import LeanColls.Data.List
+import LeanColls.Data.Range
 import LeanColls.Data.Transformer.FixSize
 
 open LeanColls
@@ -128,3 +129,27 @@ instance : LawfulSeq (Array α) α where
 end Array
 
 abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n
+
+/-! ### Scalar Arrays -/
+
+namespace ByteArray
+
+def ofFn (f : Fin n → UInt8) : ByteArray :=
+  LeanColls.Range.foldl' [0:n]
+    (fun arr i hi => arr.push (f ⟨i,by simp_all [Range.mem_def]⟩))
+    (ByteArray.mkEmpty n)
+
+instance : Fold ByteArray UInt8 where
+  fold arr := arr.foldl
+  foldM arr := arr.foldlM
+
+instance : Seq ByteArray UInt8 where
+  size := size
+  get := get
+  set := set
+  empty := empty
+  insert := push
+  toList := toList
+  ofFn := ofFn
+
+end ByteArray
