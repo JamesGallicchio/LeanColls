@@ -38,6 +38,11 @@ jobs:
           ~/.elan/bin/lean --version
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
+      - name: Build library
+        run: |
+          lake exe cache get
+          lake build LeanColls
+
       - name: Generate docs
         run: |
           lake build -R -Kdocs=on LeanColls:docs

@@ -1,14 +1,11 @@
 import Lake
 open System Lake DSL
 
-package leancolls {
-}
+package leancolls
 
 @[default_target]
-lean_lib LeanColls {
-}
+lean_lib LeanColls
 
-@[default_target]
 lean_exe test {
   root := `Main
 }
