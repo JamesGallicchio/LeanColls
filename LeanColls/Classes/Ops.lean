@@ -117,6 +117,17 @@ export Fold (fold foldM)
 
 namespace Fold
 
+instance [Fold C τ] : ForIn m C τ where
+  forIn := fun {β} _ c acc f => do
+    let res ← Fold.foldM (m := ExceptT β m)
+      c (fun x acc =>
+        f acc x >>= fun
+          | .done a => throw a
+          | .yield a => pure a) acc
+    match res with
+    | .ok a => pure a
+    | .error a => pure a
+
 def find (f : τ → Bool) [Fold C τ] (c : C) : Option τ :=
   match
     Fold.foldM c (fun () x =>

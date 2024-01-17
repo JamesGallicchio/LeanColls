@@ -8,7 +8,8 @@ import LeanColls.Data.Array
 import LeanColls.Util.Cached
 
 import Mathlib.Data.Nat.Order.Lemmas
-import Mathlib.Tactic
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
 
 /-!
 # Radix Balanced Finger Trees
