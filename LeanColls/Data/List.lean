@@ -1,6 +1,6 @@
 /- Copyright (c) 2023 James Gallicchio.
 
-Authors: James Gallicchio
+Authors: James Gallicchio, Thea Brick
 -/
 
 import Mathlib.Data.List.Lemmas
@@ -54,3 +54,37 @@ theorem ext_get_iff (L₁ L₂ : List α) (h : L₁.length = L₂.length)
 theorem get_eq_get (L1 L2 : List α) (i : Fin L1.length) (j : Fin L2.length) :
   L1 = L2 → i.val = j.val → L1.get i = L2.get j
   := by cases i; cases j; rintro rfl h; simp at h; cases h; rfl
+
+def Nonempty (α : Type u) := { lst : List α // lst ≠ nil }
+
+namespace Nonempty
+
+def ofList (lst : List α) (h : lst ≠ nil := by simp) : Nonempty α := ⟨lst, h⟩
+def toList (lst : Nonempty α) : List α := lst.val
+
+instance : CoeHead (Nonempty α) (List α) := ⟨(·.val)⟩
+instance [Inhabited α] : Inhabited (Nonempty α) := ⟨⟨[default], by simp⟩⟩
+instance [Repr α] : Repr (Nonempty α) := ⟨(reprPrec ·.toList)⟩
+
+def reduce (f : α → α → α) (lst : Nonempty α) : α :=
+  match lst with
+  | ⟨[], _⟩     => by contradiction
+  | ⟨hd::tl, _⟩ => tl.foldl f hd
+
+end Nonempty
+
+def nonempty? (lst : List α) : Option (Nonempty α) :=
+  match h₁ : lst with
+  | []     => none
+  | _ :: _ => some ⟨lst, by simp [h₁]⟩
+
+def nonempty! [Inhabited α] (lst : List α) : Nonempty α :=
+  match nonempty? lst with
+  | some res => res
+  | none     => panic! "nonempty! called on empty list"
+
+theorem length_nonempty (lst : Nonempty α) : lst.toList.length > 0 := by
+  have := lst.property
+  cases h : lst.val with
+  | nil        => contradiction
+  | cons hd tl => simp [Nonempty.toList, h]
