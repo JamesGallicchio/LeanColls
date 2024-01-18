@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Build library & docs
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +30,39 @@ jobs:
       - name: Generate docs
         run: |
           lake build -R -Kdoc=on LeanColls:docs
+
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: docs
+          path: .lake/build/doc
+
+  deploy:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Reset gh-pages branch
+        run: |
+          git checkout gh-pages
+          git reset --hard main
+
+      - name: Download docs artifact
+        uses: actions/download-artifact@master
+        with:
+          name: docs
+          path: docs/docs
+
+      - name: Force push to gh-pages branch
+        run: |
+          git add docs/*
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git commit -m "Automatic docs update $git_hash"
+          git push -f
