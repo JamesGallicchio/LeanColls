@@ -37,15 +37,16 @@ namespace LeanColls
 
 /-- `C` can be modeled as a finset of `τ`s -/
 class ToFinset (C : Type u) (τ : outParam (Type v)) where
-  toFinset : C → Finset τ
+  toFinset : (cont : C) → Finset τ
 
 /-- `C` can be modeled as a multiset of `τ`s -/
 class ToMultiset (C : Type u) (τ : outParam (Type v)) where
-  toMultiset : C → Multiset τ
+  toMultiset : (cont : C) → Multiset τ
 
 class LawfulToMultiset (C : Type u) (τ : outParam (Type v))
         [DecidableEq τ] [ToFinset C τ] [ToMultiset C τ] where
-  toFinset_toMultiset : ∀ (c : C), (ToMultiset.toMultiset c).toFinset = ToFinset.toFinset c
+  toFinset_toMultiset : ∀ (cont : C),
+    (ToMultiset.toMultiset cont).toFinset = ToFinset.toFinset cont
 
 attribute [simp] LawfulToMultiset.toFinset_toMultiset
 
@@ -56,12 +57,12 @@ instance [DecidableEq τ] [ToMultiset C τ] : LawfulToMultiset C τ where
   toFinset_toMultiset _ := rfl
 
 class ToList (C : Type u) (τ : outParam (Type v)) where
-  toList : C → List τ
+  toList : (cont : C) → List τ
 export ToList (toList)
 
 class LawfulToList (C : Type u) (τ : outParam (Type v))
         [ToMultiset C τ] [ToList C τ] where
-  toMultiset_toList : ∀ (c : C), (toList c) = ToMultiset.toMultiset c
+  toMultiset_toList : ∀ (cont : C), (toList cont) = ToMultiset.toMultiset cont
 
 attribute [simp] LawfulToMultiset.toFinset_toMultiset
 
@@ -79,16 +80,16 @@ namespace Mem
 variable (C : Type u) (τ : outParam (Type v)) [Membership τ C]
 
 class ToFinset [ToFinset C τ] : Prop where
-  mem_iff_mem_toFinset : ∀ x (c : C),
-    x ∈ c ↔ x ∈ ToFinset.toFinset c
+  mem_iff_mem_toFinset : ∀ x (cont : C),
+    x ∈ cont ↔ x ∈ ToFinset.toFinset cont
 
 class ToMultiset [ToMultiset C τ] : Prop where
-  mem_iff_mem_toMultiset : ∀ x (c : C),
-    x ∈ c ↔ x ∈ ToMultiset.toMultiset c
+  mem_iff_mem_toMultiset : ∀ x (cont : C),
+    x ∈ cont ↔ x ∈ ToMultiset.toMultiset cont
 
 class ToList [ToList C τ] : Prop where
-  mem_iff_mem_toList : ∀ x (c : C),
-    x ∈ c ↔ x ∈ ToList.toList c
+  mem_iff_mem_toList : ∀ x (cont : C),
+    x ∈ cont ↔ x ∈ ToList.toList cont
 
 end Mem
 
@@ -108,10 +109,10 @@ end Append
 /-- `C` can be folded over, with element type `τ` -/
 class Fold (C : Type u) (τ : outParam (Type v)) where
   /-- full (not early-terminating) fold over the elements of `C` -/
-  fold : {β : Type w} → C → (β → τ → β) → β → β
+  fold : {β : Type w} → (cont : C) → (β → τ → β) → β → β
   /-- monadic fold over the elements of `C` -/
   foldM : {β : Type w} → {m : Type w → Type w} → [Monad m] →
-      C → (β → τ → m β) → β → m β
+      (cont : C) → (β → τ → m β) → β → m β
     := fun c f i => fold c (fun macc x => macc >>= fun acc => f acc x) (pure i)
 export Fold (fold foldM)
 
@@ -128,27 +129,27 @@ instance [Fold C τ] : ForIn m C τ where
     | .ok a => pure a
     | .error a => pure a
 
-def find (f : τ → Bool) [Fold C τ] (c : C) : Option τ :=
+def find (f : τ → Bool) [Fold C τ] (cont : C) : Option τ :=
   match
-    Fold.foldM c (fun () x =>
+    Fold.foldM cont (fun () x =>
       if f x then .error x else .ok ()
     ) ()
   with
   | Except.ok () => none
   | Except.error x => some x
 
-def any (f : τ → Bool) [Fold C τ] (c : C) : Bool :=
+def any (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
   match
-    Fold.foldM c (fun () x =>
+    Fold.foldM cont (fun () x =>
       if f x then .error () else .ok ()
     ) ()
   with
   | Except.ok () => false
   | Except.error () => true
 
-def all (f : τ → Bool) [Fold C τ] (c : C) : Bool :=
+def all (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
   match
-    Fold.foldM c (fun () x =>
+    Fold.foldM cont (fun () x =>
       if f x then .ok () else .error ()
     ) ()
   with
@@ -169,7 +170,7 @@ By combining them we can avoid relying on distinct `ρ` types
 to associate the `next?` and `iterate` functions.
 -/
 class Iterate (C : Type u) (τ : outParam (Type v)) (ρ : outParam (Type w)) where
-  iterate : C → ρ
+  iterate : (cont : C) → ρ
   next? : ρ → Option (τ × ρ)
 export Iterate (iterate next?)
 
@@ -179,7 +180,7 @@ export Iterate (iterate next?)
 /-- `C` has an empty collection, and a way to insert `τ`s -/
 class Insert (C : Type u) (τ : outParam (Type v)) where
   empty : C
-  insert : C → τ → C
+  insert : (cont : C) → τ → C
   singleton : τ → C := insert empty
 export Insert (empty insert singleton)
 
@@ -193,13 +194,13 @@ variable  (C : Type u) (τ : outParam (Type v)) [Insert C τ]
 
 class Mem [Membership τ C] : Prop where
   mem_empty : ∀ x, ¬ x ∈ empty (C := C)
-  mem_insert : ∀ x (c : C) y, x ∈ insert c y ↔ x = y ∨ x ∈ c
+  mem_insert : ∀ x (cont : C) y, x ∈ insert cont y ↔ x = y ∨ x ∈ cont
   mem_singleton : ∀ x y, x ∈ singleton (C := C) y ↔ x = y
 
 class ToMultiset [ToMultiset C τ] : Prop where
   toMultiset_empty : ToMultiset.toMultiset (empty (C := C)) = {}
-  toMultiset_insert : ∀ (c : C) x,
-    ToMultiset.toMultiset (insert c x) = Multiset.cons x (ToMultiset.toMultiset c)
+  toMultiset_insert : ∀ (cont : C) x,
+    ToMultiset.toMultiset (insert cont x) = Multiset.cons x (ToMultiset.toMultiset cont)
   toMultiset_singleton : ∀ x,
     ToMultiset.toMultiset (singleton (C := C) x) = {x}
 
@@ -232,7 +233,7 @@ end Insert
 
 class Size (C : Type u) where
   /-- Number of elements in the collection. -/
-  size : C → Nat
+  size : (cont : C) → Nat
 export Size (size)
 
 instance (priority := low) Size.ofFold [Fold C τ] : Size C where

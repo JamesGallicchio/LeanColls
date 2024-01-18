@@ -33,35 +33,35 @@ class Indexed (C : Type u) (ι : outParam (Type v)) (τ : outParam (Type w))
   update : C → ι → (τ → τ) → C
   /-- Set the value of the function at an index -/
   set : C → ι → τ → C := (update · · <| Function.const _ ·)
-  size c := fold c (fun acc _ => acc + 1) 0
+  size cont := fold cont (fun acc _ => acc + 1) 0
 
 class LawfulIndexed (C ι τ) [DecidableEq ι] [Indexed C ι τ] where
   get_ofFn : ∀ f, Indexed.get (Indexed.ofFn (C := C) f) = f
-  get_set : ∀ (c : C) i a j,
-    Indexed.get (Indexed.set c i a) j =
-      if i = j then a else Indexed.get c j
-  get_update : ∀ (c : C) i f j,
-    Indexed.get (Indexed.update c i f) j =
-      if i = j then f (Indexed.get c j) else Indexed.get c j
+  get_set : ∀ (cont : C) i a j,
+    Indexed.get (Indexed.set cont i a) j =
+      if i = j then a else Indexed.get cont j
+  get_update : ∀ (cont : C) i f j,
+    Indexed.get (Indexed.update cont i f) j =
+      if i = j then f (Indexed.get cont j) else Indexed.get cont j
 
 namespace Indexed
 
 variable [Indexed C ι τ] [DecidableEq ι] [LawfulIndexed C ι τ]
 
-@[simp] theorem get_set_eq (c : C)
-  : Indexed.get (Indexed.set c i a) i = a := by
+@[simp] theorem get_set_eq (cont : C)
+  : Indexed.get (Indexed.set cont i a) i = a := by
   rw [LawfulIndexed.get_set]; simp
 
-@[simp] theorem get_set_ne (c : C) (h : i ≠ j)
-  : Indexed.get (Indexed.set c i a) j = Indexed.get c j := by
+@[simp] theorem get_set_ne (cont : C) (h : i ≠ j)
+  : Indexed.get (Indexed.set cont i a) j = Indexed.get cont j := by
   rw [LawfulIndexed.get_set]; simp [h]
 
-@[simp] theorem get_update_eq (c : C)
-  : Indexed.get (Indexed.update c i f) i = f (Indexed.get c i) := by
+@[simp] theorem get_update_eq (cont : C)
+  : Indexed.get (Indexed.update cont i f) i = f (Indexed.get cont i) := by
   rw [LawfulIndexed.get_update]; simp
 
-@[simp] theorem get_update_ne (c : C) (h : i ≠ j)
-  : Indexed.get (Indexed.update c i a) j = Indexed.get c j := by
+@[simp] theorem get_update_ne (cont : C) (h : i ≠ j)
+  : Indexed.get (Indexed.update cont i a) j = Indexed.get cont j := by
   rw [LawfulIndexed.get_update]; simp [h]
 
 export LawfulIndexed (get_ofFn)
