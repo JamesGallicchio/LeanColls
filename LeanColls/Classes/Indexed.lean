@@ -28,11 +28,11 @@ class Indexed (C : Type u) (ι : outParam (Type v)) (τ : outParam (Type w))
     specifying its value at every index. -/
   ofFn : (ι → τ) → C
   /-- Get the value of a collection at an index. -/
-  get : C → ι → τ
+  get : (cont : C) → (i : ι) → τ
   /-- Apply a function at an index (often done in-place). -/
-  update : C → ι → (τ → τ) → C
+  update : (cont : C) → (i : ι) → (τ → τ) → C
   /-- Set the value of the function at an index -/
-  set : C → ι → τ → C := (update · · <| Function.const _ ·)
+  set : (cont : C) → (i : ι) → τ → C := (update · · <| Function.const _ ·)
   size cont := fold cont (fun acc _ => acc + 1) 0
 
 class LawfulIndexed (C ι τ) [DecidableEq ι] [Indexed C ι τ] where

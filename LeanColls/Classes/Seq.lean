@@ -33,6 +33,9 @@ class Seq.{u,v} (C : Type u) (τ : outParam (Type v))
   set : (cont : C) → Fin (size cont) → τ → C
   update : (cont : C) → Fin (size cont) → (τ → τ) → C :=
     fun cont i f => set cont i (f (get cont i))
+  -- TODO: should `cons` and `snoc` label their container argument?
+  -- The argument order/position is intentional, for readability,
+  -- so I don't know that anyone *should* use named application here.
   cons : τ → C → C := (singleton · ++ ·)
   getCons? : C → Option (τ × C) := fun cont =>
     match h : size cont with
