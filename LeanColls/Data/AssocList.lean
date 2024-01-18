@@ -28,9 +28,21 @@ instance [BEq κ] : Map (AssocList κ τ) κ τ where
   empty := .nil
   insert := fun m (k,t) => m.cons k t
   get? := fun m k => m.find? k
-  set := fun m k x => m.cons k x
+  set := fun m k x => m.erase k |>.cons k x
+  remove := fun m k => m.erase k
   modify := fun m k f => m.modify k (Function.const _ f)
-  alter := fun m k f => sorry
+  -- TODO: can implement much more efficiently by just doing recursively
+  alter := fun m k f =>
+    match m.find? k with
+    | none =>
+      match f none with
+      | none => m
+      | some v => m.cons k v
+    | some v =>
+      match f (some v) with
+      | none => m.erase k
+      | some v' => m.replace k v'
+  -- TODO need de-duplication stuff
   toBagKeySet := {
     toFinset := sorry
     size := sorry
