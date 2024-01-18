@@ -22,8 +22,21 @@ def update [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (g : τ �
 def set [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (x : τ) : Slice C ι τ ι' f :=
   ⟨Indexed.set slice.data (f i') x⟩
 
+instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ]
+    : MultiBag.ReadOnly (Indexed.WithIdx (Slice C ι τ ι' f)) (ι' × τ) where
+  mem := fun (i',x) c => c.cont.get i' = x
+  fold c f init :=
+    fold (IndexType.univ ι')
+        (fun acc i => f acc (i, Slice.get c.cont i))
+        init
+  size _ := IndexType.card ι'
+  toMultiset c :=
+    ToMultiset.toMultiset (IndexType.univ ι')
+    |>.map (fun i' => (i', c.cont.get i'))
+
 instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ] [Inhabited τ]
     : Indexed (Slice C ι τ ι' f) ι' τ where
+  toMultiBagWithIdx := inferInstance
   get := Slice.get
   update := Slice.update
   mem x slice :=
@@ -38,9 +51,10 @@ instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ] [Inhabited τ]
     | .error () => true
     | .ok () => false
   toMultiset slice :=
-    toList (IndexType.univ ι') |> Multiset.ofList |>.map (Slice.get slice)
+    ToMultiset.toMultiset (IndexType.univ ι')
+    |>.map (Slice.get slice)
   fold slice f init :=
-    fold (IndexType.univ ι') (fun acc i => f acc (i,Slice.get slice i)) init
+    fold (IndexType.univ ι') (fun acc i => f acc (Slice.get slice i)) init
   ofFn g := ⟨
       (Indexed.ofFn fun _ => default)
       |> fold (IndexType.univ ι') (fun c i' => Indexed.set c (f i') (g i'))

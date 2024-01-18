@@ -29,7 +29,9 @@ def Seq.fixSize [Size C] (c : C) : FixSize C (size c) := {
 
 namespace FixSize
 
+-- TODO: finish impl
 instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ where
+  toMultiBagWithIdx := sorry
   mem x c := x ∈ c.data
   get c i := Seq.get c.data (i.cast c.hsize.symm)
   set c i x :=

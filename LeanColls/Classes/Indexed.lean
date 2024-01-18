@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes.Ops
+import LeanColls.Classes.Bag
 import LeanColls.Classes.IndexType
 
 namespace LeanColls
@@ -17,13 +17,18 @@ The math model for indexed collections is a total function `ι → α`.
 but a lawful [Indexed] instance implies an [IndexType] instance on `ι`.
 -/
 
+/-- An indexed collection `cont` can be reinterpreted as a
+  multibag of pairs `(i, cont[i])`.
+
+  This is similar to the `List.enum` operation. -/
+structure Indexed.WithIdx (C : Type u) where
+  cont : C
+
 class Indexed (C : Type u) (ι : outParam (Type v)) (τ : outParam (Type w))
   extends
-    Membership τ C,
-    ToMultiset C τ,
-    Fold C (ι × τ),
-    Size C
-   where
+    MultiBag.ReadOnly C τ
+  where
+  toMultiBagWithIdx : MultiBag.ReadOnly (Indexed.WithIdx C) (ι × τ)
   /-- Form an instance of the collection type by
     specifying its value at every index. -/
   ofFn : (ι → τ) → C
@@ -34,6 +39,12 @@ class Indexed (C : Type u) (ι : outParam (Type v)) (τ : outParam (Type w))
   /-- Set the value of the function at an index -/
   set : (cont : C) → (i : ι) → τ → C := (update · · <| Function.const _ ·)
   size cont := fold cont (fun acc _ => acc + 1) 0
+
+namespace Indexed
+
+def withIdx (cont : C) : Indexed.WithIdx C := .mk cont
+
+end Indexed
 
 class LawfulIndexed (C ι τ) [DecidableEq ι] [Indexed C ι τ] where
   get_ofFn : ∀ f, Indexed.get (Indexed.ofFn (C := C) f) = f
