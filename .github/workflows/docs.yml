@@ -1,8 +1,7 @@
 name: Build library & docs
 
 on:
-  push:
-  pull_request:
+  push: [ main ]
 
 jobs:
   build:
@@ -29,3 +28,15 @@ jobs:
       - name: Generate docs
         run: |
           lake build -R -Kdoc=on LeanColls:docs
+
+      - name: Deploy docs and push to gh-pages
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git checkout gh-pages
+          git reset --hard main
+          mv .lake/build/doc docs/docs/
+          git add docs/*
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          git commit -m "Automatic docs update $git_hash"
+          git push -f
