@@ -9,22 +9,22 @@ namespace LeanColls
 
 /-! ## Notation for Indexed Collections
 
-This filed defines notaion:
-  - `x[i,j,k]` for element access
-  - `x[i,j,k] := xi` for setting elements in
+This file defines notation:
+ - `x[i,j,k]` for getting elements
+ - `x[i,j,k] := xi` for setting elements
 -/
 
 
 namespace Indexed.Notation
 
-open Lean Meta 
+open Lean Meta
 
 /-- Assuming `e = X₁ × ... Xₘ` this function returns `#[X₁, ..., Xₘ]`.
 
 You can provide the expected number `n?` of elemnts then this function returns
 `#[X₁, ..., (Xₙ × ... Xₘ)].
 
-Returns none if `n? = 0` or `n? > m` i.e. `e` does not have enought terms.
+Returns none if `n? = 0` or `n? > m` i.e. `e` does not have enough terms.
 -/
 private partial def splitProdType (e : Expr) (n? : Option Nat := none)  : Option (Array Expr) :=
   if n? = .some 0 then
@@ -55,7 +55,7 @@ private def mkProdElem (xs : Array Expr) : MetaM Expr :=
 
 
 /-- Turn an array of terms in into a tuple. -/
-private def mkTuple (xs : Array (TSyntax `term)) : MacroM (TSyntax `term) := 
+private def mkTuple (xs : Array (TSyntax `term)) : MacroM (TSyntax `term) :=
   `(term| ($(xs[0]!), $(xs[1:]),*))
 
 
@@ -194,4 +194,3 @@ Please provide instance `Indexed {← ppExpr X} ?I ?E`."
   | `($(_) $x ($i, $is,*)) => `($x[$i:term,$[$is:term],*])
   | `($(_) $x $i) => `($x[$i:term])
   | _ => throw ()
-
