@@ -46,34 +46,36 @@ def withIdx (cont : C) : Indexed.WithIdx C := .mk cont
 
 end Indexed
 
-class LawfulIndexed (C ι τ) [DecidableEq ι] [Indexed C ι τ] where
+class LawfulIndexed (C ι τ) [Indexed C ι τ] where
   get_ofFn : ∀ f, Indexed.get (Indexed.ofFn (C := C) f) = f
   get_set : ∀ (cont : C) i a j,
-    Indexed.get (Indexed.set cont i a) j =
-      if i = j then a else Indexed.get cont j
+    (i = j → Indexed.get (Indexed.set cont i a) j = a)
+    ∧
+    (i ≠ j → Indexed.get (Indexed.set cont i a) j = Indexed.get cont j)
   get_update : ∀ (cont : C) i f j,
-    Indexed.get (Indexed.update cont i f) j =
-      if i = j then f (Indexed.get cont j) else Indexed.get cont j
+    (i = j → Indexed.get (Indexed.update cont i f) j = f (Indexed.get cont j))
+    ∧
+    (i ≠ j → Indexed.get (Indexed.update cont i f) j = Indexed.get cont j)
 
 namespace Indexed
 
-variable [Indexed C ι τ] [DecidableEq ι] [LawfulIndexed C ι τ]
+variable [Indexed C ι τ] [LawfulIndexed C ι τ]
 
 @[simp] theorem get_set_eq (cont : C)
   : Indexed.get (Indexed.set cont i a) i = a := by
-  rw [LawfulIndexed.get_set]; simp
+  rw [(LawfulIndexed.get_set _ _ _ _).1 rfl]
 
 @[simp] theorem get_set_ne (cont : C) (h : i ≠ j)
   : Indexed.get (Indexed.set cont i a) j = Indexed.get cont j := by
-  rw [LawfulIndexed.get_set]; simp [h]
+  rw [(LawfulIndexed.get_set _ _ _ _).2 h]
 
 @[simp] theorem get_update_eq (cont : C)
   : Indexed.get (Indexed.update cont i f) i = f (Indexed.get cont i) := by
-  rw [LawfulIndexed.get_update]; simp
+  rw [(LawfulIndexed.get_update _ _ _ _).1 rfl]
 
 @[simp] theorem get_update_ne (cont : C) (h : i ≠ j)
   : Indexed.get (Indexed.update cont i a) j = Indexed.get cont j := by
-  rw [LawfulIndexed.get_update]; simp [h]
+  rw [(LawfulIndexed.get_update _ _ _ _).2 h]
 
 export LawfulIndexed (get_ofFn)
 attribute [simp] get_ofFn
