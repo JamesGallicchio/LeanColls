@@ -47,8 +47,12 @@ instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ where
 instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ where
   get_ofFn f := by simp [Indexed.ofFn, Indexed.get]
   get_set := by
-    simp [Indexed.set, Indexed.get]
-    intros; simp [Seq.get_set, Fin.val_eq_val]
+    intros; constructor <;>
+    (simp [Indexed.set, Indexed.get]
+     intros; simp [Seq.get_set, Fin.val_eq_val]
+     intros; contradiction)
   get_update := by
-    simp [Indexed.get, Indexed.update]
-    intros; simp [Seq.get_update, Fin.val_eq_val]
+    intros; constructor <;>
+    (simp [Indexed.get, Indexed.update]
+     intros; simp [Seq.get_update, Fin.val_eq_val]
+     intros; contradiction)
