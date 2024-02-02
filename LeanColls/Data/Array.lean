@@ -134,11 +134,6 @@ abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n
 
 namespace ByteArray
 
-def ofFn (f : Fin n → UInt8) : ByteArray :=
-  LeanColls.Range.foldl' [0:n]
-    (fun arr i hi => arr.push (f ⟨i,by simp_all [Range.mem_def]⟩))
-    (ByteArray.mkEmpty n)
-
 instance : Fold ByteArray UInt8 where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
