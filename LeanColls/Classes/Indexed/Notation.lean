@@ -184,8 +184,7 @@ Please provide instance `Indexed {← ppExpr X} ?I ?E`."
   match ← elabIndices ids Is with
     | .inl is =>
       let i ← mkProdElem is
-      let xi := mkAppN (← mkConstWithFreshMVarLevels ``Indexed.get) #[X,I,E,inst,x,i]
-      return xi
+      return ← mkAppOptM ``Indexed.get #[X,I,E,inst,x,i]
     | .inr _is =>
       throwError "ranges are not yet suppored"
 
