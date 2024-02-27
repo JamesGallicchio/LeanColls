@@ -23,7 +23,7 @@ jobs:
           echo "origin/main is at $(git rev-parse origin/main)"
           echo "merge base is $(git merge-base --fork-point origin/main HEAD)"
           echo "$(git -v)"
-          echo "$(git diff origin/main HEAD -- lake-manifest.json)"
+          echo "$(git diff origin/main HEAD)"
           echo "---------- starting rebase -----------"
-          git rebase --fork-point --merge origin/main
+          git rebase --fork-point --merge -s ort -X theirs origin/main
           git push -f
