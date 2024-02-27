@@ -24,10 +24,8 @@ jobs:
       - name: lake update mathlib
         run: lake update mathlib
       - name: Check if changed & make commit
-        id: make_commit
         run: |
-          if $( git diff --quiet --exit-code lake-manifest.json ); then
-          else
+          if ! $( git diff --quiet --exit-code lake-manifest.json ); then
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
             git commit -am "chore(mathlib-nightly): bump mathlib"
