@@ -16,25 +16,9 @@ jobs:
         with:
           token: ${{ secrets.JAMES_PAT }}
           ref: mathlib-nightly
-
-      - name: Fetch main and merge base
-        run: |
-          set -v
-          git fetch --depth=1 origin main
-          MAIN_COMMIT=$(git rev-parse origin/main)
-          NIGHTLY_COMMIT=$(git rev-parse mathlib-nightly)
-          echo "main: $MAIN_COMMIT"
-          echo "mathlib-nightly: $NIGHTLY_COMMIT"
-          COMPARE_URL="https://api.github.com/repos/JamesGallicchio/LeanColls/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT"
-          echo "curling $COMPARE_URL"
-          MERGE_BASE=$(curl -s $COMPARE_URL | jq -r ".merge_base_commit.sha")
-          echo "merge base: $MERGE_BASE"
-          git fetch --shallow-exclude "$MERGE_BASE" origin $NIGHTLY_COMMIT
-          git fetch --deepend 1
-          echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
-          echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
+          fetch-depth: 0
 
       - name: Rebase onto main
         run: |
-          git rebase --onto $MAIN_COMMIT $MERGE_BASE
+          git rebase main
           git push -f
