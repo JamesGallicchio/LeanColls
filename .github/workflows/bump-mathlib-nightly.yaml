@@ -8,7 +8,8 @@ on:
 jobs:
   bump_mathlib:
     name: bump mathlib-nightly mathlib version
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -25,7 +26,7 @@ jobs:
       - name: Check if changed & make commit
         id: make_commit
         run: |
-          if $( git diff --quiet --exit-code lakefile.lean ); then
+          if $( git diff --quiet --exit-code lake-manifest.json ); then
           else
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
