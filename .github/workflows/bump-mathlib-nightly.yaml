@@ -32,5 +32,5 @@ jobs:
             echo "committed=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Build
-        if: ${{ steps.make_commit.outputs.committed == "true" }}
+        if: ${{ steps.make_commit.outputs.committed != 'true' }}
         run: lake build
