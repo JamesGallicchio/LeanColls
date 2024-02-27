@@ -23,7 +23,7 @@ jobs:
           ~/.elan/bin/lean --version
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
       - name: lake update mathlib
-        run: lake update mathlib
+        run: lake update mathlib -Kdoc=on
       - name: Check if changed & make commit
         run: |
           if ! $( git diff --quiet --exit-code lake-manifest.json ); then
