@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
       - name: Install elan
         run: |
@@ -26,6 +24,12 @@ jobs:
         run: |
           lake exe cache get
           lake build LeanColls
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: .lake/build/lib
 
       - name: Generate docs
         run: |
@@ -45,14 +49,13 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: gh-pages
 
-      - name: Reset gh-pages branch
+      - name: Reset gh-pages to main
         run: |
-          git checkout gh-pages
           git reset --hard main
 
       - name: Download docs artifact
