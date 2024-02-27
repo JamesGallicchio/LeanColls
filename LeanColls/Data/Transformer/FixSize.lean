@@ -51,7 +51,7 @@ instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ whe
     simp [Indexed.set, Indexed.get]
     intros; simp [Seq.get_set, Fin.val_eq_val]
     intros; contradiction
-  get_set_neq := by
+  get_set_ne := by
     intros;
     simp [Indexed.set, Indexed.get]
     intros; simp [Seq.get_set, Fin.val_eq_val]
