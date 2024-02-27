@@ -28,7 +28,6 @@ jobs:
           echo "curling $COMPARE_URL"
           MERGE_BASE=$(curl -s $COMPARE_URL | jq -r ".merge_base_commit.sha")
           echo "merge base: $MERGE_BASE"
-          echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
           git fetch \
             --no-tags \
             --prune \
@@ -36,8 +35,10 @@ jobs:
             --no-recurse-submodules \
             --depth=1 \
             origin $MERGE_BASE
+          echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
+          echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
 
       - name: Rebase onto main
         run: |
-          git rebase --onto "$MERGE_BASE" origin/main
+          git rebase --onto "$MAIN_COMMIT" "$MERGE_BASE"
           git push -f
