@@ -24,11 +24,9 @@ jobs:
           NIGHTLY_COMMIT=$(git rev-parse mathlib-nightly)
           echo "main: $MAIN_COMMIT"
           echo "mathlib-nightly: $NIGHTLY_COMMIT"
-          MERGE_BASE=$(
-            curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              "https://api.github.com/repos/JamesGallicchio/LeanColls/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT" \
-            | jq -r ".merge_base_commit.sha"
-          )
+          COMPARE_URL="https://api.github.com/repos/JamesGallicchio/LeanColls/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT"
+          echo "curling $COMPARE_URL"
+          MERGE_BASE=$(curl -s $COMPARE_URL | jq -r ".merge_base_commit.sha")
           echo "merge base: $MERGE_BASE"
           echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
           git fetch \
