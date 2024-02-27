@@ -24,11 +24,10 @@ jobs:
           NIGHTLY_COMMIT=$(git rev-parse mathlib-nightly)
           echo "main: $MAIN_COMMIT"
           echo "mathlib-nightly: $NIGHTLY_COMMIT"
-          MERGE_BASE=$(
-            curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          cmd="curl -s -H "Authorization: token $GITHUB_TOKEN" \
               "https://api.github.com/repos/my_user/my_repo/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT"
-            | jq -r '.merge_base_commit.sha'
-            )
+            | jq -r '.merge_base_commit.sha'"
+          MERGE_BASE=$(eval "$cmd")
           echo "merge base: $MERGE_BASE"
           echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
           git fetch \
