@@ -29,7 +29,8 @@ jobs:
           echo "curling $COMPARE_URL"
           MERGE_BASE=$(curl -s $COMPARE_URL | jq -r ".merge_base_commit.sha")
           echo "merge base: $MERGE_BASE"
-          git fetch --shallow-exclude="$MERGE_BASE" origin $NIGHTLY_COMMIT
+          git fetch --shallow-exclude "$MERGE_BASE" origin $NIGHTLY_COMMIT
+          git fetch --deepend 1
           echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
           echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
 
