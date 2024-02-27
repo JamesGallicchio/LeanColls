@@ -119,9 +119,8 @@ theorem size_eq_zero_iff_isEmpty (r : Range)
       Nat.lt_iff_add_one_le,
       Nat.sub_add_cancel]
   · simp
-    constructor <;> intro h
-    · apply Nat.le_antisymm; exact r.start_le_stop; assumption
-    · simp [h]
+    rw [Nat.sub_eq_zero_iff_le, Nat.le_antisymm_iff]
+    simp only [start_le_stop, true_and]
   · exact le_add_left r.step_pos
 
 
@@ -161,7 +160,7 @@ where
         ) (f acc i)
     else
       acc
-termination_by aux i _ _ => r.stop - i
+termination_by r.stop - i
 
 instance : Fold Range Nat where
   fold := foldl
@@ -183,7 +182,7 @@ where
         ) (f acc i (hi h))
     else
       acc
-termination_by aux i _ _ => r.stop - i
+termination_by r.stop - i
 
 theorem fold_def (r : Range) (f : β → Nat → β)
     : fold r f init =

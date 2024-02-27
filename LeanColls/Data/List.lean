@@ -42,7 +42,7 @@ def getSnoc? : List α → Option (List α × α)
   · cases xs <;> simp
   · cases xs <;> simp_all
     · rintro rfl rfl; simp_all; apply ih; rfl
-    · aesop; rw [←ih]; simp
+    · rw [←ih]; clear ih; aesop
 
 theorem ext_get_iff (L₁ L₂ : List α) (h : L₁.length = L₂.length)
   : L₁ = L₂ ↔ ∀ i h1 h2, L₁.get ⟨i,h1⟩ = L₂.get ⟨i, h2⟩
