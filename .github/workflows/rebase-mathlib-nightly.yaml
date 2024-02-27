@@ -19,5 +19,7 @@ jobs:
       - name: Rebase onto main
         run: |
           git fetch origin main
+          echo "on $(git rev-parse --symbolic-full-name HEAD) at $(git rev-parse HEAD)"
+          echo "origin/main is at $(git rev-parse origin/main)"
           git rebase origin/main
           git push -f
