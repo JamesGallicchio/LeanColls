@@ -33,12 +33,12 @@ jobs:
             --prune \
             --progress \
             --no-recurse-submodules \
-            --depth=1 \
-            origin $MERGE_BASE
+            --shallow-exclude=$MERGE_BASE
+            origin $NIGHTLY_COMMIT
           echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
           echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
 
       - name: Rebase onto main
         run: |
-          git rebase --onto "$MAIN_COMMIT" "$MERGE_BASE"
+          git rebase --onto $MAIN_COMMIT $MERGE_BASE
           git push -f
