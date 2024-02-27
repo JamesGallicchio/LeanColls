@@ -57,6 +57,10 @@ instance : IndexType (Fin n) where
   toFin := id
   fromFin := id
 
+instance : LawfulIndexType (Fin n) where
+  toFin_leftInv  := by intro _; rfl
+  toFin_rightInv := by intro _; rfl
+
 
 /-! #### Product -/
 
