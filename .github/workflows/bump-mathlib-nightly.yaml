@@ -29,7 +29,8 @@ jobs:
           if ! $( git diff --quiet --exit-code lake-manifest.json ); then
             git config --local user.email "actions@github.com"
             git config --local user.name "GitHub Actions"
-            git commit -am "chore(mathlib-nightly): bump mathlib"
+            git add lake-manifest.json
+            git commit -m "chore(mathlib-nightly): bump mathlib"
             git push
             echo "committed=true" >> "$GITHUB_OUTPUT"
           fi

@@ -1,0 +1,22 @@
+name: Rebase mathlib-nightly
+
+on:
+  push:
+  - main
+
+jobs:
+  rebase_mathlib_nightly:
+    name: Rebase mathlib-nightly onto main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.JAMES_PAT }}
+          ref: mathlib-nightly
+      - name: Rebase onto main
+        run: |
+          git fetch origin main
+          git rebase --onto origin/main
+          git push
