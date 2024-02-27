@@ -19,7 +19,7 @@ jobs:
 
       - name: Fetch main and merge base
         run: |
-          git fetch origin main
+          git fetch --depth=1 origin main
           MAIN_COMMIT=$(git rev-parse origin/main)
           NIGHTLY_COMMIT=$(git rev-parse mathlib-nightly)
           echo "main: $MAIN_COMMIT"
@@ -28,13 +28,7 @@ jobs:
           echo "curling $COMPARE_URL"
           MERGE_BASE=$(curl -s $COMPARE_URL | jq -r ".merge_base_commit.sha")
           echo "merge base: $MERGE_BASE"
-          git fetch \
-            --no-tags \
-            --prune \
-            --progress \
-            --no-recurse-submodules \
-            --shallow-exclude=$MERGE_BASE
-            origin $NIGHTLY_COMMIT
+          git fetch --shallow-exclude=$MERGE_BASE origin $NIGHTLY_COMMIT
           echo "MAIN_COMMIT=$MAIN_COMMIT" >> $GITHUB_ENV
           echo "MERGE_BASE=$MERGE_BASE" >> $GITHUB_ENV
 
