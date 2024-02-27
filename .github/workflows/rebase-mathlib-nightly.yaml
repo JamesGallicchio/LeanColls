@@ -26,7 +26,7 @@ jobs:
           echo "mathlib-nightly: $NIGHTLY_COMMIT"
           MERGE_BASE=$(
             curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              "https://api.github.com/repos/my_user/my_repo/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT" \
+              "https://api.github.com/repos/JamesGallicchio/LeanColls/compare/$MAIN_COMMIT...$NIGHTLY_COMMIT" \
             | jq -r ".merge_base_commit.sha"
           )
           echo "merge base: $MERGE_BASE"
