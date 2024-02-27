@@ -21,5 +21,9 @@ jobs:
           git fetch origin main
           echo "on $(git rev-parse --symbolic-full-name HEAD) at $(git rev-parse HEAD)"
           echo "origin/main is at $(git rev-parse origin/main)"
-          git rebase origin/main
+          echo "merge base is $(git merge-base --fork-point origin/main HEAD)"
+          echo "$(git -v)"
+          echo "$(git diff origin/main HEAD -- lake-manifest.json)"
+          echo "---------- starting rebase -----------"
+          git rebase --fork-point --merge origin/main
           git push -f
