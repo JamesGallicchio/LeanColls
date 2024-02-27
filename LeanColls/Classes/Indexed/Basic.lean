@@ -52,12 +52,22 @@ class LawfulIndexed (C ι τ) [Indexed C ι τ] where
     i = j → Indexed.get (Indexed.set cont i a) j = a
   get_set_neq : ∀ (cont : C) i a j,
     i ≠ j → Indexed.get (Indexed.set cont i a) j = Indexed.get cont j
-  update_set_get : ∀ (cont : C) i f,
+  update_eq_set_get : ∀ (cont : C) i f,
     (Indexed.update cont i f) = Indexed.set cont i (f (Indexed.get cont i))
+
+namespace LawfulIndexed
+
+@[deprecated update_eq_set_get]
+abbrev update_set_get := @update_eq_set_get
+
+end LawfulIndexed
 
 namespace Indexed
 
 variable [Indexed C ι τ] [LawfulIndexed C ι τ]
+
+export LawfulIndexed (get_ofFn)
+attribute [simp] get_ofFn
 
 @[simp] theorem get_set_eq (cont : C)
   : Indexed.get (Indexed.set cont i a) i = a := by
@@ -69,11 +79,8 @@ variable [Indexed C ι τ] [LawfulIndexed C ι τ]
 
 @[simp] theorem get_update_eq (cont : C)
   : Indexed.get (Indexed.update cont i f) i = f (Indexed.get cont i) := by
-  simp[LawfulIndexed.update_set_get]
+  simp[LawfulIndexed.update_eq_set_get]
 
 @[simp] theorem get_update_ne (cont : C) (h : i ≠ j)
   : Indexed.get (Indexed.update cont i a) j = Indexed.get cont j := by
-  simp[LawfulIndexed.update_set_get,h]
-
-export LawfulIndexed (get_ofFn)
-attribute [simp] get_ofFn
+  simp[LawfulIndexed.update_eq_set_get,h]
