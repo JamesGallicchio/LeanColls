@@ -6,6 +6,7 @@ Authors: James Gallicchio
 import Std.Data.Array.Lemmas
 import Std.Data.List.Lemmas
 import Mathlib.Data.Array.Lemmas
+import Mathlib.Tactic.Ring
 
 import LeanColls.Classes.Seq
 import LeanColls.Data.List
@@ -141,6 +142,11 @@ instance : Fold ByteArray UInt8 where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
 
+instance : Fold.ToList ByteArray UInt8 where
+  -- JG: silly me, thinking someone had proven even a single theorem about ByteArray.foldl
+  fold_eq_fold_toList := by sorry
+  foldM_eq_foldM_toList := by sorry
+
 instance : Seq ByteArray UInt8 where
   size := size
   get := get
@@ -150,6 +156,20 @@ instance : Seq ByteArray UInt8 where
   ofFn := ofFn
   snoc := push
   -- TODO(JG): implement bytearray append directly
+
+-- JG: again, silly me, thinking anyone has proven anything about ByteArray at all
+/-
+instance : LawfulSeq ByteArray UInt8 where
+  toList_append := sorry
+  toMultiset_empty := sorry
+  toMultiset_insert := sorry
+  toMultiset_singleton := by
+    simp [LeanColls.singleton, ToMultiset.toMultiset, LeanColls.toList]
+    sorry -- ... yikes..
+  size_def := by
+    intros; simp [LeanColls.size, LeanColls.toList]
+    sorry -- ...
+-/
 
 end ByteArray
 
@@ -189,9 +209,105 @@ instance : Seq FloatArray Float where
   set := set
   empty := empty
   insert := push
-  toList := toList
   ofFn := ofFn
   snoc := push
   append := append
+
+theorem ext (A1 A2 : FloatArray) : A1.data = A2.data → A1 = A2 := by
+  cases A1; cases A2; simp
+
+theorem ext_iff (A1 A2 : FloatArray) : A1 = A2 ↔ A1.data = A2.data := by
+  constructor
+  · rintro rfl; rfl
+  · apply ext
+
+theorem append.aux_eq_acc_append (A2 : FloatArray) (acc : FloatArray) (i : Nat)
+  : (aux A2 acc i).data = acc.data ++ (aux A2 FloatArray.empty i).data := by
+  if i < A2.size then
+    let j := size A2 - i
+    have : i = size A2 - j := by
+      simp; rw [Nat.sub_sub_self]; apply Nat.lt_succ.mp (Nat.le.step _); assumption
+    rw [this]; clear this
+    have : j ≤ size A2 := by simp
+    generalize j = j' at *; clear j; clear! i
+    induction j' generalizing acc with
+    | zero => unfold aux; simp [empty, mkEmpty]
+    | succ j ih =>
+      unfold aux
+      have : size A2 - j.succ < size A2 := by omega
+      have : size A2 - j.succ + 1 = size A2 - j := by omega
+      simp [*]
+      have : j ≤ size A2 := Nat.le_of_lt ‹_›
+      conv => lhs; rw [ih _ ‹_›]
+      conv => rhs; rw [ih _ ‹_›]
+      rw [←Array.append_assoc]
+      congr 1
+  else
+    unfold aux
+    simp [*, empty, mkEmpty]
+
+theorem append.aux_fromEmpty (A : FloatArray)
+  : (aux A FloatArray.empty 0).data = A.data := by
+  rcases A with ⟨A⟩
+  suffices ∀ i, i ≤ A.size → (aux ⟨A⟩ empty (A.size - i)).data = ⟨A.data.drop (A.size - i)⟩ by
+    have := this A.size (Nat.le_refl _)
+    simpa using this
+  intro i hi
+  induction i with
+  | zero => unfold aux; simp [size, empty, mkEmpty]; rfl
+  | succ i ih =>
+    specialize ih (Nat.le_of_lt hi)
+    unfold aux
+    have : A.size - i.succ < A.size := by omega
+    have : A.size - i.succ + 1 = A.size - i := by omega
+    simp [size, *]
+    rw [append.aux_eq_acc_append, ih, Array.ext'_iff]
+    simp [push, empty, mkEmpty]
+    have : A.size - i.succ < A.data.length := by omega
+    conv => rhs; rw [List.drop_eq_get_cons ‹_›]
+    congr 2
+    omega
+
+@[simp] theorem data_append (A1 A2 : FloatArray) : (A1 ++ A2).data = A1.data ++ A2.data := by
+  rcases A1 with ⟨A1⟩
+  rcases A2 with ⟨A2⟩
+  simp [instAppendFloatArray, instHAppend, append]
+  rw [append.aux_eq_acc_append, append.aux_fromEmpty]
+  rfl
+
+
+theorem ofFn.aux_spec (f : Fin n → Float) (acc : FloatArray) (i : Nat) (hi : i ≤ n)
+  : aux f acc i = acc ++ ⟨Array.ofFn (fun (j : Fin (n-i)) => f (j.addNat i |>.cast (by omega)))⟩ := by
+  have hi' := hi
+  revert hi acc
+  apply Nat.decreasingInduction' (n := n) (P := fun i => ∀ acc (hi : i ≤ n), aux f acc i = _)
+  · intro j jlt _ilej ih acc hi
+    unfold aux
+    simp only [jlt, dite_true]
+    rw [ih _ jlt, ext_iff]
+    rw [Array.ext'_iff]
+    simp [push]
+    rw [←List.ofFn_def, ←List.ofFn_def]
+    have := List.ofFn_succ (fun (x : Fin (n - j.succ + 1)) => f (x.addNat j |>.cast (by omega)))
+    convert this.symm using 1 <;> clear this
+    · simp; constructor
+      · congr; simp
+      · funext x
+        congr 1; simp [Fin.eq_iff_veq]; ring
+    · apply List.ext_get
+      · simp; omega
+      · intro x h1 h2; simp
+  · assumption
+  · intro acc _
+    unfold aux
+    simp; cases acc; rw [ext_iff]; simp
+    suffices Array.ofFn _ = #[] by
+      rw [this]; simp
+    rw [Array.ext'_iff]
+    simp
+    apply List.eq_nil_of_length_eq_zero
+    simp
+
+-- Not even going to try to write out the lawfulseq instance...
 
 end FloatArray
