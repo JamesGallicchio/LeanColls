@@ -118,7 +118,9 @@ export Fold (fold foldM)
 
 namespace Fold
 
-instance [Fold C τ] : ForIn m C τ where
+variable [Fold C τ]
+
+instance : ForIn m C τ where
   forIn := fun {β} _ c acc f => do
     let res ← Fold.foldM (m := ExceptT β m)
       c (fun x acc =>
@@ -129,7 +131,7 @@ instance [Fold C τ] : ForIn m C τ where
     | .ok a => pure a
     | .error a => pure a
 
-def find (f : τ → Bool) [Fold C τ] (cont : C) : Option τ :=
+def find (f : τ → Bool) (cont : C) : Option τ :=
   match
     Fold.foldM cont (fun () x =>
       if f x then .error x else .ok ()
@@ -138,7 +140,7 @@ def find (f : τ → Bool) [Fold C τ] (cont : C) : Option τ :=
   | Except.ok () => none
   | Except.error x => some x
 
-def any (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
+def any (f : τ → Bool) (cont : C) : Bool :=
   match
     Fold.foldM cont (fun () x =>
       if f x then .error () else .ok ()
@@ -147,7 +149,7 @@ def any (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
   | Except.ok () => false
   | Except.error () => true
 
-def all (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
+def all (f : τ → Bool) (cont : C) : Bool :=
   match
     Fold.foldM cont (fun () x =>
       if f x then .ok () else .error ()
@@ -158,6 +160,73 @@ def all (f : τ → Bool) [Fold C τ] (cont : C) : Bool :=
 
 instance (priority := low) [Fold C τ] [BEq τ] : Membership τ C where
   mem x c := any (· == x) c
+
+/-- Correctness of `Fold` with respect to `ToList` -/
+class ToList (C τ) [Fold C τ] [ToList C τ] : Prop where
+  fold_eq_fold_toList : ∀ (c : C) (f) (init : β), ∃ L,
+    List.Perm L (toList c) ∧ fold c f init = List.foldl f init L
+  foldM_eq_foldM_toList : [Monad m] → ∀ (c : C) (f) (init : β), ∃ L,
+    List.Perm L (toList c) ∧ foldM (m := m) c f init = List.foldlM f init L
+
+theorem any_eq_any_toList [LeanColls.ToList C τ] [ToList C τ]
+    (f : τ → Bool) (c : C)
+  : any f c = List.any (toList c) f := by
+  unfold any
+  generalize hf' : (fun _ _ => _) = f'
+  suffices foldM c f' () = Except.error () ↔ List.any (toList c) f by
+    rw [eq_comm]; split
+    · rw [Bool.eq_false_iff]; aesop
+    · aesop
+  have ⟨L,perm,h⟩ := ToList.foldM_eq_foldM_toList c f' ()
+  rw [h]; clear h
+  simp_rw [List.any_eq_true, ← perm.mem_iff]; clear perm c
+  subst hf'
+  induction L with
+  | nil => simp_all [pure, Except.pure]
+  | cons hd tl ih =>
+    simp [bind, Except.bind]
+    by_cases f hd = true <;> simp_all
+
+theorem all_eq_all_toList [LeanColls.ToList C τ] [ToList C τ]
+    (f : τ → Bool) (c : C)
+  : all f c = List.all (toList c) f := by
+  unfold all
+  generalize hf' : (fun _ _ => _) = f'
+  suffices foldM c f' () = Except.ok () ↔ List.all (toList c) f by
+    rw [eq_comm]; split
+    · aesop
+    · rw [Bool.eq_false_iff]; aesop
+  have ⟨L,perm,h⟩ := ToList.foldM_eq_foldM_toList c f' ()
+  rw [h]; clear h
+  simp_rw [List.all_eq_true, ← perm.mem_iff]; clear perm c
+  subst hf'
+  induction L with
+  | nil => simp_all [pure, Except.pure]
+  | cons hd tl ih =>
+    simp [bind, Except.bind]
+    by_cases f hd = true <;> simp_all
+
+@[simp]
+theorem any_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [Mem.ToList C τ]
+    (f : τ → Bool) (c : C)
+  : any f c ↔ ∃ x ∈ c, f x := by
+  rw [any_eq_any_toList]
+  simp [Mem.ToList.mem_iff_mem_toList]
+
+@[simp]
+theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [Mem.ToList C τ]
+    (f : τ → Bool) (c : C)
+  : all f c ↔ ∀ x ∈ c, f x := by
+  rw [all_eq_all_toList]
+  simp [Mem.ToList.mem_iff_mem_toList]
+
+instance [Fold C τ] [BEq τ] [LeanColls.ToList C τ]
+    [ToList C τ] [LawfulBEq τ] : Mem.ToList C τ where
+  mem_iff_mem_toList := by
+    intro x c
+    conv => lhs; simp [Membership.mem]
+    rw [any_eq_any_toList]
+    simp only [List.any_eq_true, beq_iff_eq, exists_eq_right]
 
 end Fold
 
