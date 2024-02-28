@@ -134,6 +134,9 @@ abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n
 
 namespace ByteArray
 
+instance : ToList ByteArray UInt8 where
+  toList := toList
+
 instance : Fold ByteArray UInt8 where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
@@ -144,7 +147,51 @@ instance : Seq ByteArray UInt8 where
   set := set
   empty := empty
   insert := push
-  toList := toList
   ofFn := ofFn
+  snoc := push
+  -- TODO(JG): implement bytearray append directly
 
 end ByteArray
+
+namespace FloatArray
+
+instance : ToList FloatArray Float where
+  toList := toList
+
+instance : Fold FloatArray Float where
+  fold arr := arr.foldl
+  foldM arr := arr.foldlM
+
+def append (A1 A2 : FloatArray) : FloatArray :=
+  aux A1 0
+where aux (acc : FloatArray) (i : Nat) : FloatArray :=
+  if _h : i < A2.size then
+    aux (acc.push A2[i]) (i+1)
+  else
+    acc
+termination_by aux _ i => A2.size - i
+
+instance : Append FloatArray where
+  append := append
+
+def ofFn (f : Fin n → Float) : FloatArray :=
+  aux (FloatArray.mkEmpty n) 0
+where aux (acc : FloatArray) (i : Nat) : FloatArray :=
+  if h : i < n then
+    aux (acc.push (f ⟨i,h⟩)) (i+1)
+  else
+    acc
+termination_by aux i _ => n - i
+
+instance : Seq FloatArray Float where
+  size := size
+  get := get
+  set := set
+  empty := empty
+  insert := push
+  toList := toList
+  ofFn := ofFn
+  snoc := push
+  append := append
+
+end FloatArray
