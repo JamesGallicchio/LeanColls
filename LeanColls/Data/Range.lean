@@ -112,6 +112,8 @@ def empty (start := 0) : Range where
 @[inline] def isEmpty (r : Range) : Bool :=
   r.start = r.stop
 
+#check Nat.sub_eq_iff_eq_add
+
 theorem size_eq_zero_iff_isEmpty (r : Range)
   : r.size = 0 ↔ r.isEmpty := by
   simp [size, isEmpty]
@@ -120,7 +122,10 @@ theorem size_eq_zero_iff_isEmpty (r : Range)
       Nat.sub_add_cancel]
   · simp
     constructor <;> intro h
-    · apply Nat.le_antisymm; exact r.start_le_stop; assumption
+    · apply Nat.le_antisymm
+      exact r.start_le_stop
+      have := (Nat.sub_eq_iff_eq_add r.start_le_stop).mp h
+      simp [this]
     · simp [h]
   · exact le_add_left r.step_pos
 
