@@ -161,7 +161,7 @@ where
         ) (f acc i)
     else
       acc
-termination_by aux i _ _ => r.stop - i
+termination_by r.stop - i
 
 instance : Fold Range Nat where
   fold := foldl
@@ -183,7 +183,7 @@ where
         ) (f acc i (hi h))
     else
       acc
-termination_by aux i _ _ => r.stop - i
+termination_by r.stop - i
 
 theorem fold_def (r : Range) (f : β → Nat → β)
     : fold r f init =

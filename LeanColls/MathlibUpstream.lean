@@ -17,7 +17,7 @@ where
     else
       have : i = n := Nat.le_antisymm h (Nat.not_lt.mp h')
       this ▸ acc
-termination_by aux i _ _ => n-i
+termination_by n-i
 
 theorem Fin.foldl_eq_foldl' (n : Nat) (f : α → Fin n → α) (init : α)
   : Fin.foldl n f init = Fin.foldl' (n := n) (β := fun _ _ => α) init (fun i h acc => f acc ⟨i,h⟩)
@@ -59,7 +59,7 @@ where
       f ⟨i, h'⟩ acc >>= fun acc => aux (i+1) acc
     else
       pure acc
-termination_by aux i _ _ => n-i
+termination_by n-i
 
 theorem Fin.foldlM_eq_foldl [Monad m] [LawfulMonad m] (n : Nat) {β : Type u} (init : β)
     (f : Fin n → β → m β)
