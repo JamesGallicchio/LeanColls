@@ -43,7 +43,7 @@ instance : Seq (Array α) α where
   empty := Array.empty
   insert := Array.push
   singleton := Array.singleton
-  fold c f init := Array.foldl f init c
+  fold' c f init := Array.foldl f init c
   get := Array.get
   set := Array.set
   cons := Array.cons
@@ -135,8 +135,8 @@ abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n
 namespace ByteArray
 
 instance : Fold ByteArray UInt8 where
-  fold arr := arr.foldl
-  foldM arr := arr.foldlM
+  fold' arr := arr.foldl
+  foldM' arr := arr.foldlM
 
 instance : Seq ByteArray UInt8 where
   size := size

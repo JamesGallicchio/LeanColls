@@ -163,7 +163,7 @@ where
 termination_by r.stop - i
 
 instance : Fold Range Nat where
-  fold := foldl
+  fold' := foldl
 
 def foldl' (r : Range) (f : α → (i : Nat) → i ∈ r → α) (init : α) : α :=
   aux r.start (fun h => by simp_all [mem_def]) init

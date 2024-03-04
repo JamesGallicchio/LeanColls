@@ -16,8 +16,8 @@ which can often produce faster and more memory-efficient code.
 
 namespace LeanColls
 
-inductive View.{u,v,w} : Type u → Type (max (u+1) (v+1) (w+1))
-| of [Fold.{v,u,w} C τ] (c : C) : View τ
+inductive View.{u,v} : Type u → Type (max (u+1) (v+1))
+| of [Fold.{v,u} C τ] (c : C) : View τ
 | map (f : τ → τ') (v : View τ) : View τ'
 | filter (f : τ → Bool) (v : View τ) : View τ
 | filterMap (f : τ → Option τ') (v : View τ) : View τ'
@@ -69,8 +69,6 @@ def foldM [Monad m] (f : β → τ → m β) (init : β) : View τ → m β
     (fun acc x => foldM f acc (g x))
     init v
 
-instance : Fold (View τ) τ where
-  fold v f init := fold f init v
-  foldM v f init := foldM f init v
-
-
+-- instance : Fold (View τ) τ where
+--   fold' v f init := fold f init v
+--   foldM' v f init := foldM f init v

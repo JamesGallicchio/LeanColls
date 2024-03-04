@@ -32,8 +32,8 @@ class IndexType (ι : Type u)
   toFin : ι → Fin card
   fromFin : Fin card → ι
   toList _ := Fin.foldr card (fromFin · :: ·) []
-  fold := fun _ f acc => Fin.foldl card (fun acc x => f acc (fromFin x)) acc
-  foldM := fun _ f acc => Fin.foldlM card acc (fun x acc => f acc (fromFin x))
+  fold' := fun _ f acc => Fin.foldl card (fun acc x => f acc (fromFin x)) acc
+  foldM' := fun _ f acc => Fin.foldlM card acc (fun x acc => f acc (fromFin x))
 
 class LawfulIndexType (ι : Type u) [I : IndexType ι] where
   toFin_leftInv : I.toFin.LeftInverse I.fromFin

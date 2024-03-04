@@ -21,7 +21,7 @@ which is also the model used for sequence operations.
 /-- A collection which is ordered (i.e. isomorphic to [List]). -/
 class Seq.{u,v} (C : Type u) (τ : outParam (Type v))
   extends
-  Fold.{u,v,max u v} C τ,
+  Fold.{u,v} C τ,
   Insert C τ,
   ToList C τ,
   Membership τ C,
@@ -64,7 +64,7 @@ open LeanColls
   empty := []
   insert L x := x::L
   size := List.length
-  fold L f init := List.foldl f init L
+  fold' L f init := List.foldl f init L
   ofFn := List.ofFn
   get := List.get
   set L i x := List.set L i x

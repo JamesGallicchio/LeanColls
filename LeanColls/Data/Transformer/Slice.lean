@@ -25,7 +25,7 @@ def set [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (x : τ) : Sl
 instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ]
     : MultiBag.ReadOnly (Indexed.WithIdx (Slice C ι τ ι' f)) (ι' × τ) where
   mem := fun (i',x) c => c.cont.get i' = x
-  fold c f init :=
+  fold' c f init :=
     fold (IndexType.univ ι')
         (fun acc i => f acc (i, Slice.get c.cont i))
         init
@@ -53,7 +53,7 @@ instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ] [Inhabited τ]
   toMultiset slice :=
     ToMultiset.toMultiset (IndexType.univ ι')
     |>.map (Slice.get slice)
-  fold slice f init :=
+  fold' slice f init :=
     fold (IndexType.univ ι') (fun acc i => f acc (Slice.get slice i)) init
   ofFn g := ⟨
       (Indexed.ofFn fun _ => default)

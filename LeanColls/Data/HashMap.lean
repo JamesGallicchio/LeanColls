@@ -16,17 +16,17 @@ export Std (HashMap)
 variable [BEq κ] [Hashable κ]
 
 instance : Fold (HashMap κ τ) (κ × τ) where
-  fold := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
-  foldM := fun m f init => m.foldM (fun acc k t => f acc (k,t)) init
+  fold' := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
+  foldM' := fun m f init => m.foldM (fun acc k t => f acc (k,t)) init
 
 instance : Fold (Map.KeySet (HashMap κ τ)) κ where
-  fold := fun m f init => m.data.fold (fun acc k _ => f acc k) init
-  foldM := fun m f init => m.data.foldM (fun acc k _ => f acc k) init
+  fold' := fun m f init => m.data.fold (fun acc k _ => f acc k) init
+  foldM' := fun m f init => m.data.foldM (fun acc k _ => f acc k) init
 
 instance : Map (HashMap κ τ) κ τ where
   mem := fun (k,t) m => m.find? k = some t
   toMultiset := fun m => m.toList
-  fold := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
+  fold' := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
   size := fun m => m.size
   empty := .empty
   insert := fun m (k,t) => m.insert k t

@@ -109,11 +109,32 @@ end Append
 /-- `C` can be folded over, with element type `τ` -/
 class Fold (C : Type u) (τ : outParam (Type v)) where
   /-- full (not early-terminating) fold over the elements of `C` -/
-  fold : {β : Type w} → (cont : C) → (β → τ → β) → β → β
+  fold' : {β : Type (max u v)} → (cont : C) → (β → τ → β) → β → β
   /-- monadic fold over the elements of `C` -/
-  foldM : {β : Type w} → {m : Type w → Type w} → [Monad m] →
+  foldM' : {β : Type (max u v)} → {m : Type (max u v) → Type (max u v)} → [Monad m] →
       (cont : C) → (β → τ → m β) → β → m β
-    := fun c f i => fold c (fun macc x => macc >>= fun acc => f acc x) (pure i)
+    := fun c f i => fold' c (fun macc x => macc >>= fun acc => f acc x) (pure i)
+-- export Fold (fold' foldM')
+
+def Fold.fold {C : Type (max u w)} {τ : outParam (Type (max v w))} [Fold C τ] {β : Type w}
+    (cont : C) (f : β → τ → β) (init : β) : β :=
+  let init' : ULift.{max u v w, w} β := ULift.up init
+  ULift.down <| Fold.fold' cont (fun x y => ULift.up (f (ULift.down x) y)) init'
+
+unsafe def Fold.foldMImpl {C : Type (max u v w)} {τ : outParam (Type (max u v w))} [Fold C τ]
+    {β : Type w} {m : Type w → Type w} [inst : Monad m]
+    (cont : C) (f : β → τ → m β) (init : β) : m β :=
+  let m' : Type (max u v w) → Type (max u v w) := fun T => unsafeCast (m (unsafeCast T))
+  let _ : Monad m' := unsafeCast inst
+  let init' : ULift.{max u v w, w} β := ULift.up init
+  unsafeCast <| Fold.foldM' (m:=m') (τ:=τ) cont (fun x y => unsafeCast (f (ULift.down x) y)) init'
+
+-- I really do not know how to deal with the universes
+@[implemented_by Fold.foldMImpl]
+opaque Fold.foldM {C : Type (max u v w)} {τ : outParam (Type (max u v w))} [Fold C τ]
+    {β : Type w} {m : Type w → Type w} [inst : Monad m]
+    (cont : C) (f : β → τ → m β) (init : β) : m β := pure init
+
 export Fold (fold foldM)
 
 namespace Fold

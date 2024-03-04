@@ -42,7 +42,7 @@ instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ where
     , by simp; exact c.hsize ⟩
   ofFn f := ⟨ Seq.ofFn f, by simp ⟩
   toMultiset c := toList c.data
-  fold := sorry
+  fold' := sorry
 
 instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ where
   get_ofFn f := by simp [Indexed.ofFn, Indexed.get]
