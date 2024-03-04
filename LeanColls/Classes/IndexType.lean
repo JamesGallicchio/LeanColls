@@ -64,7 +64,9 @@ instance : LawfulIndexType (Fin n) where
 
 /-! #### Product -/
 
-instance [IndexType α] [IndexType β] : IndexType (α × β) where
+variable {α : Type u} {β : Type v}
+
+instance [IndexType.{u,w} α] [IndexType.{v,w} β] : IndexType.{max u v, w} (α × β) where
   card := card α * card β
   toFin := fun x =>
     match x with
@@ -84,8 +86,8 @@ instance [IndexType α] [IndexType β] : IndexType (α × β) where
     ( fromFin ⟨q, Nat.div_lt_of_lt_mul (by rw [Nat.mul_comm]; assumption)⟩
     , fromFin ⟨r, Nat.mod_lt _ (Nat.pos_of_ne_zero fun h => by simp_all)⟩)
 
-instance [IndexType α] [LawfulIndexType α] [IndexType β] [LawfulIndexType β]
-  : LawfulIndexType (α × β) where
+instance [IndexType.{u,w} α] [LawfulIndexType.{u,w} α] [IndexType.{v,w} β] [LawfulIndexType.{v,w} β]
+  : LawfulIndexType.{max u v, w} (α × β) where
   toFin_leftInv := by
     rintro ⟨i,hi⟩; simp [toFin, fromFin]
     exact Nat.div_add_mod' i (card β)
@@ -103,7 +105,7 @@ instance [IndexType α] [LawfulIndexType α] [IndexType β] [LawfulIndexType β]
 
 /-! #### Sum -/
 
-instance [IndexType α] [IndexType β] : IndexType (α ⊕ β) where
+instance [IndexType.{u,w} α] [IndexType.{v,w} β] : IndexType.{max u v, w} (α ⊕ β) where
   card := card α + card β
   toFin := fun x =>
     match x with
@@ -119,7 +121,7 @@ instance [IndexType α] [IndexType β] : IndexType (α ⊕ β) where
     else
       .inr (fromFin ⟨i-card α, by simp at h; exact Nat.sub_lt_left_of_lt_add h hi⟩)
 
-instance [IndexType α] [LawfulIndexType α] [IndexType β] [LawfulIndexType β]
+instance [IndexType.{u,w} α] [LawfulIndexType.{u,w} α] [IndexType.{v,w} β] [LawfulIndexType.{v,w} β]
   : LawfulIndexType (α ⊕ β) where
   toFin_leftInv := by
     rintro ⟨i,hi⟩
