@@ -53,8 +53,10 @@ class LawfulIndexed (C ι τ) [Indexed C ι τ] where
     i = j → Indexed.get (Indexed.set cont i a) j = a
   get_set_ne : ∀ (cont : C) {i j a},
     i ≠ j → Indexed.get (Indexed.set cont i a) j = Indexed.get cont j
-  update_eq_set_get : ∀ (cont : C) i f,
-    (Indexed.update cont i f) = Indexed.set cont i (f (Indexed.get cont i))
+  get_update_eq : ∀ (cont : C) i j f,
+    i = j → Indexed.get (Indexed.update cont i f) j = f (Indexed.get cont i)
+  get_update_ne : ∀ (cont : C) i j f,
+    i ≠ j → Indexed.get (Indexed.update cont i f) j = Indexed.get cont j
 
 namespace Indexed
 
@@ -77,11 +79,10 @@ theorem get_set [DecidableEq ι] (cont : C) {i j a}
 
 @[simp] theorem get_update_eq (cont : C)
   : Indexed.get (Indexed.update cont i f) i = f (Indexed.get cont i) := by
-  simp[LawfulIndexed.update_eq_set_get]
+  simp [LawfulIndexed.get_update_eq]
 
-@[simp] theorem get_update_ne (cont : C) (h : i ≠ j)
-  : Indexed.get (Indexed.update cont i a) j = Indexed.get cont j := by
-  simp[LawfulIndexed.update_eq_set_get,h]
+export LawfulIndexed (get_update_ne)
+attribute [simp] get_update_ne
 
 theorem get_update [DecidableEq ι] (cont : C) {i j f}
   : Indexed.get (Indexed.update cont i f) j =
@@ -95,8 +96,10 @@ end Indexed
 -- want to add a deprecation warning
 namespace LawfulIndexed
 
-@[deprecated update_eq_set_get]
-abbrev update_set_get := @update_eq_set_get
+@[deprecated Indexed.get_update]
+theorem update_set_get [Fact False] [Indexed C ι τ] (cont : C) (i f) :
+    (Indexed.update cont i f) = Indexed.set cont i (f (Indexed.get cont i)) :=
+  False.elim (Fact.elim inferInstance)
 
 @[deprecated Indexed.get_set]
 abbrev get_set := @Indexed.get_set
