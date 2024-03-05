@@ -169,7 +169,7 @@ where aux (acc : FloatArray) (i : Nat) : FloatArray :=
     aux (acc.push A2[i]) (i+1)
   else
     acc
-termination_by aux _ i => A2.size - i
+termination_by A2.size - i
 
 instance : Append FloatArray where
   append := append
@@ -181,7 +181,7 @@ where aux (acc : FloatArray) (i : Nat) : FloatArray :=
     aux (acc.push (f ⟨i,h⟩)) (i+1)
   else
     acc
-termination_by aux i _ => n - i
+termination_by n - i
 
 instance : Seq FloatArray Float where
   size := size
