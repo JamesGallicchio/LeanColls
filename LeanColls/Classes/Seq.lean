@@ -211,30 +211,71 @@ variable [Seq C τ] [LawfulSeq C τ]
 
 set_option pp.proofs.withType false
 
+@[simp]
+theorem get_set_eq (cont : C) (i : Fin (size cont)) (x : τ) (j)
+  : i.val = j.val → get (set cont i x) j = x := by
+  intro h
+  rw [get_def]
+  simp
+  rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
+  case list_eq => apply toList_set
+  apply List.get_set_eq
+  · simp [← size_def]
+  case idx_eq => simp [h]
+
+@[simp]
+theorem get_set_ne (cont : C) (i : Fin (size cont)) (x : τ) (j)
+  : i.val ≠ j.val → get (set cont i x) j = get cont (j.cast (by rw [size_set])) := by
+  intro h
+  conv => lhs; rw [get_def]
+  conv => rhs; rw [get_def]
+  simp
+  rw [List.get_eq_get _ (List.set (toList cont) i x) _ _ (toList_set ..) ?idx_eq]
+  rw [List.get_set_ne h]
+  · congr
+  · simpa [← size_def] using j.isLt
+  case idx_eq => simp [h]
+
 theorem get_set (cont : C) (i : Fin (size cont)) (x : τ) (j)
   : get (set cont i x) j =
     if i.val = j.val then x else get cont (j.cast (size_set ..)) := by
-  rcases i with ⟨i,hi⟩; rcases j with ⟨j,hj⟩
-  rw [get_def (C := C), get_def (C := C)]; simp
-  suffices ∀ L (_hL : L = toList cont) L' (_hL' : L' = List.set L i x)
-            (hj' : j < L.length) (hj'' : j < L'.length),
-    List.get L' ⟨j,hj''⟩ = if i = j then x else get L ⟨j,hj'⟩
-    from this (toList cont) rfl (toList (set cont ⟨i,hi⟩ x))
-          (toList_set ..) (by simp_all [size_def]) (by simp_all [size_def])
-  intro L _hL L' hL' hj' hj''
-  cases hL'; rw [List.get_set]; rfl
+  by_cases i.val = j.val <;> simp [*]
+
+@[simp]
+theorem get_update_eq (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
+  : i.val = j.val → get (update cont i f) j = f (get cont i) := by
+  intro h
+  rw [get_def]
+  simp
+  rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
+  case list_eq =>
+    apply toList_update
+  simp
+  rw [List.get_set_eq _ _ _ ?h]
+  case h => simp [← size_def]
+  case idx_eq => simp [h]
+  rw [get_def]; simp
+
+@[simp]
+theorem get_update_ne (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
+  : i.val ≠ j.val → get (update cont i f) j = get cont (j.cast (by rw [size_update])) := by
+  intro h
+  conv => lhs; rw [get_def]
+  simp
+  rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
+  case list_eq =>
+    apply toList_update
+  simp
+  rw [List.get_set_ne _ _ ?h]
+  conv => rhs; rw [get_def]
+  case h => simpa [size_def] using j.isLt
+  case idx_eq => simp
+  simp [h]
 
 theorem get_update (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
   : get (update cont i f) j =
     if i.val = j.val then f (get cont (j.cast (size_update ..)))
     else get cont (j.cast (size_update ..)) := by
-  rcases i with ⟨i,hi⟩; rcases j with ⟨j,hj⟩
-  rw [get_def (C := C), get_def (C := C)]; simp
-  suffices ∀ L (_hL : L = toList cont) L' (hi : i < size L) (_hL' : L' = update L ⟨i,hi⟩ f)
-            (hj' : j < L.length) (hj'' : j < L'.length),
-    List.get L' ⟨j,hj''⟩ = if i = j then f (get L ⟨j,hj'⟩) else get L ⟨j,hj'⟩
-    from this (toList cont) rfl (toList (update cont ⟨i,hi⟩ f)) (by rw [size_def] at hi; simp_all)
-          (toList_update ..) (by simp_all [size_def]) (by simp_all [size_def])
-  intro L _hL L' hi' hL' hj' hj''
-  cases hL'; simp [update]; rw [List.get_set]
-  split <;> simp_all
+  rcases i with ⟨i,hi⟩
+  rcases j with ⟨j,hj⟩
+  by_cases i = j <;> simp [*]
