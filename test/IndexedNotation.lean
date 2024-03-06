@@ -42,6 +42,18 @@ variable (x : NDArray Nat (Fin 10)) (t : NDArray Nat (Fin 10 × Fin 20 × Fin 20
       a[i,j] /= 42
       a[i,j] •= 42
 
+
+section IndexNotationElabIssue
+
+variable {Cont Idx Elem} [IndexType Idx] [Indexed Cont Idx Elem] [Inhabited Elem]
+example (f : Idx → Elem) :
+  Function.invFun (fun (f : Idx → Elem) => Indexed.ofFn (C:=Cont) f)
+  =
+  -- elaboration of `x[i]` used to cause 'internal exception: isDefEqStuck'
+  fun x i => x[i] := sorry
+
+end IndexNotationElabIssue
+
 -- check we didn't mess up Lean's indexing
 variable (a : Array Nat) (i j : Fin a.size)
 
