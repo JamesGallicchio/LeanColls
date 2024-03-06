@@ -149,7 +149,7 @@ private def elabIndices (ids : TSyntaxArray ``elemIndex) (Is : Array Expr) :
 
 
 open Lean Elab Term Meta Qq in
-elab_rules (kind:=indexedGet) : term
+elab_rules (kind:=indexedGet) : term <= _expectedType
 | `($x[$ids:elemIndex,*]) => do
 
   let ids := ids.getElems
