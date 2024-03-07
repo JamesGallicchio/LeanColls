@@ -12,48 +12,57 @@ import LeanColls.MathlibUpstream
 
 namespace LeanColls
 
-structure Range extends Std.Range where
-  step_pos : step > 0
-  start_le_stop : start ≤ stop
+structure Range (ι : Type u) where
+  /-- The range's lower bound. -/
+  start : ι
+  /-- Whether to include start. -/
+  start_inclusive : Bool := true
+  /-- The range's upper bound. -/
+  stop : ι
+  /-- Whether to include stop. -/
+  stop_inclusive : Bool := false
+  /-- The amount to increment at each step. -/
+  step : ι
 
 namespace Range
 
-attribute [simp] step_pos start_le_stop
+variable [LE ι] [LT ι] [DecidableRel (· < · : ι → ι → Prop)] [DecidableRel (· ≤ · : ι → ι → Prop)]
 
-@[simp] def ofStd : Std.Range → Range
-| {start, stop, step} =>
-  { start := start
-  , stop := max start stop
-  , step := max 1 step
-  , step_pos := by simp
-  , start_le_stop := by simp
-  }
+#check LinearOrder
+def contains
+    (r : Range ι) (i : ι) : Prop :=
+  ( match r.start with
+    | none => true
+    | some (l, false) => l < i
+    | some (l, true) => l ≤ i
+  ) ∧
+  ( match r.stop with
+    | none => true
+    | some (h, false) => i < h
+    | some (h, true) => i ≤ h
+  )
 
-instance : Coe Std.Range Range where
-  coe := ofStd
+instance {r : Range ι} : DecidablePred (contains r) := fun _ =>
+  @And.decidable _ _
+    ( match r.start with
+    | none => inferInstance
+    | some (_, false) => inferInstance
+    | some (_, true) => inferInstance )
+    ( match r.stop with
+      | none => inferInstance
+      | some (_, false) => inferInstance
+      | some (_, true) => inferInstance
+    )
 
-instance : CoeHead Range Std.Range where
-  coe r := r.toRange
+def toSet (r : Range ι) : Set ι := contains r
 
-
-def contains (r : Range) (i : Nat) :=
-  r.start ≤ i && i < r.stop && r.step ∣ (i - r.start)
-
-instance : Membership Nat Range where
+instance : Membership ι (Range ι) where
   mem i r := contains r i
 
-theorem mem_def (r : Range) : x ∈ r ↔ r.start ≤ x ∧ x < r.stop ∧ (r.step ∣ x - r.start) := by
-  simp [Membership.mem, contains]
-  exact and_assoc
+variable [Add ι] [One ι]
 
-def nth (r : Range) (i : Nat) : Nat :=
-  r.start + i * r.step
-
-@[simp] theorem nth_ge_start (r : Range) (i : Nat) : nth r i ≥ r.start := by
-  simp [nth]
-
-@[simp] theorem nth_sub_start (r : Range) (i : Nat) : r.step ∣ (nth r i - r.start) := by
-  simp [nth]
+def foldl (f : β → ι → β) (acc : β) (r : Range ι) : β :=
+  aux
 
 def ofNth (r : Range) (x : Nat) : Nat :=
   (x - r.start) / r.step
