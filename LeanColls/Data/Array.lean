@@ -128,7 +128,7 @@ instance : LawfulSeq (Array α) α where
 
 end Array
 
-abbrev NArray (α : Type u) (n : Nat) := FixSize (Array α) n
+abbrev ArrayN (α : Type u) (n : Nat) := FixSize (Array α) n
 
 /-! ### Scalar Arrays -/
 

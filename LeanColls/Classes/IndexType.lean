@@ -41,14 +41,25 @@ class LawfulIndexType (ι : Type u) [I : IndexType ι] where
 
 namespace IndexType
 
-@[simp] theorem toFin_fromFin [IndexType ι] [LawfulIndexType ι]
+variable [IndexType ι] [LawfulIndexType ι]
+
+@[simp] theorem toFin_fromFin
   : ∀ i, toFin (ι := ι) (fromFin i) = i
   := LawfulIndexType.toFin_leftInv
 
-@[simp] theorem fromFin_toFin [IndexType ι] [LawfulIndexType ι]
+@[simp] theorem fromFin_toFin
   : ∀ x, fromFin (ι := ι) (toFin x) = x
   := LawfulIndexType.toFin_rightInv
 
+@[simp] theorem toFin_inj (i j : ι) : toFin i = toFin j ↔ i = j := by
+  constructor
+  · apply LawfulIndexType.toFin_rightInv.injective
+  · rintro rfl; rfl
+
+@[simp] theorem fromFin_inj (i j : Fin (IndexType.card ι)) : fromFin i = fromFin j ↔ i = j := by
+  constructor
+  · apply LawfulIndexType.toFin_leftInv.injective
+  · rintro rfl; rfl
 
 /-! #### Fin n -/
 
