@@ -15,9 +15,11 @@ by restricting the type to a fixed size.
 This file implements such a transformation.
  -/
 
+@[ext]
 structure FixSize.{u,v,w} (C : Type u) [Size C] (ι : Type v) [IndexType.{v,w} ι] where
   data : C
   hsize : size data = IndexType.card ι
+deriving DecidableEq
 
 def Seq.fixSize [Size C] (c : C) : FixSize C (Fin (size c)) := {
   data := c
@@ -26,7 +28,9 @@ def Seq.fixSize [Size C] (c : C) : FixSize C (Fin (size c)) := {
 
 namespace FixSize
 
-instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] : Indexed (FixSize C ι) ι τ := {
+variable [Seq C τ] [LawfulSeq C τ] [IndexType ι]
+
+instance : Indexed (FixSize C ι) ι τ := {
   Indexed.instOfIndexType
     (get := fun ⟨c,hsize⟩ i => Seq.get c (Fin.cast hsize.symm <| IndexType.toFin i))
     (ofFn := fun f => ⟨ Seq.ofFn (f <| IndexType.fromFin ·), by simp ⟩)
@@ -39,8 +43,7 @@ instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] : Indexed (FixSize C ι) ι 
     , by simp; exact c.hsize ⟩
 }
 
-instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] [LawfulIndexType ι]
-    : LawfulIndexed (FixSize C ι) ι τ where
+instance [LawfulIndexType ι] : LawfulIndexed (FixSize C ι) ι τ where
   get_ofFn f := by simp [Indexed.ofFn, Indexed.get]
   get_set_eq := by
     intros;
@@ -62,3 +65,6 @@ instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] [LawfulIndexType ι]
     · simp
     · simp [Fin.val_inj]
       assumption
+
+instance [Inhabited τ] : Inhabited (FixSize C ι) where
+  default := Indexed.ofFn fun _ => default
