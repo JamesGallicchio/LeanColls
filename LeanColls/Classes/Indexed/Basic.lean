@@ -44,6 +44,29 @@ namespace Indexed
 
 def withIdx (cont : C) : Indexed.WithIdx C := .mk cont
 
+@[simp, inline] def instOfIndexType [IndexType ι]
+      (get : C → ι → τ) (ofFn : (ι → τ) → C) (update : C → ι → (τ → τ) → C)
+    : Indexed C ι τ where
+  ofFn := ofFn
+  get := get
+  update := update
+  size := fun _ => IndexType.card ι
+  mem t c := ∃ i : ι, get c i = t
+  fold c f acc := Fold.fold (IndexType.univ ι) (f · <| get c ·) acc
+  foldM c f acc := Fold.foldM (IndexType.univ ι) (f · <| get c ·) acc
+  toMultiset := fun c =>
+    ToMultiset.toMultiset (IndexType.univ ι) |>.map (get c)
+  toMultiBagWithIdx := {
+    mem := fun (i,t) ⟨c⟩ => get c i = t
+    fold := fun ⟨c⟩ f acc =>
+      Fold.fold (IndexType.univ ι) (fun acc i => f acc (i, get c i)) acc
+    foldM := fun ⟨c⟩ f acc =>
+      Fold.foldM (IndexType.univ ι) (fun acc i => f acc (i, get c i)) acc
+    toMultiset := fun ⟨c⟩ =>
+      ToMultiset.toMultiset (IndexType.univ ι) |>.map fun i => (i, get c i)
+    size := fun _ => IndexType.card ι
+  }
+
 end Indexed
 
 class LawfulIndexed (C ι τ) [Indexed C ι τ] where

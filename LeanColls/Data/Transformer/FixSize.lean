@@ -30,19 +30,18 @@ def Seq.fixSize [Size C] (c : C) : FixSize C (size c) := {
 namespace FixSize
 
 -- TODO: finish impl
-instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ where
-  toMultiBagWithIdx := sorry
-  mem x c := x ∈ c.data
-  get c i := Seq.get c.data (i.cast c.hsize.symm)
-  set c i x :=
+instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ := {
+  Indexed.instOfIndexType
+    (get := fun ⟨c,hsize⟩ i => Seq.get c (i.cast hsize.symm))
+    (ofFn := fun f => ⟨ Seq.ofFn f, by simp ⟩)
+    (update := fun ⟨c,hsize⟩ i f =>
+        ⟨ Seq.update c (i.cast hsize.symm) f
+        , by simp; exact hsize ⟩) with
+  mem := fun x c => x ∈ c.data
+  set := fun c i x =>
     ⟨ Seq.set c.data (i.cast c.hsize.symm) x
     , by simp; exact c.hsize ⟩
-  update c i f :=
-    ⟨ Seq.update c.data (i.cast c.hsize.symm) f
-    , by simp; exact c.hsize ⟩
-  ofFn f := ⟨ Seq.ofFn f, by simp ⟩
-  toMultiset c := toList c.data
-  fold := sorry
+}
 
 instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ where
   get_ofFn f := by simp [Indexed.ofFn, Indexed.get]
