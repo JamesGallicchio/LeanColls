@@ -23,10 +23,10 @@ structure IndexType.Univ (ι : Type u)
 
 def IndexType.univ (ι : Type u) : IndexType.Univ ι := .mk
 
-class IndexType (ι : Type u)
+class IndexType.{u,w} (ι : Type u)
   extends
     ToList (IndexType.Univ ι) ι,
-    Fold (IndexType.Univ ι) ι
+    Fold.{0,u,w} (IndexType.Univ ι) ι
   where
   card : Nat
   toFin : ι → Fin card

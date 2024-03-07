@@ -15,35 +15,32 @@ by restricting the type to a fixed size.
 This file implements such a transformation.
  -/
 
-structure FixSize (C) [Size C] (n : Nat) where
+structure FixSize.{u,v,w} (C : Type u) [Size C] (ι : Type v) [IndexType.{v,w} ι] where
   data : C
-  hsize : size data = n
+  hsize : size data = IndexType.card ι
 
-def FixSize.cast [Size C] (h : n = n') (c : FixSize C n) : FixSize C n' :=
-  ⟨c.data, Trans.trans c.hsize h⟩
-
-def Seq.fixSize [Size C] (c : C) : FixSize C (size c) := {
+def Seq.fixSize [Size C] (c : C) : FixSize C (Fin (size c)) := {
   data := c
   hsize := rfl
 }
 
 namespace FixSize
 
--- TODO: finish impl
-instance [Seq C τ] [LawfulSeq C τ] : Indexed (FixSize C n) (Fin n) τ := {
+instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] : Indexed (FixSize C ι) ι τ := {
   Indexed.instOfIndexType
-    (get := fun ⟨c,hsize⟩ i => Seq.get c (i.cast hsize.symm))
-    (ofFn := fun f => ⟨ Seq.ofFn f, by simp ⟩)
+    (get := fun ⟨c,hsize⟩ i => Seq.get c (Fin.cast hsize.symm <| IndexType.toFin i))
+    (ofFn := fun f => ⟨ Seq.ofFn (f <| IndexType.fromFin ·), by simp ⟩)
     (update := fun ⟨c,hsize⟩ i f =>
-        ⟨ Seq.update c (i.cast hsize.symm) f
+        ⟨ Seq.update c (Fin.cast hsize.symm <| IndexType.toFin i) f
         , by simp; exact hsize ⟩) with
   mem := fun x c => x ∈ c.data
   set := fun c i x =>
-    ⟨ Seq.set c.data (i.cast c.hsize.symm) x
+    ⟨ Seq.set c.data (Fin.cast c.hsize.symm <| IndexType.toFin i) x
     , by simp; exact c.hsize ⟩
 }
 
-instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ where
+instance [Seq C τ] [LawfulSeq C τ] [IndexType ι] [LawfulIndexType ι]
+    : LawfulIndexed (FixSize C ι) ι τ where
   get_ofFn f := by simp [Indexed.ofFn, Indexed.get]
   get_set_eq := by
     intros;
@@ -63,5 +60,5 @@ instance [Seq C τ] [LawfulSeq C τ]: LawfulIndexed (FixSize C n) (Fin n) τ whe
     simp [Indexed.get, Indexed.update, Indexed.set]
     rw [Seq.get_update_ne]
     · simp
-    · simp [Fin.eq_iff_veq] at *
-      simp [*]
+    · simp [Fin.val_inj]
+      assumption
