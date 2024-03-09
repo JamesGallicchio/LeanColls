@@ -62,7 +62,7 @@ variable [IndexType ι] [LawfulIndexType ι]
   · apply LawfulIndexType.rightInv.injective
   · rintro rfl; rfl
 
-theorem toEquiv : ι ≃ Fin (IndexType.card ι) where
+def toEquiv : ι ≃ Fin (IndexType.card ι) where
   toFun := IndexType.toFin
   invFun := IndexType.fromFin
   left_inv := LawfulIndexType.leftInv
@@ -179,18 +179,23 @@ section
 open Lean Elab Command
 
 macro "derive_indextype% " t:term : term => `(term| IndexType.ofEquiv (proxy_equiv% $t))
+macro "derive_lawfulindextype% " t:term : term => `(term| IndexType.ofEquivLawful (proxy_equiv% $t) rfl)
 
 def mkIndexType (declName : Name) : CommandElabM Bool := do
   let indVal ← getConstInfoInduct declName
-  let cmd ← liftTermElabM do
+  let cmds ← liftTermElabM do
     let header ← Deriving.mkHeader `IndexType 0 indVal
     let binders' ← Deriving.mkInstImplicitBinders `Decidable indVal header.argNames
-    let instCmd ← `(command|
+    let indexType ← `(command|
       instance $header.binders:bracketedBinder* $(binders'.map TSyntax.mk):bracketedBinder* :
           IndexType $header.targetType := derive_indextype% _)
-    return instCmd
-  trace[Elab.Deriving.indextype] "instance command:\n{cmd}"
-  elabCommand cmd
+    let lawful ← `(command|
+      instance $header.binders:bracketedBinder* $(binders'.map TSyntax.mk):bracketedBinder* :
+          LawfulIndexType $header.targetType := derive_lawfulindextype% _)
+    return #[indexType, lawful]
+  trace[Elab.Deriving.indextype] "instance commands:\n{cmds}"
+  for cmd in cmds do
+    elabCommand cmd
   return true
 
 def mkIndexTypeInstanceHandler (declNames : Array Name) : CommandElabM Bool := do
