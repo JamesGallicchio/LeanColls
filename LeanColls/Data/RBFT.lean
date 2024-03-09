@@ -7,6 +7,7 @@ Authors: James Gallicchio
 import LeanColls.Data.Array
 import LeanColls.Util.Cached
 
+import Mathlib.Logic.Equiv.Fin
 import Mathlib.Data.Nat.Order.Lemmas
 import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Linarith
@@ -46,9 +47,9 @@ namespace LeanColls.Data.RBFT
 /- A hypercube array with `n` dimensions, each
   `WIDTH` wide, e.g. a total capacity of `WIDTH ^ n`
 -/
-def HyperArray (α : Type u) : Nat → Type u
+def HyperArray.{u,w} (α : Type u) : Nat → Type u
 | 0   => α
-| n+1 => NArray (HyperArray α n) WIDTH
+| n+1 => ArrayN.{u,w} (HyperArray α n) WIDTH
 
 namespace HyperArray
 
@@ -59,19 +60,15 @@ def size (_ : HyperArray α n) : Nat := WIDTH ^ n
 
 def ofFn : {n : Nat} → (Fin (WIDTH ^ n) → α) → HyperArray α n
 | 0, f => f ⟨0, by simp⟩
-| n+1, f => Indexed.ofFn (C := NArray _ _) fun ⟨i,hi⟩ => ofFn fun ⟨j,hj⟩ =>
-    f ⟨i * WIDTH^n + j, by sorry⟩
+| n+1, f => Indexed.ofFn (C := ArrayN _ _) fun i => ofFn fun j =>
+    f (finProdFinEquiv (j,i) |>.cast (by simp [Nat.pow_succ]))
 
 def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
 | 0,   a, ⟨0,_⟩   => a
-| n+1, A, ⟨i,h_i⟩ =>
-  let q := i / WIDTH^n
-  let r := i % WIDTH^n
-  have h_q : q < WIDTH := Nat.div_lt_of_lt_mul h_i
-  have h_r : r < WIDTH^n :=
-    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
-  let next := Indexed.get.{u,0,u} (C := NArray ..) A ⟨q, h_q⟩
-  get next ⟨r, h_r⟩
+| _+1, A, i =>
+  let (r,q) := finProdFinEquiv.symm i
+  let next := Indexed.get (C := ArrayN ..) A q
+  get next r
 
 @[simp] theorem get_ofFn (f : Fin (WIDTH ^ n) → α)
   : get (ofFn f) = f := by
@@ -86,78 +83,70 @@ def get : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α
     simp [ofFn, get]
     rw [ih]
     congr
-    simp
-    exact Nat.div_add_mod' i (WIDTH ^ n)
+    simp [finProdFinEquiv]
+    exact Nat.mod_add_div i WIDTH
 
 /- todo: make a tailrec version of this
 that uses a heterogeneous stack -/
 def set : {n : Nat} → HyperArray α n → (i : Fin (WIDTH ^ n)) → α → HyperArray α n
 | 0,   _, ⟨0,_⟩  , a => a
-| n+1, A, ⟨i,h_i⟩, a =>
-  let q := i / WIDTH^n
-  let r := i % WIDTH^n
-  have h_q : q < WIDTH := Nat.div_lt_of_lt_mul h_i
-  have h_r : r < WIDTH^n :=
-    Nat.mod_lt _ (Nat.pos_pow_of_pos _ (by simp))
-  Indexed.update (C := NArray ..) A ⟨q, h_q⟩
-  <| λ A' => set A' ⟨r, h_r⟩ a
+| _+1, A, i, a =>
+  let (r,q) := finProdFinEquiv.symm i
+  Indexed.update (C := ArrayN ..) A q
+  <| λ A' => set A' r a
 
-theorem get_set {n : Nat} (A : HyperArray α n) (i x j)
-  : (A.set i x |>.get j) = if i = j then x else A.get j
+theorem get_set_eq {n : Nat} (A : HyperArray α n) {i j x}
+  : i = j → (A.set i x |>.get j) = x
   := by
+  rintro rfl
+  induction n with
+  | zero =>
+    match i with
+    | ⟨0,_⟩ =>
+    simp [set, get]
+  | succ n ih =>
+    unfold set; unfold get
+    simp [*]
+
+theorem get_set_ne {n : Nat} (A : HyperArray α n) {i j x}
+  : i ≠ j → (A.set i x |>.get j) = A.get j
+  := by
+  rintro h
   induction n with
   | zero =>
     match i,j with
     | ⟨0,_⟩, ⟨0,_⟩ =>
-    simp [set, get]
+    contradiction
   | succ n ih =>
-    generalize hqi : i / WIDTH^n = qi
-    generalize hri : i % WIDTH^n = ri
-    generalize hqj : j / WIDTH^n = qj
-    generalize hqj : j % WIDTH^n = rj
     unfold set; unfold get
-    simp [*]
-    generalize hqif : Fin.mk qi _ = qif
-    generalize hrif : Fin.mk ri _ = rif
-    generalize hqjf : Fin.mk qj _ = qjf
-    generalize hrjf : Fin.mk rj _ = rjf
-    rw [LawfulIndexed.get_update]
-    split
-    next h =>
-      rw [ih]
-      cases h
-      congr 1
-      subst_vars
-      rcases i with ⟨i,hi⟩; rcases j with ⟨j,hj⟩
-      simp at hqjf ⊢
-      refine ⟨?_, fun | rfl => rfl⟩
-      intro h
-      have := (Nat.div_mod_unique ?_).mp ⟨hqjf.symm, h⟩
-      · rw [Nat.add_comm, Nat.div_add_mod] at this
-        exact this.1.symm
-      simp
-    next h =>
-      suffices i ≠ j by simp [this]
-      intro contra
-      subst_vars
-      simp at h
+    simp
+    rw [Indexed.get_update]
+    rw [←Equiv.apply_symm_apply finProdFinEquiv i
+       ,←Equiv.apply_symm_apply finProdFinEquiv j
+       ,Ne
+       ,Equiv.apply_eq_iff_eq finProdFinEquiv] at h
+    simp at h
+    split <;> simp_all
 
 instance : Indexed (HyperArray α n) (Fin (WIDTH ^ n)) α := {
-  ofFn := ofFn
-  get := get
-  set := set
-  update := fun A i f => set A i (f (get A i))
-  toMembership := sorry
-  toToMultiset := sorry
-  toFold := sorry
+  Indexed.instOfIndexType
+    (ofFn := ofFn)
+    (get := get)
+    (update := fun A i f => set A i (f (get A i)))
+  with
+    set := set
 }
 
 instance : LawfulIndexed (HyperArray α n) (Fin (WIDTH ^ n)) α where
   get_ofFn := get_ofFn
-  get_set := get_set
-  get_update := by
-    simp [Indexed.update, Indexed.get, get_set]
-    intros; split <;> simp_all
+  get_set_eq := get_set_eq
+  get_set_ne := get_set_ne
+  get_update_eq := by
+    simp (config := {contextual := true})
+      [Indexed.update, Indexed.get, get_set_eq]
+  get_update_ne := by
+    simp (config := {contextual := true})
+      [Indexed.update, Indexed.get, get_set_ne]
 
 end HyperArray
 

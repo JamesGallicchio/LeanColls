@@ -4,6 +4,7 @@ Authors: James Gallicchio
 -/
 
 import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.ProxyType
 
 import LeanColls.Classes.Ops
 import LeanColls.MathlibUpstream
@@ -36,8 +37,8 @@ class IndexType.{u,w} (ι : Type u)
   foldM := fun _ f acc => Fin.foldlM card acc (fun x acc => f acc (fromFin x))
 
 class LawfulIndexType (ι : Type u) [I : IndexType ι] where
-  toFin_leftInv : I.toFin.LeftInverse I.fromFin
-  toFin_rightInv : I.toFin.RightInverse I.fromFin
+  leftInv  : Function.LeftInverse  I.fromFin I.toFin
+  rightInv : Function.RightInverse I.fromFin I.toFin
 
 namespace IndexType
 
@@ -45,21 +46,48 @@ variable [IndexType ι] [LawfulIndexType ι]
 
 @[simp] theorem toFin_fromFin
   : ∀ i, toFin (ι := ι) (fromFin i) = i
-  := LawfulIndexType.toFin_leftInv
+  := LawfulIndexType.rightInv
 
 @[simp] theorem fromFin_toFin
   : ∀ x, fromFin (ι := ι) (toFin x) = x
-  := LawfulIndexType.toFin_rightInv
+  := LawfulIndexType.leftInv
 
 @[simp] theorem toFin_inj (i j : ι) : toFin i = toFin j ↔ i = j := by
   constructor
-  · apply LawfulIndexType.toFin_rightInv.injective
+  · apply LawfulIndexType.leftInv.injective
   · rintro rfl; rfl
 
 @[simp] theorem fromFin_inj (i j : Fin (IndexType.card ι)) : fromFin i = fromFin j ↔ i = j := by
   constructor
-  · apply LawfulIndexType.toFin_leftInv.injective
+  · apply LawfulIndexType.rightInv.injective
   · rintro rfl; rfl
+
+theorem toEquiv : ι ≃ Fin (IndexType.card ι) where
+  toFun := IndexType.toFin
+  invFun := IndexType.fromFin
+  left_inv := LawfulIndexType.leftInv
+  right_inv := LawfulIndexType.rightInv
+
+def ofEquiv {ι} [IndexType.{_,w} ι'] (f : ι' ≃ ι) : IndexType.{_,w} ι where
+  card := IndexType.card ι'
+  toFin   := IndexType.toFin ∘ f.symm
+  fromFin := f ∘ IndexType.fromFin
+
+def ofEquivLawful {ι} [I : IndexType ι] [IndexType ι'] [LawfulIndexType ι']
+    (f : ι' ≃ ι) (h : I = ofEquiv f) : LawfulIndexType ι where
+  leftInv  := by simp [ofEquiv] at h; substs h; intro; simp
+  rightInv := by simp [ofEquiv] at h; substs h; intro; simp
+
+/-! #### Unit -/
+
+instance : IndexType Unit where
+  card := 1
+  toFin := fun _ => 0
+  fromFin := fun _ => ()
+
+instance : LawfulIndexType Unit where
+  leftInv := by intro; rfl
+  rightInv := by rintro ⟨i,h⟩; simp [card] at h; subst h; simp [fromFin, toFin]
 
 /-! #### Fin n -/
 
@@ -69,8 +97,8 @@ instance : IndexType (Fin n) where
   fromFin := id
 
 instance : LawfulIndexType (Fin n) where
-  toFin_leftInv  := by intro _; rfl
-  toFin_rightInv := by intro _; rfl
+ leftInv  := by intro _; rfl
+ rightInv := by intro _; rfl
 
 
 /-! #### Product -/
@@ -99,10 +127,10 @@ instance [IndexType.{u,w} α] [IndexType.{v,w} β] : IndexType.{max u v, w} (α 
 
 instance [IndexType.{u,w} α] [LawfulIndexType.{u,w} α] [IndexType.{v,w} β] [LawfulIndexType.{v,w} β]
   : LawfulIndexType.{max u v, w} (α × β) where
-  toFin_leftInv := by
+  rightInv := by
     rintro ⟨i,hi⟩; simp [toFin, fromFin]
     exact Nat.div_add_mod' i (card β)
-  toFin_rightInv := by
+  leftInv := by
     rintro ⟨a,b⟩; simp [toFin, fromFin]
     constructor
     · convert fromFin_toFin a
@@ -134,15 +162,45 @@ instance [IndexType.{u,w} α] [IndexType.{v,w} β] : IndexType.{max u v, w} (α 
 
 instance [IndexType.{u,w} α] [LawfulIndexType.{u,w} α] [IndexType.{v,w} β] [LawfulIndexType.{v,w} β]
   : LawfulIndexType (α ⊕ β) where
-  toFin_leftInv := by
+  rightInv := by
     rintro ⟨i,hi⟩
     simp [toFin, fromFin]
     if i < card α then
       simp_all
     else
       simp [*]; simp_all
-  toFin_rightInv := by
+  leftInv := by
     rintro (a|b)
       <;> simp [toFin, fromFin]
 
--- TODO: deriving handler for nonrecursive inductives
+/-! #### Generic inductives -/
+
+section
+open Lean Elab Command
+
+macro "derive_indextype% " t:term : term => `(term| IndexType.ofEquiv (proxy_equiv% $t))
+
+def mkIndexType (declName : Name) : CommandElabM Bool := do
+  let indVal ← getConstInfoInduct declName
+  let cmd ← liftTermElabM do
+    let header ← Deriving.mkHeader `IndexType 0 indVal
+    let binders' ← Deriving.mkInstImplicitBinders `Decidable indVal header.argNames
+    let instCmd ← `(command|
+      instance $header.binders:bracketedBinder* $(binders'.map TSyntax.mk):bracketedBinder* :
+          IndexType $header.targetType := derive_indextype% _)
+    return instCmd
+  trace[Elab.Deriving.indextype] "instance command:\n{cmd}"
+  elabCommand cmd
+  return true
+
+def mkIndexTypeInstanceHandler (declNames : Array Name) : CommandElabM Bool := do
+  if declNames.size != 1 then
+    return false -- mutually inductive types are not supported
+  let declName := declNames[0]!
+  mkIndexType declName
+
+initialize
+  registerDerivingHandler ``IndexType mkIndexTypeInstanceHandler
+  registerTraceClass `Elab.Deriving.indextype
+
+end
