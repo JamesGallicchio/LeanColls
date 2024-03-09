@@ -3,7 +3,7 @@ Copyright (c) 2023 James Gallicchio.
 -/
 
 import LeanColls.Classes.Bag
-import LeanColls.Classes.Indexed
+import LeanColls.Classes.Indexed.Basic
 import LeanColls.Classes.IndexType
 import LeanColls.Classes.Map
 import LeanColls.Classes.Ops

@@ -4,7 +4,7 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Classes.Bag
-import LeanColls.Classes.IndexType
+import LeanColls.Classes.IndexType.Basic
 
 namespace LeanColls
 

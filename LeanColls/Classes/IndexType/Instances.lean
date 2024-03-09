@@ -1,3 +1,8 @@
+/- Copyright (c) 2024 James Gallicchio.
+
+Authors: James Gallicchio
+-/
+
 import LeanColls.Classes.IndexType.Basic
 
 open LeanColls

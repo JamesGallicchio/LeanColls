@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes.Indexed
+import LeanColls.Classes.Indexed.Basic
 
 namespace LeanColls
 
