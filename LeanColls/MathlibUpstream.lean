@@ -4,6 +4,7 @@ Authors: James Gallicchio
 -/
 
 import Mathlib.Data.Fin.Basic
+import Mathlib.Data.List.OfFn
 
 def Fin.foldl' (n : Nat) {β : (i : Nat) → i ≤ n → Sort u}
       (init : β 0 (Nat.zero_le _))
@@ -90,3 +91,29 @@ theorem Fin.foldlM_eq_foldl [Monad m] [LawfulMonad m] (n : Nat) {β : Type u} (i
     clear ih
     unfold foldl.loop; unfold foldlM.aux
     simp_all
+
+theorem Fin.foldl_eq_foldl_ofFn (n) (f : α → Fin n → α) (init : α)
+  : Fin.foldl n f init = List.foldl f init (List.ofFn id) := by
+  unfold foldl
+  suffices ∀ init i j (h : i + j = n),
+    foldl.loop n f init i =
+      List.foldl f init (List.ofFn (n := j) (fun x => Fin.natAdd i x |>.cast h))
+    by
+      have := this init 0 n (by simp)
+      simp at this; rw [this]; rfl
+  intro init i j h
+  induction j generalizing init i with
+  | zero =>
+    unfold foldl.loop
+    simp at h
+    simp [List.drop_eq_nil_of_le, h]
+  | succ j ih =>
+    unfold foldl.loop
+    have : i < n := by omega
+    simp [this, cast]
+    generalize f init _ = init'
+    have : (i+1) + j = n := by omega
+    specialize ih init' (i+1) this
+    rw [ih]; clear ih
+    congr
+    funext ⟨x,hx⟩; simp; omega

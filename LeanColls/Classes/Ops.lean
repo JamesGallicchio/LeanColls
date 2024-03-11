@@ -100,8 +100,22 @@ class ToList [ToList C τ] : Prop where
   toList_append : ∀ (c1 c2 : C),
     toList (c1 ++ c2) = toList c1 ++ toList c2
 
+attribute [simp] ToList.toList_append
+
 end Append
 
+export Functor (map)
+
+namespace Functor
+variable (C : Type u → Type v) [Functor C] (τ τ')
+
+class ToList [ToList (C τ) τ] [ToList (C τ') τ'] : Prop where
+  toList_map : ∀ (c : C τ) (f : τ → τ'),
+    toList (Functor.map f c) = Functor.map f (toList c)
+
+attribute [simp] ToList.toList_map
+
+end Functor
 
 
 /-! ### Iteration -/
@@ -119,6 +133,43 @@ export Fold (fold foldM)
 namespace Fold
 
 variable [Fold C τ]
+
+/-- Correctness of `Fold` with respect to `ToList` -/
+class ToList (C τ) [Fold C τ] [ToList C τ] : Prop where
+  fold_eq_fold_toList : ∀ (c : C) (f) (init : β), ∃ L,
+    List.Perm L (toList c) ∧ fold c f init = List.foldl f init L
+  foldM_eq_foldM_toList : [Monad m] → [LawfulMonad m] → ∀ (c : C) (f) (init : β), ∃ L,
+    List.Perm L (toList c) ∧ foldM (m := m) c f init = List.foldlM f init L
+
+@[inline]
+def map [Fold C τ] (fc : C' → C) (ft : τ → τ') : Fold C' τ' where
+  fold  c h init := Fold.fold  (fc c) (fun acc x => h acc (ft x)) init
+  foldM c h init := Fold.foldM (fc c) (fun acc x => h acc (ft x)) init
+
+def map.ToList [F : Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
+              [L : LeanColls.ToList C' τ'] (fc : C' → C) (ft : τ → τ')
+              (h : ∀ c', toList c' = List.map ft (toList (fc c')))
+    : @ToList C' τ' (map fc ft) L :=
+  @ToList.mk _ _ (map fc ft) L
+    (by
+      intro β c' g init
+      simp [map]
+      have ⟨L,h1,h2⟩ := ToList.fold_eq_fold_toList (fc c') (fun acc x => g acc (ft x)) init
+      use L.map ft
+      constructor
+      · convert h1.map ft
+        exact h _
+      · simp [List.foldl_map, h2])
+    (by
+      intro m β M LM c' g init
+      simp [map]
+      have ⟨L,h1,h2⟩ := ToList.foldM_eq_foldM_toList (fc c') (fun acc x => g acc (ft x)) init
+      use L.map ft
+      constructor
+      · convert h1.map ft
+        exact h _
+      · rw [h2]; simp [List.foldlM_eq_foldl, List.foldl_map])
+
 
 instance : ForIn m C τ where
   forIn := fun {β} _ c acc f => do
@@ -157,16 +208,6 @@ def all (f : τ → Bool) (cont : C) : Bool :=
   with
   | Except.ok () => true
   | Except.error () => false
-
-instance (priority := low) [Fold C τ] [BEq τ] : Membership τ C where
-  mem x c := any (· == x) c
-
-/-- Correctness of `Fold` with respect to `ToList` -/
-class ToList (C τ) [Fold C τ] [ToList C τ] : Prop where
-  fold_eq_fold_toList : ∀ (c : C) (f) (init : β), ∃ L,
-    List.Perm L (toList c) ∧ fold c f init = List.foldl f init L
-  foldM_eq_foldM_toList : [Monad m] → ∀ (c : C) (f) (init : β), ∃ L,
-    List.Perm L (toList c) ∧ foldM (m := m) c f init = List.foldlM f init L
 
 theorem any_eq_any_toList [LeanColls.ToList C τ] [ToList C τ]
     (f : τ → Bool) (c : C)
@@ -219,6 +260,9 @@ theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [
   : all f c ↔ ∀ x ∈ c, f x := by
   rw [all_eq_all_toList]
   simp [Mem.ToList.mem_iff_mem_toList]
+
+instance (priority := low) [Fold C τ] [BEq τ] : Membership τ C where
+  mem x c := any (· == x) c
 
 instance [Fold C τ] [BEq τ] [LeanColls.ToList C τ]
     [ToList C τ] [LawfulBEq τ] : Mem.ToList C τ where
