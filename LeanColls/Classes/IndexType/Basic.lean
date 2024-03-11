@@ -7,6 +7,7 @@ import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.ProxyType
 
 import LeanColls.Classes.Ops
+import LeanColls.Data.Transformer.View
 import LeanColls.MathlibUpstream
 
 /-! ## Index Types
@@ -24,6 +25,10 @@ structure IndexType.Univ (ι : Type u)
 
 def IndexType.univ (ι : Type u) : IndexType.Univ ι := .mk
 
+instance IndexType.instFoldUnivFin : Fold (Univ (Fin n)) (Fin n) where
+  fold := fun ⟨⟩ => Fin.foldl _
+  foldM := fun ⟨⟩ f init => Fin.foldlM _ init (Function.swap f)
+
 class IndexType.{u,w} (ι : Type u)
   extends
     ToList (IndexType.Univ ι) ι,
@@ -32,13 +37,15 @@ class IndexType.{u,w} (ι : Type u)
   card : Nat
   toFin : ι → Fin card
   fromFin : Fin card → ι
-  toList _ := Fin.foldr card (fromFin · :: ·) []
-  fold := fun _ f acc => Fin.foldl card (fun acc x => f acc (fromFin x)) acc
-  foldM := fun _ f acc => Fin.foldlM card acc (fun x acc => f acc (fromFin x))
+  toList _ := List.ofFn fromFin
 
-class LawfulIndexType (ι : Type u) [I : IndexType ι] where
+class LawfulIndexType (ι : Type u) [I : IndexType ι]
+  extends
+    Fold.ToList (IndexType.Univ ι) ι
+  where
   leftInv  : Function.LeftInverse  I.fromFin I.toFin
   rightInv : Function.RightInverse I.fromFin I.toFin
+  toList_eq_ofFn : toList (IndexType.univ ι) = List.ofFn IndexType.fromFin := by rfl
 
 namespace IndexType
 
@@ -88,22 +95,34 @@ def ofEquiv {ι} [IndexType.{_,w} ι'] (f : ι' ≃ ι) : IndexType.{_,w} ι whe
   card := IndexType.card ι'
   toFin   := IndexType.toFin ∘ f.symm
   fromFin := f ∘ IndexType.fromFin
+  toFold := Fold.map (fun ⟨⟩ => IndexType.univ (ι')) f
 
-def ofEquivLawful {ι} [I : IndexType ι] [IndexType ι'] [LawfulIndexType ι']
-    (f : ι' ≃ ι) (h : I = ofEquiv f) : LawfulIndexType ι where
-  leftInv  := by simp [ofEquiv] at h; substs h; intro; simp
-  rightInv := by simp [ofEquiv] at h; substs h; intro; simp
+def ofEquivLawful {ι} [I' : IndexType ι'] [LI' : LawfulIndexType ι'] (f : ι' ≃ ι)
+    : @LawfulIndexType ι (ofEquiv f) :=
+  @LawfulIndexType.mk
+    (ι := ι)
+    (I := ofEquiv f)
+    (leftInv  := by simp [ofEquiv]; intro; simp)
+    (rightInv := by simp [ofEquiv]; intro; simp)
+    (toList_eq_ofFn := by simp [ofEquiv]; rfl)
+    (toToList := by
+      letI := ofEquiv f; apply Fold.map.ToList
+      intro c'; simp [toList, ofEquiv, LawfulIndexType.toList_eq_ofFn]; rfl)
 
 /-! #### Unit -/
 
 instance : IndexType Unit where
   card := 1
-  toFin := fun _ => 0
-  fromFin := fun _ => ()
+  toFin := fun () => 0
+  fromFin := fun 0 => ()
+  fold := fun ⟨⟩ f init => f init ()
+  foldM := fun ⟨⟩ f init => f init ()
 
 instance : LawfulIndexType Unit where
   leftInv := by intro; rfl
   rightInv := by rintro ⟨i,h⟩; simp [card] at h; subst h; simp [fromFin, toFin]
+  fold_eq_fold_toList := by rintro β ⟨⟩ f init; simp [toList, fold]
+  foldM_eq_foldM_toList := by rintro β _ _ _ ⟨⟩ f init; simp [toList, foldM]
 
 /-! #### Fin n -/
 
@@ -113,8 +132,14 @@ instance : IndexType (Fin n) where
   fromFin := id
 
 instance : LawfulIndexType (Fin n) where
- leftInv  := by intro _; rfl
- rightInv := by intro _; rfl
+  leftInv  := by intro _; rfl
+  rightInv := by intro _; rfl
+  fold_eq_fold_toList := by
+    rintro β ⟨⟩ f init; use List.ofFn id; simp [toList, fold, Fin.foldl_eq_foldl_ofFn]
+  foldM_eq_foldM_toList := by
+    rintro β _ _ _ ⟨⟩ f init
+    use List.ofFn id
+    simp [toList, foldM, Fin.foldlM_eq_foldl, Fin.foldl_eq_foldl_ofFn, List.foldlM_eq_foldl]
 
 
 section
@@ -142,6 +167,22 @@ instance : IndexType.{max u v, w} (α × β) where
     let r := i % card β
     ( fromFin ⟨q, Nat.div_lt_of_lt_mul (by rw [Nat.mul_comm]; assumption)⟩
     , fromFin ⟨r, Nat.mod_lt _ (Nat.pos_of_ne_zero fun h => by simp_all)⟩)
+  fold := fun ⟨⟩ f acc =>
+    fold (IndexType.univ α) (fun acc a =>
+      fold (IndexType.univ β) (fun acc b =>
+          f acc (a,b)
+        )
+        acc
+      )
+      acc
+  foldM := fun ⟨⟩ f acc =>
+    foldM (IndexType.univ α) (fun acc a =>
+      foldM (IndexType.univ β) (fun acc b =>
+          f acc (a,b)
+        )
+        acc
+      )
+      acc
 
 instance : LawfulIndexType.{max u v, w} (α × β) where
   rightInv := by
@@ -158,6 +199,11 @@ instance : LawfulIndexType.{max u v, w} (α × β) where
     · convert fromFin_toFin b
       apply Nat.mul_add_mod_of_lt
       exact Fin.prop (toFin b)
+  fold_eq_fold_toList := by
+    rintro γ ⟨⟩ f init
+    refine ⟨_, List.Perm.refl _, ?_⟩
+    simp [fold, toList]
+    sorry
 
 
 /-! #### Sigma -/

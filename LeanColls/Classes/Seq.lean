@@ -65,6 +65,7 @@ open LeanColls
   insert L x := x::L
   size := List.length
   fold L f init := List.foldl f init L
+  foldM L f init := List.foldlM f init L
   ofFn := List.ofFn
   get := List.get
   set L i x := List.set L i x
@@ -86,7 +87,8 @@ class LawfulSeq (C : Type u) (τ : outParam (Type v)) [Seq C τ]
   extends
     Mem.ToList C τ,
     Append.ToList C τ,
-    Insert.ToMultiset C τ
+    Insert.ToMultiset C τ,
+    Fold.ToList C τ
   : Prop
   where
   size_def : ∀ (cont : C),
@@ -133,6 +135,8 @@ instance : LeanColls.LawfulSeq (List τ) τ where
   toList_update := by intros; rfl
   toList_cons := by intros; rfl
   toList_snoc := by intros; rfl
+  fold_eq_fold_toList := by intros; refine ⟨_, List.Perm.refl _, rfl⟩
+  foldM_eq_foldM_toList := by intros; refine ⟨_, List.Perm.refl _, rfl⟩
 
 end List
 
