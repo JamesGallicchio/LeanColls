@@ -5,8 +5,10 @@ Authors: James Gallicchio
 
 import Mathlib.Data.Fin.Basic
 import Mathlib.Data.List.OfFn
-
-import Mathlib
+import Mathlib.Data.List.ProdSigma
+import Mathlib.Tactic.Ring
+import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Multiset.Basic
 
 def Fin.foldl' (n : Nat) {β : (i : Nat) → i ≤ n → Sort u}
       (init : β 0 (Nat.zero_le _))
