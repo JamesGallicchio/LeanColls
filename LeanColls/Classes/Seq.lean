@@ -135,8 +135,12 @@ instance : LeanColls.LawfulSeq (List τ) τ where
   toList_update := by intros; rfl
   toList_cons := by intros; rfl
   toList_snoc := by intros; rfl
-  fold_eq_fold_toList := by intros; refine ⟨_, List.Perm.refl _, rfl⟩
-  foldM_eq_foldM_toList := by intros; refine ⟨_, List.Perm.refl _, rfl⟩
+  fold_eq_fold_toList := by
+    intro c
+    refine ⟨_, List.Perm.refl _, ?_⟩
+    intros; rfl
+  foldM_eq_fold := by
+    intros; simp [LeanColls.foldM, LeanColls.fold, List.foldlM_eq_foldl]
 
 end List
 
