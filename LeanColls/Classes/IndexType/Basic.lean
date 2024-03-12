@@ -100,6 +100,12 @@ theorem get_toList_univ [IndexType α] [LawfulIndexType α] (i)
   subst hL
   simp
 
+@[simp]
+theorem mem_toList_univ [IndexType α] [LawfulIndexType α] (x) : x ∈ (toList <| univ α) := by
+  simp [LawfulIndexType.toList_eq_ofFn, List.mem_ofFn]
+  use toFin x
+  simp
+
 instance (priority := default) : DecidableEq ι := by
   intro x y; rw [← toFin_eq_iff]; infer_instance
 
