@@ -8,8 +8,7 @@ import Mathlib.Data.List.Lemmas
 namespace List
 
 theorem ofFn_def (f : Fin n → α)
-  : ofFn f = (Array.ofFn f).data := by
-  rw [←Array.toList_eq]; rfl
+  : ofFn f = (Array.ofFn f).data := by rfl
 
 def getCons? : List α → Option (α × List α)
 | [] => none
@@ -42,7 +41,7 @@ def getSnoc? : List α → Option (List α × α)
   · cases xs <;> simp
   · cases xs <;> simp_all
     · rintro rfl rfl; simp_all; apply ih; rfl
-    · aesop; rw [←ih]; simp
+    · rw [←ih]; clear ih; aesop
 
 theorem ext_get_iff (L₁ L₂ : List α) (h : L₁.length = L₂.length)
   : L₁ = L₂ ↔ ∀ i h1 h2, L₁.get ⟨i,h1⟩ = L₂.get ⟨i, h2⟩

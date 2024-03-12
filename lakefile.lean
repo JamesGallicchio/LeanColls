@@ -1,5 +1,5 @@
 import Lake
-open System Lake DSL
+open Lake DSL
 
 package leancolls
 
@@ -11,7 +11,7 @@ lean_exe test {
 }
 
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "v4.6.0"
+  "https://github.com/leanprover-community/mathlib4" @ "master"
 
 meta if get_config? doc = some "on" then
   require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"

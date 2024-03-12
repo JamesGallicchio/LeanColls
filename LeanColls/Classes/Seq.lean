@@ -239,7 +239,7 @@ theorem get_set_ne (cont : C) (i : Fin (size cont)) (x : τ) (j)
   conv => rhs; rw [get_def]
   simp
   rw [List.get_eq_get _ (List.set (toList cont) i x) _ _ (toList_set ..) ?idx_eq]
-  rw [List.get_set_ne h]
+  rw [List.get_set_ne (h := h)]
   · congr
   · simpa [← size_def] using j.isLt
   case idx_eq => simp [h]
@@ -274,7 +274,7 @@ theorem get_update_ne (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
   case list_eq =>
     apply toList_update
   simp
-  rw [List.get_set_ne _ _ ?h]
+  rw [List.get_set_ne (hj := ?h)]
   conv => rhs; rw [get_def]
   case h => simpa [size_def] using j.isLt
   case idx_eq => simp
