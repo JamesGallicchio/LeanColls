@@ -6,6 +6,8 @@ Authors: James Gallicchio
 import Mathlib.Data.Fin.Basic
 import Mathlib.Data.List.OfFn
 
+import Mathlib
+
 def Fin.foldl' (n : Nat) {β : (i : Nat) → i ≤ n → Sort u}
       (init : β 0 (Nat.zero_le _))
       (f : (i : Nat) → (h : i < n) → β i (Nat.le_of_lt h) → β (i+1) h)
@@ -117,3 +119,58 @@ theorem Fin.foldl_eq_foldl_ofFn (n) (f : α → Fin n → α) (init : α)
     rw [ih]; clear ih
     congr
     funext ⟨x,hx⟩; simp; omega
+
+@[inline]
+def Fin.pair (x : Fin m) (y : Fin n) : Fin (m * n) :=
+  ⟨ x * n + y, by
+    rcases x with ⟨x,hx⟩; rcases y with ⟨y,hy⟩
+    simp
+    calc
+      _ < x * n + n := by simp [hx,hy]
+      _ ≤ (x+1) * n := by rw [Nat.succ_mul]
+      _ ≤ m * n := Nat.mul_le_mul_right _ hx⟩
+
+@[inline]
+def Fin.pair_left : Fin (m * n) → Fin m
+| ⟨p,h⟩ =>
+  ⟨ p / n, by
+    rw [Nat.div_lt_iff_lt_mul]
+    · exact h
+    · by_contra; simp_all
+  ⟩
+
+@[inline]
+def Fin.pair_right : Fin (m * n) → Fin n
+| ⟨p,h⟩ =>
+  ⟨ p % n, by
+    apply Nat.mod_lt
+    by_contra; simp_all
+  ⟩
+
+@[simp]
+theorem Fin.pair_left_pair (x : Fin m) (y : Fin n) : Fin.pair_left (Fin.pair x y) = x := by
+  rcases x with ⟨x,hx⟩; rcases y with ⟨y,hy⟩
+  simp [pair_left, pair]
+  have : n > 0 := by by_contra; simp_all
+  rw [Nat.mul_comm, Nat.mul_add_div this, (Nat.div_eq_zero_iff this).mpr hy]
+  simp
+
+@[simp]
+theorem Fin.pair_right_pair (x : Fin m) (y : Fin n) : Fin.pair_right (Fin.pair x y) = y := by
+  rcases x with ⟨x,hx⟩; rcases y with ⟨y,hy⟩
+  simp [pair_right, pair]
+  have : n > 0 := by by_contra; simp_all
+  rw [Nat.mul_comm, Nat.mul_add_mod _ _ _]
+  apply Nat.mod_eq_of_lt hy
+
+@[simp]
+theorem Fin.pair_left_right (p : Fin (m * n)) : Fin.pair (Fin.pair_left p) (Fin.pair_right p) = p := by
+  rcases p with ⟨p,hp⟩
+  simp [pair, pair_left, pair_right]
+  exact Nat.div_add_mod' p n
+
+theorem List.get_product_eq_get_pair (L1 : List α) (L2 : List β) (i : Fin ((List.product L1 L2).length))
+  : List.get (List.product L1 L2) i =
+    ( List.get L1 (Fin.pair_left <| i.cast (by apply List.length_product))
+    , List.get L2 (Fin.pair_right <| i.cast (by apply List.length_product))) := by
+  sorry
