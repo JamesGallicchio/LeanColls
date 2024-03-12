@@ -150,23 +150,9 @@ variable {α : Type u} [IndexType.{u,w} α] [LawfulIndexType.{u,w} α]
 
 instance : IndexType.{max u v, w} (α × β) where
   card := card α * card β
-  toFin := fun x =>
-    match x with
-    | (a,b) =>
-      let ⟨a,ha⟩ := toFin a
-      let ⟨b,hb⟩ := toFin b
-      ⟨ a * (IndexType.card β) + b, by
-        calc
-          _ < a * card β + card β := by simp [*]
-          _ ≤ card α * card β := by
-            rw [← Nat.succ_mul]
-            apply Nat.mul_le_mul_right
-            exact ha ⟩
-  fromFin := fun ⟨i,hi⟩ =>
-    let q := i / card β
-    let r := i % card β
-    ( fromFin ⟨q, Nat.div_lt_of_lt_mul (by rw [Nat.mul_comm]; assumption)⟩
-    , fromFin ⟨r, Nat.mod_lt _ (Nat.pos_of_ne_zero fun h => by simp_all)⟩)
+  toFin := fun (a,b) => Fin.pair (toFin a) (toFin b)
+  fromFin := fun p => (fromFin (Fin.pair_left p), fromFin (Fin.pair_right p))
+  toList := fun ⟨⟩ => List.product (toList (IndexType.univ α)) (toList (IndexType.univ β))
   fold := fun ⟨⟩ f acc =>
     fold (IndexType.univ α) (fun acc a =>
       fold (IndexType.univ β) (fun acc b =>
@@ -187,19 +173,17 @@ instance : IndexType.{max u v, w} (α × β) where
 instance : LawfulIndexType.{max u v, w} (α × β) where
   rightInv := by
     rintro ⟨i,hi⟩; simp [toFin, fromFin]
-    exact Nat.div_add_mod' i (card β)
   leftInv := by
     rintro ⟨a,b⟩; simp [toFin, fromFin]
-    constructor
-    · convert fromFin_toFin a
-      rw [Nat.mul_comm, Nat.mul_add_div]
-      simp
-      apply Nat.div_eq_of_lt
-      simp; apply Fin.pos; apply IndexType.toFin b
-    · convert fromFin_toFin b
-      apply Nat.mul_add_mod_of_lt
-      exact Fin.prop (toFin b)
+  toList_eq_ofFn := by
+    simp only [toList, fromFin]
+    sorry
   fold_eq_fold_toList := by
+    rintro γ ⟨⟩ f init
+    refine ⟨_, List.Perm.refl _, ?_⟩
+    simp [fold, toList]
+    sorry
+  foldM_eq_foldM_toList := by
     rintro γ ⟨⟩ f init
     refine ⟨_, List.Perm.refl _, ?_⟩
     simp [fold, toList]
