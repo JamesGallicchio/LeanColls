@@ -85,6 +85,21 @@ theorem fromFin_eq_iff (x y : Fin _) : (fromFin x : ι) = fromFin y ↔ x = y :=
   · apply toEquiv.symm.injective
   · rintro rfl; rfl
 
+@[simp]
+theorem length_toList_univ [IndexType α] [LawfulIndexType α]
+  : List.length (toList <| IndexType.univ α) = IndexType.card α := by
+  rw [LawfulIndexType.toList_eq_ofFn]; simp
+
+@[simp]
+theorem get_toList_univ [IndexType α] [LawfulIndexType α] (i)
+  : List.get (toList <| univ α) i = IndexType.fromFin (i.cast (by simp)) := by
+  suffices ∀ L i (hL : L = toList (univ α)), List.get L i = fromFin (i.cast (by simp [hL]))
+    from this _ _ rfl
+  intro L i hL
+  rw [LawfulIndexType.toList_eq_ofFn] at hL
+  subst hL
+  simp
+
 instance (priority := default) : DecidableEq ι := by
   intro x y; rw [← toFin_eq_iff]; infer_instance
 
@@ -121,8 +136,12 @@ instance : IndexType Unit where
 instance : LawfulIndexType Unit where
   leftInv := by intro; rfl
   rightInv := by rintro ⟨i,h⟩; simp [card] at h; subst h; simp [fromFin, toFin]
-  fold_eq_fold_toList := by rintro β ⟨⟩ f init; simp [toList, fold]
-  foldM_eq_foldM_toList := by rintro β _ _ _ ⟨⟩ f init; simp [toList, foldM]
+  fold_eq_fold_toList := by
+    rintro ⟨⟩
+    refine ⟨_, .rfl, ?_⟩
+    intro β f init; simp [toList, fold]
+  foldM_eq_fold := by
+    rintro m β _ _ ⟨⟩ f init; simp [foldM, fold]
 
 /-! #### Fin n -/
 
@@ -135,11 +154,12 @@ instance : LawfulIndexType (Fin n) where
   leftInv  := by intro _; rfl
   rightInv := by intro _; rfl
   fold_eq_fold_toList := by
-    rintro β ⟨⟩ f init; use List.ofFn id; simp [toList, fold, Fin.foldl_eq_foldl_ofFn]
-  foldM_eq_foldM_toList := by
+    rintro ⟨⟩
+    refine ⟨_, .rfl, ?_⟩
+    simp [toList, fold, Fin.foldl_eq_foldl_ofFn]
+  foldM_eq_fold := by
     rintro β _ _ _ ⟨⟩ f init
-    use List.ofFn id
-    simp [toList, foldM, Fin.foldlM_eq_foldl, Fin.foldl_eq_foldl_ofFn, List.foldlM_eq_foldl]
+    simp [foldM, fold, Fin.foldlM_eq_foldl]
 
 
 section
@@ -152,23 +172,10 @@ instance : IndexType.{max u v, w} (α × β) where
   card := card α * card β
   toFin := fun (a,b) => Fin.pair (toFin a) (toFin b)
   fromFin := fun p => (fromFin (Fin.pair_left p), fromFin (Fin.pair_right p))
-  toList := fun ⟨⟩ => List.product (toList (IndexType.univ α)) (toList (IndexType.univ β))
-  fold := fun ⟨⟩ f acc =>
-    fold (IndexType.univ α) (fun acc a =>
-      fold (IndexType.univ β) (fun acc b =>
-          f acc (a,b)
-        )
-        acc
-      )
-      acc
-  foldM := fun ⟨⟩ f acc =>
-    foldM (IndexType.univ α) (fun acc a =>
-      foldM (IndexType.univ β) (fun acc b =>
-          f acc (a,b)
-        )
-        acc
-      )
-      acc
+  toList := fun ⟨⟩ => toList (univ α) ×ˢ toList (univ β)
+  toFold := @Fold.map (Univ α × Univ β) _ _ _
+    Fold.prod
+    (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
 
 instance : LawfulIndexType.{max u v, w} (α × β) where
   rightInv := by
@@ -176,57 +183,27 @@ instance : LawfulIndexType.{max u v, w} (α × β) where
   leftInv := by
     rintro ⟨a,b⟩; simp [toFin, fromFin]
   toList_eq_ofFn := by
-    simp only [toList, fromFin]
-    sorry
-  fold_eq_fold_toList := by
-    rintro γ ⟨⟩ f init
-    refine ⟨_, List.Perm.refl _, ?_⟩
-    simp [fold, toList]
-    sorry
-  foldM_eq_foldM_toList := by
-    rintro γ ⟨⟩ f init
-    refine ⟨_, List.Perm.refl _, ?_⟩
-    simp [fold, toList]
-    sorry
+    simp [toList, fromFin]
+    apply List.ext_get
+    · simp [card, List.length_product]
+    intro i h1 h2
+    simp [List.get_product_eq_get_pair]
+    constructor <;>
+      simp [← Fin.val_inj, Fin.pair_left, Fin.pair_right]
+  toToList :=
+    @Fold.map.ToList (Univ α × Univ β) _ _ _
+      (Fold.prod) (ToList.prod) (Fold.prod.ToList)
+      _ _ _
+      (by simp [toList, ToList.prod])
 
 
 /-! #### Sigma -/
 
-instance : IndexType.{max u v, w} ((_ : α) × β) where
-  card := card α * card β
-  toFin := fun x =>
-    match x with
-    | ⟨a,b⟩ =>
-      let ⟨a,ha⟩ := toFin a
-      let ⟨b,hb⟩ := toFin b
-      ⟨ a * (IndexType.card β) + b, by
-        calc
-          _ < a * card β + card β := by simp [*]
-          _ ≤ card α * card β := by
-            rw [← Nat.succ_mul]
-            apply Nat.mul_le_mul_right
-            exact ha ⟩
-  fromFin := fun ⟨i,hi⟩ =>
-    let q := i / card β
-    let r := i % card β
-    ⟨ fromFin ⟨q, Nat.div_lt_of_lt_mul (by rw [Nat.mul_comm]; assumption)⟩
-    , fromFin ⟨r, Nat.mod_lt _ (Nat.pos_of_ne_zero fun h => by simp_all)⟩ ⟩
+instance : IndexType.{max u v, w} ((_ : α) × β) :=
+  IndexType.ofEquiv (Equiv.sigmaEquivProd α β).symm
 
-instance : LawfulIndexType.{max u v, w} ((_ : α) × β) where
-  rightInv := by
-    rintro ⟨i,hi⟩; simp [toFin, fromFin]
-    exact Nat.div_add_mod' i (card β)
-  leftInv := by
-    rintro ⟨a,b⟩; simp [toFin, fromFin]
-    constructor
-    · convert fromFin_toFin a
-      rw [Nat.mul_comm, Nat.mul_add_div]
-      simp
-      apply Nat.div_eq_of_lt
-      simp; apply Fin.pos; apply IndexType.toFin b
-    · convert fromFin_toFin b
-      apply Nat.mul_add_mod_of_lt
-      exact Fin.prop (toFin b)
+instance : LawfulIndexType.{max u v, w} ((_ : α) × β) :=
+  IndexType.ofEquivLawful _
 
 
 /-! #### Sum -/
@@ -246,8 +223,15 @@ instance : IndexType.{max u v, w} (α ⊕ β) where
       .inl (fromFin ⟨i,h⟩)
     else
       .inr (fromFin ⟨i-card α, by simp at h; exact Nat.sub_lt_left_of_lt_add h hi⟩)
+  toList := fun ⟨⟩ => (toList (univ α)).map Sum.inl ++ (toList (univ β)).map Sum.inr
+  toFold := @Fold.map (Univ α × Univ β) _ _ _
+    Fold.sum
+    (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
 
 instance : LawfulIndexType (α ⊕ β) where
+  leftInv := by
+    rintro (a|b)
+      <;> simp [toFin, fromFin]
   rightInv := by
     rintro ⟨i,hi⟩
     simp [toFin, fromFin]
@@ -255,9 +239,28 @@ instance : LawfulIndexType (α ⊕ β) where
       simp_all
     else
       simp [*]; simp_all
-  leftInv := by
-    rintro (a|b)
-      <;> simp [toFin, fromFin]
+  toList_eq_ofFn := by
+    simp [toList]
+    apply List.ext_get
+    · simp [card]
+    intro i h1 h2
+    simp [fromFin]
+    split
+    next h =>
+      rw [List.get_append_left]
+      · simp
+      · simpa using h
+    next h =>
+      rw [List.get_append_right]
+      · simp
+      · simpa using h
+      · simp at h1 ⊢
+        omega
+  toToList :=
+    @Fold.map.ToList (Univ α × Univ β) _ _ _
+      (Fold.sum) (ToList.sum) (Fold.sum.ToList)
+      _ _ _
+      (by simp [toList, ToList.sum])
 
 
 end

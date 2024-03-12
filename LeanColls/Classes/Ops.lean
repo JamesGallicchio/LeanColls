@@ -3,8 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import Mathlib.Data.Finset.Basic
-import Mathlib.Data.Multiset.Basic
+import LeanColls.MathlibUpstream
 
 /-! ## Collection operations
 
@@ -66,12 +65,22 @@ class LawfulToList (C : Type u) (τ : outParam (Type v))
 
 attribute [simp] LawfulToMultiset.toFinset_toMultiset
 
+namespace ToList
+
 instance [ToList C τ] : ToMultiset C τ where
   toMultiset c := (toList c)
 
 instance [ToList C τ] : LawfulToList C τ where
   toMultiset_toList _ := rfl
 
+def prod [ToList C₁ τ₁] [ToList C₂ τ₂] : ToList (C₁ × C₂) (τ₁ × τ₂) where
+  toList := fun (c1,c2) => toList c1 ×ˢ toList c2
+
+def sum [ToList C₁ τ₁] [ToList C₂ τ₂] : ToList (C₁ × C₂) (τ₁ ⊕ τ₂) where
+  toList := fun (c1,c2) =>
+    (toList c1).map Sum.inl ++ (toList c2).map Sum.inr
+
+end ToList
 
 
 /-! ### Operations Defined Elsewhere -/
@@ -132,14 +141,31 @@ export Fold (fold foldM)
 
 namespace Fold
 
-variable [Fold C τ]
+variable [Fold C τ] [LeanColls.ToList C τ]
 
 /-- Correctness of `Fold` with respect to `ToList` -/
 class ToList (C τ) [Fold C τ] [ToList C τ] : Prop where
-  fold_eq_fold_toList : ∀ (c : C) (f) (init : β), ∃ L,
-    List.Perm L (toList c) ∧ fold c f init = List.foldl f init L
-  foldM_eq_foldM_toList : [Monad m] → [LawfulMonad m] → ∀ (c : C) (f) (init : β), ∃ L,
-    List.Perm L (toList c) ∧ foldM (m := m) c f init = List.foldlM f init L
+  fold_eq_fold_toList : ∀ (c : C), ∃ L,
+      List.Perm L (toList c) ∧
+      ∀ {β} (f) (init : β), fold c f init = List.foldl f init L
+  foldM_eq_fold : [Monad m] → [LawfulMonad m] → ∀ (c : C) (f) (init : β),
+    foldM (m := m) c f init = fold c (fun acc x => acc >>= (f · x)) (pure init)
+
+/-- A strange lemma. Analogous to `bind_pure` chained over the length of `c`. -/
+theorem bind_fold_pure [ToList C τ] [Monad m] [LawfulMonad m] (ma : m α) (c : C) (f : _ → _ → _)
+  : ma >>= (fun a => fold c (fun acc t => do let acc ← acc; f acc t) (pure a)) =
+    fold c (fun acc t => do let acc ← acc; f acc t) ma := by
+  have := ToList.fold_eq_fold_toList c
+  rcases this with ⟨L,-,h⟩
+  simp [h]; clear h
+  rw [← List.foldr_reverse]
+  conv => lhs; arg 2; ext; rw [← List.foldr_reverse]
+  generalize L.reverse = L
+  induction L with
+  | nil => simp
+  | cons hd tl ih =>
+    simp; rw [← ih]
+    simp
 
 @[inline]
 def map [Fold C τ] (fc : C' → C) (ft : τ → τ') : Fold C' τ' where
@@ -152,24 +178,79 @@ def map.ToList [F : Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
     : @ToList C' τ' (map fc ft) L :=
   @ToList.mk _ _ (map fc ft) L
     (by
-      intro β c' g init
-      simp [map]
-      have ⟨L,h1,h2⟩ := ToList.fold_eq_fold_toList (fc c') (fun acc x => g acc (ft x)) init
+      intro c'
+      have ⟨L,hL,hfold⟩ := ToList.fold_eq_fold_toList (fc c')
       use L.map ft
       constructor
-      · convert h1.map ft
-        exact h _
-      · simp [List.foldl_map, h2])
+      · rw [h]; apply List.Perm.map; apply hL
+      intro β g init
+      specialize hfold (fun acc x => g acc (ft x)) init
+      simp [map, hfold, List.foldl_map])
     (by
       intro m β M LM c' g init
-      simp [map]
-      have ⟨L,h1,h2⟩ := ToList.foldM_eq_foldM_toList (fc c') (fun acc x => g acc (ft x)) init
-      use L.map ft
-      constructor
-      · convert h1.map ft
-        exact h _
-      · rw [h2]; simp [List.foldlM_eq_foldl, List.foldl_map])
+      simp [map, ToList.foldM_eq_fold])
 
+@[inline]
+def prod [Fold C₁ τ₁] [Fold C₂ τ₂] : Fold (C₁ × C₂) (τ₁ × τ₂) where
+  fold := fun (c1,c2) f init =>
+    init |> fold c1 fun acc x1 =>
+      acc |> fold c2 fun acc x2 => f acc (x1,x2)
+  foldM := fun (c1,c2) f init =>
+    init |> foldM c1 fun acc x1 =>
+      acc |> foldM c2 fun acc x2 => f acc (x1,x2)
+
+def prod.ToList [Fold C₁ τ₁] [L₁ : LeanColls.ToList C₁ τ₁] [Fold.ToList C₁ τ₁]
+                [Fold C₂ τ₂] [L₂ : LeanColls.ToList C₂ τ₂] [Fold.ToList C₂ τ₂]
+  : @ToList (C₁ × C₂) (τ₁ × τ₂) prod .prod :=
+  @ToList.mk _ _ prod .prod
+  (by
+    rintro ⟨c1,c2⟩
+    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList c1
+    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList c2
+    use L1 ×ˢ L2
+    constructor
+    · simp [ToList.prod]; apply List.Perm.product hL1 hL2
+    intro β f init
+    simp [prod, ToList.prod]
+    simp_rw [h1, h2, List.foldl_product])
+  (by
+    rintro m γ _ _ ⟨c1,c2⟩ f init
+    simp [prod, ToList.foldM_eq_fold]
+    congr
+    funext acc x
+    rw [bind_fold_pure]
+  )
+
+@[inline]
+def sum [Fold C₁ τ₁] [Fold C₂ τ₂] : Fold (C₁ × C₂) (τ₁ ⊕ τ₂) where
+  fold := fun (c1,c2) f init =>
+    init
+    |> fold c1 (fun acc x => f acc (.inl x))
+    |> fold c2 (fun acc x => f acc (.inr x))
+  foldM := fun (c1,c2) f acc => do
+    let acc ← foldM c1 (fun acc x => f acc (.inl x)) acc
+    foldM c2 (fun acc x => f acc (.inr x)) acc
+
+def sum.ToList [Fold C₁ τ₁] [L₁ : LeanColls.ToList C₁ τ₁] [Fold.ToList C₁ τ₁]
+                [Fold C₂ τ₂] [L₂ : LeanColls.ToList C₂ τ₂] [Fold.ToList C₂ τ₂]
+  : @ToList (C₁ × C₂) (τ₁ ⊕ τ₂) sum .sum :=
+  @ToList.mk _ _ sum .sum
+  (by
+    rintro ⟨c1,c2⟩
+    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList c1
+    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList c2
+    simp [ToList.sum, sum]
+    use L1.map Sum.inl ++ L2.map Sum.inr
+    constructor
+    · apply List.Perm.append <;> (apply List.Perm.map; assumption)
+    intro β f init
+    rw [h1, h2]
+    simp [List.foldl_map])
+  (by
+    rintro m γ _ _ ⟨c1,c2⟩ f init
+    simp [sum, ToList.foldM_eq_fold]
+    rw [bind_fold_pure]
+  )
 
 instance : ForIn m C τ where
   forIn := fun {β} _ c acc f => do
@@ -218,10 +299,12 @@ theorem any_eq_any_toList [LeanColls.ToList C τ] [ToList C τ]
     rw [eq_comm]; split
     · rw [Bool.eq_false_iff]; aesop
     · aesop
-  have ⟨L,perm,h⟩ := ToList.foldM_eq_foldM_toList c f' ()
+  rw [ToList.foldM_eq_fold]
+  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList c
   rw [h]; clear h
   simp_rw [List.any_eq_true, ← perm.mem_iff]; clear perm c
   subst hf'
+  rw [← List.foldlM_eq_foldl]
   induction L with
   | nil => simp_all [pure, Except.pure]
   | cons hd tl ih =>
@@ -237,10 +320,12 @@ theorem all_eq_all_toList [LeanColls.ToList C τ] [ToList C τ]
     rw [eq_comm]; split
     · aesop
     · rw [Bool.eq_false_iff]; aesop
-  have ⟨L,perm,h⟩ := ToList.foldM_eq_foldM_toList c f' ()
+  rw [ToList.foldM_eq_fold]
+  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList c
   rw [h]; clear h
   simp_rw [List.all_eq_true, ← perm.mem_iff]; clear perm c
   subst hf'
+  rw [← List.foldlM_eq_foldl]
   induction L with
   | nil => simp_all [pure, Except.pure]
   | cons hd tl ih =>

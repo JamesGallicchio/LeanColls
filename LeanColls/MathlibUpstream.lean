@@ -169,8 +169,68 @@ theorem Fin.pair_left_right (p : Fin (m * n)) : Fin.pair (Fin.pair_left p) (Fin.
   simp [pair, pair_left, pair_right]
   exact Nat.div_add_mod' p n
 
+theorem Fin.pair_succ_left (x : Fin m) (y : Fin n) : (Fin.pair (x.succ) y).val = Fin.pair x y + n := by
+  simp [pair, Nat.add_mul]; ring
+
+theorem Fin.pair_ge_left (x : Fin m) (y : Fin n) : Fin.pair x y ≥ x.val * n := by simp [pair]
+
+/-- `Fin.pair` is the "natural" way to index into `List.product`. -/
+theorem List.get_product_fin_pair (L1 : List α) (L2 : List β)
+    {i : Fin L1.length} {j : Fin L2.length} {p} (hp : p.val = (Fin.pair i j).val)
+  : List.get (L1 ×ˢ L2) p =
+      (List.get L1 i, List.get L2 j) := by
+  generalize hLL : L1 ×ˢ L2 = LL at p
+  induction L1 generalizing LL p with
+  | nil =>
+    exact i.elim0
+  | cons hd tl ih =>
+    dsimp at i
+    induction i using Fin.cases
+    case zero =>
+      rcases p with ⟨p,_⟩
+      simp [Fin.pair] at hp
+      have : p < L2.length := by rw [hp]; exact j.isLt
+      simp [product_cons] at hLL
+      subst LL
+      rw [get_append_left]
+      case h => simp [this]
+      simp; congr
+    case succ i =>
+      specialize @ih i (tl ×ˢ L2) rfl (Fin.pair i j |>.cast (List.length_product ..).symm) rfl
+      simp; rw [← ih]; clear ih
+      rcases p with ⟨p,h⟩
+      simp at hp hLL
+      subst p LL
+      simp [Nat.add_mul, length_product] at h ⊢
+      rw [get_append_right]
+      case h =>
+        simp
+        trans i.succ * L2.length
+        · simp [Nat.add_mul]
+        · apply Fin.pair_ge_left
+      case h'' =>
+        simp [length_product, Fin.pair_succ_left]
+      congr
+      simp [Fin.pair_succ_left]
+
 theorem List.get_product_eq_get_pair (L1 : List α) (L2 : List β) (i : Fin ((List.product L1 L2).length))
-  : List.get (List.product L1 L2) i =
+  : List.get (L1 ×ˢ L2) i =
     ( List.get L1 (Fin.pair_left <| i.cast (by apply List.length_product))
     , List.get L2 (Fin.pair_right <| i.cast (by apply List.length_product))) := by
-  sorry
+  generalize hleft : Fin.pair_left _ = left
+  generalize hright : Fin.pair_right _ = right
+  have : i = (Fin.pair left right).cast (by apply (List.length_product ..).symm) := by
+    simp [← hleft, ← hright]
+  clear hleft hright
+  subst i
+  rw [List.get_product_fin_pair]
+  simp
+
+theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
+  : List.foldl f init (L1 ×ˢ L2) =
+      List.foldl (fun acc a =>
+        List.foldl (fun acc b => f acc (a,b)) acc L2
+        ) init L1 := by
+  induction L1 generalizing init <;> simp
+  case cons hd tl ih =>
+  rw [ih]; simp [foldl_map]

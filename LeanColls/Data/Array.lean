@@ -44,6 +44,7 @@ instance : Seq (Array α) α where
   insert := Array.push
   singleton := Array.singleton
   fold c f init := Array.foldl f init c
+  foldM c f init := Array.foldlM f init c
   get := Array.get
   set := Array.set
   cons := Array.cons
@@ -125,7 +126,14 @@ instance : LawfulSeq (Array α) α where
     simp [LeanColls.toList, Seq.cons, cons]
   toList_snoc := by
     simp [LeanColls.toList, Seq.snoc, snoc]
-
+  fold_eq_fold_toList := by
+    intro A; use A.toList; refine ⟨.rfl, ?_⟩
+    intros
+    simp [fold, foldl_eq_foldl_data]
+  foldM_eq_fold := by
+    intros
+    simp [fold, foldM]
+    rw [foldlM_eq_foldlM_data, foldl_eq_foldl_data, List.foldlM_eq_foldl]
 end Array
 
 abbrev ArrayN.{u,w} (α : Type u) (n : Nat) :=
