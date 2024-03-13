@@ -1,0 +1,177 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.NeZero</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.NeZero";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">NeZero</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Init/ZeroOne.html">Mathlib.Init.ZeroOne</a></li><li><a href="../.././Mathlib/Logic/Basic.html">Mathlib.Logic.Basic</a></li><li><a href="../.././Mathlib/Init/Order/Defs.html">Mathlib.Init.Order.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.NeZero" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#NeZero"><span class="name">NeZero</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.ne"><span class="name">NeZero</span>.<span class="name">ne</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.ne'"><span class="name">NeZero</span>.<span class="name">ne'</span></a></div><div class="nav_link"><a class="break_within" href="#neZero_iff"><span class="name">neZero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#neZero_zero_iff_false"><span class="name">neZero_zero_iff_false</span></a></div><div class="nav_link"><a class="break_within" href="#not_neZero"><span class="name">not_neZero</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_or_neZero"><span class="name">eq_zero_or_neZero</span></a></div><div class="nav_link"><a class="break_within" href="#zero_ne_one"><span class="name">zero_ne_one</span></a></div><div class="nav_link"><a class="break_within" href="#one_ne_zero"><span class="name">one_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#ne_zero_of_eq_one"><span class="name">ne_zero_of_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#two_ne_zero"><span class="name">two_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#three_ne_zero"><span class="name">three_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#four_ne_zero"><span class="name">four_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#zero_ne_one'"><span class="name">zero_ne_one'</span></a></div><div class="nav_link"><a class="break_within" href="#one_ne_zero'"><span class="name">one_ne_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#two_ne_zero'"><span class="name">two_ne_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#three_ne_zero'"><span class="name">three_ne_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#four_ne_zero'"><span class="name">four_ne_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.succ"><span class="name">NeZero</span>.<span class="name">succ</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.of_pos"><span class="name">NeZero</span>.<span class="name">of_pos</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="NeZero-typeclass"><code><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a></code> typeclass <a class="hover-link" href="#NeZero-typeclass">#</a></h1><p>We create a typeclass <code><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> n</code> which carries around the fact that <code>(n : R) ≠ 0</code>.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a></code>: <code>n ≠ 0</code> as a typeclass.</li>
+</ul></div><div class="decl" id="NeZero"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L25-L27">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#NeZero"><span class="name">NeZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>A type-class version of <code>n ≠ 0</code>.</p><ul class="structure_fields" id="NeZero.mk"><li id="NeZero.out" class="structure_field"><div class="structure_field_info">out : <span class="fn"><span class="fn">n</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div><div class="structure_field_doc"><p>The proposition that <code>n</code> is not zero.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-NeZero" class="instances-list"></ul></details></div></div><div class="decl" id="NeZero.ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L30-L31">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#NeZero.ne"><span class="name">NeZero</span>.<span class="name">ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">R</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="NeZero.ne'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L34-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#NeZero.ne'"><span class="name">NeZero</span>.<span class="name">ne'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">R</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">n</span></span></div></div></div></div><div class="decl" id="neZero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L38-L39">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#neZero_iff"><span class="name">neZero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">n</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">n</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="neZero_zero_iff_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L42-L43">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#neZero_zero_iff_false"><span class="name">neZero_zero_iff_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">0</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <a href="../.././Init/Prelude.html#False">False</a></span></div></div></div></div><div class="decl" id="not_neZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L45-L45">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#not_neZero"><span class="name">not_neZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">n</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="eq_zero_or_neZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L48-L49">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#eq_zero_or_neZero"><span class="name">eq_zero_or_neZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="zero_ne_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L55-L55">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#zero_ne_one"><span class="name">zero_ne_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="one_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L58-L58">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#one_ne_zero"><span class="name">one_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ne_zero_of_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L61-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#ne_zero_of_eq_one"><span class="name">ne_zero_of_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="two_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L65-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#two_ne_zero"><span class="name">two_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">2</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">2</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">2</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="three_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L69-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#three_ne_zero"><span class="name">three_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">3</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">3</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">3</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="four_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L73-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#four_ne_zero"><span class="name">four_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">4</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">4</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">4</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="zero_ne_one'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L78-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#zero_ne_one'"><span class="name">zero_ne_one'</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="one_ne_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L81-L81">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#one_ne_zero'"><span class="name">one_ne_zero'</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="two_ne_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L84-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#two_ne_zero'"><span class="name">two_ne_zero'</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">2</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">2</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">2</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="three_ne_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L87-L87">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#three_ne_zero'"><span class="name">three_ne_zero'</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">3</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">3</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">3</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="four_ne_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L90-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#four_ne_zero'"><span class="name">four_ne_zero'</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#OfNat">OfNat</a> <span class="fn">α</span> <span class="fn">4</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">4</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">4</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="NeZero.succ"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L99-L99">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#NeZero.succ"><span class="name">NeZero</span>.<span class="name">succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">(<span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">(<span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">(<span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="NeZero.of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/NeZero.lean#L101-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Algebra/NeZero.html#NeZero.of_pos"><span class="name">NeZero</span>.<span class="name">of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#Preorder">Preorder</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">x</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

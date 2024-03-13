@@ -1,0 +1,356 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.List.Lattice</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Data.List.Lattice";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">List</span>.<span class="name">Lattice</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/List/Basic.html">Mathlib.Data.List.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Order/Monoid/MinMax.html">Mathlib.Algebra.Order.Monoid.MinMax</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.List.Lattice" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#List.Disjoint.symm"><span class="name">List</span>.<span class="name">Disjoint</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_union_left"><span class="name">List</span>.<span class="name">mem_union_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_union_right"><span class="name">List</span>.<span class="name">mem_union_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.sublist_suffix_of_union"><span class="name">List</span>.<span class="name">sublist_suffix_of_union</span></a></div><div class="nav_link"><a class="break_within" href="#List.suffix_union_right"><span class="name">List</span>.<span class="name">suffix_union_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.union_sublist_append"><span class="name">List</span>.<span class="name">union_sublist_append</span></a></div><div class="nav_link"><a class="break_within" href="#List.forall_mem_union"><span class="name">List</span>.<span class="name">forall_mem_union</span></a></div><div class="nav_link"><a class="break_within" href="#List.forall_mem_of_forall_mem_union_left"><span class="name">List</span>.<span class="name">forall_mem_of_forall_mem_union_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.forall_mem_of_forall_mem_union_right"><span class="name">List</span>.<span class="name">forall_mem_of_forall_mem_union_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_nil"><span class="name">List</span>.<span class="name">inter_nil</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_cons_of_mem"><span class="name">List</span>.<span class="name">inter_cons_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_cons_of_not_mem"><span class="name">List</span>.<span class="name">inter_cons_of_not_mem</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_of_mem_inter_left"><span class="name">List</span>.<span class="name">mem_of_mem_inter_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_of_mem_inter_right"><span class="name">List</span>.<span class="name">mem_of_mem_inter_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_inter_of_mem_of_mem"><span class="name">List</span>.<span class="name">mem_inter_of_mem_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_subset_left"><span class="name">List</span>.<span class="name">inter_subset_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_subset_right"><span class="name">List</span>.<span class="name">inter_subset_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.subset_inter"><span class="name">List</span>.<span class="name">subset_inter</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_eq_nil_iff_disjoint"><span class="name">List</span>.<span class="name">inter_eq_nil_iff_disjoint</span></a></div><div class="nav_link"><a class="break_within" href="#List.forall_mem_inter_of_forall_left"><span class="name">List</span>.<span class="name">forall_mem_inter_of_forall_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.forall_mem_inter_of_forall_right"><span class="name">List</span>.<span class="name">forall_mem_inter_of_forall_right</span></a></div><div class="nav_link"><a class="break_within" href="#List.inter_reverse"><span class="name">List</span>.<span class="name">inter_reverse</span></a></div><div class="nav_link"><a class="break_within" href="#List.nil_bagInter"><span class="name">List</span>.<span class="name">nil_bagInter</span></a></div><div class="nav_link"><a class="break_within" href="#List.bagInter_nil"><span class="name">List</span>.<span class="name">bagInter_nil</span></a></div><div class="nav_link"><a class="break_within" href="#List.cons_bagInter_of_pos"><span class="name">List</span>.<span class="name">cons_bagInter_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#List.cons_bagInter_of_neg"><span class="name">List</span>.<span class="name">cons_bagInter_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#List.mem_bagInter"><span class="name">List</span>.<span class="name">mem_bagInter</span></a></div><div class="nav_link"><a class="break_within" href="#List.count_bagInter"><span class="name">List</span>.<span class="name">count_bagInter</span></a></div><div class="nav_link"><a class="break_within" href="#List.bagInter_sublist_left"><span class="name">List</span>.<span class="name">bagInter_sublist_left</span></a></div><div class="nav_link"><a class="break_within" href="#List.bagInter_nil_iff_inter_nil"><span class="name">List</span>.<span class="name">bagInter_nil_iff_inter_nil</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lattice-structure-of-lists">Lattice structure of lists <a class="hover-link" href="#Lattice-structure-of-lists">#</a></h1><p>This files prove basic properties about <code>List.disjoint</code>, <code><a href="../../.././Std/Data/List/Basic.html#List.union">List.union</a></code>, <code><a href="../../.././Std/Data/List/Basic.html#List.inter">List.inter</a></code> and
+<code><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a></code>, which are defined in core Lean and <code>Data.List.Defs</code>.</p><p><code>l₁ ∪ l₂</code> is the list where all elements of <code>l₁</code> have been inserted in <code>l₂</code> in order. For example,
+<code>[0, 0, 1, 2, 2, 3] ∪ [4, 3, 3, 0] = [1, 2, 4, 3, 3, 0]</code></p><p><code>l₁ ∩ l₂</code> is the list of elements of <code>l₁</code> in order which are in <code>l₂</code>. For example,
+<code>[0, 0, 1, 2, 2, 3] ∪ [4, 3, 3, 0] = [0, 0, 3]</code></p><p><code><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> l₁ l₂</code> is the list of elements that are in both <code>l₁</code> and <code>l₂</code>,
+counted with multiplicity and in the order they appear in <code>l₁</code>.
+As opposed to <code><a href="../../.././Std/Data/List/Basic.html#List.inter">List.inter</a></code>, <code><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a></code> copes well with multiplicity. For example,
+<code>bagInter [0, 1, 2, 3, 2, 1, 0] [1, 0, 1, 4, 3] = [0, 1, 3, 1]</code></p></div><div class="mod_doc"><h3 class="markdown-heading" id="Disjoint"><code>Disjoint</code> <a class="hover-link" href="#Disjoint">#</a></h3></div><div class="decl" id="List.Disjoint.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L43-L43">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.Disjoint.symm"><span class="name">List</span>.<span class="name">Disjoint</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Disjoint">List.Disjoint</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Disjoint">List.Disjoint</a> <span class="fn">l₂</span> <span class="fn">l₁</span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="union"><code>union</code> <a class="hover-link" href="#union">#</a></h3></div><div class="decl" id="List.mem_union_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L81-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_union_left"><span class="name">List</span>.<span class="name">mem_union_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.mem_union_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L85-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_union_right"><span class="name">List</span>.<span class="name">mem_union_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.sublist_suffix_of_union"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L89-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.sublist_suffix_of_union"><span class="name">List</span>.<span class="name">sublist_suffix_of_union</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">t</span> : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Sublist">List.Sublist</a> <span class="fn">t</span> <span class="fn">l₁</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span></span></span></div></div></div></div><div class="decl" id="List.suffix_union_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L101-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.suffix_union_right"><span class="name">List</span>.<span class="name">suffix_union_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">l₂</span> <a href="../../.././Std/Data/List/Basic.html#List.IsSuffix">&lt;:+</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.union_sublist_append"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L105-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.union_sublist_append"><span class="name">List</span>.<span class="name">union_sublist_append</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Sublist">List.Sublist</a> <span class="fn">(<span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span>)</span> <span class="fn">(<span class="fn"><span class="fn">l₁</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">l₂</span></span>)</span></span></div></div></div></div><div class="decl" id="List.forall_mem_union"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L110-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.forall_mem_union"><span class="name">List</span>.<span class="name">forall_mem_union</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">(<span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span></span></span></div></div></div></div><div class="decl" id="List.forall_mem_of_forall_mem_union_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.forall_mem_of_forall_mem_union_left"><span class="name">List</span>.<span class="name">forall_mem_of_forall_mem_union_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="List.forall_mem_of_forall_mem_union_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L118-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.forall_mem_of_forall_mem_union_right"><span class="name">List</span>.<span class="name">forall_mem_of_forall_mem_union_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Union.union">∪</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="inter"><code>inter</code> <a class="hover-link" href="#inter">#</a></h3></div><div class="decl" id="List.inter_nil"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L130-L131">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_nil"><span class="name">List</span>.<span class="name">inter_nil</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">[]</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></div></div></div></div><div class="decl" id="List.inter_cons_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L135-L136">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_cons_of_mem"><span class="name">List</span>.<span class="name">inter_cons_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">l₁</span></span>)</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span></span></div></div></div></div><div class="decl" id="List.inter_cons_of_not_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L140-L141">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_cons_of_not_mem"><span class="name">List</span>.<span class="name">inter_cons_of_not_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">l₁</span></span>)</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.mem_of_mem_inter_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L144-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_of_mem_inter_left"><span class="name">List</span>.<span class="name">mem_of_mem_inter_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span></span></div></div></div></div><div class="decl" id="List.mem_of_mem_inter_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L148-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_of_mem_inter_right"><span class="name">List</span>.<span class="name">mem_of_mem_inter_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span></div></div></div></div><div class="decl" id="List.mem_inter_of_mem_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L151-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_inter_of_mem_of_mem"><span class="name">List</span>.<span class="name">mem_inter_of_mem_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.inter_subset_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L157-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_subset_left"><span class="name">List</span>.<span class="name">inter_subset_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">l₁</span></span></div></div></div></div><div class="decl" id="List.inter_subset_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L161-L161">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_subset_right"><span class="name">List</span>.<span class="name">inter_subset_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">l₂</span></span></div></div></div></div><div class="decl" id="List.subset_inter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L164-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.subset_inter"><span class="name">List</span>.<span class="name">subset_inter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">l</span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">l₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">l</span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">l</span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.inter_eq_nil_iff_disjoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L168-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_eq_nil_iff_disjoint"><span class="name">List</span>.<span class="name">inter_eq_nil_iff_disjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Disjoint">List.Disjoint</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.forall_mem_inter_of_forall_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L173-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.forall_mem_inter_of_forall_left"><span class="name">List</span>.<span class="name">forall_mem_inter_of_forall_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="List.forall_mem_inter_of_forall_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L178-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.forall_mem_inter_of_forall_right"><span class="name">List</span>.<span class="name">forall_mem_inter_of_forall_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span></span> → <span class="fn"><span class="fn">p</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="List.inter_reverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L184-L185">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.inter_reverse"><span class="name">List</span>.<span class="name">inter_reverse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{xs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ys : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.inter">List.inter</a> <span class="fn">xs</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Data/List/Basic.html#List.reverse">List.reverse</a> <span class="fn">ys</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.inter">List.inter</a> <span class="fn">xs</span> <span class="fn">ys</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="bagInter"><code>bagInter</code> <a class="hover-link" href="#bagInter">#</a></h3></div><div class="decl" id="List.nil_bagInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L196-L196">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.nil_bagInter"><span class="name">List</span>.<span class="name">nil_bagInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">[]</span> <span class="fn">l</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></div></div></div></div><div class="decl" id="List.bagInter_nil"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L200-L200">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.bagInter_nil"><span class="name">List</span>.<span class="name">bagInter_nil</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l</span> <span class="fn">[]</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></div></div></div></div><div class="decl" id="List.cons_bagInter_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L204-L208">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.cons_bagInter_of_pos"><span class="name">List</span>.<span class="name">cons_bagInter_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">l₁</span></span>)</span> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Data/List/Basic.html#List.erase">List.erase</a> <span class="fn">l₂</span> <span class="fn">a</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="List.cons_bagInter_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L212-L215">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.cons_bagInter_of_neg"><span class="name">List</span>.<span class="name">cons_bagInter_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#List.cons">::</a> <span class="fn">l₁</span></span>)</span> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span></span></div></div></div></div><div class="decl" id="List.mem_bagInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L219-L231">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.mem_bagInter"><span class="name">List</span>.<span class="name">mem_bagInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₁</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">l₂</span></span></span></span></div></div></div></div><div class="decl" id="List.count_bagInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L235-L251">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.count_bagInter"><span class="name">List</span>.<span class="name">count_bagInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.count">List.count</a> <span class="fn">a</span> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.count">List.count</a> <span class="fn">a</span> <span class="fn">l₁</span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.count">List.count</a> <span class="fn">a</span> <span class="fn">l₂</span></span>)</span></span></span></div></div></div></div><div class="decl" id="List.bagInter_sublist_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L254-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.bagInter_sublist_left"><span class="name">List</span>.<span class="name">bagInter_sublist_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.Sublist">List.Sublist</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span>)</span> <span class="fn">l₁</span></span></div></div></div></div><div class="decl" id="List.bagInter_nil_iff_inter_nil"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/List/Lattice.lean#L263-L267">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/List/Lattice.html#List.bagInter_nil_iff_inter_nil"><span class="name">List</span>.<span class="name">bagInter_nil_iff_inter_nil</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l₁ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l₂ : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Std/Data/List/Basic.html#List.bagInter">List.bagInter</a> <span class="fn">l₁</span> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">l₁</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">l₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[]</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

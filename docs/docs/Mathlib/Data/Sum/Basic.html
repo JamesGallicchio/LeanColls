@@ -1,0 +1,680 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Sum.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Data.Sum.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">Sum</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Tactic/MkIffOfInductiveProp.html">Mathlib.Tactic.MkIffOfInductiveProp</a></li><li><a href="../../.././Mathlib/Logic/Function/Basic.html">Mathlib.Logic.Function.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Sum.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Sum.exists_sum"><span class="name">Sum</span>.<span class="name">exists_sum</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.inl_injective"><span class="name">Sum</span>.<span class="name">inl_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.inr_injective"><span class="name">Sum</span>.<span class="name">inr_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.sum_rec_congr"><span class="name">Sum</span>.<span class="name">sum_rec_congr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.eq_left_iff_getLeft_eq"><span class="name">Sum</span>.<span class="name">eq_left_iff_getLeft_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.eq_right_iff_getRight_eq"><span class="name">Sum</span>.<span class="name">eq_right_iff_getRight_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.getLeft_eq_getLeft?"><span class="name">Sum</span>.<span class="name">getLeft_eq_getLeft?</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.getRight_eq_getRight?"><span class="name">Sum</span>.<span class="name">getRight_eq_getRight?</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.isSome_getLeft?_iff_isLeft"><span class="name">Sum</span>.<span class="name">isSome_getLeft?_iff_isLeft</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.isSome_getRight?_iff_isRight"><span class="name">Sum</span>.<span class="name">isSome_getRight?_iff_isRight</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_elim_inl"><span class="name">Sum</span>.<span class="name">update_elim_inl</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_elim_inr"><span class="name">Sum</span>.<span class="name">update_elim_inr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inl_comp_inl"><span class="name">Sum</span>.<span class="name">update_inl_comp_inl</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inl_apply_inl"><span class="name">Sum</span>.<span class="name">update_inl_apply_inl</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inl_comp_inr"><span class="name">Sum</span>.<span class="name">update_inl_comp_inr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inl_apply_inr"><span class="name">Sum</span>.<span class="name">update_inl_apply_inr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inr_comp_inl"><span class="name">Sum</span>.<span class="name">update_inr_comp_inl</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inr_apply_inl"><span class="name">Sum</span>.<span class="name">update_inr_apply_inl</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inr_comp_inr"><span class="name">Sum</span>.<span class="name">update_inr_comp_inr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.update_inr_apply_inr"><span class="name">Sum</span>.<span class="name">update_inr_apply_inr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.swap_leftInverse"><span class="name">Sum</span>.<span class="name">swap_leftInverse</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.swap_rightInverse"><span class="name">Sum</span>.<span class="name">swap_rightInverse</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.liftRel_iff"><span class="name">Sum</span>.<span class="name">liftRel_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isLeft_congr"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_congr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isRight_congr"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_congr</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isLeft_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_left</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isLeft_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_right</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isRight_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_left</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.isRight_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_right</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.exists_of_isLeft_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isLeft_left</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.exists_of_isLeft_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isLeft_right</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.exists_of_isRight_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isRight_left</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.LiftRel.exists_of_isRight_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isRight_right</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.sum_elim"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">sum_elim</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.sum_map"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">sum_map</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Surjective.sum_map"><span class="name">Function</span>.<span class="name">Surjective</span>.<span class="name">sum_map</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Bijective.sum_map"><span class="name">Function</span>.<span class="name">Bijective</span>.<span class="name">sum_map</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.map_injective"><span class="name">Sum</span>.<span class="name">map_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.map_surjective"><span class="name">Sum</span>.<span class="name">map_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.map_bijective"><span class="name">Sum</span>.<span class="name">map_bijective</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.elim_update_left"><span class="name">Sum</span>.<span class="name">elim_update_left</span></a></div><div class="nav_link"><a class="break_within" href="#Sum.elim_update_right"><span class="name">Sum</span>.<span class="name">elim_update_right</span></a></div><div class="nav_link"><a class="break_within" href="#Sum3.in₀"><span class="name">Sum3</span>.<span class="name">in₀</span></a></div><div class="nav_link"><a class="break_within" href="#Sum3.in₁"><span class="name">Sum3</span>.<span class="name">in₁</span></a></div><div class="nav_link"><a class="break_within" href="#Sum3.in₂"><span class="name">Sum3</span>.<span class="name">in₂</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Additional-lemmas-about-sum-types">Additional lemmas about sum types <a class="hover-link" href="#Additional-lemmas-about-sum-types">#</a></h1><p>Most of the former contents of this file have been moved to Std.</p></div><div class="decl" id="Sum.exists_sum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L27-L30">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.exists_sum"><span class="name">Sum</span>.<span class="name">exists_sum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <a href="../../.././foundational_types.html">Sort</a> u_3</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><span class="fn">(<span class="fn">(<span class="fn">ab</span> : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>) → <span class="fn"><span class="fn">γ</span> <span class="fn">ab</span></span></span>)</span> → <a href="../../.././foundational_types.html">Prop</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">∃ (<span class="fn">fab</span> : <span class="fn">(<span class="fn">ab</span> : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>) → <span class="fn"><span class="fn">γ</span> <span class="fn">ab</span></span></span>), <span class="fn"><span class="fn">p</span> <span class="fn">fab</span></span></span>)</span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn">∃ (<span class="fn">fa</span> : <span class="fn">(<span class="fn">val</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">γ</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">val</span></span>)</span></span></span>), <span class="fn">∃ (<span class="fn">fb</span> : <span class="fn">(<span class="fn">val</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn">γ</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">val</span></span>)</span></span></span>), <span class="fn"><span class="fn">p</span> <span class="fn">fun (<span class="fn">t</span> : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>) =&gt; <span class="fn"><a href="../../.././Init/Core.html#Sum.rec">Sum.rec</a> <span class="fn">fa</span> <span class="fn">fb</span> <span class="fn">t</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Sum.inl_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L32-L32">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.inl_injective"><span class="name">Sum</span>.<span class="name">inl_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">Sum.inl</span></span></div></div></div></div><div class="decl" id="Sum.inr_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L35-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.inr_injective"><span class="name">Sum</span>.<span class="name">inr_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">Sum.inr</span></span></div></div></div></div><div class="decl" id="Sum.sum_rec_congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L38-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.sum_rec_congr"><span class="name">Sum</span>.<span class="name">sum_rec_congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <a href="../../.././foundational_types.html">Sort</a> u_3</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">i</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">P</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">(<span class="fn">i</span> : <span class="fn">β</span>) → <span class="fn"><span class="fn">P</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#Sum.rec">Sum.rec</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#cast">cast</a> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">P</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">P</span> <span class="fn">x</span></span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.rec">Sum.rec</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">y</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Sum.eq_left_iff_getLeft_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.eq_left_iff_getLeft_eq"><span class="name">Sum</span>.<span class="name">eq_left_iff_getLeft_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">h</span> : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>), <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getLeft">Sum.getLeft</a> <span class="fn">x</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="Sum.eq_right_iff_getRight_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L57-L58">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.eq_right_iff_getRight_eq"><span class="name">Sum</span>.<span class="name">eq_right_iff_getRight_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">h</span> : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>), <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getRight">Sum.getRight</a> <span class="fn">x</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Sum.getLeft_eq_getLeft?"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L63-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.getLeft_eq_getLeft?"><span class="name">Sum</span>.<span class="name">getLeft_eq_getLeft?</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Init/Data/Option/Basic.html#Option.isSome">Option.isSome</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getLeft?">Sum.getLeft?</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getLeft">Sum.getLeft</a> <span class="fn">x</span> <span class="fn">h₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/Option/Basic.html#Option.get">Option.get</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getLeft?">Sum.getLeft?</a> <span class="fn">x</span></span>)</span> <span class="fn">h₂</span></span></span></div></div></div></div><div class="decl" id="Sum.getRight_eq_getRight?"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.getRight_eq_getRight?"><span class="name">Sum</span>.<span class="name">getRight_eq_getRight?</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Init/Data/Option/Basic.html#Option.isSome">Option.isSome</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getRight?">Sum.getRight?</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getRight">Sum.getRight</a> <span class="fn">x</span> <span class="fn">h₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/Option/Basic.html#Option.get">Option.get</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getRight?">Sum.getRight?</a> <span class="fn">x</span></span>)</span> <span class="fn">h₂</span></span></span></div></div></div></div><div class="decl" id="Sum.isSome_getLeft?_iff_isLeft"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L78-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.isSome_getLeft?_iff_isLeft"><span class="name">Sum</span>.<span class="name">isSome_getLeft?_iff_isLeft</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Option/Basic.html#Option.isSome">Option.isSome</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getLeft?">Sum.getLeft?</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Sum.isSome_getRight?_iff_isRight"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L81-L82">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.isSome_getRight?_iff_isRight"><span class="name">Sum</span>.<span class="name">isSome_getRight?_iff_isRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Data/Option/Basic.html#Option.isSome">Option.isSome</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.getRight?">Sum.getRight?</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Sum.update_elim_inl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L114-L116">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_elim_inl"><span class="name">Sum</span>.<span class="name">update_elim_inl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span>)</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="Sum.update_elim_inr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L120-L122">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_elim_inr"><span class="name">Sum</span>.<span class="name">update_elim_inr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">g</span> <span class="fn">i</span> <span class="fn">x</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inl_comp_inl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L126-L128">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inl_comp_inl"><span class="name">Sum</span>.<span class="name">update_inl_comp_inl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inl</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inl</span></span>)</span> <span class="fn">i</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inl_apply_inl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L132-L134">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inl_apply_inl"><span class="name">Sum</span>.<span class="name">update_inl_apply_inl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">j</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inl</span></span>)</span> <span class="fn">i</span> <span class="fn">x</span> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inl_comp_inr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L138-L140">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inl_comp_inr"><span class="name">Sum</span>.<span class="name">update_inl_comp_inr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inr</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inr</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inl_apply_inr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L143-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inl_apply_inr"><span class="name">Sum</span>.<span class="name">update_inl_apply_inr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">j</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">j</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inr_comp_inl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L149-L151">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inr_comp_inl"><span class="name">Sum</span>.<span class="name">update_inr_comp_inl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inl</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inl</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inr_apply_inl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L154-L156">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inr_apply_inl"><span class="name">Sum</span>.<span class="name">update_inr_apply_inl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">j</span></span>)</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inr_comp_inr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L160-L162">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inr_comp_inr"><span class="name">Sum</span>.<span class="name">update_inr_comp_inr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inr</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inr</span></span>)</span> <span class="fn">i</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Sum.update_inr_apply_inr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L166-L168">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.update_inr_apply_inr"><span class="name">Sum</span>.<span class="name">update_inr_apply_inr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">j</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Sum.inr</span></span>)</span> <span class="fn">i</span> <span class="fn">x</span> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="Sum.swap_leftInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L178-L179">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.swap_leftInverse"><span class="name">Sum</span>.<span class="name">swap_leftInverse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.LeftInverse">Function.LeftInverse</a> <span class="fn">Sum.swap</span> <span class="fn">Sum.swap</span></span></div></div></div></div><div class="decl" id="Sum.swap_rightInverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L183-L184">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.swap_rightInverse"><span class="name">Sum</span>.<span class="name">swap_rightInverse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.RightInverse">Function.RightInverse</a> <span class="fn">Sum.swap</span> <span class="fn">Sum.swap</span></span></div></div></div></div><div class="decl" id="Sum.liftRel_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L192-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.liftRel_iff"><span class="name">Sum</span>.<span class="name">liftRel_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>) (<span class="fn">a_1</span> : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>),
+  <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">a</span> <span class="fn">a_1</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>     <span class="fn"><span class="fn">(<span class="fn">∃ (<span class="fn">a_2</span> : <span class="fn">α</span>), <span class="fn">∃ (<span class="fn">c</span> : <span class="fn">γ</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">a_2</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a_2</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a_1</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">c</span></span></span></span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#Or">∨</a>       <span class="fn">∃ (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn">∃ (<span class="fn">d</span> : <span class="fn">δ</span>), <span class="fn"><span class="fn"><span class="fn">s</span> <span class="fn">b</span> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a_1</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">d</span></span></span></span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isLeft_congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L210-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isLeft_congr"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isRight_congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L211-L211">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isRight_congr"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isLeft_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L213-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isLeft_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">γ</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">c</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isLeft_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L214-L214">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isLeft_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isLeft_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a</span></span>)</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isRight_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L215-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isRight_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">δ</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">d</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Sum.LiftRel.isRight_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L216-L216">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.isRight_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">isRight_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">b</span></span>)</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Sum.LiftRel.exists_of_isLeft_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L218-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.exists_of_isLeft_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isLeft_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn">∃ (<span class="fn">c</span> : <span class="fn">γ</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">c</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.exists_of_isLeft_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L224-L225">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.exists_of_isLeft_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isLeft_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isLeft">Sum.isLeft</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn">∃ (<span class="fn">c</span> : <span class="fn">γ</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">c</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.exists_of_isRight_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L227-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.exists_of_isRight_left"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isRight_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn">∃ (<span class="fn">d</span> : <span class="fn">δ</span>), <span class="fn"><span class="fn"><span class="fn">s</span> <span class="fn">b</span> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">d</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Sum.LiftRel.exists_of_isRight_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L233-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.LiftRel.exists_of_isRight_right"><span class="name">Sum</span>.<span class="name">LiftRel</span>.<span class="name">exists_of_isRight_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">γ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">β</span> → <span class="fn"><span class="fn">δ</span> → <a href="../../.././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn"><span class="fn">γ</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.LiftRel">Sum.LiftRel</a> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.isRight">Sum.isRight</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn">∃ (<span class="fn">d</span> : <span class="fn">δ</span>), <span class="fn"><span class="fn"><span class="fn">s</span> <span class="fn">b</span> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">d</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Function.Injective.sum_elim"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L264-L269">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Function.Injective.sum_elim"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">sum_elim</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>) (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">g</span> <span class="fn">b</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="Function.Injective.sum_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L272-L275">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Function.Injective.sum_map"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">sum_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β' : <a href="../../.././foundational_types.html">Type</a> x}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α'</span> → <span class="fn">β'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="Function.Surjective.sum_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L278-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Function.Surjective.sum_map"><span class="name">Function</span>.<span class="name">Surjective</span>.<span class="name">sum_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β' : <a href="../../.././foundational_types.html">Type</a> x}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α'</span> → <span class="fn">β'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="Function.Bijective.sum_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L288-L290">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Function.Bijective.sum_map"><span class="name">Function</span>.<span class="name">Bijective</span>.<span class="name">sum_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β' : <a href="../../.././foundational_types.html">Type</a> x}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α'</span> → <span class="fn">β'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="Sum.map_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L300-L305">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.map_injective"><span class="name">Sum</span>.<span class="name">map_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="Sum.map_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L309-L320">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.map_surjective"><span class="name">Sum</span>.<span class="name">map_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Surjective">Function.Surjective</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="Sum.map_bijective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L324-L326">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.map_bijective"><span class="name">Sum</span>.<span class="name">map_bijective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">δ</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.map">Sum.map</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Bijective">Function.Bijective</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="Sum.elim_update_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L332-L340">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.elim_update_left"><span class="name">Sum</span>.<span class="name">elim_update_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">γ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">f</span> <span class="fn">i</span> <span class="fn">c</span></span>)</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">i</span></span>)</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Sum.elim_update_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L343-L351">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum.elim_update_right"><span class="name">Sum</span>.<span class="name">elim_update_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">γ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">g</span> <span class="fn">i</span> <span class="fn">c</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">(<span class="fn"><a href="../../.././Std/Data/Sum/Basic.html#Sum.elim">Sum.elim</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">i</span></span>)</span> <span class="fn">c</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Ternary-sum">Ternary sum <a class="hover-link" href="#Ternary-sum">#</a></h3><p>Abbreviations for the maps from the summands to <code>α ⊕ β ⊕ γ</code>. This is useful for pattern-matching.</p></div><div class="decl" id="Sum3.in₀"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L366-L367">source</a></div><div class="attributes">@[match_pattern, reducible]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₀"><span class="name">Sum3</span>.<span class="name">in₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn"><span class="fn">β</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">γ</span></span></span></div></div><p>The map from the first summand into a ternary sum.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₀">Sum3.in₀</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">a</span></span></span></li></ul></details><details id="instances-for-list-Sum3.in₀" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Sum3.in₁"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L372-L373">source</a></div><div class="attributes">@[match_pattern, reducible]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₁"><span class="name">Sum3</span>.<span class="name">in₁</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn"><span class="fn">β</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">γ</span></span></span></div></div><p>The map from the second summand into a ternary sum.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₁">Sum3.in₁</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inl">Sum.inl</a> <span class="fn">b</span></span>)</span></span></span></li></ul></details><details id="instances-for-list-Sum3.in₁" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Sum3.in₂"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Sum/Basic.lean#L378-L379">source</a></div><div class="attributes">@[match_pattern, reducible]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₂"><span class="name">Sum3</span>.<span class="name">in₂</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">γ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn"><span class="fn">β</span> <a href="../../.././Init/Core.html#Sum">⊕</a> <span class="fn">γ</span></span></span></div></div><p>The map from the third summand into a ternary sum.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Sum/Basic.html#Sum3.in₂">Sum3.in₂</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Sum.inr">Sum.inr</a> <span class="fn">c</span></span>)</span></span></span></li></ul></details><details id="instances-for-list-Sum3.in₂" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,365 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.CancelDenoms.Core</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.CancelDenoms.Core";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Tactic</span>.<span class="name">CancelDenoms</span>.<span class="name">Core</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/Tree.html">Mathlib.Data.Tree</a></li><li><a href="../../.././Mathlib/Logic/Basic.html">Mathlib.Logic.Basic</a></li><li><a href="../../.././Mathlib/Util/Qq.html">Mathlib.Util.Qq</a></li><li><a href="../../.././Mathlib/Util/SynthesizeUsing.html">Mathlib.Util.SynthesizeUsing</a></li><li><a href="../../.././Mathlib/Tactic/NormNum/Core.html">Mathlib.Tactic.NormNum.Core</a></li><li><a href="../../.././Mathlib/Algebra/Order/Field/Basic.html">Mathlib.Algebra.Order.Field.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.CancelDenoms.Core" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.mul_subst"><span class="name">CancelDenoms</span>.<span class="name">mul_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.div_subst"><span class="name">CancelDenoms</span>.<span class="name">div_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancel_factors_eq_div"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_eq_div</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.add_subst"><span class="name">CancelDenoms</span>.<span class="name">add_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.sub_subst"><span class="name">CancelDenoms</span>.<span class="name">sub_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.neg_subst"><span class="name">CancelDenoms</span>.<span class="name">neg_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.pow_subst"><span class="name">CancelDenoms</span>.<span class="name">pow_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.inv_subst"><span class="name">CancelDenoms</span>.<span class="name">inv_subst</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancel_factors_lt"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_lt</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancel_factors_le"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_le</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancel_factors_eq"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_eq</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancel_factors_ne"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_ne</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.findCancelFactor"><span class="name">CancelDenoms</span>.<span class="name">findCancelFactor</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.synthesizeUsingNormNum"><span class="name">CancelDenoms</span>.<span class="name">synthesizeUsingNormNum</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.CancelResult"><span class="name">CancelDenoms</span>.<span class="name">CancelResult</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.mkProdPrf"><span class="name">CancelDenoms</span>.<span class="name">mkProdPrf</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.deriveThms"><span class="name">CancelDenoms</span>.<span class="name">deriveThms</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.derive_trans"><span class="name">CancelDenoms</span>.<span class="name">derive_trans</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.derive"><span class="name">CancelDenoms</span>.<span class="name">derive</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.findCompLemma"><span class="name">CancelDenoms</span>.<span class="name">findCompLemma</span></a></div><div class="nav_link"><a class="break_within" href="#CancelDenoms.cancelDenominatorsInType"><span class="name">CancelDenoms</span>.<span class="name">cancelDenominatorsInType</span></a></div><div class="nav_link"><a class="break_within" href="#cancelDenoms"><span class="name">cancelDenoms</span></a></div><div class="nav_link"><a class="break_within" href="#cancelDenominatorsAt"><span class="name">cancelDenominatorsAt</span></a></div><div class="nav_link"><a class="break_within" href="#cancelDenominatorsTarget"><span class="name">cancelDenominatorsTarget</span></a></div><div class="nav_link"><a class="break_within" href="#cancelDenominators"><span class="name">cancelDenominators</span></a></div><div class="nav_link"><a class="break_within" href="#tacticCancel_denoms_"><span class="name">tacticCancel_denoms_</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="A-tactic-for-canceling-numeric-denominators">A tactic for canceling numeric denominators <a class="hover-link" href="#A-tactic-for-canceling-numeric-denominators">#</a></h1><p>This file defines tactics that cancel numeric denominators from field Expressions.</p><p>As an example, we want to transform a comparison <code>5*(a/3 + b/4) &lt; c/3</code> into the equivalent
+<code>5*(4*a + 3*b) &lt; 4*c</code>.</p><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>The tooling here was originally written for <code>linarith</code>, not intended as an interactive tactic.
+The interactive version has been split off because it is sometimes convenient to use on its own.
+There are likely some rough edges to it.</p><p>Improving this tactic would be a good project for someone interested in learning tactic programming.</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Lemmas-used-in-the-procedure">Lemmas used in the procedure <a class="hover-link" href="#Lemmas-used-in-the-procedure">#</a></h3></div><div class="decl" id="CancelDenoms.mul_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L38-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.mul_subst"><span class="name">CancelDenoms</span>.<span class="name">mul_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t2 : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn"><span class="fn">n2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn"><span class="fn"><span class="fn">n1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">e1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e2</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">t2</span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.div_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L44-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.div_subst"><span class="name">CancelDenoms</span>.<span class="name">div_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t1 : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn"><span class="fn">n2</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">e2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn"><span class="fn"><span class="fn">n1</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">e1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">e2</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span></div></div></div></div><div class="decl" id="CancelDenoms.cancel_factors_eq_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L49-L51">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancel_factors_eq_div"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_eq_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e' : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">e'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">e</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">e'</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.add_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.add_subst"><span class="name">CancelDenoms</span>.<span class="name">add_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t2 : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">e1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">e2</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t2</span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.sub_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L58-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.sub_subst"><span class="name">CancelDenoms</span>.<span class="name">sub_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e2 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t2 : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">e1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">e2</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t2</span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.neg_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L62-L62">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.neg_subst"><span class="name">CancelDenoms</span>.<span class="name">neg_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">e</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">t</span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.pow_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L65-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.pow_subst"><span class="name">CancelDenoms</span>.<span class="name">pow_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t1 : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e2 : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">t1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn"><span class="fn">l</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">e2</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">e1</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">e2</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">l</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">t1</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">e2</span></span></span></span></div></div></div></div><div class="decl" id="CancelDenoms.inv_subst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L69-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.inv_subst"><span class="name">CancelDenoms</span>.<span class="name">inv_subst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><span class="fn">e</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">e</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></div></div></div></div><div class="decl" id="CancelDenoms.cancel_factors_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L72-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancel_factors_lt"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ad : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bd : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{gcd : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(had : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">ad</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">bd</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgcd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">gcd</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b'</span></span>)</span></span></span>)</span></span></div></div></div></div><div class="decl" id="CancelDenoms.cancel_factors_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L80-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancel_factors_le"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ad : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bd : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{gcd : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(had : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">ad</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">bd</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgcd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">gcd</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b'</span></span>)</span></span></span>)</span></span></div></div></div></div><div class="decl" id="CancelDenoms.cancel_factors_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L88-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancel_factors_eq"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ad : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bd : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{gcd : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(had : <span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgcd : <span class="fn"><span class="fn">gcd</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b'</span></span>)</span></span></span>)</span></span></div></div></div></div><div class="decl" id="CancelDenoms.cancel_factors_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L104-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancel_factors_ne"><span class="name">CancelDenoms</span>.<span class="name">cancel_factors_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ad : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bd : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{gcd : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(had : <span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgcd : <span class="fn"><span class="fn">gcd</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">bd</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">gcd</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">ad</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b'</span></span>)</span></span></span>)</span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Computing-cancellation-factors">Computing cancellation factors <a class="hover-link" href="#Computing-cancellation-factors">#</a></h3></div><div class="decl" id="CancelDenoms.findCancelFactor"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L117-L149">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCancelFactor"><span class="name">CancelDenoms</span>.<span class="name">findCancelFactor</span></a></span><span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Mathlib/Data/Tree.html#Tree">Tree</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span></span></div></div><p><code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCancelFactor">findCancelFactor</a> e</code> produces a natural number <code>n</code>, such that multiplying <code>e</code> by <code>n</code> will
+be able to cancel all the numeric denominators in <code>e</code>. The returned <code><a href="../../.././Mathlib/Data/Tree.html#Tree">Tree</a></code> describes how to
+distribute the value <code>n</code> over products inside <code>e</code>.</p></div></div><div class="decl" id="CancelDenoms.synthesizeUsingNormNum"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L151-L155">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.synthesizeUsingNormNum"><span class="name">CancelDenoms</span>.<span class="name">synthesizeUsingNormNum</span></a></span><span class="decl_args">
+<span class="fn">(type : <span class="fn">Q(<a href="../../.././foundational_types.html">Prop</a>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">Q(<span class="fn">«$type»</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CancelDenoms.synthesizeUsingNormNum" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CancelDenoms.CancelResult"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L159-L163">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.CancelResult"><span class="name">CancelDenoms</span>.<span class="name">CancelResult</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(mα : <span class="fn">Q(<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">«$α»</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a></div></div><p><code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.CancelResult">CancelResult</a> mα e v'</code> provies a value for <code>v * e</code> where the denominators have been cancelled.</p><ul class="structure_fields" id="CancelDenoms.CancelResult.mk"><li id="CancelDenoms.CancelResult.cancelled" class="structure_field"><div class="structure_field_info">cancelled : <span class="fn">Q(<span class="fn">«$α»</span>)</span></div><div class="structure_field_doc"><p>An expression with denominators cancelled.</p></div></li><li id="CancelDenoms.CancelResult.pf" class="structure_field"><div class="structure_field_info">pf : <span class="fn">Q(<span class="fn"><span class="fn"><span class="fn">«$v»</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">«$e»</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">unknown_1</span></span>)</span></div><div class="structure_field_doc"><p>The proof that <code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.CancelResult.cancelled">cancelled</a></code> is valid.</p></div></li></ul><details id="instances-for-list-CancelDenoms.CancelResult" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CancelDenoms.mkProdPrf"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L173-L220">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.mkProdPrf"><span class="name">CancelDenoms</span>.<span class="name">mkProdPrf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sα : <span class="fn">Q(<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">«$α»</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(v' : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Tree.html#Tree">Tree</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.CancelResult">CancelDenoms.CancelResult</a> <span class="fn">q(<span class="fn">inferInstance</span>)</span> <span class="fn">e</span> <span class="fn">v'</span></span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.mkProdPrf">mkProdPrf</a> α sα v v' tr e</code> produces a proof of <code>v'*e = e'</code>, where numeric denominators have been
+canceled in <code>e'</code>, distributing <code>v</code> proportionally according to the tree <code>tr</code> computed
+by <code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCancelFactor">findCancelFactor</a></code>.</p><p>The <code>v'</code> argument is a numeral expression corresponding to <code>v</code>, which we need in order to state
+the return type accurately.</p></div></div><div class="decl" id="CancelDenoms.deriveThms"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L224-L225">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.deriveThms"><span class="name">CancelDenoms</span>.<span class="name">deriveThms</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span></div></div><p>Theorems to get expression into a form that <code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCancelFactor">findCancelFactor</a></code> and <code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.mkProdPrf">mkProdPrf</a></code>
+can more easily handle. These are important for dividing by rationals and negative integers.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.deriveThms">CancelDenoms.deriveThms</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">`div_div_eq_mul_div</span>, <span class="fn">`div_neg</span>]</span></span></li></ul></details><details id="instances-for-list-CancelDenoms.deriveThms" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CancelDenoms.derive_trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L228-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.derive_trans"><span class="name">CancelDenoms</span>.<span class="name">derive_trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">d</span></span></div></div><p>Helper lemma to chain together a <code>simp</code> proof and the result of <code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.mkProdPrf">mkProdPrf</a></code>.</p></div></div><div class="decl" id="CancelDenoms.derive"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L234-L252">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.derive"><span class="name">CancelDenoms</span>.<span class="name">derive</span></a></span><span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></div></div><p>Given <code>e</code>, a term with rational division, produces a natural number <code>n</code> and a proof of <code>n*e = e'</code>,
+where <code>e'</code> has no division. Assumes "well-behaved" division.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CancelDenoms.derive" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CancelDenoms.findCompLemma"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L261-L269">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCompLemma"><span class="name">CancelDenoms</span>.<span class="name">findCompLemma</span></a></span><span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Option">Option</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a></span></span></span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.findCompLemma">findCompLemma</a> e</code> arranges <code>e</code> in the form <code>lhs R rhs</code>, where <code>R ∈ {&lt;, ≤, =, ≠}</code>, and returns
+<code>lhs</code>, <code>rhs</code>, the <code>cancel_factors</code> lemma corresponding to <code>R</code>, and a boolean indicating whether
+<code>R</code> involves the order (i.e. <code>&lt;</code> and <code>≤</code>) or not (i.e. <code>=</code> and <code>≠</code>).
+In the case of <code><a href="../../.././Init/Prelude.html#LT">LT</a></code>, <code><a href="../../.././Init/Prelude.html#LE">LE</a></code>, <code>GE</code>, and <code>GT</code> an order on the type is needed, in the last case
+it is not, the final component of the return value tracks this.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CancelDenoms.findCompLemma" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CancelDenoms.cancelDenominatorsInType"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L277-L304">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancelDenominatorsInType"><span class="name">CancelDenoms</span>.<span class="name">cancelDenominatorsInType</span></a></span><span class="decl_args">
+<span class="fn">(h : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#CancelDenoms.cancelDenominatorsInType">cancelDenominatorsInType</a> h</code> assumes that <code>h</code> is of the form <code>lhs R rhs</code>,
+where <code>R ∈ {&lt;, ≤, =, ≠, ≥, &gt;}</code>.
+It produces an Expression <code>h'</code> of the form <code>lhs' R rhs'</code> and a proof that <code>h = h'</code>.
+Numeric denominators have been canceled in <code>lhs'</code> and <code>rhs'</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CancelDenoms.cancelDenominatorsInType" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="cancelDenoms"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L308-L324">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#cancelDenoms"><span class="name">cancelDenoms</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p><code>cancel_denoms</code> attempts to remove numerals from the denominators of fractions.
+It works on propositions that are field-valued inequalities.</p><pre><code class="language-lean">variable [LinearOrderedField α] (a b c : α)
+
+example (h : a / 5 + b / 4 &lt; c) : 4*a + 5*b &lt; 20*c := by
+  cancel_denoms at h
+  exact h
+
+example (h : a &gt; 0) : a / 5 &gt; 0 := by
+  cancel_denoms
+  exact h
+</code></pre><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-cancelDenoms" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="cancelDenominatorsAt"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L328-L333">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#cancelDenominatorsAt"><span class="name">cancelDenominatorsAt</span></a></span><span class="decl_args">
+<span class="fn">(fvar : <a href="../../.././Lean/Expr.html#Lean.FVarId">Lean.FVarId</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Elab/Tactic/Basic.html#Lean.Elab.Tactic.TacticM">Lean.Elab.Tactic.TacticM</a> <a href="../../.././Init/Prelude.html#Unit">Unit</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-cancelDenominatorsAt" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="cancelDenominatorsTarget"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L335-L337">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#cancelDenominatorsTarget"><span class="name">cancelDenominatorsTarget</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Elab/Tactic/Basic.html#Lean.Elab.Tactic.TacticM">Lean.Elab.Tactic.TacticM</a> <a href="../../.././Init/Prelude.html#Unit">Unit</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-cancelDenominatorsTarget" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="cancelDenominators"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L339-L341">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#cancelDenominators"><span class="name">cancelDenominators</span></a></span><span class="decl_args">
+<span class="fn">(loc : <a href="../../.././Lean/Elab/Tactic/Location.html#Lean.Elab.Tactic.Location">Lean.Elab.Tactic.Location</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Elab/Tactic/Basic.html#Lean.Elab.Tactic.TacticM">Lean.Elab.Tactic.TacticM</a> <a href="../../.././Init/Prelude.html#Unit">Unit</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-cancelDenominators" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="tacticCancel_denoms_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/CancelDenoms/Core.lean#L343-L345">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/CancelDenoms/Core.html#tacticCancel_denoms_"><span class="name">tacticCancel_denoms_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-tacticCancel_denoms_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,624 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Divisibility.Units</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Divisibility.Units";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Divisibility</span>.<span class="name">Units</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html">Mathlib.Algebra.Divisibility.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Group/Units.html">Mathlib.Algebra.Group.Units</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Divisibility.Units" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Units.coe_dvd"><span class="name">Units</span>.<span class="name">coe_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#Units.dvd_mul_right"><span class="name">Units</span>.<span class="name">dvd_mul_right</span></a></div><div class="nav_link"><a class="break_within" href="#Units.mul_right_dvd"><span class="name">Units</span>.<span class="name">mul_right_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#Units.dvd_mul_left"><span class="name">Units</span>.<span class="name">dvd_mul_left</span></a></div><div class="nav_link"><a class="break_within" href="#Units.mul_left_dvd"><span class="name">Units</span>.<span class="name">mul_left_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.dvd"><span class="name">IsUnit</span>.<span class="name">dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.dvd_mul_right"><span class="name">IsUnit</span>.<span class="name">dvd_mul_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.mul_right_dvd"><span class="name">IsUnit</span>.<span class="name">mul_right_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.isPrimal"><span class="name">IsUnit</span>.<span class="name">isPrimal</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.dvd_mul_left"><span class="name">IsUnit</span>.<span class="name">dvd_mul_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.mul_left_dvd"><span class="name">IsUnit</span>.<span class="name">mul_left_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#isUnit_iff_dvd_one"><span class="name">isUnit_iff_dvd_one</span></a></div><div class="nav_link"><a class="break_within" href="#isUnit_iff_forall_dvd"><span class="name">isUnit_iff_forall_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#isUnit_of_dvd_unit"><span class="name">isUnit_of_dvd_unit</span></a></div><div class="nav_link"><a class="break_within" href="#isUnit_of_dvd_one"><span class="name">isUnit_of_dvd_one</span></a></div><div class="nav_link"><a class="break_within" href="#not_isUnit_of_not_isUnit_dvd"><span class="name">not_isUnit_of_not_isUnit_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime"><span class="name">IsRelPrime</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.symm"><span class="name">IsRelPrime</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_comm"><span class="name">isRelPrime_comm</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_self"><span class="name">isRelPrime_self</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.isRelPrime_left"><span class="name">IsUnit</span>.<span class="name">isRelPrime_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.isRelPrime_right"><span class="name">IsUnit</span>.<span class="name">isRelPrime_right</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_one_left"><span class="name">isRelPrime_one_left</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_one_right"><span class="name">isRelPrime_one_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_mul_left_left"><span class="name">IsRelPrime</span>.<span class="name">of_mul_left_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_mul_left_right"><span class="name">IsRelPrime</span>.<span class="name">of_mul_left_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_mul_right_left"><span class="name">IsRelPrime</span>.<span class="name">of_mul_right_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_mul_right_right"><span class="name">IsRelPrime</span>.<span class="name">of_mul_right_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_dvd_left"><span class="name">IsRelPrime</span>.<span class="name">of_dvd_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.of_dvd_right"><span class="name">IsRelPrime</span>.<span class="name">of_dvd_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.isUnit_of_dvd"><span class="name">IsRelPrime</span>.<span class="name">isUnit_of_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_left_left"><span class="name">isRelPrime_mul_unit_left_left</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_left_right"><span class="name">isRelPrime_mul_unit_left_right</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_left"><span class="name">isRelPrime_mul_unit_left</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_right_left"><span class="name">isRelPrime_mul_unit_right_left</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_right_right"><span class="name">isRelPrime_mul_unit_right_right</span></a></div><div class="nav_link"><a class="break_within" href="#isRelPrime_mul_unit_right"><span class="name">isRelPrime_mul_unit_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.dvd_of_dvd_mul_right_of_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_right_of_isPrimal</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.dvd_of_dvd_mul_left_of_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_left_of_isPrimal</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_dvd_of_right_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd_of_right_isPrimal</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_dvd_of_left_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd_of_left_isPrimal</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.dvd_of_dvd_mul_right"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.dvd_of_dvd_mul_left"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_left"><span class="name">IsRelPrime</span>.<span class="name">mul_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_right"><span class="name">IsRelPrime</span>.<span class="name">mul_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_left_iff"><span class="name">IsRelPrime</span>.<span class="name">mul_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_right_iff"><span class="name">IsRelPrime</span>.<span class="name">mul_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsRelPrime.mul_dvd"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Divisibility-and-units">Divisibility and units <a class="hover-link" href="#Divisibility-and-units">#</a></h1><h2 class="markdown-heading" id="Main-definition">Main definition <a class="hover-link" href="#Main-definition">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> x y</code>: that <code>x</code> and <code>y</code> are relatively prime, defined to mean that the only common
+divisors of <code>x</code> and <code>y</code> are the units.</li>
+</ul></div><div class="decl" id="Units.coe_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L32-L33">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#Units.coe_dvd"><span class="name">Units</span>.<span class="name">coe_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">u</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">a</span></span></div></div><p>Elements of the unit group of a monoid represented as elements of the monoid
+divide any element of the monoid.</p></div></div><div class="decl" id="Units.dvd_mul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L38-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#Units.dvd_mul_right"><span class="name">Units</span>.<span class="name">dvd_mul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">u</span></span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a monoid, an element <code>a</code> divides an element <code>b</code> iff <code>a</code> divides all
+associates of <code>b</code>.</p></div></div><div class="decl" id="Units.mul_right_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L44-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#Units.mul_right_dvd"><span class="name">Units</span>.<span class="name">mul_right_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">u</span></span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a monoid, an element <code>a</code> divides an element <code>b</code> iff all associates of <code>a</code> divide <code>b</code>.</p></div></div><div class="decl" id="Units.dvd_mul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L57-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#Units.dvd_mul_left"><span class="name">Units</span>.<span class="name">dvd_mul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">↑<span class="fn">u</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a commutative monoid, an element <code>a</code> divides an element <code>b</code> iff <code>a</code> divides all left
+associates of <code>b</code>.</p></div></div><div class="decl" id="Units.mul_left_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#Units.mul_left_dvd"><span class="name">Units</span>.<span class="name">mul_left_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">u</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a commutative monoid, an element <code>a</code> divides an element <code>b</code> iff all
+left associates of <code>a</code> divide <code>b</code>.</p></div></div><div class="decl" id="IsUnit.dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L81-L83">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.dvd"><span class="name">IsUnit</span>.<span class="name">dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">u</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">a</span></span></div></div><p>Units of a monoid divide any element of the monoid.</p></div></div><div class="decl" id="IsUnit.dvd_mul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L87-L89">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.dvd_mul_right"><span class="name">IsUnit</span>.<span class="name">dvd_mul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">u</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="IsUnit.mul_right_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L94-L96">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.mul_right_dvd"><span class="name">IsUnit</span>.<span class="name">mul_right_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">u</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a monoid, an element a divides an element b iff all associates of <code>a</code> divide <code>b</code>.</p></div></div><div class="decl" id="IsUnit.isPrimal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L99-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.isPrimal"><span class="name">IsUnit</span>.<span class="name">isPrimal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#IsPrimal">IsPrimal</a> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="IsUnit.dvd_mul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L110-L112">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.dvd_mul_left"><span class="name">IsUnit</span>.<span class="name">dvd_mul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">u</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a commutative monoid, an element <code>a</code> divides an element <code>b</code> iff <code>a</code> divides all left
+associates of <code>b</code>.</p></div></div><div class="decl" id="IsUnit.mul_left_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L118-L120">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.mul_left_dvd"><span class="name">IsUnit</span>.<span class="name">mul_left_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">u</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>In a commutative monoid, an element <code>a</code> divides an element <code>b</code> iff all
+left associates of <code>a</code> divide <code>b</code>.</p></div></div><div class="decl" id="isUnit_iff_dvd_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L131-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isUnit_iff_dvd_one"><span class="name">isUnit_iff_dvd_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="isUnit_iff_forall_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L135-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isUnit_iff_forall_dvd"><span class="name">isUnit_iff_forall_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="isUnit_of_dvd_unit"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L139-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isUnit_of_dvd_unit"><span class="name">isUnit_of_dvd_unit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(xy : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="isUnit_of_dvd_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L143-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isUnit_of_dvd_one"><span class="name">isUnit_of_dvd_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="not_isUnit_of_not_isUnit_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L147-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#not_isUnit_of_not_isUnit_dvd"><span class="name">not_isUnit_of_not_isUnit_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">a</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="IsRelPrime"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L156-L156">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime"><span class="name">IsRelPrime</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p><code>x</code> and <code>y</code> are relatively prime if every common divisor is a unit.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ ⦃<span class="fn">d</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">x</span></span> → <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">d</span></span></span></span></span></span></li></ul></details><details id="instances-for-list-IsRelPrime" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsRelPrime.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L160-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.symm"><span class="name">IsRelPrime</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="isRelPrime_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L162-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_comm"><span class="name">isRelPrime_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L165-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_self"><span class="name">isRelPrime_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">x</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="IsUnit.isRelPrime_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.isRelPrime_left"><span class="name">IsUnit</span>.<span class="name">isRelPrime_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="IsUnit.isRelPrime_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L170-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsUnit.isRelPrime_right"><span class="name">IsUnit</span>.<span class="name">isRelPrime_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="isRelPrime_one_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L171-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_one_left"><span class="name">isRelPrime_one_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">1</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="isRelPrime_one_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L172-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_one_right"><span class="name">isRelPrime_one_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_mul_left_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L174-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_mul_left_left"><span class="name">IsRelPrime</span>.<span class="name">of_mul_left_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_mul_left_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L177-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_mul_left_right"><span class="name">IsRelPrime</span>.<span class="name">of_mul_left_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_mul_right_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L180-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_mul_right_left"><span class="name">IsRelPrime</span>.<span class="name">of_mul_right_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_mul_right_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L184-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_mul_right_right"><span class="name">IsRelPrime</span>.<span class="name">of_mul_right_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_dvd_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L187-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_dvd_left"><span class="name">IsRelPrime</span>.<span class="name">of_dvd_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(dvd : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.of_dvd_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L190-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.of_dvd_right"><span class="name">IsRelPrime</span>.<span class="name">of_dvd_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">z</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(dvd : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">z</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="IsRelPrime.isUnit_of_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L193-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.isUnit_of_dvd"><span class="name">IsRelPrime</span>.<span class="name">isUnit_of_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_left_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L199-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_left_left"><span class="name">isRelPrime_mul_unit_left_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_left_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L202-L203">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_left_right"><span class="name">isRelPrime_mul_unit_left_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L205-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_left"><span class="name">isRelPrime_mul_unit_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_right_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L208-L209">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_right_left"><span class="name">isRelPrime_mul_unit_right_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_right_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L211-L212">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_right_right"><span class="name">isRelPrime_mul_unit_right_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">(<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="isRelPrime_mul_unit_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L214-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#isRelPrime_mul_unit_right"><span class="name">isRelPrime_mul_unit_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span> <span class="fn">(<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="IsRelPrime.dvd_of_dvd_mul_right_of_isPrimal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L219-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.dvd_of_dvd_mul_right_of_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_right_of_isPrimal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#IsPrimal">IsPrimal</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="IsRelPrime.dvd_of_dvd_mul_left_of_isPrimal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L224-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.dvd_of_dvd_mul_left_of_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_left_of_isPrimal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#IsPrimal">IsPrimal</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_dvd_of_right_isPrimal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L228-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_dvd_of_right_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd_of_right_isPrimal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">y</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#IsPrimal">IsPrimal</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_dvd_of_left_isPrimal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L233-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_dvd_of_left_isPrimal"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd_of_left_isPrimal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">y</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#IsPrimal">IsPrimal</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span></div></div></div></div><div class="mod_doc"><p><code><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a></code> enjoys desirable properties in a decomposition monoid.
+See Lemma 6.3 in <em>On properties of square-free elements in commutative cancellative monoids</em>,
+https://doi.org/10.1007/s00233-019-10022-3.</p></div><div class="decl" id="IsRelPrime.dvd_of_dvd_mul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L243-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.dvd_of_dvd_mul_right"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="IsRelPrime.dvd_of_dvd_mul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L246-L247">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.dvd_of_dvd_mul_left"><span class="name">IsRelPrime</span>.<span class="name">dvd_of_dvd_mul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L249-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_left"><span class="name">IsRelPrime</span>.<span class="name">mul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">z</span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L254-L255">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_right"><span class="name">IsRelPrime</span>.<span class="name">mul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L257-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_left_iff"><span class="name">IsRelPrime</span>.<span class="name">mul_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span>)</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">y</span> <span class="fn">z</span></span></span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L260-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_right_iff"><span class="name">IsRelPrime</span>.<span class="name">mul_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">(<span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">z</span></span></span></span></div></div></div></div><div class="decl" id="IsRelPrime.mul_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Divisibility/Units.lean#L263-L264">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime.mul_dvd"><span class="name">IsRelPrime</span>.<span class="name">mul_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Algebra/Divisibility/Units.html#IsRelPrime">IsRelPrime</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H1 : <span class="fn"><span class="fn">x</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H2 : <span class="fn"><span class="fn">y</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">z</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

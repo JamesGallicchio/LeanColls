@@ -1,0 +1,588 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Nat.Cast.Order</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Data.Nat.Cast.Order";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">Nat</span>.<span class="name">Cast</span>.<span class="name">Order</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html">Mathlib.Algebra.CharZero.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Group/Abs.html">Mathlib.Algebra.Order.Group.Abs</a></li><li><a href="../../../.././Mathlib/Data/Nat/Cast/Basic.html">Mathlib.Data.Nat.Cast.Basic</a></li><li><a href="../../../.././Mathlib/Data/Nat/Cast/NeZero.html">Mathlib.Data.Nat.Cast.NeZero</a></li><li><a href="../../../.././Mathlib/Data/Nat/Order/Basic.html">Mathlib.Data.Nat.Order.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Nat.Cast.Order" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Nat.mono_cast"><span class="name">Nat</span>.<span class="name">mono_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_le_cast"><span class="name">Nat</span>.<span class="name">cast_le_cast</span></a></div><div class="nav_link"><a class="break_within" href="#GCongr.natCast_le_natCast"><span class="name">GCongr</span>.<span class="name">natCast_le_natCast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_nonneg'"><span class="name">Nat</span>.<span class="name">cast_nonneg'</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_nonneg"><span class="name">Nat</span>.<span class="name">cast_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_nonneg'"><span class="name">Nat</span>.<span class="name">ofNat_nonneg'</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_nonneg"><span class="name">Nat</span>.<span class="name">ofNat_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_min"><span class="name">Nat</span>.<span class="name">cast_min</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_max"><span class="name">Nat</span>.<span class="name">cast_max</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_add_one_pos"><span class="name">Nat</span>.<span class="name">cast_add_one_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_pos'"><span class="name">Nat</span>.<span class="name">cast_pos'</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_pos"><span class="name">Nat</span>.<span class="name">cast_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_pos'"><span class="name">Nat</span>.<span class="name">ofNat_pos'</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_pos"><span class="name">Nat</span>.<span class="name">ofNat_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.strictMono_cast"><span class="name">Nat</span>.<span class="name">strictMono_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.castOrderEmbedding_apply"><span class="name">Nat</span>.<span class="name">castOrderEmbedding_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.castOrderEmbedding"><span class="name">Nat</span>.<span class="name">castOrderEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_le"><span class="name">Nat</span>.<span class="name">cast_le</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_lt"><span class="name">Nat</span>.<span class="name">cast_lt</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.one_lt_cast"><span class="name">Nat</span>.<span class="name">one_lt_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.one_le_cast"><span class="name">Nat</span>.<span class="name">one_le_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_lt_one"><span class="name">Nat</span>.<span class="name">cast_lt_one</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_le_one"><span class="name">Nat</span>.<span class="name">cast_le_one</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_le"><span class="name">Nat</span>.<span class="name">ofNat_le</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_lt"><span class="name">Nat</span>.<span class="name">ofNat_lt</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_le_cast"><span class="name">Nat</span>.<span class="name">ofNat_le_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.ofNat_lt_cast"><span class="name">Nat</span>.<span class="name">ofNat_lt_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_le_ofNat"><span class="name">Nat</span>.<span class="name">cast_le_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_lt_ofNat"><span class="name">Nat</span>.<span class="name">cast_lt_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.one_lt_ofNat"><span class="name">Nat</span>.<span class="name">one_lt_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.one_le_ofNat"><span class="name">Nat</span>.<span class="name">one_le_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.not_ofNat_le_one"><span class="name">Nat</span>.<span class="name">not_ofNat_le_one</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.not_ofNat_lt_one"><span class="name">Nat</span>.<span class="name">not_ofNat_lt_one</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.cast_tsub"><span class="name">Nat</span>.<span class="name">cast_tsub</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.abs_cast"><span class="name">Nat</span>.<span class="name">abs_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.abs_ofNat"><span class="name">Nat</span>.<span class="name">abs_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#instNontrivial"><span class="name">instNontrivial</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.nat_of_injective"><span class="name">NeZero</span>.<span class="name">nat_of_injective</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Cast-of-natural-numbers-lemmas-about-order">Cast of natural numbers: lemmas about order <a class="hover-link" href="#Cast-of-natural-numbers-lemmas-about-order">#</a></h1></div><div class="decl" id="Nat.mono_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L32-L34">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.mono_cast"><span class="name">Nat</span>.<span class="name">mono_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">Nat.cast</span></span></div></div></div></div><div class="decl" id="Nat.cast_le_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L38-L38">source</a></div><div class="attributes">@[deprecated Nat.mono_cast]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_le_cast"><span class="name">Nat</span>.<span class="name">cast_le_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="GCongr.natCast_le_natCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L41-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#GCongr.natCast_le_natCast"><span class="name">GCongr</span>.<span class="name">natCast_le_natCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_nonneg'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L45-L46">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_nonneg'"><span class="name">Nat</span>.<span class="name">cast_nonneg'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p>See also <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_nonneg">Nat.cast_nonneg</a></code>, specialised for an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a></code>.</p></div></div><div class="decl" id="Nat.cast_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L50-L51">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_nonneg"><span class="name">Nat</span>.<span class="name">cast_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p>Specialisation of <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_nonneg'">Nat.cast_nonneg'</a></code>, which seems to be easier for Lean to use.</p></div></div><div class="decl" id="Nat.ofNat_nonneg'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L57-L57">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_nonneg'"><span class="name">Nat</span>.<span class="name">ofNat_nonneg'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div><p>See also <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_nonneg">Nat.ofNat_nonneg</a></code>, specialised for an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a></code>.</p></div></div><div class="decl" id="Nat.ofNat_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L62-L64">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_nonneg"><span class="name">Nat</span>.<span class="name">ofNat_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div><p>Specialisation of <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_nonneg'">Nat.ofNat_nonneg'</a></code>, which seems to be easier for Lean to use.</p></div></div><div class="decl" id="Nat.cast_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L67-L68">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_min"><span class="name">Nat</span>.<span class="name">cast_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">↑<span class="fn">a</span></span> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Nat.cast_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L72-L73">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_max"><span class="name">Nat</span>.<span class="name">cast_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">↑<span class="fn">a</span></span> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Nat.cast_add_one_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L80-L83">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_add_one_pos"><span class="name">Nat</span>.<span class="name">cast_add_one_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_pos'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L88-L88">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_pos'"><span class="name">Nat</span>.<span class="name">cast_pos'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div><p>See also <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_pos">Nat.cast_pos</a></code>, specialised for an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a></code>.</p></div></div><div class="decl" id="Nat.cast_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L92-L92">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_pos"><span class="name">Nat</span>.<span class="name">cast_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div><p>Specialisation of <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_pos'">Nat.cast_pos'</a></code>, which seems to be easier for Lean to use.</p></div></div><div class="decl" id="Nat.ofNat_pos'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L98-L99">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_pos'"><span class="name">Nat</span>.<span class="name">ofNat_pos'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">1</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div><p>See also <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_pos">Nat.ofNat_pos</a></code>, specialised for an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a></code>.</p></div></div><div class="decl" id="Nat.ofNat_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L104-L106">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_pos"><span class="name">Nat</span>.<span class="name">ofNat_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div><p>Specialisation of <code><a href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_pos'">Nat.ofNat_pos'</a></code>, which seems to be easier for Lean to use.</p></div></div><div class="decl" id="Nat.strictMono_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L112-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.strictMono_cast"><span class="name">Nat</span>.<span class="name">strictMono_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">Nat.cast</span></span></div></div></div></div><div class="decl" id="Nat.castOrderEmbedding_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L117-L117">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.castOrderEmbedding_apply"><span class="name">Nat</span>.<span class="name">castOrderEmbedding_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">Nat.castOrderEmbedding</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Nat.cast</span></span></div></div></div></div><div class="decl" id="Nat.castOrderEmbedding"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L118-L119">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.castOrderEmbedding"><span class="name">Nat</span>.<span class="name">castOrderEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">↪o</a> <span class="fn">α</span></span></div></div><p><code><a href="../../../.././Std/Classes/Cast.html#Nat.cast">Nat.cast</a> : ℕ → α</code> as an <code><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">OrderEmbedding</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Nat.castOrderEmbedding</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding.ofStrictMono">OrderEmbedding.ofStrictMono</a> <span class="fn">Nat.cast</span> <span class="fn">(_ : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">Nat.cast</span></span>)</span></span></span></li></ul></details><details id="instances-for-list-Nat.castOrderEmbedding" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Nat.cast_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L124-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_le"><span class="name">Nat</span>.<span class="name">cast_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L129-L130">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_lt"><span class="name">Nat</span>.<span class="name">cast_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.one_lt_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L134-L134">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.one_lt_cast"><span class="name">Nat</span>.<span class="name">one_lt_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.one_le_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L138-L138">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.one_le_cast"><span class="name">Nat</span>.<span class="name">one_le_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_lt_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L142-L143">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_lt_one"><span class="name">Nat</span>.<span class="name">cast_lt_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">1</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_le_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L147-L147">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_le_one"><span class="name">Nat</span>.<span class="name">cast_le_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Nat.ofNat_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L159-L162">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_le"><span class="name">Nat</span>.<span class="name">ofNat_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Nat.ofNat_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L166-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_lt"><span class="name">Nat</span>.<span class="name">ofNat_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Nat.ofNat_le_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L173-L174">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_le_cast"><span class="name">Nat</span>.<span class="name">ofNat_le_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.ofNat_lt_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L178-L179">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.ofNat_lt_cast"><span class="name">Nat</span>.<span class="name">ofNat_lt_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_le_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L183-L184">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_le_ofNat"><span class="name">Nat</span>.<span class="name">cast_le_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Nat.cast_lt_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L188-L189">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_lt_ofNat"><span class="name">Nat</span>.<span class="name">cast_lt_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Nat.one_lt_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L193-L194">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.one_lt_ofNat"><span class="name">Nat</span>.<span class="name">one_lt_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.one_le_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L198-L199">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.one_le_ofNat"><span class="name">Nat</span>.<span class="name">one_le_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Nat.not_ofNat_le_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L203-L204">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.not_ofNat_le_one"><span class="name">Nat</span>.<span class="name">not_ofNat_le_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Nat.not_ofNat_lt_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L208-L209">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.not_ofNat_lt_one"><span class="name">Nat</span>.<span class="name">not_ofNat_lt_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#CovariantClass">CovariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Nat.cast_tsub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L216-L222">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.cast_tsub"><span class="name">Nat</span>.<span class="name">cast_tsub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Canonical.html#CanonicallyOrderedCommSemiring">CanonicallyOrderedCommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CovariantAndContravariant.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(m : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">n</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn">n</span></span></span></span></div></div><p>A version of <code>Nat.cast_sub</code> that works for <code>ℝ≥0</code> and <code>ℚ≥0</code>. Note that this proof doesn't work
+for <code>ℕ∞</code> and <code>ℝ≥0∞</code>, so we use type-specific lemmas for these types.</p></div></div><div class="decl" id="Nat.abs_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L226-L227">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.abs_cast"><span class="name">Nat</span>.<span class="name">abs_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">|<span class="fn">↑<span class="fn">a</span></span>|</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Nat.abs_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L232-L234">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#Nat.abs_ofNat"><span class="name">Nat</span>.<span class="name">abs_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#Nat.AtLeastTwo">Nat.AtLeastTwo</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">|<span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span>|</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="instNontrivial"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L238-L239">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#instNontrivial"><span class="name">instNontrivial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">(_ : <span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(_ : <span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="NeZero.nat_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Data/Nat/Cast/Order.lean#L245-L247">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Nat/Cast/Order.html#NeZero.nat_of_injective"><span class="name">NeZero</span>.<span class="name">nat_of_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">n</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

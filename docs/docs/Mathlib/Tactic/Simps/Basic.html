@@ -1,0 +1,1026 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.Simps.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.Simps.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Tactic</span>.<span class="name">Simps</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Std/Classes/Dvd.html">Std.Classes.Dvd</a></li><li><a href="../../.././Std/Util/LibraryNote.html">Std.Util.LibraryNote</a></li><li><a href="../../.././Lean/Elab/Tactic/Simp.html">Lean.Elab.Tactic.Simp</a></li><li><a href="../../.././Mathlib/Lean/Expr/Basic.html">Mathlib.Lean.Expr.Basic</a></li><li><a href="../../.././Mathlib/Tactic/Simps/NotationClass.html">Mathlib.Tactic.Simps.NotationClass</a></li><li><a href="../../.././Std/Data/String/Basic.html">Std.Data.String.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.Simps.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#updateName"><span class="name">updateName</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.mkSimpContextResult"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">mkSimpContextResult</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.mkSimpContext"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">mkSimpContext</span></a></div><div class="nav_link"><a class="break_within" href="#hasSimpAttribute"><span class="name">hasSimpAttribute</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.simpsArgsRest"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">simpsArgsRest</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.simps"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">simps</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.attrSimps?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps?_</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.attrSimps!_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps!_</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.attrSimps!?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps!?_</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Attr.attrSimps?!_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps?!_</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.linter.simpsNoConstructor"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">linter</span>.<span class="name">simpsNoConstructor</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.linter.simpsUnusedCustomDeclarations"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">linter</span>.<span class="name">simpsUnusedCustomDeclarations</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsRule.rename"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">rename</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsRule.erase"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">erase</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsRule.add"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsRule.prefix"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">prefix</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsRule"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.simpsProj"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsProj</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.initialize_simps_projections"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">initialize_simps_projections</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Parser.Command.commandInitialize_simps_projections?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">commandInitialize_simps_projections?_</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.ProjectionData"><span class="name">Simps</span>.<span class="name">ProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.instInhabitedProjectionData"><span class="name">Simps</span>.<span class="name">instInhabitedProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.instToMessageDataProjectionData"><span class="name">Simps</span>.<span class="name">instToMessageDataProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.structureExt"><span class="name">Simps</span>.<span class="name">structureExt</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.ParsedProjectionData"><span class="name">Simps</span>.<span class="name">ParsedProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.ParsedProjectionData.toProjectionData"><span class="name">Simps</span>.<span class="name">ParsedProjectionData</span>.<span class="name">toProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.instToMessageDataParsedProjectionData"><span class="name">Simps</span>.<span class="name">instToMessageDataParsedProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.ProjectionRule"><span class="name">Simps</span>.<span class="name">ProjectionRule</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.instToMessageDataProjectionRule"><span class="name">Simps</span>.<span class="name">instToMessageDataProjectionRule</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.projectionsInfo"><span class="name">Simps</span>.<span class="name">projectionsInfo</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.findProjectionIndices"><span class="name">Simps</span>.<span class="name">findProjectionIndices</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.getCompositeOfProjectionsAux"><span class="name">Simps</span>.<span class="name">getCompositeOfProjectionsAux</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.getCompositeOfProjections"><span class="name">Simps</span>.<span class="name">getCompositeOfProjections</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.mkParsedProjectionData"><span class="name">Simps</span>.<span class="name">mkParsedProjectionData</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.applyProjectionRules"><span class="name">Simps</span>.<span class="name">applyProjectionRules</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.findProjection"><span class="name">Simps</span>.<span class="name">findProjection</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.checkForUnusedCustomProjs"><span class="name">Simps</span>.<span class="name">checkForUnusedCustomProjs</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.findAutomaticProjectionsAux"><span class="name">Simps</span>.<span class="name">findAutomaticProjectionsAux</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.findAutomaticProjections"><span class="name">Simps</span>.<span class="name">findAutomaticProjections</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.getRawProjections"><span class="name">Simps</span>.<span class="name">getRawProjections</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.elabSimpsRule"><span class="name">Simps</span>.<span class="name">elabSimpsRule</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.elabInitializeSimpsProjections"><span class="name">Simps</span>.<span class="name">elabInitializeSimpsProjections</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.Config"><span class="name">Simps</span>.<span class="name">Config</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.instInhabitedConfig"><span class="name">Simps</span>.<span class="name">instInhabitedConfig</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.elabSimpsConfig"><span class="name">Simps</span>.<span class="name">elabSimpsConfig</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.Config.asFn"><span class="name">Simps</span>.<span class="name">Config</span>.<span class="name">asFn</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.Config.lemmasOnly"><span class="name">Simps</span>.<span class="name">Config</span>.<span class="name">lemmasOnly</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Expr.instantiateLambdasOrApps"><span class="name">Lean</span>.<span class="name">Expr</span>.<span class="name">instantiateLambdasOrApps</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.getProjectionExprs"><span class="name">Simps</span>.<span class="name">getProjectionExprs</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.addProjection"><span class="name">Simps</span>.<span class="name">addProjection</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.headStructureEtaReduce"><span class="name">Simps</span>.<span class="name">headStructureEtaReduce</span></a></div><div class="nav_link"><a class="break_within" href="#Simps.addProjections"><span class="name">Simps</span>.<span class="name">addProjections</span></a></div><div class="nav_link"><a class="break_within" href="#simpsTac"><span class="name">simpsTac</span></a></div><div class="nav_link"><a class="break_within" href="#simpsTacFromSyntax"><span class="name">simpsTacFromSyntax</span></a></div><div class="nav_link"><a class="break_within" href="#simpsAttr"><span class="name">simpsAttr</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Simps-attribute">Simps attribute <a class="hover-link" href="#Simps-attribute">#</a></h1><p>This file defines the <code>@[simps]</code> attribute, to automatically generate <code>simp</code> lemmas
+reducing a definition when projections are applied to it.</p><h2 class="markdown-heading" id="Implementation-Notes">Implementation Notes <a class="hover-link" href="#Implementation-Notes">#</a></h2><p>There are three attributes being defined here</p><ul>
+<li><code>@[simps]</code> is the attribute for objects of a structure or instances of a class. It will
+automatically generate simplification lemmas for each projection of the object/instance that
+contains data. See the doc strings for <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">Lean.Parser.Attr.simps</a></code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>
+for more details and configuration options.</li>
+<li><code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt">structureExt</a></code> (just an environment extension, not actually an attribute)
+is automatically added to structures that have been used in <code>@[simps]</code>
+at least once. This attribute contains the data of the projections used for this structure
+by all following invocations of <code>@[simps]</code>.</li>
+<li><code>@[notation_class]</code> should be added to all classes that define notation, like <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code> and
+<code>Zero</code>. This specifies that the projections that <code>@[simps]</code> used are the projections from
+these notation classes instead of the projections of the superclasses.
+Example: if <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code> is tagged with <code>@[notation_class]</code> then the projection used for <code>Semigroup</code>
+will be <code>fun α hα ↦ @Mul.mul α (@Semigroup.toMul α hα)</code> instead of <code>@Semigroup.mul</code>.
+[this is not correctly implemented in Lean 4 yet]</li>
+</ul><h3 class="markdown-heading" id="Possible-Future-Improvements">Possible Future Improvements <a class="hover-link" href="#Possible-Future-Improvements">#</a></h3><ul>
+<li>If multiple declarations are generated from a <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> without explicit projection names, then
+only the first one is shown when mousing over <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code>.</li>
+</ul><h2 class="markdown-heading" id="Changes-w-r-t-Lean-3">Changes w.r.t. Lean 3 <a class="hover-link" href="#Changes-w-r-t-Lean-3">#</a></h2><p>There are some small changes in the attribute. None of them should have great effects</p><ul>
+<li>The attribute will now raise an error if it tries to generate a lemma when there already exists
+a lemma with that name (in Lean 3 it would generate a different unique name)</li>
+<li><code>transparency.none</code> has been replaced by <code>TransparencyMode.reducible</code></li>
+<li>The <code>attr</code> configuration option has been split into <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.isSimp">isSimp</a></code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.attrs">attrs</a></code> (for extra attributes)</li>
+<li>Because Lean 4 uses bundled structures, this means that <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> applied to anything that
+implements a notation class will almost certainly require a user-provided custom simps projection.</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>structures, projections, simp, simplifier, generates declarations</p></div><div class="decl" id="updateName"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L62-L63">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#updateName"><span class="name">updateName</span></a></span><span class="decl_args">
+<span class="fn">(nm : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <a href="../../.././Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(isPrefix : <a href="../../.././Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></div></div><p><code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#updateName">updateName</a> nm s <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData.isPrefix">isPrefix</a></code> adds <code>s</code> to the last component of <code>nm</code>,
+either as prefix or as suffix (specified by <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData.isPrefix">isPrefix</a></code>), separated by <code>_</code>.
+Used by <code>simps_add_projections</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#updateName">updateName</a> <span class="fn">nm</span> <span class="fn">s</span> <span class="fn">isPrefix</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Lean/Expr/Basic.html#Lean.Name.updateLast">Lean.Name.updateLast</a> <span class="fn">(<span class="fn">fun (<span class="fn">s'</span> : <a href="../../.././Init/Prelude.html#String">String</a>) =&gt; <span class="fn">if <span class="fn"><span class="fn">isPrefix</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> then <span class="fn"><span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot;_&quot;</span></span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">s'</span></span> else <span class="fn"><span class="fn"><span class="fn">s'</span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">&quot;_&quot;</span></span> <a href="../../.././Init/Prelude.html#HAppend.hAppend">++</a> <span class="fn">s</span></span></span></span>)</span> <span class="fn">nm</span></span></span></li></ul></details><details id="instances-for-list-updateName" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.mkSimpContextResult"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L71-L100">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Meta.mkSimpContextResult"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">mkSimpContextResult</span></a></span><span class="decl_args">
+<span class="fn">(cfg : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/MetaTypes.html#Lean.Meta.Simp.Config">Lean.Meta.Simp.Config</a>
+  <span class="fn">{ <span class="fn">maxSteps</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.Simp.defaultMaxSteps">Lean.Meta.Simp.defaultMaxSteps</a>, <span class="fn">maxDischargeDepth</span> := <span class="fn">2</span>, <span class="fn">contextual</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">memoize</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>,
+    <span class="fn">singlePass</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">zeta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">beta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">eta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">etaStruct</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.EtaStructMode.all">Lean.Meta.EtaStructMode.all</a>,
+    <span class="fn">iota</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">proj</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">decide</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">arith</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">autoUnfold</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">dsimp</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>,
+    <span class="fn">failIfUnchanged</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">ground</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">unfoldPartialApp</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(simpOnly : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(kind : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.SimpKind">Lean.Elab.Tactic.SimpKind</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.SimpKind.simp">Lean.Elab.Tactic.SimpKind.simp</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(dischargeWrapper : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.Simp.DischargeWrapper">Lean.Elab.Tactic.Simp.DischargeWrapper</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.Simp.DischargeWrapper.default">Lean.Elab.Tactic.Simp.DischargeWrapper.default</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hasStar : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.MkSimpContextResult">Lean.Elab.Tactic.MkSimpContextResult</a></span></div></div><p>Make <code>MkSimpContextResult</code> giving data instead of Syntax. Doesn't support arguments.
+Intended to be very similar to <code><a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.mkSimpContext">Lean.Elab.Tactic.mkSimpContext</a></code>
+Todo: support arguments.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Meta.mkSimpContextResult" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.mkSimpContext"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L105-L109">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Meta.mkSimpContext"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">mkSimpContext</span></a></span><span class="decl_args">
+<span class="fn">(cfg : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/MetaTypes.html#Lean.Meta.Simp.Config">Lean.Meta.Simp.Config</a>
+  <span class="fn">{ <span class="fn">maxSteps</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.Simp.defaultMaxSteps">Lean.Meta.Simp.defaultMaxSteps</a>, <span class="fn">maxDischargeDepth</span> := <span class="fn">2</span>, <span class="fn">contextual</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">memoize</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>,
+    <span class="fn">singlePass</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">zeta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">beta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">eta</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">etaStruct</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.EtaStructMode.all">Lean.Meta.EtaStructMode.all</a>,
+    <span class="fn">iota</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">proj</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">decide</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">arith</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">autoUnfold</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">dsimp</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>,
+    <span class="fn">failIfUnchanged</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">ground</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">unfoldPartialApp</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(simpOnly : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(kind : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.SimpKind">Lean.Elab.Tactic.SimpKind</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.SimpKind.simp">Lean.Elab.Tactic.SimpKind.simp</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(dischargeWrapper : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.Simp.DischargeWrapper">Lean.Elab.Tactic.Simp.DischargeWrapper</a> <a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.Simp.DischargeWrapper.default">Lean.Elab.Tactic.Simp.DischargeWrapper.default</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hasStar : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <a href="../../.././Lean/Meta/Tactic/Simp/Types.html#Lean.Meta.Simp.Context">Lean.Meta.Simp.Context</a></span></div></div><p>Make <code>Simp.Context</code> giving data instead of Syntax. Doesn't support arguments.
+Intended to be very similar to <code><a href="../../.././Lean/Elab/Tactic/Simp.html#Lean.Elab.Tactic.mkSimpContext">Lean.Elab.Tactic.mkSimpContext</a></code>
+Todo: support arguments.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Meta.mkSimpContext">Lean.Meta.mkSimpContext</a> <span class="fn">cfg</span> <span class="fn">simpOnly</span> <span class="fn">kind</span> <span class="fn">dischargeWrapper</span> <span class="fn">hasStar</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let data ← <span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Meta.mkSimpContextResult">Lean.Meta.mkSimpContextResult</a> <span class="fn">cfg</span> <span class="fn">simpOnly</span> <span class="fn">kind</span> <span class="fn">dischargeWrapper</span> <span class="fn">hasStar</span></span>
+  <span class="fn"><a href="../../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn"><span class="fn">data</span>.ctx</span></span></span></span></li></ul></details><details id="instances-for-list-Lean.Meta.mkSimpContext" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="hasSimpAttribute"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#hasSimpAttribute"><span class="name">hasSimpAttribute</span></a></span><span class="decl_args">
+<span class="fn">(env : <a href="../../.././Lean/Environment.html#Lean.Environment">Lean.Environment</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(declName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Bool">Bool</a></div></div><p>Tests whether <code>declName</code> has the <code>@[simp]</code> attribute in <code>env</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#hasSimpAttribute">hasSimpAttribute</a> <span class="fn">env</span> <span class="fn">declName</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Lean/Data/PersistentHashSet.html#Lean.PersistentHashSet.contains">Lean.PersistentHashSet.contains</a> <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Lean/ScopedEnvExtension.html#Lean.ScopedEnvExtension.getState">Lean.ScopedEnvExtension.getState</a> <a href="../../.././Lean/Meta/Tactic/Simp/SimpTheorems.html#Lean.Meta.simpExtension">Lean.Meta.simpExtension</a> <span class="fn">env</span></span>)</span>.lemmaNames</span>
+    <span class="fn">(<span class="fn"><a href="../../.././Lean/Meta/Tactic/Simp/SimpTheorems.html#Lean.Meta.Origin.decl">Lean.Meta.Origin.decl</a> <span class="fn">declName</span> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span></span></li></ul></details><details id="instances-for-list-hasSimpAttribute" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="mod_doc"><p>Declare notation classes.</p></div><div class="decl" id="Lean.Parser.Attr.simpsArgsRest"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L135-L136">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simpsArgsRest"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">simpsArgsRest</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>arguments to <code>@[simps]</code> attribute.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.simpsArgsRest" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Attr.simps"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L138-L238">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">simps</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of this
+declaration.</p><p>Example:</p><pre><code class="language-lean">@[simps] def foo : ℕ × ℤ := (1, 2)
+</code></pre><p>derives two <code>simp</code> lemmas:</p><pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = 1
+@[simp] lemma foo_snd : foo.snd = 2
+</code></pre><ul>
+<li>
+<p>It does not derive <code>simp</code> lemmas for the prop-valued projections.</p>
+</li>
+<li>
+<p>It will automatically reduce newly created beta-redexes, but will not unfold any definitions.</p>
+</li>
+<li>
+<p>If the structure has a coercion to either sorts or functions, and this is defined to be one
+of the projections, then this coercion will be used instead of the projection.</p>
+</li>
+<li>
+<p>If the structure is a class that has an instance to a notation class, like <code><a href="../../.././Init/Prelude.html#Neg">Neg</a></code> or <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>,
+then this notation is used instead of the corresponding projection.</p>
+</li>
+<li>
+<p>You can specify custom projections, by giving a declaration with name
+<code>{StructureName}.Simps.{projectionName}</code>. See Note [custom simps projection].</p>
+<p>Example:</p>
+<pre><code class="language-lean">def Equiv.Simps.invFun (e : α ≃ β) : β → α := e.symm
+@[simps] def Equiv.trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
+⟨e₂ ∘ e₁, e₁.symm ∘ e₂.symm⟩
+</code></pre>
+<p>generates</p>
+<pre><code>@[simp] lemma Equiv.trans_toFun : ∀ {α β γ} (e₁ e₂) (a : α), ⇑(e₁.trans e₂) a = (⇑e₂ ∘ ⇑e₁) a
+@[simp] lemma Equiv.trans_invFun : ∀ {α β γ} (e₁ e₂) (a : γ),
+  ⇑((e₁.trans e₂).symm) a = (⇑(e₁.symm) ∘ ⇑(e₂.symm)) a
+</code></pre>
+</li>
+<li>
+<p>You can specify custom projection names, by specifying the new projection names using
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.
+Example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> for more information.</p>
+</li>
+<li>
+<p>If one of the fields itself is a structure, this command will recursively create
+<code>simp</code> lemmas for all fields in that structure.</p>
+<ul>
+<li>Exception: by default it will not recursively create <code>simp</code> lemmas for fields in the structures
+<code><a href="../../.././Init/Prelude.html#Prod">Prod</a></code>, <code><a href="../../.././Init/Prelude.html#PProd">PProd</a></code>, and <code>Opposite</code>. You can give explicit projection names or change the value of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.notRecursive">Simps.Config.notRecursive</a></code> to override this behavior.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_snd_fst : foo.snd.fst = 3
+@[simp] lemma foo_snd_snd : foo.snd.snd = 4
+</code></pre>
+</li>
+<li>
+<p>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections.</p>
+</li>
+<li>
+<p>Recursive projection names can be specified using <code>proj1_proj2_proj3</code>.
+This will create a lemma of the form <code>foo.proj1.proj2.proj3 = ...</code>.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps fst fst_fst snd] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_fst_fst : foo.fst.fst = 1
+@[simp] lemma foo_snd : foo.snd = {fst := 3, snd := 4}
+</code></pre>
+</li>
+<li>
+<p>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure EquivPlusData (α β) extends α ≃ β where
+  data : <a href="../../.././Init/Prelude.html#Bool">Bool</a>
+@[simps] def EquivPlusData.<a href="../../.././Init/Prelude.html#rfl">rfl</a> {α} : EquivPlusData α α := { Equiv.refl α with data := true }
+</code></pre>
+<p>generates the following:</p>
+<pre><code class="language-lean">@[simp] lemma bar_toEquiv : ∀ {α : Sort*}, bar.toEquiv = Equiv.refl α
+@[simp] lemma bar_data : ∀ {α : Sort*}, bar.data = true
+</code></pre>
+<p>This is true, even though Lean inserts an eta-expanded version of <code>Equiv.refl α</code> in the
+definition of <code>bar</code>.</p>
+</li>
+<li>
+<p>For configuration options, see the doc string of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>.</p>
+</li>
+<li>
+<p>The precise syntax is <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := e)? ident*</code>, where <code>e : Expr</code> is an expression of type
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code> and <code>ident*</code> is a list of desired projection names.</p>
+</li>
+<li>
+<p><code>@[simps]</code> reduces let-expressions where necessary.</p>
+</li>
+<li>
+<p>When option <code>trace.simps.verbose</code> is true, <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> will print the projections it finds and the
+lemmas it generates. The same can be achieved by using <code>@[simps?]</code>.</p>
+</li>
+<li>
+<p>Use <code>@[to_additive (attr := simps)]</code> to apply both <code>to_additive</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> to a definition
+This will also generate the additive versions of all <code>simp</code> lemmas.</p>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.simps" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Attr.attrSimps?_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L240-L240">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.attrSimps?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps?_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of this
+declaration.</p><p>Example:</p><pre><code class="language-lean">@[simps] def foo : ℕ × ℤ := (1, 2)
+</code></pre><p>derives two <code>simp</code> lemmas:</p><pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = 1
+@[simp] lemma foo_snd : foo.snd = 2
+</code></pre><ul>
+<li>
+<p>It does not derive <code>simp</code> lemmas for the prop-valued projections.</p>
+</li>
+<li>
+<p>It will automatically reduce newly created beta-redexes, but will not unfold any definitions.</p>
+</li>
+<li>
+<p>If the structure has a coercion to either sorts or functions, and this is defined to be one
+of the projections, then this coercion will be used instead of the projection.</p>
+</li>
+<li>
+<p>If the structure is a class that has an instance to a notation class, like <code><a href="../../.././Init/Prelude.html#Neg">Neg</a></code> or <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>,
+then this notation is used instead of the corresponding projection.</p>
+</li>
+<li>
+<p>You can specify custom projections, by giving a declaration with name
+<code>{StructureName}.Simps.{projectionName}</code>. See Note [custom simps projection].</p>
+<p>Example:</p>
+<pre><code class="language-lean">def Equiv.Simps.invFun (e : α ≃ β) : β → α := e.symm
+@[simps] def Equiv.trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
+⟨e₂ ∘ e₁, e₁.symm ∘ e₂.symm⟩
+</code></pre>
+<p>generates</p>
+<pre><code>@[simp] lemma Equiv.trans_toFun : ∀ {α β γ} (e₁ e₂) (a : α), ⇑(e₁.trans e₂) a = (⇑e₂ ∘ ⇑e₁) a
+@[simp] lemma Equiv.trans_invFun : ∀ {α β γ} (e₁ e₂) (a : γ),
+  ⇑((e₁.trans e₂).symm) a = (⇑(e₁.symm) ∘ ⇑(e₂.symm)) a
+</code></pre>
+</li>
+<li>
+<p>You can specify custom projection names, by specifying the new projection names using
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.
+Example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> for more information.</p>
+</li>
+<li>
+<p>If one of the fields itself is a structure, this command will recursively create
+<code>simp</code> lemmas for all fields in that structure.</p>
+<ul>
+<li>Exception: by default it will not recursively create <code>simp</code> lemmas for fields in the structures
+<code><a href="../../.././Init/Prelude.html#Prod">Prod</a></code>, <code><a href="../../.././Init/Prelude.html#PProd">PProd</a></code>, and <code>Opposite</code>. You can give explicit projection names or change the value of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.notRecursive">Simps.Config.notRecursive</a></code> to override this behavior.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_snd_fst : foo.snd.fst = 3
+@[simp] lemma foo_snd_snd : foo.snd.snd = 4
+</code></pre>
+</li>
+<li>
+<p>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections.</p>
+</li>
+<li>
+<p>Recursive projection names can be specified using <code>proj1_proj2_proj3</code>.
+This will create a lemma of the form <code>foo.proj1.proj2.proj3 = ...</code>.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps fst fst_fst snd] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_fst_fst : foo.fst.fst = 1
+@[simp] lemma foo_snd : foo.snd = {fst := 3, snd := 4}
+</code></pre>
+</li>
+<li>
+<p>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure EquivPlusData (α β) extends α ≃ β where
+  data : <a href="../../.././Init/Prelude.html#Bool">Bool</a>
+@[simps] def EquivPlusData.<a href="../../.././Init/Prelude.html#rfl">rfl</a> {α} : EquivPlusData α α := { Equiv.refl α with data := true }
+</code></pre>
+<p>generates the following:</p>
+<pre><code class="language-lean">@[simp] lemma bar_toEquiv : ∀ {α : Sort*}, bar.toEquiv = Equiv.refl α
+@[simp] lemma bar_data : ∀ {α : Sort*}, bar.data = true
+</code></pre>
+<p>This is true, even though Lean inserts an eta-expanded version of <code>Equiv.refl α</code> in the
+definition of <code>bar</code>.</p>
+</li>
+<li>
+<p>For configuration options, see the doc string of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>.</p>
+</li>
+<li>
+<p>The precise syntax is <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := e)? ident*</code>, where <code>e : Expr</code> is an expression of type
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code> and <code>ident*</code> is a list of desired projection names.</p>
+</li>
+<li>
+<p><code>@[simps]</code> reduces let-expressions where necessary.</p>
+</li>
+<li>
+<p>When option <code>trace.simps.verbose</code> is true, <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> will print the projections it finds and the
+lemmas it generates. The same can be achieved by using <code>@[simps?]</code>.</p>
+</li>
+<li>
+<p>Use <code>@[to_additive (attr := simps)]</code> to apply both <code>to_additive</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> to a definition
+This will also generate the additive versions of all <code>simp</code> lemmas.</p>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.attrSimps?_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Attr.attrSimps!_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L241-L241">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.attrSimps!_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps!_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of this
+declaration.</p><p>Example:</p><pre><code class="language-lean">@[simps] def foo : ℕ × ℤ := (1, 2)
+</code></pre><p>derives two <code>simp</code> lemmas:</p><pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = 1
+@[simp] lemma foo_snd : foo.snd = 2
+</code></pre><ul>
+<li>
+<p>It does not derive <code>simp</code> lemmas for the prop-valued projections.</p>
+</li>
+<li>
+<p>It will automatically reduce newly created beta-redexes, but will not unfold any definitions.</p>
+</li>
+<li>
+<p>If the structure has a coercion to either sorts or functions, and this is defined to be one
+of the projections, then this coercion will be used instead of the projection.</p>
+</li>
+<li>
+<p>If the structure is a class that has an instance to a notation class, like <code><a href="../../.././Init/Prelude.html#Neg">Neg</a></code> or <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>,
+then this notation is used instead of the corresponding projection.</p>
+</li>
+<li>
+<p>You can specify custom projections, by giving a declaration with name
+<code>{StructureName}.Simps.{projectionName}</code>. See Note [custom simps projection].</p>
+<p>Example:</p>
+<pre><code class="language-lean">def Equiv.Simps.invFun (e : α ≃ β) : β → α := e.symm
+@[simps] def Equiv.trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
+⟨e₂ ∘ e₁, e₁.symm ∘ e₂.symm⟩
+</code></pre>
+<p>generates</p>
+<pre><code>@[simp] lemma Equiv.trans_toFun : ∀ {α β γ} (e₁ e₂) (a : α), ⇑(e₁.trans e₂) a = (⇑e₂ ∘ ⇑e₁) a
+@[simp] lemma Equiv.trans_invFun : ∀ {α β γ} (e₁ e₂) (a : γ),
+  ⇑((e₁.trans e₂).symm) a = (⇑(e₁.symm) ∘ ⇑(e₂.symm)) a
+</code></pre>
+</li>
+<li>
+<p>You can specify custom projection names, by specifying the new projection names using
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.
+Example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> for more information.</p>
+</li>
+<li>
+<p>If one of the fields itself is a structure, this command will recursively create
+<code>simp</code> lemmas for all fields in that structure.</p>
+<ul>
+<li>Exception: by default it will not recursively create <code>simp</code> lemmas for fields in the structures
+<code><a href="../../.././Init/Prelude.html#Prod">Prod</a></code>, <code><a href="../../.././Init/Prelude.html#PProd">PProd</a></code>, and <code>Opposite</code>. You can give explicit projection names or change the value of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.notRecursive">Simps.Config.notRecursive</a></code> to override this behavior.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_snd_fst : foo.snd.fst = 3
+@[simp] lemma foo_snd_snd : foo.snd.snd = 4
+</code></pre>
+</li>
+<li>
+<p>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections.</p>
+</li>
+<li>
+<p>Recursive projection names can be specified using <code>proj1_proj2_proj3</code>.
+This will create a lemma of the form <code>foo.proj1.proj2.proj3 = ...</code>.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps fst fst_fst snd] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_fst_fst : foo.fst.fst = 1
+@[simp] lemma foo_snd : foo.snd = {fst := 3, snd := 4}
+</code></pre>
+</li>
+<li>
+<p>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure EquivPlusData (α β) extends α ≃ β where
+  data : <a href="../../.././Init/Prelude.html#Bool">Bool</a>
+@[simps] def EquivPlusData.<a href="../../.././Init/Prelude.html#rfl">rfl</a> {α} : EquivPlusData α α := { Equiv.refl α with data := true }
+</code></pre>
+<p>generates the following:</p>
+<pre><code class="language-lean">@[simp] lemma bar_toEquiv : ∀ {α : Sort*}, bar.toEquiv = Equiv.refl α
+@[simp] lemma bar_data : ∀ {α : Sort*}, bar.data = true
+</code></pre>
+<p>This is true, even though Lean inserts an eta-expanded version of <code>Equiv.refl α</code> in the
+definition of <code>bar</code>.</p>
+</li>
+<li>
+<p>For configuration options, see the doc string of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>.</p>
+</li>
+<li>
+<p>The precise syntax is <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := e)? ident*</code>, where <code>e : Expr</code> is an expression of type
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code> and <code>ident*</code> is a list of desired projection names.</p>
+</li>
+<li>
+<p><code>@[simps]</code> reduces let-expressions where necessary.</p>
+</li>
+<li>
+<p>When option <code>trace.simps.verbose</code> is true, <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> will print the projections it finds and the
+lemmas it generates. The same can be achieved by using <code>@[simps?]</code>.</p>
+</li>
+<li>
+<p>Use <code>@[to_additive (attr := simps)]</code> to apply both <code>to_additive</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> to a definition
+This will also generate the additive versions of all <code>simp</code> lemmas.</p>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.attrSimps!_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Attr.attrSimps!?_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L242-L242">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.attrSimps!?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps!?_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of this
+declaration.</p><p>Example:</p><pre><code class="language-lean">@[simps] def foo : ℕ × ℤ := (1, 2)
+</code></pre><p>derives two <code>simp</code> lemmas:</p><pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = 1
+@[simp] lemma foo_snd : foo.snd = 2
+</code></pre><ul>
+<li>
+<p>It does not derive <code>simp</code> lemmas for the prop-valued projections.</p>
+</li>
+<li>
+<p>It will automatically reduce newly created beta-redexes, but will not unfold any definitions.</p>
+</li>
+<li>
+<p>If the structure has a coercion to either sorts or functions, and this is defined to be one
+of the projections, then this coercion will be used instead of the projection.</p>
+</li>
+<li>
+<p>If the structure is a class that has an instance to a notation class, like <code><a href="../../.././Init/Prelude.html#Neg">Neg</a></code> or <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>,
+then this notation is used instead of the corresponding projection.</p>
+</li>
+<li>
+<p>You can specify custom projections, by giving a declaration with name
+<code>{StructureName}.Simps.{projectionName}</code>. See Note [custom simps projection].</p>
+<p>Example:</p>
+<pre><code class="language-lean">def Equiv.Simps.invFun (e : α ≃ β) : β → α := e.symm
+@[simps] def Equiv.trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
+⟨e₂ ∘ e₁, e₁.symm ∘ e₂.symm⟩
+</code></pre>
+<p>generates</p>
+<pre><code>@[simp] lemma Equiv.trans_toFun : ∀ {α β γ} (e₁ e₂) (a : α), ⇑(e₁.trans e₂) a = (⇑e₂ ∘ ⇑e₁) a
+@[simp] lemma Equiv.trans_invFun : ∀ {α β γ} (e₁ e₂) (a : γ),
+  ⇑((e₁.trans e₂).symm) a = (⇑(e₁.symm) ∘ ⇑(e₂.symm)) a
+</code></pre>
+</li>
+<li>
+<p>You can specify custom projection names, by specifying the new projection names using
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.
+Example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> for more information.</p>
+</li>
+<li>
+<p>If one of the fields itself is a structure, this command will recursively create
+<code>simp</code> lemmas for all fields in that structure.</p>
+<ul>
+<li>Exception: by default it will not recursively create <code>simp</code> lemmas for fields in the structures
+<code><a href="../../.././Init/Prelude.html#Prod">Prod</a></code>, <code><a href="../../.././Init/Prelude.html#PProd">PProd</a></code>, and <code>Opposite</code>. You can give explicit projection names or change the value of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.notRecursive">Simps.Config.notRecursive</a></code> to override this behavior.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_snd_fst : foo.snd.fst = 3
+@[simp] lemma foo_snd_snd : foo.snd.snd = 4
+</code></pre>
+</li>
+<li>
+<p>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections.</p>
+</li>
+<li>
+<p>Recursive projection names can be specified using <code>proj1_proj2_proj3</code>.
+This will create a lemma of the form <code>foo.proj1.proj2.proj3 = ...</code>.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps fst fst_fst snd] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_fst_fst : foo.fst.fst = 1
+@[simp] lemma foo_snd : foo.snd = {fst := 3, snd := 4}
+</code></pre>
+</li>
+<li>
+<p>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure EquivPlusData (α β) extends α ≃ β where
+  data : <a href="../../.././Init/Prelude.html#Bool">Bool</a>
+@[simps] def EquivPlusData.<a href="../../.././Init/Prelude.html#rfl">rfl</a> {α} : EquivPlusData α α := { Equiv.refl α with data := true }
+</code></pre>
+<p>generates the following:</p>
+<pre><code class="language-lean">@[simp] lemma bar_toEquiv : ∀ {α : Sort*}, bar.toEquiv = Equiv.refl α
+@[simp] lemma bar_data : ∀ {α : Sort*}, bar.data = true
+</code></pre>
+<p>This is true, even though Lean inserts an eta-expanded version of <code>Equiv.refl α</code> in the
+definition of <code>bar</code>.</p>
+</li>
+<li>
+<p>For configuration options, see the doc string of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>.</p>
+</li>
+<li>
+<p>The precise syntax is <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := e)? ident*</code>, where <code>e : Expr</code> is an expression of type
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code> and <code>ident*</code> is a list of desired projection names.</p>
+</li>
+<li>
+<p><code>@[simps]</code> reduces let-expressions where necessary.</p>
+</li>
+<li>
+<p>When option <code>trace.simps.verbose</code> is true, <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> will print the projections it finds and the
+lemmas it generates. The same can be achieved by using <code>@[simps?]</code>.</p>
+</li>
+<li>
+<p>Use <code>@[to_additive (attr := simps)]</code> to apply both <code>to_additive</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> to a definition
+This will also generate the additive versions of all <code>simp</code> lemmas.</p>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.attrSimps!?_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Attr.attrSimps?!_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L243-L243">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.attrSimps?!_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Attr</span>.<span class="name">attrSimps?!_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of this
+declaration.</p><p>Example:</p><pre><code class="language-lean">@[simps] def foo : ℕ × ℤ := (1, 2)
+</code></pre><p>derives two <code>simp</code> lemmas:</p><pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = 1
+@[simp] lemma foo_snd : foo.snd = 2
+</code></pre><ul>
+<li>
+<p>It does not derive <code>simp</code> lemmas for the prop-valued projections.</p>
+</li>
+<li>
+<p>It will automatically reduce newly created beta-redexes, but will not unfold any definitions.</p>
+</li>
+<li>
+<p>If the structure has a coercion to either sorts or functions, and this is defined to be one
+of the projections, then this coercion will be used instead of the projection.</p>
+</li>
+<li>
+<p>If the structure is a class that has an instance to a notation class, like <code><a href="../../.././Init/Prelude.html#Neg">Neg</a></code> or <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>,
+then this notation is used instead of the corresponding projection.</p>
+</li>
+<li>
+<p>You can specify custom projections, by giving a declaration with name
+<code>{StructureName}.Simps.{projectionName}</code>. See Note [custom simps projection].</p>
+<p>Example:</p>
+<pre><code class="language-lean">def Equiv.Simps.invFun (e : α ≃ β) : β → α := e.symm
+@[simps] def Equiv.trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
+⟨e₂ ∘ e₁, e₁.symm ∘ e₂.symm⟩
+</code></pre>
+<p>generates</p>
+<pre><code>@[simp] lemma Equiv.trans_toFun : ∀ {α β γ} (e₁ e₂) (a : α), ⇑(e₁.trans e₂) a = (⇑e₂ ∘ ⇑e₁) a
+@[simp] lemma Equiv.trans_invFun : ∀ {α β γ} (e₁ e₂) (a : γ),
+  ⇑((e₁.trans e₂).symm) a = (⇑(e₁.symm) ∘ ⇑(e₂.symm)) a
+</code></pre>
+</li>
+<li>
+<p>You can specify custom projection names, by specifying the new projection names using
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.
+Example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> for more information.</p>
+</li>
+<li>
+<p>If one of the fields itself is a structure, this command will recursively create
+<code>simp</code> lemmas for all fields in that structure.</p>
+<ul>
+<li>Exception: by default it will not recursively create <code>simp</code> lemmas for fields in the structures
+<code><a href="../../.././Init/Prelude.html#Prod">Prod</a></code>, <code><a href="../../.././Init/Prelude.html#PProd">PProd</a></code>, and <code>Opposite</code>. You can give explicit projection names or change the value of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.notRecursive">Simps.Config.notRecursive</a></code> to override this behavior.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_snd_fst : foo.snd.fst = 3
+@[simp] lemma foo_snd_snd : foo.snd.snd = 4
+</code></pre>
+</li>
+<li>
+<p>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections.</p>
+</li>
+<li>
+<p>Recursive projection names can be specified using <code>proj1_proj2_proj3</code>.
+This will create a lemma of the form <code>foo.proj1.proj2.proj3 = ...</code>.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure MyProd (α β : Type*) := (fst : α) (snd : β)
+@[simps fst fst_fst snd] def foo : <a href="../../.././Init/Prelude.html#Prod">Prod</a> ℕ ℕ × MyProd ℕ ℕ := ⟨⟨1, 2⟩, 3, 4⟩
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean">@[simp] lemma foo_fst : foo.fst = (1, 2)
+@[simp] lemma foo_fst_fst : foo.fst.fst = 1
+@[simp] lemma foo_snd : foo.snd = {fst := 3, snd := 4}
+</code></pre>
+</li>
+<li>
+<p>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</p>
+<p>Example:</p>
+<pre><code class="language-lean">structure EquivPlusData (α β) extends α ≃ β where
+  data : <a href="../../.././Init/Prelude.html#Bool">Bool</a>
+@[simps] def EquivPlusData.<a href="../../.././Init/Prelude.html#rfl">rfl</a> {α} : EquivPlusData α α := { Equiv.refl α with data := true }
+</code></pre>
+<p>generates the following:</p>
+<pre><code class="language-lean">@[simp] lemma bar_toEquiv : ∀ {α : Sort*}, bar.toEquiv = Equiv.refl α
+@[simp] lemma bar_data : ∀ {α : Sort*}, bar.data = true
+</code></pre>
+<p>This is true, even though Lean inserts an eta-expanded version of <code>Equiv.refl α</code> in the
+definition of <code>bar</code>.</p>
+</li>
+<li>
+<p>For configuration options, see the doc string of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code>.</p>
+</li>
+<li>
+<p>The precise syntax is <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := e)? ident*</code>, where <code>e : Expr</code> is an expression of type
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></code> and <code>ident*</code> is a list of desired projection names.</p>
+</li>
+<li>
+<p><code>@[simps]</code> reduces let-expressions where necessary.</p>
+</li>
+<li>
+<p>When option <code>trace.simps.verbose</code> is true, <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> will print the projections it finds and the
+lemmas it generates. The same can be achieved by using <code>@[simps?]</code>.</p>
+</li>
+<li>
+<p>Use <code>@[to_additive (attr := simps)]</code> to apply both <code>to_additive</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> to a definition
+This will also generate the additive versions of all <code>simp</code> lemmas.</p>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Attr.attrSimps?!_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.linter.simpsNoConstructor"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L247-L250">source</a></div><div class="decl_header"><span class="decl_kind">opaque</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.linter.simpsNoConstructor"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">linter</span>.<span class="name">simpsNoConstructor</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Data/Options.html#Lean.Option">Lean.Option</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a></span></div></div><p>Linter to check that <code>simps!</code> is used when needed</p></div></div><div class="decl" id="Lean.Parser.linter.simpsUnusedCustomDeclarations"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L252-L255">source</a></div><div class="decl_header"><span class="decl_kind">opaque</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.linter.simpsUnusedCustomDeclarations"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">linter</span>.<span class="name">simpsUnusedCustomDeclarations</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Data/Options.html#Lean.Option">Lean.Option</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a></span></div></div><p>Linter to check that no unused custom declarations are declared for simps.</p></div></div><div class="decl" id="Lean.Parser.Command.simpsRule.rename"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L259-L260">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule.rename"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">rename</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for renaming a projection in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsRule.rename" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.simpsRule.erase"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L261-L262">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule.erase"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">erase</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for making a projection non-default in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsRule.erase" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.simpsRule.add"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L263-L264">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule.add"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">add</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for making a projection default in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsRule.add" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.simpsRule.prefix"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L265-L266">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule.prefix"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span>.<span class="name">prefix</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for making a projection prefix.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsRule.prefix" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.simpsRule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L267-L268">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsRule</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for a single rule in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsRule" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.simpsProj"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L269-L270">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsProj"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">simpsProj</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Syntax for <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.simpsProj" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.initialize_simps_projections"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L272-L338">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">initialize_simps_projections</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>This command specifies custom names and custom projections for the simp attribute <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsAttr">simpsAttr</a></code>.</p><ul>
+<li>You can specify custom names by writing e.g.
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.</li>
+<li>See Note [custom simps projection] and the examples below for information how to declare custom
+projections.</li>
+<li>For algebraic structures, we will automatically use the notation (like <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>)
+for the projections if such an instance is available.</li>
+<li>By default, the projections to parent structures are not default projections,
+but all the data-carrying fields are (including those in parent structures).</li>
+<li>You can disable a projection by default by running
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (-invFun)</code>
+This will ensure that no simp lemmas are generated for this projection,
+unless this projection is explicitly specified by the user.</li>
+<li>Conversely, you can enable a projection by default by running
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (+toEquiv)</code>.</li>
+<li>If you want the projection name added as a prefix in the generated lemma name, you can use
+<code>as_prefix fieldName</code>:
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → coe, as_prefix coe)</code>
+Note that this does not influence the parsing of projection names: if you have a declaration
+<code>foo</code> and you want to apply the projections <code>snd</code>, <code>coe</code> (which is a prefix) and <code>fst</code>, in that
+order you can run <code>@[simps snd_coe_fst] def foo ...</code> and this will generate a lemma with the
+name <code>coe_foo_snd_fst</code>.
+<ul>
+<li>Run <code>initialize_simps_projections?</code> (or <code>set_option trace.simps.verbose true</code>)
+to see the generated projections.</li>
+</ul>
+</li>
+<li>Running <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MyStruc</code> without arguments is not necessary, it has the
+same effect if you just add <code>@[simps]</code> to a declaration.</li>
+<li>It is recommended to call <code>@[simps]</code> or <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> in the same file as the
+structure declaration. Otherwise, the projections could be generated multiple times in different
+files.</li>
+</ul><p>Some common uses:</p><ul>
+<li>If you define a new homomorphism-like structure (like <code>MulHom</code>) you can just run
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> after defining the <code>DFunLike</code> instance (or instance that implies
+a <code>DFunLike</code> instance).
+<pre><code>  instance {mM : <a href="../../.././Init/Prelude.html#Mul">Mul</a> M} {mN : <a href="../../.././Init/Prelude.html#Mul">Mul</a> N} : DFunLike (MulHom M N) M N := ...
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply)
+</code></pre>
+This will generate <code>foo_apply</code> lemmas for each declaration <code>foo</code>.</li>
+<li>If you prefer <code>coe_foo</code> lemmas that state equalities between functions, use
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → coe, as_prefix coe)</code>
+In this case you have to use <code>@[simps (config := .asFn)]</code> or equivalently
+<code>@[simps (config := .asFn)]</code> whenever you call <code>@[simps]</code>.</li>
+<li>You can also initialize to use both, in which case you have to choose which one to use by default,
+by using either of the following
+<pre><code>  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply, toFun → coe, as_prefix coe, -coe)
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply, toFun → coe, as_prefix coe, -apply)
+</code></pre>
+In the first case, you can get both lemmas using <code>@[simps, <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := .asFn) coe]</code> and in
+the second case you can get both lemmas using <code>@[simps (config := .asFn), <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> apply]</code>.</li>
+<li>If you declare a new homomorphism-like structure (like <code>RelEmbedding</code>),
+then <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> will automatically find any <code>DFunLike</code> coercions
+that will be used as the default projection for the <code>toFun</code> field.
+<pre><code>  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> relEmbedding (toFun → apply)
+</code></pre>
+</li>
+<li>If you have an isomorphism-like structure (like <code>Equiv</code>) you often want to define a custom
+projection for the inverse:
+<pre><code>  def Equiv.Simps.symm_apply (e : α ≃ β) : β → α := e.symm
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)
+</code></pre>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.initialize_simps_projections" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Parser.Command.commandInitialize_simps_projections?_"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L341-L342">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.commandInitialize_simps_projections?_"><span class="name">Lean</span>.<span class="name">Parser</span>.<span class="name">Command</span>.<span class="name">commandInitialize_simps_projections?_</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>This command specifies custom names and custom projections for the simp attribute <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsAttr">simpsAttr</a></code>.</p><ul>
+<li>You can specify custom names by writing e.g.
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)</code>.</li>
+<li>See Note [custom simps projection] and the examples below for information how to declare custom
+projections.</li>
+<li>For algebraic structures, we will automatically use the notation (like <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code>)
+for the projections if such an instance is available.</li>
+<li>By default, the projections to parent structures are not default projections,
+but all the data-carrying fields are (including those in parent structures).</li>
+<li>You can disable a projection by default by running
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (-invFun)</code>
+This will ensure that no simp lemmas are generated for this projection,
+unless this projection is explicitly specified by the user.</li>
+<li>Conversely, you can enable a projection by default by running
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (+toEquiv)</code>.</li>
+<li>If you want the projection name added as a prefix in the generated lemma name, you can use
+<code>as_prefix fieldName</code>:
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → coe, as_prefix coe)</code>
+Note that this does not influence the parsing of projection names: if you have a declaration
+<code>foo</code> and you want to apply the projections <code>snd</code>, <code>coe</code> (which is a prefix) and <code>fst</code>, in that
+order you can run <code>@[simps snd_coe_fst] def foo ...</code> and this will generate a lemma with the
+name <code>coe_foo_snd_fst</code>.
+<ul>
+<li>Run <code>initialize_simps_projections?</code> (or <code>set_option trace.simps.verbose true</code>)
+to see the generated projections.</li>
+</ul>
+</li>
+<li>Running <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MyStruc</code> without arguments is not necessary, it has the
+same effect if you just add <code>@[simps]</code> to a declaration.</li>
+<li>It is recommended to call <code>@[simps]</code> or <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> in the same file as the
+structure declaration. Otherwise, the projections could be generated multiple times in different
+files.</li>
+</ul><p>Some common uses:</p><ul>
+<li>If you define a new homomorphism-like structure (like <code>MulHom</code>) you can just run
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> after defining the <code>DFunLike</code> instance (or instance that implies
+a <code>DFunLike</code> instance).
+<pre><code>  instance {mM : <a href="../../.././Init/Prelude.html#Mul">Mul</a> M} {mN : <a href="../../.././Init/Prelude.html#Mul">Mul</a> N} : DFunLike (MulHom M N) M N := ...
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply)
+</code></pre>
+This will generate <code>foo_apply</code> lemmas for each declaration <code>foo</code>.</li>
+<li>If you prefer <code>coe_foo</code> lemmas that state equalities between functions, use
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → coe, as_prefix coe)</code>
+In this case you have to use <code>@[simps (config := .asFn)]</code> or equivalently
+<code>@[simps (config := .asFn)]</code> whenever you call <code>@[simps]</code>.</li>
+<li>You can also initialize to use both, in which case you have to choose which one to use by default,
+by using either of the following
+<pre><code>  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply, toFun → coe, as_prefix coe, -coe)
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> MulHom (toFun → apply, toFun → coe, as_prefix coe, -apply)
+</code></pre>
+In the first case, you can get both lemmas using <code>@[simps, <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> (config := .asFn) coe]</code> and in
+the second case you can get both lemmas using <code>@[simps (config := .asFn), <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a> apply]</code>.</li>
+<li>If you declare a new homomorphism-like structure (like <code>RelEmbedding</code>),
+then <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code> will automatically find any <code>DFunLike</code> coercions
+that will be used as the default projection for the <code>toFun</code> field.
+<pre><code>  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> relEmbedding (toFun → apply)
+</code></pre>
+</li>
+<li>If you have an isomorphism-like structure (like <code>Equiv</code>) you often want to define a custom
+projection for the inverse:
+<pre><code>  def Equiv.Simps.symm_apply (e : α ≃ β) : β → α := e.symm
+  <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> Equiv (toFun → apply, invFun → symm_apply)
+</code></pre>
+</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Parser.Command.commandInitialize_simps_projections?_" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.ProjectionData"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L353-L372">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData"><span class="name">Simps</span>.<span class="name">ProjectionData</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a></div></div><p>Projection data for a single projection of a structure</p><ul class="structure_fields" id="Simps.ProjectionData.mk"><li id="Simps.ProjectionData.name" class="structure_field"><div class="structure_field_info">name : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></div><div class="structure_field_doc"><p>The name used in the generated <code>simp</code> lemmas</p></div></li><li id="Simps.ProjectionData.expr" class="structure_field"><div class="structure_field_info">expr : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></div><div class="structure_field_doc"><p>An Expression used by simps for the projection. It must be definitionally equal to an original
+projection (or a composition of multiple projections).
+These Expressions can contain the universe parameters specified in the first argument of
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt">structureExt</a></code>.</p></div></li><li id="Simps.ProjectionData.projNrs" class="structure_field"><div class="structure_field_info">projNrs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></div><div class="structure_field_doc"><p>A list of natural numbers, which is the projection number(s) that have to be applied to the
+Expression. For example the list <code>[0, 1]</code> corresponds to applying the first projection of the
+structure, and then the second projection of the resulting structure (this assumes that the
+target of the first projection is a structure with at least two projections).
+The composition of these projections is required to be definitionally equal to the provided
+Expression.</p></div></li><li id="Simps.ProjectionData.isDefault" class="structure_field"><div class="structure_field_info">isDefault : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>A boolean specifying whether <code>simp</code> lemmas are generated for this projection by default.</p></div></li><li id="Simps.ProjectionData.isPrefix" class="structure_field"><div class="structure_field_info">isPrefix : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>A boolean specifying whether this projection is written as prefix.</p></div></li></ul><details id="instances-for-list-Simps.ProjectionData" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.instInhabitedProjectionData"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L372-L372">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instInhabitedProjectionData"><span class="name">Simps</span>.<span class="name">instInhabitedProjectionData</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instInhabitedProjectionData">Simps.instInhabitedProjectionData</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">default</span> := <span class="fn">{ <span class="fn">name</span> := <span class="fn">default</span>, <span class="fn">expr</span> := <span class="fn">default</span>, <span class="fn">projNrs</span> := <span class="fn">default</span>, <span class="fn">isDefault</span> := <span class="fn">default</span>, <span class="fn">isPrefix</span> := <span class="fn">default</span> }</span> }</span></span></li></ul></details></div></div><div class="decl" id="Simps.instToMessageDataProjectionData"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L374-L377">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instToMessageDataProjectionData"><span class="name">Simps</span>.<span class="name">instToMessageDataProjectionData</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Message.html#Lean.ToMessageData">Lean.ToMessageData</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Simps.structureExt"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L379-L389">source</a></div><div class="decl_header"><span class="decl_kind">opaque</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt"><span class="name">Simps</span>.<span class="name">structureExt</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Std/Lean/NameMapAttribute.html#Lean.NameMapExtension">Lean.NameMapExtension</a> <span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span></span>)</span></span></div></div><p>The <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt">Simps.structureExt</a></code> environment extension specifies the preferred projections of the given
+structure, used by the <code>@[simps]</code> attribute.</p><ul>
+<li>You can generate this with the command <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</li>
+<li>If not generated, the <code>@[simps]</code> attribute will generate this automatically.</li>
+<li>To change the default value, see Note [custom simps projection].</li>
+<li>The first argument is the list of names of the universe variables used in the structure</li>
+<li>The second argument is an array that consists of the projection data for each projection.</li>
+</ul></div></div><div class="decl" id="Simps.ParsedProjectionData"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L392-L410">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData"><span class="name">Simps</span>.<span class="name">ParsedProjectionData</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a></div></div><p>Projection data used internally in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getRawProjections">getRawProjections</a></code>.</p><ul class="structure_fields" id="Simps.ParsedProjectionData.mk"><li id="Simps.ParsedProjectionData.strName" class="structure_field"><div class="structure_field_info">strName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></div><div class="structure_field_doc"><p>name for this projection used in the structure definition</p></div></li><li id="Simps.ParsedProjectionData.strStx" class="structure_field"><div class="structure_field_info">strStx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></div><div class="structure_field_doc"><p>syntax that might have provided <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData.strName">strName</a></code></p></div></li><li id="Simps.ParsedProjectionData.newName" class="structure_field"><div class="structure_field_info">newName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></div><div class="structure_field_doc"><p>name for this projection used in the generated <code>simp</code> lemmas</p></div></li><li id="Simps.ParsedProjectionData.newStx" class="structure_field"><div class="structure_field_info">newStx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></div><div class="structure_field_doc"><p>syntax that provided <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData.newName">newName</a></code></p></div></li><li id="Simps.ParsedProjectionData.isDefault" class="structure_field"><div class="structure_field_info">isDefault : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>will simp lemmas be generated for with (without specifically naming this?)</p></div></li><li id="Simps.ParsedProjectionData.isPrefix" class="structure_field"><div class="structure_field_info">isPrefix : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>is the projection name a prefix?</p></div></li><li id="Simps.ParsedProjectionData.expr?" class="structure_field"><div class="structure_field_info">expr? : <span class="fn"><a href="../../.././Init/Prelude.html#Option">Option</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div><div class="structure_field_doc"><p>projection expression</p></div></li><li id="Simps.ParsedProjectionData.projNrs" class="structure_field"><div class="structure_field_info">projNrs : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></div><div class="structure_field_doc"><p>the list of projection numbers this expression corresponds to</p></div></li><li id="Simps.ParsedProjectionData.isCustom" class="structure_field"><div class="structure_field_info">isCustom : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>is this a projection that is changed by the user?</p></div></li></ul><details id="instances-for-list-Simps.ParsedProjectionData" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.ParsedProjectionData.toProjectionData"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L413-L414">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData.toProjectionData"><span class="name">Simps</span>.<span class="name">ParsedProjectionData</span>.<span class="name">toProjectionData</span></a></span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></div></div><p>Turn <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">ParsedProjectionData</a></code> into <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">ProjectionData</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData.toProjectionData">Simps.ParsedProjectionData.toProjectionData</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">name</span> := <span class="fn"><span class="fn">p</span>.newName</span>, <span class="fn">expr</span> := <span class="fn"><a href="../../.././Init/Prelude.html#Option.getD">Option.getD</a> <span class="fn"><span class="fn">p</span>.expr?</span> <span class="fn">default</span></span>, <span class="fn">projNrs</span> := <span class="fn"><a href="../../.././Init/Data/Array/Basic.html#Array.toList">Array.toList</a> <span class="fn"><span class="fn">p</span>.projNrs</span></span>, <span class="fn">isDefault</span> := <span class="fn"><span class="fn">p</span>.isDefault</span>,
+    <span class="fn">isPrefix</span> := <span class="fn"><span class="fn">p</span>.isPrefix</span> }</span></span></li></ul></details><details id="instances-for-list-Simps.ParsedProjectionData.toProjectionData" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.instToMessageDataParsedProjectionData"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L416-L420">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instToMessageDataParsedProjectionData"><span class="name">Simps</span>.<span class="name">instToMessageDataParsedProjectionData</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Message.html#Lean.ToMessageData">Lean.ToMessageData</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Simps.ProjectionRule"><div class="inductive"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L424-L435">source</a></div><div class="decl_header"><span class="decl_kind">inductive</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule"><span class="name">Simps</span>.<span class="name">ProjectionRule</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a></div></div><p>The type of rules that specify how metadata for projections in changes.
+See <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><ul class="constructors"><li class="constructor" id="Simps.ProjectionRule.rename">rename: <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></span></span></span><div class="inductive_ctor_doc"><p>A renaming rule <code>before→after</code> or
+Each name comes with the syntax used to write the rule,
+which is used to declare hover information.</p></div></li><li class="constructor" id="Simps.ProjectionRule.add">add: <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></span><div class="inductive_ctor_doc"><p>An adding rule <code>+fieldName</code></p></div></li><li class="constructor" id="Simps.ProjectionRule.erase">erase: <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></span><div class="inductive_ctor_doc"><p>A hiding rule <code>-fieldName</code></p></div></li><li class="constructor" id="Simps.ProjectionRule.prefix">prefix: <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a> → <span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></span><div class="inductive_ctor_doc"><p>A prefix rule <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.simpsRule.prefix">prefix</a> fieldName</code></p></div></li></ul><details id="instances-for-list-Simps.ProjectionRule" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.instToMessageDataProjectionRule"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L437-L446">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instToMessageDataProjectionRule"><span class="name">Simps</span>.<span class="name">instToMessageDataProjectionRule</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Message.html#Lean.ToMessageData">Lean.ToMessageData</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Simps.projectionsInfo"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L449-L462">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.projectionsInfo"><span class="name">Simps</span>.<span class="name">projectionsInfo</span></a></span><span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(pref : <a href="../../.././Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Lean/Message.html#Lean.MessageData">Lean.MessageData</a></div></div><p>Returns the projection information of a structure.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.projectionsInfo" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.findProjectionIndices"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L467-L476">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.findProjectionIndices"><span class="name">Simps</span>.<span class="name">findProjectionIndices</span></a></span><span class="decl_args">
+<span class="fn">(strName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(projName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span>)</span></span></div></div><p>Find the indices of the projections that need to be applied to elaborate <code>$e.$projName</code>.
+Example: If <code>e : α ≃+ β</code> and <code>projName = `invFun</code> then this returns <code>[0, 1]</code>, because the first
+projection of <code>MulEquiv</code> is <code>toEquiv</code> and the second projection of <code>Equiv</code> is <code>invFun</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.findProjectionIndices" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.getCompositeOfProjectionsAux"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L479-L497">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getCompositeOfProjectionsAux"><span class="name">Simps</span>.<span class="name">getCompositeOfProjectionsAux</span></a></span><span class="decl_args">
+<span class="fn">(proj : <a href="../../.././Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(pos : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(args : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></span>)</span></span></div></div><p>Auxiliary function of <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getCompositeOfProjections">getCompositeOfProjections</a></code>.</p></div></div><div class="decl" id="Simps.getCompositeOfProjections"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L513-L518">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getCompositeOfProjections"><span class="name">Simps</span>.<span class="name">getCompositeOfProjections</span></a></span><span class="decl_args">
+<span class="fn">(structName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(proj : <a href="../../.././Init/Prelude.html#String">String</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span></span>)</span></span></div></div><p>Suppose we are given a structure <code>str</code> and a projection <code>proj</code>, that could be multiple nested
+projections (separated by <code>_</code>), where each projection could be a projection of a parent structure.
+This function returns an expression that is the composition of these projections and a
+list of natural numbers, that are the projection numbers of the applied projections.
+Note that this function is similar to elaborating dot notation, but it can do a little more.
+Example: if we do</p><pre><code>structure gradedFun (A : ℕ → Type*) where
+  toFun := ∀ i j, A i →+ A j →+ A (i + j)
+<a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a> (toFun_toFun_toFun → myMul)
+</code></pre><p>we will be able to generate the "projection"
+<code>λ {A} (f : gradedFun A) (x : A i) (y : A j) ↦ ↑(↑(f.toFun i j) x) y</code>,
+which projection notation cannot do.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.getCompositeOfProjections" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.mkParsedProjectionData"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L524-L536">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.mkParsedProjectionData"><span class="name">Simps</span>.<span class="name">mkParsedProjectionData</span></a></span><span class="decl_args">
+<span class="fn">(structName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span></div></div><p>Get the default <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">ParsedProjectionData</a></code> for structure <code>str</code>.
+It first returns the direct fields of the structure in the right order, and then
+all (non-subobject fields) of all parent structures. The subobject fields are precisely the
+non-default fields.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.mkParsedProjectionData" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.applyProjectionRules"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L539-L582">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.applyProjectionRules"><span class="name">Simps</span>.<span class="name">applyProjectionRules</span></a></span><span class="decl_args">
+<span class="fn">(projs : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rules : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span></div></div><p>Execute the projection renamings (and turning off projections) as specified by <code>rules</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.applyProjectionRules" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.findProjection"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L587-L621">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.findProjection"><span class="name">Simps</span>.<span class="name">findProjection</span></a></span><span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(proj : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(rawUnivs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span></div></div><p>Auxiliary function for <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getRawProjections">getRawProjections</a></code>.
+Generates the default projection, and looks for a custom projection declared by the user,
+and replaces the default projection with the custom one, if it can find it.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.findProjection" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.checkForUnusedCustomProjs"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L625-L634">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.checkForUnusedCustomProjs"><span class="name">Simps</span>.<span class="name">checkForUnusedCustomProjs</span></a></span><span class="decl_args">
+<span class="fn">(stx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(projs : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <a href="../../.././Init/Prelude.html#Unit">Unit</a></span></div></div><p>Checks if there are declarations in the current file in the namespace <code>{str}.Simps</code> that are
+not used.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.checkForUnusedCustomProjs" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.findAutomaticProjectionsAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L645-L679">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.findAutomaticProjectionsAux"><span class="name">Simps</span>.<span class="name">findAutomaticProjectionsAux</span></a></span><span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(proj : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(args : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Elab/Term.html#Lean.Elab.Term.TermElabM">Lean.Elab.TermElabM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Option">Option</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span>)</span></span></div></div><p>If a structure has a field that corresponds to a coercion to functions or sets, or corresponds
+to notation, find the custom projection that uses this coercion or notation.
+Returns the custom projection and the name of the projection used.</p><p>We catch most errors this function causes, so that we don't fail if an unrelated projection has
+an applicable name. (e.g. <code>Iso.inv</code>)</p><p>Implementation note: getting rid of TermElabM is tricky, since <code>Expr.mkAppOptM</code> doesn't allow to
+keep metavariables around, which are necessary for <code>OutParam</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.findAutomaticProjectionsAux" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.findAutomaticProjections"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L684-L702">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.findAutomaticProjections"><span class="name">Simps</span>.<span class="name">findAutomaticProjections</span></a></span><span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(projs : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ParsedProjectionData">Simps.ParsedProjectionData</a></span>)</span></span></div></div><p>Auxiliary function for <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getRawProjections">getRawProjections</a></code>.
+Find custom projections, automatically found by simps.
+These come from <code>DFunLike</code> and <code>SetLike</code> instances.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.findAutomaticProjections" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.getRawProjections"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L743-L774">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getRawProjections"><span class="name">Simps</span>.<span class="name">getRawProjections</span></a></span><span class="decl_args">
+<span class="fn">(stx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(str : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(traceIfExists : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rules : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span>)</span> <span class="fn">#[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(trc : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/CoreM.html#Lean.Core.CoreM">Lean.CoreM</a> <span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span></span>)</span></span></div></div><p>Get the projections used by <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> associated to a given structure <code>str</code>.</p><p>The returned information is also stored in the environment extension <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt">Simps.structureExt</a></code>, which
+is given to <code>str</code>. If <code>str</code> already has this attribute, the information is read from this
+extension instead. See the documentation for this extension for the data this tactic returns.</p><p>The returned universe levels are the universe levels of the structure. For the projections there
+are three cases</p><ul>
+<li>If the declaration <code>{StructureName}.Simps.{projectionName}</code> has been declared, then the value
+of this declaration is used (after checking that it is definitionally equal to the actual
+projection. If you rename the projection name, the declaration should have the <em>new</em> projection
+name.</li>
+<li>You can also declare a custom projection that is a composite of multiple projections.</li>
+<li>Otherwise, for every class with the <code><a href="../../.././Mathlib/Tactic/Simps/NotationClass.html#notation_class">notation_class</a></code> attribute, and the structure has an
+instance of that notation class, then the projection of that notation class is used for the
+projection that is definitionally equal to it (if there is such a projection).
+This means in practice that coercions to function types and sorts will be used instead of
+a projection, if this coercion is definitionally equal to a projection. Furthermore, for
+notation classes like <code><a href="../../.././Init/Prelude.html#Mul">Mul</a></code> and <code>Zero</code> those projections are used instead of the
+corresponding projection.
+Projections for coercions and notation classes are not automatically generated if they are
+composites of multiple projections (for example when you use <code>extend</code> without the
+<code>oldStructureCmd</code> (does this exist?)).</li>
+<li>Otherwise, the projection of the structure is chosen.
+For example: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getRawProjections">getRawProjections</a> env `Prod</code> gives the default projections.</li>
+</ul><pre><code>  ([u, v], [(`fst, `(Prod.fst.{u v}), [0], true, false),
+     (`snd, `(@Prod.snd.{u v}), [1], true, false)])
+</code></pre><p>Optionally, this command accepts three optional arguments:</p><ul>
+<li>If <code>traceIfExists</code> the command will always generate a trace message when the structure already
+has an entry in <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.structureExt">structureExt</a></code>.</li>
+<li>The <code>rules</code> argument specifies whether projections should be added, renamed, used as prefix, and
+not used by default.</li>
+<li>if <code>trc</code> is true, this tactic will trace information just as if
+<code>set_option trace.simps.verbose true</code> was set.</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.getRawProjections" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.elabSimpsRule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L797-L802">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.elabSimpsRule"><span class="name">Simps</span>.<span class="name">elabSimpsRule</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <span class="fn"><a href="../../.././Lean/Elab/Command.html#Lean.Elab.Command.CommandElabM">Lean.Elab.Command.CommandElabM</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionRule">Simps.ProjectionRule</a></span></span></div></div><p>Parse a rule for <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>. It is <code>&lt;name&gt;→&lt;name&gt;</code>, <code>-&lt;name&gt;</code>, <code>+&lt;name&gt;</code>
+or <code>as_prefix &lt;name&gt;</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.elabSimpsRule" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.elabInitializeSimpsProjections"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L805-L812">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.elabInitializeSimpsProjections"><span class="name">Simps</span>.<span class="name">elabInitializeSimpsProjections</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Lean/Elab/Command.html#Lean.Elab.Command.CommandElab">Lean.Elab.Command.CommandElab</a></div></div><p>Function elaborating <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Command.initialize_simps_projections">initialize_simps_projections</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.elabInitializeSimpsProjections" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.Config"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L815-L837">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config"><span class="name">Simps</span>.<span class="name">Config</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a></div></div><p>Configuration options for <code>@[simps]</code></p><ul class="structure_fields" id="Simps.Config.mk"><li id="Simps.Config.isSimp" class="structure_field"><div class="structure_field_info">isSimp : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>Make generated lemmas simp lemmas</p></div></li><li id="Simps.Config.attrs" class="structure_field"><div class="structure_field_info">attrs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span></div><div class="structure_field_doc"><p>Other simp-attributes to apply to generated lemmas.
+Attributes that are currently not simp-attributes are not supported.</p></div></li><li id="Simps.Config.simpRhs" class="structure_field"><div class="structure_field_info">simpRhs : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>simplify the right-hand side of generated simp-lemmas using <code>dsimp, simp</code>.</p></div></li><li id="Simps.Config.typeMd" class="structure_field"><div class="structure_field_info">typeMd : <a href="../../.././Init/MetaTypes.html#Lean.Meta.TransparencyMode">Lean.Meta.TransparencyMode</a></div><div class="structure_field_doc"><p>TransparencyMode used to reduce the type in order to detect whether it is a structure.</p></div></li><li id="Simps.Config.rhsMd" class="structure_field"><div class="structure_field_info">rhsMd : <a href="../../.././Init/MetaTypes.html#Lean.Meta.TransparencyMode">Lean.Meta.TransparencyMode</a></div><div class="structure_field_doc"><p>TransparencyMode used to reduce the right-hand side in order to detect whether it is a
+constructor. Note: was <code>none</code> in Lean 3</p></div></li><li id="Simps.Config.fullyApplied" class="structure_field"><div class="structure_field_info">fullyApplied : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>Generated lemmas that are fully applied, i.e. generates equalities between applied functions.
+Set this to <code>false</code> to generate equalities between functions.</p></div></li><li id="Simps.Config.notRecursive" class="structure_field"><div class="structure_field_info">notRecursive : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span></div><div class="structure_field_doc"><p>List of types in which we are not recursing to generate simplification lemmas.
+E.g. if we write <code>@[simps] def e : α × β ≃ β × α := ...</code> we will generate <code>e_apply</code> and not
+<code>e_apply_fst</code>.</p></div></li><li id="Simps.Config.debug" class="structure_field"><div class="structure_field_info">debug : <a href="../../.././Init/Prelude.html#Bool">Bool</a></div><div class="structure_field_doc"><p>Output debug messages. Not used much, use <code>set_option simps.<a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.debug">debug</a> true</code> instead.</p></div></li></ul><details id="instances-for-list-Simps.Config" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.instInhabitedConfig"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L837-L837">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.instInhabitedConfig"><span class="name">Simps</span>.<span class="name">instInhabitedConfig</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Simps.elabSimpsConfig"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L839-L840">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.elabSimpsConfig"><span class="name">Simps</span>.<span class="name">elabSimpsConfig</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> → <span class="fn"><a href="../../.././Lean/Elab/Term.html#Lean.Elab.Term.TermElabM">Lean.Elab.TermElabM</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></span></span></div></div><p>Function elaborating <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Config</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.elabSimpsConfig" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.Config.asFn"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L844-L845">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.asFn"><span class="name">Simps</span>.<span class="name">Config</span>.<span class="name">asFn</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></div></div><p>A common configuration for <code>@[simps]</code>: generate equalities between functions instead equalities
+between fully applied Expressions. Use this using <code>@[simps (config := .asFn)]</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.Config.asFn" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.Config.lemmasOnly"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L849-L850">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config.lemmasOnly"><span class="name">Simps</span>.<span class="name">Config</span>.<span class="name">lemmasOnly</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a></div></div><p>A common configuration for <code>@[simps]</code>: don't tag the generated lemmas with <code>@[simp]</code>.
+Use this using <code>@[simps (config := .lemmasOnly)]</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.Config.lemmasOnly" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Expr.instantiateLambdasOrApps"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L858-L859">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Expr.instantiateLambdasOrApps"><span class="name">Lean</span>.<span class="name">Expr</span>.<span class="name">instantiateLambdasOrApps</span></a></span><span class="decl_args">
+<span class="fn">(es : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></div></div><p><code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Expr.instantiateLambdasOrApps">instantiateLambdasOrApps</a> es e</code> instantiates lambdas in <code>e</code> by expressions from <code>es</code>.
+If the length of <code>es</code> is larger than the number of lambdas in <code>e</code>,
+then the term is applied to the remaining terms.
+Also reduces head let-expressions in <code>e</code>, including those after instantiating all lambdas.</p><p>This is very similar to <code>expr.substs</code>, but this also reduces head let-expressions.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Expr.instantiateLambdasOrApps">Lean.Expr.instantiateLambdasOrApps</a> <span class="fn">es</span> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr.betaRev">Lean.Expr.betaRev</a> <span class="fn">e</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Data/Array/Basic.html#Array.reverse">Array.reverse</a> <span class="fn">es</span></span>)</span> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></li></ul></details><details id="instances-for-list-Lean.Expr.instantiateLambdasOrApps" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.getProjectionExprs"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L886-L901">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getProjectionExprs"><span class="name">Simps</span>.<span class="name">getProjectionExprs</span></a></span><span class="decl_args">
+<span class="fn">(stx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(tgt : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(rhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(cfg : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">(<span class="fn"><a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">Simps.ProjectionData</a></span>)</span></span>)</span></span></div></div><p>Get the projections of a structure used by <code>@[simps]</code> applied to the appropriate arguments.
+Returns a list of tuples</p><pre><code>(corresponding right-hand-side, given projection name, projection Expression,
+  future projection numbers, used by default, is prefix)
+</code></pre><p>(where all fields except the first are packed in a <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.ProjectionData">ProjectionData</a></code> structure)
+one for each projection. The given projection name is the name for the projection used by the user
+used to generate (and parse) projection names. For example, in the structure</p><p>Example 1: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getProjectionExprs">getProjectionExprs</a> env `(α × β) `(⟨x, y⟩)</code> will give the output</p><pre><code>  [(`(x), `fst, `(@Prod.fst.{u v} α β), [], true, false),
+   (`(y), `snd, `(@Prod.snd.{u v} α β), [], true, false)]
+</code></pre><p>Example 2: <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.getProjectionExprs">getProjectionExprs</a> env `(α ≃ α) `(⟨id, id, fun _ ↦ rfl, fun _ ↦ rfl⟩)</code>
+will give the output</p><pre><code>  [(`(id), `apply, (Equiv.toFun), [], true, false),
+   (`(id), `symm_apply, (fun e ↦ e.symm.toFun), [], true, false),
+   ...,
+   ...]
+</code></pre><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.getProjectionExprs" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.addProjection"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L907-L952">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.addProjection"><span class="name">Simps</span>.<span class="name">addProjection</span></a></span><span class="decl_args">
+<span class="fn">(ref : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(univs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(declName : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(type : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(lhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(rhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(args : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(cfg : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <a href="../../.././Init/Prelude.html#Unit">Unit</a></span></div></div><p>Add a lemma with <code>nm</code> stating that <code>lhs = rhs</code>. <code>type</code> is the type of both <code>lhs</code> and <code>rhs</code>,
+<code>args</code> is the list of local constants occurring, and <code>univs</code> is the list of universe variables.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Simps.addProjection" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Simps.headStructureEtaReduce"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L959-L983">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.headStructureEtaReduce"><span class="name">Simps</span>.<span class="name">headStructureEtaReduce</span></a></span><span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span></div></div><p>Perform head-structure-eta-reduction on expression <code>e</code>. That is, if <code>e</code> is of the form
+<code>⟨f.1, f.2, ..., f.n⟩</code> with <code>f</code> definitionally equal to <code>e</code>, then
+<code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.headStructureEtaReduce">headStructureEtaReduce</a> e = <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.headStructureEtaReduce">headStructureEtaReduce</a> f</code> and <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.headStructureEtaReduce">headStructureEtaReduce</a> e = e</code> otherwise.</p></div></div><div class="decl" id="Simps.addProjections"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L992-L1128">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.addProjections"><span class="name">Simps</span>.<span class="name">addProjections</span></a></span><span class="decl_args">
+<span class="fn">(ref : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(univs : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nm : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(type : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(lhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(rhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(args : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mustBeStr : <a href="../../.././Init/Prelude.html#Bool">Bool</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(cfg : <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(todo : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#String">String</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(toApply : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <a href="../../.././Init/Prelude.html#Nat">Nat</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span></div></div><p>Derive lemmas specifying the projections of the declaration.
+<code>nm</code>: name of the lemma
+If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.
+<code>toApply</code> is non-empty after a custom projection that is a composition of multiple projections
+was just used. In that case we need to apply these projections before we continue changing <code>lhs</code>.
+<code>simpLemmas</code>: names of the simp lemmas added so far.(simpLemmas : Array Name)</p></div></div><div class="decl" id="simpsTac"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L1137-L1146">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsTac"><span class="name">simpsTac</span></a></span><span class="decl_args">
+<span class="fn">(ref : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(nm : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(cfg : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Mathlib/Tactic/Simps/Basic.html#Simps.Config">Simps.Config</a>
+  <span class="fn">{ <span class="fn">isSimp</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>, <span class="fn">attrs</span> := <span class="fn">[]</span>, <span class="fn">simpRhs</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a>, <span class="fn">typeMd</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.TransparencyMode.instances">Lean.Meta.TransparencyMode.instances</a>,
+    <span class="fn">rhsMd</span> := <a href="../../.././Init/MetaTypes.html#Lean.Meta.TransparencyMode.reducible">Lean.Meta.TransparencyMode.reducible</a>, <span class="fn">fullyApplied</span> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>,
+    <span class="fn">notRecursive</span> := <span class="fn">[<span class="fn">`Prod</span>, <span class="fn">`PProd</span>, <span class="fn">`Opposite</span>, <span class="fn">`PreOpposite</span>]</span>, <span class="fn">debug</span> := <a href="../../.././Init/Prelude.html#Bool.false">false</a> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(todo : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#String">String</a> <a href="../../.././Init/Prelude.html#Prod">×</a> <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a></span>)</span></span>)</span> <span class="fn">[]</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(trc : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a> <a href="../../.././Init/Prelude.html#Bool">Bool</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Attributes.html#Lean.AttrM">Lean.AttrM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsTac">simpsTac</a></code> derives <code>simp</code> lemmas for all (nested) non-Prop projections of the declaration.
+If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.
+If <code>shortNm</code> is true, the generated names will only use the last projection name.
+If <code>trc</code> is true, trace as if <code>trace.simps.verbose</code> is true.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-simpsTac" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="simpsTacFromSyntax"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L1149-L1156">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsTacFromSyntax"><span class="name">simpsTacFromSyntax</span></a></span><span class="decl_args">
+<span class="fn">(nm : <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(stx : <a href="../../.././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Attributes.html#Lean.AttrM">Lean.AttrM</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span></div></div><p>elaborate the syntax and run <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsTac">simpsTac</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-simpsTacFromSyntax" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="simpsAttr"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/Simps/Basic.lean#L1158-L1163">source</a></div><div class="decl_header"><span class="decl_kind">opaque</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/Simps/Basic.html#simpsAttr"><span class="name">simpsAttr</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Attributes.html#Lean.ParametricAttribute">Lean.ParametricAttribute</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Init/Prelude.html#Lean.Name">Lean.Name</a></span>)</span></span></div></div><p>The <code><a href="../../.././Mathlib/Tactic/Simps/Basic.html#Lean.Parser.Attr.simps">simps</a></code> attribute.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

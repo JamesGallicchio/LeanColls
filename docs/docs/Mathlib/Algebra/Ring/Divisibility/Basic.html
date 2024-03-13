@@ -1,0 +1,361 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Ring.Divisibility.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Ring.Divisibility.Basic";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Ring</span>.<span class="name">Divisibility</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Divisibility/Basic.html">Mathlib.Algebra.Divisibility.Basic</a></li><li><a href="../../../.././Mathlib/Algebra/Ring/Defs.html">Mathlib.Algebra.Ring.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Equiv/Basic.html">Mathlib.Algebra.Group.Equiv.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Ring.Divisibility.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#map_dvd_iff"><span class="name">map_dvd_iff</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.decompositionMonoid"><span class="name">MulEquiv</span>.<span class="name">decompositionMonoid</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_add"><span class="name">dvd_add</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.add"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#two_dvd_bit0"><span class="name">two_dvd_bit0</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.linear_comb"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">linear_comb</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_neg"><span class="name">dvd_neg</span></a></div><div class="nav_link"><a class="break_within" href="#neg_dvd"><span class="name">neg_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.neg_left"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">neg_left</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.of_neg_left"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">of_neg_left</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.of_neg_right"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">of_neg_right</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.neg_right"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">neg_right</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub"><span class="name">dvd_sub</span></a></div><div class="nav_link"><a class="break_within" href="#Dvd.dvd.sub"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">sub</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_add_left"><span class="name">dvd_add_left</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_add_right"><span class="name">dvd_add_right</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub_left"><span class="name">dvd_sub_left</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub_right"><span class="name">dvd_sub_right</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_iff_dvd_of_dvd_sub"><span class="name">dvd_iff_dvd_of_dvd_sub</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub_comm"><span class="name">dvd_sub_comm</span></a></div><div class="nav_link"><a class="break_within" href="#two_dvd_bit1"><span class="name">two_dvd_bit1</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_add_self_left"><span class="name">dvd_add_self_left</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_add_self_right"><span class="name">dvd_add_self_right</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub_self_left"><span class="name">dvd_sub_self_left</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_sub_self_right"><span class="name">dvd_sub_self_right</span></a></div><div class="nav_link"><a class="break_within" href="#dvd_mul_sub_mul"><span class="name">dvd_mul_sub_mul</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lemmas-about-divisibility-in-rings">Lemmas about divisibility in rings <a class="hover-link" href="#Lemmas-about-divisibility-in-rings">#</a></h1><p>Note that this file is imported by basic tactics like <code>linarith</code> and so must have only minimal
+imports. Further results about divisibility in rings may be found in
+<code>Mathlib.Algebra.Ring.Divisibility.Lemmas</code> which is not subject to this import constraint.</p></div><div class="decl" id="map_dvd_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L27-L29">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#map_dvd_iff"><span class="name">map_dvd_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Equiv.html#EquivLike">EquivLike</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquivClass">MulEquivClass</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="MulEquiv.decompositionMonoid"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L31-L38">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#MulEquiv.decompositionMonoid"><span class="name">MulEquiv</span>.<span class="name">decompositionMonoid</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Equiv.html#EquivLike">EquivLike</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquivClass">MulEquivClass</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Divisibility/Basic.html#DecompositionMonoid">DecompositionMonoid</a> <span class="fn">α</span></span></div></div></div></div><div class="decl" id="dvd_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L46-L47">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add"><span class="name">dvd_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#LeftDistribClass">LeftDistribClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Dvd.dvd.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L50-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.add"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#LeftDistribClass">LeftDistribClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add">dvd_add</a></code>.</p></div></div><div class="decl" id="two_dvd_bit0"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L57-L58">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#two_dvd_bit0"><span class="name">two_dvd_bit0</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">2</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../../.././Mathlib/Init/ZeroOne.html#bit0">bit0</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Dvd.dvd.linear_comb"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L65-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.linear_comb"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">linear_comb</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalCommSemiring">NonUnitalCommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hdx : <span class="fn"><span class="fn">d</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hdy : <span class="fn"><span class="fn">d</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">d</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="dvd_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L78-L80">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_neg"><span class="name">dvd_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>An element <code>a</code> of a semigroup with a distributive negation divides the negation of an element
+<code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="neg_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L86-L88">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#neg_dvd"><span class="name">neg_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>The negation of an element <code>a</code> of a semigroup with a distributive negation divides another
+element <code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="Dvd.dvd.neg_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L91-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.neg_left"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">neg_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of the reverse direction of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#neg_dvd">neg_dvd</a></code>.</p><hr></hr><p>The negation of an element <code>a</code> of a semigroup with a distributive negation divides another
+element <code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="Dvd.dvd.of_neg_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L91-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.of_neg_left"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">of_neg_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of the forward direction of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#neg_dvd">neg_dvd</a></code>.</p><hr></hr><p>The negation of an element <code>a</code> of a semigroup with a distributive negation divides another
+element <code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="Dvd.dvd.of_neg_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L95-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.of_neg_right"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">of_neg_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span></span> → <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of the forward direction of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_neg">dvd_neg</a></code>.</p><hr></hr><p>An element <code>a</code> of a semigroup with a distributive negation divides the negation of an element
+<code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="Dvd.dvd.neg_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L95-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.neg_right"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">neg_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span></span></span></div></div><p><strong>Alias</strong> of the reverse direction of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_neg">dvd_neg</a></code>.</p><hr></hr><p>An element <code>a</code> of a semigroup with a distributive negation divides the negation of an element
+<code>b</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="dvd_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L105-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub"><span class="name">dvd_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Dvd.dvd.sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L109-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#Dvd.dvd.sub"><span class="name">Dvd</span>.<span class="name">dvd</span>.<span class="name">sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub">dvd_sub</a></code>.</p></div></div><div class="decl" id="dvd_add_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add_left"><span class="name">dvd_add_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>If an element <code>a</code> divides another element <code>c</code> in a ring, <code>a</code> divides the sum of another element
+<code>b</code> with <code>c</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="dvd_add_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L120-L120">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add_right"><span class="name">dvd_add_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span></span></div></div><p>If an element <code>a</code> divides another element <code>b</code> in a ring, <code>a</code> divides the sum of <code>b</code> and another
+element <code>c</code> iff <code>a</code> divides <code>c</code>.</p></div></div><div class="decl" id="dvd_sub_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L125-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub_left"><span class="name">dvd_sub_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>If an element <code>a</code> divides another element <code>c</code> in a ring, <code>a</code> divides the difference of another
+element <code>b</code> with <code>c</code> iff <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="dvd_sub_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L132-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub_right"><span class="name">dvd_sub_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span></span></div></div><p>If an element <code>a</code> divides another element <code>b</code> in a ring, <code>a</code> divides the difference of <code>b</code> and
+another element <code>c</code> iff <code>a</code> divides <code>c</code>.</p></div></div><div class="decl" id="dvd_iff_dvd_of_dvd_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L137-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_iff_dvd_of_dvd_sub"><span class="name">dvd_iff_dvd_of_dvd_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="dvd_sub_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L142-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub_comm"><span class="name">dvd_sub_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="two_dvd_bit1"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L152-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#two_dvd_bit1"><span class="name">two_dvd_bit1</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../../.././Mathlib/Init/ZeroOne.html#bit1">bit1</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">2</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="dvd_add_self_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L158-L159">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add_self_left"><span class="name">dvd_add_self_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>An element a divides the sum a + b if and only if a divides b.</p></div></div><div class="decl" id="dvd_add_self_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L164-L165">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_add_self_right"><span class="name">dvd_add_self_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>An element a divides the sum b + a if and only if a divides b.</p></div></div><div class="decl" id="dvd_sub_self_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L170-L171">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub_self_left"><span class="name">dvd_sub_self_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>An element <code>a</code> divides the difference <code>a - b</code> if and only if <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="dvd_sub_self_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L176-L177">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_sub_self_right"><span class="name">dvd_sub_self_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">b</span></span></span></div></div><p>An element <code>a</code> divides the difference <code>b - a</code> if and only if <code>a</code> divides <code>b</code>.</p></div></div><div class="decl" id="dvd_mul_sub_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Algebra/Ring/Divisibility/Basic.lean#L186-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Ring/Divisibility/Basic.html#dvd_mul_sub_mul"><span class="name">dvd_mul_sub_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalCommRing">NonUnitalCommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">k</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hxy : <span class="fn"><span class="fn">k</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">k</span> <a href="../../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

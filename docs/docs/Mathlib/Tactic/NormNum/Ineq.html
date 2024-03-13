@@ -1,0 +1,332 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.NormNum.Ineq</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.NormNum.Ineq";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Tactic</span>.<span class="name">NormNum</span>.<span class="name">Ineq</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Order/Invertible.html">Mathlib.Algebra.Order.Invertible</a></li><li><a href="../../.././Mathlib/Tactic/NormNum/Eq.html">Mathlib.Tactic.NormNum.Eq</a></li><li><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html">Mathlib.Algebra.Order.Field.Defs</a></li><li><a href="../../.././Mathlib/Algebra/Order/Monoid/WithTop.html">Mathlib.Algebra.Order.Monoid.WithTop</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.NormNum.Ineq" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.inferOrderedSemiring"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferOrderedSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.inferOrderedRing"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferOrderedRing</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.inferLinearOrderedField"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferLinearOrderedField</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isNat_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_le_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isNat_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_lt_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isRat_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_le_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isRat_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_lt_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isRat_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_le_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isRat_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_lt_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isNat_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_lt_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isNat_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_le_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isInt_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_le_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isInt_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_lt_true</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isInt_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_le_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.isInt_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_lt_false</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLE"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLE.intArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span>.<span class="name">intArm</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLE.ratArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span>.<span class="name">ratArm</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLT"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLT.intArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span>.<span class="name">intArm</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.Meta.NormNum.evalLT.ratArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span>.<span class="name">ratArm</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="norm-num-extensions-for-inequalities"><code><a href="../../.././Mathlib/Tactic/NormNum/Core.html#norm_num">norm_num</a></code> extensions for inequalities. <a class="hover-link" href="#norm-num-extensions-for-inequalities">#</a></h1></div><div class="decl" id="Mathlib.Meta.NormNum.inferOrderedSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L22-L24">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.inferOrderedSemiring"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferOrderedSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">Q(<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">«$α»</span></span>)</span></span></div></div><p>Helper function to synthesize a typed <code><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> α</code> expression.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.inferOrderedSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.inferOrderedRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L27-L28">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.inferOrderedRing"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferOrderedRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">Q(<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">«$α»</span></span>)</span></span></div></div><p>Helper function to synthesize a typed <code><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> α</code> expression.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.inferOrderedRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.inferLinearOrderedField"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L31-L33">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.inferLinearOrderedField"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">inferLinearOrderedField</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">Q(<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">«$α»</span></span>)</span></span></div></div><p>Helper function to synthesize a typed <code><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> α</code> expression.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.inferLinearOrderedField" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.isNat_le_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L35-L37">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isNat_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_le_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">a</span> <span class="fn">a'</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">b</span> <span class="fn">b'</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Nat.ble">Nat.ble</a> <span class="fn">a'</span> <span class="fn">b'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isNat_lt_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L39-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isNat_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_lt_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">a</span> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">b</span> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Nat.ble">Nat.ble</a> <span class="fn">b'</span> <span class="fn">a'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isRat_le_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L43-L52">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isRat_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_le_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{na : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{nb : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{da : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{db : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">a</span> <span class="fn">na</span> <span class="fn">da</span></span> →
+  <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">b</span> <span class="fn">nb</span> <span class="fn">db</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.mul">Int.mul</a> <span class="fn">na</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.ofNat">Int.ofNat</a> <span class="fn">db</span></span>)</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.mul">Int.mul</a> <span class="fn">nb</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.ofNat">Int.ofNat</a> <span class="fn">da</span></span>)</span></span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isRat_lt_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L54-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isRat_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_lt_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{na : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{nb : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{da : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{db : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">a</span> <span class="fn">na</span> <span class="fn">da</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">b</span> <span class="fn">nb</span> <span class="fn">db</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">na</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">db</span></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">nb</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">da</span></span></span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isRat_le_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L65-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isRat_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_le_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{na : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{nb : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{da : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{db : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">a</span> <span class="fn">na</span> <span class="fn">da</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">b</span> <span class="fn">nb</span> <span class="fn">db</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">nb</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">da</span></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">na</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">db</span></span></span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isRat_lt_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isRat_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isRat_lt_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{na : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{nb : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{da : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{db : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">a</span> <span class="fn">na</span> <span class="fn">da</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsRat">Mathlib.Meta.NormNum.IsRat</a> <span class="fn">b</span> <span class="fn">nb</span> <span class="fn">db</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">nb</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">da</span></span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">na</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">db</span></span></span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="mod_doc"><h1 class="markdown-heading" id="In-equalities">(In)equalities <a class="hover-link" href="#In-equalities">#</a></h1></div><div class="decl" id="Mathlib.Meta.NormNum.isNat_lt_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L75-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isNat_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_lt_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">a</span> <span class="fn">a'</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">b</span> <span class="fn">b'</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Nat.ble">Nat.ble</a> <span class="fn">b'</span> <span class="fn">a'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isNat_le_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L80-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isNat_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isNat_le_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">a</span> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsNat">Mathlib.Meta.NormNum.IsNat</a> <span class="fn">b</span> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Nat.ble">Nat.ble</a> <span class="fn">a'</span> <span class="fn">b'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isInt_le_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isInt_le_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_le_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">a</span> <span class="fn">a'</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">b</span> <span class="fn">b'</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn">a'</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isInt_lt_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L88-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isInt_lt_true"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_lt_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">a</span> <span class="fn">a'</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">b</span> <span class="fn">b'</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn">a'</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isInt_le_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L92-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isInt_le_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_le_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">a</span> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">b</span> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn">b'</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.isInt_lt_false"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L96-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.isInt_lt_false"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">isInt_lt_false</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">a</span> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.IsInt">Mathlib.Meta.NormNum.IsInt</a> <span class="fn">b</span> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Decidable.decide">decide</a> <span class="fn">(<span class="fn"><span class="fn">b'</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a'</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLE"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L102-L153">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLE"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Tactic/NormNum/Core.html#Mathlib.Meta.NormNum.NormNumExt">Mathlib.Meta.NormNum.NormNumExt</a></div></div><p>The <code><a href="../../.././Mathlib/Tactic/NormNum/Core.html#norm_num">norm_num</a></code> extension which identifies expressions of the form <code>a ≤ b</code>,
+such that <code><a href="../../.././Mathlib/Tactic/NormNum/Core.html#norm_num">norm_num</a></code> successfully recognises both <code>a</code> and <code>b</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLE" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLE.intArm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L108-L121">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLE.intArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span>.<span class="name">intArm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> v)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$β»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">let u := <span class="fn">u</span>;
+<span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ra : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">e</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLE.intArm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLE.ratArm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L122-L135">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLE.ratArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLE</span>.<span class="name">ratArm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> v)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$β»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">let u := <span class="fn">u</span>;
+<span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ra : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">e</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLE.ratArm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLT"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L157-L211">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLT"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Tactic/NormNum/Core.html#Mathlib.Meta.NormNum.NormNumExt">Mathlib.Meta.NormNum.NormNumExt</a></div></div><p>The <code><a href="../../.././Mathlib/Tactic/NormNum/Core.html#norm_num">norm_num</a></code> extension which identifies expressions of the form <code>a &lt; b</code>,
+such that <code><a href="../../.././Mathlib/Tactic/NormNum/Core.html#norm_num">norm_num</a></code> successfully recognises both <code>a</code> and <code>b</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLT" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLT.intArm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L163-L178">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLT.intArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span>.<span class="name">intArm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> v)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$β»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">let u := <span class="fn">u</span>;
+<span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ra : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">e</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLT.intArm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.Meta.NormNum.evalLT.ratArm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Tactic/NormNum/Ineq.lean#L179-L192">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Tactic/NormNum/Ineq.html#Mathlib.Meta.NormNum.evalLT.ratArm"><span class="name">Mathlib</span>.<span class="name">Meta</span>.<span class="name">NormNum</span>.<span class="name">evalLT</span>.<span class="name">ratArm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> v)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">Q(<span class="fn">«$β»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(u : <a href="../../.././Lean/Level.html#Lean.Level">Lean.Level</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">let u := <span class="fn">u</span>;
+<span class="fn">Q(<a href="../../.././foundational_types.html">Type</a> u)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">Q(<span class="fn">«$α»</span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ra : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rb : <span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Tactic/NormNum/Result.html#Mathlib.Meta.NormNum.Result">Mathlib.Meta.NormNum.Result</a> <span class="fn">e</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.Meta.NormNum.evalLT.ratArm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

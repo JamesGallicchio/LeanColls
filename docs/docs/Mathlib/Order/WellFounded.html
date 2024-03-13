@@ -1,0 +1,414 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.WellFounded</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Order.WellFounded";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">WellFounded</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Data/Set/Basic.html">Mathlib.Data.Set.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.WellFounded" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#WellFounded.isAsymm"><span class="name">WellFounded</span>.<span class="name">isAsymm</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.isIrrefl"><span class="name">WellFounded</span>.<span class="name">isIrrefl</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.instIsAsymmRel"><span class="name">WellFounded</span>.<span class="name">instIsAsymmRel</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.instIsIrreflRelInstWellFoundedRelationInstSizeOf"><span class="name">WellFounded</span>.<span class="name">instIsIrreflRelInstWellFoundedRelationInstSizeOf</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.mono"><span class="name">WellFounded</span>.<span class="name">mono</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.onFun"><span class="name">WellFounded</span>.<span class="name">onFun</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.has_min"><span class="name">WellFounded</span>.<span class="name">has_min</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.min"><span class="name">WellFounded</span>.<span class="name">min</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.min_mem"><span class="name">WellFounded</span>.<span class="name">min_mem</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.not_lt_min"><span class="name">WellFounded</span>.<span class="name">not_lt_min</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.wellFounded_iff_has_min"><span class="name">WellFounded</span>.<span class="name">wellFounded_iff_has_min</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.sup"><span class="name">WellFounded</span>.<span class="name">sup</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.lt_sup"><span class="name">WellFounded</span>.<span class="name">lt_sup</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.succ"><span class="name">WellFounded</span>.<span class="name">succ</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.lt_succ"><span class="name">WellFounded</span>.<span class="name">lt_succ</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.lt_succ_iff"><span class="name">WellFounded</span>.<span class="name">lt_succ_iff</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.min_le"><span class="name">WellFounded</span>.<span class="name">min_le</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.eq_strictMono_iff_eq_range"><span class="name">WellFounded</span>.<span class="name">eq_strictMono_iff_eq_range</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.self_le_of_strictMono"><span class="name">WellFounded</span>.<span class="name">self_le_of_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#Function.argmin"><span class="name">Function</span>.<span class="name">argmin</span></a></div><div class="nav_link"><a class="break_within" href="#Function.not_lt_argmin"><span class="name">Function</span>.<span class="name">not_lt_argmin</span></a></div><div class="nav_link"><a class="break_within" href="#Function.argminOn"><span class="name">Function</span>.<span class="name">argminOn</span></a></div><div class="nav_link"><a class="break_within" href="#Function.argminOn_mem"><span class="name">Function</span>.<span class="name">argminOn_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Function.not_lt_argminOn"><span class="name">Function</span>.<span class="name">not_lt_argminOn</span></a></div><div class="nav_link"><a class="break_within" href="#Function.argmin_le"><span class="name">Function</span>.<span class="name">argmin_le</span></a></div><div class="nav_link"><a class="break_within" href="#Function.argminOn_le"><span class="name">Function</span>.<span class="name">argminOn_le</span></a></div><div class="nav_link"><a class="break_within" href="#Acc.induction_bot'"><span class="name">Acc</span>.<span class="name">induction_bot'</span></a></div><div class="nav_link"><a class="break_within" href="#Acc.induction_bot"><span class="name">Acc</span>.<span class="name">induction_bot</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.induction_bot'"><span class="name">WellFounded</span>.<span class="name">induction_bot'</span></a></div><div class="nav_link"><a class="break_within" href="#WellFounded.induction_bot"><span class="name">WellFounded</span>.<span class="name">induction_bot</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Well-founded-relations">Well-founded relations <a class="hover-link" href="#Well-founded-relations">#</a></h1><p>A relation is well-founded if it can be used for induction: for each <code>x</code>, <code>(∀ y, r y x → P y) → P x</code>
+implies <code>P x</code>. Well-founded relations can be used for induction and recursion, including
+construction of fixed points in the space of dependent functions <code>Π x : α , β x</code>.</p><p>The predicate <code><a href="../.././Init/WF.html#WellFounded">WellFounded</a></code> is defined in the core library. In this file we prove some extra lemmas
+and provide a few new definitions: <code><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a></code>, <code><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.sup">WellFounded.sup</a></code>, and <code><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.succ">WellFounded.succ</a></code>,
+and an induction principle <code><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.induction_bot">WellFounded.induction_bot</a></code>.</p></div><div class="decl" id="WellFounded.isAsymm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L31-L31">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.isAsymm"><span class="name">WellFounded</span>.<span class="name">isAsymm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsAsymm">IsAsymm</a> <span class="fn">α</span> <span class="fn">r</span></span></div></div></div></div><div class="decl" id="WellFounded.isIrrefl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L34-L34">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.isIrrefl"><span class="name">WellFounded</span>.<span class="name">isIrrefl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsIrrefl">IsIrrefl</a> <span class="fn">α</span> <span class="fn">r</span></span></div></div></div></div><div class="decl" id="WellFounded.instIsAsymmRel"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L37-L38">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.instIsAsymmRel"><span class="name">WellFounded</span>.<span class="name">instIsAsymmRel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/WF.html#WellFoundedRelation">WellFoundedRelation</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsAsymm">IsAsymm</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsAsymm">IsAsymm</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsAsymm">IsAsymm</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="WellFounded.instIsIrreflRelInstWellFoundedRelationInstSizeOf"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L40-L40">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.instIsIrreflRelInstWellFoundedRelationInstSizeOf"><span class="name">WellFounded</span>.<span class="name">instIsIrreflRelInstWellFoundedRelationInstSizeOf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsIrrefl">IsIrrefl</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsIrrefl">IsIrrefl</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Classes.html#IsIrrefl">IsIrrefl</a> <span class="fn">α</span> <span class="fn">WellFoundedRelation.rel</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="WellFounded.mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L42-L43">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.mono"><span class="name">WellFounded</span>.<span class="name">mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r' : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">r'</span> <span class="fn">a</span> <span class="fn">b</span></span> → <span class="fn"><span class="fn">r</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r'</span></span></div></div></div></div><div class="decl" id="WellFounded.onFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L46-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.onFun"><span class="name">WellFounded</span>.<span class="name">onFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Sort</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span> → <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">(<span class="fn"><span class="fn">r</span> <a href="../.././Mathlib/Init/Function.html#Function.onFun">on</a> <span class="fn">f</span></span>)</span></span></span></div></div></div></div><div class="decl" id="WellFounded.has_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L53-L58">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.has_min"><span class="name">WellFounded</span>.<span class="name">has_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span> → <span class="fn">∃ a ∈ <span class="fn">s</span>, <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">a</span></span></span></span></span></span></div></div><p>If <code>r</code> is a well-founded relation, then any nonempty set has a minimal element
+with respect to <code>r</code>.</p></div></div><div class="decl" id="WellFounded.min"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.min"><span class="name">WellFounded</span>.<span class="name">min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>A minimal element of a nonempty set in a well-founded order.</p><p>If you're working with a nonempty linear order, consider defining a
+<code>ConditionallyCompleteLinearOrderBot</code> instance via
+<code>WellFounded.conditionallyCompleteLinearOrderWithBot</code> and using <code><a href="../.././Mathlib/Order/Notation.html#Inf">Inf</a></code> instead.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">H</span> <span class="fn">s</span> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">(_ : <span class="fn">∃ a ∈ <span class="fn">s</span>, <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">a</span></span></span></span></span>)</span></span></span></li></ul></details><details id="instances-for-list-WellFounded.min" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="WellFounded.min_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L70-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.min_mem"><span class="name">WellFounded</span>.<span class="name">min_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">H</span> <span class="fn">s</span> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="WellFounded.not_lt_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L76-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.not_lt_min"><span class="name">WellFounded</span>.<span class="name">not_lt_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">H</span> <span class="fn">s</span> <span class="fn">h</span></span>)</span></span></span></div></div></div></div><div class="decl" id="WellFounded.wellFounded_iff_has_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L82-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.wellFounded_iff_has_min"><span class="name">WellFounded</span>.<span class="name">wellFounded_iff_has_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">s</span> : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span> → <span class="fn">∃ m ∈ <span class="fn">s</span>, <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">m</span></span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="WellFounded.sup"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L95-L97">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.sup"><span class="name">WellFounded</span>.<span class="name">sup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(wf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Order/RelClasses.html#Set.Bounded">Set.Bounded</a> <span class="fn">r</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>The supremum of a bounded, well-founded order</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.sup">WellFounded.sup</a> <span class="fn">wf</span> <span class="fn">s</span> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">wf</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn">∀ <span class="fn">a</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">r</span> <span class="fn">a</span> <span class="fn">x</span></span></span>}</span> <span class="fn">h</span></span></span></li></ul></details><details id="instances-for-list-WellFounded.sup" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="WellFounded.lt_sup"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L100-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.lt_sup"><span class="name">WellFounded</span>.<span class="name">lt_sup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(wf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Order/RelClasses.html#Set.Bounded">Set.Bounded</a> <span class="fn">r</span> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.sup">WellFounded.sup</a> <span class="fn">wf</span> <span class="fn">s</span> <span class="fn">h</span></span>)</span></span></div></div></div></div><div class="decl" id="WellFounded.succ"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L111-L112">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.succ"><span class="name">WellFounded</span>.<span class="name">succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(wf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>A successor of an element <code>x</code> in a well-founded order is a minimal element <code>y</code> such that
+<code>x &lt; y</code> if one exists. Otherwise it is <code>x</code> itself.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.succ">WellFounded.succ</a> <span class="fn">wf</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn">∃ (y : <span class="fn">α</span>), <span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">y</span></span></span> then <span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">wf</span> <span class="fn">{<span class="fn">y</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">y</span></span>}</span> <span class="fn">h</span></span> else <span class="fn">x</span></span></span></li></ul></details><details id="instances-for-list-WellFounded.succ" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="WellFounded.lt_succ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L115-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.lt_succ"><span class="name">WellFounded</span>.<span class="name">lt_succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(wf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ (y : <span class="fn">α</span>), <span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.succ">WellFounded.succ</a> <span class="fn">wf</span> <span class="fn">x</span></span>)</span></span></div></div></div></div><div class="decl" id="WellFounded.lt_succ_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L123-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.lt_succ_iff"><span class="name">WellFounded</span>.<span class="name">lt_succ_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[wo : <span class="fn"><a href="../.././Mathlib/Order/RelClasses.html#IsWellOrder">IsWellOrder</a> <span class="fn">α</span> <span class="fn">r</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∃ (y : <span class="fn">α</span>), <span class="fn"><span class="fn">r</span> <span class="fn">x</span> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">y</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.succ">WellFounded.succ</a> <span class="fn">(_ : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span> <span class="fn">x</span></span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">y</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="WellFounded.min_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L145-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.min_le"><span class="name">WellFounded</span>.<span class="name">min_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">β</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hne : <span class="fn"><a href="../.././Init/Prelude.html#optParam">optParam</a> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span> <span class="fn">(_ : <span class="fn">∃ (x : <span class="fn">β</span>), <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">h</span> <span class="fn">s</span> <span class="fn">hne</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="WellFounded.eq_strictMono_iff_eq_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L162-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.eq_strictMono_iff_eq_range"><span class="name">WellFounded</span>.<span class="name">eq_strictMono_iff_eq_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set.range">Set.range</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set.range">Set.range</a> <span class="fn">g</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="WellFounded.self_le_of_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L173-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.self_le_of_strictMono"><span class="name">WellFounded</span>.<span class="name">self_le_of_strictMono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">n</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Function.argmin"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L193-L194">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.argmin"><span class="name">Function</span>.<span class="name">argmin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#LT">LT</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>Given a function <code>f : α → β</code> where <code>β</code> carries a well-founded <code>&lt;</code>, this is an element of <code>α</code>
+whose image under <code>f</code> is minimal in the sense of <code><a href="../.././Mathlib/Order/WellFounded.html#Function.not_lt_argmin">Function.not_lt_argmin</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argmin">Function.argmin</a> <span class="fn">f</span> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">(_ : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">(<span class="fn"><a href="../.././Init/Core.html#InvImage">InvImage</a> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">f</span></span>)</span></span>)</span> <span class="fn">Set.univ</span> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">Set.univ</span></span>)</span></span></span></li></ul></details><details id="instances-for-list-Function.argmin" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.not_lt_argmin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L197-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.not_lt_argmin"><span class="name">Function</span>.<span class="name">not_lt_argmin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#LT">LT</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argmin">Function.argmin</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="Function.argminOn"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L204-L205">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.argminOn"><span class="name">Function</span>.<span class="name">argminOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#LT">LT</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p>Given a function <code>f : α → β</code> where <code>β</code> carries a well-founded <code>&lt;</code>, and a non-empty subset <code>s</code>
+of <code>α</code>, this is an element of <code>s</code> whose image under <code>f</code> is minimal in the sense of
+<code><a href="../.././Mathlib/Order/WellFounded.html#Function.not_lt_argminOn">Function.not_lt_argminOn</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argminOn">Function.argminOn</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">s</span> <span class="fn">hs</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#WellFounded.min">WellFounded.min</a> <span class="fn">(_ : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">(<span class="fn"><a href="../.././Init/Core.html#InvImage">InvImage</a> <span class="fn">(<span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span>)</span> <span class="fn">f</span></span>)</span></span>)</span> <span class="fn">s</span> <span class="fn">hs</span></span></span></li></ul></details><details id="instances-for-list-Function.argminOn" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.argminOn_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L209-L210">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.argminOn_mem"><span class="name">Function</span>.<span class="name">argminOn_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#LT">LT</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argminOn">Function.argminOn</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">s</span> <span class="fn">hs</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Function.not_lt_argminOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L214-L216">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.not_lt_argminOn"><span class="name">Function</span>.<span class="name">not_lt_argminOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#LT">LT</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Init/Prelude.html#optParam">optParam</a> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argminOn">Function.argminOn</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">s</span> <span class="fn">hs</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="Function.argmin_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L226-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.argmin_le"><span class="name">Function</span>.<span class="name">argmin_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argmin">Function.argmin</a> <span class="fn">f</span> <span class="fn">h</span></span>)</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Function.argminOn_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L231-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Function.argminOn_le"><span class="name">Function</span>.<span class="name">argminOn_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Init/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">fun (<span class="fn">x</span> x_1 : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x_1</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Init/Prelude.html#optParam">optParam</a> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">s</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Order/WellFounded.html#Function.argminOn">Function.argminOn</a> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">s</span> <span class="fn">hs</span></span>)</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Acc.induction_bot'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L247-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Acc.induction_bot'"><span class="name">Acc</span>.<span class="name">induction_bot'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Sort</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bot : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../.././Init/WF.html#Acc">Acc</a> <span class="fn">r</span> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <span class="fn"><span class="fn">β</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ih : <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">f</span> <span class="fn">bot</span></span></span> → <span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span> → <span class="fn">∃ (c : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">c</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">c</span></span>)</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span> → <span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">bot</span></span>)</span></span></span></div></div><p>Let <code>r</code> be a relation on <code>α</code>, let <code>f : α → β</code> be a function, let <code>C : β → Prop</code>, and
+let <code>bot : α</code>. This induction principle shows that <code>C (f bot)</code> holds, given that</p><ul>
+<li>some <code>a</code> that is accessible by <code>r</code> satisfies <code>C (f a)</code>, and</li>
+<li>for each <code>b</code> such that <code>f b ≠ f bot</code> and <code>C (f b)</code> holds, there is <code>c</code>
+satisfying <code>r c b</code> and <code>C (f c)</code>.</li>
+</ul></div></div><div class="decl" id="Acc.induction_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L259-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#Acc.induction_bot"><span class="name">Acc</span>.<span class="name">induction_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bot : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../.././Init/WF.html#Acc">Acc</a> <span class="fn">r</span> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <span class="fn"><span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ih : <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">bot</span></span> → <span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">b</span></span> → <span class="fn">∃ (c : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">c</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">C</span> <span class="fn">c</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">C</span> <span class="fn">bot</span></span></span></div></div><p>Let <code>r</code> be a relation on <code>α</code>, let <code>C : α → Prop</code> and let <code>bot : α</code>.
+This induction principle shows that <code>C bot</code> holds, given that</p><ul>
+<li>some <code>a</code> that is accessible by <code>r</code> satisfies <code>C a</code>, and</li>
+<li>for each <code>b ≠ bot</code> such that <code>C b</code> holds, there is <code>c</code> satisfying <code>r c b</code> and <code>C c</code>.</li>
+</ul></div></div><div class="decl" id="WellFounded.induction_bot'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L270-L273">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.induction_bot'"><span class="name">WellFounded</span>.<span class="name">induction_bot'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Sort</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hwf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bot : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <span class="fn"><span class="fn">β</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ih : <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">f</span> <span class="fn">bot</span></span></span> → <span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span> → <span class="fn">∃ (c : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">c</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">c</span></span>)</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span> → <span class="fn"><span class="fn">C</span> <span class="fn">(<span class="fn"><span class="fn">f</span> <span class="fn">bot</span></span>)</span></span></span></div></div><p>Let <code>r</code> be a well-founded relation on <code>α</code>, let <code>f : α → β</code> be a function,
+let <code>C : β → Prop</code>, and let <code>bot : α</code>.
+This induction principle shows that <code>C (f bot)</code> holds, given that</p><ul>
+<li>some <code>a</code> satisfies <code>C (f a)</code>, and</li>
+<li>for each <code>b</code> such that <code>f b ≠ f bot</code> and <code>C (f b)</code> holds, there is <code>c</code>
+satisfying <code>r c b</code> and <code>C (f c)</code>.</li>
+</ul></div></div><div class="decl" id="WellFounded.induction_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/7ca43cbd6aa34058a1afad8e47190af3ec1f9bdb/Mathlib/Order/WellFounded.lean#L283-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/WellFounded.html#WellFounded.induction_bot"><span class="name">WellFounded</span>.<span class="name">induction_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">α</span> → <span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hwf : <span class="fn"><a href="../.././Init/WF.html#WellFounded">WellFounded</a> <span class="fn">r</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{bot : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <span class="fn"><span class="fn">α</span> → <a href="../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ih : <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">bot</span></span> → <span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">b</span></span> → <span class="fn">∃ (c : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <span class="fn">c</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">C</span> <span class="fn">c</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">C</span> <span class="fn">a</span></span> → <span class="fn"><span class="fn">C</span> <span class="fn">bot</span></span></span></div></div><p>Let <code>r</code> be a well-founded relation on <code>α</code>, let <code>C : α → Prop</code>, and let <code>bot : α</code>.
+This induction principle shows that <code>C bot</code> holds, given that</p><ul>
+<li>some <code>a</code> satisfies <code>C a</code>, and</li>
+<li>for each <code>b</code> that satisfies <code>C b</code>, there is <code>c</code> satisfying <code>r c b</code> and <code>C c</code>.</li>
+</ul><p>The naming is inspired by the fact that when <code>r</code> is transitive, it follows that <code>bot</code> is
+the smallest element w.r.t. <code>r</code> that satisfies <code>C</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
