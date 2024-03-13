@@ -427,6 +427,10 @@ instance [Membership τ C] [LeanColls.ToMultiset C τ] [ToMultiset C τ] [Mem.To
   rw [LawfulToList.toMultiset_toList]
   rw [ToMultiset.toMultiset_singleton]
 
+def into [Fold C τ] (c : C) (C' : Type u) [Insert C' τ] : C' :=
+  fold c insert empty
+abbrev _root_.LeanColls.Fold.into := Insert.into
+
 end Insert
 
 
