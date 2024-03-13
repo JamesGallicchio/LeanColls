@@ -236,3 +236,39 @@ theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
   induction L1 generalizing init <;> simp
   case cons hd tl ih =>
   rw [ih]; simp [foldl_map]
+
+theorem List.reverse_filter (f) (L : List α)
+  : List.reverse (List.filter f L) = List.filter f (L.reverse) := by
+  induction L <;> simp [filter_cons]; split <;> simp [*]
+
+theorem List.foldl_filter (f) (acc : β) (g) (L : List α)
+  : List.foldl f acc (List.filter g L) = List.foldl (fun acc x => if g x then f acc x else acc) acc L := by
+  rw [← foldr_reverse, reverse_filter, ← foldr_reverse]
+  generalize reverse L = L'; clear L; rename List α => L
+  induction L <;> simp [filter_cons]; split <;> simp [*]
+
+theorem List.reverse_filterMap (f : α → Option β) (L : List α)
+  : List.reverse (List.filterMap f L) = List.filterMap f (L.reverse) := by
+  induction L <;> simp [filterMap_cons, filterMap_append]; split <;> simp [*]
+
+theorem List.foldl_filterMap (f) (acc : γ) (g : α → Option β) (L : List α)
+  : List.foldl f acc (List.filterMap g L) =
+      List.foldl (fun acc x =>
+        match g x with
+        | some x => f acc x
+        | none => acc) acc L := by
+  rw [← foldr_reverse, reverse_filterMap, ← foldr_reverse]
+  generalize reverse L = L'; clear L; rename List α => L
+  induction L <;> simp [filter_cons]; split <;> simp [*]
+
+theorem List.reverse_bind (f : α → List β) (L : List α)
+  : List.reverse (List.bind L f) = List.bind (L.reverse) (fun a => (f a).reverse) := by
+  induction L <;> simp [*]
+
+theorem List.foldl_bind (f) (acc : γ) (g : α → List β) (L : List α)
+  : List.foldl f acc (List.bind L g) =
+      List.foldl (fun acc x =>
+        List.foldl f acc (g x)) acc L := by
+  rw [← foldr_reverse, reverse_bind, ← foldr_reverse]
+  generalize reverse L = L'; clear L; rename List α => L
+  induction L <;> simp [*]

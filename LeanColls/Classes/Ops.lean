@@ -346,15 +346,22 @@ theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [
   rw [all_eq_all_toList]
   simp [Mem.ToList.mem_iff_mem_toList]
 
+def mem [Fold C τ] (x : τ) (c : C) : Prop :=
+  open Classical in any (decide <| · = x) c
+
 def toMem [Fold C τ] : Membership τ C where
-  mem x c := open Classical in any (decide <| · = x) c
+  mem := mem
+
+open Classical in
+@[simp] theorem mem_iff [Fold C τ] (x : τ) (c : C)
+  : toMem.mem x c ↔ any (decide <| · = x) c := by rfl
 
 def toMem.ToList [Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
     : @Mem.ToList C τ toMem inferInstance :=
   @Mem.ToList.mk C τ toMem inferInstance
     (by
       intro x c
-      simp [toMem]
+      simp [toMem, mem]
       rw [any_eq_any_toList]
       simp [List.any_eq_true, beq_iff_eq, exists_eq_right])
 
@@ -430,6 +437,13 @@ instance [Membership τ C] [LeanColls.ToMultiset C τ] [ToMultiset C τ] [Mem.To
 def into (C' : Type u) {τ} [Insert C' τ] {C} [Fold C τ] (c : C) : C' :=
   fold c insert empty
 abbrev _root_.LeanColls.Fold.into := @Insert.into
+
+theorem mem_into (C') {τ C} [DecidableEq τ] [Fold C τ] [Insert C' τ]
+      [Membership τ C'] [Insert.Mem C' τ] [ToList C' τ] [Mem.ToList C' τ] (c : C) (x)
+  : x ∈ into C' c ↔ x ∈ into (List τ) c := by
+  simp [into]
+  rw [Mem.ToList.mem_iff_mem_toList]
+  sorry
 
 end Insert
 
