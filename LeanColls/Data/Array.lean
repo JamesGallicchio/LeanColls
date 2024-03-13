@@ -152,6 +152,9 @@ instance : Fold ByteArray UInt8 where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
 
+instance : Membership UInt8 ByteArray := Fold.toMem
+--instance : Mem.ToList ByteArray UInt8 := Fold.toMem.ToList
+
 instance : Seq ByteArray UInt8 where
   size := size
   get := get
@@ -172,6 +175,9 @@ instance : ToList FloatArray Float where
 instance : Fold FloatArray Float where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
+
+instance : Membership Float FloatArray := Fold.toMem
+--instance : Mem.ToList FloatArray Float := Fold.toMem.ToList
 
 def append (A1 A2 : FloatArray) : FloatArray :=
   aux A1 0

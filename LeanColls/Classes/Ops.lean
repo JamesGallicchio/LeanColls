@@ -346,16 +346,17 @@ theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [
   rw [all_eq_all_toList]
   simp [Mem.ToList.mem_iff_mem_toList]
 
-instance (priority := low) [Fold C τ] [BEq τ] : Membership τ C where
-  mem x c := any (· == x) c
+def toMem [Fold C τ] : Membership τ C where
+  mem x c := open Classical in any (decide <| · = x) c
 
-instance [Fold C τ] [BEq τ] [LeanColls.ToList C τ]
-    [ToList C τ] [LawfulBEq τ] : Mem.ToList C τ where
-  mem_iff_mem_toList := by
-    intro x c
-    conv => lhs; simp [Membership.mem]
-    rw [any_eq_any_toList]
-    simp only [List.any_eq_true, beq_iff_eq, exists_eq_right]
+def toMem.ToList [Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
+    : @Mem.ToList C τ toMem inferInstance :=
+  @Mem.ToList.mk C τ toMem inferInstance
+    (by
+      intro x c
+      simp [toMem]
+      rw [any_eq_any_toList]
+      simp [List.any_eq_true, beq_iff_eq, exists_eq_right])
 
 end Fold
 
