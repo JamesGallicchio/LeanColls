@@ -236,3 +236,75 @@ theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
   induction L1 generalizing init <;> simp
   case cons hd tl ih =>
   rw [ih]; simp [foldl_map]
+section LinearOrders
+
+instance : LinearOrder UInt8 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt8.le; simp
+  le_trans := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b hab hba; apply UInt8.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt8.le UInt8.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt16 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt16.le
+    simp
+  le_trans := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b hab hba; apply UInt16.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt16.le UInt16.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt32 where
+  decidableLE := inferInstance
+  le_refl := by
+    unfold LE.le; simp [instLEUInt32]
+  le_trans := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b hab hba; apply UInt32.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    unfold LE.le LT.lt; simp only [instLEUInt32, instLTUInt32]
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt64 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt64.le; simp
+  le_trans := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b hab hba; apply UInt64.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt64.le UInt64.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+end LinearOrders

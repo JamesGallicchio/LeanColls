@@ -1,4 +1,4 @@
-/- Copyright (c) 2023 James Gallicchio
+/- Copyright (c) 2023-2024 James Gallicchio
 
 Authors: James Gallicchio
 -/
@@ -12,56 +12,102 @@ import LeanColls.MathlibUpstream
 
 namespace LeanColls
 
-structure Range (ι : Type u) where
-  /-- The range's lower bound. -/
-  start : ι
-  /-- Whether to include start. -/
-  start_inclusive : Bool := true
-  /-- The range's upper bound. -/
-  stop : ι
-  /-- Whether to include stop. -/
-  stop_inclusive : Bool := false
-  /-- The amount to increment at each step. -/
-  step : ι
-
 namespace Range
 
-variable [LE ι] [LT ι] [DecidableRel (· < · : ι → ι → Prop)] [DecidableRel (· ≤ · : ι → ι → Prop)]
+/-! ## Generalized Ranges
 
-#check LinearOrder
-def contains
-    (r : Range ι) (i : ι) : Prop :=
-  ( match r.start with
-    | none => true
-    | some (l, false) => l < i
-    | some (l, true) => l ≤ i
-  ) ∧
-  ( match r.stop with
-    | none => true
-    | some (h, false) => i < h
-    | some (h, true) => i ≤ h
-  )
+Mathlib defines 9 common intervals over preorders,
+based on whether the left and right bounds are
+- closed (inclusive)
+- open (exclusive)
+- infinite (unbounded)
 
-instance {r : Range ι} : DecidablePred (contains r) := fun _ =>
-  @And.decidable _ _
-    ( match r.start with
-    | none => inferInstance
-    | some (_, false) => inferInstance
-    | some (_, true) => inferInstance )
-    ( match r.stop with
-      | none => inferInstance
-      | some (_, false) => inferInstance
-      | some (_, true) => inferInstance
-    )
+These are denoted `Range.XX` here.
+`X` is `C` for closed, `O` for open, and `I` for infinite.
+-/
 
-def toSet (r : Range ι) : Set ι := contains r
+structure II (ι : Type u)
+structure IC {ι : Type u} (  R : ι)
+structure IO {ι : Type u} (  R : ι)
+structure CI {ι : Type u} (L   : ι)
+structure OI {ι : Type u} (L   : ι)
+structure OO {ι : Type u} (L R : ι)
+structure CO {ι : Type u} (L R : ι)
+structure OC {ι : Type u} (L R : ι)
+structure CC {ι : Type u} (L R : ι)
 
-instance : Membership ι (Range ι) where
-  mem i r := contains r i
+/-! ## Range Notation
 
-variable [Add ι] [One ι]
+- Ranges are denoted by `a..b`
+- By default the endpoints are included
+- Write `a<..b` or `a..<b` to exclude either endpoint.
+- Write `a..` or `..b` or `..` for ranges unbounded on left/right
+-/
 
-def foldl (f : β → ι → β) (acc : β) (r : Range ι) : β :=
+notation    ".."    => II
+notation    ".."  r => IC r
+notation    "..<" r => IO r
+notation l  ".."    => CI l
+notation l "<.."    => OI l
+notation l  ".."  r => OO l r
+notation l  "..<" r => CO l r
+notation l "<.."  r => OC l r
+notation l "<..<" r => CC l r
+
+/-! ## Range Membership -/
+
+section
+variable [LE ι] [DecidableRel (· ≤ · : ι → ι → Prop)] [LT ι] [DecidableRel (· < · : ι → ι → Prop)]
+
+@[inline] def II.contains (_self : II (ι := ι)    ) : ι → Prop := fun _i => true
+@[inline] def IC.contains (_self : IC (ι := ι) r  ) : ι → Prop := fun i => r ≤ i
+@[inline] def IO.contains (_self : IO (ι := ι) r  ) : ι → Prop := fun i => r < i
+@[inline] def CI.contains (_self : CI (ι := ι) l  ) : ι → Prop := fun i => l ≤ i
+@[inline] def OI.contains (_self : OI (ι := ι) l  ) : ι → Prop := fun i => l < i
+@[inline] def OO.contains (_self : OO (ι := ι) l r) : ι → Prop := fun i => l < i && i < r
+@[inline] def CO.contains (_self : CO (ι := ι) l r) : ι → Prop := fun i => l ≤ i && i < r
+@[inline] def OC.contains (_self : OC (ι := ι) l r) : ι → Prop := fun i => l < i && i ≤ r
+@[inline] def CC.contains (_self : CC (ι := ι) l r) : ι → Prop := fun i => l ≤ i && i ≤ r
+
+@[inline] instance : Membership ι (II (ι := ι)    ) := ⟨Function.swap II.contains⟩
+@[inline] instance : Membership ι (IC (ι := ι) r  ) := ⟨Function.swap IC.contains⟩
+@[inline] instance : Membership ι (IO (ι := ι) r  ) := ⟨Function.swap IO.contains⟩
+@[inline] instance : Membership ι (CI (ι := ι) l  ) := ⟨Function.swap CI.contains⟩
+@[inline] instance : Membership ι (OI (ι := ι) l  ) := ⟨Function.swap OI.contains⟩
+@[inline] instance : Membership ι (OO (ι := ι) l r) := ⟨Function.swap OO.contains⟩
+@[inline] instance : Membership ι (CO (ι := ι) l r) := ⟨Function.swap CO.contains⟩
+@[inline] instance : Membership ι (OC (ι := ι) l r) := ⟨Function.swap OC.contains⟩
+@[inline] instance : Membership ι (CC (ι := ι) l r) := ⟨Function.swap CC.contains⟩
+
+instance : DecidablePred (II.contains (self : II (ι := ι)    )) := by unfold II.contains; infer_instance
+instance : DecidablePred (IC.contains (self : IC (ι := ι) r  )) := by unfold IC.contains; infer_instance
+instance : DecidablePred (IO.contains (self : IO (ι := ι) r  )) := by unfold IO.contains; infer_instance
+instance : DecidablePred (CI.contains (self : CI (ι := ι) l  )) := by unfold CI.contains; infer_instance
+instance : DecidablePred (OI.contains (self : OI (ι := ι) l  )) := by unfold OI.contains; infer_instance
+instance : DecidablePred (OO.contains (self : OO (ι := ι) l r)) := by unfold OO.contains; infer_instance
+instance : DecidablePred (CO.contains (self : CO (ι := ι) l r)) := by unfold CO.contains; infer_instance
+instance : DecidablePred (OC.contains (self : OC (ι := ι) l r)) := by unfold OC.contains; infer_instance
+instance : DecidablePred (CC.contains (self : CC (ι := ι) l r)) := by unfold CC.contains; infer_instance
+
+instance II.instDecidableMem : Decidable (i ∈ (self : II (ι := ι)    )) := by simp [Membership.mem]; infer_instance
+instance IC.instDecidableMem : Decidable (i ∈ (self : IC (ι := ι) r  )) := by simp [Membership.mem]; infer_instance
+instance IO.instDecidableMem : Decidable (i ∈ (self : IO (ι := ι) r  )) := by simp [Membership.mem]; infer_instance
+instance CI.instDecidableMem : Decidable (i ∈ (self : CI (ι := ι) l  )) := by simp [Membership.mem]; infer_instance
+instance OI.instDecidableMem : Decidable (i ∈ (self : OI (ι := ι) l  )) := by simp [Membership.mem]; infer_instance
+instance OO.instDecidableMem : Decidable (i ∈ (self : OO (ι := ι) l r)) := by simp [Membership.mem]; infer_instance
+instance CO.instDecidableMem : Decidable (i ∈ (self : CO (ι := ι) l r)) := by simp [Membership.mem]; infer_instance
+instance OC.instDecidableMem : Decidable (i ∈ (self : OC (ι := ι) l r)) := by simp [Membership.mem]; infer_instance
+instance CC.instDecidableMem : Decidable (i ∈ (self : CC (ι := ι) l r)) := by simp [Membership.mem]; infer_instance
+
+end
+
+/-! ## Range Folds -/
+
+section
+variable [LE ι] [DecidableRel (· ≤ · : ι → ι → Prop)] [LT ι] [DecidableRel (· < · : ι → ι → Prop)]
+          [Add ι] [One ι]
+
+def foldlAux (f : β → ι → β) (acc : β) (start stop : ι) : β :=
   aux
 
 def ofNth (r : Range) (x : Nat) : Nat :=
