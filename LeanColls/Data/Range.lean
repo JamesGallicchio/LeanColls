@@ -101,151 +101,167 @@ instance CC.instDecidableMem : Decidable (i ∈ (self : CC (ι := ι) l r)) := b
 
 end
 
+/-! ## Range Stepping -/
+
+/-- Step function for range types.
+`step i = i'` should be the smallest `i'` s.t. `i < i'`.
+-/
+class Step (ι : Type u) where
+  step : ι → ι
+
+class LawfulStep (ι) [Step ι] [LT ι] [LE ι] where
+  step_minimal : ∀ i : ι, (∃ i', i < i') → ∀ i', i < i' → Step.step i ≤ i'
+
+instance : Step Nat where
+  step := Nat.succ
+
+instance : LawfulStep Nat where
+  step_minimal := by
+    rintro i - i'' hi''
+    exact hi''
+
+instance : Step (Fin n) where
+  step := fun i =>
+    have : n > 0 := Nat.lt_of_le_of_lt (Nat.zero_le _) i.isLt
+    ⟨(i+1) % n, Nat.mod_lt _ this⟩
+
+instance : LawfulStep (Fin n) where
+  step_minimal := by
+    rintro i - i'' hi''
+    cases i; cases i''
+    simp_all [Step.step]
+    rw [Nat.mod_eq_of_lt]
+    · assumption
+    · omega
+
 /-! ## Range Folds -/
 
+class WellFoundedStepLE (ι) [Step ι] [LE ι] where
+  wf_step_le : ∀ stop, WellFounded (fun (x y : ι) => x ≤ stop ∧ Step.step y = x)
+
+class WellFoundedStepLT (ι) [Step ι] [LT ι] where
+  wf_step_lt : ∀ stop, WellFounded (fun (x y : ι) => x < stop ∧ Step.step y = x)
+
+instance : WellFoundedStepLE Nat where
+  wf_step_le stop := by
+    constructor
+    intro x
+    simp [Step.step]
+    if hx : ¬(x ≤ stop) then
+      constructor
+      intro y ⟨h,rfl⟩
+      exfalso; apply hx (Nat.le_of_succ_le h)
+    else
+    simp at hx
+    let diff := stop - x
+    have : x = stop - diff := by
+      simp only; rw [Nat.sub_sub_self hx]
+    rw [this]; clear hx this
+    have : diff ≤ stop := by omega
+    clear_value diff
+    induction diff with
+    | zero =>
+      constructor
+      rintro - ⟨h,rfl⟩
+      exfalso
+      simp at h; exact Nat.not_succ_le_self _ h
+    | succ i ih =>
+      constructor
+      rintro - ⟨-,rfl⟩
+      have : (stop - i.succ).succ = (stop - i) := by omega
+      rw [this]; clear this
+      apply ih
+      omega
+
+instance : WellFoundedStepLT Nat where
+  wf_step_lt stop := by
+    constructor
+    intro x
+    simp [Step.step]
+    if hx : ¬(x < stop) then
+      constructor
+      intro y ⟨h,rfl⟩
+      exfalso; apply hx (Nat.le_of_succ_le h)
+    else
+    simp at hx
+    let diff := stop - x
+    have : x = stop - diff := by
+      rw [Nat.sub_sub_self]; exact Nat.le_of_lt hx
+    rw [this]; clear hx this
+    have : diff ≤ stop := by omega
+    clear_value diff
+    induction diff with
+    | zero =>
+      constructor
+      rintro - ⟨h,rfl⟩
+      exfalso
+      simp at h; exact Nat.not_succ_le_self _ (Nat.le_of_lt h)
+    | succ i ih =>
+      constructor
+      rintro - ⟨-,rfl⟩
+      have : (stop - i.succ).succ = (stop - i) := by omega
+      rw [this]; clear this
+      apply ih
+      omega
+
+structure StepToLE (ι : Type u) where
+  (start stop : ι)
+
+instance [Step ι] [LE ι] [WellFoundedStepLE ι] : WellFoundedRelation (StepToLE ι) where
+  rel := fun ⟨start,stop⟩ ⟨start',stop'⟩ =>
+    stop = stop' ∧ Step.step start' = start ∧ start ≤ stop
+  wf := by
+    constructor
+    rintro ⟨start,stop⟩
+    simp
+    have ⟨this⟩ := WellFoundedStepLE.wf_step_le stop
+    specialize this start
+    induction this with
+    | intro start _h ih =>
+      constructor
+      rintro ⟨start', stop'⟩
+      simp_all
+
+structure StepToLT (ι : Type u) where
+  (start stop : ι)
+
+instance [Step ι] [LT ι] [WellFoundedStepLT ι] : WellFoundedRelation (StepToLT ι) where
+  rel := fun ⟨start,stop⟩ ⟨start',stop'⟩ =>
+    stop = stop' ∧ Step.step start' = start ∧ start < stop
+  wf := by
+    constructor
+    rintro ⟨start,stop⟩
+    simp
+    have ⟨this⟩ := WellFoundedStepLT.wf_step_lt stop
+    specialize this start
+    induction this with
+    | intro start _h ih =>
+      constructor
+      rintro ⟨start', stop'⟩
+      simp_all
+
 section
-variable [LE ι] [DecidableRel (· ≤ · : ι → ι → Prop)] [LT ι] [DecidableRel (· < · : ι → ι → Prop)]
-          [Add ι] [One ι]
+variable [DecidableEq ι]
+    [LE ι] [DecidableRel (· ≤ · : ι → ι → Prop)]
+    [LT ι] [DecidableRel (· < · : ι → ι → Prop)]
+    [Step ι]
 
-def foldlAux (f : β → ι → β) (acc : β) (start stop : ι) : β :=
-  aux
+attribute [-instance] instSizeOf
 
-def ofNth (r : Range) (x : Nat) : Nat :=
-  (x - r.start) / r.step
+def foldAuxIncl [LawfulStep ι] [WellFoundedStepLE ι] (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
+  if h : i < stop then
+    have := (LawfulStep.step_minimal i) ⟨stop,h⟩ _ h
+    foldAuxIncl stop f (Step.step i) (f acc i)
+  else
+    f acc i
+termination_by StepToLE.mk i stop
 
-theorem ofNth_nth (r : Range) (i : Nat)
-  : ofNth r (nth r i) = i := by
-  simp [nth, ofNth]
+def foldAuxExcl [LawfulStep ι] [WellFoundedStepLE ι] (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
+  if h : i < stop then
+    have := (LawfulStep.step_minimal i) ⟨stop,h⟩ _ h
+    foldAuxExcl stop f (Step.step i) (f acc i)
+  else
+    acc
+termination_by StepToLE.mk i stop
 
-theorem nth_ofNth {r : Range} {x : Nat} (h : x ∈ r)
-  : nth r (ofNth r x) = x := by
-  simp [mem_def] at h
-  simp [nth, ofNth]
-  rw [Nat.div_mul_cancel h.2.2]
-  simp only [*, ge_iff_le, add_tsub_cancel_of_le]
-
-def size (r : Range) : Nat :=
-  (r.stop - r.start + r.step - 1) / r.step
-
-instance : Size Range where
-  size := size
-
-theorem nth_lt_stop_iff_lt_size (r : Range) (i : Nat)
-  : nth r i < r.stop ↔ i < size r := by
-  simp [nth, size, Nat.lt_iff_add_one_le,
-        Nat.le_div_iff_mul_le r.step_pos]
-  zify; simp
-  constructor <;> intro h <;> linarith
-
-@[simp] theorem nth_mem_iff_lt_size (r : Range) (i : Nat)
-  : nth r i ∈ r ↔ i < size r := by
-  simp [mem_def, nth_lt_stop_iff_lt_size]
-
-theorem nth_size_eq_stop (r : Range) (h : r.step = 1)
-  : r.nth r.size = r.stop := by
-    simp [nth, size, h]
-
-theorem nth_size_lt (r : Range)
-  : r.nth r.size < r.stop + r.step := by
-    simp [nth, size]
-    rw [Nat.add_comm, Nat.lt_iff_add_one_le, Nat.add_assoc]
-    apply Nat.add_le_of_le_sub
-    · apply Nat.add_le_add; simp; apply r.step_pos
-    convert Nat.div_mul_le_self _ _ using 1
-    rw [Nat.add_comm, Nat.sub_add_eq,
-        Nat.add_sub_assoc r.start_le_stop,
-        Nat.add_comm,
-        Nat.add_sub_assoc r.step_pos]
-
-
-def empty (start := 0) : Range where
-  start := start
-  stop := start
-  step_pos := by simp
-  start_le_stop := by simp
-
-@[inline] def isEmpty (r : Range) : Bool :=
-  r.start = r.stop
-
-theorem size_eq_zero_iff_isEmpty (r : Range)
-  : r.size = 0 ↔ r.isEmpty := by
-  simp [size, isEmpty]
-  rw [Nat.div_eq_zero_iff r.step_pos,
-      Nat.lt_iff_add_one_le,
-      Nat.sub_add_cancel]
-  · simp
-    constructor <;> intro h
-    · apply Nat.le_antisymm
-      exact r.start_le_stop
-      have := (Nat.sub_eq_iff_eq_add r.start_le_stop).mp h
-      simp [this]
-    · simp [h]
-  · exact le_add_left r.step_pos
-
-
-def get (r : Range) (i : Fin (size r)) : Nat := nth r i
-
-theorem get_mem (r : Range) (i) : get r i ∈ r := by
-  rcases i with ⟨i,hi⟩
-  simp [get, mem_def, nth_lt_stop_iff_lt_size]
-  simp [nth, hi]
-
-theorem mem_iff_exists_get (r : Range) : x ∈ r ↔ ∃ i, x = get r i := by
-  constructor
-  · intro h
-    have := nth_ofNth h
-    rw [← this] at h ⊢; clear this
-    simp at h
-    use ⟨_,h⟩
-    rfl
-  · rintro ⟨⟨i,hi⟩,rfl⟩
-    simp [get, hi]
-
-
-def foldl (r : Range) (f : α → Nat → α) (init : α) : α :=
-  aux r.start (fun h => by simp_all [mem_def]) init
-where
-  aux i (hi : i < r.stop → i ∈ r) (acc : α) :=
-    if h : i < r.stop then
-      have := r.step_pos
-      have : r.stop - (i + r.step) < r.stop - i := by
-        rw [Nat.sub_add_eq]; apply Nat.sub_lt
-        repeat simp [*]
-      aux (i + r.step) (fun h => by
-        simp_all [mem_def]; rcases hi with ⟨left,right⟩
-        constructor
-        · apply le_add_right; assumption
-        · rw [Nat.sub_add_comm left]; simp [*]
-        ) (f acc i)
-    else
-      acc
-termination_by r.stop - i
-
-instance : Fold Range Nat where
-  fold := foldl
-
-def foldl' (r : Range) (f : α → (i : Nat) → i ∈ r → α) (init : α) : α :=
-  aux r.start (fun h => by simp_all [mem_def]) init
-where
-  aux i (hi : i < r.stop → i ∈ r) (acc : α) :=
-    if h : i < r.stop then
-      have := r.step_pos
-      have : r.stop - (i + r.step) < r.stop - i := by
-        rw [Nat.sub_add_eq]; apply Nat.sub_lt
-        repeat simp [*]
-      aux (i + r.step) (fun h => by
-        simp_all [mem_def]; rcases hi with ⟨left,right⟩
-        constructor
-        · apply le_add_right; assumption
-        · rw [Nat.sub_add_comm left]; simp [*]
-        ) (f acc i (hi h))
-    else
-      acc
-termination_by r.stop - i
-
-theorem fold_def (r : Range) (f : β → Nat → β)
-    : fold r f init =
-      Fin.foldl (r.size) (fun acc i => f acc (r.get i)) init
-  := by
-  simp [fold, foldl, Fin.foldl]
-  sorry -- TODO
+end
