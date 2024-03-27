@@ -109,50 +109,62 @@ end
 class Step (ι : Type u) where
   step : ι → ι
 
+instance [One ι] [Add ι] : Step ι where
+  step x := x + 1
+
 class LawfulStep (ι) [Step ι] [LT ι] [LE ι] where
   step_minimal : ∀ i : ι, (∃ i', i < i') → ∀ i', i < i' → Step.step i ≤ i'
 
-instance : Step Nat where
-  step := Nat.succ
-
 instance : LawfulStep Nat where
-  step_minimal := by
+step_minimal := by
     rintro i - i'' hi''
     exact hi''
 
-instance : Step (Fin n) where
-  step := fun i =>
-    have : n > 0 := Nat.lt_of_le_of_lt (Nat.zero_le _) i.isLt
-    ⟨(i+1) % n, Nat.mod_lt _ this⟩
-
-instance : LawfulStep (Fin n) where
+instance [NeZero n] : LawfulStep (Fin n) where
   step_minimal := by
     rintro i - i'' hi''
     cases i; cases i''
-    simp_all [Step.step]
+    simp_all [Step.step, Fin.add_def]
     rw [Nat.mod_eq_of_lt]
     · assumption
     · omega
 
-/-! ## Range Folds -/
+instance : LawfulStep UInt8 where
+  step_minimal := by
+    rintro ⟨⟨i,hi⟩⟩ - ⟨⟨i',hi'1⟩⟩ hi'2
+    simp [
+        Step.step, Nat.lt_iff_add_one_le,
+        instLEUInt8, UInt8.le,
+        instLTUInt8, UInt8.lt,
+        UInt8.add_def, Fin.add_def
+      ] at hi'2 ⊢
+    rw [Nat.mod_eq_of_lt]
+    · exact hi'2
+    · calc _ ≤ i' := hi'2
+        _ < UInt8.size := hi'1
 
-class WellFoundedStepLE (ι) [Step ι] [LE ι] where
-  wf_step_le : ∀ stop, WellFounded (fun (x y : ι) => x ≤ stop ∧ Step.step y = x)
+/-- Defines well-founded stepping in terms of accessibility.
 
-class WellFoundedStepLT (ι) [Step ι] [LT ι] where
-  wf_step_lt : ∀ stop, WellFounded (fun (x y : ι) => x < stop ∧ Step.step y = x)
+The relation used is `x R y ↔ x = step y ∧ y < stop`.
+This way, when `y = stop`, there is no `x` such that `x R y`,
+which serves as the base case for the `Acc` predicate.
+But when `y < stop`, `step y R y`,
+which forms a chain of accessibility to any `x ≤ stop`.
+ -/
+class WellFoundedStep (ι) [Step ι] extends LinearOrder ι where
+  wf_step_le : ∀ stop, ∀ x, Acc (fun (x y : ι) => y < stop ∧ Step.step y = x) x
 
-instance : WellFoundedStepLE Nat where
+instance : WellFoundedStep Nat where
   wf_step_le stop := by
-    constructor
     intro x
-    simp [Step.step]
-    if hx : ¬(x ≤ stop) then
+    by_cases hx : x ≤ stop
+    case neg =>
       constructor
-      intro y ⟨h,rfl⟩
-      exfalso; apply hx (Nat.le_of_succ_le h)
-    else
-    simp at hx
+      rintro - ⟨h,rfl⟩
+      exfalso
+      rw [Preorder.lt_iff_le_not_le] at h
+      exact hx h.1
+    case pos =>
     let diff := stop - x
     have : x = stop - diff := by
       simp only; rw [Nat.sub_sub_self hx]
@@ -164,104 +176,132 @@ instance : WellFoundedStepLE Nat where
       constructor
       rintro - ⟨h,rfl⟩
       exfalso
-      simp at h; exact Nat.not_succ_le_self _ h
+      simp at h
     | succ i ih =>
       constructor
       rintro - ⟨-,rfl⟩
-      have : (stop - i.succ).succ = (stop - i) := by omega
-      rw [this]; clear this
+      have : (stop - i.succ) + 1 = (stop - i) := by omega
+      conv => arg 2; simp [Step.step]; rw [this]
+      clear this
       apply ih
       omega
 
-instance : WellFoundedStepLT Nat where
-  wf_step_lt stop := by
-    constructor
-    intro x
-    simp [Step.step]
-    if hx : ¬(x < stop) then
+instance [NeZero n] : WellFoundedStep (Fin n) where
+  wf_step_le := by
+    intro ⟨stop,hstop⟩ ⟨x,hxstop⟩
+    by_cases hx : x ≤ stop
+    case neg =>
       constructor
-      intro y ⟨h,rfl⟩
-      exfalso; apply hx (Nat.le_of_succ_le h)
-    else
+      rintro - ⟨h,rfl⟩
+      exfalso
+      rw [Preorder.lt_iff_le_not_le] at h
+      exact hx h.1
+    case pos =>
     simp at hx
     let diff := stop - x
     have : x = stop - diff := by
-      rw [Nat.sub_sub_self]; exact Nat.le_of_lt hx
-    rw [this]; clear hx this
-    have : diff ≤ stop := by omega
-    clear_value diff
+      rw [Nat.sub_sub_self]; exact hx
+    have hdiff : diff ≤ stop := by omega
+    clear_value diff; clear hx
+    cases this
     induction diff with
     | zero =>
       constructor
       rintro - ⟨h,rfl⟩
       exfalso
-      simp at h; exact Nat.not_succ_le_self _ (Nat.le_of_lt h)
+      simp_all [Step.step]
     | succ i ih =>
       constructor
       rintro - ⟨-,rfl⟩
-      have : (stop - i.succ).succ = (stop - i) := by omega
-      rw [this]; clear this
-      apply ih
-      omega
+      have : stop - i.succ + 1 = (stop - i) := by omega
+      have : (stop - i.succ + 1) % n = stop - i := by
+        rw [this]; apply Nat.mod_eq_of_lt
+        apply Nat.lt_of_le_of_lt; apply Nat.sub_le; exact hstop
+      convert ih ?_ ?_
+      · simp [Step.step, Fin.add_def, this]
+      · omega
+      · omega
 
-structure StepToLE (ι : Type u) where
+instance : WellFoundedStep UInt8 where
+  wf_step_le := by
+    intro ⟨stop,hstop⟩ ⟨x,hxstop⟩
+    by_cases hx : x ≤ stop
+    case neg =>
+      constructor
+      rintro - ⟨h,rfl⟩
+      exfalso
+      rw [Preorder.lt_iff_le_not_le] at h
+      exact hx h.1
+    case pos =>
+    simp at hx
+    let diff := stop - x
+    have : x = stop - diff := by
+      rw [Nat.sub_sub_self]; exact hx
+    have hdiff : diff ≤ stop := by omega
+    clear_value diff; clear hx
+    cases this
+    induction diff with
+    | zero =>
+      constructor
+      rintro - ⟨h,rfl⟩
+      exfalso
+      simp_all [Step.step]
+    | succ i ih =>
+      constructor
+      rintro - ⟨-,rfl⟩
+      have : stop - i.succ + 1 = (stop - i) := by omega
+      have : (stop - i.succ + 1) % UInt8.size = stop - i := by
+        rw [this]; apply Nat.mod_eq_of_lt
+        apply Nat.lt_of_le_of_lt; apply Nat.sub_le; exact hstop
+      convert ih ?_ ?_
+      · simp [Step.step, UInt8.add_def, Fin.add_def, ← Fin.val_inj]; exact this
+      · omega
+      · omega
+
+structure StepToRel (ι : Type u) where
   (start stop : ι)
 
-instance [Step ι] [LE ι] [WellFoundedStepLE ι] : WellFoundedRelation (StepToLE ι) where
+instance [Step ι] [WellFoundedStep ι] : WellFoundedRelation (StepToRel ι) where
   rel := fun ⟨start,stop⟩ ⟨start',stop'⟩ =>
-    stop = stop' ∧ Step.step start' = start ∧ start ≤ stop
+    stop = stop' ∧ Step.step start' = start ∧ start' < stop
   wf := by
     constructor
     rintro ⟨start,stop⟩
     simp
-    have ⟨this⟩ := WellFoundedStepLE.wf_step_le stop
-    specialize this start
+    have := WellFoundedStep.wf_step_le stop start
     induction this with
     | intro start _h ih =>
       constructor
       rintro ⟨start', stop'⟩
+      simp
+      rintro rfl rfl h
       simp_all
 
-structure StepToLT (ι : Type u) where
-  (start stop : ι)
-
-instance [Step ι] [LT ι] [WellFoundedStepLT ι] : WellFoundedRelation (StepToLT ι) where
-  rel := fun ⟨start,stop⟩ ⟨start',stop'⟩ =>
-    stop = stop' ∧ Step.step start' = start ∧ start < stop
-  wf := by
-    constructor
-    rintro ⟨start,stop⟩
-    simp
-    have ⟨this⟩ := WellFoundedStepLT.wf_step_lt stop
-    specialize this start
-    induction this with
-    | intro start _h ih =>
-      constructor
-      rintro ⟨start', stop'⟩
-      simp_all
+/-! ## Range Folds -/
 
 section
-variable [DecidableEq ι]
-    [LE ι] [DecidableRel (· ≤ · : ι → ι → Prop)]
-    [LT ι] [DecidableRel (· < · : ι → ι → Prop)]
-    [Step ι]
+variable [DecidableEq ι] [Step ι] [WellFoundedStep ι] [LawfulStep ι]
 
 attribute [-instance] instSizeOf
 
-def foldAuxIncl [LawfulStep ι] [WellFoundedStepLE ι] (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
-  if h : i < stop then
-    have := (LawfulStep.step_minimal i) ⟨stop,h⟩ _ h
-    foldAuxIncl stop f (Step.step i) (f acc i)
-  else
-    f acc i
-termination_by StepToLE.mk i stop
-
-def foldAuxExcl [LawfulStep ι] [WellFoundedStepLE ι] (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
-  if h : i < stop then
-    have := (LawfulStep.step_minimal i) ⟨stop,h⟩ _ h
-    foldAuxExcl stop f (Step.step i) (f acc i)
+def foldIncl (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
+  if i ≤ stop then
+    aux i acc
   else
     acc
-termination_by StepToLE.mk i stop
+where
+  aux (i acc) :=
+    if i < stop then
+      aux (Step.step i) (f acc i)
+    else
+      f acc i
+  termination_by StepToRel.mk i stop
+
+def foldExcl (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
+  if i < stop then
+    foldExcl stop f (Step.step i) (f acc i)
+  else
+    acc
+termination_by StepToRel.mk i stop
 
 end

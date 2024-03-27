@@ -236,6 +236,18 @@ theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
   induction L1 generalizing init <;> simp
   case cons hd tl ih =>
   rw [ih]; simp [foldl_map]
+
+section UIntFacts
+
+theorem UInt8.add_def (i j : UInt8) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt16.add_def (i j : UInt16) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt32.add_def (i j : UInt32) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt64.add_def (i j : UInt64) : i + j = ⟨i.val + j.val⟩ := rfl
+
+theorem UInt8.toNat_ofNat (n : Nat) : (OfNat.ofNat n : UInt8).toNat = n % UInt8.size := rfl
+
+end UIntFacts
+
 section LinearOrders
 
 instance : LinearOrder UInt8 where
