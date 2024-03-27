@@ -319,4 +319,28 @@ instance : LinearOrder UInt64 where
     simp [LE.le, LT.lt]; unfold UInt64.le UInt64.lt
     intro a b; apply Preorder.lt_iff_le_not_le
 
+instance : BoundedOrder UInt8 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt8, UInt8.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt8, UInt8.le]
+
+instance : BoundedOrder UInt16 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt16, UInt16.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt16, UInt16.le]
+
+instance : BoundedOrder UInt32 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt32]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt32]
+
+instance : BoundedOrder UInt64 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt64, UInt64.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt64, UInt64.le]
+
 end LinearOrders

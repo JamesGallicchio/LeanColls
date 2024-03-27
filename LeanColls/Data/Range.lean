@@ -304,4 +304,31 @@ def foldExcl (stop : ι) (f : β → ι → β) (i : ι) (acc : β) : β :=
     acc
 termination_by StepToRel.mk i stop
 
+@[inline] def CC.foldl (_self : CC (ι := ι) l r) (f : β → ι → β) (acc : β) : β :=
+  foldIncl r f l acc
+
+@[inline] def OC.foldl (_self : OC (ι := ι) l r) (f : β → ι → β) (acc : β) : β :=
+  foldIncl r f (Step.step l) acc
+
+@[inline] def CO.foldl (_self : CO (ι := ι) l r) (f : β → ι → β) (acc : β) : β :=
+  foldExcl r f l acc
+
+@[inline] def OO.foldl (_self : OO (ι := ι) l r) (f : β → ι → β) (acc : β) : β :=
+  foldExcl r f (Step.step l) acc
+
+@[inline] def CI.foldl [Top ι] (_self : CI (ι := ι) l  ) (f : β → ι → β) (acc : β) : β :=
+  foldIncl ⊤ f l acc
+
+@[inline] def OI.foldl [Top ι] (_self : OI (ι := ι) l  ) (f : β → ι → β) (acc : β) : β :=
+  foldIncl ⊤ f (Step.step l) acc
+
+@[inline] def IC.foldl [Bot ι] (_self : IC (ι := ι) r  ) (f : β → ι → β) (acc : β) : β :=
+  foldIncl r f ⊥ acc
+
+@[inline] def IO.foldl [Bot ι] (_self : IO (ι := ι) r  ) (f : β → ι → β) (acc : β) : β :=
+  foldExcl r f ⊥ acc
+
+@[inline] def II.foldl [Top ι] [Bot ι] (_self : II (ι := ι)    ) (f : β → ι → β) (acc : β) : β :=
+  foldIncl ⊤ f ⊥ acc
+
 end
