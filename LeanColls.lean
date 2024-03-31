@@ -4,7 +4,9 @@ Copyright (c) 2023 James Gallicchio.
 
 import LeanColls.Classes.Bag
 import LeanColls.Classes.Indexed.Basic
+import LeanColls.Classes.Indexed.Notation
 import LeanColls.Classes.IndexType.Basic
+import LeanColls.Classes.IndexType.Instances
 import LeanColls.Classes.Map
 import LeanColls.Classes.Ops
 import LeanColls.Classes.Seq

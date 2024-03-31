@@ -278,7 +278,7 @@ section
 open Lean Elab Command
 
 macro "derive_indextype% " t:term : term => `(term| IndexType.ofEquiv (proxy_equiv% $t))
-macro "derive_lawfulindextype% " t:term : term => `(term| IndexType.ofEquivLawful (proxy_equiv% $t) rfl)
+macro "derive_lawfulindextype% " t:term : term => `(term| IndexType.ofEquivLawful (proxy_equiv% $t))
 
 def mkIndexType (declName : Name) : CommandElabM Bool := do
   let indVal ← getConstInfoInduct declName
