@@ -5,6 +5,7 @@ Authors: James Gallicchio
 
 import LeanColls.Classes.Ops
 import LeanColls.Classes.Ops.Fold
+import LeanColls.Classes.Ops.Insert
 import LeanColls.Data.List
 
 import Mathlib.Data.List.OfFn
