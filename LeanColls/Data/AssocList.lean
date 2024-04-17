@@ -4,6 +4,7 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Classes.Map
+import LeanColls.Classes.Ops.Fold
 import LeanColls.Data.Transformer.View
 
 import Std.Data.AssocList
