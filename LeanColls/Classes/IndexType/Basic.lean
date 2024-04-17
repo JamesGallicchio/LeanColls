@@ -7,6 +7,7 @@ import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.ProxyType
 
 import LeanColls.Classes.Ops
+import LeanColls.Classes.Ops.Fold
 import LeanColls.Data.Transformer.View
 import LeanColls.MathlibUpstream
 

@@ -4,6 +4,7 @@ Authors: James Gallicchio
 -/
 
 import LeanColls.Classes.Ops
+import LeanColls.Classes.Ops.Fold
 import LeanColls.Data.List
 
 import Mathlib.Data.List.OfFn
