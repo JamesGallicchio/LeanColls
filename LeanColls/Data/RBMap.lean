@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes.Map
+import LeanColls.Classes.Dict
 import LeanColls.Data.Transformer.View
 
 import Std.Data.RBMap
@@ -18,11 +18,11 @@ instance [Ord κ] : Fold (RBMap κ τ) (κ × τ) where
   fold := fun m f init => m.data.foldl (fun acc k t => f acc (k,t)) init
   foldM := fun m f init => m.data.foldlM (fun acc k t => f acc (k,t)) init
 
-instance [Ord κ] : Fold (Map.KeySet (RBMap κ τ)) κ where
+instance [Ord κ] : Fold (Dict.KeySet (RBMap κ τ)) κ where
   fold := fun m f init => m.data.data.foldl (fun acc k _ => f acc k) init
   foldM := fun m f init => m.data.data.foldlM (fun acc k _ => f acc k) init
 
-instance [Ord κ] : Map (RBMap κ τ) κ τ where
+instance [Ord κ] : Dict (RBMap κ τ) κ τ where
   mem := fun (k,t) m => m.data.find? k = some t
   toMultiset := fun m => m.data.toList
   size := fun m => m.data.size
