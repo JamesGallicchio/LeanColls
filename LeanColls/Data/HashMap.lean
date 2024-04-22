@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes.Map
+import LeanColls.Classes.Dict
 import LeanColls.Data.Transformer.View
 
 import Std.Data.HashMap
@@ -19,11 +19,11 @@ instance : Fold (HashMap κ τ) (κ × τ) where
   fold := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
   foldM := fun m f init => m.foldM (fun acc k t => f acc (k,t)) init
 
-instance : Fold (Map.KeySet (HashMap κ τ)) κ where
+instance : Fold (Dict.KeySet (HashMap κ τ)) κ where
   fold := fun m f init => m.data.fold (fun acc k _ => f acc k) init
   foldM := fun m f init => m.data.foldM (fun acc k _ => f acc k) init
 
-instance : Map (HashMap κ τ) κ τ where
+instance : Dict (HashMap κ τ) κ τ where
   mem := fun (k,t) m => m.find? k = some t
   toMultiset := fun m => m.toList
   fold := fun m f init => m.fold (fun acc k t => f acc (k,t)) init

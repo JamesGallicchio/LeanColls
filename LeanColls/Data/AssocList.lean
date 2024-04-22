@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import LeanColls.Classes.Map
+import LeanColls.Classes.Dict
 import LeanColls.Classes.Ops.Fold
 import LeanColls.Data.Transformer.View
 
@@ -18,17 +18,17 @@ instance : Fold (AssocList κ τ) (κ × τ) where
   fold := fun m f init => m.foldl (fun acc k t => f acc (k,t)) init
   foldM := fun m f init => m.foldlM (fun acc k t => f acc (k,t)) init
 
-instance : Fold (Map.KeySet (AssocList κ τ)) κ where
+instance : Fold (Dict.KeySet (AssocList κ τ)) κ where
   fold := fun m f init => m.data.foldl (fun acc k _ => f acc k) init
   foldM := fun m f init => m.data.foldlM (fun acc k _ => f acc k) init
 
 instance : Membership (κ × τ) (AssocList κ τ) := Fold.toMem
 --instance : Mem.ToList (AssocList κ τ) (κ × τ) := Fold.toMem.ToList
 
-instance : Membership κ (Map.KeySet (AssocList κ τ)) := Fold.toMem
---instance : Mem.ToList (Map.KeySet (AssocList κ τ)) κ := Fold.toMem.ToList
+instance : Membership κ (Dict.KeySet (AssocList κ τ)) := Fold.toMem
+--instance : Mem.ToList (Dict.KeySet (AssocList κ τ)) κ := Fold.toMem.ToList
 
-instance [BEq κ] : Map (AssocList κ τ) κ τ where
+instance [BEq κ] : Dict (AssocList κ τ) κ τ where
   mem := fun (k,t) m => m.find? k = some t
   toMultiset := fun m => m.toList
   size := fun m => m.length

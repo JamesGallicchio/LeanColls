@@ -5,34 +5,30 @@ Authors: James Gallicchio
 
 import LeanColls.Classes.Bag
 
-/-! ## Maps
+/-! ## Dictionaries
 
-Maps are collections which encode relational data.
-This file defines a few varieties of map:
-- [Map]: many-to-one map; math model is a partial function
-- [Indexed]: total map; math model is a total function
-
-These classes all build on those defined in `Bag.lean`.
+Dictionaries are collections which encode relational data.
+The math model is a partial function `α → Option β`.
 -/
 
 namespace LeanColls
 
-namespace Map
+namespace Dict
 
 /-- Represents the key set of a `C` map.
 
-This is a trivial wrapper structure on which [Map] instances
-provide a [Bag] instance.
+This is a trivial wrapper structure,
+on which dictionary implementations should provide a `Bag` instance.
 -/
 structure KeySet (C : Type u) where
   data : C
 
-end Map
+end Dict
 
-class Map (C : Type u) (κ : outParam (Type v)) (τ : outParam (Type w))
+class Dict (C : Type u) (κ : outParam (Type v)) (τ : outParam (Type w))
   extends MultiBag C (κ × τ) where
   /-- The [Bag] instance providing functions on this collection's [KeySet]. -/
-  toBagKeySet : Bag.ReadOnly (Map.KeySet C) κ
+  toBagKeySet : Bag.ReadOnly (Dict.KeySet C) κ
   /-- Look up `k` in collection `cont` -/
   get? : (cont : C) → (k : κ) → Option τ
   /-- Alter the entry at key `k` in `cont`.
@@ -48,8 +44,8 @@ class Map (C : Type u) (κ : outParam (Type v)) (τ : outParam (Type w))
   /-- Remove the entry at key `k`, if present. -/
   remove : (cont : C) → (k : κ) → C := (alter · · (Function.const _ none))
 
-attribute [instance] Map.toBagKeySet
+attribute [instance] Dict.toBagKeySet
 
-namespace Map
+namespace Dict
 
 def keySet (cont : C) : KeySet C := ⟨cont⟩
