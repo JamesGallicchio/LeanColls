@@ -7,7 +7,13 @@ import LeanColls.Classes.Dict
 import LeanColls.Data.Transformer.View
 
 import Std.Data.HashMap
+import Std.Data.HashMap.Lemmas
 
+/-! ### HashMap
+
+Very few facts are proven about HashMap,
+so we do not even attempt the lawfulness proofs.
+-/
 
 namespace LeanColls
 
@@ -23,9 +29,14 @@ instance : Fold (Dict.KeySet (HashMap κ τ)) κ where
   fold := fun m f init => m.data.fold (fun acc k _ => f acc k) init
   foldM := fun m f init => m.data.foldM (fun acc k _ => f acc k) init
 
-instance : Dict (HashMap κ τ) κ τ where
+instance : ToList (HashMap κ τ) (κ × τ) where
+  toList := Std.HashMap.toList
+
+instance : Membership (κ × τ) (HashMap κ τ) where
   mem := fun (k,t) m => m.find? k = some t
-  toMultiset := fun m => m.toList
+
+instance : Dict (HashMap κ τ) κ τ where
+  toMultiset m := m.toList
   fold := fun m f init => m.fold (fun acc k t => f acc (k,t)) init
   size := fun m => m.size
   empty := .empty
@@ -40,7 +51,7 @@ instance : Dict (HashMap κ τ) κ τ where
     | some _, none => m.erase k
   modify := fun m k f => m.modify k (Function.const _ f)
   toBagKeySet := {
-    mem := fun x m => m.data.contains x
-    size := fun s => s.data.size
-    toFinset := sorry
+    mem := fun x ⟨m⟩ => m.contains x
+    size := fun ⟨m⟩ => m.size
+    toMultiset := fun ⟨m⟩ => m.toList.map (·.1)
   }
