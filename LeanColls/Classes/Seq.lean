@@ -61,7 +61,7 @@ namespace List
 
 open LeanColls
 
-@[simp] instance : Seq (List τ) τ where
+instance : Seq (List τ) τ where
   toList := id
   empty := []
   insert L x := x::L
@@ -126,14 +126,14 @@ instance : LeanColls.LawfulSeq (List τ) τ where
   toList_ofFn          := by simp
   toList_set           := by simp
   get_def              := by simp
-  getCons?_eq_some        := by simp
-  getSnoc?_eq_some        := by simp
-  toMultiset_empty     := by simp
-  toMultiset_insert    := by simp
-  toMultiset_singleton := by simp
-  size_def             := by simp
-  getCons?_eq_none        := by simp
-  getSnoc?_eq_none        := by simp
+  getCons?_eq_some        := by simp [instSeqList]
+  getSnoc?_eq_some        := by simp [instSeqList]
+  toMultiset_empty     := by simp [instSeqList]
+  toMultiset_insert    := by simp [instSeqList]
+  toMultiset_singleton := by simp [instSeqList]
+  size_def             := by simp [instSeqList]
+  getCons?_eq_none        := by simp [instSeqList]
+  getSnoc?_eq_none        := by simp [instSeqList]
   toList_update := by intros; rfl
   toList_cons := by intros; rfl
   toList_snoc := by intros; rfl
@@ -181,21 +181,25 @@ attribute [simp] toList_ofFn toList_set toList_update toList_cons toList_snoc
 
 variable [Seq C τ] [LawfulSeq C τ]
 
+-- TODO(JG): is there a way to mark a lemma simp for just this file?
+-- attribute [simp] List.instSeqList
+-- I don't want to add and remove it because it is very dangerous outside this file
+
 @[simp] theorem size_set (cont : C) (i : Fin (size cont)) (x : τ)
   : size (set cont i x) = size cont := by
-  simp [size_def]
+  simp [size_def, List.instSeqList]
 
 @[simp] theorem size_update (cont : C) (i f)
   : size (Seq.update cont i f) = size cont := by
-  simp [size_def]
+  simp [size_def, List.instSeqList]
 
 @[simp] theorem size_cons (cont : C) (x)
   : size (Seq.cons x cont) = size cont + 1 := by
-  simp [size_def]
+  simp [size_def, List.instSeqList]
 
 @[simp] theorem size_snoc (cont : C) (x)
   : size (Seq.snoc cont x) = size cont + 1 := by
-  simp [size_def]
+  simp [size_def, List.instSeqList]
 
 @[simp] theorem size_append (c1 c2 : C)
   : size (c1 ++ c2) = size c1 + size c2 := by
@@ -207,7 +211,7 @@ variable [Seq C τ] [LawfulSeq C τ]
 
 @[simp] theorem size_ofFn (f : Fin n → τ)
   : size (ofFn (C := C) f) = n := by
-  simp [size_def, toList_ofFn]
+  simp [size_def, toList_ofFn, List.instSeqList]
 
 @[simp] theorem get_ofFn (f : Fin n → τ) (i : Fin (size (ofFn f)))
   : get (ofFn (C := C) f) i = f (i.cast <| size_ofFn f) := by
@@ -215,9 +219,9 @@ variable [Seq C τ] [LawfulSeq C τ]
   rw [get_def]
   suffices ∀ L (_h : L = ofFn f) (hi' : i < L.length),
     get L ⟨i,hi'⟩ = f ⟨i, size_ofFn (C := C) f ▸ hi⟩
-    from this _ (toList_ofFn _) (by simp at hi; simp [*])
+    from this _ (toList_ofFn _) (by simp at hi; simp [List.instSeqList, *])
   intro L hL hi'
-  cases hL; simp
+  cases hL; simp [List.instSeqList]
 
 set_option pp.proofs.withType false
 
@@ -226,7 +230,7 @@ theorem get_set_eq (cont : C) (i : Fin (size cont)) (x : τ) (j)
   : i.val = j.val → get (set cont i x) j = x := by
   intro h
   rw [get_def]
-  simp
+  simp [List.instSeqList]
   rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
   case list_eq => apply toList_set
   apply List.get_set_eq
@@ -239,7 +243,7 @@ theorem get_set_ne (cont : C) (i : Fin (size cont)) (x : τ) (j)
   intro h
   conv => lhs; rw [get_def]
   conv => rhs; rw [get_def]
-  simp
+  simp [List.instSeqList]
   rw [List.get_eq_get _ (List.set (toList cont) i x) _ _ (toList_set ..) ?idx_eq]
   rw [List.get_set_ne _ h]
   · congr
@@ -256,15 +260,15 @@ theorem get_update_eq (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
   : i.val = j.val → get (update cont i f) j = f (get cont i) := by
   intro h
   rw [get_def]
-  simp
+  simp [List.instSeqList]
   rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
   case list_eq =>
     apply toList_update
-  simp
+  simp [List.instSeqList]
   rw [List.get_set_eq _ _ _ ?h]
   case h => simp [← size_def]
   case idx_eq => simp [h]
-  rw [get_def]; simp
+  rw [get_def]; simp [List.instSeqList]
 
 @[simp]
 theorem get_update_ne (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
