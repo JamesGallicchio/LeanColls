@@ -7,7 +7,7 @@ import LeanColls.Classes.Indexed.Basic
 import LeanColls.Classes.Indexed.Notation
 import LeanColls.Classes.IndexType.Basic
 import LeanColls.Classes.IndexType.Instances
-import LeanColls.Classes.Map
+import LeanColls.Classes.Dict
 import LeanColls.Classes.Ops
 import LeanColls.Classes.Seq
 import LeanColls.Data.Transformer.FixSize
