@@ -275,14 +275,14 @@ theorem get_update_ne (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
   : i.val ≠ j.val → get (update cont i f) j = get cont (j.cast (by rw [size_update])) := by
   intro h
   conv => lhs; rw [get_def]
-  simp
+  simp [List.instSeqList]
   rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
   case list_eq =>
     apply toList_update
-  simp
+  simp [List.instSeqList]
   rw [List.get_set_ne _ _ _ ?h]
   conv => rhs; rw [get_def]
-  case h => simpa [size_def] using j.isLt
+  case h => simpa [size_def, List.instSeqList] using j.isLt
   case idx_eq => simp
   simp [h]
 
