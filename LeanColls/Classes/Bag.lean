@@ -25,10 +25,15 @@ do not include a way to insert or remove elements.
 
 namespace LeanColls
 
-/-- [Bag] operations expected on read-only "set-like" collections. -/
+/-- [Bag] operations expected on read-only "set-like" collections.
+
+Note that this requires `ToMultiset` even though the model is `ToFinset`;
+lawfulness is stated in terms of `ToFinset`,
+but some `Bag`s can't provide `ToFinset` without some extra hypotheses.
+-/
 class Bag.ReadOnly (C : Type u) (τ : outParam (Type v)) extends
   Membership τ C,
-  ToFinset C τ,
+  ToMultiset C τ,
   Fold C τ,
   Size C
 
