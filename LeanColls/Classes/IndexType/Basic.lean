@@ -42,7 +42,8 @@ class IndexType.{u,w} (ι : Type u)
 
 class LawfulIndexType (ι : Type u) [I : IndexType ι]
   extends
-    Fold.ToList (IndexType.Univ ι) ι
+    Fold.LawfulFold (IndexType.Univ ι) ι,
+    Fold.AgreesWithToMultiset (IndexType.Univ ι) ι
   where
   leftInv  : Function.LeftInverse  I.fromFin I.toFin
   rightInv : Function.RightInverse I.fromFin I.toFin
@@ -113,11 +114,12 @@ instance (priority := default) : DecidableEq ι := by
 
 /-! #### Transport over equivalence -/
 
+
 def ofEquiv {ι} [IndexType.{_,w} ι'] (f : ι' ≃ ι) : IndexType.{_,w} ι where
   card := IndexType.card ι'
   toFin   := IndexType.toFin ∘ f.symm
   fromFin := f ∘ IndexType.fromFin
-  toFold := Fold.map (fun ⟨⟩ => IndexType.univ (ι')) f
+  toFold := Fold.instMap (fun ⟨⟩ => IndexType.univ (ι')) f
 
 def ofEquivLawful {ι} [I' : IndexType ι'] [LI' : LawfulIndexType ι'] (f : ι' ≃ ι)
     : @LawfulIndexType ι (ofEquiv f) :=
@@ -127,9 +129,17 @@ def ofEquivLawful {ι} [I' : IndexType ι'] [LI' : LawfulIndexType ι'] (f : ι'
     (leftInv  := by simp [ofEquiv]; intro; simp)
     (rightInv := by simp [ofEquiv]; intro; simp)
     (toList_eq_ofFn := by simp [ofEquiv]; rfl)
-    (toToList := by
-      letI := ofEquiv f; apply Fold.map.ToList
-      intro c'; simp [toList, ofEquiv, LawfulIndexType.toList_eq_ofFn]; rfl)
+    (toLawfulFold := Fold.LawfulFold.instMap ..)
+    (toAgreesWithToMultiset := by
+      convert @Fold.AgreesWithToMultiset.instMap _ _ _ _ _
+        inferInstance _ (fun (_ : Univ ι) => Univ.mk) f
+      simp [ofEquiv, inferInstance, ToMultiset.instMap]
+      unfold instToMultiset toMultiset
+      congr; ext _
+      have := LI'.toList_eq_ofFn
+      simp only [Multiset.map_coe, this]
+      congr; simp
+      rfl)
 
 /-! #### Unit -/
 
@@ -143,9 +153,9 @@ instance : IndexType Unit where
 instance : LawfulIndexType Unit where
   leftInv := by intro; rfl
   rightInv := by rintro ⟨i,h⟩; simp [card] at h; subst h; simp [fromFin, toFin]
-  fold_eq_fold_toList := by
+  exists_eq_list_foldl := by
     rintro ⟨⟩
-    refine ⟨_, .rfl, ?_⟩
+    refine ⟨_, rfl, ?_⟩
     intro β f init; simp [toList, fold]
   foldM_eq_fold := by
     rintro m β _ _ ⟨⟩ f init; simp [foldM, fold]
@@ -160,9 +170,9 @@ instance : IndexType (Fin n) where
 instance : LawfulIndexType (Fin n) where
   leftInv  := by intro _; rfl
   rightInv := by intro _; rfl
-  fold_eq_fold_toList := by
+  exists_eq_list_foldl := by
     rintro ⟨⟩
-    refine ⟨_, .rfl, ?_⟩
+    refine ⟨_, rfl, ?_⟩
     simp [toList, fold, Fin.foldl_eq_foldl_ofFn]
   foldM_eq_fold := by
     rintro β _ _ _ ⟨⟩ f init
@@ -179,10 +189,20 @@ instance : IndexType.{max u v, w} (α × β) where
   card := card α * card β
   toFin := fun (a,b) => Fin.pair (toFin a) (toFin b)
   fromFin := fun p => (fromFin (Fin.pair_left p), fromFin (Fin.pair_right p))
-  toList := fun ⟨⟩ => toList (univ α) ×ˢ toList (univ β)
-  toFold := @Fold.map (Univ α × Univ β) _ _ _
-    Fold.prod
-    (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+  toToList :=
+    let _ := ToList.instProd (C₁ := Univ α) (C₂ := Univ β)
+    ToList.instMap (C₁ := Univ α × Univ β) (C₂ := Univ (α × β)) (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+  toFold :=
+    let _ := Fold.instProd (C₁ := Univ α) (C₂ := Univ β)
+    Fold.instMap (C := Univ α × Univ β) (C' := Univ (α × β)) (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+
+@[simp]
+theorem toList_univ_prod {c : Univ (α × β)}: toList c = toList (univ α) ×ˢ toList (univ β) := by
+  simp [instIndexTypeProd, ToList.instMap, ToList.instProd]
+
+@[simp]
+theorem toMultiset_univ_prod : toMultiset (univ (α × β)) = toMultiset (univ α) ×ˢ toMultiset (univ β) := by
+  simp only [instIndexTypeProd, ToList.instMap, ToList.instProd, instToMultiset]; simp
 
 instance : LawfulIndexType.{max u v, w} (α × β) where
   rightInv := by
@@ -197,11 +217,33 @@ instance : LawfulIndexType.{max u v, w} (α × β) where
     simp [List.get_product_eq_get_pair]
     constructor <;>
       simp [← Fin.val_inj, Fin.pair_left, Fin.pair_right]
-  toToList :=
-    @Fold.map.ToList (Univ α × Univ β) _ _ _
-      (Fold.prod) (ToList.prod) (Fold.prod.ToList)
-      _ _ _
-      (by simp [toList, ToList.prod])
+  exists_eq_list_foldl :=
+    -- these proof goals are really annoying, and I'm not sure how to automate the
+    -- "just keep unfolding until we actually find the difference" step
+    let _a := Fold.instProd (C₁ := Univ α) (C₂ := Univ β)
+    let _b := Fold.instMap (C' := Univ (α × β)) (C := Univ α × Univ β)
+              (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    let _c := ToMultiset.instProd (C₁ := Univ α) (C₂ := Univ β)
+    let _d := ToMultiset.instMap (C₂ := Univ (α × β)) (C₁ := Univ α × Univ β)
+              (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    let _e := Fold.AgreesWithToMultiset.instProd (C₁ := Univ α) (C₂ := Univ β)
+    let f := Fold.AgreesWithToMultiset.instMap (C' := Univ (α × β)) (C := Univ α × Univ β)
+      (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    by
+    have := f.exists_eq_list_foldl
+    intro c
+    specialize this c
+    rcases this with ⟨L,h1,h2⟩
+    refine ⟨L,?_,h2⟩
+    rw [h1]
+    simp (config := {zetaDelta := true})
+    simp only [ToMultiset.instMap, ToMultiset.instProd, toMultiset]
+    simp
+  toLawfulFold :=
+    @Fold.LawfulFold.instMap (Univ α × Univ β) _ (Univ (α × β)) _
+      Fold.instProd
+      Fold.LawfulFold.instProd
+      (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
 
 
 /-! #### Sigma -/
@@ -230,10 +272,26 @@ instance : IndexType.{max u v, w} (α ⊕ β) where
       .inl (fromFin ⟨i,h⟩)
     else
       .inr (fromFin ⟨i-card α, by simp at h; exact Nat.sub_lt_left_of_lt_add h hi⟩)
-  toList := fun ⟨⟩ => (toList (univ α)).map Sum.inl ++ (toList (univ β)).map Sum.inr
-  toFold := @Fold.map (Univ α × Univ β) _ _ _
-    Fold.sum
-    (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+  toToList :=
+    let _ := ToList.instSum (C₁ := Univ α) (C₂ := Univ β)
+    ToList.instMap (C₁ := Univ α × Univ β) (C₂ := Univ (α ⊕ β)) (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+  toFold :=
+    let _ := Fold.instSum (C₁ := Univ α) (C₂ := Univ β)
+    Fold.instMap (C := Univ α × Univ β) (C' := Univ (α ⊕ β)) (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+
+theorem toList_univ_sum {c : Univ (α ⊕ β)} :
+    toList c = (toList (univ α) |>.map Sum.inl) ++ (toList (univ β) |>.map Sum.inr) := by
+  simp [instIndexTypeSum, ToList.instMap, ToList.instSum]
+
+theorem toMultiset_univ_sum :
+    toMultiset (univ (α ⊕ β)) = (toMultiset (univ α)).map Sum.inl + (toMultiset (univ β)).map Sum.inr := by
+  simp only [instIndexTypeSum, ToList.instMap, ToList.instSum, instToMultiset]
+  simp only [
+    List.map_append,
+    List.map_map,
+    Function.id_comp,
+    ToList.toMultiset_toList]
+  rfl
 
 instance : LawfulIndexType (α ⊕ β) where
   leftInv := by
@@ -247,7 +305,7 @@ instance : LawfulIndexType (α ⊕ β) where
     else
       simp [*]; simp_all
   toList_eq_ofFn := by
-    simp [toList]
+    simp [toList_univ_sum, toList]
     apply List.ext_get
     · simp [card]
     intro i h1 h2
@@ -263,11 +321,30 @@ instance : LawfulIndexType (α ⊕ β) where
       · simpa using h
       · simp at h1 ⊢
         omega
-  toToList :=
-    @Fold.map.ToList (Univ α × Univ β) _ _ _
-      (Fold.sum) (ToList.sum) (Fold.sum.ToList)
-      _ _ _
-      (by simp [toList, ToList.sum])
+  exists_eq_list_foldl :=
+    -- these proof goals are really annoying, and I'm not sure how to automate the
+    -- "just keep unfolding until we actually find the difference" step
+    let _a := Fold.instSum (C₁ := Univ α) (C₂ := Univ β)
+    let _b := Fold.instMap (C' := Univ (α ⊕ β)) (C := Univ α × Univ β)
+              (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    let _c := ToMultiset.instSum (C₁ := Univ α) (C₂ := Univ β)
+    let _d := ToMultiset.instMap (C₂ := Univ (α ⊕ β)) (C₁ := Univ α × Univ β)
+              (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    let _e := Fold.AgreesWithToMultiset.instSum (C₁ := Univ α) (C₂ := Univ β)
+    let f := Fold.AgreesWithToMultiset.instMap (C' := Univ (α ⊕ β)) (C := Univ α × Univ β)
+      (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
+    by
+    have := f.exists_eq_list_foldl
+    intro c
+    specialize this c
+    rcases this with ⟨L,h1,h2⟩
+    refine ⟨L,?_,h2⟩
+    rw [h1]
+  toLawfulFold :=
+    @Fold.LawfulFold.instMap (Univ α × Univ β) _ (Univ (α ⊕ β)) _
+      Fold.instSum
+      Fold.LawfulFold.instSum
+      (fun ⟨⟩ => (⟨⟩,⟨⟩)) id
 
 
 end

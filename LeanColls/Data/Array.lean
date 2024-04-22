@@ -52,7 +52,10 @@ instance : Seq (Array α) α where
   getSnoc? := Array.getSnoc?
 
 instance : LawfulSeq (Array α) α where
-  mem_iff_mem_toList := by simp [LeanColls.toList, mem_def]
+  mem_iff_mem_toSet := by
+    simp [toSet, Set.mem_def, Array.mem_def, Membership.mem_toMultiset_iff_mem_toList]
+    simp only [← Array.toList_eq]
+    intros; rfl
   toList_append := by simp [LeanColls.toList]
   toMultiset_empty := by
     simp [LeanColls.toList, ToMultiset.toMultiset, LeanColls.empty, empty]
@@ -126,10 +129,12 @@ instance : LawfulSeq (Array α) α where
     simp [LeanColls.toList, Seq.cons, cons]
   toList_snoc := by
     simp [LeanColls.toList, Seq.snoc, snoc]
-  fold_eq_fold_toList := by
-    intro A; use A.toList; refine ⟨.rfl, ?_⟩
-    intros
-    simp [fold, foldl_eq_foldl_data]
+  exists_eq_list_foldl := by
+    intro A; use A.toList
+    constructor
+    · rfl
+    · intros
+      simp [fold, foldl_eq_foldl_data]
   foldM_eq_fold := by
     intros
     simp [fold, foldM]
@@ -152,8 +157,8 @@ instance : Fold ByteArray UInt8 where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
 
-instance : Membership UInt8 ByteArray := Fold.toMem
---instance : Mem.ToList ByteArray UInt8 := Fold.toMem.ToList
+instance : Membership UInt8 ByteArray := Fold.instMem
+--instance : Membership.AgreesWithToSet ByteArray UInt8 := Fold.instMem.AgreesWithToSet
 
 instance : Seq ByteArray UInt8 where
   size := size
@@ -176,8 +181,8 @@ instance : Fold FloatArray Float where
   fold arr := arr.foldl
   foldM arr := arr.foldlM
 
-instance : Membership Float FloatArray := Fold.toMem
---instance : Mem.ToList FloatArray Float := Fold.toMem.ToList
+instance : Membership Float FloatArray := Fold.instMem
+--instance : Mem.ToList FloatArray Float := Fold.instMem.AgreesWithToSet
 
 def append (A1 A2 : FloatArray) : FloatArray :=
   aux A1 0
