@@ -236,3 +236,111 @@ theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
   induction L1 generalizing init <;> simp
   case cons hd tl ih =>
   rw [ih]; simp [foldl_map]
+
+section UIntFacts
+
+theorem UInt8.add_def (i j : UInt8) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt16.add_def (i j : UInt16) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt32.add_def (i j : UInt32) : i + j = ⟨i.val + j.val⟩ := rfl
+theorem UInt64.add_def (i j : UInt64) : i + j = ⟨i.val + j.val⟩ := rfl
+
+theorem UInt8.toNat_ofNat (n : Nat) : (OfNat.ofNat n : UInt8).toNat = n % UInt8.size := rfl
+
+end UIntFacts
+
+section LinearOrders
+
+instance : LinearOrder UInt8 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt8.le; simp
+  le_trans := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b hab hba; apply UInt8.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt8.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt8.le UInt8.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt16 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt16.le
+    simp
+  le_trans := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b hab hba; apply UInt16.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt16.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt16.le UInt16.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt32 where
+  decidableLE := inferInstance
+  le_refl := by
+    unfold LE.le; simp [instLEUInt32]
+  le_trans := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b hab hba; apply UInt32.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    unfold LE.le; simp [instLEUInt32]
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    unfold LE.le LT.lt; simp only [instLEUInt32, instLTUInt32]
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : LinearOrder UInt64 where
+  decidableLE := inferInstance
+  le_refl := by
+    simp [LE.le]; unfold UInt64.le; simp
+  le_trans := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b c; apply Preorder.le_trans
+  le_antisymm := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b hab hba; apply UInt64.ext; apply PartialOrder.le_antisymm <;> assumption
+  le_total := by
+    simp [LE.le]; unfold UInt64.le
+    intro a b; apply LinearOrder.le_total
+  lt_iff_le_not_le := by
+    simp [LE.le, LT.lt]; unfold UInt64.le UInt64.lt
+    intro a b; apply Preorder.lt_iff_le_not_le
+
+instance : BoundedOrder UInt8 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt8, UInt8.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt8, UInt8.le]
+
+instance : BoundedOrder UInt16 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt16, UInt16.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt16, UInt16.le]
+
+instance : BoundedOrder UInt32 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt32]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt32]
+
+instance : BoundedOrder UInt64 where
+  top := ⟨⊤⟩
+  le_top := by rintro ⟨x⟩; simp [instLEUInt64, UInt64.le]
+  bot := ⟨⊥⟩
+  bot_le := by rintro ⟨x⟩; simp [instLEUInt64, UInt64.le]
+
+end LinearOrders
