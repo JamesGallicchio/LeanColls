@@ -104,7 +104,7 @@ instance : LawfulSeq (Array α) α where
       · simp; simp_all [size_mk]
   getSnoc?_eq_none := by
     simp [LeanColls.toList, Seq.getSnoc?]
-    rintro ⟨L⟩; simp [getSnoc?]; exact List.length_eq_zero
+    rintro ⟨L⟩; simp [getSnoc?]
   getSnoc?_eq_some := by
     rintro ⟨L⟩ x ⟨L'⟩
     simp [LeanColls.toList, Seq.getSnoc?, getSnoc?]

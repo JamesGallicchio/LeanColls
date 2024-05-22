@@ -5,7 +5,6 @@ Authors: James Gallicchio
 
 import Std.Data.Range.Lemmas
 import Mathlib.Tactic.Linarith
-import Mathlib.Data.Nat.Basic
 
 import LeanColls.Classes.Ops
 import LeanColls.MathlibUpstream
