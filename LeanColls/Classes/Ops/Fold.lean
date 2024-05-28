@@ -8,7 +8,7 @@ import LeanColls.Classes.Ops
 
 namespace LeanColls.Fold
 
-variable [Fold C τ] [LeanColls.ToList C τ]
+variable {C : Type u} {τ : Type v} [Fold C τ] [LeanColls.ToList C τ]
 
 /-- Correctness of `Fold` with respect to `ToList` -/
 class ToList (C τ) [Fold C τ] [ToList C τ] : Prop where
@@ -143,11 +143,22 @@ instance : ForIn m C τ where
 
 def find (f : τ → Bool) (cont : C) : Option τ :=
   match
-    Fold.foldM cont (fun () x =>
-      if f x then .error x else .ok ()
-    ) ()
+    Fold.foldM (m := Except τ) (β := PUnit.{v+1}) cont (fun ⟨⟩ x =>
+      if f x then Except.error x else .ok ⟨⟩
+    ) ⟨⟩
   with
-  | Except.ok () => none
+  | Except.ok ⟨⟩ => none
+  | Except.error x => some x
+
+def first {β : Type w} (f : τ → Option β) (cont : C) : Option β :=
+  match
+    Fold.foldM.{u,v,w} (m := Except β) (β := PUnit.{w+1}) cont (fun ⟨⟩ x =>
+      match f x with
+      | some x => .error x
+      | none => .ok ⟨⟩
+    ) ⟨⟩
+  with
+  | Except.ok ⟨⟩ => none
   | Except.error x => some x
 
 def any (f : τ → Bool) (cont : C) : Bool :=
@@ -223,6 +234,9 @@ theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [
   : all f c ↔ ∀ x ∈ c, f x := by
   rw [all_eq_all_toList]
   simp [Mem.ToList.mem_iff_mem_toList]
+
+def count [Fold C τ] (f : τ → Bool) (c : C) : Nat :=
+  Fold.fold c (fun acc x => if f x then acc+1 else acc) 0
 
 def toMem [Fold C τ] : Membership τ C where
   mem x c := open Classical in any (decide <| · = x) c

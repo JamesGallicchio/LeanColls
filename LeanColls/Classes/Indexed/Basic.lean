@@ -38,6 +38,9 @@ class Indexed (C : Type u) (ι : outParam (Type v)) (τ : outParam (Type w))
   update : (cont : C) → (i : ι) → (τ → τ) → C
   /-- Set the value of the function at an index -/
   set : (cont : C) → (i : ι) → τ → C := (update · · <| Function.const _ ·)
+  /-- Swap a value in for the current value at an index -/
+  swap : (cont : C) → (i : ι) → τ → τ × C :=
+    fun c i x => let old := get c i; (old, set c i x)
   size cont := fold cont (fun acc _ => acc + 1) 0
 
 namespace Indexed
