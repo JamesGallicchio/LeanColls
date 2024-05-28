@@ -7,11 +7,11 @@ import LeanColls.Classes.Dict
 import LeanColls.Classes.Ops.Fold
 import LeanColls.Data.Transformer.View
 
-import Std.Data.AssocList
+import Batteries.Data.AssocList
 
 /-! ### AssocList
 
-This file hooks `Std.AssocList` and mathlib's `AList`
+This file hooks `Batteries.AssocList` and mathlib's `AList`
 into the `LeanColls` framework.
 
 Note `AssocList` has a very ugly theory without an assumption
@@ -21,7 +21,7 @@ Mathlib's `AList` has a nicer theory but worse computational properties.
 
 namespace LeanColls
 
-export Std (AssocList)
+export Batteries (AssocList)
 
 namespace AssocList
 
@@ -30,7 +30,7 @@ instance : Fold (AssocList κ τ) (κ × τ) where
   foldM := fun m f init => m.foldlM (fun acc k t => f acc (k,t)) init
 
 instance : ToList (AssocList κ τ) (κ × τ) where
-  toList := Std.AssocList.toList
+  toList := Batteries.AssocList.toList
 
 instance : Fold.ToList (AssocList κ τ) (κ × τ) where
   fold_eq_fold_toList := by

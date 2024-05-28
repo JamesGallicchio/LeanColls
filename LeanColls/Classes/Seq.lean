@@ -61,7 +61,7 @@ namespace List
 
 open LeanColls
 
-instance : Seq (List τ) τ where
+instance instSeqList : Seq (List τ) τ where
   toList := id
   empty := []
   insert L x := x::L
@@ -278,10 +278,11 @@ theorem get_update_ne (cont : C) (i : Fin (size cont)) (f : τ → τ) (j)
   simp [List.instSeqList]
   rw [List.get_eq_get _ _ _ _ ?list_eq ?idx_eq]
   case list_eq =>
-    apply toList_update
+      apply toList_update
   simp [List.instSeqList]
   rw [List.get_set_ne _ _ _ ?h]
   conv => rhs; rw [get_def]
+  rfl
   case h => simpa [size_def, List.instSeqList] using j.isLt
   case idx_eq => simp
   simp [h]
