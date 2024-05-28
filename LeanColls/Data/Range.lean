@@ -3,7 +3,7 @@
 Authors: James Gallicchio
 -/
 
-import Std.Data.Range.Lemmas
+import Batteries.Data.Range.Lemmas
 import Mathlib.Tactic.Linarith
 
 import LeanColls.Classes.Ops

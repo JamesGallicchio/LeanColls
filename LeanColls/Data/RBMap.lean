@@ -6,13 +6,13 @@ Authors: James Gallicchio
 import LeanColls.Classes.Dict
 import LeanColls.Data.Transformer.View
 
-import Std.Data.RBMap
+import Batteries.Data.RBMap
 
 
 namespace LeanColls
 
 structure RBMap (κ) [Ord κ] (τ) where
-  data : Std.RBMap κ τ compare
+  data : Batteries.RBMap κ τ compare
 
 instance [Ord κ] : Fold (RBMap κ τ) (κ × τ) where
   fold := fun m f init => m.data.foldl (fun acc k t => f acc (k,t)) init

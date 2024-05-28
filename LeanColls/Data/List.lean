@@ -7,9 +7,6 @@ import Mathlib.Data.List.Lemmas
 
 namespace List
 
-theorem ofFn_def (f : Fin n → α)
-  : ofFn f = (Array.ofFn f).data := rfl
-
 def getCons? : List α → Option (α × List α)
 | [] => none
 | x::xs => some (x,xs)
