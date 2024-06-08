@@ -1,0 +1,346 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="stylesheet" href=".././src/pygments.css"></link><link rel="icon" href=".././favicon.svg"></link><link rel="mask-icon" href=".././favicon.svg" color="#000000"></link><link rel="prefetch" href=".././/declarations/declaration-data.bmp" as="image"></link><title>Init.GetElem</title><script defer="true" src=".././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT=".././";</script><script>const MODULE_NAME="Init.GetElem";</script><script type="module" src=".././jump-src.js"></script><script type="module" src=".././search.js"></script><script type="module" src=".././expand-nav.js"></script><script type="module" src=".././how-about.js"></script><script type="module" src=".././instances.js"></script><script type="module" src=".././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Init</span>.<span class="name">GetElem</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href=".././Init/Util.html">Init.Util</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Init.GetElem" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#GetElem"><span class="name">GetElem</span></a></div><div class="nav_link"><a class="break_within" href="#«term__[_]»"><span class="name">«term__[_]»</span></a></div><div class="nav_link"><a class="break_within" href="#«term__[_]'_»"><span class="name">«term__[_]'_»</span></a></div><div class="nav_link"><a class="break_within" href="#«term__[_]_?»"><span class="name">«term__[_]_?»</span></a></div><div class="nav_link"><a class="break_within" href="#«term__[_]_!»"><span class="name">«term__[_]_!»</span></a></div><div class="nav_link"><a class="break_within" href="#LawfulGetElem"><span class="name">LawfulGetElem</span></a></div><div class="nav_link"><a class="break_within" href="#LawfulGetElem.getElem?_def"><span class="name">LawfulGetElem</span>.<span class="name">getElem?_def</span></a></div><div class="nav_link"><a class="break_within" href="#LawfulGetElem.getElem!_def"><span class="name">LawfulGetElem</span>.<span class="name">getElem!_def</span></a></div><div class="nav_link"><a class="break_within" href="#getElem?_pos"><span class="name">getElem?_pos</span></a></div><div class="nav_link"><a class="break_within" href="#getElem?_neg"><span class="name">getElem?_neg</span></a></div><div class="nav_link"><a class="break_within" href="#getElem!_pos"><span class="name">getElem!_pos</span></a></div><div class="nav_link"><a class="break_within" href="#getElem!_neg"><span class="name">getElem!_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.instGetElemFinVal"><span class="name">Fin</span>.<span class="name">instGetElemFinVal</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.instLawfulGetElemValOfNat"><span class="name">Fin</span>.<span class="name">instLawfulGetElemValOfNat</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.getElem_fin"><span class="name">Fin</span>.<span class="name">getElem_fin</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.getElem?_fin"><span class="name">Fin</span>.<span class="name">getElem?_fin</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.getElem!_fin"><span class="name">Fin</span>.<span class="name">getElem!_fin</span></a></div><div class="nav_link"><a class="break_within" href="#List.instGetElemNatLtLength"><span class="name">List</span>.<span class="name">instGetElemNatLtLength</span></a></div><div class="nav_link"><a class="break_within" href="#List.instLawfulGetElemNatLtLength"><span class="name">List</span>.<span class="name">instLawfulGetElemNatLtLength</span></a></div><div class="nav_link"><a class="break_within" href="#List.cons_getElem_zero"><span class="name">List</span>.<span class="name">cons_getElem_zero</span></a></div><div class="nav_link"><a class="break_within" href="#List.cons_getElem_succ"><span class="name">List</span>.<span class="name">cons_getElem_succ</span></a></div><div class="nav_link"><a class="break_within" href="#List.get_drop_eq_drop"><span class="name">List</span>.<span class="name">get_drop_eq_drop</span></a></div><div class="nav_link"><a class="break_within" href="#Array.instGetElemNatLtSize"><span class="name">Array</span>.<span class="name">instGetElemNatLtSize</span></a></div><div class="nav_link"><a class="break_within" href="#Array.instLawfulGetElemNatLtSize"><span class="name">Array</span>.<span class="name">instLawfulGetElemNatLtSize</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Syntax.instGetElemNatTrue"><span class="name">Lean</span>.<span class="name">Syntax</span>.<span class="name">instGetElemNatTrue</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Syntax.instLawfulGetElemNatTrue"><span class="name">Lean</span>.<span class="name">Syntax</span>.<span class="name">instLawfulGetElemNatTrue</span></a></div></nav><main>
+<div class="decl" id="GetElem"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L27-L57">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#GetElem"><span class="name">GetElem</span></a></span><span class="decl_args">
+<span class="fn">(coll : <a href=".././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(idx : <a href=".././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(elem : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <a href=".././foundational_types.html">(<a href=".././foundational_types.html">Type</a> w)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(valid : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<span class="fn"><span class="fn">coll</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href=".././foundational_types.html">Type</a> (max (max u v) w)</div></div><p>The class <code><a href=".././Init/GetElem.html#GetElem">GetElem</a> coll idx elem valid</code> implements the <code>xs[i]</code> notation.
+Given <code>xs[i]</code> with <code>xs : coll</code> and <code>i : idx</code>, Lean looks for an instance of
+<code><a href=".././Init/GetElem.html#GetElem">GetElem</a> coll idx elem valid</code> and uses this to infer the type of return
+value <code>elem</code> and side conditions <code>valid</code> required to ensure <code>xs[i]</code> yields
+a valid value of type <code>elem</code>.</p><p>For example, the instance for arrays looks like
+<code><a href=".././Init/GetElem.html#GetElem">GetElem</a> (Array α) <a href=".././Init/Prelude.html#Nat">Nat</a> α (fun xs i =&gt; i &lt; xs.size)</code>.</p><p>The proof side-condition <code>valid xs i</code> is automatically dispatched by the
+<code>get_elem_tactic</code> tactic, which can be extended by adding more clauses to
+<code>get_elem_tactic_trivial</code>.</p><ul class="structure_fields" id="GetElem.mk"><li id="GetElem.getElem" class="structure_field"><div class="structure_field_info">getElem : <span class="fn">(<span class="fn">xs</span> : <span class="fn">coll</span>) → <span class="fn">(<span class="fn">i</span> : <span class="fn">idx</span>) → <span class="fn"><span class="fn"><span class="fn">valid</span> <span class="fn">xs</span> <span class="fn">i</span></span> → <span class="fn">elem</span></span></span></span></div><div class="structure_field_doc"><p>The syntax <code>arr[i]</code> gets the <code>i</code>'th element of the collection <code>arr</code>. If there
+are proof side conditions to the application, they will be automatically
+inferred by the <code>get_elem_tactic</code> tactic.</p><p>The actual behavior of this class is type-dependent, but here are some
+important implementations:</p><ul>
+<li><code>arr[i] : α</code> where <code>arr : <a href=".././Init/Prelude.html#Array">Array</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code> or <code>i : <a href=".././Init/Prelude.html#USize">USize</a></code>: does array
+indexing with no bounds check and a proof side goal <code>i &lt; arr.size</code>.</li>
+<li><code>l[i] : α</code> where <code>l : <a href=".././Init/Prelude.html#List">List</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: index into a list, with proof
+side goal <code>i &lt; l.length</code>.</li>
+<li><code>stx[i] : Syntax</code> where <code>stx : Syntax</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: get a syntax argument,
+no side goal (returns <code>.missing</code> out of range)</li>
+</ul><p>There are other variations on this syntax:</p><ul>
+<li><code>arr[i]!</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem!">getElem!</a> arr i</code> which should panic and return
+<code>default : α</code> if the index is not valid.</li>
+<li><code>arr[i]?</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem?">getElem?</a></code> which should return <code>none</code> if the index
+is not valid.</li>
+<li><code>arr[i]'h</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem">getElem</a> arr i h</code> with <code>h</code> an explicit proof the
+index is valid.</li>
+</ul></div></li><li id="GetElem.getElem?" class="structure_field"><div class="structure_field_info">getElem? : <span class="fn">(<span class="fn">xs</span> : <span class="fn">coll</span>) → <span class="fn">(<span class="fn">i</span> : <span class="fn">idx</span>) → <span class="fn">[<span class="fn">inst</span> : <span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">valid</span> <span class="fn">xs</span> <span class="fn">i</span></span>)</span></span>] → <span class="fn"><a href=".././Init/Prelude.html#Option">Option</a> <span class="fn">elem</span></span></span></span></span></div></li><li id="GetElem.getElem!" class="structure_field"><div class="structure_field_info">getElem! : <span class="fn">[<span class="fn">inst</span> : <span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">elem</span></span>] → <span class="fn">(<span class="fn">xs</span> : <span class="fn">coll</span>) → <span class="fn">(<span class="fn">i</span> : <span class="fn">idx</span>) → <span class="fn">[<span class="fn">inst</span> : <span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">valid</span> <span class="fn">xs</span> <span class="fn">i</span></span>)</span></span>] → <span class="fn">elem</span></span></span></span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-GetElem" class="instances-list"></ul></details></div></div><div class="decl" id="«term__[_]»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L61-L62">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#«term__[_]»"><span class="name">«term__[_]»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href=".././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><p>The syntax <code>arr[i]</code> gets the <code>i</code>'th element of the collection <code>arr</code>. If there
+are proof side conditions to the application, they will be automatically
+inferred by the <code>get_elem_tactic</code> tactic.</p><p>The actual behavior of this class is type-dependent, but here are some
+important implementations:</p><ul>
+<li><code>arr[i] : α</code> where <code>arr : <a href=".././Init/Prelude.html#Array">Array</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code> or <code>i : <a href=".././Init/Prelude.html#USize">USize</a></code>: does array
+indexing with no bounds check and a proof side goal <code>i &lt; arr.size</code>.</li>
+<li><code>l[i] : α</code> where <code>l : <a href=".././Init/Prelude.html#List">List</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: index into a list, with proof
+side goal <code>i &lt; l.length</code>.</li>
+<li><code>stx[i] : Syntax</code> where <code>stx : Syntax</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: get a syntax argument,
+no side goal (returns <code>.missing</code> out of range)</li>
+</ul><p>There are other variations on this syntax:</p><ul>
+<li><code>arr[i]!</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem!">getElem!</a> arr i</code> which should panic and return
+<code>default : α</code> if the index is not valid.</li>
+<li><code>arr[i]?</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem?">getElem?</a></code> which should return <code>none</code> if the index
+is not valid.</li>
+<li><code>arr[i]'h</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem">getElem</a> arr i h</code> with <code>h</code> an explicit proof the
+index is valid.</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term__[_]»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term__[_]'_»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L65-L66">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#«term__[_]'_»"><span class="name">«term__[_]'_»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href=".././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><p>The syntax <code>arr[i]</code> gets the <code>i</code>'th element of the collection <code>arr</code>. If there
+are proof side conditions to the application, they will be automatically
+inferred by the <code>get_elem_tactic</code> tactic.</p><p>The actual behavior of this class is type-dependent, but here are some
+important implementations:</p><ul>
+<li><code>arr[i] : α</code> where <code>arr : <a href=".././Init/Prelude.html#Array">Array</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code> or <code>i : <a href=".././Init/Prelude.html#USize">USize</a></code>: does array
+indexing with no bounds check and a proof side goal <code>i &lt; arr.size</code>.</li>
+<li><code>l[i] : α</code> where <code>l : <a href=".././Init/Prelude.html#List">List</a> α</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: index into a list, with proof
+side goal <code>i &lt; l.length</code>.</li>
+<li><code>stx[i] : Syntax</code> where <code>stx : Syntax</code> and <code>i : <a href=".././Init/Prelude.html#Nat">Nat</a></code>: get a syntax argument,
+no side goal (returns <code>.missing</code> out of range)</li>
+</ul><p>There are other variations on this syntax:</p><ul>
+<li><code>arr[i]!</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem!">getElem!</a> arr i</code> which should panic and return
+<code>default : α</code> if the index is not valid.</li>
+<li><code>arr[i]?</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem?">getElem?</a></code> which should return <code>none</code> if the index
+is not valid.</li>
+<li><code>arr[i]'h</code> is syntax for <code><a href=".././Init/GetElem.html#GetElem.getElem">getElem</a> arr i h</code> with <code>h</code> an explicit proof the
+index is valid.</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term__[_]'_»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term__[_]_?»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L73-L73">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#«term__[_]_?»"><span class="name">«term__[_]_?»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href=".././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><p>The syntax <code>arr[i]?</code> gets the <code>i</code>'th element of the collection <code>arr</code> or
+returns <code>none</code> if <code>i</code> is out of bounds.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term__[_]_?»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term__[_]_!»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L79-L79">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#«term__[_]_!»"><span class="name">«term__[_]_!»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href=".././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><p>The syntax <code>arr[i]!</code> gets the <code>i</code>'th element of the collection <code>arr</code> and
+panics <code>i</code> is out of bounds.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term__[_]_!»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LawfulGetElem"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L81-L87">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#LawfulGetElem"><span class="name">LawfulGetElem</span></a></span><span class="decl_args">
+<span class="fn">(cont : <a href=".././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(idx : <a href=".././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(elem : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <a href=".././foundational_types.html">(<a href=".././foundational_types.html">Type</a> w)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(dom : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[ge : <span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href=".././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="LawfulGetElem.mk"><li id="LawfulGetElem.getElem?_def" class="structure_field"><div class="structure_field_info">getElem?_def : <span class="fn">∀ (<span class="fn">c</span> : <span class="fn">cont</span>) (<span class="fn">i</span> : <span class="fn">idx</span>) [<span class="fn">inst</span> : <span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>], <span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span> then <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]</span></span> else <span class="fn">none</span></span></span></span></div></li><li id="LawfulGetElem.getElem!_def" class="structure_field"><div class="structure_field_info">getElem!_def : <span class="fn">∀ [<span class="fn">inst</span> : <span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">elem</span></span>] (<span class="fn">c</span> : <span class="fn">cont</span>) (<span class="fn">i</span> : <span class="fn">idx</span>) [<span class="fn">inst_1</span> : <span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>],
+  <span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]!</span> <a href=".././Init/Prelude.html#Eq">=</a>     <span class="fn">match <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> with
+    | <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn">e</span></span> =&gt; <span class="fn">e</span>
+    | <span class="fn">none</span> =&gt; <span class="fn">default</span></span></span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-LawfulGetElem" class="instances-list"></ul></details></div></div><div class="decl" id="LawfulGetElem.getElem?_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L84-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#LawfulGetElem.getElem?_def"><span class="name">LawfulGetElem</span>.<span class="name">getElem?_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <a href=".././foundational_types.html">(<a href=".././foundational_types.html">Type</a> w)</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>)</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[ge : <span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[self : <span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span> then <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]</span></span> else <span class="fn">none</span></span></span></div></div></div></div><div class="decl" id="LawfulGetElem.getElem!_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L86-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#LawfulGetElem.getElem!_def"><span class="name">LawfulGetElem</span>.<span class="name">getElem!_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <a href=".././foundational_types.html">(<a href=".././foundational_types.html">Type</a> w)</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><a href=".././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>)</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[ge : <span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[self : <span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">elem</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]!</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">match <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> with
+  | <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn">e</span></span> =&gt; <span class="fn">e</span>
+  | <span class="fn">none</span> =&gt; <span class="fn">default</span></span></span></div></div></div></div><div class="decl" id="getElem?_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L91-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#getElem?_pos"><span class="name">getElem?_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Init/Prelude.html#Option.some">some</a> <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]</span></span></span></div></div></div></div><div class="decl" id="getElem?_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L96-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#getElem?_neg"><span class="name">getElem?_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]?</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">none</span></span></div></div></div></div><div class="decl" id="getElem!_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L101-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#getElem!_pos"><span class="name">getElem!_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">elem</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]!</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]</span></span></div></div></div></div><div class="decl" id="getElem!_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L106-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#getElem!_neg"><span class="name">getElem!_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{idx : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><span class="fn">idx</span> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">idx</span> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">elem</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">idx</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href=".././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">dom</span> <span class="fn">c</span> <span class="fn">i</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>[<span class="fn">i</span>]!</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">default</span></span></div></div></div></div><div class="decl" id="Fin.instGetElemFinVal"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L112-L115">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Fin.instGetElemFinVal"><span class="name">Fin</span>.<span class="name">instGetElemFinVal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><a href=".././Init/Prelude.html#Nat">Nat</a> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span> <span class="fn">elem</span> <span class="fn">fun (<span class="fn">xs</span> : <span class="fn">cont</span>) (<span class="fn">i</span> : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) =&gt; <span class="fn"><span class="fn">dom</span> <span class="fn">xs</span> <span class="fn">↑<span class="fn">i</span></span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Fin.instLawfulGetElemValOfNat"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L117-L121">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Fin.instLawfulGetElemValOfNat"><span class="name">Fin</span>.<span class="name">instLawfulGetElemValOfNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{elem : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dom : <span class="fn"><span class="fn">cont</span> → <span class="fn"><a href=".././Init/Prelude.html#Nat">Nat</a> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">elem</span> <span class="fn">dom</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">cont</span> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span> <span class="fn">elem</span> <span class="fn">fun (<span class="fn">xs</span> : <span class="fn">cont</span>) (<span class="fn">i</span> : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) =&gt; <span class="fn"><span class="fn">dom</span> <span class="fn">xs</span> <span class="fn">↑<span class="fn">i</span></span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Fin.getElem_fin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L123-L124">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Fin.getElem_fin"><span class="name">Fin</span>.<span class="name">getElem_fin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Elem : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Dom : <span class="fn"><span class="fn">Cont</span> → <span class="fn"><a href=".././Init/Prelude.html#Nat">Nat</a> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">Cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">Elem</span> <span class="fn">Dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">Cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">Dom</span> <span class="fn">a</span> <span class="fn">↑<span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span>[<span class="fn">i</span>]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span>[<span class="fn">↑<span class="fn">i</span></span>]</span></span></div></div></div></div><div class="decl" id="Fin.getElem?_fin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L126-L127">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Fin.getElem?_fin"><span class="name">Fin</span>.<span class="name">getElem?_fin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Elem : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Dom : <span class="fn"><span class="fn">Cont</span> → <span class="fn"><a href=".././Init/Prelude.html#Nat">Nat</a> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">Cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">Elem</span> <span class="fn">Dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">Cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">Dom</span> <span class="fn">a</span> <span class="fn">↑<span class="fn">i</span></span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span>[<span class="fn">i</span>]?</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span>[<span class="fn">↑<span class="fn">i</span></span>]?</span></span></div></div></div></div><div class="decl" id="Fin.getElem!_fin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L129-L130">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Fin.getElem!_fin"><span class="name">Fin</span>.<span class="name">getElem!_fin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Cont : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Elem : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Dom : <span class="fn"><span class="fn">Cont</span> → <span class="fn"><a href=".././Init/Prelude.html#Nat">Nat</a> → <a href=".././foundational_types.html">Prop</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">Cont</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">Elem</span> <span class="fn">Dom</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">Cont</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Decidable">Decidable</a> <span class="fn">(<span class="fn"><span class="fn">Dom</span> <span class="fn">a</span> <span class="fn">↑<span class="fn">i</span></span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">Elem</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span>[<span class="fn">i</span>]!</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span>[<span class="fn">↑<span class="fn">i</span></span>]!</span></span></div></div></div></div><div class="decl" id="List.instGetElemNatLtLength"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L139-L140">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#List.instGetElemNatLtLength"><span class="name">List</span>.<span class="name">instGetElemNatLtLength</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">α</span> <span class="fn">fun (<span class="fn">as</span> : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) (<span class="fn">i</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">as</span>.length</span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="List.instLawfulGetElemNatLtLength"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L142-L142">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#List.instLawfulGetElemNatLtLength"><span class="name">List</span>.<span class="name">instLawfulGetElemNatLtLength</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">α</span> <span class="fn">fun (<span class="fn">as</span> : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>) (<span class="fn">i</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">as</span>.length</span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="List.cons_getElem_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L144-L145">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#List.cons_getElem_zero"><span class="name">List</span>.<span class="name">cons_getElem_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span>.length</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span>[<span class="fn">0</span>]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="List.cons_getElem_succ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L147-L148">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#List.cons_getElem_succ"><span class="name">List</span>.<span class="name">cons_getElem_succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span>.length</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn">as</span></span>)</span>[<span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">as</span>[<span class="fn">i</span>]</span></span></div></div></div></div><div class="decl" id="List.get_drop_eq_drop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L150-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#List.get_drop_eq_drop"><span class="name">List</span>.<span class="name">get_drop_eq_drop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(as : <span class="fn"><a href=".././Init/Prelude.html#List">List</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href=".././Init/Prelude.html#Nat">Nat</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">as</span>.length</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">as</span>[<span class="fn">i</span>]</span> <a href=".././Init/Prelude.html#List.cons">::</a> <span class="fn"><a href=".././Init/Data/List/Basic.html#List.drop">List.drop</a> <span class="fn">(<span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span> <span class="fn">as</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><a href=".././Init/Data/List/Basic.html#List.drop">List.drop</a> <span class="fn">i</span> <span class="fn">as</span></span></span></div></div></div></div><div class="decl" id="Array.instGetElemNatLtSize"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L159-L160">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Array.instGetElemNatLtSize"><span class="name">Array</span>.<span class="name">instGetElemNatLtSize</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span>)</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">α</span> <span class="fn">fun (<span class="fn">xs</span> : <span class="fn"><a href=".././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span>) (<span class="fn">i</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">xs</span>.size</span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Array.instLawfulGetElemNatLtSize"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L162-L162">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Array.instLawfulGetElemNatLtSize"><span class="name">Array</span>.<span class="name">instLawfulGetElemNatLtSize</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <span class="fn">(<span class="fn"><a href=".././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span>)</span> <a href=".././Init/Prelude.html#Nat">Nat</a> <span class="fn">α</span> <span class="fn">fun (<span class="fn">xs</span> : <span class="fn"><a href=".././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span>) (<span class="fn">i</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <span class="fn"><span class="fn">i</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">xs</span>.size</span></span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Lean.Syntax.instGetElemNatTrue"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Lean.Syntax.instGetElemNatTrue"><span class="name">Lean</span>.<span class="name">Syntax</span>.<span class="name">instGetElemNatTrue</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#GetElem">GetElem</a> <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> <a href=".././Init/Prelude.html#Nat">Nat</a> <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> <span class="fn">fun (<span class="fn">x</span> : <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>) (<span class="fn">x</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <a href=".././Init/Prelude.html#True">True</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Lean.Syntax.instLawfulGetElemNatTrue"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/df668f00e6c08cb63661aacc43d0e83388e2c60d/src/Init/GetElem.lean#L171-L171">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href=".././Init/GetElem.html#Lean.Syntax.instLawfulGetElemNatTrue"><span class="name">Lean</span>.<span class="name">Syntax</span>.<span class="name">instLawfulGetElemNatTrue</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Init/GetElem.html#LawfulGetElem">LawfulGetElem</a> <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> <a href=".././Init/Prelude.html#Nat">Nat</a> <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a> <span class="fn">fun (<span class="fn">x</span> : <a href=".././Init/Prelude.html#Lean.Syntax">Lean.Syntax</a>) (<span class="fn">x</span> : <a href=".././Init/Prelude.html#Nat">Nat</a>) =&gt; <a href=".././Init/Prelude.html#True">True</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href=".././Init/GetElem.html#Lean.Syntax.instLawfulGetElemNatTrue">Lean.Syntax.instLawfulGetElemNatTrue</a> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src=".././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
