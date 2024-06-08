@@ -6,8 +6,8 @@ Authors: James Gallicchio
 import LeanColls.Classes.Dict
 import LeanColls.Data.Transformer.View
 
-import Std.Data.HashMap
-import Std.Data.HashMap.Lemmas
+import Batteries.Data.HashMap
+import Batteries.Data.HashMap.Lemmas
 
 /-! ### HashMap
 
@@ -17,7 +17,7 @@ so we do not even attempt the lawfulness proofs.
 
 namespace LeanColls
 
-export Std (HashMap)
+export Batteries (HashMap)
 
 variable [BEq κ] [Hashable κ]
 
@@ -30,7 +30,7 @@ instance : Fold (Dict.KeySet (HashMap κ τ)) κ where
   foldM := fun m f init => m.data.foldM (fun acc k _ => f acc k) init
 
 instance : ToList (HashMap κ τ) (κ × τ) where
-  toList := Std.HashMap.toList
+  toList := Batteries.HashMap.toList
 
 instance : Membership (κ × τ) (HashMap κ τ) where
   mem := fun (k,t) m => m.find? k = some t

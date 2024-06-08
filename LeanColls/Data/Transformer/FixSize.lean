@@ -63,8 +63,8 @@ instance [LawfulIndexType ι] : LawfulIndexed (FixSize C ι) ι τ where
     simp [Indexed.get, Indexed.update, Indexed.set]
     rw [Seq.get_update_ne]
     · simp
-    · simp [Fin.val_inj]
-      assumption
+    · simp [Fin.ext_iff] at *
+      simp [Fin.val_inj]; assumption
 
 instance [Inhabited τ] : Inhabited (FixSize C ι) where
   default := Indexed.ofFn fun _ => default
