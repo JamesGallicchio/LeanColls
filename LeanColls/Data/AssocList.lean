@@ -32,16 +32,18 @@ instance : Fold (AssocList κ τ) (κ × τ) where
 instance : ToList (AssocList κ τ) (κ × τ) where
   toList := Batteries.AssocList.toList
 
-instance : Fold.ToList (AssocList κ τ) (κ × τ) where
-  fold_eq_fold_toList := by
-    intro c
-    use c.toList
-    simp only [toList]
-    simp [fold]
+instance : Fold.LawfulFold (AssocList κ τ) (κ × τ) where
   foldM_eq_fold := by
     simp [foldM, fold]
     intros
     rw [List.foldlM_eq_foldl]
+
+instance : Fold.AgreesWithToMultiset (AssocList κ τ) (κ × τ) where
+  exists_eq_list_foldl := by
+    intro c
+    use c.toList
+    simp only [toMultiset, toList]
+    simp [fold]
 
 instance [BEq κ] : Membership (κ × τ) (AssocList κ τ) where
   mem := fun (k,t) m => m.find? k = some t
@@ -53,18 +55,22 @@ instance : Fold (Dict.KeySet (AssocList κ τ)) κ where
 instance : ToList (Dict.KeySet (AssocList κ τ)) (κ) where
   toList := fun ⟨al⟩ => al.toList.map (·.1)
 
-instance : Fold.ToList (Dict.KeySet (AssocList κ τ)) κ where
-  fold_eq_fold_toList := by
-    intro c
-    use c.data.toList.map (·.1)
-    simp only [toList]
-    simp [fold, List.foldl_map]
+instance : Fold.LawfulFold (Dict.KeySet (AssocList κ τ)) κ where
   foldM_eq_fold := by
     simp [foldM, fold]
     intros
     rw [List.foldlM_eq_foldl]
 
-instance [DecidableEq κ] : Membership κ (Dict.KeySet (AssocList κ τ)) := Fold.toMem
+instance [DecidableEq κ] : Membership κ (Dict.KeySet (AssocList κ τ)) := Fold.instMem
+
+instance : Fold.AgreesWithToMultiset (Dict.KeySet (AssocList κ τ)) κ where
+  exists_eq_list_foldl := by
+    intro c
+    use c.data.toList.map (·.1)
+    simp only [toMultiset, toList]
+    simp [fold, List.foldl_map]
+
+instance [DecidableEq κ] : Membership κ (Dict.KeySet (AssocList κ τ)) := Fold.instMem
 
 -- TODO(JG)
 instance [DecidableEq κ] : Dict (AssocList κ τ) κ τ where

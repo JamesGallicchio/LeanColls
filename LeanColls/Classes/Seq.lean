@@ -87,10 +87,11 @@ namespace LeanColls
 
 class LawfulSeq (C : Type u) (τ : outParam (Type v)) [Seq C τ]
   extends
-    Mem.ToList C τ,
-    Append.ToList C τ,
-    Insert.ToMultiset C τ,
-    Fold.ToList C τ
+    Membership.AgreesWithToSet C τ,
+    Append.AgreesWithToList C τ,
+    Insert.AgreesWithToMultiset C τ,
+    Fold.LawfulFold C τ,
+    Fold.AgreesWithToMultiset C τ
   : Prop
   where
   size_def : ∀ (cont : C),
@@ -121,7 +122,7 @@ end LeanColls
 namespace List
 
 instance : LeanColls.LawfulSeq (List τ) τ where
-  mem_iff_mem_toList   := by simp
+  mem_iff_mem_toSet    := by intros; simp [LeanColls.instToSet_1]; rfl
   toList_append        := by simp
   toList_ofFn          := by simp
   toList_set           := by simp
@@ -137,9 +138,9 @@ instance : LeanColls.LawfulSeq (List τ) τ where
   toList_update := by intros; rfl
   toList_cons := by intros; rfl
   toList_snoc := by intros; rfl
-  fold_eq_fold_toList := by
+  exists_eq_list_foldl := by
     intro c
-    refine ⟨_, List.Perm.refl _, ?_⟩
+    refine ⟨_, rfl, ?_⟩
     intros; rfl
   foldM_eq_fold := by
     intros; simp [LeanColls.foldM, LeanColls.fold, List.foldlM_eq_foldl]
@@ -150,19 +151,17 @@ namespace LeanColls
 
 namespace Seq
 
-export Mem.ToList (
-  mem_iff_mem_toList
+export Membership.AgreesWithToSet (
+  mem_iff_mem_toSet
 )
 
-export Append.ToList (
+export Append.AgreesWithToList (
   toList_append
 )
-attribute [simp] toList_append
 
-export Insert.ToMultiset (
+export Insert.AgreesWithToMultiset (
   toMultiset_empty
 )
-attribute [simp] toMultiset_empty
 
 export LawfulSeq (
 size_def

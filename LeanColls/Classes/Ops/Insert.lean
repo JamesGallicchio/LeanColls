@@ -14,41 +14,52 @@ instance [_root_.Insert τ C] [EmptyCollection C] : Insert C τ where
 
 variable  (C : Type u) (τ : outParam (Type v)) [Insert C τ]
 
-class Mem [Membership τ C] : Prop where
-  mem_empty : ∀ x, ¬ x ∈ empty (C := C)
-  mem_insert : ∀ x (cont : C) y, x ∈ insert cont y ↔ x = y ∨ x ∈ cont
-  mem_singleton : ∀ x y, x ∈ singleton (C := C) y ↔ x = y
+class AgreesWithToSet [ToSet C τ] : Prop where
+  toSet_empty : toSet (empty (C := C)) = ∅
+  toSet_insert : ∀ (cont : C) x, toSet (insert cont x) = {x} ∪ toSet cont
+  toSet_singleton : ∀ x, toSet (singleton (C := C) x) = {x}
 
-class ToMultiset [ToMultiset C τ] : Prop where
-  toMultiset_empty : ToMultiset.toMultiset (empty (C := C)) = {}
+export AgreesWithToSet (
+  toSet_empty
+  toSet_insert
+  toSet_singleton)
+
+attribute [simp] toSet_empty toSet_insert toSet_singleton
+
+class AgreesWithToMultiset [ToMultiset C τ] : Prop where
+  toMultiset_empty : toMultiset (empty (C := C)) = 0
   toMultiset_insert : ∀ (cont : C) x,
-    ToMultiset.toMultiset (insert cont x) = Multiset.cons x (ToMultiset.toMultiset cont)
+    toMultiset (insert cont x) = x ::ₘ toMultiset cont
   toMultiset_singleton : ∀ x,
-    ToMultiset.toMultiset (singleton (C := C) x) = {x}
+    toMultiset (singleton (C := C) x) = {x}
 
-instance [Membership τ C] [LeanColls.ToMultiset C τ] [ToMultiset C τ] [Mem.ToMultiset C τ] : Mem C τ where
-  mem_empty := by
-    intro x
-    simp [Mem.ToMultiset.mem_iff_mem_toMultiset, ToMultiset.toMultiset_empty]
-  mem_insert := by
-    intro x c y
-    simp [Mem.ToMultiset.mem_iff_mem_toMultiset, ToMultiset.toMultiset_insert]
-  mem_singleton := by
-    intro x
-    simp [Mem.ToMultiset.mem_iff_mem_toMultiset, ToMultiset.toMultiset_singleton]
+export AgreesWithToMultiset (
+  toMultiset_empty
+  toMultiset_insert
+  toMultiset_singleton)
 
-@[simp] theorem toList_empty [Membership τ C] [Mem C τ] [ToList C τ] [Mem.ToList C τ]
+attribute [simp] toMultiset_empty toMultiset_insert toMultiset_singleton
+
+instance [ToMultiset C τ] [AgreesWithToMultiset C τ] : AgreesWithToSet C τ where
+  toSet_empty := by
+    simp [toSet, toMultiset_empty]; rfl
+  toSet_insert := by
+    intro c x
+    simp [toSet, toMultiset_insert]; rfl
+  toSet_singleton := by
+    intro x
+    simp [toSet, toMultiset_singleton]; rfl
+
+@[simp] theorem toList_empty [ToList C τ] [AgreesWithToMultiset C τ]
   : toList (empty (C := C)) = [] := by
-  rw [List.eq_nil_iff_forall_not_mem]
-  intro x
-  rw [← Mem.ToList.mem_iff_mem_toList]
-  apply Mem.mem_empty
+  rw [← List.isEmpty_iff_eq_nil
+    , ← Multiset.coe_eq_zero_iff_isEmpty]
+  simp [toMultiset_empty]
 
-@[simp] theorem toList_singleton [ToList C τ] [LeanColls.ToMultiset C τ] [LawfulToList C τ] [ToMultiset C τ]
+@[simp] theorem toList_singleton [ToList C τ] [AgreesWithToMultiset C τ]
   : toList (singleton (C := C) x) = [x] := by
   apply Multiset.coe_eq_singleton.mp
-  rw [LawfulToList.toMultiset_toList]
-  rw [ToMultiset.toMultiset_singleton]
+  simp [toMultiset_singleton]
 
 def into (C' : Type u) {τ} [Insert C' τ] {C} [Fold C τ] (c : C) : C' :=
   fold c insert empty
@@ -60,21 +71,31 @@ export Insert (into)
 namespace Insert
 
 @[simp]
-theorem mem_into_iff [Insert C' τ] [Membership τ C'] [Mem C' τ]
-    [Fold C τ] [Membership τ C] [ToList C τ] [Fold.ToList C τ] [Mem.ToList C τ]
+theorem toMultiset_into_eq [ToMultiset C τ] [ToMultiset C' τ]
+    [Fold C τ] [Fold.AgreesWithToMultiset C τ]
+    [Insert C' τ] [AgreesWithToMultiset C' τ]
+    (c : C)
+  : toMultiset (into C' c) = toMultiset c := by
+  unfold into
+  apply Fold.multisetInduction c (motive := fun m acc => toMultiset acc = m)
+  · simp [toMultiset_empty]
+  · rintro _ _ _ _ _ rfl
+    simp [toMultiset_insert]
+
+@[simp]
+theorem mem_into_iff
+    [Fold C τ] [ToMultiset C τ] [Fold.AgreesWithToMultiset C τ]
+    [Insert C' τ] [ToSet C' τ] [AgreesWithToSet C' τ]
+    [Membership τ C'] [Membership.AgreesWithToSet C' τ]
+    [Membership τ C] [Membership.AgreesWithToSet C τ]
     (c : C)
   : x ∈ into C' c ↔ x ∈ c := by
   unfold into
-  have ⟨L, perm, h⟩ := Fold.ToList.fold_eq_fold_toList c
-  conv at h => ext; ext; ext; rw [← List.foldr_reverse]
-  replace perm := (List.reverse_perm ..).trans perm
-  generalize L.reverse = L' at perm h; clear L
-  conv => lhs; rw [h]
-  clear h
-  conv => rhs; rw [Mem.ToList.mem_iff_mem_toList, ← perm.mem_iff]
-  clear perm
-  induction L' with
-  | nil =>
-    simp [Mem.mem_empty]
-  | cons hd tl ih =>
-    simp [Mem.mem_insert, ih]
+  conv => rhs; rw [←Membership.mem_toMultiset_iff_mem]
+  apply Fold.multisetInduction c (motive := fun m acc => x ∈ acc ↔ x ∈ m)
+  · rw [Membership.AgreesWithToSet.mem_iff_mem_toSet, toSet_empty]
+    simp
+  · rintro _ _ _ _ _ h
+    rw [Membership.AgreesWithToSet.mem_iff_mem_toSet, toSet_insert]
+    simp [toMultiset_insert]
+    rw [h]
