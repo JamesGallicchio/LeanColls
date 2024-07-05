@@ -217,7 +217,7 @@ variable [Seq C τ] [LawfulSeq C τ]
   : get (ofFn (C := C) f) i = f (i.cast <| size_ofFn f) := by
   rcases i with ⟨i,hi⟩
   rw [get_def]
-  suffices ∀ L (_h : L = ofFn f) (hi' : i < L.length),
+  suffices ∀ (L : List _) (_h : L = ofFn f) (hi' : i < L.length),
     get L ⟨i,hi'⟩ = f ⟨i, size_ofFn (C := C) f ▸ hi⟩
     from this _ (toList_ofFn _) (by simp at hi; simp [List.instSeqList, *])
   intro L hL hi'
