@@ -113,15 +113,19 @@ instance : LawfulSeq (Array α) α where
     rintro ⟨L⟩; simp [getSnoc?]
   getSnoc?_eq_some := by
     rintro ⟨L⟩ x ⟨L'⟩
-    simp [LeanColls.toList, Seq.getSnoc?, getSnoc?]
-    split <;> simp_all [List.length_eq_zero]
-    simp [pop]
-    rw [getElem_eq_data_get, ← List.getLast_eq_get L (List.ne_nil_of_length_pos ‹_›)]
-    constructor
-    · rintro ⟨rfl,rfl⟩
-      simp only [List.dropLast_append_getLast]
-    · rintro rfl
-      simp only [List.dropLast_concat, List.getLast_append, and_self]
+    simp [LeanColls.toList, Seq.getSnoc?, getSnoc?
+        , Array.pop, List.dropLast_append_getLast]
+    rw [← L.reverse_reverse]
+    generalize L.reverse = L
+    cases L with
+    | nil => simp
+    | cons hd tl =>
+    simp [Array.getElem_eq_data_get]
+    rw [List.get_append_right] <;> simp
+    generalize tl.reverse = L
+    rw [List.append_eq_append_iff]
+    simp [List.singleton_eq_append]
+    aesop
   toList_update := by
     rintro ⟨c⟩ ⟨i,h⟩ f
     simp [Seq.update, LeanColls.toList, getElem_eq_data_get]

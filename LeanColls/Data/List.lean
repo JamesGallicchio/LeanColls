@@ -77,3 +77,7 @@ theorem length_nonempty (lst : Nonempty α) : lst.toList.length > 0 := by
   cases h : lst.val with
   | nil        => contradiction
   | cons hd tl => simp [Nonempty.toList, h]
+
+theorem singleton_eq_append (x : α) (A B : List α)
+  : [x] = A ++ B ↔ A = [x] ∧ B = [] ∨ A = [] ∧ B = [x] := by
+  cases A <;> aesop
