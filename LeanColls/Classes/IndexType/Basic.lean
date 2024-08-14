@@ -99,7 +99,13 @@ theorem get_toList_univ [IndexType α] [LawfulIndexType α] (i)
   intro L i hL
   rw [LawfulIndexType.toList_eq_ofFn] at hL
   subst hL
-  simp
+  simp [Fin.cast]
+
+@[simp]
+theorem getElem_toList_univ [IndexType α] [LawfulIndexType α] (i) (h : i < (toList <| univ α).length)
+  : (toList <| univ α)[i]'h = IndexType.fromFin ⟨i,by simpa using h⟩ := by
+  have := get_toList_univ (α := α) ⟨i,by simpa using h⟩
+  simpa using this
 
 @[simp]
 theorem mem_toList_univ [IndexType α] [LawfulIndexType α] (x) : x ∈ (toList <| univ α) := by
@@ -191,12 +197,12 @@ instance : LawfulIndexType.{max u v, w} (α × β) where
     rintro ⟨a,b⟩; simp [toFin, fromFin]
   toList_eq_ofFn := by
     simp [toList, fromFin]
-    apply List.ext_get
+    apply List.ext_getElem
     · simp [card, List.length_product]
     intro i h1 h2
-    simp [List.get_product_eq_get_pair]
-    constructor <;>
-      simp [← Fin.val_inj, Fin.pair_left, Fin.pair_right]
+    simp
+    convert List.getElem_product_eq_get_pair (toList <| univ α) (toList <| univ β) ⟨i,h1⟩
+      <;> simp [← Fin.val_inj, Fin.pair_left, Fin.pair_right]
   toToList :=
     @Fold.map.ToList (Univ α × Univ β) _ _ _
       (Fold.prod) (ToList.prod) (Fold.prod.ToList)
@@ -254,11 +260,11 @@ instance : LawfulIndexType (α ⊕ β) where
     simp [fromFin]
     split
     next h =>
-      rw [List.get_append_left]
-      · simp
-      · simpa using h
+      rw [List.getElem_append_left]
+      rw [List.getElem_map]
+        <;> simp [*]
     next h =>
-      rw [List.get_append_right]
+      rw [List.getElem_append_right]
       · simp
       · simpa using h
       · simp at h1 ⊢

@@ -9,6 +9,7 @@ import Mathlib.Data.List.ProdSigma
 import Mathlib.Tactic.Ring
 import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Multiset.Basic
+import Mathlib.Tactic.MoveAdd
 
 def Fin.foldl' (n : Nat) {β : (i : Nat) → i ≤ n → Sort u}
       (init : β 0 (Nat.zero_le _))
@@ -177,11 +178,11 @@ theorem Fin.pair_succ_left (x : Fin m) (y : Fin n) : (Fin.pair (x.succ) y).val =
 theorem Fin.pair_ge_left (x : Fin m) (y : Fin n) : Fin.pair x y ≥ x.val * n := by simp [pair]
 
 /-- `Fin.pair` is the "natural" way to index into `List.product`. -/
-theorem List.get_product_fin_pair (L1 : List α) (L2 : List β)
-    {i : Fin L1.length} {j : Fin L2.length} {p} (hp : p.val = (Fin.pair i j).val)
-  : List.get (L1 ×ˢ L2) p =
-      (List.get L1 i, List.get L2 j) := by
-  generalize hLL : L1 ×ˢ L2 = LL at p
+theorem List.getElem_product_fin_pair (L1 : List α) (L2 : List β)
+    {i : Fin L1.length} {j : Fin L2.length} {p : Nat} {hp : p < (L1 ×ˢ L2).length} (h : p = (Fin.pair i j).val)
+  : (L1 ×ˢ L2)[p]'hp =
+      (L1[i], L2[j]) := by
+  generalize hLL : L1 ×ˢ L2 = LL at hp
   induction L1 generalizing LL p with
   | nil =>
     exact i.elim0
@@ -189,44 +190,45 @@ theorem List.get_product_fin_pair (L1 : List α) (L2 : List β)
     dsimp at i
     induction i using Fin.cases
     case zero =>
-      rcases p with ⟨p,_⟩
-      simp [Fin.pair] at hp
-      have : p < L2.length := by rw [hp]; exact j.isLt
+      simp [Fin.pair] at h
+      have : p < L2.length := by rw [h]; exact j.isLt
       simp [product_cons] at hLL
       subst LL
-      rw [get_append_left]
+      simp; rw [List.getElem_append_left]
       case h => simp [this]
       simp; congr
     case succ i =>
-      specialize @ih i (tl ×ˢ L2) rfl (Fin.pair i j |>.cast (List.length_product ..).symm) rfl
-      simp; rw [← ih]; clear ih
-      rcases p with ⟨p,h⟩
-      simp at hp hLL
+      specialize @ih i _ rfl (tl ×ˢ L2) rfl
       subst p LL
-      simp [Nat.add_mul, length_product] at h ⊢
-      rw [get_append_right]
-      case h =>
-        simp
-        trans i.succ * L2.length
-        · simp [Nat.add_mul]
-        · apply Fin.pair_ge_left
-      case h'' =>
-        simp [length_product, Fin.pair_succ_left]
-      congr
-      simp [Fin.pair_succ_left]
+      simp at ih ⊢
+      rw [List.getElem_append_right]
+      · convert @ih _
+        · rcases i with ⟨i,hi⟩; rcases j with ⟨j,hj⟩
+          simp [Fin.pair, Nat.add_mul]
+          clear hp ih hi hj tl hd
+          rw [Nat.add_assoc, Nat.add_comm _ j, ← Nat.add_assoc]
+          simp
+        · convert (i.pair j).isLt; apply List.length_product
+      · simp [Fin.pair, Fin.succ, Nat.add_mul]
+        rw [Nat.add_comm, ← Nat.add_assoc]; simp
+      · have := (i.pair j).isLt
+        convert this
+        · simp [Fin.pair, Fin.succ, Nat.add_mul]
+          move_add [L2.length]; simp
+        · apply List.length_product
 
-theorem List.get_product_eq_get_pair (L1 : List α) (L2 : List β) (i : Fin ((List.product L1 L2).length))
-  : List.get (L1 ×ˢ L2) i =
-    ( List.get L1 (Fin.pair_left <| i.cast (by apply List.length_product))
-    , List.get L2 (Fin.pair_right <| i.cast (by apply List.length_product))) := by
+theorem List.getElem_product_eq_get_pair (L1 : List α) (L2 : List β) (i : Fin ((List.product L1 L2).length))
+  : (L1 ×ˢ L2)[i] =
+    ( L1[Fin.pair_left <| i.cast (by apply List.length_product)]
+    , L2[Fin.pair_right <| i.cast (by apply List.length_product)]) := by
   generalize hleft : Fin.pair_left _ = left
   generalize hright : Fin.pair_right _ = right
   have : i = (Fin.pair left right).cast (by apply (List.length_product ..).symm) := by
     simp [← hleft, ← hright]
   clear hleft hright
   subst i
-  rw [List.get_product_fin_pair]
   simp
+  apply List.getElem_product_fin_pair; rfl
 
 theorem List.foldl_product (f : γ → α × β → γ) (init : γ)
   : List.foldl f init (L1 ×ˢ L2) =

@@ -5,7 +5,7 @@ Authors: James Gallicchio
 
 import Batteries.Data.Array.Lemmas
 import Batteries.Data.List.Lemmas
-import Mathlib.Data.Array.Lemmas
+import Batteries.Data.ByteArray
 
 import LeanColls.Classes.Seq
 import LeanColls.Data.List
@@ -20,7 +20,7 @@ namespace Array
 def ofFn_data (f : Fin n → α) : (ofFn f).data = List.ofFn f := by
   apply List.ext_get
   · simp
-  · simp (config := {contextual := true}) [← Array.getElem_eq_data_get]
+  · simp (config := {contextual := true}) [← Array.getElem_eq_data_getElem]
 
 def cons (x : α) (A : Array α) : Array α := #[x] ++ A
 
@@ -73,8 +73,7 @@ instance : LawfulSeq (Array α) α where
   get_def := by
     rintro c ⟨i,hi⟩
     simp [LeanColls.toList, Seq.get]
-    rw [getElem_eq_data_get, ← Option.some_inj,
-      ← List.get?_eq_get, ← List.get?_eq_get, toList_eq]
+    rw [getElem_eq_data_getElem]
   toList_set := by
     rintro c ⟨i,hi⟩ x
     simp [LeanColls.toList, Seq.set]
@@ -88,7 +87,7 @@ instance : LawfulSeq (Array α) α where
     · simp [LeanColls.toList, Seq.getCons?]
       intro h; split at h; simp_all; rw [size_eq_length_data] at *; simp at *
     next hd tl =>
-    simp [LeanColls.toList, Seq.getCons?, getElem_eq_data_get]
+    simp [LeanColls.toList, Seq.getCons?, getElem_eq_data_getElem]
     split <;> simp_all [size_mk]
     rintro rfl
     constructor
@@ -98,7 +97,7 @@ instance : LawfulSeq (Array α) α where
       have : List.length tl = List.length L' := by
         clear h; simp_all [size_mk]
       rw [Array.ext_iff] at h
-      · simp at h; simp [getElem_eq_data_get] at h
+      · simp at h; simp [getElem_eq_data_getElem] at h
         apply List.ext_get
         · assumption
         intro i h1 h2
@@ -106,7 +105,7 @@ instance : LawfulSeq (Array α) α where
       · simp
     · rintro rfl
       rw [Array.ext_iff]
-      · simp; simp [getElem_eq_data_get]
+      · simp; simp [getElem_eq_data_getElem]
       · simp; simp_all [size_mk]
   getSnoc?_eq_none := by
     simp [LeanColls.toList, Seq.getSnoc?]
@@ -120,18 +119,14 @@ instance : LawfulSeq (Array α) α where
     cases L with
     | nil => simp
     | cons hd tl =>
-    simp [Array.getElem_eq_data_get]
-    rw [List.get_append_right] <;> simp
+    simp [Array.getElem_eq_data_getElem]
     generalize tl.reverse = L
     rw [List.append_eq_append_iff]
     simp [List.singleton_eq_append]
     aesop
   toList_update := by
     rintro ⟨c⟩ ⟨i,h⟩ f
-    simp [Seq.update, LeanColls.toList, getElem_eq_data_get]
-    congr 2; apply List.get_eq_get
-    · rw [toList_eq]
-    · simp
+    simp [Seq.update, LeanColls.toList, getElem_eq_data_getElem]
   toList_cons := by
     simp [LeanColls.toList, Seq.cons, cons]
   toList_snoc := by
