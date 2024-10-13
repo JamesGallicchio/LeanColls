@@ -1,0 +1,612 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Order.Ring.InjSurj</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Order.Ring.InjSurj";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">Ring</span>.<span class="name">InjSurj</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Ring/InjSurj.html">Mathlib.Algebra.Ring.InjSurj</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Group/InjSurj.html">Mathlib.Algebra.Order.Group.InjSurj</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html">Mathlib.Algebra.Order.Ring.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Order.Ring.InjSurj" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Function.Injective.orderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.orderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedCommSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.orderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.orderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedCommRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.strictOrderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.strictOrderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedCommSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.strictOrderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.strictOrderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedCommRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.linearOrderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.linearOrderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedCommSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.linearOrderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.linearOrderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedCommRing</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Pulling-back-ordered-rings-along-injective-maps">Pulling back ordered rings along injective maps <a class="hover-link" href="#Pulling-back-ordered-rings-along-injective-maps">#</a></h1></div><div class="decl" id="Function.Injective.orderedSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L24-L34">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.orderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring">OrderedSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.orderedSemiring">Function.Injective.orderedSemiring</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">zero</span> <span class="fn">one</span> <span class="fn">add</span> <span class="fn">mul</span> <span class="fn">nsmul</span> <span class="fn">npow</span> <span class="fn">natCast</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Basic.html#Function.Injective.orderedAddCommMonoid">Function.Injective.orderedAddCommMonoid</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">zero</span> <span class="fn">add</span> <span class="fn">⋯</span></span>;
+  <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedSemiring.mk">OrderedSemiring.mk</a> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-Function.Injective.orderedSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.orderedCommSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L38-L43">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.orderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedCommSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommSemiring">OrderedCommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommSemiring">OrderedCommSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommSemiring">OrderedCommSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.orderedCommSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.orderedRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L47-L56">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.orderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">β</span></span></div></div><p>Pullback an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.orderedRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.orderedCommRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L60-L67">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.orderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">orderedCommRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommRing">OrderedCommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommRing">OrderedCommRing</a> <span class="fn">β</span></span></div></div><p>Pullback an <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedCommRing">OrderedCommRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.orderedCommRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.strictOrderedSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L71-L82">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.strictOrderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedSemiring">StrictOrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedSemiring">StrictOrderedSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedSemiring">StrictOrderedSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.strictOrderedSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.strictOrderedCommSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L86-L92">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.strictOrderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedCommSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedCommSemiring">StrictOrderedCommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedCommSemiring">StrictOrderedCommSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.strictOrderedCommSemiring">strictOrderedCommSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.strictOrderedCommSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.strictOrderedRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L96-L105">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.strictOrderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedRing">StrictOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedRing">StrictOrderedRing</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedRing">StrictOrderedRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.strictOrderedRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.strictOrderedCommRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L109-L117">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.strictOrderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">strictOrderedCommRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedCommRing">StrictOrderedCommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedCommRing">StrictOrderedCommRing</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedCommRing">StrictOrderedCommRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.strictOrderedCommRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.linearOrderedSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L121-L128">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.linearOrderedSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Sup">Sup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Inf">Inf</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sup : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Sup.sup">⊔</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Inf.inf">⊓</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.linearOrderedSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.linearOrderedCommSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L132-L139">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.linearOrderedCommSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedCommSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Sup">Sup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Inf">Inf</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hsup : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Sup.sup">⊔</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hinf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Inf.inf">⊓</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommSemiring">LinearOrderedCommSemiring</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedSemiring">LinearOrderedSemiring</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.linearOrderedCommSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.linearOrderedRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L143-L153">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.linearOrderedRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Sup">Sup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Inf">Inf</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hsup : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Sup.sup">⊔</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hinf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Inf.inf">⊓</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.linearOrderedRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.linearOrderedCommRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Ring/InjSurj.lean#L157-L166">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Ring/InjSurj.html#Function.Injective.linearOrderedCommRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">linearOrderedCommRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">β</span> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Sup">Sup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Notation.html#Inf">Inf</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommRing">LinearOrderedCommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">β</span>) (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sup : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Sup.sup">⊔</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Mathlib/Order/Notation.html#Inf.inf">⊓</a> <span class="fn">y</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">y</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommRing">LinearOrderedCommRing</a> <span class="fn">β</span></span></div></div><p>Pullback a <code><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedCommRing">LinearOrderedCommRing</a></code> under an injective map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.linearOrderedCommRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

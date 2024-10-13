@@ -1,0 +1,195 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.GroupWithZero.Units.Lemmas</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.GroupWithZero.Units.Lemmas";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">GroupWithZero</span>.<span class="name">Units</span>.<span class="name">Lemmas</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/GroupWithZero/Commute.html">Mathlib.Algebra.GroupWithZero.Commute</a></li><li><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html">Mathlib.Algebra.GroupWithZero.Hom</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Units/Hom.html">Mathlib.Algebra.Group.Units.Hom</a></li><li><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Units.html">Mathlib.Algebra.GroupWithZero.Action.Units</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.GroupWithZero.Units.Lemmas" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Commute.div_eq_div_iff"><span class="name">Commute</span>.<span class="name">div_eq_div_iff</span></a></div><div class="nav_link"><a class="break_within" href="#map_ne_zero"><span class="name">map_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#map_eq_zero"><span class="name">map_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#eq_on_inv₀"><span class="name">eq_on_inv₀</span></a></div><div class="nav_link"><a class="break_within" href="#map_inv₀"><span class="name">map_inv₀</span></a></div><div class="nav_link"><a class="break_within" href="#map_div₀"><span class="name">map_div₀</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZero.inverse"><span class="name">MonoidWithZero</span>.<span class="name">inverse</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZero.coe_inverse"><span class="name">MonoidWithZero</span>.<span class="name">coe_inverse</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZero.inverse_apply"><span class="name">MonoidWithZero</span>.<span class="name">inverse_apply</span></a></div><div class="nav_link"><a class="break_within" href="#invMonoidWithZeroHom"><span class="name">invMonoidWithZeroHom</span></a></div><div class="nav_link"><a class="break_within" href="#Units.smul_mk0"><span class="name">Units</span>.<span class="name">smul_mk0</span></a></div><div class="nav_link"><a class="break_within" href="#map_zpow₀"><span class="name">map_zpow₀</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Further-lemmas-about-units-in-a-MonoidWithZero-or-a-GroupWithZero">Further lemmas about units in a <code><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a></code> or a <code><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a></code>. <a class="hover-link" href="#Further-lemmas-about-units-in-a-MonoidWithZero-or-a-GroupWithZero">#</a></h1></div><div class="decl" id="Commute.div_eq_div_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L25-L26">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#Commute.div_eq_div_iff"><span class="name">Commute</span>.<span class="name">div_eq_div_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">G₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">G₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">b</span> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">d</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span></span></div></div><p>The <code><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a></code> version of <code><a href="../../../.././Mathlib/Algebra/Group/Basic.html#div_eq_div_iff_mul_eq_mul">div_eq_div_iff_mul_eq_mul</a></code>.</p></div></div><div class="decl" id="map_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L37-L38">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#map_ne_zero"><span class="name">map_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="map_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L41-L42">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#map_eq_zero"><span class="name">map_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="eq_on_inv₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L44-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#eq_on_inv₀"><span class="name">eq_on_inv₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀' : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F'</span> <span class="fn">G₀</span> <span class="fn">M₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F'</span> <span class="fn">G₀</span> <span class="fn">M₀'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F'</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">F'</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div></div></div><div class="decl" id="map_inv₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L59-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#map_inv₀"><span class="name">map_inv₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div><p>A monoid homomorphism between groups with zeros sending <code>0</code> to <code>0</code> sends <code>a⁻¹</code> to <code>(f a)⁻¹</code>.</p></div></div><div class="decl" id="map_div₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L66-L67">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#map_div₀"><span class="name">map_div₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="MonoidWithZero.inverse"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L73-L78">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#MonoidWithZero.inverse"><span class="name">MonoidWithZero</span>.<span class="name">inverse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommMonoidWithZero">CommMonoidWithZero</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M</span></span></div></div><p>We define the inverse as a <code><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">MonoidWithZeroHom</a></code> by extending the inverse map by zero
+on non-units.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">MonoidWithZero.inverse</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">Ring.inverse</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_one'</span> := <span class="fn">⋯</span>, <span class="fn">map_mul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-MonoidWithZero.inverse" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MonoidWithZero.coe_inverse"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L81-L83">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#MonoidWithZero.coe_inverse"><span class="name">MonoidWithZero</span>.<span class="name">coe_inverse</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommMonoidWithZero">CommMonoidWithZero</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">MonoidWithZero.inverse</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Ring.inverse</span></span></div></div></div></div><div class="decl" id="MonoidWithZero.inverse_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L86-L88">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#MonoidWithZero.inverse_apply"><span class="name">MonoidWithZero</span>.<span class="name">inverse_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommMonoidWithZero">CommMonoidWithZero</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">MonoidWithZero.inverse</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Basic.html#Ring.inverse">Ring.inverse</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="invMonoidWithZeroHom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L91-L92">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#invMonoidWithZeroHom"><span class="name">invMonoidWithZeroHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommGroupWithZero">CommGroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G₀</span> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">G₀</span></span></div></div><p>Inversion on a commutative group with zero, considered as a monoid with zero homomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">invMonoidWithZeroHom</span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__src</span> := <span class="fn">invMonoidHom</span>;
+  <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">(↑<span class="fn">__src</span>)</span>.toFun</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_one'</span> := <span class="fn">⋯</span>, <span class="fn">map_mul'</span> := <span class="fn">⋯</span> }</span></span></span></li></ul></details><details id="instances-for-list-invMonoidWithZeroHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Units.smul_mk0"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L100-L101">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#Units.smul_mk0"><span class="name">Units</span>.<span class="name">smul_mk0</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">G₀</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn">g</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Basic.html#Units.mk0">Units.mk0</a> <span class="fn">g</span> <span class="fn">hg</span></span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="map_zpow₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Units/Lemmas.lean#L108-L110">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html#map_zpow₀"><span class="name">map_zpow₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀' : <a href="../../../.././foundational_types.html">Type</a> u_10}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <span class="fn">G₀</span> <span class="fn">G₀'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p>If a monoid homomorphism <code>f</code> between two <code><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a></code>s maps <code>0</code> to <code>0</code>, then it maps <code>x^n</code>,
+<code>n : ℤ</code>, to <code>(f x)^n</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

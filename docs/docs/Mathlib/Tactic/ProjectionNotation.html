@@ -1,0 +1,53 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Tactic.ProjectionNotation</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Tactic.ProjectionNotation";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Tactic</span>.<span class="name">ProjectionNotation</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Tactic/ProjectionNotation.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Lean.html">Lean</a></li><li><a href="../.././Mathlib/Init.html">Mathlib.Init</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Tactic.ProjectionNotation" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Mathlib.ProjectionNotation.mkExtendedFieldNotationUnexpander"><span class="name">Mathlib</span>.<span class="name">ProjectionNotation</span>.<span class="name">mkExtendedFieldNotationUnexpander</span></a></div><div class="nav_link"><a class="break_within" href="#Mathlib.ProjectionNotation.ppDotAttr"><span class="name">Mathlib</span>.<span class="name">ProjectionNotation</span>.<span class="name">ppDotAttr</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Pretty-printing-projection-notation">Pretty printing projection notation <a class="hover-link" href="#Pretty-printing-projection-notation">#</a></h1><p><strong>Deprecated</strong> as of 2024-05-02 with Lean v4.8.0 since dot notation is now default with
+the introduction of <code>pp.fieldNotation.generalized</code>, which handles dot notation pervasively
+and correctly.</p><p>This module contains the <code>@[pp_dot]</code> attribute, which is used to configure functions to pretty print
+using projection notation (i.e., like <code>x.f y</code> rather than <code>C.f x y</code>).</p><p>Core's projection delaborator collapses chains of ancestor projections.
+For example, to turn <code>x.toFoo.toBar</code> into <code>x.toBar</code>.
+The <code>pp_dot</code> attribute works together with this delaborator to completely collapse such chains.</p></div><div class="decl" id="Mathlib.ProjectionNotation.mkExtendedFieldNotationUnexpander"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Tactic/ProjectionNotation.lean#L36-L56">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/ProjectionNotation.html#Mathlib.ProjectionNotation.mkExtendedFieldNotationUnexpander"><span class="name">Mathlib</span>.<span class="name">ProjectionNotation</span>.<span class="name">mkExtendedFieldNotationUnexpander</span></a></span><span class="decl_args">
+<span class="fn">(f : <a href="../.././Init/Prelude.html#Lean.Name">Lean.Name</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Lean/Elab/Command.html#Lean.Elab.Command.CommandElabM">Lean.Elab.Command.CommandElabM</a> <a href="../.././Init/Prelude.html#Unit">Unit</a></span></div></div><p>Given a function <code>f</code> that is either a true projection or a generalized projection
+(i.e., a function that works using extended field notation, a.k.a. &quot;dot notation&quot;), generates
+an <code>app_unexpander</code> for it to get it to pretty print using dot notation.</p><p>See also the docstring of the <code>pp_dot</code> attribute.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Mathlib.ProjectionNotation.mkExtendedFieldNotationUnexpander" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Mathlib.ProjectionNotation.ppDotAttr"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Tactic/ProjectionNotation.lean#L58-L114">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Tactic/ProjectionNotation.html#Mathlib.ProjectionNotation.ppDotAttr"><span class="name">Mathlib</span>.<span class="name">ProjectionNotation</span>.<span class="name">ppDotAttr</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Adding the <code>@[pp_dot]</code> attribute defines an <code>app_unexpander</code> for the given function to
+support pretty printing the function using extended field notation (&quot;dot notation&quot;).
+This particular attribute is <em>only</em> for functions whose first explicit argument is the
+receiver of the generalized field notation. That is to say, it is only meant for
+transforming <code>C.f c x y z ...</code> to <code>c.f x y z ...</code> for <code>c : C</code>.</p><p>It can be used to help get projection notation to work for function-valued structure fields,
+since the built-in projection delaborator cannot handle excess arguments.</p><p>Example for generalized field notation:</p><pre><code>structure A where
+  n : <a href="../.././Init/Prelude.html#Nat">Nat</a>
+
+@[pp_dot]
+def A.foo (a : A) (m : Nat) : <a href="../.././Init/Prelude.html#Nat">Nat</a> := a.n + m
+</code></pre><p>Now, <code>A.foo x m</code> pretty prints as <code>x.foo m</code>. If <code>A</code> is a structure, it also adds a rule that
+<code>A.foo x.toA m</code> pretty prints as <code>x.foo m</code>. This rule is meant to combine with core's
+the projection collapse delaborator, where together <code>A.foo x.toB.toA m</code>
+will pretty print as <code>x.foo m</code>.</p><p>Since the mentioned rule is a purely syntactic transformation,
+it might lead to output that does not round trip, though this can only occur if
+there exists an <code>A</code>-valued <code>toA</code> function that is not a parent projection that
+happens to be pretty printable using dot notation.</p><p>Here is an example to illustrate the round tripping issue:</p><pre><code class="language-lean">import <a href="../.././Mathlib/Tactic/ProjectionNotation.html">Mathlib.Tactic.ProjectionNotation</a>
+
+structure A where n : <a href="../.././Init/Data/Int/Basic.html#Int">Int</a>
+
+@[pp_dot]
+def A.inc (a : A) (k : Int) : <a href="../.././Init/Data/Int/Basic.html#Int">Int</a> := a.n + k
+
+structure B where n : <a href="../.././Init/Prelude.html#Nat">Nat</a>
+
+def B.toA (b : B) : A := ⟨b.n⟩
+
+variable (b : B)
+
+#check A.inc b.toA 1
+-- (B.toA b).inc 1 : <a href="../.././Init/Data/Int/Basic.html#Int">Int</a>
+
+attribute [pp_dot] B.toA
+#check A.inc b.toA 1
+-- b.inc 1 : <a href="../.././Init/Data/Int/Basic.html#Int">Int</a>
+
+#check b.inc 1
+-- invalid field 'inc', the environment does <a href="../.././Init/Prelude.html#not">not</a> contain 'B.inc'
+</code></pre><p>To avoid this, don't use <code>pp_dot</code> for coercion functions
+such as <code>B.toA</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/Tactic/ProjectionNotation.html#Mathlib.ProjectionNotation.ppDotAttr">Mathlib.ProjectionNotation.ppDotAttr</a> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`Mathlib.ProjectionNotation.ppDotAttr</span> <span class="fn">1024</span> <span class="fn">(<a href="../.././Init/Prelude.html#Lean.ParserDescr.nonReservedSymbol">Lean.ParserDescr.nonReservedSymbol</a> <span class="fn">&quot;pp_dot&quot;</span> <a href="../.././Init/Prelude.html#Bool.false">false</a>)</span></span></span></li></ul></details><details id="instances-for-list-Mathlib.ProjectionNotation.ppDotAttr" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

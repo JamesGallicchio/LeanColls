@@ -1,0 +1,732 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.GroupWithZero.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.GroupWithZero.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">GroupWithZero</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Logic/Unique.html">Mathlib.Logic.Unique</a></li><li><a href="../../.././Mathlib/Algebra/Group/Basic.html">Mathlib.Algebra.Group.Basic</a></li><li><a href="../../.././Mathlib/Algebra/GroupWithZero/NeZero.html">Mathlib.Algebra.GroupWithZero.NeZero</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.GroupWithZero.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#left_ne_zero_of_mul"><span class="name">left_ne_zero_of_mul</span></a></div><div class="nav_link"><a class="break_within" href="#right_ne_zero_of_mul"><span class="name">right_ne_zero_of_mul</span></a></div><div class="nav_link"><a class="break_within" href="#ne_zero_and_ne_zero_of_mul"><span class="name">ne_zero_and_ne_zero_of_mul</span></a></div><div class="nav_link"><a class="break_within" href="#mul_eq_zero_of_ne_zero_imp_eq_zero"><span class="name">mul_eq_zero_of_ne_zero_imp_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#zero_mul_eq_const"><span class="name">zero_mul_eq_const</span></a></div><div class="nav_link"><a class="break_within" href="#mul_zero_eq_const"><span class="name">mul_zero_eq_const</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_of_mul_self_eq_zero"><span class="name">eq_zero_of_mul_self_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#mul_ne_zero"><span class="name">mul_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.mul"><span class="name">NeZero</span>.<span class="name">mul</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_of_zero_eq_one"><span class="name">eq_zero_of_zero_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#uniqueOfZeroEqOne"><span class="name">uniqueOfZeroEqOne</span></a></div><div class="nav_link"><a class="break_within" href="#subsingleton_iff_zero_eq_one"><span class="name">subsingleton_iff_zero_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#subsingleton_of_zero_eq_one"><span class="name">subsingleton_of_zero_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#eq_of_zero_eq_one"><span class="name">eq_of_zero_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#zero_ne_one_or_forall_eq_0"><span class="name">zero_ne_one_or_forall_eq_0</span></a></div><div class="nav_link"><a class="break_within" href="#left_ne_zero_of_mul_eq_one"><span class="name">left_ne_zero_of_mul_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#right_ne_zero_of_mul_eq_one"><span class="name">right_ne_zero_of_mul_eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#zero_pow"><span class="name">zero_pow</span></a></div><div class="nav_link"><a class="break_within" href="#zero_pow_eq"><span class="name">zero_pow_eq</span></a></div><div class="nav_link"><a class="break_within" href="#pow_eq_zero_of_le"><span class="name">pow_eq_zero_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#ne_zero_pow"><span class="name">ne_zero_pow</span></a></div><div class="nav_link"><a class="break_within" href="#zero_pow_eq_zero"><span class="name">zero_pow_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#pow_eq_zero"><span class="name">pow_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#pow_eq_zero_iff"><span class="name">pow_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#pow_ne_zero_iff"><span class="name">pow_ne_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#pow_ne_zero"><span class="name">pow_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.pow"><span class="name">NeZero</span>.<span class="name">pow</span></a></div><div class="nav_link"><a class="break_within" href="#sq_eq_zero_iff"><span class="name">sq_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#pow_eq_zero_iff'"><span class="name">pow_eq_zero_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#CancelMonoidWithZero.to_noZeroDivisors"><span class="name">CancelMonoidWithZero</span>.<span class="name">to_noZeroDivisors</span></a></div><div class="nav_link"><a class="break_within" href="#mul_eq_mul_right_iff"><span class="name">mul_eq_mul_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#mul_eq_mul_left_iff"><span class="name">mul_eq_mul_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#mul_right_eq_self₀"><span class="name">mul_right_eq_self₀</span></a></div><div class="nav_link"><a class="break_within" href="#mul_left_eq_self₀"><span class="name">mul_left_eq_self₀</span></a></div><div class="nav_link"><a class="break_within" href="#mul_eq_left₀"><span class="name">mul_eq_left₀</span></a></div><div class="nav_link"><a class="break_within" href="#mul_eq_right₀"><span class="name">mul_eq_right₀</span></a></div><div class="nav_link"><a class="break_within" href="#left_eq_mul₀"><span class="name">left_eq_mul₀</span></a></div><div class="nav_link"><a class="break_within" href="#right_eq_mul₀"><span class="name">right_eq_mul₀</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_of_mul_eq_self_right"><span class="name">eq_zero_of_mul_eq_self_right</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_of_mul_eq_self_left"><span class="name">eq_zero_of_mul_eq_self_left</span></a></div><div class="nav_link"><a class="break_within" href="#GroupWithZero.mul_left_injective"><span class="name">GroupWithZero</span>.<span class="name">mul_left_injective</span></a></div><div class="nav_link"><a class="break_within" href="#GroupWithZero.mul_right_injective"><span class="name">GroupWithZero</span>.<span class="name">mul_right_injective</span></a></div><div class="nav_link"><a class="break_within" href="#inv_mul_cancel_right₀"><span class="name">inv_mul_cancel_right₀</span></a></div><div class="nav_link"><a class="break_within" href="#inv_mul_cancel_left₀"><span class="name">inv_mul_cancel_left₀</span></a></div><div class="nav_link"><a class="break_within" href="#GroupWithZero.toDivisionMonoid"><span class="name">GroupWithZero</span>.<span class="name">toDivisionMonoid</span></a></div><div class="nav_link"><a class="break_within" href="#GroupWithZero.toCancelMonoidWithZero"><span class="name">GroupWithZero</span>.<span class="name">toCancelMonoidWithZero</span></a></div><div class="nav_link"><a class="break_within" href="#zero_div"><span class="name">zero_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_zero"><span class="name">div_zero</span></a></div><div class="nav_link"><a class="break_within" href="#mul_self_mul_inv"><span class="name">mul_self_mul_inv</span></a></div><div class="nav_link"><a class="break_within" href="#mul_inv_mul_cancel"><span class="name">mul_inv_mul_cancel</span></a></div><div class="nav_link"><a class="break_within" href="#inv_mul_mul_self"><span class="name">inv_mul_mul_self</span></a></div><div class="nav_link"><a class="break_within" href="#mul_self_div_self"><span class="name">mul_self_div_self</span></a></div><div class="nav_link"><a class="break_within" href="#div_self_mul_self"><span class="name">div_self_mul_self</span></a></div><div class="nav_link"><a class="break_within" href="#div_self_mul_self'"><span class="name">div_self_mul_self'</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_ne_zero"><span class="name">one_div_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#inv_eq_zero"><span class="name">inv_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#zero_eq_inv"><span class="name">zero_eq_inv</span></a></div><div class="nav_link"><a class="break_within" href="#div_div_self"><span class="name">div_div_self</span></a></div><div class="nav_link"><a class="break_within" href="#ne_zero_of_one_div_ne_zero"><span class="name">ne_zero_of_one_div_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#eq_zero_of_one_div_eq_zero"><span class="name">eq_zero_of_one_div_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#mul_left_surjective₀"><span class="name">mul_left_surjective₀</span></a></div><div class="nav_link"><a class="break_within" href="#mul_right_surjective₀"><span class="name">mul_right_surjective₀</span></a></div><div class="nav_link"><a class="break_within" href="#zero_zpow"><span class="name">zero_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#zero_zpow_eq"><span class="name">zero_zpow_eq</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_add_one₀"><span class="name">zpow_add_one₀</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_sub_one₀"><span class="name">zpow_sub_one₀</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_add₀"><span class="name">zpow_add₀</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_add'"><span class="name">zpow_add'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_one_add₀"><span class="name">zpow_one_add₀</span></a></div><div class="nav_link"><a class="break_within" href="#div_mul_eq_mul_div₀"><span class="name">div_mul_eq_mul_div₀</span></a></div><div class="nav_link"><a class="break_within" href="#div_sq_cancel"><span class="name">div_sq_cancel</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Groups-with-an-adjoined-zero-element">Groups with an adjoined zero element <a class="hover-link" href="#Groups-with-an-adjoined-zero-element">#</a></h1><p>This file describes structures that are not usually studied on their own right in mathematics,
+namely a special sort of monoid: apart from a distinguished “zero element” they form a group,
+or in other words, they are groups with an adjoined zero element.</p><p>Examples are:</p><ul>
+<li>division rings;</li>
+<li>the value monoid of a multiplicative valuation;</li>
+<li>in particular, the non-negative real numbers.</li>
+</ul><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><p>Various lemmas about <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a></code> and <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommGroupWithZero">CommGroupWithZero</a></code>.
+To reduce import dependencies, the type-classes themselves are in
+<code>Algebra.GroupWithZero.Defs</code>.</p><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>As is usual in mathlib, we extend the inverse function to the zero element,
+and require <code>0⁻¹ = 0</code>.</p></div><div class="decl" id="left_ne_zero_of_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L48-L49">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#left_ne_zero_of_mul"><span class="name">left_ne_zero_of_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="right_ne_zero_of_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L51-L52">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#right_ne_zero_of_mul"><span class="name">right_ne_zero_of_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="ne_zero_and_ne_zero_of_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#ne_zero_and_ne_zero_of_mul"><span class="name">ne_zero_and_ne_zero_of_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="mul_eq_zero_of_ne_zero_imp_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L57-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_eq_zero_of_ne_zero_imp_eq_zero"><span class="name">mul_eq_zero_of_ne_zero_imp_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="zero_mul_eq_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L62-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_mul_eq_const"><span class="name">zero_mul_eq_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(fun (<span class="fn">x</span> : <span class="fn">M₀</span>) =&gt; <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">M₀</span> <span class="fn">0</span></span></span></div></div><p>To match <code><a href="../../.././Mathlib/Algebra/Group/Basic.html#one_mul_eq_id">one_mul_eq_id</a></code>.</p></div></div><div class="decl" id="mul_zero_eq_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_zero_eq_const"><span class="name">mul_zero_eq_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroClass">MulZeroClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(fun (<span class="fn">x</span> : <span class="fn">M₀</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">0</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">M₀</span> <span class="fn">0</span></span></span></div></div><p>To match <code><a href="../../.././Mathlib/Algebra/Group/Basic.html#mul_one_eq_id">mul_one_eq_id</a></code>.</p></div></div><div class="decl" id="eq_zero_of_mul_self_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L75-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_zero_of_mul_self_eq_zero"><span class="name">eq_zero_of_mul_self_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="mul_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L79-L80">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_ne_zero"><span class="name">mul_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="NeZero.mul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L86-L88">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#NeZero.mul"><span class="name">NeZero</span>.<span class="name">mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">x</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">y</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="eq_zero_of_zero_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L99-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_zero_of_zero_eq_one"><span class="name">eq_zero_of_zero_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">M₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>In a monoid with zero, if zero equals one, then zero is the only element.</p></div></div><div class="decl" id="uniqueOfZeroEqOne"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L106-L108">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#uniqueOfZeroEqOne"><span class="name">uniqueOfZeroEqOne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Unique.html#Unique">Unique</a> <span class="fn">M₀</span></span></div></div><p>In a monoid with zero, if zero equals one, then zero is the unique element.</p><p>Somewhat arbitrarily, we define the default element to be <code>0</code>.
+All other elements will be provably equal to it, but not necessarily definitionally equal.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#uniqueOfZeroEqOne">uniqueOfZeroEqOne</a> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn">0</span>, <span class="fn">uniq</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-uniqueOfZeroEqOne" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="subsingleton_iff_zero_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L112-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#subsingleton_iff_zero_eq_one"><span class="name">subsingleton_iff_zero_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">M₀</span></span></span></div></div><p>In a monoid with zero, zero equals one if and only if all elements of that semiring
+are equal.</p></div></div><div class="decl" id="subsingleton_of_zero_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L115-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#subsingleton_of_zero_eq_one"><span class="name">subsingleton_of_zero_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> → <span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">M₀</span></span></span></div></div><p><strong>Alias</strong> of the forward direction of <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#subsingleton_iff_zero_eq_one">subsingleton_iff_zero_eq_one</a></code>.</p><hr></hr><p>In a monoid with zero, zero equals one if and only if all elements of that semiring
+are equal.</p></div></div><div class="decl" id="eq_of_zero_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L117-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_of_zero_eq_one"><span class="name">eq_of_zero_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">M₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">M₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="zero_ne_one_or_forall_eq_0"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L121-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_ne_one_or_forall_eq_0"><span class="name">zero_ne_one_or_forall_eq_0</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">M₀</span>), <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div><p>In a monoid with zero, either zero and one are nonequal, or zero is the only element.</p></div></div><div class="decl" id="left_ne_zero_of_mul_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L130-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#left_ne_zero_of_mul_eq_one"><span class="name">left_ne_zero_of_mul_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="right_ne_zero_of_mul_eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L133-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#right_ne_zero_of_mul_eq_one"><span class="name">right_ne_zero_of_mul_eq_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="zero_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L141-L142">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_pow"><span class="name">zero_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="zero_pow_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L144-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_pow_eq"><span class="name">zero_pow_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_eq_zero_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L149-L151">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_eq_zero_of_le"><span class="name">pow_eq_zero_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hmn : <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ne_zero_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L153-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#ne_zero_pow"><span class="name">ne_zero_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="zero_pow_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L156-L157">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_pow_eq_zero"><span class="name">zero_pow_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L161-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_eq_zero"><span class="name">pow_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L165-L166">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_eq_zero_iff"><span class="name">pow_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_ne_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L168-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_ne_zero_iff"><span class="name">pow_ne_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L171-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_ne_zero"><span class="name">pow_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="NeZero.pow"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L173-L173">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#NeZero.pow"><span class="name">NeZero</span>.<span class="name">pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">a</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/NeZero.html#NeZero">NeZero</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="sq_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L175-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#sq_eq_zero_iff"><span class="name">sq_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="pow_eq_zero_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L177-L178">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#pow_eq_zero_iff'"><span class="name">pow_eq_zero_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="CancelMonoidWithZero.to_noZeroDivisors"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L187-L189">source</a></div><div class="attributes">@[instance 10]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#CancelMonoidWithZero.to_noZeroDivisors"><span class="name">CancelMonoidWithZero</span>.<span class="name">to_noZeroDivisors</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">M₀</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="mul_eq_mul_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L192-L193">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_eq_mul_right_iff"><span class="name">mul_eq_mul_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="mul_eq_mul_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L196-L197">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_eq_mul_left_iff"><span class="name">mul_eq_mul_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="mul_right_eq_self₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L199-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_right_eq_self₀"><span class="name">mul_right_eq_self₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="mul_left_eq_self₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L204-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_left_eq_self₀"><span class="name">mul_left_eq_self₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="mul_eq_left₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L210-L211">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_eq_left₀"><span class="name">mul_eq_left₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="mul_eq_right₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L214-L215">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_eq_right₀"><span class="name">mul_eq_right₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="left_eq_mul₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L218-L218">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#left_eq_mul₀"><span class="name">left_eq_mul₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="right_eq_mul₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L221-L221">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#right_eq_mul₀"><span class="name">right_eq_mul₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="eq_zero_of_mul_eq_self_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L225-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_zero_of_mul_eq_self_right"><span class="name">eq_zero_of_mul_eq_self_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>An element of a <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a></code> fixed by right multiplication by an element other
+than one must be zero.</p></div></div><div class="decl" id="eq_zero_of_mul_eq_self_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L230-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_zero_of_mul_eq_self_left"><span class="name">eq_zero_of_mul_eq_self_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">M₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">M₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>An element of a <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a></code> fixed by left multiplication by an element other
+than one must be zero.</p></div></div><div class="decl" id="GroupWithZero.mul_left_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L239-L241">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#GroupWithZero.mul_left_injective"><span class="name">GroupWithZero</span>.<span class="name">mul_left_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">fun (<span class="fn">y</span> : <span class="fn">G₀</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="GroupWithZero.mul_right_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L243-L245">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#GroupWithZero.mul_right_injective"><span class="name">GroupWithZero</span>.<span class="name">mul_right_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">fun (<span class="fn">y</span> : <span class="fn">G₀</span>) =&gt; <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="inv_mul_cancel_right₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L248-L251">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#inv_mul_cancel_right₀"><span class="name">inv_mul_cancel_right₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="inv_mul_cancel_left₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L255-L258">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#inv_mul_cancel_left₀"><span class="name">inv_mul_cancel_left₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="GroupWithZero.toDivisionMonoid"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L265-L280">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#GroupWithZero.toDivisionMonoid"><span class="name">GroupWithZero</span>.<span class="name">toDivisionMonoid</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">G₀</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">GroupWithZero.toDivisionMonoid</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__src</span> := <span class="fn">inst</span>;
+  <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid.mk">DivisionMonoid.mk</a> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></span></li></ul></details></div></div><div class="decl" id="GroupWithZero.toCancelMonoidWithZero"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L283-L288">source</a></div><div class="attributes">@[instance 10]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#GroupWithZero.toCancelMonoidWithZero"><span class="name">GroupWithZero</span>.<span class="name">toCancelMonoidWithZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CancelMonoidWithZero">CancelMonoidWithZero</a> <span class="fn">G₀</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">GroupWithZero.toCancelMonoidWithZero</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__src</span> := <span class="fn">inst</span>;
+  <span class="fn">CancelMonoidWithZero.mk</span></span></span></li></ul></details></div></div><div class="decl" id="zero_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L297-L297">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_div"><span class="name">zero_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="div_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L300-L300">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_zero"><span class="name">div_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="mul_self_mul_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L305-L308">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_self_mul_inv"><span class="name">mul_self_mul_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Multiplying <code>a</code> by itself and then by its inverse results in <code>a</code>
+(whether or not <code>a</code> is zero).</p></div></div><div class="decl" id="mul_inv_mul_cancel"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L314-L317">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_inv_mul_cancel"><span class="name">mul_inv_mul_cancel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Multiplying <code>a</code> by its inverse and then by itself results in <code>a</code>
+(whether or not <code>a</code> is zero).</p></div></div><div class="decl" id="inv_mul_mul_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L323-L326">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#inv_mul_mul_self"><span class="name">inv_mul_mul_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Multiplying <code>a⁻¹</code> by <code>a</code> twice results in <code>a</code> (whether or not <code>a</code>
+is zero).</p></div></div><div class="decl" id="mul_self_div_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L332-L332">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_self_div_self"><span class="name">mul_self_div_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Multiplying <code>a</code> by itself and then dividing by itself results in <code>a</code>, whether or not <code>a</code> is
+zero.</p></div></div><div class="decl" id="div_self_mul_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L337-L337">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_self_mul_self"><span class="name">div_self_mul_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Dividing <code>a</code> by itself and then multiplying by itself results in <code>a</code>, whether or not <code>a</code> is
+zero.</p></div></div><div class="decl" id="div_self_mul_self'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L342-L345">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_self_mul_self'"><span class="name">div_self_mul_self'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="one_div_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L348-L349">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#one_div_ne_zero"><span class="name">one_div_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="inv_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L352-L352">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#inv_eq_zero"><span class="name">inv_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="zero_eq_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L355-L356">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_eq_inv"><span class="name">zero_eq_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="div_div_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L361-L363">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_div_self"><span class="name">div_div_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>Dividing <code>a</code> by the result of dividing <code>a</code> by itself results in
+<code>a</code> (whether or not <code>a</code> is zero).</p></div></div><div class="decl" id="ne_zero_of_one_div_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L365-L367">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#ne_zero_of_one_div_ne_zero"><span class="name">ne_zero_of_one_div_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="eq_zero_of_one_div_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L369-L370">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#eq_zero_of_one_div_eq_zero"><span class="name">eq_zero_of_one_div_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="mul_left_surjective₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L372-L373">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_left_surjective₀"><span class="name">mul_left_surjective₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">fun (<span class="fn">g</span> : <span class="fn">G₀</span>) =&gt; <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="mul_right_surjective₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L375-L376">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#mul_right_surjective₀"><span class="name">mul_right_surjective₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">fun (<span class="fn">g</span> : <span class="fn">G₀</span>) =&gt; <span class="fn"><span class="fn">g</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="zero_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L378-L380">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_zpow"><span class="name">zero_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="zero_zpow_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L382-L385">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zero_zpow_eq"><span class="name">zero_zpow_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="zpow_add_one₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L387-L393">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zpow_add_one₀"><span class="name">zpow_add_one₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">n</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="zpow_sub_one₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L395-L398">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zpow_sub_one₀"><span class="name">zpow_sub_one₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">n</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div></div></div><div class="decl" id="zpow_add₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L400-L404">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zpow_add₀"><span class="name">zpow_add₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zpow_add'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L406-L417">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zpow_add'"><span class="name">zpow_add'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zpow_one_add₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L419-L419">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#zpow_one_add₀"><span class="name">zpow_one_add₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#GroupWithZero">GroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">G₀</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">i</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">i</span></span></span></span></div></div></div></div><div class="decl" id="div_mul_eq_mul_div₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L427-L428">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_mul_eq_mul_div₀"><span class="name">div_mul_eq_mul_div₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommGroupWithZero">CommGroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="div_sq_cancel"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/GroupWithZero/Basic.lean#L430-L433">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/GroupWithZero/Basic.html#div_sq_cancel"><span class="name">div_sq_cancel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G₀ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#CommGroupWithZero">CommGroupWithZero</a> <span class="fn">G₀</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">G₀</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

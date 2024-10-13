@@ -1,0 +1,945 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Field.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Field.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Field</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Order/Synonym.html">Mathlib.Order.Synonym</a></li><li><a href="../../.././Mathlib/Algebra/Field/Defs.html">Mathlib.Algebra.Field.Defs</a></li><li><a href="../../.././Mathlib/Algebra/Ring/Commute.html">Mathlib.Algebra.Ring.Commute</a></li><li><a href="../../.././Mathlib/Algebra/Ring/Invertible.html">Mathlib.Algebra.Ring.Invertible</a></li><li><a href="../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html">Mathlib.Algebra.GroupWithZero.Units.Lemmas</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Field.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#add_div"><span class="name">add_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_add_div_same"><span class="name">div_add_div_same</span></a></div><div class="nav_link"><a class="break_within" href="#same_add_div"><span class="name">same_add_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_add_same"><span class="name">div_add_same</span></a></div><div class="nav_link"><a class="break_within" href="#one_add_div"><span class="name">one_add_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_add_one"><span class="name">div_add_one</span></a></div><div class="nav_link"><a class="break_within" href="#inv_add_inv'"><span class="name">inv_add_inv'</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_mul_add_mul_one_div_eq_one_div_add_one_div"><span class="name">one_div_mul_add_mul_one_div_eq_one_div_add_one_div</span></a></div><div class="nav_link"><a class="break_within" href="#add_div_eq_mul_add_div"><span class="name">add_div_eq_mul_add_div</span></a></div><div class="nav_link"><a class="break_within" href="#add_div'"><span class="name">add_div'</span></a></div><div class="nav_link"><a class="break_within" href="#div_add'"><span class="name">div_add'</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.div_add_div"><span class="name">Commute</span>.<span class="name">div_add_div</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.one_div_add_one_div"><span class="name">Commute</span>.<span class="name">one_div_add_one_div</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.inv_add_inv"><span class="name">Commute</span>.<span class="name">inv_add_inv</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_neg_one_eq_neg_one"><span class="name">one_div_neg_one_eq_neg_one</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_neg_eq_neg_one_div"><span class="name">one_div_neg_eq_neg_one_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_neg_eq_neg_div"><span class="name">div_neg_eq_neg_div</span></a></div><div class="nav_link"><a class="break_within" href="#neg_div"><span class="name">neg_div</span></a></div><div class="nav_link"><a class="break_within" href="#neg_div'"><span class="name">neg_div'</span></a></div><div class="nav_link"><a class="break_within" href="#neg_div_neg_eq"><span class="name">neg_div_neg_eq</span></a></div><div class="nav_link"><a class="break_within" href="#neg_inv"><span class="name">neg_inv</span></a></div><div class="nav_link"><a class="break_within" href="#div_neg"><span class="name">div_neg</span></a></div><div class="nav_link"><a class="break_within" href="#inv_neg"><span class="name">inv_neg</span></a></div><div class="nav_link"><a class="break_within" href="#inv_neg_one"><span class="name">inv_neg_one</span></a></div><div class="nav_link"><a class="break_within" href="#div_neg_self"><span class="name">div_neg_self</span></a></div><div class="nav_link"><a class="break_within" href="#neg_div_self"><span class="name">neg_div_self</span></a></div><div class="nav_link"><a class="break_within" href="#div_sub_div_same"><span class="name">div_sub_div_same</span></a></div><div class="nav_link"><a class="break_within" href="#same_sub_div"><span class="name">same_sub_div</span></a></div><div class="nav_link"><a class="break_within" href="#one_sub_div"><span class="name">one_sub_div</span></a></div><div class="nav_link"><a class="break_within" href="#div_sub_same"><span class="name">div_sub_same</span></a></div><div class="nav_link"><a class="break_within" href="#div_sub_one"><span class="name">div_sub_one</span></a></div><div class="nav_link"><a class="break_within" href="#sub_div"><span class="name">sub_div</span></a></div><div class="nav_link"><a class="break_within" href="#inv_sub_inv'"><span class="name">inv_sub_inv'</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_mul_sub_mul_one_div_eq_one_div_add_one_div"><span class="name">one_div_mul_sub_mul_one_div_eq_one_div_add_one_div</span></a></div><div class="nav_link"><a class="break_within" href="#DivisionRing.isDomain"><span class="name">DivisionRing</span>.<span class="name">isDomain</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.div_sub_div"><span class="name">Commute</span>.<span class="name">div_sub_div</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.inv_sub_inv"><span class="name">Commute</span>.<span class="name">inv_sub_inv</span></a></div><div class="nav_link"><a class="break_within" href="#div_add_div"><span class="name">div_add_div</span></a></div><div class="nav_link"><a class="break_within" href="#one_div_add_one_div"><span class="name">one_div_add_one_div</span></a></div><div class="nav_link"><a class="break_within" href="#inv_add_inv"><span class="name">inv_add_inv</span></a></div><div class="nav_link"><a class="break_within" href="#div_sub_div"><span class="name">div_sub_div</span></a></div><div class="nav_link"><a class="break_within" href="#inv_sub_inv"><span class="name">inv_sub_inv</span></a></div><div class="nav_link"><a class="break_within" href="#sub_div'"><span class="name">sub_div'</span></a></div><div class="nav_link"><a class="break_within" href="#div_sub'"><span class="name">div_sub'</span></a></div><div class="nav_link"><a class="break_within" href="#Field.isDomain"><span class="name">Field</span>.<span class="name">isDomain</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.injective"><span class="name">RingHom</span>.<span class="name">injective</span></a></div><div class="nav_link"><a class="break_within" href="#DivisionRing.ofIsUnitOrEqZero"><span class="name">DivisionRing</span>.<span class="name">ofIsUnitOrEqZero</span></a></div><div class="nav_link"><a class="break_within" href="#Field.ofIsUnitOrEqZero"><span class="name">Field</span>.<span class="name">ofIsUnitOrEqZero</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.divisionSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">divisionSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.divisionRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">divisionRing</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.semifield"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">semifield</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.field"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">field</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.instRatCast"><span class="name">OrderDual</span>.<span class="name">instRatCast</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.instDivisionSemiring"><span class="name">OrderDual</span>.<span class="name">instDivisionSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.instDivisionRing"><span class="name">OrderDual</span>.<span class="name">instDivisionRing</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.instSemifield"><span class="name">OrderDual</span>.<span class="name">instSemifield</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.instField"><span class="name">OrderDual</span>.<span class="name">instField</span></a></div><div class="nav_link"><a class="break_within" href="#toDual_ratCast"><span class="name">toDual_ratCast</span></a></div><div class="nav_link"><a class="break_within" href="#ofDual_ratCast"><span class="name">ofDual_ratCast</span></a></div><div class="nav_link"><a class="break_within" href="#Lex.instRatCast"><span class="name">Lex</span>.<span class="name">instRatCast</span></a></div><div class="nav_link"><a class="break_within" href="#Lex.instDivisionSemiring"><span class="name">Lex</span>.<span class="name">instDivisionSemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Lex.instDivisionRing"><span class="name">Lex</span>.<span class="name">instDivisionRing</span></a></div><div class="nav_link"><a class="break_within" href="#Lex.instSemifield"><span class="name">Lex</span>.<span class="name">instSemifield</span></a></div><div class="nav_link"><a class="break_within" href="#Lex.instField"><span class="name">Lex</span>.<span class="name">instField</span></a></div><div class="nav_link"><a class="break_within" href="#toLex_ratCast"><span class="name">toLex_ratCast</span></a></div><div class="nav_link"><a class="break_within" href="#ofLex_ratCast"><span class="name">ofLex_ratCast</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lemmas-about-division-semi-rings-and-semi-fields">Lemmas about division (semi)rings and (semi)fields <a class="hover-link" href="#Lemmas-about-division-semi-rings-and-semi-fields">#</a></h1></div><div class="decl" id="add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L27-L27">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#add_div"><span class="name">add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="div_add_div_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L30-L31">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_add_div_same"><span class="name">div_add_div_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="same_add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L33-L33">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#same_add_div"><span class="name">same_add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="div_add_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L35-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_add_same"><span class="name">div_add_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="one_add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L37-L38">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_add_div"><span class="name">one_add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="div_add_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L40-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_add_one"><span class="name">div_add_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="inv_add_inv'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L44-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_add_inv'"><span class="name">inv_add_inv'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div><p>See <code><a href="../../.././Mathlib/Algebra/Field/Basic.html#inv_add_inv">inv_add_inv</a></code> for the more convenient version when <code>K</code> is commutative.</p></div></div><div class="decl" id="one_div_mul_add_mul_one_div_eq_one_div_add_one_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L48-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_div_mul_add_mul_one_div_eq_one_div_add_one_div"><span class="name">one_div_mul_add_mul_one_div_eq_one_div_add_one_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="add_div_eq_mul_add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L52-L53">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#add_div_eq_mul_add_div"><span class="name">add_div_eq_mul_add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="add_div'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L56-L57">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#add_div'"><span class="name">add_div'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="div_add'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L60-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_add'"><span class="name">div_add'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Commute.div_add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L63-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Commute.div_add_div"><span class="name">Commute</span>.<span class="name">div_add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hbc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">b</span> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">b</span> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span>)</span></span></span></div></div></div></div><div class="decl" id="Commute.one_div_add_one_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L67-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Commute.one_div_add_one_div"><span class="name">Commute</span>.<span class="name">one_div_add_one_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Commute.inv_add_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L71-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Commute.inv_add_inv"><span class="name">Commute</span>.<span class="name">inv_add_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="one_div_neg_one_eq_neg_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L81-L83">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_div_neg_one_eq_neg_one"><span class="name">one_div_neg_one_eq_neg_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">-<span class="fn">1</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="one_div_neg_eq_neg_one_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L85-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_div_neg_eq_neg_one_div"><span class="name">one_div_neg_eq_neg_one_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">(<span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span>)</span></span></span></div></div></div></div><div class="decl" id="div_neg_eq_neg_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L92-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_neg_eq_neg_div"><span class="name">div_neg_eq_neg_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span>)</span></span></span></div></div></div></div><div class="decl" id="neg_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L99-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#neg_div"><span class="name">neg_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span>)</span></span></span></div></div></div></div><div class="decl" id="neg_div'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L103-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#neg_div'"><span class="name">neg_div'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="neg_div_neg_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L106-L106">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#neg_div_neg_eq"><span class="name">neg_div_neg_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="neg_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L108-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#neg_inv"><span class="name">neg_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="div_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L110-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_neg"><span class="name">div_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="inv_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L112-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_neg"><span class="name">inv_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div></div></div><div class="decl" id="inv_neg_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L114-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_neg_one"><span class="name">inv_neg_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivisionMonoid">DivisionMonoid</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#HasDistribNeg">HasDistribNeg</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(-<span class="fn">1</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="div_neg_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L123-L123">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_neg_self"><span class="name">div_neg_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="neg_div_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L126-L126">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#neg_div_self"><span class="name">neg_div_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="div_sub_div_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L128-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_sub_div_same"><span class="name">div_sub_div_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="same_sub_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L131-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#same_sub_div"><span class="name">same_sub_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="one_sub_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L134-L135">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_sub_div"><span class="name">one_sub_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="div_sub_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L137-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_sub_same"><span class="name">div_sub_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="div_sub_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L140-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_sub_one"><span class="name">div_sub_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="sub_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L143-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#sub_div"><span class="name">sub_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="inv_sub_inv'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L147-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_sub_inv'"><span class="name">inv_sub_inv'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div><p>See <code><a href="../../.././Mathlib/Algebra/Field/Basic.html#inv_sub_inv">inv_sub_inv</a></code> for the more convenient version when <code>K</code> is commutative.</p></div></div><div class="decl" id="one_div_mul_sub_mul_one_div_eq_one_div_add_one_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L150-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_div_mul_sub_mul_one_div_eq_one_div_add_one_div"><span class="name">one_div_mul_sub_mul_one_div_eq_one_div_add_one_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="DivisionRing.isDomain"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L155-L156">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#DivisionRing.isDomain"><span class="name">DivisionRing</span>.<span class="name">isDomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Commute.div_sub_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L158-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Commute.div_sub_div"><span class="name">Commute</span>.<span class="name">div_sub_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hbc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">b</span> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbd : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">b</span> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span>)</span></span></span></div></div></div></div><div class="decl" id="Commute.inv_sub_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L162-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Commute.inv_sub_inv"><span class="name">Commute</span>.<span class="name">inv_sub_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">a</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="div_add_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L172-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_add_div"><span class="name">div_add_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span>)</span></span></span></div></div></div></div><div class="decl" id="one_div_add_one_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L176-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#one_div_add_one_div"><span class="name">one_div_add_one_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="inv_add_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L179-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_add_inv"><span class="name">inv_add_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="div_sub_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L191-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_sub_div"><span class="name">div_sub_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">K</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span>)</span></span></span></div></div></div></div><div class="decl" id="inv_sub_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L195-L196">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#inv_sub_inv"><span class="name">inv_sub_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">b</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="sub_div'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L199-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#sub_div'"><span class="name">sub_div'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="div_sub'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L203-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#div_sub'"><span class="name">div_sub'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Field.isDomain"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L207-L208">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Field.isDomain"><span class="name">Field</span>.<span class="name">isDomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="RingHom.injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L214-L216">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#RingHom.injective"><span class="name">RingHom</span>.<span class="name">injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="DivisionRing.ofIsUnitOrEqZero"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L226-L233">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#DivisionRing.ofIsUnitOrEqZero"><span class="name">DivisionRing</span>.<span class="name">ofIsUnitOrEqZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">R</span></span></div></div><p>Constructs a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a></code> structure on a <code><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a></code> consisting only of units and 0.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-DivisionRing.ofIsUnitOrEqZero" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Field.ofIsUnitOrEqZero"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L237-L240">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Field.ofIsUnitOrEqZero"><span class="name">Field</span>.<span class="name">ofIsUnitOrEqZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span></div></div><p>Constructs a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a></code> structure on a <code><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a></code> consisting only of units and 0.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Basic.html#Field.ofIsUnitOrEqZero">Field.ofIsUnitOrEqZero</a> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Basic.html#DivisionRing.ofIsUnitOrEqZero">DivisionRing.ofIsUnitOrEqZero</a> <span class="fn">h</span></span>;
+  <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field.mk">Field.mk</a> <span class="fn">⋯</span> <span class="fn">DivisionRing.zpow</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">DivisionRing.nnqsmul</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">DivisionRing.qsmul</span> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-Field.ofIsUnitOrEqZero" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.divisionSemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L251-L261">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Function.Injective.divisionSemiring"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">divisionSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv">Inv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Div">Div</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Rat/Init.html#NNRatCast">NNRatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(div : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnqsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zpow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span></div></div><p>Pullback a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a></code> along an injective function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.divisionSemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.divisionRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L265-L279">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Function.Injective.divisionRing"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">divisionRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv">Inv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Div">Div</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Rat/Init.html#NNRatCast">NNRatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(div : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnqsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(qsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zpow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span></div></div><p>Pullback a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a></code> along an injective function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.divisionRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.semifield"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L283-L291">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Function.Injective.semifield"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">semifield</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv">Inv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Div">Div</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Rat/Init.html#NNRatCast">NNRatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(div : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnqsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zpow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span></div></div><p>Pullback a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a></code> along an injective function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.semifield" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Function.Injective.field"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L295-L307">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Function.Injective.field"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">field</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv">Inv</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Div">Div</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Pow">Pow</a> <span class="fn">α</span> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Cast.html#NatCast">NatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Int/Basic.html#IntCast">IntCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Rat/Init.html#NNRatCast">NNRatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(neg : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(sub : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(inv : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(div : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zsmul : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnqsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(qsmul : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(npow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(zpow : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>) (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(natCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(intCast : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(nnratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ratCast : <span class="fn">∀ (<span class="fn">q</span> : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span></div></div><p>Pullback a <code><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a></code> along an injective function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Function.Injective.field" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Order-dual">Order dual <a class="hover-link" href="#Order-dual">#</a></h3></div><div class="decl" id="OrderDual.instRatCast"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L315-L315">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#OrderDual.instRatCast"><span class="name">OrderDual</span>.<span class="name">instRatCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.instRatCast</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="OrderDual.instDivisionSemiring"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L316-L316">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#OrderDual.instDivisionSemiring"><span class="name">OrderDual</span>.<span class="name">instDivisionSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.instDivisionSemiring</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="OrderDual.instDivisionRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L317-L317">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#OrderDual.instDivisionRing"><span class="name">OrderDual</span>.<span class="name">instDivisionRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.instDivisionRing</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="OrderDual.instSemifield"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L318-L318">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#OrderDual.instSemifield"><span class="name">OrderDual</span>.<span class="name">instSemifield</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.instSemifield</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="OrderDual.instField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L319-L319">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#OrderDual.instField"><span class="name">OrderDual</span>.<span class="name">instField</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn"><span class="fn">α</span><a href="../../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.instField</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="toDual_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L323-L323">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#toDual_ratCast"><span class="name">toDual_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">OrderDual.toDual</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="ofDual_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L325-L325">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#ofDual_ratCast"><span class="name">ofDual_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">OrderDual.ofDual</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Lexicographic-order">Lexicographic order <a class="hover-link" href="#Lexicographic-order">#</a></h3></div><div class="decl" id="Lex.instRatCast"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L331-L331">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Lex.instRatCast"><span class="name">Lex</span>.<span class="name">instRatCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">(<a href="../../.././Mathlib/Order/Synonym.html#Lex">Lex</a> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lex.instRatCast</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="Lex.instDivisionSemiring"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L332-L332">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Lex.instDivisionSemiring"><span class="name">Lex</span>.<span class="name">instDivisionSemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">(<a href="../../.././Mathlib/Order/Synonym.html#Lex">Lex</a> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lex.instDivisionSemiring</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="Lex.instDivisionRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L333-L333">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Lex.instDivisionRing"><span class="name">Lex</span>.<span class="name">instDivisionRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">(<a href="../../.././Mathlib/Order/Synonym.html#Lex">Lex</a> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lex.instDivisionRing</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="Lex.instSemifield"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L334-L334">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Lex.instSemifield"><span class="name">Lex</span>.<span class="name">instSemifield</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Semifield">Semifield</a> <span class="fn">(<a href="../../.././Mathlib/Order/Synonym.html#Lex">Lex</a> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lex.instSemifield</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="Lex.instField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L335-L335">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#Lex.instField"><span class="name">Lex</span>.<span class="name">instField</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">(<a href="../../.././Mathlib/Order/Synonym.html#Lex">Lex</a> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Lex.instField</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">inst</span></span></li></ul></details></div></div><div class="decl" id="toLex_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L339-L339">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#toLex_ratCast"><span class="name">toLex_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">toLex</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="ofLex_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Field/Basic.lean#L341-L341">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Field/Basic.html#ofLex_ratCast"><span class="name">ofLex_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Batteries/Classes/RatCast.html#RatCast">RatCast</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">ofLex</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

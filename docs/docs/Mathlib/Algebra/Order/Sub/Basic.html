@@ -1,0 +1,539 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Order.Sub.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Order.Sub.Basic";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">Sub</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Even.html">Mathlib.Algebra.Group.Even</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Equiv/Basic.html">Mathlib.Algebra.Group.Equiv.Basic</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html">Mathlib.Algebra.Order.Monoid.Canonical.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/ExistsOfLE.html">Mathlib.Algebra.Order.Monoid.Unbundled.ExistsOfLE</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Sub/Unbundled/Basic.html">Mathlib.Algebra.Order.Sub.Unbundled.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Order.Sub.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#add_tsub_cancel_iff_le"><span class="name">add_tsub_cancel_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_add_cancel_iff_le"><span class="name">tsub_add_cancel_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_eq_zero_iff_le"><span class="name">tsub_eq_zero_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_eq_zero_of_le"><span class="name">tsub_eq_zero_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_self"><span class="name">tsub_self</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_le_self"><span class="name">tsub_le_self</span></a></div><div class="nav_link"><a class="break_within" href="#zero_tsub"><span class="name">zero_tsub</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_self_add"><span class="name">tsub_self_add</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_pos_iff_not_le"><span class="name">tsub_pos_iff_not_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_pos_of_lt"><span class="name">tsub_pos_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_lt_of_lt"><span class="name">tsub_lt_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_le_tsub_iff_left"><span class="name">AddLECancellable</span>.<span class="name">tsub_le_tsub_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_right_inj"><span class="name">AddLECancellable</span>.<span class="name">tsub_right_inj</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_le_tsub_iff_left"><span class="name">tsub_le_tsub_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_right_inj"><span class="name">tsub_right_inj</span></a></div><div class="nav_link"><a class="break_within" href="#CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid"><span class="name">CanonicallyOrderedAddCommMonoid</span>.<span class="name">toAddCancelCommMonoid</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_pos_iff_lt"><span class="name">tsub_pos_iff_lt</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_eq_tsub_min"><span class="name">tsub_eq_tsub_min</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.lt_tsub_iff_right"><span class="name">AddLECancellable</span>.<span class="name">lt_tsub_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.lt_tsub_iff_left"><span class="name">AddLECancellable</span>.<span class="name">lt_tsub_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_lt_tsub_iff_right"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_tsub_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_lt_self"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_self</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_lt_self_iff"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_self_iff</span></a></div><div class="nav_link"><a class="break_within" href="#AddLECancellable.tsub_lt_tsub_iff_left_of_le"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_tsub_iff_left_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_lt_tsub_iff_right"><span class="name">tsub_lt_tsub_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_lt_self"><span class="name">tsub_lt_self</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_lt_self_iff"><span class="name">tsub_lt_self_iff</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_lt_tsub_iff_left_of_le"><span class="name">tsub_lt_tsub_iff_left_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_tsub_eq_min"><span class="name">tsub_tsub_eq_min</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_add_eq_max"><span class="name">tsub_add_eq_max</span></a></div><div class="nav_link"><a class="break_within" href="#add_tsub_eq_max"><span class="name">add_tsub_eq_max</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_min"><span class="name">tsub_min</span></a></div><div class="nav_link"><a class="break_within" href="#tsub_add_min"><span class="name">tsub_add_min</span></a></div><div class="nav_link"><a class="break_within" href="#Even.tsub"><span class="name">Even</span>.<span class="name">tsub</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lemmas-about-subtraction-in-unbundled-canonically-ordered-monoids">Lemmas about subtraction in unbundled canonically ordered monoids <a class="hover-link" href="#Lemmas-about-subtraction-in-unbundled-canonically-ordered-monoids">#</a></h1></div><div class="decl" id="add_tsub_cancel_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L21-L22">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#add_tsub_cancel_iff_le"><span class="name">add_tsub_cancel_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">(<span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_add_cancel_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L24-L26">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_add_cancel_iff_le"><span class="name">tsub_add_cancel_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_eq_zero_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L30-L31">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_eq_zero_iff_le"><span class="name">tsub_eq_zero_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_eq_zero_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L33-L33">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_eq_zero_of_le"><span class="name">tsub_eq_zero_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p><strong>Alias</strong> of the reverse direction of <code><a href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_eq_zero_iff_le">tsub_eq_zero_iff_le</a></code>.</p></div></div><div class="decl" id="tsub_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L37-L38">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_self"><span class="name">tsub_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="tsub_le_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L40-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_le_self"><span class="name">tsub_le_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="zero_tsub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L43-L44">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#zero_tsub"><span class="name">zero_tsub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="tsub_self_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L46-L47">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_self_add"><span class="name">tsub_self_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">(<span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="tsub_pos_iff_not_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L49-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_pos_iff_not_le"><span class="name">tsub_pos_iff_not_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="tsub_pos_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L52-L53">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_pos_of_lt"><span class="name">tsub_pos_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="tsub_lt_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L55-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_lt_of_lt"><span class="name">tsub_lt_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_le_tsub_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L60-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_le_tsub_iff_left"><span class="name">AddLECancellable</span>.<span class="name">tsub_le_tsub_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_right_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L67-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_right_inj"><span class="name">AddLECancellable</span>.<span class="name">tsub_right_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hba : <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hca : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></span></div></div></div></div><div class="mod_doc"><h4 class="markdown-heading" id="Lemmas-where-addition-is-order-reflecting">Lemmas where addition is order-reflecting. <a class="hover-link" href="#Lemmas-where-addition-is-order-reflecting">#</a></h4></div><div class="decl" id="tsub_le_tsub_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L81-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_le_tsub_iff_left"><span class="name">tsub_le_tsub_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_right_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_right_inj"><span class="name">tsub_right_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hba : <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hca : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L94-L97">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid"><span class="name">CanonicallyOrderedAddCommMonoid</span>.<span class="name">toAddCancelCommMonoid</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCancelCommMonoid">AddCancelCommMonoid</a> <span class="fn">α</span></span></div></div><p>A <code><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddCommMonoid">CanonicallyOrderedAddCommMonoid</a></code> with ordered subtraction and order-reflecting addition is
+cancellative. This is not an instance as it would form a typeclass loop.</p><p>See note [reducible non-instances].</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid">CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid</a> <span class="fn">α</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__src</span> := <span class="fn">inferInstance</span>;
+  <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCancelCommMonoid.mk">AddCancelCommMonoid.mk</a> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-CanonicallyOrderedAddCommMonoid.toAddCancelCommMonoid" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Lemmas-in-a-linearly-canonically-ordered-monoid">Lemmas in a linearly canonically ordered monoid. <a class="hover-link" href="#Lemmas-in-a-linearly-canonically-ordered-monoid">#</a></h3></div><div class="decl" id="tsub_pos_iff_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L111-L111">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_pos_iff_lt"><span class="name">tsub_pos_iff_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="tsub_eq_tsub_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L113-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_eq_tsub_min"><span class="name">tsub_eq_tsub_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.lt_tsub_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L120-L121">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.lt_tsub_iff_right"><span class="name">AddLECancellable</span>.<span class="name">lt_tsub_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.lt_tsub_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L123-L124">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.lt_tsub_iff_left"><span class="name">AddLECancellable</span>.<span class="name">lt_tsub_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_lt_tsub_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L126-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_lt_tsub_iff_right"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_tsub_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_lt_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L129-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_lt_self"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_lt_self_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L134-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_lt_self_iff"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_self_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="AddLECancellable.tsub_lt_tsub_iff_left_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L142-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#AddLECancellable.tsub_lt_tsub_iff_left_of_le"><span class="name">AddLECancellable</span>.<span class="name">tsub_lt_tsub_iff_left_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#AddLECancellable">AddLECancellable</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div><p>See <code>lt_tsub_iff_left_of_le_of_le</code> for a weaker statement in a partial order.</p></div></div><div class="decl" id="tsub_lt_tsub_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L153-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_lt_tsub_iff_right"><span class="name">tsub_lt_tsub_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div><p>This lemma also holds for <code>ENNReal</code>, but we need a different proof for that.</p></div></div><div class="decl" id="tsub_lt_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L156-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_lt_self"><span class="name">tsub_lt_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span> → <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="tsub_lt_self_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L159-L160">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_lt_self_iff"><span class="name">tsub_lt_self_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="tsub_lt_tsub_iff_left_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L163-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_lt_tsub_iff_left_of_le"><span class="name">tsub_lt_tsub_iff_left_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div><p>See <code>lt_tsub_iff_left_of_le_of_le</code> for a weaker statement in a partial order.</p></div></div><div class="decl" id="tsub_tsub_eq_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L166-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_tsub_eq_min"><span class="name">tsub_tsub_eq_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">(<span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Lemmas-about-max-and-min">Lemmas about <code>max</code> and <code>min</code>. <a class="hover-link" href="#Lemmas-about-max-and-min">#</a></h3></div><div class="decl" id="tsub_add_eq_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L174-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_add_eq_max"><span class="name">tsub_add_eq_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="add_tsub_eq_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L179-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#add_tsub_eq_max"><span class="name">add_tsub_eq_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">(<span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L181-L184">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_min"><span class="name">tsub_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="tsub_add_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L186-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#tsub_add_min"><span class="name">tsub_add_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Even.tsub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Algebra/Order/Sub/Basic.lean#L191-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Sub/Basic.html#Even.tsub"><span class="name">Even</span>.<span class="name">tsub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyLinearOrderedAddCommMonoid">CanonicallyLinearOrderedAddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Sub/Defs.html#OrderedSub">OrderedSub</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Defs.html#ContravariantClass">ContravariantClass</a> <span class="fn">α</span> <span class="fn">α</span> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x_1</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Even.html#Even">Even</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Even.html#Even">Even</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Even.html#Even">Even</a> <span class="fn">(<span class="fn">m</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">n</span>)</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,526 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Rat.Cast.Defs</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Data.Rat.Cast.Defs";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">Rat</span>.<span class="name">Cast</span>.<span class="name">Defs</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Field/Rat.html">Mathlib.Algebra.Field.Rat</a></li><li><a href="../../../.././Mathlib/Data/NNRat/Lemmas.html">Mathlib.Data.NNRat.Lemmas</a></li><li><a href="../../../.././Mathlib/Data/Rat/Lemmas.html">Mathlib.Data.Rat.Lemmas</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Commute/Basic.html">Mathlib.Algebra.Group.Commute.Basic</a></li><li><a href="../../../.././Mathlib/Algebra/GroupWithZero/Units/Lemmas.html">Mathlib.Algebra.GroupWithZero.Units.Lemmas</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Field/Rat.html">Mathlib.Algebra.Order.Field.Rat</a></li><li><a href="../../../.././Mathlib/Data/Int/Cast/Lemmas.html">Mathlib.Data.Int.Cast.Lemmas</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Rat.Cast.Defs" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_natCast"><span class="name">NNRat</span>.<span class="name">cast_natCast</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_ofNat"><span class="name">NNRat</span>.<span class="name">cast_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_zero"><span class="name">NNRat</span>.<span class="name">cast_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_one"><span class="name">NNRat</span>.<span class="name">cast_one</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_commute"><span class="name">NNRat</span>.<span class="name">cast_commute</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.commute_cast"><span class="name">NNRat</span>.<span class="name">commute_cast</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_comm"><span class="name">NNRat</span>.<span class="name">cast_comm</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_divNat_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_divNat_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_add_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_add_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_mul_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_mul_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_inv_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_inv_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.cast_div_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_div_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_intCast"><span class="name">Rat</span>.<span class="name">cast_intCast</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_natCast"><span class="name">Rat</span>.<span class="name">cast_natCast</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_coe_int"><span class="name">Rat</span>.<span class="name">cast_coe_int</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_coe_nat"><span class="name">Rat</span>.<span class="name">cast_coe_nat</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_ofNat"><span class="name">Rat</span>.<span class="name">cast_ofNat</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_zero"><span class="name">Rat</span>.<span class="name">cast_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_one"><span class="name">Rat</span>.<span class="name">cast_one</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_commute"><span class="name">Rat</span>.<span class="name">cast_commute</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_comm"><span class="name">Rat</span>.<span class="name">cast_comm</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.commute_cast"><span class="name">Rat</span>.<span class="name">commute_cast</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_divInt_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_divInt_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_mkRat_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_mkRat_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_add_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_add_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_neg"><span class="name">Rat</span>.<span class="name">cast_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_sub_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_sub_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_mul_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_mul_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_inv_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_inv_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.cast_div_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_div_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#map_nnratCast"><span class="name">map_nnratCast</span></a></div><div class="nav_link"><a class="break_within" href="#eq_nnratCast"><span class="name">eq_nnratCast</span></a></div><div class="nav_link"><a class="break_within" href="#map_ratCast"><span class="name">map_ratCast</span></a></div><div class="nav_link"><a class="break_within" href="#eq_ratCast"><span class="name">eq_ratCast</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_nnrat'"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat'</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_nnrat_iff"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat_iff</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_nnrat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_nnrat_on_pnat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat_on_pnat</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_rat'"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat'</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_rat_iff"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat_iff</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_rat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidWithZeroHomClass.ext_rat_on_pnat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat_on_pnat</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.ext_rat"><span class="name">RingHom</span>.<span class="name">ext_rat</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.subsingleton_ringHom"><span class="name">NNRat</span>.<span class="name">subsingleton_ringHom</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.subsingleton_ringHom"><span class="name">Rat</span>.<span class="name">subsingleton_ringHom</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.instDistribSMul"><span class="name">NNRat</span>.<span class="name">instDistribSMul</span></a></div><div class="nav_link"><a class="break_within" href="#NNRat.instIsScalarTowerRight"><span class="name">NNRat</span>.<span class="name">instIsScalarTowerRight</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.instDistribSMul"><span class="name">Rat</span>.<span class="name">instDistribSMul</span></a></div><div class="nav_link"><a class="break_within" href="#Rat.instIsScalarTowerRight"><span class="name">Rat</span>.<span class="name">instIsScalarTowerRight</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Casts-for-Rational-Numbers">Casts for Rational Numbers <a class="hover-link" href="#Casts-for-Rational-Numbers">#</a></h1><h2 class="markdown-heading" id="Summary">Summary <a class="hover-link" href="#Summary">#</a></h2><p>We define the canonical injection from ℚ into an arbitrary division ring and prove various
+casting lemmas showing the well-behavedness of this injection.</p><h2 class="markdown-heading" id="Notations">Notations <a class="hover-link" href="#Notations">#</a></h2><ul>
+<li><code>/.</code> is infix notation for <code><a href="../../../.././Batteries/Data/Rat/Basic.html#Rat.divInt">Rat.divInt</a></code>.</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>rat, rationals, field, ℚ, numerator, denominator, num, denom, cast, coercion, casting</p></div><div class="decl" id="NNRat.cast_natCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L36-L36">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_natCast"><span class="name">NNRat</span>.<span class="name">cast_natCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L39-L40">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_ofNat"><span class="name">NNRat</span>.<span class="name">cast_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">n</span>.AtLeastTwo</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L42-L42">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_zero"><span class="name">NNRat</span>.<span class="name">cast_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="NNRat.cast_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L43-L43">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_one"><span class="name">NNRat</span>.<span class="name">cast_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="NNRat.cast_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L45-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_commute"><span class="name">NNRat</span>.<span class="name">cast_commute</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(↑<span class="fn">q</span>)</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="NNRat.commute_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L48-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.commute_cast"><span class="name">NNRat</span>.<span class="name">commute_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">a</span> <span class="fn">↑<span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L50-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_comm"><span class="name">NNRat</span>.<span class="name">cast_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_divNat_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L52-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_divNat_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_divNat_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">↑<span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/NNRat/Defs.html#NNRat.divNat">NNRat.divNat</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_add_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L73-L80">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_add_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_add_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">r</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">q</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_mul_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L83-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_mul_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_mul_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">r</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">q</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="NNRat.cast_inv_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L93-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_inv_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_inv_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.num</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(↑<span class="fn">q</span>)</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="NNRat.cast_div_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L97-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.cast_div_of_ne_zero"><span class="name">NNRat</span>.<span class="name">cast_div_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">r</span>.num</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">q</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑<span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_intCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L113-L114">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_intCast"><span class="name">Rat</span>.<span class="name">cast_intCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Rat.cast_natCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L117-L118">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_natCast"><span class="name">Rat</span>.<span class="name">cast_natCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Rat.cast_coe_int"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L120-L120">source</a></div><div class="attributes">@[deprecated Rat.cast_intCast]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_coe_int"><span class="name">Rat</span>.<span class="name">cast_coe_int</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_intCast">Rat.cast_intCast</a></code>.</p></div></div><div class="decl" id="Rat.cast_coe_nat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L121-L121">source</a></div><div class="attributes">@[deprecated Rat.cast_natCast]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_coe_nat"><span class="name">Rat</span>.<span class="name">cast_coe_nat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_natCast">Rat.cast_natCast</a></code>.</p></div></div><div class="decl" id="Rat.cast_ofNat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L124-L126">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_ofNat"><span class="name">Rat</span>.<span class="name">cast_ofNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">n</span>.AtLeastTwo</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Rat.cast_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L129-L130">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_zero"><span class="name">Rat</span>.<span class="name">cast_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Rat.cast_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L133-L134">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_one"><span class="name">Rat</span>.<span class="name">cast_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Rat.cast_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L136-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_commute"><span class="name">Rat</span>.<span class="name">cast_commute</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(↑<span class="fn">r</span>)</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Rat.cast_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L139-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_comm"><span class="name">Rat</span>.<span class="name">cast_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="Rat.commute_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L142-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.commute_cast"><span class="name">Rat</span>.<span class="name">commute_cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">a</span> <span class="fn">↑<span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="Rat.cast_divInt_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L146-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_divInt_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_divInt_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(b0 : <span class="fn"><span class="fn">↑<span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Batteries/Data/Rat/Basic.html#Rat.divInt">Rat.divInt</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_mkRat_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L166-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_mkRat_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_mkRat_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">↑<span class="fn">b</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Batteries/Data/Rat/Basic.html#mkRat">mkRat</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_add_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L170-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_add_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_add_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">r</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">q</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L179-L179">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_neg"><span class="name">Rat</span>.<span class="name">cast_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">q</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑<span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_sub_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L181-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_sub_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_sub_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">p</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">p</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">q</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_mul_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L184-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_mul_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_mul_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">p</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">p</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">q</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="Rat.cast_inv_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L194-L195">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_inv_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_inv_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.num</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(↑<span class="fn">q</span>)</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="Rat.cast_div_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L197-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.cast_div_of_ne_zero"><span class="name">Rat</span>.<span class="name">cast_div_of_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">p</span>.den</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">q</span>.num</span></span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">p</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">q</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑<span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="map_nnratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L212-L213">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#map_nnratCast"><span class="name">map_nnratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="eq_nnratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L216-L217">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#eq_nnratCast"><span class="name">eq_nnratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="map_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L220-L221">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#map_ratCast"><span class="name">map_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">q</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="eq_ratCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L223-L224">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#eq_ratCast"><span class="name">eq_ratCast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">q</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_nnrat'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L234-L237">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_nnrat'"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ≥0</code> agree on the naturals then they are equal.</p></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_nnrat_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L242-L242">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_nnrat_iff"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Nat/Cast/Basic.html#Nat.castRingHom">Nat.castRingHom</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Nat/Cast/Basic.html#Nat.castRingHom">Nat.castRingHom</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span></span></span></span></div></div></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_nnrat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L243-L245">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_nnrat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Nat/Cast/Basic.html#Nat.castRingHom">Nat.castRingHom</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Nat/Cast/Basic.html#Nat.castRingHom">Nat.castRingHom</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ≥0</code> agree on the naturals then they are equal.</p><p>See note [partially-applied ext lemmas] for why <code>comp</code> is used here.</p></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_nnrat_on_pnat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L249-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_nnrat_on_pnat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_nnrat_on_pnat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(same_on_pnat : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">n</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ≥0</code> agree on the positive naturals then they are
+equal.</p></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_rat'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L260-L264">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_rat'"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">m</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">m</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">m</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ</code> agree on the integers then they are equal.</p></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_rat_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L269-L269">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_rat_iff"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Int/Cast/Lemmas.html#Int.castRingHom">Int.castRingHom</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Int/Cast/Lemmas.html#Int.castRingHom">Int.castRingHom</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span></span></span></span></div></div></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_rat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L270-L272">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_rat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHom">→*₀</a> <span class="fn">M₀</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Int/Cast/Lemmas.html#Int.castRingHom">Int.castRingHom</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Data/Int/Cast/Lemmas.html#Int.castRingHom">Int.castRingHom</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ</code> agree on the integers then they are equal.</p><p>See note [partially-applied ext lemmas] for why <code>comp</code> is used here.</p></div></div><div class="decl" id="MonoidWithZeroHomClass.ext_rat_on_pnat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L276-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#MonoidWithZeroHomClass.ext_rat_on_pnat"><span class="name">MonoidWithZeroHomClass</span>.<span class="name">ext_rat_on_pnat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₀ : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MonoidWithZero">MonoidWithZero</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Hom.html#MonoidWithZeroHomClass">MonoidWithZeroHomClass</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">M₀</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(same_on_neg_one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(-<span class="fn">1</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">(-<span class="fn">1</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(same_on_pnat : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">n</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>If monoid with zero homs <code>f</code> and <code>g</code> from <code>ℚ</code> agree on the positive naturals and <code>-1</code> then
+they are equal.</p></div></div><div class="decl" id="RingHom.ext_rat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L290-L294">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#RingHom.ext_rat"><span class="name">RingHom</span>.<span class="name">ext_rat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHomClass">RingHomClass</a> <span class="fn">F</span> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">F</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>Any two ring homomorphisms from <code>ℚ</code> to a semiring are equal. If the codomain is a division ring,
+then this lemma follows from <code><a href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#eq_ratCast">eq_ratCast</a></code>.</p></div></div><div class="decl" id="NNRat.subsingleton_ringHom"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L296-L297">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.subsingleton_ringHom"><span class="name">NNRat</span>.<span class="name">subsingleton_ringHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Rat.subsingleton_ringHom"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L299-L300">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.subsingleton_ringHom"><span class="name">Rat</span>.<span class="name">subsingleton_ringHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">(<a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Scalar-multiplication">Scalar multiplication <a class="hover-link" href="#Scalar-multiplication">#</a></h3></div><div class="decl" id="NNRat.instDistribSMul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L307-L309">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.instDistribSMul"><span class="name">NNRat</span>.<span class="name">instDistribSMul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribSMul">DistribSMul</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">NNRat.instDistribSMul</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribSMul.mk">DistribSMul.mk</a> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="NNRat.instIsScalarTowerRight"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L311-L312">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#NNRat.instIsScalarTowerRight"><span class="name">NNRat</span>.<span class="name">instIsScalarTowerRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionSemiring">DivisionSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Rat/Init.html#NNRat">ℚ≥0</a> <span class="fn">α</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Rat.instDistribSMul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L319-L321">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.instDistribSMul"><span class="name">Rat</span>.<span class="name">instDistribSMul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribSMul">DistribSMul</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Rat.instDistribSMul</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribSMul.mk">DistribSMul.mk</a> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="Rat.instIsScalarTowerRight"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Data/Rat/Cast/Defs.lean#L323-L324">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Data/Rat/Cast/Defs.html#Rat.instIsScalarTowerRight"><span class="name">Rat</span>.<span class="name">instIsScalarTowerRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Batteries/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">α</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

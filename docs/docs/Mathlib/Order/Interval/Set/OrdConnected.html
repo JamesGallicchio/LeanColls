@@ -1,0 +1,667 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.Interval.Set.OrdConnected</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Order.Interval.Set.OrdConnected";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">Interval</span>.<span class="name">Set</span>.<span class="name">OrdConnected</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Order/Antichain.html">Mathlib.Order.Antichain</a></li><li><a href="../../../.././Mathlib/Order/SetNotation.html">Mathlib.Order.SetNotation</a></li><li><a href="../../../.././Mathlib/Order/Interval/Set/OrderEmbedding.html">Mathlib.Order.Interval.Set.OrderEmbedding</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.Interval.Set.OrdConnected" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected"><span class="name">Set</span>.<span class="name">OrdConnected</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.out'"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">out'</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.out"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">out</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_def"><span class="name">Set</span>.<span class="name">ordConnected_def</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iff"><span class="name">Set</span>.<span class="name">ordConnected_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_of_Ioo"><span class="name">Set</span>.<span class="name">ordConnected_of_Ioo</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.preimage_mono"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">preimage_mono</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.preimage_anti"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">preimage_anti</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Icc_subset"><span class="name">Set</span>.<span class="name">Icc_subset</span></a></div><div class="nav_link"><a class="break_within" href="#OrderEmbedding.image_Icc"><span class="name">OrderEmbedding</span>.<span class="name">image_Icc</span></a></div><div class="nav_link"><a class="break_within" href="#OrderEmbedding.image_Ico"><span class="name">OrderEmbedding</span>.<span class="name">image_Ico</span></a></div><div class="nav_link"><a class="break_within" href="#OrderEmbedding.image_Ioc"><span class="name">OrderEmbedding</span>.<span class="name">image_Ioc</span></a></div><div class="nav_link"><a class="break_within" href="#OrderEmbedding.image_Ioo"><span class="name">OrderEmbedding</span>.<span class="name">image_Ioo</span></a></div><div class="nav_link"><a class="break_within" href="#Set.image_subtype_val_Icc"><span class="name">Set</span>.<span class="name">image_subtype_val_Icc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.image_subtype_val_Ico"><span class="name">Set</span>.<span class="name">image_subtype_val_Ico</span></a></div><div class="nav_link"><a class="break_within" href="#Set.image_subtype_val_Ioc"><span class="name">Set</span>.<span class="name">image_subtype_val_Ioc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.image_subtype_val_Ioo"><span class="name">Set</span>.<span class="name">image_subtype_val_Ioo</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.inter"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">inter</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.inter'"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">inter'</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.dual"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">dual</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_dual"><span class="name">Set</span>.<span class="name">ordConnected_dual</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_sInter"><span class="name">Set</span>.<span class="name">ordConnected_sInter</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iInter"><span class="name">Set</span>.<span class="name">ordConnected_iInter</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iInter'"><span class="name">Set</span>.<span class="name">ordConnected_iInter'</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_biInter"><span class="name">Set</span>.<span class="name">ordConnected_biInter</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_pi"><span class="name">Set</span>.<span class="name">ordConnected_pi</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_pi'"><span class="name">Set</span>.<span class="name">ordConnected_pi'</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Ici"><span class="name">Set</span>.<span class="name">ordConnected_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Iic"><span class="name">Set</span>.<span class="name">ordConnected_Iic</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Ioi"><span class="name">Set</span>.<span class="name">ordConnected_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Iio"><span class="name">Set</span>.<span class="name">ordConnected_Iio</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Icc"><span class="name">Set</span>.<span class="name">ordConnected_Icc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Ico"><span class="name">Set</span>.<span class="name">ordConnected_Ico</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Ioc"><span class="name">Set</span>.<span class="name">ordConnected_Ioc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_Ioo"><span class="name">Set</span>.<span class="name">ordConnected_Ioo</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_singleton"><span class="name">Set</span>.<span class="name">ordConnected_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_empty"><span class="name">Set</span>.<span class="name">ordConnected_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_univ"><span class="name">Set</span>.<span class="name">ordConnected_univ</span></a></div><div class="nav_link"><a class="break_within" href="#Set.instDenselyOrdered"><span class="name">Set</span>.<span class="name">instDenselyOrdered</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_preimage"><span class="name">Set</span>.<span class="name">ordConnected_preimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_image"><span class="name">Set</span>.<span class="name">ordConnected_image</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_range"><span class="name">Set</span>.<span class="name">ordConnected_range</span></a></div><div class="nav_link"><a class="break_within" href="#Set.dual_ordConnected_iff"><span class="name">Set</span>.<span class="name">dual_ordConnected_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Set.dual_ordConnected"><span class="name">Set</span>.<span class="name">dual_ordConnected</span></a></div><div class="nav_link"><a class="break_within" href="#IsAntichain.ordConnected"><span class="name">IsAntichain</span>.<span class="name">ordConnected</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_inter_Icc_of_subset"><span class="name">Set</span>.<span class="name">ordConnected_inter_Icc_of_subset</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_inter_Icc_iff"><span class="name">Set</span>.<span class="name">ordConnected_inter_Icc_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Set.not_ordConnected_inter_Icc_iff"><span class="name">Set</span>.<span class="name">not_ordConnected_inter_Icc_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_uIcc"><span class="name">Set</span>.<span class="name">ordConnected_uIcc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_uIoc"><span class="name">Set</span>.<span class="name">ordConnected_uIoc</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.uIcc_subset"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">uIcc_subset</span></a></div><div class="nav_link"><a class="break_within" href="#Set.OrdConnected.uIoc_subset"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">uIoc_subset</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iff_uIcc_subset"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_of_uIcc_subset_left"><span class="name">Set</span>.<span class="name">ordConnected_of_uIcc_subset_left</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iff_uIcc_subset_left"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset_left</span></a></div><div class="nav_link"><a class="break_within" href="#Set.ordConnected_iff_uIcc_subset_right"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset_right</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Order-connected-sets">Order-connected sets <a class="hover-link" href="#Order-connected-sets">#</a></h1><p>We say that a set <code>s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> α</code> is <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> if for all <code>x y ∈ s</code> it includes the
+interval <code>[[x, y]]</code>. If <code>α</code> is a <code><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a></code> <code>ConditionallyCompleteLinearOrder</code> with
+the <code>OrderTopology</code>, then this condition is equivalent to <code>IsPreconnected s</code>. If <code>α</code> is a
+<code>LinearOrderedField</code>, then this condition is also equivalent to <code>Convex α s</code>.</p><p>In this file we prove that intersection of a family of <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> sets is <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> and
+that all standard intervals are <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code>.</p></div><div class="decl" id="Set.OrdConnected"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L36-L38">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected"><span class="name">Set</span>.<span class="name">OrdConnected</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>We say that a set <code>s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> α</code> is <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> if for all <code>x y ∈ s</code> it includes the
+interval <code>[[x, y]]</code>. If <code>α</code> is a <code><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a></code> <code>ConditionallyCompleteLinearOrder</code> with
+the <code>OrderTopology</code>, then this condition is equivalent to <code>IsPreconnected s</code>. If <code>α</code> is a
+<code>LinearOrderedField</code>, then this condition is also equivalent to <code>Convex α s</code>.</p><ul class="structure_fields" id="Set.OrdConnected.mk"><li id="Set.OrdConnected.out'" class="structure_field"><div class="structure_field_info">out' : <span class="fn">∀ ⦃<span class="fn">x</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></span></div><div class="structure_field_doc"><p><code>s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> α</code> is <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> if for all <code>x y ∈ s</code> it includes the interval <code>[[x, y]]</code>.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-Set.OrdConnected" class="instances-list"></ul></details></div></div><div class="decl" id="Set.OrdConnected.out'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L38-L38">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.out'"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">out'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[self : <span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃x : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃y : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div><p><code>s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> α</code> is <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> if for all <code>x y ∈ s</code> it includes the interval <code>[[x, y]]</code>.</p></div></div><div class="decl" id="Set.OrdConnected.out"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L40-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.out"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">out</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃x : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></div></div></div></div><div class="decl" id="Set.ordConnected_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L43-L44">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_def"><span class="name">Set</span>.<span class="name">ordConnected_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ ⦃<span class="fn">x</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Set.ordConnected_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L47-L49">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iff"><span class="name">Set</span>.<span class="name">ordConnected_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn">∀ <span class="fn">y</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></span></div></div><p>It suffices to prove <code>[[x, y]] ⊆ s</code> for <code>x y ∈ s</code>, <code>x ≤ y</code>.</p></div></div><div class="decl" id="Set.ordConnected_of_Ioo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L51-L57">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_of_Ioo"><span class="name">Set</span>.<span class="name">ordConnected_of_Ioo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn">∀ <span class="fn">y</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">y</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">s</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.OrdConnected.preimage_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L59-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.preimage_mono"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">preimage_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">f</span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.OrdConnected.preimage_anti"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L63-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.preimage_anti"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">preimage_anti</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">f</span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.Icc_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L67-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.Icc_subset"><span class="name">Set</span>.<span class="name">Icc_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="OrderEmbedding.image_Icc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L79-L81">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#OrderEmbedding.image_Icc"><span class="name">OrderEmbedding</span>.<span class="name">image_Icc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">α</span> <a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">↪o</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">e</span></span>)</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">e</span></span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">(<span class="fn">e</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">e</span> <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="OrderEmbedding.image_Ico"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L83-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#OrderEmbedding.image_Ico"><span class="name">OrderEmbedding</span>.<span class="name">image_Ico</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">α</span> <a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">↪o</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">e</span></span>)</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">e</span></span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">(<span class="fn">e</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">e</span> <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="OrderEmbedding.image_Ioc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L88-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#OrderEmbedding.image_Ioc"><span class="name">OrderEmbedding</span>.<span class="name">image_Ioc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">α</span> <a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">↪o</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">e</span></span>)</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">e</span></span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">(<span class="fn">e</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">e</span> <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="OrderEmbedding.image_Ioo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L93-L96">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#OrderEmbedding.image_Ioo"><span class="name">OrderEmbedding</span>.<span class="name">image_Ioo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">α</span> <a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderEmbedding">↪o</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">e</span></span>)</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">e</span></span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">(<span class="fn">e</span> <span class="fn">x</span>)</span> <span class="fn">(<span class="fn">e</span> <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="Set.image_subtype_val_Icc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L107-L109">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.image_subtype_val_Icc"><span class="name">Set</span>.<span class="name">image_subtype_val_Icc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subtype.val</span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">↑<span class="fn">x</span></span> <span class="fn">↑<span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Set.image_subtype_val_Ico"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L112-L114">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.image_subtype_val_Ico"><span class="name">Set</span>.<span class="name">image_subtype_val_Ico</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subtype.val</span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">↑<span class="fn">x</span></span> <span class="fn">↑<span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Set.image_subtype_val_Ioc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L117-L119">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.image_subtype_val_Ioc"><span class="name">Set</span>.<span class="name">image_subtype_val_Ioc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subtype.val</span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">↑<span class="fn">x</span></span> <span class="fn">↑<span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Set.image_subtype_val_Ioo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L122-L124">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.image_subtype_val_Ioo"><span class="name">Set</span>.<span class="name">image_subtype_val_Ioo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">↑<span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subtype.val</span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">↑<span class="fn">x</span></span> <span class="fn">↑<span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Set.OrdConnected.inter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L126-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.inter"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">inter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.OrdConnected</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn">t</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.OrdConnected.inter'"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L130-L132">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.inter'"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">inter'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">t</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn">t</span>)</span>.OrdConnected</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Set.OrdConnected.dual"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L134-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.dual"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">dual</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">OrderDual.ofDual</span></span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_dual"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L138-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_dual"><span class="name">Set</span>.<span class="name">ordConnected_dual</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">OrderDual.ofDual</span></span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">s</span>.OrdConnected</span></span></div></div></div></div><div class="decl" id="Set.ordConnected_sInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L141-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_sInter"><span class="name">Set</span>.<span class="name">ordConnected_sInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn">∀ <span class="fn">s</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn">s</span>.OrdConnected</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/SetNotation.html#Set.sInter">⋂₀</a> <span class="fn">S</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_iInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L145-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iInter"><span class="name">Set</span>.<span class="name">ordConnected_iInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">(<span class="fn">s</span> <span class="fn">i</span>)</span>.OrdConnected</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(⋂ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">s</span> <span class="fn">i</span></span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_iInter'"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L149-L151">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iInter'"><span class="name">Set</span>.<span class="name">ordConnected_iInter'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">(<span class="fn">s</span> <span class="fn">i</span>)</span>.OrdConnected</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(⋂ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">s</span> <span class="fn">i</span></span>)</span>.OrdConnected</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Set.ordConnected_biInter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L154-L156">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_biInter"><span class="name">Set</span>.<span class="name">ordConnected_biInter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn">ι</span> → <a href="../../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><span class="fn"><span class="fn">p</span> <span class="fn">i</span></span> → <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>) (<span class="fn">hi</span> : <span class="fn"><span class="fn">p</span> <span class="fn">i</span></span>), <span class="fn"><span class="fn">(<span class="fn">s</span> <span class="fn">i</span> <span class="fn">hi</span>)</span>.OrdConnected</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(⋂ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn">⋂ (<span class="fn">hi</span> : <span class="fn"><span class="fn">p</span> <span class="fn">i</span></span>), <span class="fn"><span class="fn">s</span> <span class="fn">i</span> <span class="fn">hi</span></span></span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_pi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L158-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_pi"><span class="name">Set</span>.<span class="name">ordConnected_pi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn"><span class="fn">ι</span> → <a href="../../../.././foundational_types.html">Type</a> u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">(<span class="fn">α</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<span class="fn">α</span> <span class="fn">i</span>)</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">i</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">(<span class="fn">t</span> <span class="fn">i</span>)</span>.OrdConnected</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">s</span>.pi</span> <span class="fn">t</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_pi'"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L162-L164">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_pi'"><span class="name">Set</span>.<span class="name">ordConnected_pi'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <span class="fn"><span class="fn">ι</span> → <a href="../../../.././foundational_types.html">Type</a> u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">(<span class="fn">α</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<span class="fn">α</span> <span class="fn">i</span>)</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">(<span class="fn">t</span> <span class="fn">i</span>)</span>.OrdConnected</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">s</span>.pi</span> <span class="fn">t</span>)</span>.OrdConnected</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Set.ordConnected_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L167-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Ici"><span class="name">Set</span>.<span class="name">ordConnected_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">a</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Iic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L171-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Iic"><span class="name">Set</span>.<span class="name">ordConnected_Iic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Iic">Set.Iic</a> <span class="fn">a</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L175-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Ioi"><span class="name">Set</span>.<span class="name">ordConnected_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">a</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Iio"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L179-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Iio"><span class="name">Set</span>.<span class="name">ordConnected_Iio</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Iio">Set.Iio</a> <span class="fn">a</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Icc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L183-L184">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Icc"><span class="name">Set</span>.<span class="name">ordConnected_Icc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Ico"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L187-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Ico"><span class="name">Set</span>.<span class="name">ordConnected_Ico</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Ioc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L191-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Ioc"><span class="name">Set</span>.<span class="name">ordConnected_Ioc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_Ioo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L195-L196">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_Ioo"><span class="name">Set</span>.<span class="name">ordConnected_Ioo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L199-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_singleton"><span class="name">Set</span>.<span class="name">ordConnected_singleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{<span class="fn">a</span>}</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L205-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_empty"><span class="name">Set</span>.<span class="name">ordConnected_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_univ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L209-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_univ"><span class="name">Set</span>.<span class="name">ordConnected_univ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">Set.univ</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.instDenselyOrdered"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L213-L217">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.instDenselyOrdered"><span class="name">Set</span>.<span class="name">instDenselyOrdered</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a> <span class="fn">↑<span class="fn">s</span></span></span></div></div><p>In a dense order <code>α</code>, the subtype from an <code><a href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected">OrdConnected</a></code> set is also densely ordered.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Set.ordConnected_preimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L220-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_preimage"><span class="name">Set</span>.<span class="name">ordConnected_preimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderHomClass">OrderHomClass</a> <span class="fn">F</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">f</span></span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_image"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L225-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_image"><span class="name">Set</span>.<span class="name">ordConnected_image</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Equiv.html#EquivLike">EquivLike</a> <span class="fn">E</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderIsoClass">OrderIsoClass</a> <span class="fn">E</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">E</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">e</span></span> <a href="../../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L232-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_range"><span class="name">Set</span>.<span class="name">ordConnected_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Equiv.html#EquivLike">EquivLike</a> <span class="fn">E</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderIsoClass">OrderIsoClass</a> <span class="fn">E</span> <span class="fn">α</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">e</span></span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.dual_ordConnected_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L238-L240">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.dual_ordConnected_iff"><span class="name">Set</span>.<span class="name">dual_ordConnected_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">OrderDual.ofDual</span></span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">s</span>.OrdConnected</span></span></div></div></div></div><div class="decl" id="Set.dual_ordConnected"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L243-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.dual_ordConnected"><span class="name">Set</span>.<span class="name">dual_ordConnected</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">s</span>.OrdConnected</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">⇑<span class="fn">OrderDual.ofDual</span></span> <a href="../../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="IsAntichain.ordConnected"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L252-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#IsAntichain.ordConnected"><span class="name">IsAntichain</span>.<span class="name">ordConnected</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/Order/Antichain.html#IsAntichain">IsAntichain</a> <span class="fn">(fun (<span class="fn">x</span> <span class="fn">x_1</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span>)</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">s</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_inter_Icc_of_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L258-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_inter_Icc_of_subset"><span class="name">Set</span>.<span class="name">ordConnected_inter_Icc_of_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_inter_Icc_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L262-L266">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_inter_Icc_iff"><span class="name">Set</span>.<span class="name">ordConnected_inter_Icc_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Set.not_ordConnected_inter_Icc_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L268-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.not_ordConnected_inter_Icc_iff"><span class="name">Set</span>.<span class="name">not_ordConnected_inter_Icc_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span>.OrdConnected</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">z</span> ∉ <span class="fn">s</span>, <span class="fn"><span class="fn">z</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">x</span> <span class="fn">y</span></span></span></span></span></div></div></div></div><div class="decl" id="Set.ordConnected_uIcc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L279-L280">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_uIcc"><span class="name">Set</span>.<span class="name">ordConnected_uIcc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_uIoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L283-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_uIoc"><span class="name">Set</span>.<span class="name">ordConnected_uIoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIoc">Ι</a> <span class="fn">a</span> <span class="fn">b</span>)</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.OrdConnected.uIcc_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L286-L288">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.uIcc_subset"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">uIcc_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃x : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃y : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Set.OrdConnected.uIoc_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L290-L292">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.OrdConnected.uIoc_subset"><span class="name">Set</span>.<span class="name">OrdConnected</span>.<span class="name">uIoc_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.OrdConnected</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃x : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃y : <span class="fn">α</span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIoc">Ι</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Set.ordConnected_iff_uIcc_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L294-L296">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iff_uIcc_subset"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ ⦃<span class="fn">x</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Set.ordConnected_of_uIcc_subset_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L298-L303">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_of_uIcc_subset_left"><span class="name">Set</span>.<span class="name">ordConnected_of_uIcc_subset_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">y</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">s</span>.OrdConnected</span></div></div></div></div><div class="decl" id="Set.ordConnected_iff_uIcc_subset_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L305-L307">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iff_uIcc_subset_left"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></div></div></div></div><div class="decl" id="Set.ordConnected_iff_uIcc_subset_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/Interval/Set/OrdConnected.lean#L309-L311">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Interval/Set/OrdConnected.html#Set.ordConnected_iff_uIcc_subset_right"><span class="name">Set</span>.<span class="name">ordConnected_iff_uIcc_subset_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.OrdConnected</span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ ⦃<span class="fn">y</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Interval/Set/UnorderedInterval.html#Set.uIcc">Set.uIcc</a> <span class="fn">y</span> <span class="fn">x</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

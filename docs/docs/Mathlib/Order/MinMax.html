@@ -1,0 +1,794 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.MinMax</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Order.MinMax";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">MinMax</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Order/Lattice.html">Mathlib.Order.Lattice</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.MinMax" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#le_min_iff"><span class="name">le_min_iff</span></a></div><div class="nav_link"><a class="break_within" href="#le_max_iff"><span class="name">le_max_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_iff"><span class="name">min_le_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_le_iff"><span class="name">max_le_iff</span></a></div><div class="nav_link"><a class="break_within" href="#lt_min_iff"><span class="name">lt_min_iff</span></a></div><div class="nav_link"><a class="break_within" href="#lt_max_iff"><span class="name">lt_max_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_iff"><span class="name">min_lt_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_lt_iff"><span class="name">max_lt_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_le_max"><span class="name">max_le_max</span></a></div><div class="nav_link"><a class="break_within" href="#max_le_max_left"><span class="name">max_le_max_left</span></a></div><div class="nav_link"><a class="break_within" href="#max_le_max_right"><span class="name">max_le_max_right</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_min"><span class="name">min_le_min</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_min_left"><span class="name">min_le_min_left</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_min_right"><span class="name">min_le_min_right</span></a></div><div class="nav_link"><a class="break_within" href="#le_max_of_le_left"><span class="name">le_max_of_le_left</span></a></div><div class="nav_link"><a class="break_within" href="#le_max_of_le_right"><span class="name">le_max_of_le_right</span></a></div><div class="nav_link"><a class="break_within" href="#lt_max_of_lt_left"><span class="name">lt_max_of_lt_left</span></a></div><div class="nav_link"><a class="break_within" href="#lt_max_of_lt_right"><span class="name">lt_max_of_lt_right</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_of_left_le"><span class="name">min_le_of_left_le</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_of_right_le"><span class="name">min_le_of_right_le</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_of_left_lt"><span class="name">min_lt_of_left_lt</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_of_right_lt"><span class="name">min_lt_of_right_lt</span></a></div><div class="nav_link"><a class="break_within" href="#max_min_distrib_left"><span class="name">max_min_distrib_left</span></a></div><div class="nav_link"><a class="break_within" href="#max_min_distrib_right"><span class="name">max_min_distrib_right</span></a></div><div class="nav_link"><a class="break_within" href="#min_max_distrib_left"><span class="name">min_max_distrib_left</span></a></div><div class="nav_link"><a class="break_within" href="#min_max_distrib_right"><span class="name">min_max_distrib_right</span></a></div><div class="nav_link"><a class="break_within" href="#min_le_max"><span class="name">min_le_max</span></a></div><div class="nav_link"><a class="break_within" href="#min_eq_left_iff"><span class="name">min_eq_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_eq_right_iff"><span class="name">min_eq_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_eq_left_iff"><span class="name">max_eq_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_eq_right_iff"><span class="name">max_eq_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_cases"><span class="name">min_cases</span></a></div><div class="nav_link"><a class="break_within" href="#max_cases"><span class="name">max_cases</span></a></div><div class="nav_link"><a class="break_within" href="#min_eq_iff"><span class="name">min_eq_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_eq_iff"><span class="name">max_eq_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_min_left_iff"><span class="name">min_lt_min_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_min_right_iff"><span class="name">min_lt_min_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_lt_max_left_iff"><span class="name">max_lt_max_left_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_lt_max_right_iff"><span class="name">max_lt_max_right_iff</span></a></div><div class="nav_link"><a class="break_within" href="#max_idem"><span class="name">max_idem</span></a></div><div class="nav_link"><a class="break_within" href="#min_idem"><span class="name">min_idem</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_max"><span class="name">min_lt_max</span></a></div><div class="nav_link"><a class="break_within" href="#max_lt_max"><span class="name">max_lt_max</span></a></div><div class="nav_link"><a class="break_within" href="#min_lt_min"><span class="name">min_lt_min</span></a></div><div class="nav_link"><a class="break_within" href="#min_right_comm"><span class="name">min_right_comm</span></a></div><div class="nav_link"><a class="break_within" href="#Max.left_comm"><span class="name">Max</span>.<span class="name">left_comm</span></a></div><div class="nav_link"><a class="break_within" href="#Max.right_comm"><span class="name">Max</span>.<span class="name">right_comm</span></a></div><div class="nav_link"><a class="break_within" href="#MonotoneOn.map_max"><span class="name">MonotoneOn</span>.<span class="name">map_max</span></a></div><div class="nav_link"><a class="break_within" href="#MonotoneOn.map_min"><span class="name">MonotoneOn</span>.<span class="name">map_min</span></a></div><div class="nav_link"><a class="break_within" href="#AntitoneOn.map_max"><span class="name">AntitoneOn</span>.<span class="name">map_max</span></a></div><div class="nav_link"><a class="break_within" href="#AntitoneOn.map_min"><span class="name">AntitoneOn</span>.<span class="name">map_min</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_max"><span class="name">Monotone</span>.<span class="name">map_max</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_min"><span class="name">Monotone</span>.<span class="name">map_min</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_max"><span class="name">Antitone</span>.<span class="name">map_max</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_min"><span class="name">Antitone</span>.<span class="name">map_min</span></a></div><div class="nav_link"><a class="break_within" href="#min_choice"><span class="name">min_choice</span></a></div><div class="nav_link"><a class="break_within" href="#max_choice"><span class="name">max_choice</span></a></div><div class="nav_link"><a class="break_within" href="#le_of_max_le_left"><span class="name">le_of_max_le_left</span></a></div><div class="nav_link"><a class="break_within" href="#le_of_max_le_right"><span class="name">le_of_max_le_right</span></a></div><div class="nav_link"><a class="break_within" href="#max_commutative"><span class="name">max_commutative</span></a></div><div class="nav_link"><a class="break_within" href="#max_associative"><span class="name">max_associative</span></a></div><div class="nav_link"><a class="break_within" href="#instCommutativeMax_mathlib"><span class="name">instCommutativeMax_mathlib</span></a></div><div class="nav_link"><a class="break_within" href="#instAssociativeMax_mathlib"><span class="name">instAssociativeMax_mathlib</span></a></div><div class="nav_link"><a class="break_within" href="#max_left_commutative"><span class="name">max_left_commutative</span></a></div><div class="nav_link"><a class="break_within" href="#min_commutative"><span class="name">min_commutative</span></a></div><div class="nav_link"><a class="break_within" href="#min_associative"><span class="name">min_associative</span></a></div><div class="nav_link"><a class="break_within" href="#instCommutativeMin_mathlib"><span class="name">instCommutativeMin_mathlib</span></a></div><div class="nav_link"><a class="break_within" href="#instAssociativeMin_mathlib"><span class="name">instAssociativeMin_mathlib</span></a></div><div class="nav_link"><a class="break_within" href="#min_left_commutative"><span class="name">min_left_commutative</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="max-and-min"><code>max</code> and <code>min</code> <a class="hover-link" href="#max-and-min">#</a></h1><p>This file proves basic properties about maxima and minima on a <code><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a></code>.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>min, max</p></div><div class="decl" id="le_min_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L31-L32">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_min_iff"><span class="name">le_min_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="le_max_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L35-L36">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_max_iff"><span class="name">le_max_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="min_le_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L39-L40">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_iff"><span class="name">min_le_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="max_le_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L43-L44">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_le_iff"><span class="name">max_le_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="lt_min_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L47-L48">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#lt_min_iff"><span class="name">lt_min_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">b</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="lt_max_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L51-L52">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#lt_max_iff"><span class="name">lt_max_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="min_lt_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L55-L56">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_iff"><span class="name">min_lt_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="max_lt_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L59-L60">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_lt_iff"><span class="name">max_lt_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="max_le_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L63-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_le_max"><span class="name">max_le_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> → <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span> → <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">c</span> <span class="fn">d</span></span></span></span></span></div></div></div></div><div class="decl" id="max_le_max_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L66-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_le_max_left"><span class="name">max_le_max_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">c</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">c</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="max_le_max_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L68-L68">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_le_max_right"><span class="name">max_le_max_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="min_le_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L71-L72">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_min"><span class="name">min_le_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> → <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span> → <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">c</span> <span class="fn">d</span></span></span></span></span></div></div></div></div><div class="decl" id="min_le_min_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L74-L74">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_min_left"><span class="name">min_le_min_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">c</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">c</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="min_le_min_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L76-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_min_right"><span class="name">min_le_min_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">b</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="le_max_of_le_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L78-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_max_of_le_left"><span class="name">le_max_of_le_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="le_max_of_le_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L81-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_max_of_le_right"><span class="name">le_max_of_le_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> → <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="lt_max_of_lt_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L84-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#lt_max_of_lt_left"><span class="name">lt_max_of_lt_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="lt_max_of_lt_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L87-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#lt_max_of_lt_right"><span class="name">lt_max_of_lt_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="min_le_of_left_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L90-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_of_left_le"><span class="name">min_le_of_left_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> → <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="min_le_of_right_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L93-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_of_right_le"><span class="name">min_le_of_right_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> → <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="min_lt_of_left_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L96-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_of_left_lt"><span class="name">min_lt_of_left_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="min_lt_of_right_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L99-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_of_right_lt"><span class="name">min_lt_of_right_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="max_min_distrib_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L102-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_min_distrib_left"><span class="name">max_min_distrib_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">b</span> <span class="fn">c</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="max_min_distrib_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L105-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_min_distrib_right"><span class="name">max_min_distrib_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span>)</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="min_max_distrib_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L108-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_max_distrib_left"><span class="name">min_max_distrib_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="min_max_distrib_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L111-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_max_distrib_right"><span class="name">min_max_distrib_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span>)</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">b</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="min_le_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_le_max"><span class="name">min_le_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="min_eq_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L118-L119">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_eq_left_iff"><span class="name">min_eq_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="min_eq_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L122-L123">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_eq_right_iff"><span class="name">min_eq_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="max_eq_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L126-L127">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_eq_left_iff"><span class="name">max_eq_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="max_eq_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L130-L131">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_eq_right_iff"><span class="name">max_eq_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="min_cases"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L136-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_cases"><span class="name">min_cases</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span></span></span></div></div><p>For elements <code>a</code> and <code>b</code> of a linear order, either <code>min a b = a</code> and <code>a ≤ b</code>,
+or <code>min a b = b</code> and <code>b &lt; a</code>.
+Use cases on this lemma to automate linarith in inequalities</p></div></div><div class="decl" id="max_cases"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L146-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_cases"><span class="name">max_cases</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></div></div><p>For elements <code>a</code> and <code>b</code> of a linear order, either <code>max a b = a</code> and <code>b ≤ a</code>,
+or <code>max a b = b</code> and <code>a &lt; b</code>.
+Use cases on this lemma to automate linarith in inequalities</p></div></div><div class="decl" id="min_eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L149-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_eq_iff"><span class="name">min_eq_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></span></span></div></div></div></div><div class="decl" id="max_eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L155-L156">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_eq_iff"><span class="name">max_eq_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="min_lt_min_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L158-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_min_left_iff"><span class="name">min_lt_min_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">b</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="min_lt_min_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L162-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_min_right_iff"><span class="name">min_lt_min_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="max_lt_max_left_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L165-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_lt_max_left_iff"><span class="name">max_lt_max_left_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">c</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="max_lt_max_right_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_lt_max_right_iff"><span class="name">max_lt_max_right_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="max_idem"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L172-L173">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_idem"><span class="name">max_idem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.IdempotentOp">Std.IdempotentOp</a> <span class="fn">max</span></span></div></div><p>An instance asserting that <code>max a a = a</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="min_idem"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L177-L178">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_idem"><span class="name">min_idem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.IdempotentOp">Std.IdempotentOp</a> <span class="fn">min</span></span></div></div><p>An instance asserting that <code>min a a = a</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="min_lt_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L181-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_max"><span class="name">min_lt_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="max_lt_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L185-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_lt_max"><span class="name">max_lt_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">c</span> <span class="fn">d</span></span></span></div></div></div></div><div class="decl" id="min_lt_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L188-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_lt_min"><span class="name">min_lt_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">c</span> <span class="fn">d</span></span></span></div></div></div></div><div class="decl" id="min_right_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L191-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_right_comm"><span class="name">min_right_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">c</span>)</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Max.left_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L194-L195">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Max.left_comm"><span class="name">Max</span>.<span class="name">left_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">c</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">b</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="Max.right_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L197-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Max.right_comm"><span class="name">Max</span>.<span class="name">right_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span> <span class="fn">c</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">c</span>)</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="MonotoneOn.map_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L200-L203">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#MonotoneOn.map_max"><span class="name">MonotoneOn</span>.<span class="name">map_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#MonotoneOn">MonotoneOn</a> <span class="fn">f</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="MonotoneOn.map_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L205-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#MonotoneOn.map_min"><span class="name">MonotoneOn</span>.<span class="name">map_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#MonotoneOn">MonotoneOn</a> <span class="fn">f</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="AntitoneOn.map_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L208-L209">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#AntitoneOn.map_max"><span class="name">AntitoneOn</span>.<span class="name">map_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#AntitoneOn">AntitoneOn</a> <span class="fn">f</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="AntitoneOn.map_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L211-L212">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#AntitoneOn.map_min"><span class="name">AntitoneOn</span>.<span class="name">map_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#AntitoneOn">AntitoneOn</a> <span class="fn">f</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Monotone.map_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L214-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Monotone.map_max"><span class="name">Monotone</span>.<span class="name">map_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Monotone.map_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L217-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Monotone.map_min"><span class="name">Monotone</span>.<span class="name">map_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Antitone.map_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L220-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Antitone.map_max"><span class="name">Antitone</span>.<span class="name">map_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="Antitone.map_min"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L223-L224">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#Antitone.map_min"><span class="name">Antitone</span>.<span class="name">map_min</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">b</span>)</span></span></span></div></div></div></div><div class="decl" id="min_choice"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L226-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_choice"><span class="name">min_choice</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Min.min">min</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="max_choice"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L228-L229">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_choice"><span class="name">max_choice</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="le_of_max_le_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L231-L232">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_of_max_le_left"><span class="name">le_of_max_le_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="le_of_max_le_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L234-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#le_of_max_le_right"><span class="name">le_of_max_le_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Max.max">max</a> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">b</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="max_commutative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L237-L238">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_commutative"><span class="name">max_commutative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#Commutative">Commutative</a> <span class="fn">max</span></span></div></div></div></div><div class="decl" id="max_associative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L240-L241">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_associative"><span class="name">max_associative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#Associative">Associative</a> <span class="fn">max</span></span></div></div></div></div><div class="decl" id="instCommutativeMax_mathlib"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L243-L244">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#instCommutativeMax_mathlib"><span class="name">instCommutativeMax_mathlib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.Commutative">Std.Commutative</a> <span class="fn">max</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="instAssociativeMax_mathlib"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L246-L247">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#instAssociativeMax_mathlib"><span class="name">instAssociativeMax_mathlib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.Associative">Std.Associative</a> <span class="fn">max</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="max_left_commutative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L249-L250">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#max_left_commutative"><span class="name">max_left_commutative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#LeftCommutative">LeftCommutative</a> <span class="fn">max</span></span></div></div></div></div><div class="decl" id="min_commutative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L252-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_commutative"><span class="name">min_commutative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#Commutative">Commutative</a> <span class="fn">min</span></span></div></div></div></div><div class="decl" id="min_associative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_associative"><span class="name">min_associative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#Associative">Associative</a> <span class="fn">min</span></span></div></div></div></div><div class="decl" id="instCommutativeMin_mathlib"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L258-L259">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#instCommutativeMin_mathlib"><span class="name">instCommutativeMin_mathlib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.Commutative">Std.Commutative</a> <span class="fn">min</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="instAssociativeMin_mathlib"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L261-L262">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#instAssociativeMin_mathlib"><span class="name">instAssociativeMin_mathlib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Core.html#Std.Associative">Std.Associative</a> <span class="fn">min</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="min_left_commutative"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/20c73142afa995ac9c8fb80a9bb585a55ca38308/Mathlib/Order/MinMax.lean#L264-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/MinMax.html#min_left_commutative"><span class="name">min_left_commutative</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Order/Defs.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Logic.html#LeftCommutative">LeftCommutative</a> <span class="fn">min</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

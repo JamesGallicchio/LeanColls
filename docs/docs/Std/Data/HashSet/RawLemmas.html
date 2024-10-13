@@ -1,0 +1,609 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Std.Data.HashSet.RawLemmas</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Std.Data.HashSet.RawLemmas";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Std</span>.<span class="name">Data</span>.<span class="name">HashSet</span>.<span class="name">RawLemmas</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Std/Data/HashMap/RawLemmas.html">Std.Data.HashMap.RawLemmas</a></li><li><a href="../../.././Std/Data/HashSet/Raw.html">Std.Data.HashSet.Raw</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Std.Data.HashSet.RawLemmas" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_emptyc</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_iff_contains"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_iff_contains</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_congr"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_congr</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_congr"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_congr</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.not_mem_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_emptyc</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.not_mem_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_emptyc</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_of_isEmpty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_isEmpty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.not_mem_of_isEmpty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_of_isEmpty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_eq_false_iff_exists_contains_eq_true"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_false_iff_exists_contains_eq_true</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_eq_false_iff_exists_mem"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_false_iff_exists_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_iff_forall_contains"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_iff_forall_contains</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_iff_forall_not_mem"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_iff_forall_not_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_of_contains_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_contains_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_of_mem_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_of_mem_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_insert_self"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_insert_self</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_insert_self"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_insert_self</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_emptyc</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_eq_size_eq_zero"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_size_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_le_size_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_le_size_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_insert_le"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_insert_le</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.erase_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">erase_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.erase_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">erase_emptyc</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.isEmpty_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.contains_of_contains_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_contains_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.mem_of_mem_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_of_mem_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_erase_le"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_erase_le</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.size_le_size_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_le_size_erase</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.containsThenInsert_fst"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">containsThenInsert_fst</span></a></div><div class="nav_link"><a class="break_within" href="#Std.HashSet.Raw.containsThenInsert_snd"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">containsThenInsert_snd</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Hash-set-lemmas">Hash set lemmas <a class="hover-link" href="#Hash-set-lemmas">#</a></h1><p>This module contains lemmas about <code><a href="../../.././Std/Data/HashSet/Raw.html">Std.Data.HashSet.Raw</a></code>. Most of the lemmas require
+<code><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> α</code> and <code><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> α</code> for the key type <code>α</code>. The easiest way to obtain these instances
+is to provide an instance of <code><a href="../../.././Init/Core.html#LawfulBEq">LawfulBEq</a> α</code>.</p></div><div class="decl" id="Std.HashSet.Raw.isEmpty_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L36-L37">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <a href="../../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span>)</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_emptyc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L40-L41">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_emptyc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L44-L45">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">a</span>)</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_iff_contains"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L47-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_iff_contains"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_iff_contains</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L50-L52">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_congr"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_congr"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">b</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L57-L58">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <a href="../../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span>)</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.not_mem_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L60-L61">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.not_mem_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <a href="../../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_emptyc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L63-L64">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_emptyc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.not_mem_emptyc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L66-L67">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.not_mem_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_emptyc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_of_isEmpty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_of_isEmpty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_isEmpty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.not_mem_of_isEmpty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L73-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.not_mem_of_isEmpty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">not_mem_of_isEmpty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_eq_false_iff_exists_contains_eq_true"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_eq_false_iff_exists_contains_eq_true"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_false_iff_exists_contains_eq_true</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_eq_false_iff_exists_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L81-L83">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_eq_false_iff_exists_mem"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_false_iff_exists_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_iff_forall_contains"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L85-L87">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_iff_forall_contains"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_iff_forall_contains</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_iff_forall_not_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L89-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_iff_forall_not_mem"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_iff_forall_not_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L94-L96">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#or">||</a> <span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span>)</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L99-L100">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_of_contains_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L102-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_of_contains_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_contains_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn"><span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_of_mem_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L106-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_of_mem_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_of_mem_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span></span></span> → <span class="fn"><span class="fn"><span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_insert_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L111-L112">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_insert_self"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_insert_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.contains</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_insert_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L115-L116">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_insert_self"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_insert_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L119-L120">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <a href="../../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_emptyc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L123-L124">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_emptyc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a>.size</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_eq_size_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L126-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_eq_size_eq_zero"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_eq_size_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">0</span>)</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L129-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span> then <span class="fn"><span class="fn">m</span>.size</span> else <span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_le_size_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L133-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_le_size_insert"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_le_size_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.size</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_insert_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L136-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_insert_le"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_insert_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.erase_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L140-L141">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.erase_empty"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">erase_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <a href="../../.././Init/Prelude.html#Nat">Nat</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span>)</span>.erase</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw.empty">Std.HashSet.Raw.empty</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.erase_emptyc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L144-L145">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.erase_emptyc"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">erase_emptyc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a>.erase</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.isEmpty_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L148-L150">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.isEmpty_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">isEmpty_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">m</span>.isEmpty</span> <a href="../../.././Init/Prelude.html#or">||</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#and">&amp;&amp;</a> <span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">k</span></span></span>)</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L153-L155">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><a href="../../.././Init/Prelude.html#not">!</a><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#and">&amp;&amp;</a> <span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span>)</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L158-L160">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#BEq.beq">==</a> <span class="fn">a</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.false">false</a></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.contains_of_contains_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L162-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.contains_of_contains_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">contains_of_contains_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Bool.true">true</a></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.mem_of_mem_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L166-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.mem_of_mem_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">mem_of_mem_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span></span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L169-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">m</span></span> then <span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span> else <span class="fn"><span class="fn">m</span>.size</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_erase_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L173-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_erase_le"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_erase_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">m</span>.size</span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.size_le_size_erase"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L176-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.size_le_size_erase"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">size_le_size_erase</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/BEq.html#EquivBEq">EquivBEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/Hashable.html#LawfulHashable">LawfulHashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span>.size</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.erase</span> <span class="fn">k</span>)</span>.size</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.containsThenInsert_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L181-L182">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.containsThenInsert_fst"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">containsThenInsert_fst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.containsThenInsert</span> <span class="fn">k</span>)</span>.fst</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">m</span>.contains</span> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="Std.HashSet.Raw.containsThenInsert_snd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover/lean4/blob/ec3042d94bd11a42430f9e14d39e26b1f880f99b/src/Std/Data/HashSet/RawLemmas.lean#L185-L186">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Std/Data/HashSet/RawLemmas.html#Std.HashSet.Raw.containsThenInsert_snd"><span class="name">Std</span>.<span class="name">HashSet</span>.<span class="name">Raw</span>.<span class="name">containsThenInsert_snd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Hashable">Hashable</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Std/Data/HashSet/Raw.html#Std.HashSet.Raw">Std.HashSet.Raw</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span>.WF</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">m</span>.containsThenInsert</span> <span class="fn">k</span>)</span>.snd</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">m</span>.insert</span> <span class="fn">k</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
