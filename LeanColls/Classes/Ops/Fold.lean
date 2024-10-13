@@ -30,7 +30,7 @@ theorem foldM_eq_foldM_toList [Monad m] [LawfulMonad m] (c : C)
   rw [ToList.foldM_eq_fold, h, List.foldlM_eq_foldl]
 
 /-- A strange lemma. Analogous to `bind_pure` chained over the length of `c`. -/
-theorem bind_fold_pure [ToList C τ] [Monad m] [LawfulMonad m] (ma : m α) (c : C) (f : _ → _ → _)
+theorem bind_fold_pure [Monad m] [LawfulMonad m] (ma : m α) (c : C) (f : _ → _ → _)
   : ma >>= (fun a => fold c (fun acc t => do let acc ← acc; f acc t) (pure a)) =
     fold c (fun acc t => do let acc ← acc; f acc t) ma := by
   have := ToList.fold_eq_fold_toList c
@@ -168,7 +168,7 @@ def all (f : τ → Bool) (cont : C) : Bool :=
   | Except.ok () => true
   | Except.error () => false
 
-theorem any_eq_any_toList [LeanColls.ToList C τ] [ToList C τ]
+theorem any_eq_any_toList
     (f : τ → Bool) (c : C)
   : any f c = List.any (toList c) f := by
   unfold any
@@ -189,7 +189,7 @@ theorem any_eq_any_toList [LeanColls.ToList C τ] [ToList C τ]
     simp [bind, Except.bind]
     by_cases f hd = true <;> simp_all
 
-theorem all_eq_all_toList [LeanColls.ToList C τ] [ToList C τ]
+theorem all_eq_all_toList
     (f : τ → Bool) (c : C)
   : all f c = List.all (toList c) f := by
   unfold all
@@ -211,14 +211,14 @@ theorem all_eq_all_toList [LeanColls.ToList C τ] [ToList C τ]
     by_cases f hd = true <;> simp_all
 
 @[simp]
-theorem any_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [Mem.ToList C τ]
+theorem any_iff_exists [Membership τ C] [Mem.ToList C τ]
     (f : τ → Bool) (c : C)
   : any f c ↔ ∃ x ∈ c, f x := by
   rw [any_eq_any_toList]
   simp [Mem.ToList.mem_iff_mem_toList]
 
 @[simp]
-theorem all_iff_exists [Membership τ C] [LeanColls.ToList C τ] [ToList C τ] [Mem.ToList C τ]
+theorem all_iff_exists [Membership τ C] [Mem.ToList C τ]
     (f : τ → Bool) (c : C)
   : all f c ↔ ∀ x ∈ c, f x := by
   rw [all_eq_all_toList]
