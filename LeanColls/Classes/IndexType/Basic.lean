@@ -28,7 +28,7 @@ def IndexType.univ (ι : Type u) : IndexType.Univ ι := .mk
 
 instance IndexType.instFoldUnivFin : Fold (Univ (Fin n)) (Fin n) where
   fold := fun ⟨⟩ => Fin.foldl _
-  foldM := fun ⟨⟩ f init => Fin.foldlM _ init (Function.swap f)
+  foldM := fun ⟨⟩ f init => Fin.foldlM _ f init
 
 class IndexType.{u,w} (ι : Type u)
   extends
@@ -267,8 +267,6 @@ instance : LawfulIndexType (α ⊕ β) where
       rw [List.getElem_append_right]
       · simp
       · simpa using h
-      · simp at h1 ⊢
-        omega
   toToList :=
     @Fold.map.ToList (Univ α × Univ β) _ _ _
       (Fold.sum) (ToList.sum) (Fold.sum.ToList)

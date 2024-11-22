@@ -54,48 +54,12 @@ theorem Fin.foldl_eq_foldl' (n : Nat) (f : α → Fin n → α) (init : α)
     unfold foldl.loop; unfold foldl'.aux
     simp [*]
 
-def Fin.foldlM [Monad m] (n : Nat) {β : Type u}
-      (init : β)
-      (f : Fin n → β → m β)
-      : m β :=
-  aux 0 init
-where
-  aux (i : Nat) (acc : β) : m β :=
-    if h' : i < n then
-      f ⟨i, h'⟩ acc >>= fun acc => aux (i+1) acc
-    else
-      pure acc
-termination_by n-i
-
 theorem Fin.foldlM_eq_foldl [Monad m] [LawfulMonad m] (n : Nat) {β : Type u} (init : β)
-    (f : Fin n → β → m β)
-  : Fin.foldlM n init f = Fin.foldl n (fun macc i => macc >>= fun acc => f i acc) (pure init)
+    (f : β → Fin n → m β)
+  : Fin.foldlM n f init = Fin.foldl n (fun macc i => macc >>= fun acc => f acc i) (pure init)
   := by
-  simp [foldl, foldlM]
-  suffices ∀ i j (hj : i + j = n) macc,
-    (macc >>= fun acc => foldlM.aux n f i acc) =
-      foldl.loop n _ macc i
-    by
-    have := this 0 n (by simp) (pure init)
-    simp at this
-    exact this
-  intro i j hj
-  induction j generalizing i with
-  | zero =>
-    intro macc
-    simp at hj; cases hj
-    unfold foldl.loop; unfold foldlM.aux
-    simp
-  | succ j' ih =>
-    intro macc
-    rw [Nat.add_succ, ← Nat.succ_add] at hj
-    have hi : i < n := by calc
-      _ ≤ Nat.succ i + j' := Nat.le_add_right _ _
-      _ = n := hj
-    have := ih (i+1) hj (macc >>= fun acc => f ⟨i,hi⟩ acc)
-    clear ih
-    unfold foldl.loop; unfold foldlM.aux
-    simp_all
+  rw [foldlM_eq_foldlM_list, foldl_eq_foldl_list]
+  rw [List.foldlM_eq_foldl]
 
 theorem Fin.foldl_eq_foldl_ofFn (n) (f : α → Fin n → α) (init : α)
   : Fin.foldl n f init = List.foldl f init (List.ofFn id) := by
@@ -211,11 +175,6 @@ theorem List.getElem_product_fin_pair (L1 : List α) (L2 : List β)
         · convert (i.pair j).isLt; apply List.length_product
       · simp [Fin.pair, Fin.succ, Nat.add_mul]
         rw [Nat.add_comm, ← Nat.add_assoc]; simp
-      · have := (i.pair j).isLt
-        convert this
-        · simp [Fin.pair, Fin.succ, Nat.add_mul]
-          move_add [L2.length]; simp
-        · apply List.length_product
 
 theorem List.getElem_product_eq_get_pair (L1 : List α) (L2 : List β) (i : Fin ((List.product L1 L2).length))
   : (L1 ×ˢ L2)[i] =

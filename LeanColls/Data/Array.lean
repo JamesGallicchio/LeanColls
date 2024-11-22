@@ -17,10 +17,10 @@ open LeanColls
 namespace Array
 
 @[simp]
-def ofFn_data (f : Fin n → α) : (ofFn f).data = List.ofFn f := by
+def toList_ofFn (f : Fin n → α) : (ofFn f).toList = List.ofFn f := by
   apply List.ext_get
   · simp
-  · simp (config := {contextual := true}) [← Array.getElem_eq_data_getElem]
+  · simp (config := {contextual := true})
 
 def cons (x : α) (A : Array α) : Array α := #[x] ++ A
 
@@ -32,7 +32,7 @@ def getSnoc? (A : Array α) :=
   else
     none
 
-theorem ext'_iff (A B : Array α) : A = B ↔ A.data = B.data := by
+theorem ext'_iff (A B : Array α) : A = B ↔ A.toList = B.toList := by
   cases A; cases B; simp
 
 instance : ToList (Array α) α where
@@ -68,9 +68,8 @@ instance : LawfulSeq (Array α) α where
   get_def := by
     rintro c ⟨i,hi⟩
     simp [LeanColls.toList, Seq.get]
-    rw [getElem_eq_data_getElem]
   toList_set := by
-    rintro c ⟨i,hi⟩ x
+    rintro c ⟨i,_⟩ x
     simp [LeanColls.toList, Seq.set]
   getCons?_eq_none := by
     intro ⟨L⟩
@@ -80,9 +79,9 @@ instance : LawfulSeq (Array α) α where
     intro ⟨L⟩ x ⟨L'⟩
     cases L
     · simp [LeanColls.toList, Seq.getCons?]
-      intro h; split at h; simp_all; rw [size_eq_length_data] at *; simp at *
+      intro h; split at h; simp_all; rw [size_eq_length_toList] at *; simp at *
     next hd tl =>
-    simp [LeanColls.toList, Seq.getCons?, getElem_eq_data_getElem]
+    simp [LeanColls.toList, Seq.getCons?, getElem_eq_getElem_toList]
     split <;> simp_all [size_mk]
     rintro rfl
     constructor
@@ -112,14 +111,14 @@ instance : LawfulSeq (Array α) α where
     cases L with
     | nil => simp
     | cons hd tl =>
-    simp [Array.getElem_eq_data_getElem]
+    simp [Array.getElem_eq_getElem_toList]
     generalize tl.reverse = L
     rw [List.append_eq_append_iff]
     simp [List.singleton_eq_append]
     aesop
   toList_update := by
     rintro ⟨c⟩ ⟨i,h⟩ f
-    simp [Seq.update, LeanColls.toList, getElem_eq_data_getElem]
+    simp [Seq.update, LeanColls.toList, getElem_eq_getElem_toList]
   toList_cons := by
     simp [LeanColls.toList, Seq.cons, cons]
   toList_snoc := by
@@ -127,11 +126,11 @@ instance : LawfulSeq (Array α) α where
   fold_eq_fold_toList := by
     intro A; use A.toList; refine ⟨.rfl, ?_⟩
     intros
-    simp [fold, foldl_eq_foldl_data]
+    simp [fold, foldl_eq_foldl_toList]
   foldM_eq_fold := by
     intros
     simp [fold, foldM]
-    rw [foldlM_eq_foldlM_data, foldl_eq_foldl_data, List.foldlM_eq_foldl]
+    rw [foldlM_eq_foldlM_toList, foldl_eq_foldl_toList, List.foldlM_eq_foldl]
 end Array
 
 abbrev ArrayN.{u,w} (α : Type u) (n : Nat) :=

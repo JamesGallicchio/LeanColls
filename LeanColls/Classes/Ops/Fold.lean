@@ -24,7 +24,7 @@ theorem foldM_eq_foldM_toList [Monad m] [LawfulMonad m] (c : C)
   : ∃ L, List.Perm L (toList c) ∧
     ∀ {β} (f) (init : β), foldM (m := m) c f init = List.foldlM f init L
   := by
-  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList c
+  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList (τ := τ) c
   use L; refine ⟨perm,?_⟩; clear perm
   intro β f init
   rw [ToList.foldM_eq_fold, h, List.foldlM_eq_foldl]
@@ -33,7 +33,7 @@ theorem foldM_eq_foldM_toList [Monad m] [LawfulMonad m] (c : C)
 theorem bind_fold_pure [Monad m] [LawfulMonad m] (ma : m α) (c : C) (f : _ → _ → _)
   : ma >>= (fun a => fold c (fun acc t => do let acc ← acc; f acc t) (pure a)) =
     fold c (fun acc t => do let acc ← acc; f acc t) ma := by
-  have := ToList.fold_eq_fold_toList c
+  have := ToList.fold_eq_fold_toList (τ := τ) c
   rcases this with ⟨L,-,h⟩
   simp [h]; clear h
   rw [← List.foldr_reverse]
@@ -57,7 +57,7 @@ def map.ToList [F : Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
   @ToList.mk _ _ (map fc ft) L
     (by
       intro c'
-      have ⟨L,hL,hfold⟩ := ToList.fold_eq_fold_toList (fc c')
+      have ⟨L,hL,hfold⟩ := ToList.fold_eq_fold_toList (τ := τ) (fc c')
       use L.map ft
       constructor
       · rw [h]; apply List.Perm.map; apply hL
@@ -83,8 +83,8 @@ def prod.ToList [Fold C₁ τ₁] [L₁ : LeanColls.ToList C₁ τ₁] [Fold.ToL
   @ToList.mk _ _ prod .prod
   (by
     rintro ⟨c1,c2⟩
-    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList c1
-    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList c2
+    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList (τ := τ₁) c1
+    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList (τ := τ₂) c2
     use L1 ×ˢ L2
     constructor
     · simp [ToList.prod]; apply List.Perm.product hL1 hL2
@@ -115,8 +115,8 @@ def sum.ToList [Fold C₁ τ₁] [L₁ : LeanColls.ToList C₁ τ₁] [Fold.ToLi
   @ToList.mk _ _ sum .sum
   (by
     rintro ⟨c1,c2⟩
-    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList c1
-    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList c2
+    have ⟨L1,hL1,h1⟩ := Fold.ToList.fold_eq_fold_toList (τ := τ₁) c1
+    have ⟨L2,hL2,h2⟩ := Fold.ToList.fold_eq_fold_toList (τ := τ₂) c2
     simp [ToList.sum, sum]
     use L1.map Sum.inl ++ L2.map Sum.inr
     constructor
@@ -178,7 +178,7 @@ theorem any_eq_any_toList
     · rw [Bool.eq_false_iff]; aesop
     · aesop
   rw [ToList.foldM_eq_fold]
-  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList c
+  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList (τ := τ) c
   rw [h]; clear h
   simp_rw [List.any_eq_true, ← perm.mem_iff]; clear perm c
   subst hf'
@@ -199,7 +199,7 @@ theorem all_eq_all_toList
     · aesop
     · rw [Bool.eq_false_iff]; aesop
   rw [ToList.foldM_eq_fold]
-  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList c
+  have ⟨L,perm,h⟩ := ToList.fold_eq_fold_toList (τ := τ) c
   rw [h]; clear h
   simp_rw [List.all_eq_true, ← perm.mem_iff]; clear perm c
   subst hf'

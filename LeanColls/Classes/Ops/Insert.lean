@@ -65,7 +65,7 @@ theorem mem_into_iff [Insert C' τ] [Membership τ C'] [Mem C' τ]
     (c : C)
   : x ∈ into C' c ↔ x ∈ c := by
   unfold into
-  have ⟨L, perm, h⟩ := Fold.ToList.fold_eq_fold_toList c
+  have ⟨L, perm, h⟩ := Fold.ToList.fold_eq_fold_toList (τ := τ) c
   conv at h => ext; ext; ext; rw [← List.foldr_reverse]
   replace perm := (List.reverse_perm ..).trans perm
   generalize L.reverse = L' at perm h; clear L

@@ -11,7 +11,4 @@ lean_exe test {
 }
 
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "v4.12.0"
-
-meta if get_config? doc = some "on" then
-  require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"
+  "https://github.com/leanprover-community/mathlib4" @ "v4.13.0"
