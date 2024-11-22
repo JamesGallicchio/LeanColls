@@ -23,10 +23,10 @@ instance [Ord κ] : Fold (Dict.KeySet (RBMap κ τ)) κ where
   foldM := fun m f init => m.data.data.foldlM (fun acc k _ => f acc k) init
 
 instance [Ord κ] : Membership (κ × τ) (RBMap κ τ) where
-  mem := fun (k,t) m => m.data.find? k = some t
+  mem := fun m (k,t) => m.data.find? k = some t
 
 instance [Ord κ] : Membership κ (Dict.KeySet (RBMap κ τ)) where
-  mem := fun k ⟨m⟩ => m.data.keys.contains k
+  mem := fun ⟨m⟩ k => m.data.keys.contains k
 
 instance [Ord κ] : Bag.ReadOnly (Dict.KeySet (RBMap κ τ)) κ where
   toMultiset := fun ⟨m⟩ => m.data.keysList

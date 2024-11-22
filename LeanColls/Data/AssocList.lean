@@ -44,7 +44,7 @@ instance : Fold.ToList (AssocList κ τ) (κ × τ) where
     rw [List.foldlM_eq_foldl]
 
 instance [BEq κ] : Membership (κ × τ) (AssocList κ τ) where
-  mem := fun (k,t) m => m.find? k = some t
+  mem := fun m (k,t) => m.find? k = some t
 
 instance : Fold (Dict.KeySet (AssocList κ τ)) κ where
   fold := fun m f init => m.data.foldl (fun acc k _ => f acc k) init

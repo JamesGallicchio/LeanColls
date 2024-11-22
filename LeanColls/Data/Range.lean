@@ -39,7 +39,7 @@ def contains (r : Range) (i : Nat) :=
   r.start ≤ i && i < r.stop && r.step ∣ (i - r.start)
 
 instance : Membership Nat Range where
-  mem i r := contains r i
+  mem r i := contains r i
 
 theorem mem_def (r : Range) : x ∈ r ↔ r.start ≤ x ∧ x < r.stop ∧ (r.step ∣ x - r.start) := by
   simp [Membership.mem, contains]

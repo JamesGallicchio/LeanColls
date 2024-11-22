@@ -32,11 +32,6 @@ def getSnoc? (A : Array α) :=
   else
     none
 
-theorem ext_iff (A B : Array α) (h : A.size = B.size) : A = B ↔ ∀ (i : Nat) h1 h2, A[i]'h1 = B[i]'h2 := by
-  constructor
-  · rintro rfl; simp
-  · apply ext _ _ h
-
 theorem ext'_iff (A B : Array α) : A = B ↔ A.data = B.data := by
   cases A; cases B; simp
 
@@ -97,16 +92,14 @@ instance : LawfulSeq (Array α) α where
       have : List.length tl = List.length L' := by
         clear h; simp_all [size_mk]
       rw [Array.ext_iff] at h
-      · simp at h; simp [getElem_eq_data_getElem] at h
-        apply List.ext_get
-        · assumption
-        intro i h1 h2
-        apply h i (this ▸ h1) h2
-      · simp
+      simp at h
+      apply List.ext_get
+      · assumption
+      intro i h1 h2
+      apply h i (this ▸ h1) h2
     · rintro rfl
       rw [Array.ext_iff]
-      · simp; simp [getElem_eq_data_getElem]
-      · simp; simp_all [size_mk]
+      simp; simp_all [size_mk]
   getSnoc?_eq_none := by
     simp [LeanColls.toList, Seq.getSnoc?]
     rintro ⟨L⟩; simp [getSnoc?]

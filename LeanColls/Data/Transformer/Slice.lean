@@ -24,7 +24,7 @@ def set [Indexed C ι τ] (slice : Slice C ι τ ι' f) (i' : ι') (x : τ) : Sl
 
 instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ]
     : MultiBag.ReadOnly (Indexed.WithIdx (Slice C ι τ ι' f)) (ι' × τ) where
-  mem := fun (i',x) c => c.cont.get i' = x
+  mem := fun c (i',x) => c.cont.get i' = x
   fold c f init :=
     fold (IndexType.univ ι')
         (fun acc i => f acc (i, Slice.get c.cont i))
@@ -39,7 +39,7 @@ instance [Indexed C ι τ] [IndexType ι'] [DecidableEq τ] [Inhabited τ]
   toMultiBagWithIdx := inferInstance
   get := Slice.get
   update := Slice.update
-  mem x slice :=
+  mem slice x :=
     match
       foldM (m := Except Unit) (IndexType.univ ι')
         (fun _ i' =>

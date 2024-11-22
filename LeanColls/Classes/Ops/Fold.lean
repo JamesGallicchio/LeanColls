@@ -225,7 +225,7 @@ theorem all_iff_exists [Membership τ C] [Mem.ToList C τ]
   simp [Mem.ToList.mem_iff_mem_toList]
 
 def toMem [Fold C τ] : Membership τ C where
-  mem x c := open Classical in any (decide <| · = x) c
+  mem c x := open Classical in any (decide <| · = x) c
 
 def toMem.ToList [Fold C τ] [LeanColls.ToList C τ] [ToList C τ]
     : @Mem.ToList C τ toMem inferInstance :=

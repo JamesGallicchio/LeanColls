@@ -33,7 +33,7 @@ instance : ToList (HashMap κ τ) (κ × τ) where
   toList := Batteries.HashMap.toList
 
 instance : Membership (κ × τ) (HashMap κ τ) where
-  mem := fun (k,t) m => m.find? k = some t
+  mem := fun m (k,t) => m.find? k = some t
 
 instance : Dict (HashMap κ τ) κ τ where
   toMultiset m := m.toList
@@ -51,7 +51,7 @@ instance : Dict (HashMap κ τ) κ τ where
     | some _, none => m.erase k
   modify := fun m k f => m.modify k (Function.const _ f)
   toBagKeySet := {
-    mem := fun x ⟨m⟩ => m.contains x
+    mem := fun ⟨m⟩ x => m.contains x
     size := fun ⟨m⟩ => m.size
     toMultiset := fun ⟨m⟩ => m.toList.map (·.1)
   }

@@ -51,13 +51,13 @@ def withIdx (cont : C) : Indexed.WithIdx C := .mk cont
   get := get
   update := update
   size := fun _ => IndexType.card ι
-  mem t c := ∃ i : ι, get c i = t
+  mem c t := ∃ i : ι, get c i = t
   fold c f acc := Fold.fold (IndexType.univ ι) (f · <| get c ·) acc
   foldM c f acc := Fold.foldM (IndexType.univ ι) (f · <| get c ·) acc
   toMultiset := fun c =>
     ToMultiset.toMultiset (IndexType.univ ι) |>.map (get c)
   toMultiBagWithIdx := {
-    mem := fun (i,t) ⟨c⟩ => get c i = t
+    mem := fun ⟨c⟩ (i,t) => get c i = t
     fold := fun ⟨c⟩ f acc =>
       Fold.fold (IndexType.univ ι) (fun acc i => f acc (i, get c i)) acc
     foldM := fun ⟨c⟩ f acc =>

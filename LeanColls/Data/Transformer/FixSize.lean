@@ -37,7 +37,7 @@ instance : Indexed (FixSize C ι) ι τ := {
     (update := fun ⟨c,hsize⟩ i f =>
         ⟨ Seq.update c (Fin.cast hsize.symm <| IndexType.toFin i) f
         , by simp; exact hsize ⟩) with
-  mem := fun x c => x ∈ c.data
+  mem := fun c x => x ∈ c.data
   set := fun c i x =>
     ⟨ Seq.set c.data (Fin.cast c.hsize.symm <| IndexType.toFin i) x
     , by simp; exact c.hsize ⟩
