@@ -39,13 +39,14 @@ jobs:
 
       - name: Generate docs
         run: |
-          lake build -R -Kdoc=on LeanColls:docs
+          cd docs
+          lake build LeanColls:docs
 
       - name: Upload docs artifact
         uses: actions/upload-artifact@master
         with:
           name: docs
-          path: .lake/build/doc
+          path: docs/.lake/build/doc
 
   deploy:
     name: Deploy docs
